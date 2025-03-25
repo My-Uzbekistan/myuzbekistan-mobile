@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 class BounceTap extends StatefulWidget {
-  /// this defines how hard you want the widget to bounce on tap
+  /// this defines how hard you want the collapsed_container to bounce on tap
 
 
-  /// this is your widget child
+  /// this is your collapsed_container child
   final Widget child;
 
   /// This is a user defined duration
   final Duration? duration;
 
-  /// this callback triggers when your widget is tapped
+  /// this callback triggers when your collapsed_container is tapped
   final VoidCallback? onTap;
 
-  /// this callback triggers when your widget is pressed for a long time
+  /// this callback triggers when your collapsed_container is pressed for a long time
   final VoidCallback? onLongPress;
 
 

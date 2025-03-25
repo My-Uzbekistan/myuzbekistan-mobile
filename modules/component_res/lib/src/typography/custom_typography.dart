@@ -13,22 +13,22 @@ mixin CustomTypography {
 
   //height 20
   static TextStyle labelLg = _defaultFont.copyWith(
-      fontSize: 17, fontWeight: FontWeight.w500, height: 20 / 17);
+      fontSize: 17, fontWeight: FontWeight.w500, height: 24 / 17);
 
   //height 20
   static TextStyle labelMd = _defaultFont.copyWith(
-      fontSize: 15, fontWeight: FontWeight.w500, height: 18 / 15);
+      fontSize: 15, fontWeight: FontWeight.w500, height: 20 / 15);
   static TextStyle labelSm = _defaultFont.copyWith(
-      fontSize: 13, fontWeight: FontWeight.w500, height: 16 / 13);
+      fontSize: 13, fontWeight: FontWeight.w500, height: 18 / 13);
 
   static TextStyle bodyLg = _defaultFont.copyWith(
-      fontSize: 17, fontWeight: FontWeight.w400, height: 20 / 17);
+      fontSize: 17, fontWeight: FontWeight.w400, height: 24 / 17);
   static TextStyle bodyMd = _defaultFont.copyWith(
-      fontSize: 15, fontWeight: FontWeight.w400, height: 18 / 15);
+      fontSize: 15, fontWeight: FontWeight.w400, height: 20 / 15);
   static TextStyle bodySm = _defaultFont.copyWith(
-      fontSize: 13, fontWeight: FontWeight.w400, height: 16 / 13);
+      fontSize: 13, fontWeight: FontWeight.w400, height: 18 / 13);
   static TextStyle bodyXsm = _defaultFont.copyWith(
-      fontSize: 12, fontWeight: FontWeight.w400, height: 15 / 12);
+      fontSize: 12, fontWeight: FontWeight.w400, height: 16 / 12);
   static TextStyle bodyXXsm = _defaultFont.copyWith(
       fontSize: 11, fontWeight: FontWeight.w400, height: 14 / 11);
 }

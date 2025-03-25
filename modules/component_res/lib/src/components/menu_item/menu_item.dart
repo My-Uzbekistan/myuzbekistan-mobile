@@ -14,8 +14,8 @@ class MenuItem extends StatelessWidget {
       onTap: (){},
       borderRadius: BorderRadius.circular(20),
       child: Ink(
-          height: 100,
-          width: 100,
+          height: 112,
+          width: 112,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: context.appColors.background.elevation1Alt),

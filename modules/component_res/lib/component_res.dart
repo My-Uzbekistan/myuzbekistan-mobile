@@ -13,4 +13,10 @@ export 'src/components/input/search_input_field.dart';
 export 'package:cached_network_image/cached_network_image.dart';
 export 'src/components/bounsing_tap/bounsing_tap.dart';
 export 'src/components/stars_badge/stars_badge.dart';
-
+export 'src/components/collapsed_container/collapsable_container.dart';
+export 'src/components/avatar/avatar.dart';
+export 'src/components/stacked_card/stacked_card.dart';
+export 'package:flutter_svg/svg.dart';
+export 'package:carousel_slider/carousel_state.dart';
+export 'package:carousel_slider/carousel_slider.dart';
+// export 'src/components/toast/toast.dart';

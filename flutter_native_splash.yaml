@@ -1,0 +1,9 @@
+flutter_native_splash:
+  android: true
+  ios: false
+  color: "#FFFFFF"  # Splash fond rangi
+  image: null  # Splash screen-da hech qanday image chiqmasligi uchun
+  android_12:
+    color: "#FFFFFF"
+    image: null
+

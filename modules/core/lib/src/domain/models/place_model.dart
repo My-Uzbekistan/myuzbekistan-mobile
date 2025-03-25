@@ -1,47 +1,96 @@
+import 'package:core/src/domain/models/content_detail.dart';
+import 'package:core/src/shared/view_type.dart';
 
-class PlaceCategories {
+class ContentCategories {
   final int categoryId; // Only 'id' is required
   final String categoryName;
-  final List<Place> contentView;
-  const PlaceCategories({
+  final MainPageContent? recommended;
+  final ViewType viewType;
+  final List<MainPageContent> contents;
+
+  const ContentCategories({
     required this.categoryId, // Only 'id' is required
     required this.categoryName,
-    required this.contentView,
+    required this.recommended,
+    required this.viewType,
+    required this.contents,
   });
 }
 
-class Place {
-  final int id; // Only 'id' is required
+class MainPageContent {
+  int contentId;
   String? title;
-  String? description;
-  int? categoryId;
-  String? workingHours;
+  String? caption;
+  List<String> photos;
+  String? photo;
+  String? region;
+  String? address;
+  List<Facility> facilities;
+  List<String> languages;
   double? ratingAverage;
+  int? averageCheck;
   double? price;
   double? priceInDollar;
-  String? address;
-  bool? recommended;
-  String? locale;
-  String? imageUrl;
-  int? status;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  ViewType viewType;
+  bool isFavorite;
 
-  Place({
-    required this.id, // Only 'id' is required
+  MainPageContent({
+    required this.contentId,
+    required this.photos,
+    required this.viewType,
     this.title,
-    this.description,
-    this.categoryId,
-    this.workingHours,
+    this.caption,
+    this.region,
+    this.address,
+    this.averageCheck,
     this.ratingAverage,
+    this.facilities = const [],
+    this.languages = const [],
+    this.photo,
     this.price,
     this.priceInDollar,
-    this.address,
-    this.recommended,
-    this.locale,
-    this.imageUrl,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
+    this.isFavorite = false,
   });
+
+  String? get mainPhoto => photo ?? photos.firstOrNull;
+
+  String? get contentAddress => address ?? region;
+
+  /// **copyWith funksiyasi**
+  MainPageContent copyWith({
+    int? contentId,
+    String? title,
+    String? caption,
+    List<String>? photos,
+    String? photo,
+    String? region,
+    String? address,
+    List<Facility>? facilities,
+    List<String>? languages,
+    double? ratingAverage,
+    int? averageCheck,
+    double? price,
+    double? priceInDollar,
+    ViewType? viewType,
+    bool? isFavorite,
+  }) {
+    return MainPageContent(
+      contentId: contentId ?? this.contentId,
+      title: title ?? this.title,
+      caption: caption ?? this.caption,
+      photos: photos ?? List.from(this.photos), // Ro'yxat nusxasi olinadi
+      photo: photo ?? this.photo,
+      region: region ?? this.region,
+      address: address ?? this.address,
+      facilities: facilities ?? List.from(this.facilities),
+      languages: languages ?? List.from(this.languages),
+      ratingAverage: ratingAverage ?? this.ratingAverage,
+      averageCheck: averageCheck ?? this.averageCheck,
+      price: price ?? this.price,
+      priceInDollar: priceInDollar ?? this.priceInDollar,
+      viewType: viewType ?? this.viewType,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }
+

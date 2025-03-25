@@ -1,18 +1,28 @@
 import 'package:component_res/component_res.dart';
+import 'package:core/core.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
-
+import 'package:uzbekistan_travel/core/settings_bloc/app_settings_bloc.dart';
+import 'package:uzbekistan_travel/presentaion/profile_page/bloc/profile_bloc.dart';
 import 'di/injection.dart';
+import 'firebase_options.dart';
+import 'generated/locale/app_localizations.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!kReleaseMode) {
-    debugPrint("RUNNING APP");
-  }
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
-  configureInjection();
+  await Hive.initFlutter();
+
+  await configureInjection();
   runApp(const MyApp());
 }
 
@@ -88,35 +98,50 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
+  // This collapsed_container is the root of your application.
 
   @override
   void initState() {
-
     super.initState();
-
   }
+
   @override
   void dispose() {
-
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("BUILD FUNCTION IS WORKING");
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: AppColorTheme.lightTheme,
-      darkTheme: AppColorTheme.darkTheme,
-      builder: (context, child) {
-        return MediaQuery(
-            data: MediaQuery.of(context)
-                .copyWith(textScaler: TextScaler.linear(1.0)),
-            child: child!);
-      },
-      routerConfig: routes,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<AppSettingsBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
+        )
+      ],
+      child: BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
+        builder: (context, state) {
+          return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: AppColorTheme.lightTheme,
+            darkTheme: AppColorTheme.darkTheme,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            locale: state.appLocale.locale,
+            themeMode: state.mode,
+            builder: (context, child) {
+              return MediaQuery(
+                  data: MediaQuery.of(context)
+                      .copyWith(textScaler: TextScaler.linear(1.0)),
+                  child: child!);
+            },
+            routerConfig: routes,
+          );
+        },
+      ),
     );
   }
 }
@@ -148,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Flexible(
                 child: Text(
-              "Hello, user",
+              "Hell,user",
               style: CustomTypography.H3,
             ))
           ],
@@ -158,18 +183,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          // SliverAppBar with flexible space
-          // SliverAppBar(
-          //   pinned: true,
-          //   elevation: 0,
-          //   floating: false,
-          //   surfaceTintColor: Colors.transparent,
-          //   title: Text('SliverAppBar'),
-          //  // Adjusted height for smooth transition
-          // ),
-
-          // Padding and Container for the first section
-
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
@@ -205,10 +218,10 @@ class _MyHomePageState extends State<MyHomePage> {
             pinned: true,
             delegate: _BlurHeaderDelegate(),
           ),
-
-          SliverToBoxAdapter(
-            child: AvatarStack(),
-          ),
+          //
+          // SliverToBoxAdapter(
+          //   child: AvatarStack(),
+          // ),
 
           SliverToBoxAdapter(
             child: SearchInputField(),
@@ -219,7 +232,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 32),
-                  AppBadge(),
+                  AppBadge(
+                    title: "AppBadge",
+                  ),
                   MenuItem(
                     title: "Show menu",
                   ),
@@ -231,7 +246,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Stack(
                       children: [
-
                         Positioned(
                           child: Column(
                             children: [
@@ -294,40 +308,11 @@ class _BlurHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get minExtent => 100;
+
   @override
   FloatingHeaderSnapConfiguration? get snapConfiguration => null;
 
   @override
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
       true;
-}
-
-class AvatarStack extends StatelessWidget {
-  final List<String> avatars = [
-    "https://i.pravatar.cc/100?img=1",
-    "https://i.pravatar.cc/100?img=2",
-    "https://i.pravatar.cc/100?img=3",
-    "https://i.pravatar.cc/100?img=4",
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 150, // Stack kengligi
-      height: 60, // Stack balandligi
-      child: Stack(
-        children: List.generate(avatars.length, (index) {
-          int reversedIndex =
-              avatars.length - index - 1; // Elementlarni teskari joylashtirish
-          return Positioned(
-            left: reversedIndex * 30.0, // Har bir keyingi avatar orqaga ketadi
-            child: CircleAvatar(
-              radius: 30,
-              backgroundImage: NetworkImage(avatars[reversedIndex]),
-            ),
-          );
-        }),
-      ),
-    );
-  }
 }

@@ -1,9 +1,10 @@
 part of 'home_groups.dart';
 
 class ItemCard extends StatelessWidget {
-  final HomeListCellContent content;
+  final MainPageContent content;
   final VoidCallback? onTap;
-  const ItemCard({super.key, required this.content,this.onTap});
+
+  const ItemCard({super.key, required this.content, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -11,6 +12,17 @@ class ItemCard extends StatelessWidget {
     final itemWidth = screenWidth * 0.25;
     final width = max(156.0, min(200.0, itemWidth));
 
+    final contentImage = content.viewType == ViewType.places
+        ? AppImageCard.large(
+            imageUrl: content.mainPhoto,
+            ratingAverage: content.ratingAverage ?? 0,
+            averageCheck: content.averageCheck ?? 0,
+          )
+        : AppImageCard.large(
+            imageUrl: content.mainPhoto,
+            priceText: (content.priceInDollar ?? 0).floor() > 0
+                ? "\$${content.priceInDollar?.floor()}"
+                : null);
     return IntrinsicWidth(
       child: BounceTap(
         onTap: onTap,
@@ -20,12 +32,7 @@ class ItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 8,
             children: [
-              AppImageCard.large(
-                imageUrl: content.imageUrl,
-                star: content.star,
-                rate: content.rate,
-                priceRate: content.priceRate
-              ),
+              contentImage,
               SizedBox(
                 width: double.infinity,
                 child: Column(
@@ -39,7 +46,7 @@ class ItemCard extends StatelessWidget {
                       style: CustomTypography.bodyMd,
                     ),
                     Text(
-                      content.description ?? "",
+                      content.contentAddress ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: CustomTypography.bodyMd.copyWith(

@@ -16,23 +16,26 @@ mixin AppImageCard {
   static _AppItemCardImage large({
     String? imageUrl,
     int? star,
-    double? rate,
-    int? priceRate,
+    double ratingAverage = 0,
+    int averageCheck = 0,
+    String? priceText
   }) {
     return _AppItemCardImage(
       imageUrl: imageUrl,
-      rate: rate,
-      star: star,
-      priceRate: priceRate,
+      ratingAverage: ratingAverage,
+      averageCheck: averageCheck,
+      priceText: priceText,
     );
   }
 
   static _AppItemCardImage medium({
     String? imageUrl,
+    Widget? topRightWidget,
   }) {
     return _AppItemCardImage(
       imageUrl: imageUrl,
       appImageCardSize: AppImageCardSize.medium,
+      topRightWidget: topRightWidget,
     );
   }
 }
@@ -42,17 +45,19 @@ enum AppImageCardSize { medium, large, extraLarge }
 class _AppItemCardImage extends StatelessWidget {
   final String? imageUrl;
   final AppImageCardSize appImageCardSize;
-  final double? rate;
-  final int? star;
-  final int? priceRate;
-  const _AppItemCardImage({
-    super.key,
-    this.imageUrl,
-    this.appImageCardSize = AppImageCardSize.large,
-    this.rate,
-    this.star,
-    this.priceRate,
-  });
+  final double ratingAverage;
+  final int averageCheck;
+  final String? priceText;
+  final  Widget? topRightWidget;
+
+  const _AppItemCardImage(
+      {super.key,
+      this.imageUrl,
+      this.appImageCardSize = AppImageCardSize.large,
+      this.ratingAverage = 0,
+      this.averageCheck = 0,
+        this.topRightWidget,
+      this.priceText});
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +82,14 @@ class _AppItemCardImage extends StatelessWidget {
           children: [
             CachedNetworkImage(
               imageUrl: imageUrl ?? "",
+              errorListener: (e) {
+                debugPrint(e.toString());
+              },
               errorWidget: (context, o, s) {
                 return Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover);
               },
               placeholder: (context, s) {
-                return Assets.pngDefaultContentImage.toImage();
+                return Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover);
               },
               fit: BoxFit.cover,
               height: double.maxFinite,
@@ -94,7 +102,14 @@ class _AppItemCardImage extends StatelessWidget {
                       ? 0.32
                       : 0.16),
             )),
-            if (rate != null)
+
+            if(topRightWidget!=null)
+              Positioned(
+                right: 8,
+                top: 8,
+                child: topRightWidget!,
+              ),
+            if (ratingAverage > 0)
               Positioned(
                   top: 12,
                   left: 12,
@@ -106,25 +121,22 @@ class _AppItemCardImage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(32),
                         color: Colors.white),
                     child: Text(
-                      "$rate",
+                      "$ratingAverage",
                       style: CustomTypography.labelSm
                           .copyWith(color: context.appColors.brand),
                     ),
                   )),
-            Positioned(
-                bottom: 12,
-                left: 12,
-                right: 12,
-                child: Row(
-                  children: [
-                    if (star != null) StarsBadge(stars: star!),
-                    Expanded(
-                      child: SizedBox(),
-                    ),
-                    if (priceRate != null)
-                      PriceCategoryWithContainer(priceCategory: priceRate!)
-                  ],
-                ))
+            if (averageCheck > 0)
+              Positioned(
+                  bottom: 12,
+                  right: 12,
+                  child:
+                      PriceCategoryWithContainer(priceCategory: averageCheck)),
+            if (priceText != null && priceText!.isNotEmpty)
+              Positioned(
+                  bottom: 12,
+                  right: 12,
+                  child: PriceContainer(priceText: priceText!))
           ],
         ),
       ),

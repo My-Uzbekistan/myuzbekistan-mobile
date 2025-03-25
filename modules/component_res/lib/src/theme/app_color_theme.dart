@@ -28,7 +28,11 @@ ThemeData _buildTheme(
       scaffoldBackgroundColor: Platform.isIOS
           ? colors.background.baseIos
           : colors.background.baseAndroid,
-      appBarTheme: AppBarTheme(
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: colors.background.elevation1
+      ),
+      appBarTheme: themeData.appBarTheme.copyWith(
+        surfaceTintColor: Colors.transparent,
         iconTheme: IconThemeData(color: colors.textIconColor.primary),
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
@@ -42,8 +46,9 @@ ThemeData _buildTheme(
                   : Brightness.light),
           backgroundColor: colors.background.background,
           foregroundColor: colors.background.background,
+
           titleTextStyle:
-              CustomTypography.H2.copyWith(color: defaultTextColor)),
+              CustomTypography.labelLg.copyWith(color: defaultTextColor)),
       textTheme: TextTheme(
         displayLarge: CustomTypography.H1.copyWith(color: defaultTextColor),
         displayMedium: CustomTypography.H2.copyWith(color: defaultTextColor),

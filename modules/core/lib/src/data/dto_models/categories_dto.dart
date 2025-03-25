@@ -1,9 +1,11 @@
+import 'package:core/src/data/network/convertors/image_convertor.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'categories_dto.g.dart';
 @JsonSerializable()
 class CategoriesDto {
 
   String? name;
+  @ImageConvertor()
   String? icon;
   int id;
 

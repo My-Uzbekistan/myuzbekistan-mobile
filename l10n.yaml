@@ -1,0 +1,10 @@
+arb-dir: locales/values
+template-arb-file: main_en.arb
+output-class: AppLocalizations
+output-localization-file: app_localizations.dart
+output-dir: lib/generated/locale/
+synthetic-package: false
+required-resource-attributes: false
+include-file:
+  - locales/values/tabs_en.arb
+#use-escaping: true

@@ -2,7 +2,10 @@ import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
 class AppBadge extends StatelessWidget {
-  const AppBadge({super.key});
+  final String title;
+  final String? iconUrl;
+
+  const AppBadge({super.key, required this.title, this.iconUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +18,24 @@ class AppBadge extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         spacing: 6,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Assets.svgIconCusine.toSvgImage(
+          if (iconUrl != null)
+            CachedNetworkImage(
+              imageUrl: iconUrl ?? "",
+              height: 20,
               width: 20,
-              colorFilter: ColorFilter.mode(
-                  context.appColors.textIconColor.primary, BlendMode.srcIn)),
-          Text(
-            "Uzbek cousine",
-            style: CustomTypography.bodyMd,
+              color: context.appColors.textIconColor.primary,
+              colorBlendMode: BlendMode.srcIn,
+              errorWidget: (context, s, ob) {
+                return SizedBox();
+              },
+            ),
+          Flexible(
+            child: Text(
+              title,
+              style: CustomTypography.bodyMd,
+            ),
           )
         ],
       ),

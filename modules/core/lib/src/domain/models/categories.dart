@@ -1,6 +1,13 @@
 
 
 
+class Region {
+  String? name;
+  int id;
+  Region({this.name, required this.id,});
+}
+
+
 class Categories {
 
   String? name;

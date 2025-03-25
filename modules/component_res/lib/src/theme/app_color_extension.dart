@@ -12,6 +12,7 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
   final ServiceColors service;
   final RippleColor rippleColor;
 
+
   _AppColorsExtension(
       {
         required this.brand,

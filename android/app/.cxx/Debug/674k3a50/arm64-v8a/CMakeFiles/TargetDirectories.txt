@@ -1,0 +1,2 @@
+/Users/ilhomshergoziyev/Projects/MyUzbekistan/MyUzbekistan/android/app/.cxx/Debug/674k3a50/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/ilhomshergoziyev/Projects/MyUzbekistan/MyUzbekistan/android/app/.cxx/Debug/674k3a50/arm64-v8a/CMakeFiles/rebuild_cache.dir

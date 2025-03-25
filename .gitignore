@@ -11,6 +11,11 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+/lib/generated/intl
+/lib/generated/l10n.dart
+/lib/l10n/
+
+
 
 # IntelliJ related
 *.iml

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "949425586550",
+    "project_id": "my-uzbekistan-f54be",
+    "storage_bucket": "my-uzbekistan-f54be.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949425586550:android:b3578de4ab192a49f7ba57",
+        "android_client_info": {
+          "package_name": "uz.travel.my.uzb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949425586550-qnmr4vcsroa3glejpts4jc24fr3ct53m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uz.travel.my.uzb",
+            "certificate_hash": "e7d120e8a23d412084f2054891f936b235b21951"
+          }
+        },
+        {
+          "client_id": "949425586550-cc7jab0lo02ebqq1lf5jlqtcm91prngr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBStDCl5M8O2u1RmL5i50T1huOKTyLW9l4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949425586550-cc7jab0lo02ebqq1lf5jlqtcm91prngr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "949425586550-ipa4pps37uchu559evil9q93jp6n6jms.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "uz.travel.my.uzb"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

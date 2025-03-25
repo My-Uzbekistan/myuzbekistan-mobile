@@ -1,40 +1,163 @@
+import 'dart:io';
+
+import 'package:component_res/component_res.dart';
+import 'package:core/core.dart';
+import 'package:dartx/dartx.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
+import 'package:uzbekistan_travel/presentaion/auth/auth_page.dart';
+import 'package:uzbekistan_travel/presentaion/auth/bloc/auth_bloc.dart';
+import 'package:uzbekistan_travel/presentaion/detail/detail_bloc/detail_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/detail/detail_page.dart';
+import 'package:uzbekistan_travel/presentaion/detail/pages/image_preview_page.dart';
 import 'package:uzbekistan_travel/presentaion/home/home_bloc/home_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/home/page/home_page.dart';
-import 'package:uzbekistan_travel/presentaion/search/search_page.dart';
+import 'package:uzbekistan_travel/presentaion/home/page/select_region/select_region_page.dart';
+import 'package:uzbekistan_travel/presentaion/profile_page/pages/change_locale.dart';
+import 'package:uzbekistan_travel/presentaion/profile_page/pages/change_theme_page.dart';
+import 'package:uzbekistan_travel/presentaion/profile_page/profile_page.dart';
+import 'package:uzbekistan_travel/presentaion/search/bloc/contents_by_category_bloc.dart';
+import 'package:uzbekistan_travel/presentaion/search/content_by_categories_page.dart';
+import 'package:uzbekistan_travel/presentaion/shell_more/pages/currencies_page.dart';
+import 'package:uzbekistan_travel/presentaion/shell_more/shell_more_page.dart';
+import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
+import 'package:uzbekistan_travel/presentaion/splash.dart';
 
-enum AppRoute {
-  home(path: "/", name: "home"),
-  search(path: "/search", name: "search"),
-  detail(path: "/detail", name: "detail");
+part 'home_shell_route.dart';
 
-  final String path;
-  final String name;
+part 'app_route_path.dart';
 
-  // Constructor
-  const AppRoute({required this.path, required this.name});
-}
+part 'modal_page_route.dart';
 
-final GoRouter routes = GoRouter(routes: [
-  GoRoute(
-      path: AppRoute.home.path,
-      name: AppRoute.home.name,
-      builder: (context, state) => BlocProvider(
-            create: (context) =>
-                getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
-            child: HomePage(),
-          )),
-  GoRoute(
-      path: AppRoute.search.path,
-      name: AppRoute.search.name,
-      builder: (context, state) => SearchPage()),
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
+final GoRouter routes = GoRouter(
+    navigatorKey: _rootNavigatorKey,
+    initialLocation:
+        Platform.isIOS ? AppRoutePath.shellHome.path : AppRoutePath.splash.path,
+    routes: [
+      GoRoute(
+        path: AppRoutePath.splash.path,
+        name: AppRoutePath.splash.name,
+        builder: (context, state) => SplashScreen(),
+      ),
+      ..._shellRoute,
+      // GoRoute(
+      //     path: AppRoutePath.home.path,
+      //     name: AppRoutePath.home.name,
+      //     builder: (context, state) =>
+      //         BlocProvider(
+      //           create: (context) =>
+      //           getIt<HomeBloc>()
+      //             ..add(HomeBlocEvent.initial()),
+      //           child: HomePage(),
+      //         )),
+      GoRoute(
+          path: AppRoutePath.contentByCategory.path,
+          name: AppRoutePath.contentByCategory.name,
+          builder: (context, state) {
+            final hasFavorites = state.uri.queryParameters["hasFavorites"];
+            final categoryName = hasFavorites != null
+                ? context.localizations?.favorites
+                : state.uri.queryParameters["categoryName"];
+            final int categoryId =
+                state.uri.queryParameters["categoryId"]?.toInt() ?? 0;
+            return BlocProvider(
+              create: (context) => getIt<ContentByCategoryBloc>()
+                ..add(hasFavorites != null
+                    ? ContentByCategoryEvent.loadFavorites()
+                    : ContentByCategoryEvent.init(
+                        categoryId,
+                      )),
+              child: ContentByCategoryPage(
+                categoryName: categoryName ?? "",
+              ),
+            );
+          }),
 
+      GoRoute(
+          path: AppRoutePath.detail.path,
+          name: AppRoutePath.detail.name,
+          pageBuilder: (context, state) {
+            return _slideTransition(
+                context: context,
+                state: state,
+                child: BlocProvider(
+                  create: (context) => getIt<DetailBloc>()
+                    ..add(DetailBlocEvent.initial(
+                        contentId:
+                            "${state.uri.queryParameters["contentId"]}")),
+                  child: DetailPage(),
+                ));
+          },
+          routes: [
+            GoRoute(
+                path: AppRoutePath.imagePreviewPage.path,
+                name: AppRoutePath.imagePreviewPage.name,
+                builder: (context, state) {
+                  return ImagePreviewPage(
+                    images: state.extra as List<String>,
+                  );
+                }),
+          ]),
+      GoRoute(
+        path: AppRoutePath.profilePage.path,
+        name: AppRoutePath.profilePage.name,
+        pageBuilder: (context, state) => _slideTransition(
+            child: ProfilePage(), context: context, state: state),
+      ),
 
-  GoRoute(
-      path: AppRoute.detail.path,
-      name: AppRoute.detail.name,
-      builder: (context, state) => DetailPage())
-]);
+      GoRoute(
+          path: AppRoutePath.currenciesPage.path,
+          name: AppRoutePath.currenciesPage.name,
+          pageBuilder: (context, state) {
+            final c = state.extra as List<Currency>;
+            return _slideTransition(
+                child: CurrenciesPage(
+                  currencies: c,
+                ),
+                context: context,
+                state: state);
+          }),
+      GoRoute(
+          path: AppRoutePath.authPage.path,
+          name: AppRoutePath.authPage.name,
+          pageBuilder: (context, state) => ModalPage(
+              child: BlocProvider(
+                create: (context) => getIt<AuthBlock>(),
+                child: AuthPage(),
+              ),
+              showDragHandle: true)),
+
+      GoRoute(
+          path: AppRoutePath.changeLang.path,
+          name: AppRoutePath.changeLang.name,
+          pageBuilder: (context, state) =>
+              ModalPage(child: ChangeLocalePage(), showDragHandle: true)),
+
+      GoRoute(
+          path: AppRoutePath.changeTheme.path,
+          name: AppRoutePath.changeTheme.name,
+          pageBuilder: (context, state) =>
+              ModalPage(child: ChangeThemePage(), showDragHandle: true)),
+
+      GoRoute(
+          path: AppRoutePath.selectRegionPage.path,
+          name: AppRoutePath.selectRegionPage.name,
+          pageBuilder: (context, state) {
+            final regionId =
+                state.uri.queryParameters["selectRegionId"]!.toInt();
+            final regions = state.extra as List<Region>;
+
+            return ModalPage(
+                child: SelectRegionPage(
+                  regions: regions,
+                  selectedRegionId: regionId,
+                ),
+                showDragHandle: true);
+          })
+    ]);

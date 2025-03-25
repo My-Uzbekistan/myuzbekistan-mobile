@@ -1,17 +1,30 @@
 part of 'home_groups.dart';
 
-class HomeListCell extends StatelessWidget {
-  final HomeListCellData data;
-  final VoidCallback? onItemTap;
+class HomeListCell extends StatefulWidget {
+  final List<MainPageContent> items;
+  final String categoryName;
+  final ValueChanged<MainPageContent>? onItemTap;
   final VoidCallback? openAll;
-  const HomeListCell(
-      {super.key, required this.data, this.onItemTap, this.openAll});
 
+  const HomeListCell(
+      {super.key,
+      required this.categoryName,
+      required this.items,
+      this.onItemTap,
+      this.openAll});
+
+  @override
+  State<HomeListCell> createState() => _HomeListCellState();
+}
+
+class _HomeListCellState extends State<HomeListCell>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(bottom: 16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ConstrainedBox(
             constraints: BoxConstraints(minHeight: 68),
@@ -22,19 +35,19 @@ class HomeListCell extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.only(left: 16),
                       child: Text(
-                        data.title,
+                        widget.categoryName,
                         style: CustomTypography.H2,
                       ),
                     ),
                   ),
                   GestureDetector(
-                    onTap: openAll,
+                    onTap: widget.openAll,
                     child: Container(
                         height: double.infinity,
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         alignment: Alignment.center,
                         child: Text(
-                          "All",
+                          context.localizations?.action_all ?? "",
                           style: CustomTypography.bodyLg
                               .copyWith(color: context.appColors.brand),
                         )),
@@ -49,12 +62,22 @@ class HomeListCell extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 16),
             child: Row(
               spacing: 12,
-              children: List.generate(data.contents.length, (index) {
-                return ItemCard(
-                  onTap: onItemTap,
-                  key: ValueKey(data.contents[index]),
-                  content: data.contents[index],
-                );
+              children: List.generate(widget.items.length, (index) {
+                final item = widget.items[index];
+                return item.viewType == ViewType.profile
+                    ? ItemCardAvatar(
+                        avatarUrl: item.mainPhoto,
+                        name: item.title,
+                        onTap: () {
+                          widget.onItemTap?.call(item);
+                        },
+                      )
+                    : ItemCard(
+                        key: ValueKey(item),
+                        content: item,
+                        onTap: () => widget.onItemTap?.call(item),
+
+                      );
               }),
             ),
           )
@@ -62,4 +85,8 @@ class HomeListCell extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

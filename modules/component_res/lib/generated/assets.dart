@@ -2,12 +2,41 @@
 class Assets {
   Assets._();
 
+  static const String flagsCn = 'assets/flags/cn.svg';
+  static const String flagsEu = 'assets/flags/eu.svg';
+  static const String flagsKr = 'assets/flags/kr.svg';
+  static const String flagsKz = 'assets/flags/kz.svg';
+  static const String flagsRu = 'assets/flags/ru.svg';
+  static const String flagsTr = 'assets/flags/tr.svg';
+  static const String flagsUs = 'assets/flags/us.svg';
+  static const String flagsUz = 'assets/flags/uz.svg';
+  static const String logoDarkFullLogo = 'assets/logo/dark_full_logo.svg';
+  static const String logoLightFullLogo = 'assets/logo/light_full_logo.svg';
   static const String pngAvatar = 'assets/png/avatar.png';
+  static const String pngAvatarImage = 'assets/png/avatar_image.png';
   static const String pngDefaultContentImage = 'assets/png/default_content_image.png';
+  static const String pngMap = 'assets/png/map.png';
+  static const String pngPersonalDefaultBg = 'assets/png/personal_default_bg.png';
+  static const String svgGoogleLogo = 'assets/svg/google_logo.svg';
+  static const String svgIconArrowRight = 'assets/svg/icon_arrow_right.svg';
+  static const String svgIconCheck = 'assets/svg/icon_check.svg';
   static const String svgIconCusine = 'assets/svg/icon_cusine.svg';
+  static const String svgIconFilledHeard = 'assets/svg/icon_filled_heard.svg';
+  static const String svgIconFlagRu = 'assets/svg/icon_flag_ru.svg';
+  static const String svgIconFlagUk = 'assets/svg/icon_flag_uk.svg';
+  static const String svgIconFlagUz = 'assets/svg/icon_flag_uz.svg';
   static const String svgIconMenu = 'assets/svg/icon_menu.svg';
+  static const String svgIconTheme = 'assets/svg/icon_theme.svg';
+  static const String svgIconTime = 'assets/svg/icon_time.svg';
+  static const String svgLanguage = 'assets/svg/language.svg';
+  static const String svgOutlineHeard = 'assets/svg/outline_heard.svg';
   static const String svgPinLocationLine = 'assets/svg/pin_location_line.svg';
   static const String svgSearchLine = 'assets/svg/search_line.svg';
   static const String svgStar = 'assets/svg/star.svg';
+  static const String svgTabIconHome = 'assets/svg/tab_icon_home.svg';
+  static const String svgTabIconMap = 'assets/svg/tab_icon_map.svg';
+  static const String svgTabIconMore = 'assets/svg/tab_icon_more.svg';
+  static const String svgTabIconPayment = 'assets/svg/tab_icon_payment.svg';
+  static const String svgTabIconTransfer = 'assets/svg/tab_icon_transfer.svg';
 
 }

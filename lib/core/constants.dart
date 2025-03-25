@@ -1,0 +1,1 @@
+const  double maxScreenWidth=650;
