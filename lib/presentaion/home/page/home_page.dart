@@ -32,7 +32,7 @@ class HomePage extends HookWidget {
             switch (state) {
               case HomeBlocLoadingState _:
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: LoadingIndicator(),
                 );
               case HomeBlocDataState data:
                 return Scaffold(

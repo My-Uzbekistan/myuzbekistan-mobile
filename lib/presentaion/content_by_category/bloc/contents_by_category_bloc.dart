@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uzbekistan_travel/core/listeners/appsettings_change_listener.dart';
+import 'package:uzbekistan_travel/core/utils/auth_check.dart';
 
 part 'contents_by_category_event.dart';
 
@@ -39,13 +41,24 @@ class ContentByCategoryBloc
 
   void _updateFavoriteItem(
       _UpdateItemFavoriteEvent event, Emitter<ContentByCategoryState> emit) {
-    add(ContentByCategoryEvent.updateItemFavoriteWithPopResult(
-        isFavorite: event.isFavorite, contentId: event.contentId));
-    try {
-      final result = _repository.favoriteChange(
-          contentId: event.contentId, setFavorite: event.isFavorite);
-      _changeStatusListener.refreshFavorite();
-    } catch (e) {}
+    if(state.navState!=null) {
+      emit(state.copyWith(navState: null));
+    }
+    AuthCheck.authCheck(
+      unauthorized: (){
+        emit(state.copyWith(navState: ContentsByCategoryNavState.unauthorized()));
+      },
+      authSuccess: (){
+        add(ContentByCategoryEvent.updateItemFavoriteWithPopResult(
+            isFavorite: event.isFavorite, contentId: event.contentId));
+        try {
+          final result = _repository.favoriteChange(
+              contentId: event.contentId, setFavorite: event.isFavorite);
+          _changeStatusListener.refreshFavorite();
+        } catch (e) {}
+      }
+    );
+
   }
 
   void _updateItemFavoriteWithPopResult(_UpdateItemFavoriteWithPopResult event,
@@ -57,7 +70,6 @@ class ContentByCategoryBloc
               ..removeWhere((e) => e.contentId == event.contentId)));
       }
     } else {
-      // final content = state.contents.firstWhere((e)=>e.contentId==event.contentId);
       final index =
           state.contents.indexWhere((e) => e.contentId == event.contentId);
       final content = state.contents[index];
@@ -134,7 +146,7 @@ class ContentByCategoryBloc
         emit(state.copyWith(
           isLoading: false,
           contents: List.of(state.contents)..addAll(result),
-          hasMore: result.length == state.pageSize,
+          hasMore: result.length >= state.pageSize,
         ));
       } catch (e) {
         emit(state.copyWith(

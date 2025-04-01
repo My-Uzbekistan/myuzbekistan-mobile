@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
 import 'package:uzbekistan_travel/core/navigation/navigation_extensions.dart';
@@ -16,14 +17,27 @@ import 'widget/location_widget.dart';
 import 'widget/menu_group.dart';
 import 'widget/top_widget.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends HookWidget {
   const DetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final iconTheme = Theme.of(context).iconTheme;
     return Scaffold(
-      body: BlocBuilder<DetailBloc, DetailBlocState>(builder: (context, state) {
+      body:
+          BlocConsumer<DetailBloc, DetailBlocState>(listener: (context, state) {
+        if (state is DetailBlocDataState) {
+          if (state.navState is Unauthorized) {
+            context.pushAuthPage();
+          }
+        }
+      }, buildWhen: (previous, current) {
+        if (previous is DetailBlocDataState && current is DetailBlocDataState) {
+          return previous.contentDetail != current.contentDetail;
+        } else {
+          return previous != current;
+        }
+      }, builder: (context, state) {
         return state.when(loadingState: () {
           return Scaffold(
             appBar: AppBar(),
@@ -32,11 +46,11 @@ class DetailPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             ),
           );
-        }, dataState: (detail) {
+        }, dataState: (detail, navState) {
           return PopScope(
             canPop: false,
             onPopInvokedWithResult: (didPop, didResult) {
-              if(!didPop) {
+              if (!didPop) {
                 context.pop({"isFavorite": detail.isFavorite});
               }
             },
@@ -143,6 +157,7 @@ class DetailPage extends StatelessWidget {
                       LocationWidget(
                         title: detail.location?.name ?? "",
                         address: detail.address,
+                        coordinates: detail.location?.value ?? [],
                       ),
                     if (detail.contactAvailable)
                       CellsWidget(

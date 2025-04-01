@@ -33,5 +33,11 @@
   "uzbekistan": "O'zbekiston",
   "exchange_rates": "Valyuta kurslari",
   "uzbek_currency": "*O‘zbekiston valyutasi (UZS) so‘m deb ataladi",
-  "exchange_banks": "Valyuta ayirboshlash banklari"
+  "exchange_banks": "Valyuta ayirboshlash banklari",
+  "loading_data": "Ma'lumot yuklanmoqda",
+  "coming_soon": "Tez kunlarda!",
+  "coming_soon_message": "Biz ajoyib narsa ustida ishlayapmiz.",
+  "nothing_found": "Hech narsa topilmadi",
+  "nothing_found_message": "Hech narsa topilmadi. Qayta qidiring!"
+
 }

@@ -1718,6 +1718,9 @@ mixin _$ContentByCategoryState {
   bool get hasMore => throw _privateConstructorUsedError;
   ContentByCategoryType get type => throw _privateConstructorUsedError;
   String? get query => throw _privateConstructorUsedError;
+  ContentsByCategoryNavState? get navState =>
+      throw _privateConstructorUsedError;
+  ErrorState? get error => throw _privateConstructorUsedError;
 
   /// Create a copy of ContentByCategoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -1740,7 +1743,12 @@ abstract class $ContentByCategoryStateCopyWith<$Res> {
       bool isLoading,
       bool hasMore,
       ContentByCategoryType type,
-      String? query});
+      String? query,
+      ContentsByCategoryNavState? navState,
+      ErrorState? error});
+
+  $ContentsByCategoryNavStateCopyWith<$Res>? get navState;
+  $ErrorStateCopyWith<$Res>? get error;
 }
 
 /// @nodoc
@@ -1767,6 +1775,8 @@ class _$ContentByCategoryStateCopyWithImpl<$Res,
     Object? hasMore = null,
     Object? type = null,
     Object? query = freezed,
+    Object? navState = freezed,
+    Object? error = freezed,
   }) {
     return _then(_value.copyWith(
       contents: null == contents
@@ -1801,17 +1811,53 @@ class _$ContentByCategoryStateCopyWithImpl<$Res,
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String?,
+      navState: freezed == navState
+          ? _value.navState
+          : navState // ignore: cast_nullable_to_non_nullable
+              as ContentsByCategoryNavState?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as ErrorState?,
     ) as $Val);
+  }
+
+  /// Create a copy of ContentByCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ContentsByCategoryNavStateCopyWith<$Res>? get navState {
+    if (_value.navState == null) {
+      return null;
+    }
+
+    return $ContentsByCategoryNavStateCopyWith<$Res>(_value.navState!, (value) {
+      return _then(_value.copyWith(navState: value) as $Val);
+    });
+  }
+
+  /// Create a copy of ContentByCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ErrorStateCopyWith<$Res>? get error {
+    if (_value.error == null) {
+      return null;
+    }
+
+    return $ErrorStateCopyWith<$Res>(_value.error!, (value) {
+      return _then(_value.copyWith(error: value) as $Val);
+    });
   }
 }
 
 /// @nodoc
-abstract class _$$ContentByCategoryStateImplCopyWith<$Res>
+abstract class _$$ContentByCategoryDataStateImplCopyWith<$Res>
     implements $ContentByCategoryStateCopyWith<$Res> {
-  factory _$$ContentByCategoryStateImplCopyWith(
-          _$ContentByCategoryStateImpl value,
-          $Res Function(_$ContentByCategoryStateImpl) then) =
-      __$$ContentByCategoryStateImplCopyWithImpl<$Res>;
+  factory _$$ContentByCategoryDataStateImplCopyWith(
+          _$ContentByCategoryDataStateImpl value,
+          $Res Function(_$ContentByCategoryDataStateImpl) then) =
+      __$$ContentByCategoryDataStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -1822,17 +1868,24 @@ abstract class _$$ContentByCategoryStateImplCopyWith<$Res>
       bool isLoading,
       bool hasMore,
       ContentByCategoryType type,
-      String? query});
+      String? query,
+      ContentsByCategoryNavState? navState,
+      ErrorState? error});
+
+  @override
+  $ContentsByCategoryNavStateCopyWith<$Res>? get navState;
+  @override
+  $ErrorStateCopyWith<$Res>? get error;
 }
 
 /// @nodoc
-class __$$ContentByCategoryStateImplCopyWithImpl<$Res>
+class __$$ContentByCategoryDataStateImplCopyWithImpl<$Res>
     extends _$ContentByCategoryStateCopyWithImpl<$Res,
-        _$ContentByCategoryStateImpl>
-    implements _$$ContentByCategoryStateImplCopyWith<$Res> {
-  __$$ContentByCategoryStateImplCopyWithImpl(
-      _$ContentByCategoryStateImpl _value,
-      $Res Function(_$ContentByCategoryStateImpl) _then)
+        _$ContentByCategoryDataStateImpl>
+    implements _$$ContentByCategoryDataStateImplCopyWith<$Res> {
+  __$$ContentByCategoryDataStateImplCopyWithImpl(
+      _$ContentByCategoryDataStateImpl _value,
+      $Res Function(_$ContentByCategoryDataStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ContentByCategoryState
@@ -1848,8 +1901,10 @@ class __$$ContentByCategoryStateImplCopyWithImpl<$Res>
     Object? hasMore = null,
     Object? type = null,
     Object? query = freezed,
+    Object? navState = freezed,
+    Object? error = freezed,
   }) {
-    return _then(_$ContentByCategoryStateImpl(
+    return _then(_$ContentByCategoryDataStateImpl(
       contents: null == contents
           ? _value._contents
           : contents // ignore: cast_nullable_to_non_nullable
@@ -1882,14 +1937,22 @@ class __$$ContentByCategoryStateImplCopyWithImpl<$Res>
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String?,
+      navState: freezed == navState
+          ? _value.navState
+          : navState // ignore: cast_nullable_to_non_nullable
+              as ContentsByCategoryNavState?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as ErrorState?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ContentByCategoryStateImpl implements _ContentByCategoryState {
-  _$ContentByCategoryStateImpl(
+class _$ContentByCategoryDataStateImpl implements _ContentByCategoryDataState {
+  _$ContentByCategoryDataStateImpl(
       {final List<MainPageContent> contents = const [],
       this.categoryId = 0,
       this.page = 1,
@@ -1897,7 +1960,9 @@ class _$ContentByCategoryStateImpl implements _ContentByCategoryState {
       this.isLoading = true,
       this.hasMore = true,
       this.type = ContentByCategoryType.contents,
-      this.query})
+      this.query,
+      this.navState,
+      this.error})
       : _contents = contents;
 
   final List<MainPageContent> _contents;
@@ -1929,17 +1994,21 @@ class _$ContentByCategoryStateImpl implements _ContentByCategoryState {
   final ContentByCategoryType type;
   @override
   final String? query;
+  @override
+  final ContentsByCategoryNavState? navState;
+  @override
+  final ErrorState? error;
 
   @override
   String toString() {
-    return 'ContentByCategoryState(contents: $contents, categoryId: $categoryId, page: $page, pageSize: $pageSize, isLoading: $isLoading, hasMore: $hasMore, type: $type, query: $query)';
+    return 'ContentByCategoryState(contents: $contents, categoryId: $categoryId, page: $page, pageSize: $pageSize, isLoading: $isLoading, hasMore: $hasMore, type: $type, query: $query, navState: $navState, error: $error)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ContentByCategoryStateImpl &&
+            other is _$ContentByCategoryDataStateImpl &&
             const DeepCollectionEquality().equals(other._contents, _contents) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId) &&
@@ -1950,7 +2019,10 @@ class _$ContentByCategoryStateImpl implements _ContentByCategoryState {
                 other.isLoading == isLoading) &&
             (identical(other.hasMore, hasMore) || other.hasMore == hasMore) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.query, query) || other.query == query));
+            (identical(other.query, query) || other.query == query) &&
+            (identical(other.navState, navState) ||
+                other.navState == navState) &&
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
@@ -1963,20 +2035,22 @@ class _$ContentByCategoryStateImpl implements _ContentByCategoryState {
       isLoading,
       hasMore,
       type,
-      query);
+      query,
+      navState,
+      error);
 
   /// Create a copy of ContentByCategoryState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ContentByCategoryStateImplCopyWith<_$ContentByCategoryStateImpl>
-      get copyWith => __$$ContentByCategoryStateImplCopyWithImpl<
-          _$ContentByCategoryStateImpl>(this, _$identity);
+  _$$ContentByCategoryDataStateImplCopyWith<_$ContentByCategoryDataStateImpl>
+      get copyWith => __$$ContentByCategoryDataStateImplCopyWithImpl<
+          _$ContentByCategoryDataStateImpl>(this, _$identity);
 }
 
-abstract class _ContentByCategoryState implements ContentByCategoryState {
-  factory _ContentByCategoryState(
+abstract class _ContentByCategoryDataState implements ContentByCategoryState {
+  factory _ContentByCategoryDataState(
       {final List<MainPageContent> contents,
       final int categoryId,
       final int page,
@@ -1984,7 +2058,9 @@ abstract class _ContentByCategoryState implements ContentByCategoryState {
       final bool isLoading,
       final bool hasMore,
       final ContentByCategoryType type,
-      final String? query}) = _$ContentByCategoryStateImpl;
+      final String? query,
+      final ContentsByCategoryNavState? navState,
+      final ErrorState? error}) = _$ContentByCategoryDataStateImpl;
 
   @override
   List<MainPageContent> get contents;
@@ -2002,11 +2078,446 @@ abstract class _ContentByCategoryState implements ContentByCategoryState {
   ContentByCategoryType get type;
   @override
   String? get query;
+  @override
+  ContentsByCategoryNavState? get navState;
+  @override
+  ErrorState? get error;
 
   /// Create a copy of ContentByCategoryState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ContentByCategoryStateImplCopyWith<_$ContentByCategoryStateImpl>
+  _$$ContentByCategoryDataStateImplCopyWith<_$ContentByCategoryDataStateImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$ContentsByCategoryNavState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unauthorized,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Unauthorized value) unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Unauthorized value)? unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unauthorized value)? unauthorized,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ContentsByCategoryNavStateCopyWith<$Res> {
+  factory $ContentsByCategoryNavStateCopyWith(ContentsByCategoryNavState value,
+          $Res Function(ContentsByCategoryNavState) then) =
+      _$ContentsByCategoryNavStateCopyWithImpl<$Res,
+          ContentsByCategoryNavState>;
+}
+
+/// @nodoc
+class _$ContentsByCategoryNavStateCopyWithImpl<$Res,
+        $Val extends ContentsByCategoryNavState>
+    implements $ContentsByCategoryNavStateCopyWith<$Res> {
+  _$ContentsByCategoryNavStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ContentsByCategoryNavState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$UnauthorizedImplCopyWith<$Res> {
+  factory _$$UnauthorizedImplCopyWith(
+          _$UnauthorizedImpl value, $Res Function(_$UnauthorizedImpl) then) =
+      __$$UnauthorizedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UnauthorizedImplCopyWithImpl<$Res>
+    extends _$ContentsByCategoryNavStateCopyWithImpl<$Res, _$UnauthorizedImpl>
+    implements _$$UnauthorizedImplCopyWith<$Res> {
+  __$$UnauthorizedImplCopyWithImpl(
+      _$UnauthorizedImpl _value, $Res Function(_$UnauthorizedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContentsByCategoryNavState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UnauthorizedImpl implements Unauthorized {
+  const _$UnauthorizedImpl();
+
+  @override
+  String toString() {
+    return 'ContentsByCategoryNavState.unauthorized()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UnauthorizedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unauthorized,
+  }) {
+    return unauthorized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unauthorized,
+  }) {
+    return unauthorized?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unauthorized,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Unauthorized value) unauthorized,
+  }) {
+    return unauthorized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Unauthorized value)? unauthorized,
+  }) {
+    return unauthorized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unauthorized value)? unauthorized,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Unauthorized implements ContentsByCategoryNavState {
+  const factory Unauthorized() = _$UnauthorizedImpl;
+}
+
+/// @nodoc
+mixin _$ErrorState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
+    required TResult Function() failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
+    TResult? Function()? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
+    TResult Function()? failure,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NotFoundState value) notFound,
+    required TResult Function(__FailureState value) failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_NotFoundState value)? notFound,
+    TResult? Function(__FailureState value)? failure,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NotFoundState value)? notFound,
+    TResult Function(__FailureState value)? failure,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ErrorStateCopyWith<$Res> {
+  factory $ErrorStateCopyWith(
+          ErrorState value, $Res Function(ErrorState) then) =
+      _$ErrorStateCopyWithImpl<$Res, ErrorState>;
+}
+
+/// @nodoc
+class _$ErrorStateCopyWithImpl<$Res, $Val extends ErrorState>
+    implements $ErrorStateCopyWith<$Res> {
+  _$ErrorStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$NotFoundStateImplCopyWith<$Res> {
+  factory _$$NotFoundStateImplCopyWith(
+          _$NotFoundStateImpl value, $Res Function(_$NotFoundStateImpl) then) =
+      __$$NotFoundStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NotFoundStateImplCopyWithImpl<$Res>
+    extends _$ErrorStateCopyWithImpl<$Res, _$NotFoundStateImpl>
+    implements _$$NotFoundStateImplCopyWith<$Res> {
+  __$$NotFoundStateImplCopyWithImpl(
+      _$NotFoundStateImpl _value, $Res Function(_$NotFoundStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$NotFoundStateImpl implements _NotFoundState {
+  const _$NotFoundStateImpl();
+
+  @override
+  String toString() {
+    return 'ErrorState.notFound()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NotFoundStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
+    required TResult Function() failure,
+  }) {
+    return notFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
+    TResult? Function()? failure,
+  }) {
+    return notFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
+    TResult Function()? failure,
+    required TResult orElse(),
+  }) {
+    if (notFound != null) {
+      return notFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NotFoundState value) notFound,
+    required TResult Function(__FailureState value) failure,
+  }) {
+    return notFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_NotFoundState value)? notFound,
+    TResult? Function(__FailureState value)? failure,
+  }) {
+    return notFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NotFoundState value)? notFound,
+    TResult Function(__FailureState value)? failure,
+    required TResult orElse(),
+  }) {
+    if (notFound != null) {
+      return notFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NotFoundState implements ErrorState {
+  const factory _NotFoundState() = _$NotFoundStateImpl;
+}
+
+/// @nodoc
+abstract class _$$_FailureStateImplCopyWith<$Res> {
+  factory _$$_FailureStateImplCopyWith(
+          _$_FailureStateImpl value, $Res Function(_$_FailureStateImpl) then) =
+      __$$_FailureStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_FailureStateImplCopyWithImpl<$Res>
+    extends _$ErrorStateCopyWithImpl<$Res, _$_FailureStateImpl>
+    implements _$$_FailureStateImplCopyWith<$Res> {
+  __$$_FailureStateImplCopyWithImpl(
+      _$_FailureStateImpl _value, $Res Function(_$_FailureStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ErrorState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$_FailureStateImpl implements __FailureState {
+  const _$_FailureStateImpl();
+
+  @override
+  String toString() {
+    return 'ErrorState.failure()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_FailureStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
+    required TResult Function() failure,
+  }) {
+    return failure();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
+    TResult? Function()? failure,
+  }) {
+    return failure?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
+    TResult Function()? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NotFoundState value) notFound,
+    required TResult Function(__FailureState value) failure,
+  }) {
+    return failure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_NotFoundState value)? notFound,
+    TResult? Function(__FailureState value)? failure,
+  }) {
+    return failure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NotFoundState value)? notFound,
+    TResult Function(__FailureState value)? failure,
+    required TResult orElse(),
+  }) {
+    if (failure != null) {
+      return failure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class __FailureState implements ErrorState {
+  const factory __FailureState() = _$_FailureStateImpl;
 }

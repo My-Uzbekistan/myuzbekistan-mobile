@@ -395,38 +395,41 @@ mixin _$DetailBlocState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingState,
-    required TResult Function(ContentDetail contentDetail) dataState,
+    required TResult Function(ContentDetail contentDetail, NavState? navState)
+        dataState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadingState,
-    TResult? Function(ContentDetail contentDetail)? dataState,
+    TResult? Function(ContentDetail contentDetail, NavState? navState)?
+        dataState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingState,
-    TResult Function(ContentDetail contentDetail)? dataState,
+    TResult Function(ContentDetail contentDetail, NavState? navState)?
+        dataState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadingState value) loadingState,
-    required TResult Function(_DetailBlocDataState value) dataState,
+    required TResult Function(DetailBlocDataState value) dataState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadingState value)? loadingState,
-    TResult? Function(_DetailBlocDataState value)? dataState,
+    TResult? Function(DetailBlocDataState value)? dataState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadingState value)? loadingState,
-    TResult Function(_DetailBlocDataState value)? dataState,
+    TResult Function(DetailBlocDataState value)? dataState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -502,7 +505,8 @@ class _$LoadingStateImpl with DiagnosticableTreeMixin implements _LoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingState,
-    required TResult Function(ContentDetail contentDetail) dataState,
+    required TResult Function(ContentDetail contentDetail, NavState? navState)
+        dataState,
   }) {
     return loadingState();
   }
@@ -511,7 +515,8 @@ class _$LoadingStateImpl with DiagnosticableTreeMixin implements _LoadingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadingState,
-    TResult? Function(ContentDetail contentDetail)? dataState,
+    TResult? Function(ContentDetail contentDetail, NavState? navState)?
+        dataState,
   }) {
     return loadingState?.call();
   }
@@ -520,7 +525,8 @@ class _$LoadingStateImpl with DiagnosticableTreeMixin implements _LoadingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingState,
-    TResult Function(ContentDetail contentDetail)? dataState,
+    TResult Function(ContentDetail contentDetail, NavState? navState)?
+        dataState,
     required TResult orElse(),
   }) {
     if (loadingState != null) {
@@ -533,7 +539,7 @@ class _$LoadingStateImpl with DiagnosticableTreeMixin implements _LoadingState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadingState value) loadingState,
-    required TResult Function(_DetailBlocDataState value) dataState,
+    required TResult Function(DetailBlocDataState value) dataState,
   }) {
     return loadingState(this);
   }
@@ -542,7 +548,7 @@ class _$LoadingStateImpl with DiagnosticableTreeMixin implements _LoadingState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadingState value)? loadingState,
-    TResult? Function(_DetailBlocDataState value)? dataState,
+    TResult? Function(DetailBlocDataState value)? dataState,
   }) {
     return loadingState?.call(this);
   }
@@ -551,7 +557,7 @@ class _$LoadingStateImpl with DiagnosticableTreeMixin implements _LoadingState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadingState value)? loadingState,
-    TResult Function(_DetailBlocDataState value)? dataState,
+    TResult Function(DetailBlocDataState value)? dataState,
     required TResult orElse(),
   }) {
     if (loadingState != null) {
@@ -571,7 +577,9 @@ abstract class _$$DetailBlocDataStateImplCopyWith<$Res> {
           $Res Function(_$DetailBlocDataStateImpl) then) =
       __$$DetailBlocDataStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ContentDetail contentDetail});
+  $Res call({ContentDetail contentDetail, NavState? navState});
+
+  $NavStateCopyWith<$Res>? get navState;
 }
 
 /// @nodoc
@@ -588,13 +596,32 @@ class __$$DetailBlocDataStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? contentDetail = null,
+    Object? navState = freezed,
   }) {
     return _then(_$DetailBlocDataStateImpl(
       contentDetail: null == contentDetail
           ? _value.contentDetail
           : contentDetail // ignore: cast_nullable_to_non_nullable
               as ContentDetail,
+      navState: freezed == navState
+          ? _value.navState
+          : navState // ignore: cast_nullable_to_non_nullable
+              as NavState?,
     ));
+  }
+
+  /// Create a copy of DetailBlocState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NavStateCopyWith<$Res>? get navState {
+    if (_value.navState == null) {
+      return null;
+    }
+
+    return $NavStateCopyWith<$Res>(_value.navState!, (value) {
+      return _then(_value.copyWith(navState: value));
+    });
   }
 }
 
@@ -602,15 +629,17 @@ class __$$DetailBlocDataStateImplCopyWithImpl<$Res>
 
 class _$DetailBlocDataStateImpl
     with DiagnosticableTreeMixin
-    implements _DetailBlocDataState {
-  const _$DetailBlocDataStateImpl({required this.contentDetail});
+    implements DetailBlocDataState {
+  const _$DetailBlocDataStateImpl({required this.contentDetail, this.navState});
 
   @override
   final ContentDetail contentDetail;
+  @override
+  final NavState? navState;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DetailBlocState.dataState(contentDetail: $contentDetail)';
+    return 'DetailBlocState.dataState(contentDetail: $contentDetail, navState: $navState)';
   }
 
   @override
@@ -618,7 +647,8 @@ class _$DetailBlocDataStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'DetailBlocState.dataState'))
-      ..add(DiagnosticsProperty('contentDetail', contentDetail));
+      ..add(DiagnosticsProperty('contentDetail', contentDetail))
+      ..add(DiagnosticsProperty('navState', navState));
   }
 
   @override
@@ -627,11 +657,13 @@ class _$DetailBlocDataStateImpl
         (other.runtimeType == runtimeType &&
             other is _$DetailBlocDataStateImpl &&
             (identical(other.contentDetail, contentDetail) ||
-                other.contentDetail == contentDetail));
+                other.contentDetail == contentDetail) &&
+            (identical(other.navState, navState) ||
+                other.navState == navState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, contentDetail);
+  int get hashCode => Object.hash(runtimeType, contentDetail, navState);
 
   /// Create a copy of DetailBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -646,29 +678,32 @@ class _$DetailBlocDataStateImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadingState,
-    required TResult Function(ContentDetail contentDetail) dataState,
+    required TResult Function(ContentDetail contentDetail, NavState? navState)
+        dataState,
   }) {
-    return dataState(contentDetail);
+    return dataState(contentDetail, navState);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadingState,
-    TResult? Function(ContentDetail contentDetail)? dataState,
+    TResult? Function(ContentDetail contentDetail, NavState? navState)?
+        dataState,
   }) {
-    return dataState?.call(contentDetail);
+    return dataState?.call(contentDetail, navState);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadingState,
-    TResult Function(ContentDetail contentDetail)? dataState,
+    TResult Function(ContentDetail contentDetail, NavState? navState)?
+        dataState,
     required TResult orElse(),
   }) {
     if (dataState != null) {
-      return dataState(contentDetail);
+      return dataState(contentDetail, navState);
     }
     return orElse();
   }
@@ -677,7 +712,7 @@ class _$DetailBlocDataStateImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadingState value) loadingState,
-    required TResult Function(_DetailBlocDataState value) dataState,
+    required TResult Function(DetailBlocDataState value) dataState,
   }) {
     return dataState(this);
   }
@@ -686,7 +721,7 @@ class _$DetailBlocDataStateImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadingState value)? loadingState,
-    TResult? Function(_DetailBlocDataState value)? dataState,
+    TResult? Function(DetailBlocDataState value)? dataState,
   }) {
     return dataState?.call(this);
   }
@@ -695,7 +730,7 @@ class _$DetailBlocDataStateImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadingState value)? loadingState,
-    TResult Function(_DetailBlocDataState value)? dataState,
+    TResult Function(DetailBlocDataState value)? dataState,
     required TResult orElse(),
   }) {
     if (dataState != null) {
@@ -705,15 +740,178 @@ class _$DetailBlocDataStateImpl
   }
 }
 
-abstract class _DetailBlocDataState implements DetailBlocState {
-  const factory _DetailBlocDataState(
-      {required final ContentDetail contentDetail}) = _$DetailBlocDataStateImpl;
+abstract class DetailBlocDataState implements DetailBlocState {
+  const factory DetailBlocDataState(
+      {required final ContentDetail contentDetail,
+      final NavState? navState}) = _$DetailBlocDataStateImpl;
 
   ContentDetail get contentDetail;
+  NavState? get navState;
 
   /// Create a copy of DetailBlocState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DetailBlocDataStateImplCopyWith<_$DetailBlocDataStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$NavState {
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unauthorized,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Unauthorized value) unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Unauthorized value)? unauthorized,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unauthorized value)? unauthorized,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NavStateCopyWith<$Res> {
+  factory $NavStateCopyWith(NavState value, $Res Function(NavState) then) =
+      _$NavStateCopyWithImpl<$Res, NavState>;
+}
+
+/// @nodoc
+class _$NavStateCopyWithImpl<$Res, $Val extends NavState>
+    implements $NavStateCopyWith<$Res> {
+  _$NavStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of NavState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+abstract class _$$UnauthorizedImplCopyWith<$Res> {
+  factory _$$UnauthorizedImplCopyWith(
+          _$UnauthorizedImpl value, $Res Function(_$UnauthorizedImpl) then) =
+      __$$UnauthorizedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UnauthorizedImplCopyWithImpl<$Res>
+    extends _$NavStateCopyWithImpl<$Res, _$UnauthorizedImpl>
+    implements _$$UnauthorizedImplCopyWith<$Res> {
+  __$$UnauthorizedImplCopyWithImpl(
+      _$UnauthorizedImpl _value, $Res Function(_$UnauthorizedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NavState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$UnauthorizedImpl with DiagnosticableTreeMixin implements Unauthorized {
+  const _$UnauthorizedImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NavState.unauthorized()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'NavState.unauthorized'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$UnauthorizedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unauthorized,
+  }) {
+    return unauthorized();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unauthorized,
+  }) {
+    return unauthorized?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unauthorized,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Unauthorized value) unauthorized,
+  }) {
+    return unauthorized(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Unauthorized value)? unauthorized,
+  }) {
+    return unauthorized?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unauthorized value)? unauthorized,
+    required TResult orElse(),
+  }) {
+    if (unauthorized != null) {
+      return unauthorized(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Unauthorized implements NavState {
+  const factory Unauthorized() = _$UnauthorizedImpl;
 }

@@ -119,4 +119,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exchange_banks => 'Exchange banks';
+
+  @override
+  String get loading_data => 'Loading data';
+
+  @override
+  String get coming_soon => 'Coming soon!';
+
+  @override
+  String get coming_soon_message => 'We are working on something great.';
+
+  @override
+  String get nothing_found => 'Nothing found';
+
+  @override
+  String get nothing_found_message => 'No results found. Try searching again!';
 }

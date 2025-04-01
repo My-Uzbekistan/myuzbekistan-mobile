@@ -76,7 +76,7 @@ class ImagePreviewPage extends HookWidget {
                         duration: const Duration(milliseconds: 300),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(11),
                             border: isSelected
                                 ? Border.all(
                                     color: context.appColors.brand,

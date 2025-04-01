@@ -29,5 +29,10 @@
   "uzbekistan": "Uzbekistan",
   "exchange_rates": "Exchange rates",
   "uzbek_currency": "*The Uzbek currency (UZS) is called SOUM",
-  "exchange_banks": "Exchange banks"
+  "exchange_banks": "Exchange banks",
+  "loading_data": "Loading data",
+  "coming_soon": "Coming soon!",
+  "coming_soon_message": "We are working on something great.",
+  "nothing_found": "Nothing found",
+  "nothing_found_message": "No results found. Try searching again!"
 }

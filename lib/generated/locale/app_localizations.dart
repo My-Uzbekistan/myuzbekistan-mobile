@@ -264,6 +264,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exchange banks'**
   String get exchange_banks;
+
+  /// No description provided for @loading_data.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading data'**
+  String get loading_data;
+
+  /// No description provided for @coming_soon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming soon!'**
+  String get coming_soon;
+
+  /// No description provided for @coming_soon_message.
+  ///
+  /// In en, this message translates to:
+  /// **'We are working on something great.'**
+  String get coming_soon_message;
+
+  /// No description provided for @nothing_found.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing found'**
+  String get nothing_found;
+
+  /// No description provided for @nothing_found_message.
+  ///
+  /// In en, this message translates to:
+  /// **'No results found. Try searching again!'**
+  String get nothing_found_message;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

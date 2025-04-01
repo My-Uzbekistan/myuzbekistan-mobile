@@ -119,4 +119,19 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get exchange_banks => 'Valyuta ayirboshlash banklari';
+
+  @override
+  String get loading_data => 'Ma\'lumot yuklanmoqda';
+
+  @override
+  String get coming_soon => 'Tez kunlarda!';
+
+  @override
+  String get coming_soon_message => 'Biz ajoyib narsa ustida ishlayapmiz.';
+
+  @override
+  String get nothing_found => 'Hech narsa topilmadi';
+
+  @override
+  String get nothing_found_message => 'Hech narsa topilmadi. Qayta qidiring!';
 }

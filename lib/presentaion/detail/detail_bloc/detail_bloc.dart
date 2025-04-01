@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:uzbekistan_travel/core/utils/auth_check.dart';
 
 import '../../../core/listeners/appsettings_change_listener.dart';
 
@@ -35,17 +36,27 @@ class DetailBloc extends Bloc<DetailBlocEvent, DetailBlocState> {
 
   Future<void> _setFavoriteEvent(
       _DetailBlocChangeFavorite event, Emitter<DetailBlocState> emit) async {
-    final data = (state as _DetailBlocDataState).contentDetail;
-    emit((state as _DetailBlocDataState).copyWith(
-        contentDetail: data.copyWith(isFavorite: event.isSetFavorite)));
-    try {
-
-      final result = await _repository.favoriteChange(
-          contentId: (state as _DetailBlocDataState).contentDetail.id,
-          setFavorite: event.isSetFavorite);
-      _appLocaleChangeListener.refreshFavorite(require: !event.isSetFavorite);
-    } catch (e) {
-      debugPrint("DetailBLocSetFavoriteEvent ${e}");
-    }
+    final dataState = (state as DetailBlocDataState);
+    emit((state as DetailBlocDataState).copyWith(navState: null));
+    AuthCheck.authCheck(
+      authSuccess: () async {
+        emit(dataState.copyWith(
+            contentDetail: dataState.contentDetail
+                .copyWith(isFavorite: event.isSetFavorite),
+            navState: null));
+        try {
+          final result = await _repository.favoriteChange(
+              contentId: dataState.contentDetail.id,
+              setFavorite: event.isSetFavorite);
+          _appLocaleChangeListener.refreshFavorite(
+              require: !event.isSetFavorite);
+        } catch (e) {
+          debugPrint("DetailBLocSetFavoriteEvent ${e}");
+        }
+      },
+      unauthorized: () {
+        emit(dataState.copyWith(navState: NavState.unauthorized()));
+      },
+    );
   }
 }

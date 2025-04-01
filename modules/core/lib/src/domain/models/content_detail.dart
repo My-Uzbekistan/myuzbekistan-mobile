@@ -1,7 +1,8 @@
 import 'package:core/src/shared/extensions.dart';
 import 'package:core/src/shared/view_type.dart';
+import 'package:equatable/equatable.dart';
 
-class ContentDetail {
+class ContentDetail extends Equatable {
   final int id;
   final String? title;
   final String? description;
@@ -104,6 +105,31 @@ class ContentDetail {
       viewType: viewType ?? this.viewType,
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+    id,
+    title,
+    description,
+    categoryId,
+    categoryName,
+    workingHours,
+    location,
+    facilities,
+    languages,
+    files,
+    photos,
+    _photo,
+    contacts,
+    ratingAverage,
+    averageCheck,
+    price,
+    priceInDollar,
+    address,
+    isFavorite,
+    viewType,
+  ];
 
 }
 

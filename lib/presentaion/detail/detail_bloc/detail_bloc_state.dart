@@ -6,5 +6,15 @@ abstract class DetailBlocState with _$DetailBlocState {
 
   const factory DetailBlocState.dataState({
     required ContentDetail contentDetail,
-  }) = _DetailBlocDataState;
+
+    NavState ? navState
+  }) = DetailBlocDataState;
+}
+
+
+@freezed
+abstract class NavState with _$NavState {
+
+  const factory NavState.unauthorized() = Unauthorized;
+
 }

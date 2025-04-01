@@ -31,13 +31,13 @@ abstract class RestService {
       {@Path("categoryId") required int categoryId,
       @Query("page") required int page,
       @Query("pageSize") required int pageSize,
-      @Query("search") String? search});
+      @Query("content_by_category") String? search});
 
   @GET("favorites")
   Future<FavoriteDto> loadFavourites({
     @Query("page") required int page,
     @Query("pageSize") required int pageSize,
-    @Query("search") String? search,
+    @Query("content_by_category") String? search,
     @CancelRequest() CancelToken? cancelToken,
   });
 

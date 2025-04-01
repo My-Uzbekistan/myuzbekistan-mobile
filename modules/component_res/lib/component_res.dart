@@ -16,7 +16,11 @@ export 'src/components/stars_badge/stars_badge.dart';
 export 'src/components/collapsed_container/collapsable_container.dart';
 export 'src/components/avatar/avatar.dart';
 export 'src/components/stacked_card/stacked_card.dart';
+export 'src/components/loading_indicator.dart';
 export 'package:flutter_svg/svg.dart';
 export 'package:carousel_slider/carousel_state.dart';
 export 'package:carousel_slider/carousel_slider.dart';
+export  'package:google_maps_flutter/google_maps_flutter.dart';
+
+
 // export 'src/components/toast/toast.dart';

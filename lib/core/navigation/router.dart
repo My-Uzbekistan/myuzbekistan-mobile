@@ -11,6 +11,9 @@ import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
 import 'package:uzbekistan_travel/presentaion/auth/auth_page.dart';
 import 'package:uzbekistan_travel/presentaion/auth/bloc/auth_bloc.dart';
+import 'package:uzbekistan_travel/presentaion/message_container.dart';
+import 'package:uzbekistan_travel/presentaion/content_by_category/bloc/contents_by_category_bloc.dart' show ContentByCategoryBloc, ContentByCategoryEvent;
+import 'package:uzbekistan_travel/presentaion/content_by_category/content_by_categories_page.dart';
 import 'package:uzbekistan_travel/presentaion/detail/detail_bloc/detail_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/detail/detail_page.dart';
 import 'package:uzbekistan_travel/presentaion/detail/pages/image_preview_page.dart';
@@ -20,8 +23,6 @@ import 'package:uzbekistan_travel/presentaion/home/page/select_region/select_reg
 import 'package:uzbekistan_travel/presentaion/profile_page/pages/change_locale.dart';
 import 'package:uzbekistan_travel/presentaion/profile_page/pages/change_theme_page.dart';
 import 'package:uzbekistan_travel/presentaion/profile_page/profile_page.dart';
-import 'package:uzbekistan_travel/presentaion/search/bloc/contents_by_category_bloc.dart';
-import 'package:uzbekistan_travel/presentaion/search/content_by_categories_page.dart';
 import 'package:uzbekistan_travel/presentaion/shell_more/pages/currencies_page.dart';
 import 'package:uzbekistan_travel/presentaion/shell_more/shell_more_page.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
@@ -59,25 +60,26 @@ final GoRouter routes = GoRouter(
       GoRoute(
           path: AppRoutePath.contentByCategory.path,
           name: AppRoutePath.contentByCategory.name,
-          builder: (context, state) {
+          pageBuilder: (context,state){
             final hasFavorites = state.uri.queryParameters["hasFavorites"];
             final categoryName = hasFavorites != null
                 ? context.localizations?.favorites
                 : state.uri.queryParameters["categoryName"];
             final int categoryId =
                 state.uri.queryParameters["categoryId"]?.toInt() ?? 0;
-            return BlocProvider(
+            return _slideTransition(child: BlocProvider(
               create: (context) => getIt<ContentByCategoryBloc>()
                 ..add(hasFavorites != null
                     ? ContentByCategoryEvent.loadFavorites()
                     : ContentByCategoryEvent.init(
-                        categoryId,
-                      )),
+                  categoryId,
+                )),
               child: ContentByCategoryPage(
                 categoryName: categoryName ?? "",
               ),
-            );
-          }),
+            ), context: context, state: state);
+          },
+          ),
 
       GoRoute(
           path: AppRoutePath.detail.path,

@@ -90,7 +90,7 @@ class _RestService implements RestService {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
-      r'search': search,
+      r'content_by_category': search,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -132,7 +132,7 @@ class _RestService implements RestService {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
-      r'search': search,
+      r'content_by_category': search,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

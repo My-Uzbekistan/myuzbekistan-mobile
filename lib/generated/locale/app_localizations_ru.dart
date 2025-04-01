@@ -119,4 +119,19 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get exchange_banks => 'Обменные банки';
+
+  @override
+  String get loading_data => 'Загрузка данных';
+
+  @override
+  String get coming_soon => 'Вскоре!';
+
+  @override
+  String get coming_soon_message => 'Мы работаем над чем-то великим.';
+
+  @override
+  String get nothing_found => 'Ничего не найдено';
+
+  @override
+  String get nothing_found_message => 'Ничего не найдено. Попробуйте снова!';
 }

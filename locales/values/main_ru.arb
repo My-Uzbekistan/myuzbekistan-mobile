@@ -31,5 +31,10 @@
   "exchange_rates": "Курсы валют",
 
   "uzbek_currency": "*Узбекская валюта (UZS) называется сум",
-  "exchange_banks": "Обменные банки"
+  "exchange_banks": "Обменные банки",
+  "loading_data": "Загрузка данных",
+  "coming_soon": "Вскоре!",
+  "coming_soon_message": "Мы работаем над чем-то великим.",
+  "nothing_found": "Ничего не найдено",
+  "nothing_found_message": "Ничего не найдено. Попробуйте снова!"
 }

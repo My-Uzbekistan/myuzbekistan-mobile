@@ -19,31 +19,19 @@ final _shellRoute = [
         GoRoute(
             path: "/map",
             name: "map",
-            builder: (context, state) => Container(
-                  child: Center(
-                    child: Text("Map"),
-                  ),
-                ))
+            builder: (context, state) => MessageContainer.comingSoonWidget(context))
       ]),
       StatefulShellBranch(routes: [
         GoRoute(
             path: "/payment",
             name: "payment",
-            builder: (context, state) => Container(
-                  child: Center(
-                    child: Text("Payment"),
-                  ),
-                ))
+            builder: (context, state) =>MessageContainer.comingSoonWidget(context))
       ]),
       StatefulShellBranch(routes: [
         GoRoute(
             path: "/transfer",
             name: "transfer",
-            builder: (context, state) => Container(
-                  child: Center(
-                    child: Text("Transfer"),
-                  ),
-                ))
+            builder: (context, state) => MessageContainer.comingSoonWidget(context))
       ]),
       StatefulShellBranch(routes: [
         GoRoute(

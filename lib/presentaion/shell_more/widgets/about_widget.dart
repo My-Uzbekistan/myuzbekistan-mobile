@@ -181,6 +181,7 @@ class _PagerItem extends StatelessWidget {
           height: 182,
           enlargeStrategy: CenterPageEnlargeStrategy.zoom,
           aspectRatio: 262 / 182,
+
           enlargeCenterPage: true,
           enableInfiniteScroll: false,
           viewportFraction: viewportFraction,

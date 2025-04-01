@@ -10,6 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:core/core.dart' as _i494;
+import 'package:core/core.dart';
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:uzbekistan_travel/core/listeners/appsettings_change_listener.dart'
@@ -18,14 +19,13 @@ import 'package:uzbekistan_travel/core/settings_bloc/app_settings_bloc.dart'
     as _i994;
 import 'package:uzbekistan_travel/presentaion/auth/bloc/auth_bloc.dart'
     as _i1072;
+import 'package:uzbekistan_travel/presentaion/content_by_category/bloc/contents_by_category_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/detail/detail_bloc/detail_bloc.dart'
     as _i1037;
 import 'package:uzbekistan_travel/presentaion/home/home_bloc/home_bloc.dart'
     as _i1020;
 import 'package:uzbekistan_travel/presentaion/profile_page/bloc/profile_bloc.dart'
     as _i345;
-import 'package:uzbekistan_travel/presentaion/search/bloc/contents_by_category_bloc.dart'
-    as _i206;
 import 'package:uzbekistan_travel/presentaion/shell_more/bloc/more_bloc.dart'
     as _i627;
 
@@ -51,16 +51,16 @@ extension GetItInjectableX on _i174.GetIt {
           gh<_i494.SecurityStorage>(),
           gh<_i454.AppStatusChangeListeners>(),
         ));
-    gh.factory<_i206.ContentByCategoryBloc>(() => _i206.ContentByCategoryBloc(
-          gh<_i494.Repository>(),
-          gh<_i454.AppStatusChangeListeners>(),
-        ));
     gh.factory<_i345.ProfileBloc>(() => _i345.ProfileBloc(
           gh<_i494.SecurityStorage>(),
           gh<_i454.AppStatusChangeListeners>(),
         ));
     gh.factory<_i994.AppSettingsBloc>(() => _i994.AppSettingsBloc(
           gh<_i494.AppPreference>(),
+          gh<_i454.AppStatusChangeListeners>(),
+        ));
+    gh.factory<ContentByCategoryBloc>(() => ContentByCategoryBloc(
+          gh<Repository>(),
           gh<_i454.AppStatusChangeListeners>(),
         ));
     gh.factory<_i1020.HomeBloc>(() => _i1020.HomeBloc(

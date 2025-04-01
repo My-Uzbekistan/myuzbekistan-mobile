@@ -15,8 +15,11 @@ class Assets {
   static const String pngAvatar = 'assets/png/avatar.png';
   static const String pngAvatarImage = 'assets/png/avatar_image.png';
   static const String pngDefaultContentImage = 'assets/png/default_content_image.png';
+  static const String pngGears = 'assets/png/gears.png';
   static const String pngMap = 'assets/png/map.png';
   static const String pngPersonalDefaultBg = 'assets/png/personal_default_bg.png';
+  static const String pngSearchMaskIcon = 'assets/png/search_mask_icon.png';
+  static const String pngSosok = 'assets/png/sosok.png';
   static const String svgGoogleLogo = 'assets/svg/google_logo.svg';
   static const String svgIconArrowRight = 'assets/svg/icon_arrow_right.svg';
   static const String svgIconCheck = 'assets/svg/icon_check.svg';
