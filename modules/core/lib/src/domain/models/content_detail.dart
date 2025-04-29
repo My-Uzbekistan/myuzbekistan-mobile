@@ -12,7 +12,7 @@ class ContentDetail extends Equatable {
   final Field<List<double>>? location;
   final Field<List<Facility>>? facilities;
   final Field<List<String>>? languages;
-  final Field<List<String>>? files;
+  final Field<List<Attachments>>? attachments;
   final List<String>? photos;
   final String? _photo;
   final Field<List<Contacts>>? contacts;
@@ -34,7 +34,7 @@ class ContentDetail extends Equatable {
       this.location,
       this.facilities,
       this.languages,
-      this.files,
+      this.attachments,
       this.photos,
       String? photo,
       this.contacts,
@@ -44,8 +44,7 @@ class ContentDetail extends Equatable {
       this.priceInDollar,
       this.address,
       required this.viewType,
-      this.isFavorite=false
-      })
+      this.isFavorite = false})
       : _photo = photo;
 
   String get image => _photo ?? photos?.firstOrNull ?? "";
@@ -71,6 +70,7 @@ class ContentDetail extends Equatable {
     Field<List<Facility>>? facilities,
     Field<List<String>>? languages,
     Field<List<String>>? files,
+    Field<List<Attachments>>? attachments,
     List<String>? photos,
     String? photo,
     Field<List<Contacts>>? contacts,
@@ -92,7 +92,6 @@ class ContentDetail extends Equatable {
       location: location ?? this.location,
       facilities: facilities ?? this.facilities,
       languages: languages ?? this.languages,
-      files: files ?? this.files,
       photos: photos ?? this.photos,
       photo: photo ?? _photo,
       contacts: contacts ?? this.contacts,
@@ -103,34 +102,34 @@ class ContentDetail extends Equatable {
       address: address ?? this.address,
       isFavorite: isFavorite ?? this.isFavorite,
       viewType: viewType ?? this.viewType,
+      attachments: attachments ?? this.attachments,
     );
   }
 
   @override
   // TODO: implement props
   List<Object?> get props => [
-    id,
-    title,
-    description,
-    categoryId,
-    categoryName,
-    workingHours,
-    location,
-    facilities,
-    languages,
-    files,
-    photos,
-    _photo,
-    contacts,
-    ratingAverage,
-    averageCheck,
-    price,
-    priceInDollar,
-    address,
-    isFavorite,
-    viewType,
-  ];
-
+        id,
+        title,
+        description,
+        categoryId,
+        categoryName,
+        workingHours,
+        location,
+        facilities,
+        languages,
+        attachments,
+        photos,
+        _photo,
+        contacts,
+        ratingAverage,
+        averageCheck,
+        price,
+        priceInDollar,
+        address,
+        isFavorite,
+        viewType,
+      ];
 }
 
 class Contacts {
@@ -162,4 +161,12 @@ class Field<T> {
     this.name,
     this.value,
   });
+}
+
+class Attachments {
+  final String? name;
+  final String? file;
+  final String? icon;
+
+  Attachments({this.name, this.file, this.icon});
 }

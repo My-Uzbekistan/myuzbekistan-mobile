@@ -31,13 +31,13 @@ abstract class RestService {
       {@Path("categoryId") required int categoryId,
       @Query("page") required int page,
       @Query("pageSize") required int pageSize,
-      @Query("content_by_category") String? search});
+      @Query("search") String? search});
 
   @GET("favorites")
   Future<FavoriteDto> loadFavourites({
     @Query("page") required int page,
     @Query("pageSize") required int pageSize,
-    @Query("content_by_category") String? search,
+    @Query("search") String? search,
     @CancelRequest() CancelToken? cancelToken,
   });
 
@@ -52,12 +52,16 @@ abstract class RestService {
 
   @POST("auth/google-login")
   Future<TokenDto> authGoogle(@Body() Map<String, dynamic> body);
+  @POST("auth/apple-login")
+  Future<TokenDto> authApple(@Body() Map<String, dynamic> body);
 
   @POST("favorites")
   Future<dynamic> addFavorite({@Query("contentId") required int contentId});
 
   @DELETE("favorites")
   Future<dynamic> deleteFavorite({@Query("contentId") required int contentId});
+  @DELETE("auth/delete")
+  Future<dynamic> deleteAccount();
 
 
   @GET("more/currency")

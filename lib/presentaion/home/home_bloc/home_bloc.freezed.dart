@@ -19,7 +19,7 @@ mixin _$HomeBlocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loadDataEvent,
+    required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
     required TResult Function() loadFavorites,
@@ -28,7 +28,7 @@ mixin _$HomeBlocEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loadDataEvent,
+    TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
     TResult? Function()? loadFavorites,
@@ -37,7 +37,7 @@ mixin _$HomeBlocEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loadDataEvent,
+    TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
     TResult Function()? loadFavorites,
@@ -146,7 +146,7 @@ class _$HomeBlocInitialEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loadDataEvent,
+    required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
     required TResult Function() loadFavorites,
@@ -158,7 +158,7 @@ class _$HomeBlocInitialEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loadDataEvent,
+    TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
     TResult? Function()? loadFavorites,
@@ -170,7 +170,7 @@ class _$HomeBlocInitialEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loadDataEvent,
+    TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
     TResult Function()? loadFavorites,
@@ -232,6 +232,8 @@ abstract class _$$LoadDataEventImplCopyWith<$Res> {
   factory _$$LoadDataEventImplCopyWith(
           _$LoadDataEventImpl value, $Res Function(_$LoadDataEventImpl) then) =
       __$$LoadDataEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isRefresh});
 }
 
 /// @nodoc
@@ -244,6 +246,18 @@ class __$$LoadDataEventImplCopyWithImpl<$Res>
 
   /// Create a copy of HomeBlocEvent
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isRefresh = null,
+  }) {
+    return _then(_$LoadDataEventImpl(
+      isRefresh: null == isRefresh
+          ? _value.isRefresh
+          : isRefresh // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
@@ -251,64 +265,81 @@ class __$$LoadDataEventImplCopyWithImpl<$Res>
 class _$LoadDataEventImpl
     with DiagnosticableTreeMixin
     implements _LoadDataEvent {
-  _$LoadDataEventImpl();
+  _$LoadDataEventImpl({this.isRefresh = false});
+
+  @override
+  @JsonKey()
+  final bool isRefresh;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeBlocEvent.loadDataEvent()';
+    return 'HomeBlocEvent.loadDataEvent(isRefresh: $isRefresh)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'HomeBlocEvent.loadDataEvent'));
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeBlocEvent.loadDataEvent'))
+      ..add(DiagnosticsProperty('isRefresh', isRefresh));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadDataEventImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$LoadDataEventImpl &&
+            (identical(other.isRefresh, isRefresh) ||
+                other.isRefresh == isRefresh));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, isRefresh);
+
+  /// Create a copy of HomeBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadDataEventImplCopyWith<_$LoadDataEventImpl> get copyWith =>
+      __$$LoadDataEventImplCopyWithImpl<_$LoadDataEventImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loadDataEvent,
+    required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
     required TResult Function() loadFavorites,
   }) {
-    return loadDataEvent();
+    return loadDataEvent(isRefresh);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loadDataEvent,
+    TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
     TResult? Function()? loadFavorites,
   }) {
-    return loadDataEvent?.call();
+    return loadDataEvent?.call(isRefresh);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loadDataEvent,
+    TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
     TResult Function()? loadFavorites,
     required TResult orElse(),
   }) {
     if (loadDataEvent != null) {
-      return loadDataEvent();
+      return loadDataEvent(isRefresh);
     }
     return orElse();
   }
@@ -355,7 +386,15 @@ class _$LoadDataEventImpl
 }
 
 abstract class _LoadDataEvent implements HomeBlocEvent {
-  factory _LoadDataEvent() = _$LoadDataEventImpl;
+  factory _LoadDataEvent({final bool isRefresh}) = _$LoadDataEventImpl;
+
+  bool get isRefresh;
+
+  /// Create a copy of HomeBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$LoadDataEventImplCopyWith<_$LoadDataEventImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -436,7 +475,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loadDataEvent,
+    required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
     required TResult Function() loadFavorites,
@@ -448,7 +487,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loadDataEvent,
+    TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
     TResult? Function()? loadFavorites,
@@ -460,7 +499,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loadDataEvent,
+    TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
     TResult Function()? loadFavorites,
@@ -575,7 +614,7 @@ class _$LoadContentsEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loadDataEvent,
+    required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
     required TResult Function() loadFavorites,
@@ -587,7 +626,7 @@ class _$LoadContentsEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loadDataEvent,
+    TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
     TResult? Function()? loadFavorites,
@@ -599,7 +638,7 @@ class _$LoadContentsEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loadDataEvent,
+    TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
     TResult Function()? loadFavorites,
@@ -706,7 +745,7 @@ class _$LoadFavoritesEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loadDataEvent,
+    required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
     required TResult Function() loadFavorites,
@@ -718,7 +757,7 @@ class _$LoadFavoritesEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loadDataEvent,
+    TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
     TResult? Function()? loadFavorites,
@@ -730,7 +769,7 @@ class _$LoadFavoritesEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loadDataEvent,
+    TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
     TResult Function()? loadFavorites,
@@ -799,8 +838,10 @@ mixin _$HomeBlocState {
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)
+            bool loadingContents,
+            bool isRefreshing)
         dataState,
+    required TResult Function() errorState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -813,8 +854,10 @@ mixin _$HomeBlocState {
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)?
+            bool loadingContents,
+            bool isRefreshing)?
         dataState,
+    TResult? Function()? errorState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -827,8 +870,10 @@ mixin _$HomeBlocState {
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)?
+            bool loadingContents,
+            bool isRefreshing)?
         dataState,
+    TResult Function()? errorState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -836,18 +881,21 @@ mixin _$HomeBlocState {
   TResult map<TResult extends Object?>({
     required TResult Function(HomeBlocLoadingState value) loading,
     required TResult Function(HomeBlocDataState value) dataState,
+    required TResult Function(HomeBlocErrorState value) errorState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HomeBlocLoadingState value)? loading,
     TResult? Function(HomeBlocDataState value)? dataState,
+    TResult? Function(HomeBlocErrorState value)? errorState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeBlocLoadingState value)? loading,
     TResult Function(HomeBlocDataState value)? dataState,
+    TResult Function(HomeBlocErrorState value)? errorState,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -932,8 +980,10 @@ class _$HomeBlocLoadingStateImpl
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)
+            bool loadingContents,
+            bool isRefreshing)
         dataState,
+    required TResult Function() errorState,
   }) {
     return loading();
   }
@@ -949,8 +999,10 @@ class _$HomeBlocLoadingStateImpl
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)?
+            bool loadingContents,
+            bool isRefreshing)?
         dataState,
+    TResult? Function()? errorState,
   }) {
     return loading?.call();
   }
@@ -966,8 +1018,10 @@ class _$HomeBlocLoadingStateImpl
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)?
+            bool loadingContents,
+            bool isRefreshing)?
         dataState,
+    TResult Function()? errorState,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -981,6 +1035,7 @@ class _$HomeBlocLoadingStateImpl
   TResult map<TResult extends Object?>({
     required TResult Function(HomeBlocLoadingState value) loading,
     required TResult Function(HomeBlocDataState value) dataState,
+    required TResult Function(HomeBlocErrorState value) errorState,
   }) {
     return loading(this);
   }
@@ -990,6 +1045,7 @@ class _$HomeBlocLoadingStateImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HomeBlocLoadingState value)? loading,
     TResult? Function(HomeBlocDataState value)? dataState,
+    TResult? Function(HomeBlocErrorState value)? errorState,
   }) {
     return loading?.call(this);
   }
@@ -999,6 +1055,7 @@ class _$HomeBlocLoadingStateImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeBlocLoadingState value)? loading,
     TResult Function(HomeBlocDataState value)? dataState,
+    TResult Function(HomeBlocErrorState value)? errorState,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -1025,7 +1082,8 @@ abstract class _$$HomeBlocDataStateImplCopyWith<$Res> {
       List<String> favorites,
       int totalFavoriteCount,
       Region? selectedRegion,
-      bool loadingContents});
+      bool loadingContents,
+      bool isRefreshing});
 }
 
 /// @nodoc
@@ -1048,6 +1106,7 @@ class __$$HomeBlocDataStateImplCopyWithImpl<$Res>
     Object? totalFavoriteCount = null,
     Object? selectedRegion = freezed,
     Object? loadingContents = null,
+    Object? isRefreshing = null,
   }) {
     return _then(_$HomeBlocDataStateImpl(
       categories: null == categories
@@ -1078,6 +1137,10 @@ class __$$HomeBlocDataStateImplCopyWithImpl<$Res>
           ? _value.loadingContents
           : loadingContents // ignore: cast_nullable_to_non_nullable
               as bool,
+      isRefreshing: null == isRefreshing
+          ? _value.isRefreshing
+          : isRefreshing // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1094,7 +1157,8 @@ class _$HomeBlocDataStateImpl
       final List<String> favorites = const [],
       this.totalFavoriteCount = 0,
       this.selectedRegion,
-      this.loadingContents = true})
+      this.loadingContents = true,
+      this.isRefreshing = false})
       : _categories = categories,
         _contents = contents,
         _regions = regions,
@@ -1144,10 +1208,13 @@ class _$HomeBlocDataStateImpl
   @override
   @JsonKey()
   final bool loadingContents;
+  @override
+  @JsonKey()
+  final bool isRefreshing;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeBlocState.dataState(categories: $categories, contents: $contents, regions: $regions, favorites: $favorites, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents)';
+    return 'HomeBlocState.dataState(categories: $categories, contents: $contents, regions: $regions, favorites: $favorites, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
   }
 
   @override
@@ -1161,7 +1228,8 @@ class _$HomeBlocDataStateImpl
       ..add(DiagnosticsProperty('favorites', favorites))
       ..add(DiagnosticsProperty('totalFavoriteCount', totalFavoriteCount))
       ..add(DiagnosticsProperty('selectedRegion', selectedRegion))
-      ..add(DiagnosticsProperty('loadingContents', loadingContents));
+      ..add(DiagnosticsProperty('loadingContents', loadingContents))
+      ..add(DiagnosticsProperty('isRefreshing', isRefreshing));
   }
 
   @override
@@ -1180,7 +1248,9 @@ class _$HomeBlocDataStateImpl
             (identical(other.selectedRegion, selectedRegion) ||
                 other.selectedRegion == selectedRegion) &&
             (identical(other.loadingContents, loadingContents) ||
-                other.loadingContents == loadingContents));
+                other.loadingContents == loadingContents) &&
+            (identical(other.isRefreshing, isRefreshing) ||
+                other.isRefreshing == isRefreshing));
   }
 
   @override
@@ -1192,7 +1262,8 @@ class _$HomeBlocDataStateImpl
       const DeepCollectionEquality().hash(_favorites),
       totalFavoriteCount,
       selectedRegion,
-      loadingContents);
+      loadingContents,
+      isRefreshing);
 
   /// Create a copy of HomeBlocState
   /// with the given fields replaced by the non-null parameter values.
@@ -1214,11 +1285,13 @@ class _$HomeBlocDataStateImpl
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)
+            bool loadingContents,
+            bool isRefreshing)
         dataState,
+    required TResult Function() errorState,
   }) {
     return dataState(categories, contents, regions, favorites,
-        totalFavoriteCount, selectedRegion, loadingContents);
+        totalFavoriteCount, selectedRegion, loadingContents, isRefreshing);
   }
 
   @override
@@ -1232,11 +1305,13 @@ class _$HomeBlocDataStateImpl
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)?
+            bool loadingContents,
+            bool isRefreshing)?
         dataState,
+    TResult? Function()? errorState,
   }) {
     return dataState?.call(categories, contents, regions, favorites,
-        totalFavoriteCount, selectedRegion, loadingContents);
+        totalFavoriteCount, selectedRegion, loadingContents, isRefreshing);
   }
 
   @override
@@ -1250,13 +1325,15 @@ class _$HomeBlocDataStateImpl
             List<String> favorites,
             int totalFavoriteCount,
             Region? selectedRegion,
-            bool loadingContents)?
+            bool loadingContents,
+            bool isRefreshing)?
         dataState,
+    TResult Function()? errorState,
     required TResult orElse(),
   }) {
     if (dataState != null) {
       return dataState(categories, contents, regions, favorites,
-          totalFavoriteCount, selectedRegion, loadingContents);
+          totalFavoriteCount, selectedRegion, loadingContents, isRefreshing);
     }
     return orElse();
   }
@@ -1266,6 +1343,7 @@ class _$HomeBlocDataStateImpl
   TResult map<TResult extends Object?>({
     required TResult Function(HomeBlocLoadingState value) loading,
     required TResult Function(HomeBlocDataState value) dataState,
+    required TResult Function(HomeBlocErrorState value) errorState,
   }) {
     return dataState(this);
   }
@@ -1275,6 +1353,7 @@ class _$HomeBlocDataStateImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(HomeBlocLoadingState value)? loading,
     TResult? Function(HomeBlocDataState value)? dataState,
+    TResult? Function(HomeBlocErrorState value)? errorState,
   }) {
     return dataState?.call(this);
   }
@@ -1284,6 +1363,7 @@ class _$HomeBlocDataStateImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(HomeBlocLoadingState value)? loading,
     TResult Function(HomeBlocDataState value)? dataState,
+    TResult Function(HomeBlocErrorState value)? errorState,
     required TResult orElse(),
   }) {
     if (dataState != null) {
@@ -1301,7 +1381,8 @@ abstract class HomeBlocDataState implements HomeBlocState {
       final List<String> favorites,
       final int totalFavoriteCount,
       final Region? selectedRegion,
-      final bool loadingContents}) = _$HomeBlocDataStateImpl;
+      final bool loadingContents,
+      final bool isRefreshing}) = _$HomeBlocDataStateImpl;
 
   List<Categories> get categories;
   List<ContentCategories> get contents;
@@ -1310,10 +1391,157 @@ abstract class HomeBlocDataState implements HomeBlocState {
   int get totalFavoriteCount;
   Region? get selectedRegion;
   bool get loadingContents;
+  bool get isRefreshing;
 
   /// Create a copy of HomeBlocState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HomeBlocDataStateImplCopyWith<_$HomeBlocDataStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$HomeBlocErrorStateImplCopyWith<$Res> {
+  factory _$$HomeBlocErrorStateImplCopyWith(_$HomeBlocErrorStateImpl value,
+          $Res Function(_$HomeBlocErrorStateImpl) then) =
+      __$$HomeBlocErrorStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$HomeBlocErrorStateImplCopyWithImpl<$Res>
+    extends _$HomeBlocStateCopyWithImpl<$Res, _$HomeBlocErrorStateImpl>
+    implements _$$HomeBlocErrorStateImplCopyWith<$Res> {
+  __$$HomeBlocErrorStateImplCopyWithImpl(_$HomeBlocErrorStateImpl _value,
+      $Res Function(_$HomeBlocErrorStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeBlocState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$HomeBlocErrorStateImpl
+    with DiagnosticableTreeMixin
+    implements HomeBlocErrorState {
+  const _$HomeBlocErrorStateImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeBlocState.errorState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HomeBlocState.errorState'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$HomeBlocErrorStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(
+            List<Categories> categories,
+            List<ContentCategories> contents,
+            List<Region> regions,
+            List<String> favorites,
+            int totalFavoriteCount,
+            Region? selectedRegion,
+            bool loadingContents,
+            bool isRefreshing)
+        dataState,
+    required TResult Function() errorState,
+  }) {
+    return errorState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(
+            List<Categories> categories,
+            List<ContentCategories> contents,
+            List<Region> regions,
+            List<String> favorites,
+            int totalFavoriteCount,
+            Region? selectedRegion,
+            bool loadingContents,
+            bool isRefreshing)?
+        dataState,
+    TResult? Function()? errorState,
+  }) {
+    return errorState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(
+            List<Categories> categories,
+            List<ContentCategories> contents,
+            List<Region> regions,
+            List<String> favorites,
+            int totalFavoriteCount,
+            Region? selectedRegion,
+            bool loadingContents,
+            bool isRefreshing)?
+        dataState,
+    TResult Function()? errorState,
+    required TResult orElse(),
+  }) {
+    if (errorState != null) {
+      return errorState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(HomeBlocLoadingState value) loading,
+    required TResult Function(HomeBlocDataState value) dataState,
+    required TResult Function(HomeBlocErrorState value) errorState,
+  }) {
+    return errorState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(HomeBlocLoadingState value)? loading,
+    TResult? Function(HomeBlocDataState value)? dataState,
+    TResult? Function(HomeBlocErrorState value)? errorState,
+  }) {
+    return errorState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(HomeBlocLoadingState value)? loading,
+    TResult Function(HomeBlocDataState value)? dataState,
+    TResult Function(HomeBlocErrorState value)? errorState,
+    required TResult orElse(),
+  }) {
+    if (errorState != null) {
+      return errorState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class HomeBlocErrorState implements HomeBlocState {
+  const factory HomeBlocErrorState() = _$HomeBlocErrorStateImpl;
 }

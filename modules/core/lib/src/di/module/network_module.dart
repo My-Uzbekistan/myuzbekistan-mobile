@@ -7,6 +7,8 @@ import 'package:core/src/data/dio_refresh/token_manager.dart';
 import 'package:core/src/data/network/interseptors/TokenRefreshInterceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_alice/alice.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -16,7 +18,13 @@ import '../../data/network/interseptors/AppInterceptor.dart';
 @module
 abstract class NetworkModule {
   @lazySingleton
-  Dio provideDio(AppPreference preference, SecurityStorage securityStorage) {
+  Alice getAlice() {
+    return Alice();
+  }
+
+  @lazySingleton
+  Dio provideDio(
+      AppPreference preference, SecurityStorage securityStorage, Alice alice) {
     final dioOptions = BaseOptions(baseUrl: AppConstants.baseUrlAPi)
       ..connectTimeout = const Duration(seconds: 30)
       ..receiveTimeout = const Duration(seconds: 30);
@@ -28,12 +36,14 @@ abstract class NetworkModule {
         refreshToken: securityStorage.getRefreshToken(),
       ),
     );
-    debugPrint("refrehToken  ${securityStorage.getRefreshToken()} ");
     dio.interceptors.add(AppInterceptor(preference, securityStorage));
     dio.interceptors.add(
-      TokenRefreshInterceptor(securityStorage:securityStorage),
+      TokenRefreshInterceptor(securityStorage: securityStorage),
     );
-    dio.interceptors.add(PrettyDioLogger(requestBody: true));
+    if (kDebugMode) {
+      dio.interceptors.add(alice.getDioInterceptor());
+      dio.interceptors.add(PrettyDioLogger(requestBody: true));
+    }
     return dio;
   }
 }

@@ -31,7 +31,8 @@ mixin _$ContentDto {
   FieldDto<List<FacilityItemDto>>? get facilities =>
       throw _privateConstructorUsedError;
   FieldDto<List<String>>? get languages => throw _privateConstructorUsedError;
-  FieldDto<List<String>>? get files => throw _privateConstructorUsedError;
+  FieldDto<List<AttachmentsItemDto>>? get attachments =>
+      throw _privateConstructorUsedError;
   @ImageArrayConvertor()
   List<String>? get photos => throw _privateConstructorUsedError;
   @ImageConvertor()
@@ -73,7 +74,7 @@ abstract class $ContentDtoCopyWith<$Res> {
       FieldDto<List<double>>? location,
       FieldDto<List<FacilityItemDto>>? facilities,
       FieldDto<List<String>>? languages,
-      FieldDto<List<String>>? files,
+      FieldDto<List<AttachmentsItemDto>>? attachments,
       @ImageArrayConvertor() List<String>? photos,
       @ImageConvertor() String? photo,
       FieldDto<List<ContactsDto>>? contacts,
@@ -110,7 +111,7 @@ class _$ContentDtoCopyWithImpl<$Res, $Val extends ContentDto>
     Object? location = freezed,
     Object? facilities = freezed,
     Object? languages = freezed,
-    Object? files = freezed,
+    Object? attachments = freezed,
     Object? photos = freezed,
     Object? photo = freezed,
     Object? contacts = freezed,
@@ -162,10 +163,10 @@ class _$ContentDtoCopyWithImpl<$Res, $Val extends ContentDto>
           ? _value.languages
           : languages // ignore: cast_nullable_to_non_nullable
               as FieldDto<List<String>>?,
-      files: freezed == files
-          ? _value.files
-          : files // ignore: cast_nullable_to_non_nullable
-              as FieldDto<List<String>>?,
+      attachments: freezed == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as FieldDto<List<AttachmentsItemDto>>?,
       photos: freezed == photos
           ? _value.photos
           : photos // ignore: cast_nullable_to_non_nullable
@@ -225,7 +226,7 @@ abstract class _$$ContentDtoImplCopyWith<$Res>
       FieldDto<List<double>>? location,
       FieldDto<List<FacilityItemDto>>? facilities,
       FieldDto<List<String>>? languages,
-      FieldDto<List<String>>? files,
+      FieldDto<List<AttachmentsItemDto>>? attachments,
       @ImageArrayConvertor() List<String>? photos,
       @ImageConvertor() String? photo,
       FieldDto<List<ContactsDto>>? contacts,
@@ -260,7 +261,7 @@ class __$$ContentDtoImplCopyWithImpl<$Res>
     Object? location = freezed,
     Object? facilities = freezed,
     Object? languages = freezed,
-    Object? files = freezed,
+    Object? attachments = freezed,
     Object? photos = freezed,
     Object? photo = freezed,
     Object? contacts = freezed,
@@ -312,10 +313,10 @@ class __$$ContentDtoImplCopyWithImpl<$Res>
           ? _value.languages
           : languages // ignore: cast_nullable_to_non_nullable
               as FieldDto<List<String>>?,
-      files: freezed == files
-          ? _value.files
-          : files // ignore: cast_nullable_to_non_nullable
-              as FieldDto<List<String>>?,
+      attachments: freezed == attachments
+          ? _value.attachments
+          : attachments // ignore: cast_nullable_to_non_nullable
+              as FieldDto<List<AttachmentsItemDto>>?,
       photos: freezed == photos
           ? _value._photos
           : photos // ignore: cast_nullable_to_non_nullable
@@ -370,7 +371,7 @@ class _$ContentDtoImpl extends _ContentDto {
       this.location,
       this.facilities,
       this.languages,
-      this.files,
+      this.attachments,
       @ImageArrayConvertor() final List<String>? photos,
       @ImageConvertor() this.photo,
       this.contacts,
@@ -407,7 +408,7 @@ class _$ContentDtoImpl extends _ContentDto {
   @override
   final FieldDto<List<String>>? languages;
   @override
-  final FieldDto<List<String>>? files;
+  final FieldDto<List<AttachmentsItemDto>>? attachments;
   final List<String>? _photos;
   @override
   @ImageArrayConvertor()
@@ -441,7 +442,7 @@ class _$ContentDtoImpl extends _ContentDto {
 
   @override
   String toString() {
-    return 'ContentDto(id: $id, title: $title, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, location: $location, facilities: $facilities, languages: $languages, files: $files, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, address: $address, viewType: $viewType)';
+    return 'ContentDto(id: $id, title: $title, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, location: $location, facilities: $facilities, languages: $languages, attachments: $attachments, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, address: $address, viewType: $viewType)';
   }
 
   @override
@@ -467,7 +468,8 @@ class _$ContentDtoImpl extends _ContentDto {
                 other.facilities == facilities) &&
             (identical(other.languages, languages) ||
                 other.languages == languages) &&
-            (identical(other.files, files) || other.files == files) &&
+            (identical(other.attachments, attachments) ||
+                other.attachments == attachments) &&
             const DeepCollectionEquality().equals(other._photos, _photos) &&
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.contacts, contacts) ||
@@ -498,7 +500,7 @@ class _$ContentDtoImpl extends _ContentDto {
         location,
         facilities,
         languages,
-        files,
+        attachments,
         const DeepCollectionEquality().hash(_photos),
         photo,
         contacts,
@@ -538,7 +540,7 @@ abstract class _ContentDto extends ContentDto {
       final FieldDto<List<double>>? location,
       final FieldDto<List<FacilityItemDto>>? facilities,
       final FieldDto<List<String>>? languages,
-      final FieldDto<List<String>>? files,
+      final FieldDto<List<AttachmentsItemDto>>? attachments,
       @ImageArrayConvertor() final List<String>? photos,
       @ImageConvertor() final String? photo,
       final FieldDto<List<ContactsDto>>? contacts,
@@ -574,7 +576,7 @@ abstract class _ContentDto extends ContentDto {
   @override
   FieldDto<List<String>>? get languages;
   @override
-  FieldDto<List<String>>? get files;
+  FieldDto<List<AttachmentsItemDto>>? get attachments;
   @override
   @ImageArrayConvertor()
   List<String>? get photos;
@@ -791,6 +793,204 @@ abstract class _FacilityItemDto implements FacilityItemDto {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$FacilityItemDtoImplCopyWith<_$FacilityItemDtoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AttachmentsItemDto _$AttachmentsItemDtoFromJson(Map<String, dynamic> json) {
+  return _AttachmentsItemDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AttachmentsItemDto {
+  @ImageConvertor()
+  String? get icon => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  @ImageConvertor()
+  String? get files => throw _privateConstructorUsedError;
+
+  /// Serializes this AttachmentsItemDto to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of AttachmentsItemDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $AttachmentsItemDtoCopyWith<AttachmentsItemDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AttachmentsItemDtoCopyWith<$Res> {
+  factory $AttachmentsItemDtoCopyWith(
+          AttachmentsItemDto value, $Res Function(AttachmentsItemDto) then) =
+      _$AttachmentsItemDtoCopyWithImpl<$Res, AttachmentsItemDto>;
+  @useResult
+  $Res call(
+      {@ImageConvertor() String? icon,
+      String? name,
+      @ImageConvertor() String? files});
+}
+
+/// @nodoc
+class _$AttachmentsItemDtoCopyWithImpl<$Res, $Val extends AttachmentsItemDto>
+    implements $AttachmentsItemDtoCopyWith<$Res> {
+  _$AttachmentsItemDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of AttachmentsItemDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? icon = freezed,
+    Object? name = freezed,
+    Object? files = freezed,
+  }) {
+    return _then(_value.copyWith(
+      icon: freezed == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      files: freezed == files
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AttachmentsItemDtoImplCopyWith<$Res>
+    implements $AttachmentsItemDtoCopyWith<$Res> {
+  factory _$$AttachmentsItemDtoImplCopyWith(_$AttachmentsItemDtoImpl value,
+          $Res Function(_$AttachmentsItemDtoImpl) then) =
+      __$$AttachmentsItemDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@ImageConvertor() String? icon,
+      String? name,
+      @ImageConvertor() String? files});
+}
+
+/// @nodoc
+class __$$AttachmentsItemDtoImplCopyWithImpl<$Res>
+    extends _$AttachmentsItemDtoCopyWithImpl<$Res, _$AttachmentsItemDtoImpl>
+    implements _$$AttachmentsItemDtoImplCopyWith<$Res> {
+  __$$AttachmentsItemDtoImplCopyWithImpl(_$AttachmentsItemDtoImpl _value,
+      $Res Function(_$AttachmentsItemDtoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AttachmentsItemDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? icon = freezed,
+    Object? name = freezed,
+    Object? files = freezed,
+  }) {
+    return _then(_$AttachmentsItemDtoImpl(
+      icon: freezed == icon
+          ? _value.icon
+          : icon // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      files: freezed == files
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AttachmentsItemDtoImpl implements _AttachmentsItemDto {
+  const _$AttachmentsItemDtoImpl(
+      {@ImageConvertor() this.icon, this.name, @ImageConvertor() this.files});
+
+  factory _$AttachmentsItemDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AttachmentsItemDtoImplFromJson(json);
+
+  @override
+  @ImageConvertor()
+  final String? icon;
+  @override
+  final String? name;
+  @override
+  @ImageConvertor()
+  final String? files;
+
+  @override
+  String toString() {
+    return 'AttachmentsItemDto(icon: $icon, name: $name, files: $files)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AttachmentsItemDtoImpl &&
+            (identical(other.icon, icon) || other.icon == icon) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.files, files) || other.files == files));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, icon, name, files);
+
+  /// Create a copy of AttachmentsItemDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AttachmentsItemDtoImplCopyWith<_$AttachmentsItemDtoImpl> get copyWith =>
+      __$$AttachmentsItemDtoImplCopyWithImpl<_$AttachmentsItemDtoImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AttachmentsItemDtoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AttachmentsItemDto implements AttachmentsItemDto {
+  const factory _AttachmentsItemDto(
+      {@ImageConvertor() final String? icon,
+      final String? name,
+      @ImageConvertor() final String? files}) = _$AttachmentsItemDtoImpl;
+
+  factory _AttachmentsItemDto.fromJson(Map<String, dynamic> json) =
+      _$AttachmentsItemDtoImpl.fromJson;
+
+  @override
+  @ImageConvertor()
+  String? get icon;
+  @override
+  String? get name;
+  @override
+  @ImageConvertor()
+  String? get files;
+
+  /// Create a copy of AttachmentsItemDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AttachmentsItemDtoImplCopyWith<_$AttachmentsItemDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -2,11 +2,11 @@ import 'package:component_res/component_res.dart';
 import 'package:core/core.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
 import 'package:uzbekistan_travel/core/settings_bloc/app_settings_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/profile_page/bloc/profile_bloc.dart';
@@ -112,35 +112,37 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => getIt<AppSettingsBloc>(),
+    return OverlaySupport.global(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<AppSettingsBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
+          )
+        ],
+        child: BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
+          builder: (context, state) {
+            return MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: AppColorTheme.lightTheme,
+              darkTheme: AppColorTheme.darkTheme,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: state.appLocale.locale,
+              themeMode: state.mode,
+              builder: (context, child) {
+                return MediaQuery(
+                    data: MediaQuery.of(context)
+                        .copyWith(textScaler: TextScaler.linear(1.0)),
+                    child: child!);
+              },
+              routerConfig: routes,
+            );
+          },
         ),
-        BlocProvider(
-          create: (context) => getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
-        )
-      ],
-      child: BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
-        builder: (context, state) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
-            theme: AppColorTheme.lightTheme,
-            darkTheme: AppColorTheme.darkTheme,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            locale: state.appLocale.locale,
-            themeMode: state.mode,
-            builder: (context, child) {
-              return MediaQuery(
-                  data: MediaQuery.of(context)
-                      .copyWith(textScaler: TextScaler.linear(1.0)),
-                  child: child!);
-            },
-            routerConfig: routes,
-          );
-        },
       ),
     );
   }

@@ -158,20 +158,26 @@ class _PagerItem extends StatelessWidget {
         itemBuilder: (context, index, realIndex) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: CachedNetworkImage(
-                imageUrl: items[index],
-                width: double.maxFinite,
-                fit: BoxFit.fitWidth,
-                errorWidget: (context, o, s) {
-                  return Assets.pngDefaultContentImage
-                      .toImage(fit: BoxFit.cover);
-                },
-                placeholder: (context, s) {
-                  return Assets.pngDefaultContentImage
-                      .toImage(fit: BoxFit.cover);
-                },
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: CachedNetworkImage(
+                  imageUrl: items[index],
+                  width: double.maxFinite,
+
+                  fit: BoxFit.fitWidth,
+                  errorWidget: (context, o, s) {
+                    return Assets.pngDefaultContentImage
+                        .toImage(fit: BoxFit.cover);
+                  },
+                  placeholder: (context, s) {
+                    return Assets.pngDefaultContentImage
+                        .toImage(fit: BoxFit.cover);
+                  },
+                ),
               ),
             ),
           );

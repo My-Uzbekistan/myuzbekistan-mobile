@@ -27,7 +27,6 @@ class TokenRefreshInterceptor extends Interceptor {
   Future<void> _handleTokenRefresh(
       DioException error, ErrorInterceptorHandler handler) async {
     if (_isRefreshing) {
-      // Agar allaqachon refresh qilinayotgan bo‘lsa, kutamiz
       await _refreshCompleter?.future;
     } else {
       _isRefreshing = true;

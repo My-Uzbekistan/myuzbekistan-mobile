@@ -2,6 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:core/core.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -61,6 +62,7 @@ class DetailPage extends HookWidget {
                 return [
                   IconButton(
                       onPressed: () {
+                        HapticFeedback.selectionClick();
                         context.read<DetailBloc>().add(
                             DetailBlocEvent.changeFavoriteState(
                                 isSetFavorite: !detail.isFavorite));
@@ -137,9 +139,14 @@ class DetailPage extends HookWidget {
                               color: context.appColors.textIconColor.primary),
                         ),
                       ),
-                    if (detail.files != null && detail.files?.value != [])
-                      FilesGroup(),
-                    if (detail.facilitiesAvailable)
+                    if (detail.attachments != null &&
+                        (detail.attachments?.value??[] ).isNotEmpty)
+                      FilesGroup(
+                        attachments: detail.attachments!.value ?? [],
+                        title: detail.attachments!.name ?? "",
+                      ),
+                    if (detail.facilitiesAvailable&&
+                       ( detail.facilities?.value??[]).isNotEmpty)
                       FacilitiesWidget(
                         title: detail.facilities?.name ?? "",
                         facilities: detail.facilities?.value ?? [],

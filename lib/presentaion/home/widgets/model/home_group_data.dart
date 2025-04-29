@@ -1,14 +1,17 @@
 part of '../home_groups.dart';
 
 class HomeGroupData {
+  final int categoryId;
   final MainPageContent? recommended;
   final String title;
   final List<MainPageContent> items;
 
-  HomeGroupData(
-      {required this.title,
-      this.recommended,
-      required this.items,});
+  HomeGroupData({
+    required this.categoryId,
+    required this.title,
+    this.recommended,
+    required this.items,
+  });
 }
 
 @immutable

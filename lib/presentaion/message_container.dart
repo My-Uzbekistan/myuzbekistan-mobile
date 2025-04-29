@@ -18,6 +18,16 @@ mixin class MessageContainer {
       caption: context.localizations!.nothing_found_message,
     );
   }
+
+
+  static Widget custom({Widget icon = const SizedBox(), required String title, required String caption}) {
+    return _MessageContainerWidget(
+      icon: icon,
+      title: title,
+      caption: caption,
+    );
+  }
+
 }
 
 class _MessageContainerWidget extends StatelessWidget {
@@ -56,6 +66,7 @@ class _MessageContainerWidget extends StatelessWidget {
         Text(
           caption,
           style: CustomTypography.bodyLg,
+          textAlign: TextAlign.center,
         ),
       ]),
     );

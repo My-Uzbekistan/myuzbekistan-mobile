@@ -85,7 +85,7 @@ class TopBalanceWidget extends StatelessWidget {
               spacing: 2,
               children: [
                 Text(
-                  "\$${_priceInDollar.floor()}",
+                  "~\$${_priceInDollar.floor()}",
                   style: CustomTypography.H3
                       .copyWith(color: context.appColors.brand),
                 ),

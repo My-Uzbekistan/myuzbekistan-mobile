@@ -1,9 +1,11 @@
 import 'package:component_res/component_res.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
 import 'package:uzbekistan_travel/core/navigation/navigation_extensions.dart';
+import 'package:uzbekistan_travel/presentaion/message_container.dart';
 
 import 'bloc/contents_by_category_bloc.dart';
 
@@ -48,80 +50,136 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
             },
           ),
           Expanded(
-              child: BlocConsumer<ContentByCategoryBloc,
-                      ContentByCategoryState>(
-                  listener: (context, state) {
-                    if(state.navState is Unauthorized){
-                      context.pushAuthPage();
-                    }
-                  },
-                  buildWhen: (previous, current) {
-                    return previous != current;
+              child:
+                  BlocConsumer<ContentByCategoryBloc, ContentByCategoryState>(
+                      listener: (context, state) {
+            if (state is ContentByCategoryDataState) {
+              if (state.navState is Unauthorized) {
+                context.pushAuthPage();
+              }
+            }
+          }, buildWhen: (previous, current) {
+                    debugPrint("uopdateStatez  buildWhen  ${current}");
+            return true;
+          }, builder: (context, state) {
+                        debugPrint("uopdateStatezjxhcgaksjcslkj  ${state}");
+            if (state is ContentByCategoryDataState) {
+              return NotificationListener<ScrollNotification>(
+                onNotification: (notification) {
+                  if (notification.metrics.pixels >=
+                      notification.metrics.maxScrollExtent - 100) {
+                    bloc?.add(ContentByCategoryEvent.loadMore());
+                  }
 
-                  },
-                  builder: (context, state) {
-                    return NotificationListener<ScrollNotification>(
-                      onNotification: (notification) {
-                        if (notification.metrics.pixels >=
-                            notification.metrics.maxScrollExtent - 100) {
-                          bloc?.add(ContentByCategoryEvent.loadMore());
-                        }
-
-                        return false;
-                      },
-                      child: ListView.builder(
-                          itemCount:
-                              state.contents.length + (state.isLoading ? 1 : 0),
-                          itemBuilder: (context, index) {
-                            if (index >= state.contents.length) {
-                              return Container(
-                                  padding: EdgeInsets.only(bottom: 32),
-                                  child: Center(
-                                      child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    spacing: 8,
-                                    children: [
-                                      Flexible(
-                                          child: Text(
-                                        context.localizations!.loading_data,
-                                        style: CustomTypography.bodyMd.copyWith(
-                                            color: context.appColors
-                                                .textIconColor.secondary),
-                                      )),
-                                      SizedBox(
-                                        height: 32,
-                                        width: 32,
-                                        child: LoadingIndicator(),
-                                      )
-                                    ],
-                                  )));
+                  return false;
+                },
+                child: ListView.builder(
+                    itemCount:
+                        state.contents.length + (state.isLoading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index >= state.contents.length) {
+                        return Container(
+                            padding: EdgeInsets.only(bottom: 32),
+                            child: Center(
+                                child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              spacing: 8,
+                              children: [
+                                Flexible(
+                                    child: Text(
+                                  context.localizations!.loading_data,
+                                  style: CustomTypography.bodyMd.copyWith(
+                                      color: context
+                                          .appColors.textIconColor.secondary),
+                                )),
+                                SizedBox(
+                                  height: 32,
+                                  width: 32,
+                                  child: LoadingIndicator(),
+                                )
+                              ],
+                            )));
+                      }
+                      final item = state.contents[index];
+                      return RepaintBoundary(
+                        key: ValueKey(item.contentId),
+                        child: SearchCell(
+                          onFavoriteChangeTap: () {
+                            HapticFeedback.selectionClick();
+                            bloc?.add(ContentByCategoryEvent.updateItemFavorite(
+                                contentId: item.contentId,
+                                isFavorite: !item.isFavorite));
+                          },
+                          onTap: () async {
+                            final result =
+                                await context.pushDetailPage(item.contentId);
+                            if (result != null && result["isFavorite"] != null) {
+                              bloc?.add(ContentByCategoryEvent
+                                  .updateItemFavoriteWithPopResult(
+                                      isFavorite: result["isFavorite"],
+                                      contentId: item.contentId));
                             }
-                            final item = state.contents[index];
-                            return SearchCell(
-                              onFavoriteChangeTap: () {
+                          },
+                          mainPageContent: item,
+                        ),
+                      );
+                    }),
+              );
+            } else if (state is ContentByCategoryNoContentState) {
+              return Transform.translate(
+                offset: Offset(0, -kToolbarHeight),
+                child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: MessageContainer.notFoundWidget(context)),
+              );
+            } else if (state is ContentByCategoryErrorState) {
+              return Transform.translate(
+                offset: Offset(0, -kToolbarHeight),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        MessageContainer.custom(
+                            icon: Assets.pngExclamationmarkSquare.toImage(),
+                            title: context.localizations!.pageFailedToLoad,
+                            caption:
+                                context.localizations!.something_went_wrong),
+                        SizedBox(
+                          height: 24,
+                        ),
+                        SizedBox(
+                          width: double.maxFinite,
+                          height: 48,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 24),
+                            child: FilledButton(
+                              onPressed: () {
                                 bloc?.add(
-                                    ContentByCategoryEvent.updateItemFavorite(
-                                        contentId: item.contentId,
-                                        isFavorite: !item.isFavorite));
+                                    ContentByCategoryEvent.loadContentEvent());
                               },
-                              onTap: () async {
-                                final result = await context
-                                    .pushDetailPage(item.contentId);
-                                if (result != null &&
-                                    result["isFavorite"] != null) {
-                                  bloc?.add(ContentByCategoryEvent
-                                      .updateItemFavoriteWithPopResult(
-                                          isFavorite: result["isFavorite"],
-                                          contentId: item.contentId));
-                                }
-                              },
-                              mainPageContent: item,
-                            );
-                          }),
-                    );
-                  }))
+                              style: FilledButton.styleFrom(
+                                  elevation: 0,
+                                  textStyle: CustomTypography.bodyLg,
+                                  backgroundColor:
+                                      context.appColors.fill.quaternary,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16))),
+                              child: Text(context.localizations!.refresh),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+
+            return SizedBox();
+          }))
         ],
       ),
     );
@@ -179,11 +237,14 @@ class SearchCell extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text(
-                          mainPageContent.title ?? "",
-                          style: CustomTypography.labelLg,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20),
+                          child: Text(
+                            mainPageContent.title ?? "",
+                            style: CustomTypography.labelLg,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
                         ),
                         if (mainPageContent.region != null)
                           Text(

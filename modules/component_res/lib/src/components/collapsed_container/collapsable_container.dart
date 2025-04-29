@@ -80,76 +80,83 @@ class CollapsableContainer extends HookWidget {
                 actionsIconTheme: isCollapsed.value
                     ? iconTheme
                     : iconTheme.copyWith(color: Colors.white),
-                title: AnimatedOpacity(
-                  duration: const Duration(milliseconds: 200),
-                  opacity: isCollapsed.value ? 1 : 0,
-                  child: Text(
-                    title,
-                    style: Theme.of(context).appBarTheme.titleTextStyle,
+                title: RepaintBoundary(
+                  key: ValueKey("collapsTitle"),
+                  child: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 200),
+                    opacity: isCollapsed.value ? 1 : 0,
+                    child: Text(
+                      title,
+                      maxLines: 2,
+                      style: Theme.of(context).appBarTheme.titleTextStyle,
+                    ),
                   ),
                 ),
                 actions: actions?.call(isCollapsed.value),
-                flexibleSpace: AnimatedOpacity(
-                  opacity: !isCollapsed.value ? 1 : 0,
-                  duration: const Duration(milliseconds: 200),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final double currentHeight =
-                          constraints.biggest.height - (statusBarHeight);
-                      double collapseFactor =
-                          ((currentHeight - collapsedBarHeight) /
-                                  (expandedBarHeight - collapsedBarHeight))
-                              .clamp(0.0, 1.0);
-                      if (collapseFactor >= 0.9) collapseFactor = 1.0;
+                flexibleSpace: RepaintBoundary(
+                  key: ValueKey("flexibleSpace"),
+                  child: AnimatedOpacity(
+                    opacity: !isCollapsed.value ? 1 : 0,
+                    duration: const Duration(milliseconds: 200),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final double currentHeight =
+                            constraints.biggest.height - (statusBarHeight);
+                        double collapseFactor =
+                            ((currentHeight - collapsedBarHeight) /
+                                    (expandedBarHeight - collapsedBarHeight))
+                                .clamp(0.0, 1.0);
+                        if (collapseFactor >= 0.9) collapseFactor = 1.0;
 
-                      return Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          FlexibleSpaceBar(
-                            background: background ??
-                                CachedNetworkImage(
-                                  imageUrl: backgroundImageUrl ?? "",
-                                  errorWidget: (context, o, s) {
-                                    return Assets.pngDefaultContentImage
-                                        .toImage(fit: BoxFit.cover);
-                                  },
-                                  placeholder: (context, s) {
-                                    return Assets.pngDefaultContentImage
-                                        .toImage(fit: BoxFit.cover);
-                                  },
-                                  fit: BoxFit.cover,
-                                ),
-                          ),
-                          Positioned.fill(
-                              child: Container(
-                            color: overlayColor ??
-                                Colors.black.withValues(alpha: 0.48),
-                          )),
-                          if (content != null)
-                            Positioned(
-                              left: 16.0,
-                              bottom: 16.0,
-                              right: 16.0,
-                              child: Padding(
-                                padding:
-                                    EdgeInsets.only(top: collapsedBarHeight),
-                                child: Opacity(
-                                  opacity: collapseFactor,
-                                  child: expandedAppBarContent,
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            FlexibleSpaceBar(
+                              background: background ??
+                                  CachedNetworkImage(
+                                    imageUrl: backgroundImageUrl ?? "",
+                                    errorWidget: (context, o, s) {
+                                      return Assets.pngDefaultContentImage
+                                          .toImage(fit: BoxFit.cover);
+                                    },
+                                    placeholder: (context, s) {
+                                      return Assets.pngDefaultContentImage
+                                          .toImage(fit: BoxFit.cover);
+                                    },
+                                    fit: BoxFit.cover,
+                                  ),
+                            ),
+                            Positioned.fill(
+                                child: Container(
+                              color: overlayColor ??
+                                  Colors.black.withValues(alpha: 0.48),
+                            )),
+                            if (content != null)
+                              Positioned(
+                                left: 16.0,
+                                bottom: 16.0,
+                                right: 16.0,
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(top: collapsedBarHeight),
+                                  child: Opacity(
+                                    opacity: collapseFactor,
+                                    child: expandedAppBarContent,
+                                  ),
                                 ),
                               ),
-                            ),
-                          // Positioned(
-                          //     top: 0,
-                          //     left: 0,
-                          //     right: 0,
-                          //     child: Container(
-                          //       height: collapsedBarHeight,
-                          //       color: Colors.green,
-                          //     ))
-                        ],
-                      );
-                    },
+                            // Positioned(
+                            //     top: 0,
+                            //     left: 0,
+                            //     right: 0,
+                            //     child: Container(
+                            //       height: collapsedBarHeight,
+                            //       color: Colors.green,
+                            //     ))
+                          ],
+                        );
+                      },
+                    ),
                   ),
                 ),
               ),

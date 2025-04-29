@@ -1,10 +1,14 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:component_res/component_res.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
+import 'package:uzbekistan_travel/di/injection.dart';
 import 'package:uzbekistan_travel/presentaion/home/widgets/item_card_avatar.dart';
+import 'package:uzbekistan_travel/presentaion/home/widgets/load_content_bloc/load_content_bloc.dart';
 
 part 'model/home_group_data.dart';
 
@@ -87,6 +91,7 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> {
         if(widget.data.items.isNotEmpty)
         HomeListCell(
           key: ValueKey(widget.data.toString()),
+          categoryId:widget.data.categoryId,
           items: widget.data.items,
           categoryName: widget.data.title,
           openAll: widget.onOpenAll,

@@ -199,6 +199,12 @@ abstract class AppLocalizations {
   /// **'Continue with Google'**
   String get continueWithGoogle;
 
+  /// No description provided for @continueWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Apple'**
+  String get continueWithApple;
+
   /// No description provided for @averageCheck.
   ///
   /// In en, this message translates to:
@@ -294,6 +300,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No results found. Try searching again!'**
   String get nothing_found_message;
+
+  /// No description provided for @refresh.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refresh;
+
+  /// No description provided for @pageFailedToLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Page failed to load'**
+  String get pageFailedToLoad;
+
+  /// No description provided for @something_went_wrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get something_went_wrong;
+
+  /// No description provided for @generalEmergency.
+  ///
+  /// In en, this message translates to:
+  /// **'General Emergency'**
+  String get generalEmergency;
+
+  /// No description provided for @touristPolice.
+  ///
+  /// In en, this message translates to:
+  /// **'Tourist police'**
+  String get touristPolice;
+
+  /// No description provided for @fire.
+  ///
+  /// In en, this message translates to:
+  /// **'Fire'**
+  String get fire;
+
+  /// No description provided for @police.
+  ///
+  /// In en, this message translates to:
+  /// **'Police'**
+  String get police;
+
+  /// No description provided for @medical.
+  ///
+  /// In en, this message translates to:
+  /// **'Medical'**
+  String get medical;
+
+  /// No description provided for @gasEmergency.
+  ///
+  /// In en, this message translates to:
+  /// **'Gas Emergency'**
+  String get gasEmergency;
+
+  /// No description provided for @emergencyContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Contacts'**
+  String get emergencyContacts;
+
+  /// No description provided for @usefulTips.
+  ///
+  /// In en, this message translates to:
+  /// **'Useful tips'**
+  String get usefulTips;
+
+  /// No description provided for @logoutConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to log out?'**
+  String get logoutConfirmation;
+
+  /// No description provided for @deleteAccountConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to delete the account?'**
+  String get deleteAccountConfirmation;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete account'**
+  String get deleteAccount;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

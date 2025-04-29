@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:core/src/constants.dart';
 import 'package:core/src/shared/local/security_storage.dart';
 import 'package:core/src/shared/user_model.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_alice/core/alice_core.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../domain/models/Token.dart';
 
@@ -10,26 +15,20 @@ import '../../domain/models/Token.dart';
 class SecurityStorageImpl implements SecurityStorage {
   final Box _box;
 
-  SecurityStorageImpl({@Named(StorageConstants.securityBox) required Box box})
-      : _box = box;
+  SecurityStorageImpl({
+    @Named(StorageConstants.securityBox) required Box box,
+  }) : _box = box;
 
   @override
   UserModel? getUserModel() {
-    final dynamic userModel = _box.get(
-      "userModel",
-    );
-    if (userModel == null) return null;
-    final user = UserModel.fromJson(userModel);
+    final dynamic token = getAccessToken();
+    if (token == null) return null;
+    final jwt = JwtDecoder.decode(token);
+    debugPrint("jwt UserModel $jwt");
+    final user = UserModel(
+        name: jwt["userName"], email: jwt["name"], photoUrl: jwt["photoUrl"]);
     return user;
   }
-
-
-  @override
-  Future<void> setUserModel(
-      {required UserModel userModel,}) async {
-    await _box.put("userModel", userModel.toJson());
-  }
-
 
   @override
   String? getAccessToken() {
@@ -46,7 +45,6 @@ class SecurityStorageImpl implements SecurityStorage {
     return false;
   }
 
-
   @override
   Future<void> clearData() async {
     await _box.clear();
@@ -54,7 +52,6 @@ class SecurityStorageImpl implements SecurityStorage {
 
   @override
   Future<void> setToken({required Token token}) async {
-
     await _box.put("accessToken", token.accessToken);
     await _box.put("refreshToken", token.refreshToken);
     await _box.put("expiresIn", token.expires);

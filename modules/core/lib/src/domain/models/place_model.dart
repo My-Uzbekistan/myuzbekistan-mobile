@@ -1,5 +1,6 @@
 import 'package:core/src/domain/models/content_detail.dart';
 import 'package:core/src/shared/view_type.dart';
+import 'package:equatable/equatable.dart';
 
 class ContentCategories {
   final int categoryId; // Only 'id' is required
@@ -17,7 +18,7 @@ class ContentCategories {
   });
 }
 
-class MainPageContent {
+class MainPageContent extends Equatable {
   int contentId;
   String? title;
   String? caption;
@@ -33,6 +34,7 @@ class MainPageContent {
   double? priceInDollar;
   ViewType viewType;
   bool isFavorite;
+
 
   MainPageContent({
     required this.contentId,
@@ -92,5 +94,9 @@ class MainPageContent {
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [contentId,title,isFavorite];
 }
 

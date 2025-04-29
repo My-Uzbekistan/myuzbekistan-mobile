@@ -11,8 +11,12 @@ abstract class HomeBlocState with _$HomeBlocState {
     @Default([]) List<String> favorites,
     @Default(0) int totalFavoriteCount,
     Region? selectedRegion,
-    @Default(true) bool loadingContents
+    @Default(true) bool loadingContents,
+    @Default(false) bool isRefreshing
+
   }) = HomeBlocDataState;
+
+  const factory HomeBlocState.errorState() = HomeBlocErrorState;
 }
 
 

@@ -14,3 +14,5 @@ export 'src/shared/local/app_preference.dart';
 export 'src/shared/local/security_storage.dart';
 export 'src/shared/user_model.dart';
 
+export 'package:flutter_alice/alice.dart';
+

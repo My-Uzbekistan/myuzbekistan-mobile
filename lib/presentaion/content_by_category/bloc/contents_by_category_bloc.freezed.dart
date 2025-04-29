@@ -1710,22 +1710,83 @@ abstract class _UpdateItemFavoriteEvent implements ContentByCategoryEvent {
 
 /// @nodoc
 mixin _$ContentByCategoryState {
-  List<MainPageContent> get contents => throw _privateConstructorUsedError;
-  int get categoryId => throw _privateConstructorUsedError;
-  int get page => throw _privateConstructorUsedError;
-  int get pageSize => throw _privateConstructorUsedError;
-  bool get isLoading => throw _privateConstructorUsedError;
-  bool get hasMore => throw _privateConstructorUsedError;
-  ContentByCategoryType get type => throw _privateConstructorUsedError;
-  String? get query => throw _privateConstructorUsedError;
-  ContentsByCategoryNavState? get navState =>
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)
+        dataState,
+    required TResult Function() errorState,
+    required TResult Function() noContentState,
+  }) =>
       throw _privateConstructorUsedError;
-  ErrorState? get error => throw _privateConstructorUsedError;
-
-  /// Create a copy of ContentByCategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $ContentByCategoryStateCopyWith<ContentByCategoryState> get copyWith =>
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult? Function()? errorState,
+    TResult? Function()? noContentState,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult Function()? errorState,
+    TResult Function()? noContentState,
+    required TResult orElse(),
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ContentByCategoryDataState value) dataState,
+    required TResult Function(ContentByCategoryErrorState value) errorState,
+    required TResult Function(ContentByCategoryNoContentState value)
+        noContentState,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ContentByCategoryDataState value)? dataState,
+    TResult? Function(ContentByCategoryErrorState value)? errorState,
+    TResult? Function(ContentByCategoryNoContentState value)? noContentState,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ContentByCategoryDataState value)? dataState,
+    TResult Function(ContentByCategoryErrorState value)? errorState,
+    TResult Function(ContentByCategoryNoContentState value)? noContentState,
+    required TResult orElse(),
+  }) =>
       throw _privateConstructorUsedError;
 }
 
@@ -1734,21 +1795,6 @@ abstract class $ContentByCategoryStateCopyWith<$Res> {
   factory $ContentByCategoryStateCopyWith(ContentByCategoryState value,
           $Res Function(ContentByCategoryState) then) =
       _$ContentByCategoryStateCopyWithImpl<$Res, ContentByCategoryState>;
-  @useResult
-  $Res call(
-      {List<MainPageContent> contents,
-      int categoryId,
-      int page,
-      int pageSize,
-      bool isLoading,
-      bool hasMore,
-      ContentByCategoryType type,
-      String? query,
-      ContentsByCategoryNavState? navState,
-      ErrorState? error});
-
-  $ContentsByCategoryNavStateCopyWith<$Res>? get navState;
-  $ErrorStateCopyWith<$Res>? get error;
 }
 
 /// @nodoc
@@ -1764,101 +1810,14 @@ class _$ContentByCategoryStateCopyWithImpl<$Res,
 
   /// Create a copy of ContentByCategoryState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? contents = null,
-    Object? categoryId = null,
-    Object? page = null,
-    Object? pageSize = null,
-    Object? isLoading = null,
-    Object? hasMore = null,
-    Object? type = null,
-    Object? query = freezed,
-    Object? navState = freezed,
-    Object? error = freezed,
-  }) {
-    return _then(_value.copyWith(
-      contents: null == contents
-          ? _value.contents
-          : contents // ignore: cast_nullable_to_non_nullable
-              as List<MainPageContent>,
-      categoryId: null == categoryId
-          ? _value.categoryId
-          : categoryId // ignore: cast_nullable_to_non_nullable
-              as int,
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
-      pageSize: null == pageSize
-          ? _value.pageSize
-          : pageSize // ignore: cast_nullable_to_non_nullable
-              as int,
-      isLoading: null == isLoading
-          ? _value.isLoading
-          : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-      hasMore: null == hasMore
-          ? _value.hasMore
-          : hasMore // ignore: cast_nullable_to_non_nullable
-              as bool,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as ContentByCategoryType,
-      query: freezed == query
-          ? _value.query
-          : query // ignore: cast_nullable_to_non_nullable
-              as String?,
-      navState: freezed == navState
-          ? _value.navState
-          : navState // ignore: cast_nullable_to_non_nullable
-              as ContentsByCategoryNavState?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as ErrorState?,
-    ) as $Val);
-  }
-
-  /// Create a copy of ContentByCategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ContentsByCategoryNavStateCopyWith<$Res>? get navState {
-    if (_value.navState == null) {
-      return null;
-    }
-
-    return $ContentsByCategoryNavStateCopyWith<$Res>(_value.navState!, (value) {
-      return _then(_value.copyWith(navState: value) as $Val);
-    });
-  }
-
-  /// Create a copy of ContentByCategoryState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ErrorStateCopyWith<$Res>? get error {
-    if (_value.error == null) {
-      return null;
-    }
-
-    return $ErrorStateCopyWith<$Res>(_value.error!, (value) {
-      return _then(_value.copyWith(error: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$ContentByCategoryDataStateImplCopyWith<$Res>
-    implements $ContentByCategoryStateCopyWith<$Res> {
+abstract class _$$ContentByCategoryDataStateImplCopyWith<$Res> {
   factory _$$ContentByCategoryDataStateImplCopyWith(
           _$ContentByCategoryDataStateImpl value,
           $Res Function(_$ContentByCategoryDataStateImpl) then) =
       __$$ContentByCategoryDataStateImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {List<MainPageContent> contents,
@@ -1870,12 +1829,10 @@ abstract class _$$ContentByCategoryDataStateImplCopyWith<$Res>
       ContentByCategoryType type,
       String? query,
       ContentsByCategoryNavState? navState,
-      ErrorState? error});
+      ErrorState? errorState});
 
-  @override
   $ContentsByCategoryNavStateCopyWith<$Res>? get navState;
-  @override
-  $ErrorStateCopyWith<$Res>? get error;
+  $ErrorStateCopyWith<$Res>? get errorState;
 }
 
 /// @nodoc
@@ -1902,7 +1859,7 @@ class __$$ContentByCategoryDataStateImplCopyWithImpl<$Res>
     Object? type = null,
     Object? query = freezed,
     Object? navState = freezed,
-    Object? error = freezed,
+    Object? errorState = freezed,
   }) {
     return _then(_$ContentByCategoryDataStateImpl(
       contents: null == contents
@@ -1941,17 +1898,45 @@ class __$$ContentByCategoryDataStateImplCopyWithImpl<$Res>
           ? _value.navState
           : navState // ignore: cast_nullable_to_non_nullable
               as ContentsByCategoryNavState?,
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
+      errorState: freezed == errorState
+          ? _value.errorState
+          : errorState // ignore: cast_nullable_to_non_nullable
               as ErrorState?,
     ));
+  }
+
+  /// Create a copy of ContentByCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ContentsByCategoryNavStateCopyWith<$Res>? get navState {
+    if (_value.navState == null) {
+      return null;
+    }
+
+    return $ContentsByCategoryNavStateCopyWith<$Res>(_value.navState!, (value) {
+      return _then(_value.copyWith(navState: value));
+    });
+  }
+
+  /// Create a copy of ContentByCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $ErrorStateCopyWith<$Res>? get errorState {
+    if (_value.errorState == null) {
+      return null;
+    }
+
+    return $ErrorStateCopyWith<$Res>(_value.errorState!, (value) {
+      return _then(_value.copyWith(errorState: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$ContentByCategoryDataStateImpl implements _ContentByCategoryDataState {
+class _$ContentByCategoryDataStateImpl implements ContentByCategoryDataState {
   _$ContentByCategoryDataStateImpl(
       {final List<MainPageContent> contents = const [],
       this.categoryId = 0,
@@ -1962,7 +1947,7 @@ class _$ContentByCategoryDataStateImpl implements _ContentByCategoryDataState {
       this.type = ContentByCategoryType.contents,
       this.query,
       this.navState,
-      this.error})
+      this.errorState})
       : _contents = contents;
 
   final List<MainPageContent> _contents;
@@ -1997,11 +1982,11 @@ class _$ContentByCategoryDataStateImpl implements _ContentByCategoryDataState {
   @override
   final ContentsByCategoryNavState? navState;
   @override
-  final ErrorState? error;
+  final ErrorState? errorState;
 
   @override
   String toString() {
-    return 'ContentByCategoryState(contents: $contents, categoryId: $categoryId, page: $page, pageSize: $pageSize, isLoading: $isLoading, hasMore: $hasMore, type: $type, query: $query, navState: $navState, error: $error)';
+    return 'ContentByCategoryState.dataState(contents: $contents, categoryId: $categoryId, page: $page, pageSize: $pageSize, isLoading: $isLoading, hasMore: $hasMore, type: $type, query: $query, navState: $navState, errorState: $errorState)';
   }
 
   @override
@@ -2022,7 +2007,8 @@ class _$ContentByCategoryDataStateImpl implements _ContentByCategoryDataState {
             (identical(other.query, query) || other.query == query) &&
             (identical(other.navState, navState) ||
                 other.navState == navState) &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.errorState, errorState) ||
+                other.errorState == errorState));
   }
 
   @override
@@ -2037,7 +2023,7 @@ class _$ContentByCategoryDataStateImpl implements _ContentByCategoryDataState {
       type,
       query,
       navState,
-      error);
+      errorState);
 
   /// Create a copy of ContentByCategoryState
   /// with the given fields replaced by the non-null parameter values.
@@ -2047,10 +2033,115 @@ class _$ContentByCategoryDataStateImpl implements _ContentByCategoryDataState {
   _$$ContentByCategoryDataStateImplCopyWith<_$ContentByCategoryDataStateImpl>
       get copyWith => __$$ContentByCategoryDataStateImplCopyWithImpl<
           _$ContentByCategoryDataStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)
+        dataState,
+    required TResult Function() errorState,
+    required TResult Function() noContentState,
+  }) {
+    return dataState(contents, categoryId, page, pageSize, isLoading, hasMore,
+        type, query, navState, this.errorState);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult? Function()? errorState,
+    TResult? Function()? noContentState,
+  }) {
+    return dataState?.call(contents, categoryId, page, pageSize, isLoading,
+        hasMore, type, query, navState, this.errorState);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult Function()? errorState,
+    TResult Function()? noContentState,
+    required TResult orElse(),
+  }) {
+    if (dataState != null) {
+      return dataState(contents, categoryId, page, pageSize, isLoading, hasMore,
+          type, query, navState, this.errorState);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ContentByCategoryDataState value) dataState,
+    required TResult Function(ContentByCategoryErrorState value) errorState,
+    required TResult Function(ContentByCategoryNoContentState value)
+        noContentState,
+  }) {
+    return dataState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ContentByCategoryDataState value)? dataState,
+    TResult? Function(ContentByCategoryErrorState value)? errorState,
+    TResult? Function(ContentByCategoryNoContentState value)? noContentState,
+  }) {
+    return dataState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ContentByCategoryDataState value)? dataState,
+    TResult Function(ContentByCategoryErrorState value)? errorState,
+    TResult Function(ContentByCategoryNoContentState value)? noContentState,
+    required TResult orElse(),
+  }) {
+    if (dataState != null) {
+      return dataState(this);
+    }
+    return orElse();
+  }
 }
 
-abstract class _ContentByCategoryDataState implements ContentByCategoryState {
-  factory _ContentByCategoryDataState(
+abstract class ContentByCategoryDataState implements ContentByCategoryState {
+  factory ContentByCategoryDataState(
       {final List<MainPageContent> contents,
       final int categoryId,
       final int page,
@@ -2060,35 +2151,325 @@ abstract class _ContentByCategoryDataState implements ContentByCategoryState {
       final ContentByCategoryType type,
       final String? query,
       final ContentsByCategoryNavState? navState,
-      final ErrorState? error}) = _$ContentByCategoryDataStateImpl;
+      final ErrorState? errorState}) = _$ContentByCategoryDataStateImpl;
 
-  @override
   List<MainPageContent> get contents;
-  @override
   int get categoryId;
-  @override
   int get page;
-  @override
   int get pageSize;
-  @override
   bool get isLoading;
-  @override
   bool get hasMore;
-  @override
   ContentByCategoryType get type;
-  @override
   String? get query;
-  @override
   ContentsByCategoryNavState? get navState;
-  @override
-  ErrorState? get error;
+  ErrorState? get errorState;
 
   /// Create a copy of ContentByCategoryState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ContentByCategoryDataStateImplCopyWith<_$ContentByCategoryDataStateImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ContentByCategoryErrorStateImplCopyWith<$Res> {
+  factory _$$ContentByCategoryErrorStateImplCopyWith(
+          _$ContentByCategoryErrorStateImpl value,
+          $Res Function(_$ContentByCategoryErrorStateImpl) then) =
+      __$$ContentByCategoryErrorStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ContentByCategoryErrorStateImplCopyWithImpl<$Res>
+    extends _$ContentByCategoryStateCopyWithImpl<$Res,
+        _$ContentByCategoryErrorStateImpl>
+    implements _$$ContentByCategoryErrorStateImplCopyWith<$Res> {
+  __$$ContentByCategoryErrorStateImplCopyWithImpl(
+      _$ContentByCategoryErrorStateImpl _value,
+      $Res Function(_$ContentByCategoryErrorStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContentByCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ContentByCategoryErrorStateImpl implements ContentByCategoryErrorState {
+  _$ContentByCategoryErrorStateImpl();
+
+  @override
+  String toString() {
+    return 'ContentByCategoryState.errorState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ContentByCategoryErrorStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)
+        dataState,
+    required TResult Function() errorState,
+    required TResult Function() noContentState,
+  }) {
+    return errorState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult? Function()? errorState,
+    TResult? Function()? noContentState,
+  }) {
+    return errorState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult Function()? errorState,
+    TResult Function()? noContentState,
+    required TResult orElse(),
+  }) {
+    if (errorState != null) {
+      return errorState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ContentByCategoryDataState value) dataState,
+    required TResult Function(ContentByCategoryErrorState value) errorState,
+    required TResult Function(ContentByCategoryNoContentState value)
+        noContentState,
+  }) {
+    return errorState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ContentByCategoryDataState value)? dataState,
+    TResult? Function(ContentByCategoryErrorState value)? errorState,
+    TResult? Function(ContentByCategoryNoContentState value)? noContentState,
+  }) {
+    return errorState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ContentByCategoryDataState value)? dataState,
+    TResult Function(ContentByCategoryErrorState value)? errorState,
+    TResult Function(ContentByCategoryNoContentState value)? noContentState,
+    required TResult orElse(),
+  }) {
+    if (errorState != null) {
+      return errorState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ContentByCategoryErrorState implements ContentByCategoryState {
+  factory ContentByCategoryErrorState() = _$ContentByCategoryErrorStateImpl;
+}
+
+/// @nodoc
+abstract class _$$ContentByCategoryNoContentStateImplCopyWith<$Res> {
+  factory _$$ContentByCategoryNoContentStateImplCopyWith(
+          _$ContentByCategoryNoContentStateImpl value,
+          $Res Function(_$ContentByCategoryNoContentStateImpl) then) =
+      __$$ContentByCategoryNoContentStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ContentByCategoryNoContentStateImplCopyWithImpl<$Res>
+    extends _$ContentByCategoryStateCopyWithImpl<$Res,
+        _$ContentByCategoryNoContentStateImpl>
+    implements _$$ContentByCategoryNoContentStateImplCopyWith<$Res> {
+  __$$ContentByCategoryNoContentStateImplCopyWithImpl(
+      _$ContentByCategoryNoContentStateImpl _value,
+      $Res Function(_$ContentByCategoryNoContentStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContentByCategoryState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ContentByCategoryNoContentStateImpl
+    implements ContentByCategoryNoContentState {
+  _$ContentByCategoryNoContentStateImpl();
+
+  @override
+  String toString() {
+    return 'ContentByCategoryState.noContentState()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ContentByCategoryNoContentStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)
+        dataState,
+    required TResult Function() errorState,
+    required TResult Function() noContentState,
+  }) {
+    return noContentState();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult? Function()? errorState,
+    TResult? Function()? noContentState,
+  }) {
+    return noContentState?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            List<MainPageContent> contents,
+            int categoryId,
+            int page,
+            int pageSize,
+            bool isLoading,
+            bool hasMore,
+            ContentByCategoryType type,
+            String? query,
+            ContentsByCategoryNavState? navState,
+            ErrorState? errorState)?
+        dataState,
+    TResult Function()? errorState,
+    TResult Function()? noContentState,
+    required TResult orElse(),
+  }) {
+    if (noContentState != null) {
+      return noContentState();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ContentByCategoryDataState value) dataState,
+    required TResult Function(ContentByCategoryErrorState value) errorState,
+    required TResult Function(ContentByCategoryNoContentState value)
+        noContentState,
+  }) {
+    return noContentState(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ContentByCategoryDataState value)? dataState,
+    TResult? Function(ContentByCategoryErrorState value)? errorState,
+    TResult? Function(ContentByCategoryNoContentState value)? noContentState,
+  }) {
+    return noContentState?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ContentByCategoryDataState value)? dataState,
+    TResult Function(ContentByCategoryErrorState value)? errorState,
+    TResult Function(ContentByCategoryNoContentState value)? noContentState,
+    required TResult orElse(),
+  }) {
+    if (noContentState != null) {
+      return noContentState(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ContentByCategoryNoContentState
+    implements ContentByCategoryState {
+  factory ContentByCategoryNoContentState() =
+      _$ContentByCategoryNoContentStateImpl;
 }
 
 /// @nodoc

@@ -86,6 +86,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get continueWithGoogle => 'Google orqali kirish';
 
   @override
+  String get continueWithApple => 'Apple orqali kirish';
+
+  @override
   String get averageCheck => 'O‘rtacha baxo';
 
   @override
@@ -134,4 +137,52 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get nothing_found_message => 'Hech narsa topilmadi. Qayta qidiring!';
+
+  @override
+  String get refresh => 'Yangilash';
+
+  @override
+  String get pageFailedToLoad => 'Sahifa yuklanmadi';
+
+  @override
+  String get something_went_wrong => 'Nimadir xato ketdi. Iltimos, qayta urinib ko‘ring.';
+
+  @override
+  String get generalEmergency => 'Favqulodda yordam';
+
+  @override
+  String get touristPolice => 'Turistlar politsiyasi';
+
+  @override
+  String get fire => 'Yong‘in xizmati';
+
+  @override
+  String get police => 'Politsiya';
+
+  @override
+  String get medical => 'Tez yordam';
+
+  @override
+  String get gasEmergency => 'Gaz xizmati';
+
+  @override
+  String get emergencyContacts => 'Favqulodda kontaktlar';
+
+  @override
+  String get usefulTips => 'Foydali maslahatlar';
+
+  @override
+  String get logoutConfirmation => 'Tizimdan chiqishni xohlaysizmi?';
+
+  @override
+  String get deleteAccountConfirmation => 'Accountni o\'chirishni xohlaysizmi?';
+
+  @override
+  String get deleteAccount => 'Accountni o\'chirish';
+
+  @override
+  String get cancel => 'Bekor qilish';
+
+  @override
+  String get warning => 'Ogohlantirish';
 }

@@ -61,6 +61,20 @@ extension NavigationExtensions on BuildContext {
     pushNamedType(AppRoutePath.currenciesPage, extra: currencies);
   }
 
+  void pushWebViewPage({String? title, required String actionUrl}) {
+    pushNamedType(AppRoutePath.webViewPage, queryParameters: {
+      "title": title,
+      "actionUrl": actionUrl,
+    });
+  }
+
+  void pushPdfViewPage({String? title, String? pdfUrl}) {
+    pushNamedType(AppRoutePath.pdfPreViewPage, queryParameters: {
+      "title": title,
+      "pdfUrl": pdfUrl,
+    });
+  }
+
   Future<T?> pushNamedType<T extends Object?>(
     AppRoutePath route, {
     Map<String, String> pathParameters = const <String, String>{},

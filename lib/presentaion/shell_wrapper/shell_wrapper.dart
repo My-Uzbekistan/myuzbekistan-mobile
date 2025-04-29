@@ -82,27 +82,27 @@ class ShellPageWrapper extends HookWidget {
             .toSvgImage(colorFilter: selectedTabColorFilter),
         label: context.localizations?.nav_home,
       ),
-      BottomNavigationBarItem(
-        icon: Assets.svgTabIconMap
-            .toSvgImage(colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconMap
-            .toSvgImage(colorFilter: selectedTabColorFilter),
-        label: context.localizations?.nav_map,
-      ),
-      BottomNavigationBarItem(
-        icon: Assets.svgTabIconPayment
-            .toSvgImage(colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconPayment
-            .toSvgImage(colorFilter: selectedTabColorFilter),
-        label: context.localizations?.nav_payment,
-      ),
-      BottomNavigationBarItem(
-        icon: Assets.svgTabIconTransfer
-            .toSvgImage(colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconTransfer
-            .toSvgImage(colorFilter: selectedTabColorFilter),
-        label: context.localizations?.nav_transfer,
-      ),
+      // BottomNavigationBarItem(
+      //   icon: Assets.svgTabIconMap
+      //       .toSvgImage(colorFilter: unselectedTabColorFilter),
+      //   activeIcon: Assets.svgTabIconMap
+      //       .toSvgImage(colorFilter: selectedTabColorFilter),
+      //   label: context.localizations?.nav_map,
+      // ),
+      // BottomNavigationBarItem(
+      //   icon: Assets.svgTabIconPayment
+      //       .toSvgImage(colorFilter: unselectedTabColorFilter),
+      //   activeIcon: Assets.svgTabIconPayment
+      //       .toSvgImage(colorFilter: selectedTabColorFilter),
+      //   label: context.localizations?.nav_payment,
+      // ),
+      // BottomNavigationBarItem(
+      //   icon: Assets.svgTabIconTransfer
+      //       .toSvgImage(colorFilter: unselectedTabColorFilter),
+      //   activeIcon: Assets.svgTabIconTransfer
+      //       .toSvgImage(colorFilter: selectedTabColorFilter),
+      //   label: context.localizations?.nav_transfer,
+      // ),
       BottomNavigationBarItem(
         icon: Assets.svgTabIconMore
             .toSvgImage(colorFilter: unselectedTabColorFilter),

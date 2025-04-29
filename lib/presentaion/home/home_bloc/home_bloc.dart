@@ -57,8 +57,12 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   Future<void> _loadDataEvent(
       _LoadDataEvent event, Emitter<HomeBlocState> emit) async {
-    dataState = HomeBlocDataState();
-    emit(HomeBlocState.loading());
+    if(event.isRefresh){
+      emit(dataState.copyWith(isRefreshing: true));
+    }else {
+      dataState = HomeBlocDataState();
+      emit(HomeBlocState.loading());
+    }
     await _loadCategoriesAndRegions(emit);
     add(HomeBlocEvent.loadFavorites());
   }
@@ -68,10 +72,10 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     try {
       final result = await _repository.loadContents(
           regionId: dataState.selectedRegion?.id);
-      dataState = dataState.copyWith(contents: result, loadingContents: false);
+      dataState = dataState.copyWith(contents: result, loadingContents: false,isRefreshing: false);
       emit(dataState);
     } catch (e) {
-      dataState = dataState.copyWith(loadingContents: false);
+      dataState = dataState.copyWith(loadingContents: false,isRefreshing: false);
       emit(dataState.copyWith(loadingContents: false));
     }
   }
@@ -98,7 +102,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
           categories: categories);
       add(HomeBlocEvent.loadContents());
     } catch (e) {
-      debugPrint("HomeCategories 3xaption  $e");
+      emit(HomeBlocState.errorState());
     }
   }
 

@@ -39,6 +39,7 @@ class LocationWidget extends HookWidget {
                   key: ValueKey(coordinates),
                   scrollGesturesEnabled: true,
                   zoomGesturesEnabled: false,
+                  zoomControlsEnabled: false,
                   markers: markerIcon.hasData
                       ? {
                           Marker(
@@ -68,8 +69,9 @@ class LocationWidget extends HookWidget {
             children: [
               Assets.svgPinLocationLine.toSvgImage(
                   colorFilter: ColorFilter.mode(
-                      context.appColors.textIconColor.primary,
-                      BlendMode.srcIn)),
+                      context.appColors.textIconColor.primary, BlendMode.srcIn),
+                  height: 24,
+                  width: 24),
               Flexible(
                 child: Text(
                   address!,

@@ -15,11 +15,16 @@ class Assets {
   static const String pngAvatar = 'assets/png/avatar.png';
   static const String pngAvatarImage = 'assets/png/avatar_image.png';
   static const String pngDefaultContentImage = 'assets/png/default_content_image.png';
+  static const String pngExclamationmarkSquare = 'assets/png/exclamationmark_square.png';
   static const String pngGears = 'assets/png/gears.png';
   static const String pngMap = 'assets/png/map.png';
   static const String pngPersonalDefaultBg = 'assets/png/personal_default_bg.png';
   static const String pngSearchMaskIcon = 'assets/png/search_mask_icon.png';
   static const String pngSosok = 'assets/png/sosok.png';
+  static const String svgAppleLogo = 'assets/svg/apple_logo.svg';
+  static const String svgBoltFill = 'assets/svg/bolt_fill.svg';
+  static const String svgCrossCaseFill = 'assets/svg/cross_case_fill.svg';
+  static const String svgFlameFill = 'assets/svg/flame_fill.svg';
   static const String svgGoogleLogo = 'assets/svg/google_logo.svg';
   static const String svgIconArrowRight = 'assets/svg/icon_arrow_right.svg';
   static const String svgIconCheck = 'assets/svg/icon_check.svg';
@@ -35,7 +40,10 @@ class Assets {
   static const String svgOutlineHeard = 'assets/svg/outline_heard.svg';
   static const String svgPinLocationLine = 'assets/svg/pin_location_line.svg';
   static const String svgSearchLine = 'assets/svg/search_line.svg';
+  static const String svgShieldFill = 'assets/svg/shield_fill.svg';
   static const String svgStar = 'assets/svg/star.svg';
+  static const String svgStarLeadinghalfFilled = 'assets/svg/star_leadinghalf_filled.svg';
+  static const String svgStaroflifeFill = 'assets/svg/staroflife_fill.svg';
   static const String svgTabIconHome = 'assets/svg/tab_icon_home.svg';
   static const String svgTabIconMap = 'assets/svg/tab_icon_map.svg';
   static const String svgTabIconMore = 'assets/svg/tab_icon_more.svg';

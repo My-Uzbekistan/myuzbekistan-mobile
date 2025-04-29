@@ -21,7 +21,7 @@ class ItemCard extends StatelessWidget {
         : AppImageCard.large(
             imageUrl: content.mainPhoto,
             priceText: (content.priceInDollar ?? 0).floor() > 0
-                ? "\$${content.priceInDollar?.floor()}"
+                ? "~\$${content.priceInDollar?.floor()}"
                 : null);
     return IntrinsicWidth(
       child: BounceTap(

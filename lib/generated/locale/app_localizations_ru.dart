@@ -86,6 +86,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get continueWithGoogle => 'Продолжить с Google';
 
   @override
+  String get continueWithApple => 'Продолжить с Apple';
+
+  @override
   String get averageCheck => 'Средний рейтинг';
 
   @override
@@ -134,4 +137,52 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get nothing_found_message => 'Ничего не найдено. Попробуйте снова!';
+
+  @override
+  String get refresh => 'Обновить';
+
+  @override
+  String get pageFailedToLoad => 'Страница не загрузилась';
+
+  @override
+  String get something_went_wrong => 'Что-то пошло не так. Пожалуйста, попробуйте еще раз.';
+
+  @override
+  String get generalEmergency => 'Аварийная служба';
+
+  @override
+  String get touristPolice => 'Туристическая полиция';
+
+  @override
+  String get fire => 'Пожарная служба';
+
+  @override
+  String get police => 'Полиция';
+
+  @override
+  String get medical => 'Скорая помощь';
+
+  @override
+  String get gasEmergency => 'Газовая аварийная служба';
+
+  @override
+  String get emergencyContacts => 'Экстренные контакты';
+
+  @override
+  String get usefulTips => 'Полезные советы';
+
+  @override
+  String get logoutConfirmation => 'Вы хотите выйти из системы?';
+
+  @override
+  String get deleteAccountConfirmation => 'Вы хотите удалить аккаунт?';
+
+  @override
+  String get deleteAccount => 'Удалить аккаунт';
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get warning => 'Предупреждение';
 }

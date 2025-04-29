@@ -25,7 +25,7 @@ class ContentDto with _$ContentDto {
           FieldDto<List<double>>? location,
           FieldDto<List<FacilityItemDto>>? facilities,
           FieldDto<List<String>>? languages,
-          FieldDto<List<String>>? files,
+          FieldDto<List<AttachmentsItemDto>>? attachments,
           @ImageArrayConvertor() List<String>? photos,
           @ImageConvertor() String? photo,
           FieldDto<List<ContactsDto>>? contacts,
@@ -66,6 +66,14 @@ class ContentDto with _$ContentDto {
                     ?.map((e) => Facility(id: e.id, name: e.name, icon: e.icon))
                     .toList())
             : null,
+        attachments: attachments != null
+            ? Field(
+                name: attachments?.name,
+                value: attachments?.value
+                    ?.map((e) =>
+                        Attachments(name: e.name, icon: e.icon, file: e.files))
+                    .toList())
+            : null,
         workingHours: workingHours != null
             ? Field(name: workingHours?.name, value: workingHours?.value)
             : null,
@@ -83,8 +91,7 @@ class ContentDto with _$ContentDto {
         location: location != null
             ? Field(name: location?.name, value: location?.value)
             : null,
-        isFavorite: isFavorite ?? false
-        );
+        isFavorite: isFavorite ?? false);
   }
 }
 
@@ -98,6 +105,18 @@ class FacilityItemDto with _$FacilityItemDto {
 
   factory FacilityItemDto.fromJson(Map<String, dynamic> json) =>
       _$FacilityItemDtoFromJson(json);
+}
+
+@freezed
+class AttachmentsItemDto with _$AttachmentsItemDto {
+  const factory AttachmentsItemDto({
+    @ImageConvertor() String? icon,
+    String? name,
+    @ImageConvertor() String? files,
+  }) = _AttachmentsItemDto;
+
+  factory AttachmentsItemDto.fromJson(Map<String, dynamic> json) =>
+      _$AttachmentsItemDtoFromJson(json);
 }
 
 @freezed

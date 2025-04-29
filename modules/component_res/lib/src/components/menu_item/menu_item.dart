@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 class MenuItem extends StatelessWidget {
   final Color? iconBgColor;
   final String title;
-  final String? svgAssets;
+  final String? imageUrl;
+  final   VoidCallback? onTap;
 
-  const MenuItem({super.key,required this.title, this.svgAssets,this.iconBgColor,});
+  const MenuItem(
+      {super.key, required this.title, this.imageUrl, this.iconBgColor,this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: onTap,
       borderRadius: BorderRadius.circular(20),
       child: Ink(
           height: 112,
@@ -24,25 +26,33 @@ class MenuItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Ink(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: iconBgColor ?? context.appColors.brand),
-                  child: (svgAssets??Assets.svgIconMenu)
-                      .toSvgImage(height: 24, width: 24, fit: BoxFit.none),
-                ),
-                Expanded(
-                    child: SizedBox(
-                  height: 4,
-                )),
-                Text(
-                  title,
-                  style: CustomTypography.labelSm.copyWith(color: context.appColors.textIconColor.primary),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                )
+              Ink(
+              height: 40,
+              width: 40,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: iconBgColor ?? context.appColors.brand),
+              child: SizedBox(
+                  height: 24,
+                  child: CachedNetworkImage(imageUrl: imageUrl ?? "",
+                    errorWidget: (context, url, error) =>
+                        Assets.svgIconMenu.toSvgImage(),
+                  )
+
+                // (svgAssets??Assets.svgIconMenu)
+                //     .toSvgImage(height: 24, width: 24, fit: BoxFit.none),
+              ),),
+              Expanded(
+                  child: SizedBox(
+                    height: 4,
+                  )),
+              Text(
+                title,
+                style: CustomTypography.labelSm.copyWith(
+                    color: context.appColors.textIconColor.primary),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              )
               ],
             ),
           )),

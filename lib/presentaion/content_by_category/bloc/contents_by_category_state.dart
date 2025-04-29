@@ -2,7 +2,7 @@ part of 'contents_by_category_bloc.dart';
 
 @freezed
 abstract class ContentByCategoryState with _$ContentByCategoryState {
-  factory ContentByCategoryState({
+  factory ContentByCategoryState.dataState({
     @Default([]) List<MainPageContent> contents,
     @Default(0) int categoryId,
     @Default(1) int page,
@@ -12,8 +12,13 @@ abstract class ContentByCategoryState with _$ContentByCategoryState {
     @Default(ContentByCategoryType.contents) ContentByCategoryType type,
     String? query,
     ContentsByCategoryNavState? navState,
-    ErrorState? error,
-  }) = _ContentByCategoryDataState;
+    ErrorState? errorState,
+  }) = ContentByCategoryDataState;
+
+  factory ContentByCategoryState.errorState() = ContentByCategoryErrorState;
+
+  factory ContentByCategoryState.noContentState() =
+      ContentByCategoryNoContentState;
 }
 
 enum ContentByCategoryType { contents, favorites }
@@ -29,14 +34,3 @@ abstract class ErrorState with _$ErrorState {
 
   const factory ErrorState.failure() = __FailureState;
 }
-
-// extension ContentsByCategoryStateExt on ContentByCategoryState {
-//
-//   ContentByCategoryState copy(){
-//
-//     switch(this){
-//       case _ContentByCategoryState:
-//         return ContentByCategoryState();
-//     }
-//   }
-// }

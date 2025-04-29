@@ -90,7 +90,7 @@ class _RestService implements RestService {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
-      r'content_by_category': search,
+      r'search': search,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -132,7 +132,7 @@ class _RestService implements RestService {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
-      r'content_by_category': search,
+      r'search': search,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
@@ -248,6 +248,34 @@ class _RestService implements RestService {
   }
 
   @override
+  Future<TokenDto> authApple(Map<String, dynamic> body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _options = _setStreamType<TokenDto>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'auth/apple-login',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late TokenDto _value;
+    try {
+      _value = TokenDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<dynamic> addFavorite({required int contentId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'contentId': contentId};
@@ -279,6 +307,27 @@ class _RestService implements RestService {
           .compose(
             _dio.options,
             'favorites',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
+  }
+
+  @override
+  Future<dynamic> deleteAccount() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<dynamic>(
+      Options(method: 'DELETE', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'auth/delete',
             queryParameters: queryParameters,
             data: _data,
           )

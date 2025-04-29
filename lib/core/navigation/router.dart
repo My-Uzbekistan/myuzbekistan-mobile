@@ -1,16 +1,15 @@
 import 'dart:io';
 
-import 'package:component_res/component_res.dart';
 import 'package:core/core.dart';
 import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
 import 'package:uzbekistan_travel/presentaion/auth/auth_page.dart';
 import 'package:uzbekistan_travel/presentaion/auth/bloc/auth_bloc.dart';
+import 'package:uzbekistan_travel/presentaion/detail/pages/pdf_preview_page.dart';
 import 'package:uzbekistan_travel/presentaion/message_container.dart';
 import 'package:uzbekistan_travel/presentaion/content_by_category/bloc/contents_by_category_bloc.dart' show ContentByCategoryBloc, ContentByCategoryEvent;
 import 'package:uzbekistan_travel/presentaion/content_by_category/content_by_categories_page.dart';
@@ -24,6 +23,8 @@ import 'package:uzbekistan_travel/presentaion/profile_page/pages/change_locale.d
 import 'package:uzbekistan_travel/presentaion/profile_page/pages/change_theme_page.dart';
 import 'package:uzbekistan_travel/presentaion/profile_page/profile_page.dart';
 import 'package:uzbekistan_travel/presentaion/shell_more/pages/currencies_page.dart';
+import 'package:uzbekistan_travel/presentaion/shell_more/pages/emergancy_contacts.dart';
+import 'package:uzbekistan_travel/presentaion/shell_more/pages/web_view_page.dart';
 import 'package:uzbekistan_travel/presentaion/shell_more/shell_more_page.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
 import 'package:uzbekistan_travel/presentaion/splash.dart';
@@ -34,10 +35,10 @@ part 'app_route_path.dart';
 
 part 'modal_page_route.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
 final GoRouter routes = GoRouter(
-    navigatorKey: _rootNavigatorKey,
+    navigatorKey: rootNavigatorKey,
     initialLocation:
         Platform.isIOS ? AppRoutePath.shellHome.path : AppRoutePath.splash.path,
     routes: [
@@ -70,7 +71,7 @@ final GoRouter routes = GoRouter(
             return _slideTransition(child: BlocProvider(
               create: (context) => getIt<ContentByCategoryBloc>()
                 ..add(hasFavorites != null
-                    ? ContentByCategoryEvent.loadFavorites()
+                    ? ContentByCategoryEvent.initFavorite()
                     : ContentByCategoryEvent.init(
                   categoryId,
                 )),
@@ -121,6 +122,42 @@ final GoRouter routes = GoRouter(
             return _slideTransition(
                 child: CurrenciesPage(
                   currencies: c,
+                ),
+                context: context,
+                state: state);
+          }),
+      GoRoute(
+          path: AppRoutePath.emergencyContacts.path,
+          name: AppRoutePath.emergencyContacts.name,
+          pageBuilder: (context, state) {
+            debugPrint("urlEmergancy ${state.path}");
+            return _slideTransition(
+                child: EmergencyContactsPage(
+                ),
+                context: context,
+                state: state);
+          }),
+      GoRoute(
+          path: AppRoutePath.webViewPage.path,
+          name: AppRoutePath.webViewPage.name,
+          pageBuilder: (context, state) {
+            return _slideTransition(
+                child: WebViewPage(
+                  title: state.uri.queryParameters["title"],
+                  actionUrl:  state.uri.queryParameters["actionUrl"],
+                ),
+                context: context,
+                state: state);
+          }),
+      GoRoute(
+          path: AppRoutePath.pdfPreViewPage.path,
+          name: AppRoutePath.pdfPreViewPage.name,
+          pageBuilder: (context, state) {
+
+            return _slideTransition(
+                child: PdfPreviewPage(
+                  title: state.uri.queryParameters["title"],
+                  pdfUrl:  state.uri.queryParameters["pdfUrl"],
                 ),
                 context: context,
                 state: state);

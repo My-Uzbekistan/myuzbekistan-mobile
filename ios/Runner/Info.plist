@@ -67,7 +67,15 @@
 			<string>com.googleusercontent.apps.949425586550-ipa4pps37uchu559evil9q93jp6n6jms</string>
 		</array>
 	</dict>
+	 <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>myUzbekistan</string>
+        </array>
+      </dict>
 </array>
+
+
 
 </dict>
 </plist>

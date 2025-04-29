@@ -23,6 +23,8 @@
   "logout": "Chiqish",
   "getStartedDescription": "Imkoniyatlardan to‘liq foydalanish uchun tizimga kiring va oʻzingiz yoqtirgan narsalarni ham saqlab oling",
   "continueWithGoogle": "Google orqali kirish",
+  "continueWithApple": "Apple orqali kirish",
+
   "averageCheck": "O‘rtacha baxo",
   "search": "Qidiruv",
   "rating": "Reyting",
@@ -38,6 +40,21 @@
   "coming_soon": "Tez kunlarda!",
   "coming_soon_message": "Biz ajoyib narsa ustida ishlayapmiz.",
   "nothing_found": "Hech narsa topilmadi",
-  "nothing_found_message": "Hech narsa topilmadi. Qayta qidiring!"
-
+  "nothing_found_message": "Hech narsa topilmadi. Qayta qidiring!",
+  "refresh": "Yangilash",
+  "pageFailedToLoad": "Sahifa yuklanmadi",
+  "something_went_wrong": "Nimadir xato ketdi. Iltimos, qayta urinib ko‘ring.",
+  "generalEmergency": "Favqulodda yordam",
+  "touristPolice": "Turistlar politsiyasi",
+  "fire": "Yong‘in xizmati",
+  "police": "Politsiya",
+  "medical": "Tez yordam",
+  "gasEmergency": "Gaz xizmati",
+  "emergencyContacts": "Favqulodda kontaktlar",
+  "usefulTips": "Foydali maslahatlar",
+  "logoutConfirmation": "Tizimdan chiqishni xohlaysizmi?",
+  "deleteAccountConfirmation": "Accountni o'chirishni xohlaysizmi?",
+  "deleteAccount": "Accountni o'chirish",
+  "cancel": "Bekor qilish",
+  "warning": "Ogohlantirish"
 }

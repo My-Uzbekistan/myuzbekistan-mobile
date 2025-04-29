@@ -14,12 +14,12 @@ enum AppRoutePath {
   detail(path: "/detail", name: "detail"),
   changeLang(path: "/changeLang", name: "changeLang"),
   changeTheme(path: "/changeTheme", name: "changeTheme"),
-
   selectRegionPage(path: "/selectRegionPage", name: "selectRegionPage"),
   currenciesPage(path: "/currenciesPage", name: "currenciesPage"),
-
-  imagePreviewPage(path: "imagePreviewPage", name: "imagePreviewPage"),;
-
+  emergencyContacts(path: "/emergencyContacts", name: "emergencyContacts"),
+  webViewPage(path: "/webViewPage", name: "webViewPage"),
+  pdfPreViewPage(path: "/pdfPreViewPage", name: "pdfPreViewPage"),
+  imagePreviewPage(path: "imagePreviewPage", name: "imagePreviewPage");
 
   final String path;
   final String name;

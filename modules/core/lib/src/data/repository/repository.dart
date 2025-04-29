@@ -82,9 +82,23 @@ class RepositoryImp implements Repository {
   }
 
   @override
-  Future<Token> authGoogle({required String idToken}) {
-    return _restService
-        .authGoogle({"IdToken": idToken}).call((data) => data.toDomain());
+  Future<Token> authGoogle(
+      {required String idToken, String? fullName, String? photoUrl}) {
+    return _restService.authGoogle({
+      "IdToken": idToken,
+      "userName": fullName,
+      "photoUrl": photoUrl
+    }).call((data) => data.toDomain());
+  }
+
+  @override
+  Future<Token> authApple(
+      {required String idToken, String? fullName, String? photoUrl}) {
+    return _restService.authApple({
+      "IdToken": idToken,
+      "userName": fullName,
+      "photoUrl": photoUrl
+    }).call((data) => data.toDomain());
   }
 
   @override
@@ -113,6 +127,11 @@ class RepositoryImp implements Repository {
     return _restService
         .loadMoreUseFull()
         .call((data) => data.map((e) => e.toDomain()).toList());
+  }
+
+  @override
+  Future deleteAccount() {
+    return _restService.deleteAccount().call();
   }
 }
 

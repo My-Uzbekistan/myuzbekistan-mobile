@@ -70,12 +70,14 @@ _$ContentDtoImpl _$$ContentDtoImplFromJson(Map<String, dynamic> json) =>
               json['languages'] as Map<String, dynamic>,
               (value) =>
                   (value as List<dynamic>).map((e) => e as String).toList()),
-      files: json['files'] == null
+      attachments: json['attachments'] == null
           ? null
-          : FieldDto<List<String>>.fromJson(
-              json['files'] as Map<String, dynamic>,
-              (value) =>
-                  (value as List<dynamic>).map((e) => e as String).toList()),
+          : FieldDto<List<AttachmentsItemDto>>.fromJson(
+              json['attachments'] as Map<String, dynamic>,
+              (value) => (value as List<dynamic>)
+                  .map((e) =>
+                      AttachmentsItemDto.fromJson(e as Map<String, dynamic>))
+                  .toList()),
       photos: const ImageArrayConvertor().fromJson(json['photos'] as List?),
       photo: const ImageConvertor().fromJson(json['photo'] as String?),
       contacts: json['contacts'] == null
@@ -108,7 +110,7 @@ Map<String, dynamic> _$$ContentDtoImplToJson(_$ContentDtoImpl instance) =>
       'location': instance.location,
       'facilities': instance.facilities,
       'languages': instance.languages,
-      'files': instance.files,
+      'attachments': instance.attachments,
       'photos': _$JsonConverterToJson<List<dynamic>?, List<String>>(
           instance.photos, const ImageArrayConvertor().toJson),
       'photo': const ImageConvertor().toJson(instance.photo),
@@ -141,6 +143,22 @@ Map<String, dynamic> _$$FacilityItemDtoImplToJson(
       'id': instance.id,
       'name': instance.name,
       'icon': const ImageConvertor().toJson(instance.icon),
+    };
+
+_$AttachmentsItemDtoImpl _$$AttachmentsItemDtoImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AttachmentsItemDtoImpl(
+      icon: const ImageConvertor().fromJson(json['icon'] as String?),
+      name: json['name'] as String?,
+      files: const ImageConvertor().fromJson(json['files'] as String?),
+    );
+
+Map<String, dynamic> _$$AttachmentsItemDtoImplToJson(
+        _$AttachmentsItemDtoImpl instance) =>
+    <String, dynamic>{
+      'icon': const ImageConvertor().toJson(instance.icon),
+      'name': instance.name,
+      'files': const ImageConvertor().toJson(instance.files),
     };
 
 _$LanguageItemDtoImpl _$$LanguageItemDtoImplFromJson(

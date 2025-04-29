@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:component_res/component_res.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,49 +27,87 @@ class _AuthPageState extends State<AuthPage> {
             }
           }, builder: (context, state) {
             return Container(
-              padding: EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 32),
+              padding:
+                  EdgeInsets.symmetric(horizontal: 16).copyWith(bottom: 32),
               child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                    context.localizations!.getStarted,
+                      context.localizations!.getStarted,
                       style: CustomTypography.H2,
                     ),
                     SizedBox(
                       height: 12,
                     ),
                     Text(
-context.localizations!.getStartedDescription,
+                      context.localizations!.getStartedDescription,
                       style: CustomTypography.bodyMd.copyWith(
                           color: context.appColors.textIconColor.secondary),
                     ),
                     SizedBox(
                       height: 24,
                     ),
-                    ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 48),
-                            maximumSize: Size(double.infinity, 48),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            backgroundColor: context.appColors.fill.quaternary,
-                            elevation: 0,
-                            foregroundColor:
-                                context.appColors.textIconColor.primary,
-                            shadowColor: Colors.transparent),
-                        icon: Assets.svgGoogleLogo.toSvgImage(),
-                        onPressed: () {
-                          context.read<AuthBlock>().add(AuthEvent.authByGoogle());
-                        },
-                        label: state is AuthLoadingState
-                            ? SizedBox(
-                                height: 24,
-                                width: 24,
-                                child: CircularProgressIndicator(),
-                              )
-                            : Text(context.localizations!.continueWithGoogle))
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      spacing: 8,
+                      children: [
+                        ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(double.infinity, 48),
+                                maximumSize: Size(double.infinity, 48),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16)),
+                                backgroundColor:
+                                    context.appColors.fill.quaternary,
+                                elevation: 0,
+                                foregroundColor:
+                                    context.appColors.textIconColor.primary,
+                                shadowColor: Colors.transparent),
+                            icon: Assets.svgGoogleLogo.toSvgImage(),
+                            onPressed: () {
+                              context
+                                  .read<AuthBlock>()
+                                  .add(AuthEvent.authByGoogle());
+                            },
+                            label: state is AuthGoogleLoadingState
+                                ? SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: LoadingIndicator(),
+                                  )
+                                : Text(
+                                    context.localizations!.continueWithGoogle)),
+                        if (Platform.isIOS)
+                          ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(double.infinity, 48),
+                                  maximumSize: Size(double.infinity, 48),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16)),
+                                  backgroundColor:
+                                      context.appColors.fill.quaternary,
+                                  elevation: 0,
+                                  foregroundColor:
+                                      context.appColors.textIconColor.primary,
+                                  shadowColor: Colors.transparent),
+                              icon: Assets.svgAppleLogo.toSvgImage(),
+                              onPressed: () {
+                                context
+                                    .read<AuthBlock>()
+                                    .add(AuthEvent.authByApple());
+                              },
+                              label: state is AuthAppleLoadingState
+                                  ? SizedBox(
+                                      height: 24,
+                                      width: 24,
+                                      child: LoadingIndicator(),
+                                    )
+                                  : Text(context
+                                      .localizations!.continueWithApple)),
+                      ],
+                    )
                   ]),
             );
           })

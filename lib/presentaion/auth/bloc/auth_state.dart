@@ -4,6 +4,7 @@ part of 'auth_bloc.dart';
 abstract class AuthState with _$AuthState {
 
   factory AuthState.defaultState() = DefaultState;
-  factory AuthState.loading() = AuthLoadingState;
+  factory AuthState.googleLoading() = AuthGoogleLoadingState;
+  factory AuthState.appleLoading() = AuthAppleLoadingState;
   factory AuthState.authSuccessState() = AuthSuccessState;
 }

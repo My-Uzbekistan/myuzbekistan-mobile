@@ -19,9 +19,10 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
   final SecurityStorage _securityStorage;
   final AppStatusChangeListeners _appLocaleChangeListener;
   StreamSubscription? _streamSubscription;
+  final Repository repository;
 
   ProfileBloc(SecurityStorage securityStorage,
-      AppStatusChangeListeners appStatusChangeListeners)
+      AppStatusChangeListeners appStatusChangeListeners, this.repository)
       : _securityStorage = securityStorage,
         _appLocaleChangeListener = appStatusChangeListeners,
         super(ProfileBlocState.guestState()) {
@@ -33,13 +34,20 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
       final userModel = _securityStorage.getUserModel();
       if (userModel != null) {
         emit(ProfileBlocState.dataState(userModel: userModel));
-      }else {
+      } else {
         emit(ProfileBlocState.guestState());
       }
     });
     on<_ProfileBlocLogOutEvent>((event, emit) async {
       await _securityStorage.clearData();
-     _appLocaleChangeListener.refresh();
+      _appLocaleChangeListener.refresh();
+    });
+    on<_ProfileBlocDeleteEvent>((event, emit) async {
+      try {
+        await repository.deleteAccount();
+      } catch (e) {}
+      await _securityStorage.clearData();
+      _appLocaleChangeListener.refresh();
     });
   }
 
@@ -47,7 +55,7 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
     _streamSubscription?.cancel();
     _streamSubscription =
         _appLocaleChangeListener.refreshListener.listen((event) {
-          debugPrint("refreshEvent 1241241241241}");
+      debugPrint("refreshEvent 1241241241241}");
       add(ProfileBlocEvent.loadEvent());
     });
   }

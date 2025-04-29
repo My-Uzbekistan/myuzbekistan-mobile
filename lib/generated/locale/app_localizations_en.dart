@@ -86,6 +86,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continueWithGoogle => 'Continue with Google';
 
   @override
+  String get continueWithApple => 'Continue with Apple';
+
+  @override
   String get averageCheck => 'Average check';
 
   @override
@@ -134,4 +137,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get nothing_found_message => 'No results found. Try searching again!';
+
+  @override
+  String get refresh => 'Refresh';
+
+  @override
+  String get pageFailedToLoad => 'Page failed to load';
+
+  @override
+  String get something_went_wrong => 'Something went wrong. Please try again.';
+
+  @override
+  String get generalEmergency => 'General Emergency';
+
+  @override
+  String get touristPolice => 'Tourist police';
+
+  @override
+  String get fire => 'Fire';
+
+  @override
+  String get police => 'Police';
+
+  @override
+  String get medical => 'Medical';
+
+  @override
+  String get gasEmergency => 'Gas Emergency';
+
+  @override
+  String get emergencyContacts => 'Emergency Contacts';
+
+  @override
+  String get usefulTips => 'Useful tips';
+
+  @override
+  String get logoutConfirmation => 'Do you want to log out?';
+
+  @override
+  String get deleteAccountConfirmation => 'Do you want to delete the account?';
+
+  @override
+  String get deleteAccount => 'Delete account';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get warning => 'Warning';
 }

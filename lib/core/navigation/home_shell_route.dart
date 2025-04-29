@@ -2,7 +2,7 @@ part of 'router.dart';
 
 final _shellRoute = [
   StatefulShellRoute.indexedStack(
-    parentNavigatorKey: _rootNavigatorKey,
+    parentNavigatorKey: rootNavigatorKey,
     builder: (context, state, navShell) =>
         ShellPageWrapper(navigationShell: navShell),
     branches: [
@@ -15,24 +15,24 @@ final _shellRoute = [
                   child: HomePage(),
                 ))
       ]),
-      StatefulShellBranch(routes: [
-        GoRoute(
-            path: "/map",
-            name: "map",
-            builder: (context, state) => MessageContainer.comingSoonWidget(context))
-      ]),
-      StatefulShellBranch(routes: [
-        GoRoute(
-            path: "/payment",
-            name: "payment",
-            builder: (context, state) =>MessageContainer.comingSoonWidget(context))
-      ]),
-      StatefulShellBranch(routes: [
-        GoRoute(
-            path: "/transfer",
-            name: "transfer",
-            builder: (context, state) => MessageContainer.comingSoonWidget(context))
-      ]),
+      // StatefulShellBranch(routes: [
+      //   GoRoute(
+      //       path: "/map",
+      //       name: "map",
+      //       builder: (context, state) => MessageContainer.comingSoonWidget(context))
+      // ]),
+      // StatefulShellBranch(routes: [
+      //   GoRoute(
+      //       path: "/payment",
+      //       name: "payment",
+      //       builder: (context, state) =>MessageContainer.comingSoonWidget(context))
+      // ]),
+      // StatefulShellBranch(routes: [
+      //   GoRoute(
+      //       path: "/transfer",
+      //       name: "transfer",
+      //       builder: (context, state) => MessageContainer.comingSoonWidget(context))
+      // ]),
       StatefulShellBranch(routes: [
         GoRoute(
             path: "/more",

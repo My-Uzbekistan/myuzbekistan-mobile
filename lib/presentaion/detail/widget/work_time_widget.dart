@@ -17,7 +17,7 @@ class WorkTimeWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Assets.svgIconTime.toSvgImage(),
+          Assets.svgIconTime.toSvgImage(colorFilter: ColorFilter.mode(context.appColors.textIconColor.primary, BlendMode.srcIn),height: 24,width: 24),
           Flexible(
               child: Text(
             workingHours ?? "",

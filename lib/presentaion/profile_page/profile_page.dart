@@ -101,24 +101,60 @@ class _ProfilePageState extends State<ProfilePage> {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 16).copyWith(top: 24),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: Size(double.infinity, 48),
-                        maximumSize: Size(double.infinity, 48),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
-                        backgroundColor: context.appColors.fill.quaternary,
-                        elevation: 0,
-                        foregroundColor:
-                            context.appColors.textIconColor.primary,
-                        shadowColor: Colors.transparent),
-                    onPressed: () {
-                      context
-                          .read<ProfileBloc>()
-                          .add(ProfileBlocEvent.logOut());
-                      context.goMain();
-                    },
-                    child: Text(context.localizations!.logout),
+                  child: Column(
+                    spacing: 8,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(double.infinity, 48),
+                            maximumSize: Size(double.infinity, 48),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
+                            backgroundColor: context.appColors.fill.quaternary,
+                            elevation: 0,
+                            foregroundColor:
+                                context.appColors.textIconColor.primary,
+                            shadowColor: Colors.transparent),
+                        onPressed: () {
+                          showAlertDialog(
+                              content:
+                                  context.localizations!.logoutConfirmation,
+                              action: context.localizations!.logout,
+                              onPressed: () {
+                                context
+                                    .read<ProfileBloc>()
+                                    .add(ProfileBlocEvent.logOut());
+                                context.goMain();
+                              });
+                        },
+                        child: Text(context.localizations!.logout),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(double.infinity, 48),
+                            maximumSize: Size(double.infinity, 48),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16)),
+                            backgroundColor: context.appColors.fill.quaternary,
+                            elevation: 0,
+                            foregroundColor:
+                                context.appColors.textIconColor.primary,
+                            shadowColor: Colors.transparent),
+                        onPressed: () {
+                          showAlertDialog(
+                              content: context
+                                  .localizations!.deleteAccountConfirmation,
+                              action: context.localizations!.deleteAccount,
+                              onPressed: () {
+                                context
+                                    .read<ProfileBloc>()
+                                    .add(ProfileBlocEvent.deleteAccount());
+                                context.goMain();
+                              });
+                        },
+                        child: Text(context.localizations!.deleteAccount),
+                      )
+                    ],
                   ),
                 )
             ],
@@ -126,5 +162,41 @@ class _ProfilePageState extends State<ProfilePage> {
         });
       }),
     );
+  }
+
+  void showAlertDialog(
+      {required String content,
+      required String action,
+      required VoidCallback onPressed}) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              context.localizations!.warning,
+              style: CustomTypography.bodyLg
+                  .copyWith(color: context.appColors.textIconColor.primary),
+            ),
+            content: Text(content),
+            actions: [
+              TextButton(
+                child: Text(
+                  context.localizations!.cancel,
+                  style: CustomTypography.bodyMd.copyWith(
+                      color: context.appColors.textIconColor.secondary),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop(); // dialogni yopish
+                },
+              ),
+              TextButton(
+                child: Text(action),
+                onPressed: () {
+                  onPressed.call();
+                },
+              ),
+            ],
+          );
+        });
   }
 }

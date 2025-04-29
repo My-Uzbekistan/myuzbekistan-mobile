@@ -35,8 +35,9 @@ extension GetItInjectableX on _i174.GetIt {
       environment,
       environmentFilter,
     );
-    final localeModule = _$LocaleModule();
     final networkModule = _$NetworkModule();
+    final localeModule = _$LocaleModule();
+    gh.lazySingleton<_i494.Alice>(() => networkModule.getAlice());
     await gh.lazySingletonAsync<_i979.Box<dynamic>>(
       () => localeModule.localStorageBox(),
       instanceName: 'myUzblocaleStorageBox',
@@ -54,6 +55,7 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i361.Dio>(() => networkModule.provideDio(
           gh<_i494.AppPreference>(),
           gh<_i494.SecurityStorage>(),
+          gh<_i494.Alice>(),
         ));
     gh.factory<_i358.RestService>(() => _i358.RestService(gh<_i361.Dio>()));
     gh.factory<_i81.Repository>(
@@ -62,6 +64,6 @@ extension GetItInjectableX on _i174.GetIt {
   }
 }
 
-class _$LocaleModule extends _i43.LocaleModule {}
-
 class _$NetworkModule extends _i639.NetworkModule {}
+
+class _$LocaleModule extends _i43.LocaleModule {}

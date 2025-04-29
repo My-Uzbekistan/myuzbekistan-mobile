@@ -17,6 +17,7 @@ class MoreItemDto {
   int id;
   String? title;
   String? description;
+  String? actionUrl;
   @ImageConvertor()
   String? photo;
 
@@ -28,6 +29,12 @@ class MoreItemDto {
   Map<String, dynamic> toJson() => _$MoreItemDtoToJson(this);
 
   MoreItem toDomain() {
-    return MoreItem(id: id, title: title, description: description, photo: photo);
+    return MoreItem(
+      id: id,
+      title: title,
+      description: description,
+      photo: photo,
+      actionUrl: actionUrl,
+    );
   }
 }

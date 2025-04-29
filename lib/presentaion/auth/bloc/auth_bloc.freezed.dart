@@ -19,18 +19,21 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authByGoogle,
+    required TResult Function() authByApple,
     required TResult Function() logOutEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authByGoogle,
+    TResult? Function()? authByApple,
     TResult? Function()? logOutEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authByGoogle,
+    TResult Function()? authByApple,
     TResult Function()? logOutEvent,
     required TResult orElse(),
   }) =>
@@ -38,18 +41,21 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthGoogleEvent value) authByGoogle,
+    required TResult Function(_AuthAppleEvent value) authByApple,
     required TResult Function(_AuthLogOutEvent value) logOutEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult? Function(_AuthAppleEvent value)? authByApple,
     TResult? Function(_AuthLogOutEvent value)? logOutEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult Function(_AuthAppleEvent value)? authByApple,
     TResult Function(_AuthLogOutEvent value)? logOutEvent,
     required TResult orElse(),
   }) =>
@@ -118,6 +124,7 @@ class _$AuthGoogleEventImpl implements _AuthGoogleEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authByGoogle,
+    required TResult Function() authByApple,
     required TResult Function() logOutEvent,
   }) {
     return authByGoogle();
@@ -127,6 +134,7 @@ class _$AuthGoogleEventImpl implements _AuthGoogleEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authByGoogle,
+    TResult? Function()? authByApple,
     TResult? Function()? logOutEvent,
   }) {
     return authByGoogle?.call();
@@ -136,6 +144,7 @@ class _$AuthGoogleEventImpl implements _AuthGoogleEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authByGoogle,
+    TResult Function()? authByApple,
     TResult Function()? logOutEvent,
     required TResult orElse(),
   }) {
@@ -149,6 +158,7 @@ class _$AuthGoogleEventImpl implements _AuthGoogleEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthGoogleEvent value) authByGoogle,
+    required TResult Function(_AuthAppleEvent value) authByApple,
     required TResult Function(_AuthLogOutEvent value) logOutEvent,
   }) {
     return authByGoogle(this);
@@ -158,6 +168,7 @@ class _$AuthGoogleEventImpl implements _AuthGoogleEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult? Function(_AuthAppleEvent value)? authByApple,
     TResult? Function(_AuthLogOutEvent value)? logOutEvent,
   }) {
     return authByGoogle?.call(this);
@@ -167,6 +178,7 @@ class _$AuthGoogleEventImpl implements _AuthGoogleEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult Function(_AuthAppleEvent value)? authByApple,
     TResult Function(_AuthLogOutEvent value)? logOutEvent,
     required TResult orElse(),
   }) {
@@ -179,6 +191,117 @@ class _$AuthGoogleEventImpl implements _AuthGoogleEvent {
 
 abstract class _AuthGoogleEvent implements AuthEvent {
   factory _AuthGoogleEvent() = _$AuthGoogleEventImpl;
+}
+
+/// @nodoc
+abstract class _$$AuthAppleEventImplCopyWith<$Res> {
+  factory _$$AuthAppleEventImplCopyWith(_$AuthAppleEventImpl value,
+          $Res Function(_$AuthAppleEventImpl) then) =
+      __$$AuthAppleEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthAppleEventImplCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$AuthAppleEventImpl>
+    implements _$$AuthAppleEventImplCopyWith<$Res> {
+  __$$AuthAppleEventImplCopyWithImpl(
+      _$AuthAppleEventImpl _value, $Res Function(_$AuthAppleEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$AuthAppleEventImpl implements _AuthAppleEvent {
+  _$AuthAppleEventImpl();
+
+  @override
+  String toString() {
+    return 'AuthEvent.authByApple()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AuthAppleEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() authByGoogle,
+    required TResult Function() authByApple,
+    required TResult Function() logOutEvent,
+  }) {
+    return authByApple();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? authByGoogle,
+    TResult? Function()? authByApple,
+    TResult? Function()? logOutEvent,
+  }) {
+    return authByApple?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? authByGoogle,
+    TResult Function()? authByApple,
+    TResult Function()? logOutEvent,
+    required TResult orElse(),
+  }) {
+    if (authByApple != null) {
+      return authByApple();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthGoogleEvent value) authByGoogle,
+    required TResult Function(_AuthAppleEvent value) authByApple,
+    required TResult Function(_AuthLogOutEvent value) logOutEvent,
+  }) {
+    return authByApple(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult? Function(_AuthAppleEvent value)? authByApple,
+    TResult? Function(_AuthLogOutEvent value)? logOutEvent,
+  }) {
+    return authByApple?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult Function(_AuthAppleEvent value)? authByApple,
+    TResult Function(_AuthLogOutEvent value)? logOutEvent,
+    required TResult orElse(),
+  }) {
+    if (authByApple != null) {
+      return authByApple(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AuthAppleEvent implements AuthEvent {
+  factory _AuthAppleEvent() = _$AuthAppleEventImpl;
 }
 
 /// @nodoc
@@ -223,6 +346,7 @@ class _$AuthLogOutEventImpl implements _AuthLogOutEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authByGoogle,
+    required TResult Function() authByApple,
     required TResult Function() logOutEvent,
   }) {
     return logOutEvent();
@@ -232,6 +356,7 @@ class _$AuthLogOutEventImpl implements _AuthLogOutEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authByGoogle,
+    TResult? Function()? authByApple,
     TResult? Function()? logOutEvent,
   }) {
     return logOutEvent?.call();
@@ -241,6 +366,7 @@ class _$AuthLogOutEventImpl implements _AuthLogOutEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authByGoogle,
+    TResult Function()? authByApple,
     TResult Function()? logOutEvent,
     required TResult orElse(),
   }) {
@@ -254,6 +380,7 @@ class _$AuthLogOutEventImpl implements _AuthLogOutEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthGoogleEvent value) authByGoogle,
+    required TResult Function(_AuthAppleEvent value) authByApple,
     required TResult Function(_AuthLogOutEvent value) logOutEvent,
   }) {
     return logOutEvent(this);
@@ -263,6 +390,7 @@ class _$AuthLogOutEventImpl implements _AuthLogOutEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult? Function(_AuthAppleEvent value)? authByApple,
     TResult? Function(_AuthLogOutEvent value)? logOutEvent,
   }) {
     return logOutEvent?.call(this);
@@ -272,6 +400,7 @@ class _$AuthLogOutEventImpl implements _AuthLogOutEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthGoogleEvent value)? authByGoogle,
+    TResult Function(_AuthAppleEvent value)? authByApple,
     TResult Function(_AuthLogOutEvent value)? logOutEvent,
     required TResult orElse(),
   }) {
@@ -291,21 +420,24 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() defaultState,
-    required TResult Function() loading,
+    required TResult Function() googleLoading,
+    required TResult Function() appleLoading,
     required TResult Function() authSuccessState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? defaultState,
-    TResult? Function()? loading,
+    TResult? Function()? googleLoading,
+    TResult? Function()? appleLoading,
     TResult? Function()? authSuccessState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? defaultState,
-    TResult Function()? loading,
+    TResult Function()? googleLoading,
+    TResult Function()? appleLoading,
     TResult Function()? authSuccessState,
     required TResult orElse(),
   }) =>
@@ -313,21 +445,24 @@ mixin _$AuthState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DefaultState value) defaultState,
-    required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthGoogleLoadingState value) googleLoading,
+    required TResult Function(AuthAppleLoadingState value) appleLoading,
     required TResult Function(AuthSuccessState value) authSuccessState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DefaultState value)? defaultState,
-    TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult? Function(AuthAppleLoadingState value)? appleLoading,
     TResult? Function(AuthSuccessState value)? authSuccessState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DefaultState value)? defaultState,
-    TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult Function(AuthAppleLoadingState value)? appleLoading,
     TResult Function(AuthSuccessState value)? authSuccessState,
     required TResult orElse(),
   }) =>
@@ -396,7 +531,8 @@ class _$DefaultStateImpl implements DefaultState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() defaultState,
-    required TResult Function() loading,
+    required TResult Function() googleLoading,
+    required TResult Function() appleLoading,
     required TResult Function() authSuccessState,
   }) {
     return defaultState();
@@ -406,7 +542,8 @@ class _$DefaultStateImpl implements DefaultState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? defaultState,
-    TResult? Function()? loading,
+    TResult? Function()? googleLoading,
+    TResult? Function()? appleLoading,
     TResult? Function()? authSuccessState,
   }) {
     return defaultState?.call();
@@ -416,7 +553,8 @@ class _$DefaultStateImpl implements DefaultState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? defaultState,
-    TResult Function()? loading,
+    TResult Function()? googleLoading,
+    TResult Function()? appleLoading,
     TResult Function()? authSuccessState,
     required TResult orElse(),
   }) {
@@ -430,7 +568,8 @@ class _$DefaultStateImpl implements DefaultState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DefaultState value) defaultState,
-    required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthGoogleLoadingState value) googleLoading,
+    required TResult Function(AuthAppleLoadingState value) appleLoading,
     required TResult Function(AuthSuccessState value) authSuccessState,
   }) {
     return defaultState(this);
@@ -440,7 +579,8 @@ class _$DefaultStateImpl implements DefaultState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DefaultState value)? defaultState,
-    TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult? Function(AuthAppleLoadingState value)? appleLoading,
     TResult? Function(AuthSuccessState value)? authSuccessState,
   }) {
     return defaultState?.call(this);
@@ -450,7 +590,8 @@ class _$DefaultStateImpl implements DefaultState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DefaultState value)? defaultState,
-    TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult Function(AuthAppleLoadingState value)? appleLoading,
     TResult Function(AuthSuccessState value)? authSuccessState,
     required TResult orElse(),
   }) {
@@ -466,18 +607,20 @@ abstract class DefaultState implements AuthState {
 }
 
 /// @nodoc
-abstract class _$$AuthLoadingStateImplCopyWith<$Res> {
-  factory _$$AuthLoadingStateImplCopyWith(_$AuthLoadingStateImpl value,
-          $Res Function(_$AuthLoadingStateImpl) then) =
-      __$$AuthLoadingStateImplCopyWithImpl<$Res>;
+abstract class _$$AuthGoogleLoadingStateImplCopyWith<$Res> {
+  factory _$$AuthGoogleLoadingStateImplCopyWith(
+          _$AuthGoogleLoadingStateImpl value,
+          $Res Function(_$AuthGoogleLoadingStateImpl) then) =
+      __$$AuthGoogleLoadingStateImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AuthLoadingStateImplCopyWithImpl<$Res>
-    extends _$AuthStateCopyWithImpl<$Res, _$AuthLoadingStateImpl>
-    implements _$$AuthLoadingStateImplCopyWith<$Res> {
-  __$$AuthLoadingStateImplCopyWithImpl(_$AuthLoadingStateImpl _value,
-      $Res Function(_$AuthLoadingStateImpl) _then)
+class __$$AuthGoogleLoadingStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthGoogleLoadingStateImpl>
+    implements _$$AuthGoogleLoadingStateImplCopyWith<$Res> {
+  __$$AuthGoogleLoadingStateImplCopyWithImpl(
+      _$AuthGoogleLoadingStateImpl _value,
+      $Res Function(_$AuthGoogleLoadingStateImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of AuthState
@@ -486,18 +629,19 @@ class __$$AuthLoadingStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$AuthLoadingStateImpl implements AuthLoadingState {
-  _$AuthLoadingStateImpl();
+class _$AuthGoogleLoadingStateImpl implements AuthGoogleLoadingState {
+  _$AuthGoogleLoadingStateImpl();
 
   @override
   String toString() {
-    return 'AuthState.loading()';
+    return 'AuthState.googleLoading()';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AuthLoadingStateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$AuthGoogleLoadingStateImpl);
   }
 
   @override
@@ -507,32 +651,35 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() defaultState,
-    required TResult Function() loading,
+    required TResult Function() googleLoading,
+    required TResult Function() appleLoading,
     required TResult Function() authSuccessState,
   }) {
-    return loading();
+    return googleLoading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? defaultState,
-    TResult? Function()? loading,
+    TResult? Function()? googleLoading,
+    TResult? Function()? appleLoading,
     TResult? Function()? authSuccessState,
   }) {
-    return loading?.call();
+    return googleLoading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? defaultState,
-    TResult Function()? loading,
+    TResult Function()? googleLoading,
+    TResult Function()? appleLoading,
     TResult Function()? authSuccessState,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (googleLoading != null) {
+      return googleLoading();
     }
     return orElse();
   }
@@ -541,39 +688,161 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DefaultState value) defaultState,
-    required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthGoogleLoadingState value) googleLoading,
+    required TResult Function(AuthAppleLoadingState value) appleLoading,
     required TResult Function(AuthSuccessState value) authSuccessState,
   }) {
-    return loading(this);
+    return googleLoading(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DefaultState value)? defaultState,
-    TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult? Function(AuthAppleLoadingState value)? appleLoading,
     TResult? Function(AuthSuccessState value)? authSuccessState,
   }) {
-    return loading?.call(this);
+    return googleLoading?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DefaultState value)? defaultState,
-    TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult Function(AuthAppleLoadingState value)? appleLoading,
     TResult Function(AuthSuccessState value)? authSuccessState,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (googleLoading != null) {
+      return googleLoading(this);
     }
     return orElse();
   }
 }
 
-abstract class AuthLoadingState implements AuthState {
-  factory AuthLoadingState() = _$AuthLoadingStateImpl;
+abstract class AuthGoogleLoadingState implements AuthState {
+  factory AuthGoogleLoadingState() = _$AuthGoogleLoadingStateImpl;
+}
+
+/// @nodoc
+abstract class _$$AuthAppleLoadingStateImplCopyWith<$Res> {
+  factory _$$AuthAppleLoadingStateImplCopyWith(
+          _$AuthAppleLoadingStateImpl value,
+          $Res Function(_$AuthAppleLoadingStateImpl) then) =
+      __$$AuthAppleLoadingStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthAppleLoadingStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthAppleLoadingStateImpl>
+    implements _$$AuthAppleLoadingStateImplCopyWith<$Res> {
+  __$$AuthAppleLoadingStateImplCopyWithImpl(_$AuthAppleLoadingStateImpl _value,
+      $Res Function(_$AuthAppleLoadingStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$AuthAppleLoadingStateImpl implements AuthAppleLoadingState {
+  _$AuthAppleLoadingStateImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.appleLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthAppleLoadingStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() defaultState,
+    required TResult Function() googleLoading,
+    required TResult Function() appleLoading,
+    required TResult Function() authSuccessState,
+  }) {
+    return appleLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? defaultState,
+    TResult? Function()? googleLoading,
+    TResult? Function()? appleLoading,
+    TResult? Function()? authSuccessState,
+  }) {
+    return appleLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? defaultState,
+    TResult Function()? googleLoading,
+    TResult Function()? appleLoading,
+    TResult Function()? authSuccessState,
+    required TResult orElse(),
+  }) {
+    if (appleLoading != null) {
+      return appleLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DefaultState value) defaultState,
+    required TResult Function(AuthGoogleLoadingState value) googleLoading,
+    required TResult Function(AuthAppleLoadingState value) appleLoading,
+    required TResult Function(AuthSuccessState value) authSuccessState,
+  }) {
+    return appleLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DefaultState value)? defaultState,
+    TResult? Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult? Function(AuthAppleLoadingState value)? appleLoading,
+    TResult? Function(AuthSuccessState value)? authSuccessState,
+  }) {
+    return appleLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DefaultState value)? defaultState,
+    TResult Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult Function(AuthAppleLoadingState value)? appleLoading,
+    TResult Function(AuthSuccessState value)? authSuccessState,
+    required TResult orElse(),
+  }) {
+    if (appleLoading != null) {
+      return appleLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthAppleLoadingState implements AuthState {
+  factory AuthAppleLoadingState() = _$AuthAppleLoadingStateImpl;
 }
 
 /// @nodoc
@@ -618,7 +887,8 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() defaultState,
-    required TResult Function() loading,
+    required TResult Function() googleLoading,
+    required TResult Function() appleLoading,
     required TResult Function() authSuccessState,
   }) {
     return authSuccessState();
@@ -628,7 +898,8 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? defaultState,
-    TResult? Function()? loading,
+    TResult? Function()? googleLoading,
+    TResult? Function()? appleLoading,
     TResult? Function()? authSuccessState,
   }) {
     return authSuccessState?.call();
@@ -638,7 +909,8 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? defaultState,
-    TResult Function()? loading,
+    TResult Function()? googleLoading,
+    TResult Function()? appleLoading,
     TResult Function()? authSuccessState,
     required TResult orElse(),
   }) {
@@ -652,7 +924,8 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(DefaultState value) defaultState,
-    required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthGoogleLoadingState value) googleLoading,
+    required TResult Function(AuthAppleLoadingState value) appleLoading,
     required TResult Function(AuthSuccessState value) authSuccessState,
   }) {
     return authSuccessState(this);
@@ -662,7 +935,8 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(DefaultState value)? defaultState,
-    TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult? Function(AuthAppleLoadingState value)? appleLoading,
     TResult? Function(AuthSuccessState value)? authSuccessState,
   }) {
     return authSuccessState?.call(this);
@@ -672,7 +946,8 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DefaultState value)? defaultState,
-    TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthGoogleLoadingState value)? googleLoading,
+    TResult Function(AuthAppleLoadingState value)? appleLoading,
     TResult Function(AuthSuccessState value)? authSuccessState,
     required TResult orElse(),
   }) {

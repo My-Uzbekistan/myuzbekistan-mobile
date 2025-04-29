@@ -335,6 +335,7 @@ mixin _$ProfileBlocEvent {
     required TResult Function() initEvent,
     required TResult Function() loadEvent,
     required TResult Function() logOut,
+    required TResult Function() deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -342,6 +343,7 @@ mixin _$ProfileBlocEvent {
     TResult? Function()? initEvent,
     TResult? Function()? loadEvent,
     TResult? Function()? logOut,
+    TResult? Function()? deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -349,6 +351,7 @@ mixin _$ProfileBlocEvent {
     TResult Function()? initEvent,
     TResult Function()? loadEvent,
     TResult Function()? logOut,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -357,6 +360,7 @@ mixin _$ProfileBlocEvent {
     required TResult Function(_ProfileBlocInitEvent value) initEvent,
     required TResult Function(_ProfileBlocLoadEvent value) loadEvent,
     required TResult Function(_ProfileBlocLogOutEvent value) logOut,
+    required TResult Function(_ProfileBlocDeleteEvent value) deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -364,6 +368,7 @@ mixin _$ProfileBlocEvent {
     TResult? Function(_ProfileBlocInitEvent value)? initEvent,
     TResult? Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult? Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult? Function(_ProfileBlocDeleteEvent value)? deleteAccount,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -371,6 +376,7 @@ mixin _$ProfileBlocEvent {
     TResult Function(_ProfileBlocInitEvent value)? initEvent,
     TResult Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult Function(_ProfileBlocDeleteEvent value)? deleteAccount,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -442,6 +448,7 @@ class _$ProfileBlocInitEventImpl implements _ProfileBlocInitEvent {
     required TResult Function() initEvent,
     required TResult Function() loadEvent,
     required TResult Function() logOut,
+    required TResult Function() deleteAccount,
   }) {
     return initEvent();
   }
@@ -452,6 +459,7 @@ class _$ProfileBlocInitEventImpl implements _ProfileBlocInitEvent {
     TResult? Function()? initEvent,
     TResult? Function()? loadEvent,
     TResult? Function()? logOut,
+    TResult? Function()? deleteAccount,
   }) {
     return initEvent?.call();
   }
@@ -462,6 +470,7 @@ class _$ProfileBlocInitEventImpl implements _ProfileBlocInitEvent {
     TResult Function()? initEvent,
     TResult Function()? loadEvent,
     TResult Function()? logOut,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (initEvent != null) {
@@ -476,6 +485,7 @@ class _$ProfileBlocInitEventImpl implements _ProfileBlocInitEvent {
     required TResult Function(_ProfileBlocInitEvent value) initEvent,
     required TResult Function(_ProfileBlocLoadEvent value) loadEvent,
     required TResult Function(_ProfileBlocLogOutEvent value) logOut,
+    required TResult Function(_ProfileBlocDeleteEvent value) deleteAccount,
   }) {
     return initEvent(this);
   }
@@ -486,6 +496,7 @@ class _$ProfileBlocInitEventImpl implements _ProfileBlocInitEvent {
     TResult? Function(_ProfileBlocInitEvent value)? initEvent,
     TResult? Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult? Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult? Function(_ProfileBlocDeleteEvent value)? deleteAccount,
   }) {
     return initEvent?.call(this);
   }
@@ -496,6 +507,7 @@ class _$ProfileBlocInitEventImpl implements _ProfileBlocInitEvent {
     TResult Function(_ProfileBlocInitEvent value)? initEvent,
     TResult Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult Function(_ProfileBlocDeleteEvent value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (initEvent != null) {
@@ -554,6 +566,7 @@ class _$ProfileBlocLoadEventImpl implements _ProfileBlocLoadEvent {
     required TResult Function() initEvent,
     required TResult Function() loadEvent,
     required TResult Function() logOut,
+    required TResult Function() deleteAccount,
   }) {
     return loadEvent();
   }
@@ -564,6 +577,7 @@ class _$ProfileBlocLoadEventImpl implements _ProfileBlocLoadEvent {
     TResult? Function()? initEvent,
     TResult? Function()? loadEvent,
     TResult? Function()? logOut,
+    TResult? Function()? deleteAccount,
   }) {
     return loadEvent?.call();
   }
@@ -574,6 +588,7 @@ class _$ProfileBlocLoadEventImpl implements _ProfileBlocLoadEvent {
     TResult Function()? initEvent,
     TResult Function()? loadEvent,
     TResult Function()? logOut,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (loadEvent != null) {
@@ -588,6 +603,7 @@ class _$ProfileBlocLoadEventImpl implements _ProfileBlocLoadEvent {
     required TResult Function(_ProfileBlocInitEvent value) initEvent,
     required TResult Function(_ProfileBlocLoadEvent value) loadEvent,
     required TResult Function(_ProfileBlocLogOutEvent value) logOut,
+    required TResult Function(_ProfileBlocDeleteEvent value) deleteAccount,
   }) {
     return loadEvent(this);
   }
@@ -598,6 +614,7 @@ class _$ProfileBlocLoadEventImpl implements _ProfileBlocLoadEvent {
     TResult? Function(_ProfileBlocInitEvent value)? initEvent,
     TResult? Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult? Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult? Function(_ProfileBlocDeleteEvent value)? deleteAccount,
   }) {
     return loadEvent?.call(this);
   }
@@ -608,6 +625,7 @@ class _$ProfileBlocLoadEventImpl implements _ProfileBlocLoadEvent {
     TResult Function(_ProfileBlocInitEvent value)? initEvent,
     TResult Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult Function(_ProfileBlocDeleteEvent value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (loadEvent != null) {
@@ -668,6 +686,7 @@ class _$ProfileBlocLogOutEventImpl implements _ProfileBlocLogOutEvent {
     required TResult Function() initEvent,
     required TResult Function() loadEvent,
     required TResult Function() logOut,
+    required TResult Function() deleteAccount,
   }) {
     return logOut();
   }
@@ -678,6 +697,7 @@ class _$ProfileBlocLogOutEventImpl implements _ProfileBlocLogOutEvent {
     TResult? Function()? initEvent,
     TResult? Function()? loadEvent,
     TResult? Function()? logOut,
+    TResult? Function()? deleteAccount,
   }) {
     return logOut?.call();
   }
@@ -688,6 +708,7 @@ class _$ProfileBlocLogOutEventImpl implements _ProfileBlocLogOutEvent {
     TResult Function()? initEvent,
     TResult Function()? loadEvent,
     TResult Function()? logOut,
+    TResult Function()? deleteAccount,
     required TResult orElse(),
   }) {
     if (logOut != null) {
@@ -702,6 +723,7 @@ class _$ProfileBlocLogOutEventImpl implements _ProfileBlocLogOutEvent {
     required TResult Function(_ProfileBlocInitEvent value) initEvent,
     required TResult Function(_ProfileBlocLoadEvent value) loadEvent,
     required TResult Function(_ProfileBlocLogOutEvent value) logOut,
+    required TResult Function(_ProfileBlocDeleteEvent value) deleteAccount,
   }) {
     return logOut(this);
   }
@@ -712,6 +734,7 @@ class _$ProfileBlocLogOutEventImpl implements _ProfileBlocLogOutEvent {
     TResult? Function(_ProfileBlocInitEvent value)? initEvent,
     TResult? Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult? Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult? Function(_ProfileBlocDeleteEvent value)? deleteAccount,
   }) {
     return logOut?.call(this);
   }
@@ -722,6 +745,7 @@ class _$ProfileBlocLogOutEventImpl implements _ProfileBlocLogOutEvent {
     TResult Function(_ProfileBlocInitEvent value)? initEvent,
     TResult Function(_ProfileBlocLoadEvent value)? loadEvent,
     TResult Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult Function(_ProfileBlocDeleteEvent value)? deleteAccount,
     required TResult orElse(),
   }) {
     if (logOut != null) {
@@ -733,4 +757,124 @@ class _$ProfileBlocLogOutEventImpl implements _ProfileBlocLogOutEvent {
 
 abstract class _ProfileBlocLogOutEvent implements ProfileBlocEvent {
   factory _ProfileBlocLogOutEvent() = _$ProfileBlocLogOutEventImpl;
+}
+
+/// @nodoc
+abstract class _$$ProfileBlocDeleteEventImplCopyWith<$Res> {
+  factory _$$ProfileBlocDeleteEventImplCopyWith(
+          _$ProfileBlocDeleteEventImpl value,
+          $Res Function(_$ProfileBlocDeleteEventImpl) then) =
+      __$$ProfileBlocDeleteEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ProfileBlocDeleteEventImplCopyWithImpl<$Res>
+    extends _$ProfileBlocEventCopyWithImpl<$Res, _$ProfileBlocDeleteEventImpl>
+    implements _$$ProfileBlocDeleteEventImplCopyWith<$Res> {
+  __$$ProfileBlocDeleteEventImplCopyWithImpl(
+      _$ProfileBlocDeleteEventImpl _value,
+      $Res Function(_$ProfileBlocDeleteEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ProfileBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ProfileBlocDeleteEventImpl implements _ProfileBlocDeleteEvent {
+  _$ProfileBlocDeleteEventImpl();
+
+  @override
+  String toString() {
+    return 'ProfileBlocEvent.deleteAccount()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProfileBlocDeleteEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initEvent,
+    required TResult Function() loadEvent,
+    required TResult Function() logOut,
+    required TResult Function() deleteAccount,
+  }) {
+    return deleteAccount();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initEvent,
+    TResult? Function()? loadEvent,
+    TResult? Function()? logOut,
+    TResult? Function()? deleteAccount,
+  }) {
+    return deleteAccount?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initEvent,
+    TResult Function()? loadEvent,
+    TResult Function()? logOut,
+    TResult Function()? deleteAccount,
+    required TResult orElse(),
+  }) {
+    if (deleteAccount != null) {
+      return deleteAccount();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ProfileBlocInitEvent value) initEvent,
+    required TResult Function(_ProfileBlocLoadEvent value) loadEvent,
+    required TResult Function(_ProfileBlocLogOutEvent value) logOut,
+    required TResult Function(_ProfileBlocDeleteEvent value) deleteAccount,
+  }) {
+    return deleteAccount(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_ProfileBlocInitEvent value)? initEvent,
+    TResult? Function(_ProfileBlocLoadEvent value)? loadEvent,
+    TResult? Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult? Function(_ProfileBlocDeleteEvent value)? deleteAccount,
+  }) {
+    return deleteAccount?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ProfileBlocInitEvent value)? initEvent,
+    TResult Function(_ProfileBlocLoadEvent value)? loadEvent,
+    TResult Function(_ProfileBlocLogOutEvent value)? logOut,
+    TResult Function(_ProfileBlocDeleteEvent value)? deleteAccount,
+    required TResult orElse(),
+  }) {
+    if (deleteAccount != null) {
+      return deleteAccount(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ProfileBlocDeleteEvent implements ProfileBlocEvent {
+  factory _ProfileBlocDeleteEvent() = _$ProfileBlocDeleteEventImpl;
 }

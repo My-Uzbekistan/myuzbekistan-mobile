@@ -97,8 +97,8 @@ class _BounceTapState extends State<BounceTap>
   }
 }
 
-extension on VoidCallback {
-  delayed(Duration duration) {
-    Future.delayed(duration).then((value) => this.call());
-  }
-}
+// extension on VoidCallback {
+//   delayed(Duration duration) {
+//     Future.delayed(duration).then((value) => this.call());
+//   }
+// }
