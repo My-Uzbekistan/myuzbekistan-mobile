@@ -58,6 +58,7 @@ class CollapsableContainer extends HookWidget {
         },
         child: Scaffold(
           body: CustomScrollView(
+            primary: false,
             controller: scrollController,
             slivers: [
               SliverAppBar(
@@ -145,14 +146,6 @@ class CollapsableContainer extends HookWidget {
                                   ),
                                 ),
                               ),
-                            // Positioned(
-                            //     top: 0,
-                            //     left: 0,
-                            //     right: 0,
-                            //     child: Container(
-                            //       height: collapsedBarHeight,
-                            //       color: Colors.green,
-                            //     ))
                           ],
                         );
                       },
@@ -163,7 +156,6 @@ class CollapsableContainer extends HookWidget {
               SliverFillRemaining(
                 hasScrollBody: false,
                 child: SingleChildScrollView(
-                  physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.only(bottom: 24),
                   child: content,
                 ),

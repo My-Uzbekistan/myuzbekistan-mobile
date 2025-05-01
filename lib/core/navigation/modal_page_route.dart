@@ -56,5 +56,5 @@ Page _slideTransition(
             );
           },
         )
-      : MaterialPage(child: child);
+      : CupertinoPage(child: child);
 }
