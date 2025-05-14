@@ -1,31 +1,36 @@
 part of 'home_groups.dart';
 
-class ItemCard extends StatelessWidget {
+class ItemCard extends StatefulWidget  {
   final MainPageContent content;
   final VoidCallback? onTap;
 
   const ItemCard({super.key, required this.content, this.onTap});
 
   @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final itemWidth = screenWidth * 0.25;
     final width = max(156.0, min(200.0, itemWidth));
 
-    final contentImage = content.viewType == ViewType.places
+    final contentImage = widget.content.viewType == ViewType.places
         ? AppImageCard.large(
-            imageUrl: content.mainPhoto,
-            ratingAverage: content.ratingAverage ?? 0,
-            averageCheck: content.averageCheck ?? 0,
+            imageUrl: widget.content.mainPhoto,
+            ratingAverage: widget.content.ratingAverage ?? 0,
+            averageCheck: widget.content.averageCheck ?? 0,
           )
         : AppImageCard.large(
-            imageUrl: content.mainPhoto,
-            priceText: (content.priceInDollar ?? 0).floor() > 0
-                ? "~\$${content.priceInDollar?.floor()}"
+            imageUrl: widget.content.mainPhoto,
+            priceText: (widget.content.priceInDollar ?? 0).floor() > 0
+                ? "~\$${widget.content.priceInDollar?.floor()}"
                 : null);
     return IntrinsicWidth(
       child: BounceTap(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: SizedBox(
           width: width,
           child: Column(
@@ -40,13 +45,13 @@ class ItemCard extends StatelessWidget {
                   spacing: 2,
                   children: [
                     Text(
-                      content.title ?? "",
+                      widget.content.title ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: CustomTypography.bodyMd,
                     ),
                     Text(
-                      content.contentAddress ?? "",
+                      widget.content.contentAddress ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: CustomTypography.bodyMd.copyWith(
@@ -61,4 +66,8 @@ class ItemCard extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

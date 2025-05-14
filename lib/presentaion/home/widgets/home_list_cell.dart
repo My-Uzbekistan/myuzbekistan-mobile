@@ -6,6 +6,7 @@ class HomeListCell extends StatefulWidget {
   final int categoryId;
   final ValueChanged<MainPageContent>? onItemTap;
   final VoidCallback? openAll;
+  final ViewType? viewType;
 
   const HomeListCell(
       {super.key,
@@ -13,6 +14,7 @@ class HomeListCell extends StatefulWidget {
       required this.categoryName,
       required this.items,
       this.onItemTap,
+      this.viewType,
       this.openAll});
 
   @override
@@ -85,41 +87,80 @@ class _HomeListCellState extends State<HomeListCell>
                     ),
                   ),
                 ),
-                SingleChildScrollView(
-                  controller: scrollController,
-                  scrollDirection: Axis.horizontal,
-                  physics: Platform.isAndroid
-                      ? ClampingScrollPhysics()
-                      : BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    spacing: 12,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(state.contents.length + 1, (index) {
-                      if (index == state.contents.length) {
-                        return state.isLoading
-                            ? LoadingIndicator()
-                            : SizedBox();
-                      }
-                      final item = state.contents[index];
-                      return RepaintBoundary(
-                        key:ValueKey(item) ,
-                        child: item.viewType == ViewType.profile
-                            ? ItemCardAvatar(
-                          avatarUrl: item.mainPhoto,
-                          name: item.title,
-                          onTap: () {
-                            widget.onItemTap?.call(item);
-                          },
-                        )
-                            : ItemCard(
-                          content: item,
-                          onTap: () => widget.onItemTap?.call(item),
-                        ),
-                      );
-                    }),
-                  ),
+
+                SizedBox(
+                  height: widget.viewType == ViewType.profile ? 122 : 220,
+                  child: ListView.separated(
+                      controller: scrollController,
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      separatorBuilder: (context, index) {
+                        return SizedBox(
+                          width: 12,
+                        );
+                      },
+                      scrollDirection: Axis.horizontal,
+                      physics: Platform.isAndroid
+                          ? ClampingScrollPhysics()
+                          : BouncingScrollPhysics(),
+                      itemCount:
+                          state.contents.length + (state.isLoading ? 1 : 0),
+                      itemBuilder: (context, index) {
+                        if (index == state.contents.length) {
+                          return LoadingIndicator();
+                        }
+                        final item = state.contents[index];
+                        return RepaintBoundary(
+                          key: ValueKey(item),
+                          child: widget.viewType == ViewType.profile
+                              ? ItemCardAvatar(
+                                  avatarUrl: item.mainPhoto,
+                                  name: item.title,
+                                  onTap: () {
+                                    widget.onItemTap?.call(item);
+                                  },
+                                )
+                              : ItemCard(
+                                  content: item,
+                                  onTap: () => widget.onItemTap?.call(item),
+                                ),
+                        );
+                      }),
                 )
+                // SingleChildScrollView(
+                //   controller: scrollController,
+                //   scrollDirection: Axis.horizontal,
+                //   physics: Platform.isAndroid
+                //       ? ClampingScrollPhysics()
+                //       : BouncingScrollPhysics(),
+                //   padding: EdgeInsets.symmetric(horizontal: 16),
+                //   child: Row(
+                //     spacing: 12,
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: List.generate(state.contents.length + 1, (index) {
+                //       if (index == state.contents.length) {
+                //         return state.isLoading
+                //             ? LoadingIndicator()
+                //             : SizedBox();
+                //       }
+                //       final item = state.contents[index];
+                //       return RepaintBoundary(
+                //         key:ValueKey(item) ,
+                //         child: item.viewType == ViewType.profile
+                //             ? ItemCardAvatar(
+                //           avatarUrl: item.mainPhoto,
+                //           name: item.title,
+                //           onTap: () {
+                //             widget.onItemTap?.call(item);
+                //           },
+                //         )
+                //             : ItemCard(
+                //           content: item,
+                //           onTap: () => widget.onItemTap?.call(item),
+                //         ),
+                //       );
+                //     }),
+                //   ),
+                // )
               ],
             ),
           );
@@ -130,5 +171,5 @@ class _HomeListCellState extends State<HomeListCell>
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 }

@@ -96,6 +96,7 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> {
           categoryName: widget.data.title,
           openAll: widget.onOpenAll,
           onItemTap: widget.onContentItemTap,
+          viewType: widget.data.viewType,
         )
       ],
     );

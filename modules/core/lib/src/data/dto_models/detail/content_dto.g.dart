@@ -179,7 +179,7 @@ Map<String, dynamic> _$$LanguageItemDtoImplToJson(
 
 _$ContactsDtoImpl _$$ContactsDtoImplFromJson(Map<String, dynamic> json) =>
     _$ContactsDtoImpl(
-      icon: json['icon'] as String?,
+      icon: const ImageConvertor().fromJson(json['icon'] as String?),
       name: json['name'] as String?,
       contact: json['contact'] as String?,
       action: json['action'] as String?,
@@ -187,7 +187,7 @@ _$ContactsDtoImpl _$$ContactsDtoImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ContactsDtoImplToJson(_$ContactsDtoImpl instance) =>
     <String, dynamic>{
-      'icon': instance.icon,
+      'icon': const ImageConvertor().toJson(instance.icon),
       'name': instance.name,
       'contact': instance.contact,
       'action': instance.action,

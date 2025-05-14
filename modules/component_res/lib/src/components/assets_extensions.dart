@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 final _package = "component_res";
 
 extension AssetsExtension on String {
-  bool get isAssetPath => RegExp(r'^assets/.*\.(png|jpg|jpeg|gif|svg)$')
+  bool get isAssetPath => RegExp(r'^assets/.*\.(png|jpg|jpeg|gif|webp|svg)$')
       .hasMatch(this); // assets/ bilan boshlanishi kerak
 
   Widget toImage({double? width, double? height, BoxFit fit = BoxFit.none}) {

@@ -73,7 +73,7 @@ class _CellItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     color: context.appColors.fill.quaternary),
                 child: CachedNetworkImage(
-                  imageUrl: "https://travel.sec.uz/${icon}",
+                  imageUrl: icon??"",
                   fit: BoxFit.cover,
                   errorListener: (obj){},
                   errorWidget: (context, url, error) => SizedBox(),

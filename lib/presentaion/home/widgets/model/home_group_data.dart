@@ -5,12 +5,15 @@ class HomeGroupData {
   final MainPageContent? recommended;
   final String title;
   final List<MainPageContent> items;
+  final ViewType viewType;
+
 
   HomeGroupData({
     required this.categoryId,
     required this.title,
     this.recommended,
     required this.items,
+    this.viewType = ViewType.places,
   });
 }
 

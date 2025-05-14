@@ -14,25 +14,32 @@ class ItemCardAvatar extends StatelessWidget {
       onTap:onTap ,
       child: SizedBox(
         width: 96,
-        child: Center(
-          child: Column(
+        child:  Column(
             spacing: 8,
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              AppAvatar(
-                imageUrl: avatarUrl,
-                sizeType: AvatarSizeType.large,
+              SizedBox(
+                width: 80,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: AppAvatar(
+
+                    imageUrl: avatarUrl,
+                    sizeType: AvatarSizeType.large,
+                  ),
+                ),
               ),
               Text(
                 name??"",
+                maxLines: 1,
                 textAlign: TextAlign.center,
                 style: CustomTypography.bodySm,
               )
             ],
           ),
-        ),
+
       ),
     );
   }

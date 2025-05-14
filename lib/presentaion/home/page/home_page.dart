@@ -42,10 +42,9 @@ class HomePage extends HookWidget {
                   triggerMode: RefreshIndicatorTriggerMode.anywhere,
                   onRefresh: () async {
                     bloc.add(HomeBlocEvent.loadDataEvent(isRefresh: true));
-                    isRefreshing.value=true;
+                    isRefreshing.value = true;
                     await Future.delayed(Duration(seconds: 2));
-                    isRefreshing.value=false;
-
+                    isRefreshing.value = false;
                   },
                   child: Scaffold(
                     appBar: AppBar(
@@ -192,35 +191,68 @@ class HomePage extends HookWidget {
                           ),
                         SliverToBoxAdapter(
                           child: !data.loadingContents
-                              ? SingleChildScrollView(
+                              ? ListView.builder(
+                                  shrinkWrap: true,
                                   physics: NeverScrollableScrollPhysics(),
-                                  child: Column(children: [
-                                    ...data.contents.map((e) {
-                                      return HomeGroupsWidget(
-                                        key: ValueKey(e),
-                                        onOpenAll: () {
-                                          context.pushContentByCategoryPage(
-                                              e.categoryName, e.categoryId);
-                                        },
-                                        onContentItemTap: (content) {
-                                          context.pushDetailPage(
-                                              content.contentId);
-                                        },
-                                        data: HomeGroupData(
-                                          categoryId: e.categoryId,
-                                          recommended: e.recommended,
-                                          title: e.categoryName,
-                                          items: e.contents,
-                                        ),
-                                      );
-                                    })
-                                  ]),
+                                  itemCount: data.contents.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    final e = data.contents[index];
+                                    return HomeGroupsWidget(
+                                      key: ValueKey(e),
+                                      onOpenAll: () {
+                                        context.pushContentByCategoryPage(
+                                            e.categoryName, e.categoryId);
+                                      },
+                                      onContentItemTap: (content) {
+                                        context
+                                            .pushDetailPage(content.contentId);
+                                      },
+                                      data: HomeGroupData(
+                                        viewType: e.viewType,
+                                        categoryId: e.categoryId,
+                                        recommended: e.recommended,
+                                        title: e.categoryName,
+                                        items: e.contents,
+                                      ),
+                                    );
+                                  },
                                 )
                               : Center(
                                   child: Padding(
                                       padding: EdgeInsets.only(top: 8),
                                       child: CircularProgressIndicator()),
                                 ),
+
+                          // SingleChildScrollView(
+                          // physics: NeverScrollableScrollPhysics(),
+                          // child: Column(children: [
+                          // ...data.contents.map((e) {
+                          // return HomeGroupsWidget(
+                          // key: ValueKey(e),
+                          // onOpenAll: () {
+                          // context.pushContentByCategoryPage(
+                          // e.categoryName, e.categoryId);
+                          // },
+                          // onContentItemTap: (content) {
+                          // context.pushDetailPage(
+                          // content.contentId);
+                          // },
+                          // data: HomeGroupData(
+                          // categoryId: e.categoryId,
+                          // recommended: e.recommended,
+                          // title: e.categoryName,
+                          // items: e.contents,
+                          // ),
+                          // );
+                          // })
+                          // ]),
+                          // )
+                          //     : Center(
+                          // child: Padding(
+                          // padding: EdgeInsets.only(top: 8),
+                          // child: CircularProgressIndicator()),
+                          // ),
                         )
                       ],
                     ),

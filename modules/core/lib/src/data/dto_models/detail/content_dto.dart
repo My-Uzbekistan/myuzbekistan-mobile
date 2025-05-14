@@ -133,7 +133,8 @@ class LanguageItemDto with _$LanguageItemDto {
 @freezed
 class ContactsDto with _$ContactsDto {
   const factory ContactsDto(
-      {String? icon,
+      {
+        @ImageConvertor() String? icon,
       String? name,
       String? contact,
       String? action}) = _ContactsDto;

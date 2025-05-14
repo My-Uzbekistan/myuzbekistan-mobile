@@ -1168,6 +1168,7 @@ ContactsDto _$ContactsDtoFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContactsDto {
+  @ImageConvertor()
   String? get icon => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   String? get contact => throw _privateConstructorUsedError;
@@ -1189,7 +1190,11 @@ abstract class $ContactsDtoCopyWith<$Res> {
           ContactsDto value, $Res Function(ContactsDto) then) =
       _$ContactsDtoCopyWithImpl<$Res, ContactsDto>;
   @useResult
-  $Res call({String? icon, String? name, String? contact, String? action});
+  $Res call(
+      {@ImageConvertor() String? icon,
+      String? name,
+      String? contact,
+      String? action});
 }
 
 /// @nodoc
@@ -1241,7 +1246,11 @@ abstract class _$$ContactsDtoImplCopyWith<$Res>
       __$$ContactsDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? icon, String? name, String? contact, String? action});
+  $Res call(
+      {@ImageConvertor() String? icon,
+      String? name,
+      String? contact,
+      String? action});
 }
 
 /// @nodoc
@@ -1286,12 +1295,14 @@ class __$$ContactsDtoImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ContactsDtoImpl implements _ContactsDto {
-  const _$ContactsDtoImpl({this.icon, this.name, this.contact, this.action});
+  const _$ContactsDtoImpl(
+      {@ImageConvertor() this.icon, this.name, this.contact, this.action});
 
   factory _$ContactsDtoImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContactsDtoImplFromJson(json);
 
   @override
+  @ImageConvertor()
   final String? icon;
   @override
   final String? name;
@@ -1338,7 +1349,7 @@ class _$ContactsDtoImpl implements _ContactsDto {
 
 abstract class _ContactsDto implements ContactsDto {
   const factory _ContactsDto(
-      {final String? icon,
+      {@ImageConvertor() final String? icon,
       final String? name,
       final String? contact,
       final String? action}) = _$ContactsDtoImpl;
@@ -1347,6 +1358,7 @@ abstract class _ContactsDto implements ContactsDto {
       _$ContactsDtoImpl.fromJson;
 
   @override
+  @ImageConvertor()
   String? get icon;
   @override
   String? get name;
