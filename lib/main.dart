@@ -1,5 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:core/core.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -110,6 +111,8 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return OverlaySupport.global(
@@ -132,6 +135,7 @@ class _MyAppState extends State<MyApp> {
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.appLocale.locale,
+
               themeMode: state.mode,
               builder: (context, child) {
                 return MediaQuery(

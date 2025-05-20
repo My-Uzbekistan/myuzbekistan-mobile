@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:core/core.dart';
 import 'package:dartx/dartx.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,8 @@ import 'package:uzbekistan_travel/presentaion/auth/auth_page.dart';
 import 'package:uzbekistan_travel/presentaion/auth/bloc/auth_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/detail/pages/pdf_preview_page.dart';
 import 'package:uzbekistan_travel/presentaion/message_container.dart';
-import 'package:uzbekistan_travel/presentaion/content_by_category/bloc/contents_by_category_bloc.dart' show ContentByCategoryBloc, ContentByCategoryEvent;
+import 'package:uzbekistan_travel/presentaion/content_by_category/bloc/contents_by_category_bloc.dart'
+    show ContentByCategoryBloc, ContentByCategoryEvent;
 import 'package:uzbekistan_travel/presentaion/content_by_category/content_by_categories_page.dart';
 import 'package:uzbekistan_travel/presentaion/detail/detail_bloc/detail_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/detail/detail_page.dart';
@@ -38,7 +40,11 @@ part 'modal_page_route.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorKey = GlobalKey<NavigatorState>();
+final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+final FirebaseAnalyticsObserver observer =
+    FirebaseAnalyticsObserver(analytics: analytics);
 final GoRouter routes = GoRouter(
+    observers: [observer],
     navigatorKey: rootNavigatorKey,
     initialLocation:
         Platform.isIOS ? AppRoutePath.shellHome.path : AppRoutePath.splash.path,
@@ -60,28 +66,31 @@ final GoRouter routes = GoRouter(
       //           child: HomePage(),
       //         )),
       GoRoute(
-          path: AppRoutePath.contentByCategory.path,
-          name: AppRoutePath.contentByCategory.name,
-          pageBuilder: (context,state){
-            final hasFavorites = state.uri.queryParameters["hasFavorites"];
-            final categoryName = hasFavorites != null
-                ? context.localizations?.favorites
-                : state.uri.queryParameters["categoryName"];
-            final int categoryId =
-                state.uri.queryParameters["categoryId"]?.toInt() ?? 0;
-            return _slideTransition(child: BlocProvider(
-              create: (context) => getIt<ContentByCategoryBloc>()
-                ..add(hasFavorites != null
-                    ? ContentByCategoryEvent.initFavorite()
-                    : ContentByCategoryEvent.init(
-                  categoryId,
-                )),
-              child: ContentByCategoryPage(
-                categoryName: categoryName ?? "",
+        path: AppRoutePath.contentByCategory.path,
+        name: AppRoutePath.contentByCategory.name,
+        pageBuilder: (context, state) {
+          final hasFavorites = state.uri.queryParameters["hasFavorites"];
+          final categoryName = hasFavorites != null
+              ? context.localizations?.favorites
+              : state.uri.queryParameters["categoryName"];
+          final int categoryId =
+              state.uri.queryParameters["categoryId"]?.toInt() ?? 0;
+          return _slideTransition(
+              child: BlocProvider(
+                create: (context) => getIt<ContentByCategoryBloc>()
+                  ..add(hasFavorites != null
+                      ? ContentByCategoryEvent.initFavorite()
+                      : ContentByCategoryEvent.init(
+                          categoryId,
+                        )),
+                child: ContentByCategoryPage(
+                  categoryName: categoryName ?? "",
+                ),
               ),
-            ), context: context, state: state);
-          },
-          ),
+              context: context,
+              state: state);
+        },
+      ),
 
       GoRoute(
           path: AppRoutePath.detail.path,
@@ -133,10 +142,7 @@ final GoRouter routes = GoRouter(
           pageBuilder: (context, state) {
             debugPrint("urlEmergancy ${state.path}");
             return _slideTransition(
-                child: EmergencyContactsPage(
-                ),
-                context: context,
-                state: state);
+                child: EmergencyContactsPage(), context: context, state: state);
           }),
       GoRoute(
           path: AppRoutePath.webViewPage.path,
@@ -145,7 +151,7 @@ final GoRouter routes = GoRouter(
             return _slideTransition(
                 child: WebViewPage(
                   title: state.uri.queryParameters["title"],
-                  actionUrl:  state.uri.queryParameters["actionUrl"],
+                  actionUrl: state.uri.queryParameters["actionUrl"],
                 ),
                 context: context,
                 state: state);
@@ -154,11 +160,10 @@ final GoRouter routes = GoRouter(
           path: AppRoutePath.pdfPreViewPage.path,
           name: AppRoutePath.pdfPreViewPage.name,
           pageBuilder: (context, state) {
-
             return _slideTransition(
                 child: PdfPreviewPage(
                   title: state.uri.queryParameters["title"],
-                  pdfUrl:  state.uri.queryParameters["pdfUrl"],
+                  pdfUrl: state.uri.queryParameters["pdfUrl"],
                 ),
                 context: context,
                 state: state);
