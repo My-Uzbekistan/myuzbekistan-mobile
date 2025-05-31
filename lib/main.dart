@@ -22,74 +22,9 @@ Future<void> main() async {
   );
 
   await Hive.initFlutter();
-
   await configureInjection();
   runApp(const MyApp());
 }
-
-// class _BlurHeaderDelegate extends SliverPersistentHeaderDelegate {
-//   @override
-//   double get minExtent => kToolbarHeight; // AppBar kichik bo‘lgandagi balandlik
-//   @override
-//   double get maxExtent =>
-//       kToolbarHeight; // AppBar doim kichik qolganda blur ishlaydi
-//
-//   @override
-//   Widget build(
-//       BuildContext context, double shrinkOffset, bool overlapsContent) {
-//     return
-//         Container(
-//           height:kToolbarHeight,
-//           color: Colors.red,
-//           // iOS muzdek effekt
-//           alignment: Alignment.bottomCenter,
-//           child: Row(
-//             children: List.generate(
-//               4,
-//               (index) {
-//                 return HomeCategoryItem();
-//               },
-//             ),
-//           ),
-//         );
-//   }
-//
-//   @override
-//   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-//     return true;
-//   }
-// }
-
-// class _BlurHeaderDelegatest extends SliverPersistentHeaderDelegate {
-//   final double stheight;
-//
-//   _BlurHeaderDelegatest(this.stheight);
-//
-//   @override
-//   double get minExtent => stheight; // AppBar kichik bo‘lgandagi balandlik
-//   @override
-//   double get maxExtent => stheight; // AppBar doim kichik qolganda blur ishlaydi
-//
-//   @override
-//   Widget build(
-//       BuildContext context, double shrinkOffset, bool overlapsContent) {
-//     return ClipRect(
-//         child: BackdropFilter(
-//       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-//       child: Container(
-//         height: maxExtent - shrinkOffset + minExtent,
-//         color: context.appColors.background.background.withValues(alpha: 0.85),
-//         // iOS muzdek effekt
-//         alignment: Alignment.bottomCenter,
-//       ),
-//     ));
-//   }
-//
-//   @override
-//   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-//     return false;
-//   }
-// }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -220,10 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
           // SliverPersistentHeader with blur effect
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _BlurHeaderDelegate(),
-          ),
+
           //
           // SliverToBoxAdapter(
           //   child: AvatarStack(),
@@ -289,36 +221,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class _BlurHeaderDelegate extends SliverPersistentHeaderDelegate {
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: context.appColors.background.background,
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: List.generate(
-          4,
-          (index) {
-            return HomeCategoryItem(
-              title: "",
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => 100; // Same as SliverAppBar height
-
-  @override
-  double get minExtent => 100;
-
-  @override
-  FloatingHeaderSnapConfiguration? get snapConfiguration => null;
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
-      true;
-}

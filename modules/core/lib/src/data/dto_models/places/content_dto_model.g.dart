@@ -33,6 +33,21 @@ Map<String, dynamic> _$$ContentCategoriesDtoImplToJson(
       'contents': instance.contents,
     };
 
+_$TemperatureDtoImpl _$$TemperatureDtoImplFromJson(Map<String, dynamic> json) =>
+    _$TemperatureDtoImpl(
+      temperature: json['temperature'] as String?,
+      condition: json['condition'] as String?,
+      iconUrl: json['iconUrl'] as String?,
+    );
+
+Map<String, dynamic> _$$TemperatureDtoImplToJson(
+        _$TemperatureDtoImpl instance) =>
+    <String, dynamic>{
+      'temperature': instance.temperature,
+      'condition': instance.condition,
+      'iconUrl': instance.iconUrl,
+    };
+
 _$MainPageContentDtoImpl _$$MainPageContentDtoImplFromJson(
         Map<String, dynamic> json) =>
     _$MainPageContentDtoImpl(
@@ -45,6 +60,8 @@ _$MainPageContentDtoImpl _$$MainPageContentDtoImplFromJson(
       photo: const ImageConvertor().fromJson(json['photo'] as String?),
       region: json['region'] as String?,
       address: json['address'] as String?,
+      distance: (json['distance'] as num?)?.toDouble(),
+      reviewCount: (json['reviewCount'] as num?)?.toInt(),
       facilities: (json['facilities'] as List<dynamic>?)
           ?.map((e) => FacilityItemDto.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -72,6 +89,8 @@ Map<String, dynamic> _$$MainPageContentDtoImplToJson(
       'photo': const ImageConvertor().toJson(instance.photo),
       'region': instance.region,
       'address': instance.address,
+      'distance': instance.distance,
+      'reviewCount': instance.reviewCount,
       'facilities': instance.facilities,
       'languages': instance.languages,
       'ratingAverage': instance.ratingAverage,

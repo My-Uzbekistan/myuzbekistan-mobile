@@ -396,6 +396,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Warning'**
   String get warning;
+
+  /// No description provided for @guest_chose.
+  ///
+  /// In en, this message translates to:
+  /// **'Guest selection'**
+  String get guest_chose;
+
+  /// No description provided for @distanceKm.
+  ///
+  /// In en, this message translates to:
+  /// **'km'**
+  String get distanceKm;
+
+  /// No description provided for @distanceM.
+  ///
+  /// In en, this message translates to:
+  /// **'m'**
+  String get distanceM;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -16,6 +16,7 @@ class Assets {
   static const String pngDefaultContentImage = 'assets/png/default_content_image.webp';
   static const String pngExclamationmarkSquare = 'assets/png/exclamationmark_square.png';
   static const String pngGears = 'assets/png/gears.png';
+  static const String pngIcSearch = 'assets/png/ic_search.png';
   static const String pngMap = 'assets/png/map.png';
   static const String pngPersonalDefaultBg = 'assets/png/personal_default_bg.webp';
   static const String pngSearchMaskIcon = 'assets/png/search_mask_icon.png';
@@ -25,6 +26,7 @@ class Assets {
   static const String svgCrossCaseFill = 'assets/svg/cross_case_fill.svg';
   static const String svgFlameFill = 'assets/svg/flame_fill.svg';
   static const String svgGoogleLogo = 'assets/svg/google_logo.svg';
+  static const String svgIcBackChevron = 'assets/svg/ic_back_chevron.svg';
   static const String svgIconArrowRight = 'assets/svg/icon_arrow_right.svg';
   static const String svgIconCheck = 'assets/svg/icon_check.svg';
   static const String svgIconCusine = 'assets/svg/icon_cusine.svg';
@@ -36,6 +38,7 @@ class Assets {
   static const String svgIconTheme = 'assets/svg/icon_theme.svg';
   static const String svgIconTime = 'assets/svg/icon_time.svg';
   static const String svgLanguage = 'assets/svg/language.svg';
+  static const String svgLocationFill = 'assets/svg/location_fill.svg';
   static const String svgOutlineHeard = 'assets/svg/outline_heard.svg';
   static const String svgPinLocationLine = 'assets/svg/pin_location_line.svg';
   static const String svgSearchLine = 'assets/svg/search_line.svg';

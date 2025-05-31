@@ -7,7 +7,7 @@ extension AssetsExtension on String {
   bool get isAssetPath => RegExp(r'^assets/.*\.(png|jpg|jpeg|gif|webp|svg)$')
       .hasMatch(this); // assets/ bilan boshlanishi kerak
 
-  Widget toImage({double? width, double? height, BoxFit fit = BoxFit.none}) {
+  Widget toImage({double? width, double? height, BoxFit fit = BoxFit.none,Color? tintColor}) {
     if (!isAssetPath) {
       throw ArgumentError('Bu string asset yo\'li emas!');
     }
@@ -17,6 +17,7 @@ extension AssetsExtension on String {
       height: height,
       fit: fit,
       package: _package,
+      color: tintColor,
     );
   }
 

@@ -193,6 +193,34 @@ class _RestService implements RestService {
   }
 
   @override
+  Future<TemperatureDto> loadWeather({int? regionId}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'regionId': regionId};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<TemperatureDto>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'weather/region',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late TemperatureDto _value;
+    try {
+      _value = TemperatureDto.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<ContentDto> loadContentById({required int contentId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

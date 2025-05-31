@@ -185,4 +185,13 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get warning => 'Ogohlantirish';
+
+  @override
+  String get guest_chose => 'Mehmonlar tanlovi';
+
+  @override
+  String get distanceKm => 'km';
+
+  @override
+  String get distanceM => 'm';
 }

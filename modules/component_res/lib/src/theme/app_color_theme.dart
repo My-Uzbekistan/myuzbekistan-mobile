@@ -68,7 +68,7 @@ ThemeData _buildTheme(
       ),
       extensions: [
         _AppColorsExtension(
-            brand: colors.brand,
+            brand: colors.brandPrimary,
             textIconColor: colors.textIconColor,
             background: colors.background,
             fill: colors.fill,

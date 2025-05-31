@@ -53,5 +53,8 @@
   "deleteAccountConfirmation": "Вы хотите удалить аккаунт?",
   "deleteAccount": "Удалить аккаунт",
   "cancel": "Отмена",
-  "warning": "Предупреждение"
+  "warning": "Предупреждение",
+  "guest_chose": "Выбор гостей",
+  "distanceKm": "км",
+  "distanceM": "м"
 }

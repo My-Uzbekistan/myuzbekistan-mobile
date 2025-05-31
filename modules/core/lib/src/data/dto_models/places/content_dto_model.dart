@@ -36,6 +36,28 @@ class ContentCategoriesDto with _$ContentCategoriesDto {
 }
 
 @freezed
+class TemperatureDto with _$TemperatureDto {
+  const TemperatureDto._();
+
+  const factory TemperatureDto({
+    String? temperature,
+    String? condition,
+    String? iconUrl,
+  }) = _TemperatureDto;
+
+  Temperature toDomain() {
+    return Temperature(
+      temperature: temperature,
+      condition: condition,
+      iconUrl: iconUrl,
+    );
+  }
+
+  factory TemperatureDto.fromJson(Map<String, dynamic> json) =>
+      _$TemperatureDtoFromJson(json);
+}
+
+@freezed
 class MainPageContentDto with _$MainPageContentDto {
   const MainPageContentDto._();
 
@@ -47,6 +69,8 @@ class MainPageContentDto with _$MainPageContentDto {
           @ImageConvertor() String? photo,
           String? region,
           String? address,
+          double? distance,
+          int? reviewCount,
           List<FacilityItemDto>? facilities,
           List<String>? languages,
           double? ratingAverage,
@@ -79,7 +103,8 @@ class MainPageContentDto with _$MainPageContentDto {
         price: price,
         priceInDollar: priceInDollar,
         viewType: viewType,
-    isFavorite: isFavorite??false
-    );
+        distance: distance,
+        reviewCount: reviewCount,
+        isFavorite: isFavorite ?? false);
   }
 }

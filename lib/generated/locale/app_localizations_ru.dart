@@ -185,4 +185,13 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get warning => 'Предупреждение';
+
+  @override
+  String get guest_chose => 'Выбор гостей';
+
+  @override
+  String get distanceKm => 'км';
+
+  @override
+  String get distanceM => 'м';
 }

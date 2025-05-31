@@ -41,8 +41,12 @@ dependencies:
   jwt_decoder: ^2.0.1
   synchronized: ^3.3.1
   equatable: ^2.0.7
+  geolocator: ^14.0.1
+  permission_handler: ^12.0.0+1
   flutter_alice:
     git: git@github.com:IlhomSh/flutter_alice.git
+
+
 
 
 dev_dependencies:

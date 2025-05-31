@@ -1,11 +1,12 @@
 part of '../app_color_theme.dart';
 
 class LightColors extends _BaseColors {
-  Color get brand => Color(0xff0077ff);
+  @override
+  Color get brandPrimary => Color(0xff6171FF);
   @override
   // TODO: implement textColors
   TextIconColor get textIconColor => TextIconColor(
-    primary:  Colors.black,
+    primary:  const Color(0xff221F26),
     secondary: const Color(0xff3C3C43).withValues(alpha: 0.64),
     tertiary: const Color(0xff3C3C43).withValues(alpha: 0.32),
     disable: const Color(0xff3C3C43).withValues(alpha: 0.16),
@@ -53,6 +54,7 @@ class LightColors extends _BaseColors {
       green: const Color(0xff34C759).withValues(alpha: 0.16),
       blue: const Color(0xff007AFF).withValues(alpha: 0.12),
       yellow: const Color(0xffF6B51E).withValues(alpha: 0.16),
+    brand: const Color(0xff6171FF).withValues(alpha: 0.12),
      );
 
 

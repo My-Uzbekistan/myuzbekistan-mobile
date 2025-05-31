@@ -22,10 +22,18 @@ abstract class NetworkModule {
     return Alice();
   }
 
+  @Named('baseUrl')
+  @LazySingleton(env: [Environment.prod])
+  String get devApiUrl => AppConstants.baseUrlAPi;
+
+  @Named('baseUrl')
+  @LazySingleton(env: [Environment.dev])
+  String get prodApiUrl => AppConstants.baseUrlDevAPi;
+
   @lazySingleton
   Dio provideDio(
-      AppPreference preference, SecurityStorage securityStorage, Alice alice) {
-    final dioOptions = BaseOptions(baseUrl: AppConstants.baseUrlAPi)
+      AppPreference preference, SecurityStorage securityStorage,@Named('baseUrl') String baseUrl, Alice alice) {
+    final dioOptions = BaseOptions(baseUrl: baseUrl)
       ..connectTimeout = const Duration(seconds: 30)
       ..receiveTimeout = const Duration(seconds: 30);
     final dio = Dio(dioOptions);

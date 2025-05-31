@@ -56,5 +56,8 @@
   "deleteAccountConfirmation": "Accountni o'chirishni xohlaysizmi?",
   "deleteAccount": "Accountni o'chirish",
   "cancel": "Bekor qilish",
-  "warning": "Ogohlantirish"
+  "warning": "Ogohlantirish",
+  "guest_chose": "Mehmonlar tanlovi",
+  "distanceKm": "km",
+  "distanceM": "m"
 }

@@ -64,7 +64,7 @@ class _HomeListCellState extends State<HomeListCell>
                       children: [
                         Expanded(
                           child: Padding(
-                            padding: EdgeInsets.only(left: 16),
+                            padding: EdgeInsets.only(left: 20),
                             child: Text(
                               widget.categoryName,
                               style: CustomTypography.H2,
@@ -75,7 +75,7 @@ class _HomeListCellState extends State<HomeListCell>
                           onTap: widget.openAll,
                           child: Container(
                               height: double.infinity,
-                              padding: EdgeInsets.symmetric(horizontal: 16),
+                              padding: EdgeInsets.symmetric(horizontal: 20),
                               alignment: Alignment.center,
                               child: Text(
                                 context.localizations?.action_all ?? "",
@@ -89,7 +89,7 @@ class _HomeListCellState extends State<HomeListCell>
                 ),
 
                 SizedBox(
-                  height: widget.viewType == ViewType.profile ? 122 : 220,
+                  height: widget.viewType == ViewType.profile ? 122 : 230,
                   child: ListView.separated(
                       controller: scrollController,
                       padding: EdgeInsets.symmetric(horizontal: 16),
@@ -106,9 +106,14 @@ class _HomeListCellState extends State<HomeListCell>
                           state.contents.length + (state.isLoading ? 1 : 0),
                       itemBuilder: (context, index) {
                         if (index == state.contents.length) {
-                          return LoadingIndicator();
+                          return Container(
+                            alignment: Alignment.topLeft,
+                            padding: EdgeInsets.only(top: 70),
+                            child: LoadingIndicator(),
+                          );
                         }
                         final item = state.contents[index];
+
                         return RepaintBoundary(
                           key: ValueKey(item),
                           child: widget.viewType == ViewType.profile
@@ -121,6 +126,8 @@ class _HomeListCellState extends State<HomeListCell>
                                 )
                               : ItemCard(
                                   content: item,
+                                  distanceText:
+                                      distanceText(context, item.distanceKm),
                                   onTap: () => widget.onItemTap?.call(item),
                                 ),
                         );
@@ -167,6 +174,14 @@ class _HomeListCellState extends State<HomeListCell>
         },
       ),
     );
+  }
+
+  String? distanceText(BuildContext context, double? distance) {
+    if (distance == null) return null;
+    if (distance < 0.5) {
+      return "${(distance * 100).floor()} ${context.localizations!.distanceM}";
+    }
+    return "${distance.floor()} ${context.localizations!.distanceKm}";
   }
 
   @override

@@ -284,6 +284,195 @@ abstract class _ContentCategoriesDto extends ContentCategoriesDto {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+TemperatureDto _$TemperatureDtoFromJson(Map<String, dynamic> json) {
+  return _TemperatureDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TemperatureDto {
+  String? get temperature => throw _privateConstructorUsedError;
+  String? get condition => throw _privateConstructorUsedError;
+  String? get iconUrl => throw _privateConstructorUsedError;
+
+  /// Serializes this TemperatureDto to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of TemperatureDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $TemperatureDtoCopyWith<TemperatureDto> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TemperatureDtoCopyWith<$Res> {
+  factory $TemperatureDtoCopyWith(
+          TemperatureDto value, $Res Function(TemperatureDto) then) =
+      _$TemperatureDtoCopyWithImpl<$Res, TemperatureDto>;
+  @useResult
+  $Res call({String? temperature, String? condition, String? iconUrl});
+}
+
+/// @nodoc
+class _$TemperatureDtoCopyWithImpl<$Res, $Val extends TemperatureDto>
+    implements $TemperatureDtoCopyWith<$Res> {
+  _$TemperatureDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of TemperatureDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? temperature = freezed,
+    Object? condition = freezed,
+    Object? iconUrl = freezed,
+  }) {
+    return _then(_value.copyWith(
+      temperature: freezed == temperature
+          ? _value.temperature
+          : temperature // ignore: cast_nullable_to_non_nullable
+              as String?,
+      condition: freezed == condition
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iconUrl: freezed == iconUrl
+          ? _value.iconUrl
+          : iconUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TemperatureDtoImplCopyWith<$Res>
+    implements $TemperatureDtoCopyWith<$Res> {
+  factory _$$TemperatureDtoImplCopyWith(_$TemperatureDtoImpl value,
+          $Res Function(_$TemperatureDtoImpl) then) =
+      __$$TemperatureDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String? temperature, String? condition, String? iconUrl});
+}
+
+/// @nodoc
+class __$$TemperatureDtoImplCopyWithImpl<$Res>
+    extends _$TemperatureDtoCopyWithImpl<$Res, _$TemperatureDtoImpl>
+    implements _$$TemperatureDtoImplCopyWith<$Res> {
+  __$$TemperatureDtoImplCopyWithImpl(
+      _$TemperatureDtoImpl _value, $Res Function(_$TemperatureDtoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TemperatureDto
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? temperature = freezed,
+    Object? condition = freezed,
+    Object? iconUrl = freezed,
+  }) {
+    return _then(_$TemperatureDtoImpl(
+      temperature: freezed == temperature
+          ? _value.temperature
+          : temperature // ignore: cast_nullable_to_non_nullable
+              as String?,
+      condition: freezed == condition
+          ? _value.condition
+          : condition // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iconUrl: freezed == iconUrl
+          ? _value.iconUrl
+          : iconUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TemperatureDtoImpl extends _TemperatureDto {
+  const _$TemperatureDtoImpl({this.temperature, this.condition, this.iconUrl})
+      : super._();
+
+  factory _$TemperatureDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TemperatureDtoImplFromJson(json);
+
+  @override
+  final String? temperature;
+  @override
+  final String? condition;
+  @override
+  final String? iconUrl;
+
+  @override
+  String toString() {
+    return 'TemperatureDto(temperature: $temperature, condition: $condition, iconUrl: $iconUrl)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TemperatureDtoImpl &&
+            (identical(other.temperature, temperature) ||
+                other.temperature == temperature) &&
+            (identical(other.condition, condition) ||
+                other.condition == condition) &&
+            (identical(other.iconUrl, iconUrl) || other.iconUrl == iconUrl));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, temperature, condition, iconUrl);
+
+  /// Create a copy of TemperatureDto
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TemperatureDtoImplCopyWith<_$TemperatureDtoImpl> get copyWith =>
+      __$$TemperatureDtoImplCopyWithImpl<_$TemperatureDtoImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TemperatureDtoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TemperatureDto extends TemperatureDto {
+  const factory _TemperatureDto(
+      {final String? temperature,
+      final String? condition,
+      final String? iconUrl}) = _$TemperatureDtoImpl;
+  const _TemperatureDto._() : super._();
+
+  factory _TemperatureDto.fromJson(Map<String, dynamic> json) =
+      _$TemperatureDtoImpl.fromJson;
+
+  @override
+  String? get temperature;
+  @override
+  String? get condition;
+  @override
+  String? get iconUrl;
+
+  /// Create a copy of TemperatureDto
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TemperatureDtoImplCopyWith<_$TemperatureDtoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 MainPageContentDto _$MainPageContentDtoFromJson(Map<String, dynamic> json) {
   return _MainPageContentDto.fromJson(json);
 }
@@ -299,6 +488,8 @@ mixin _$MainPageContentDto {
   String? get photo => throw _privateConstructorUsedError;
   String? get region => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
+  double? get distance => throw _privateConstructorUsedError;
+  int? get reviewCount => throw _privateConstructorUsedError;
   List<FacilityItemDto>? get facilities => throw _privateConstructorUsedError;
   List<String>? get languages => throw _privateConstructorUsedError;
   double? get ratingAverage => throw _privateConstructorUsedError;
@@ -333,6 +524,8 @@ abstract class $MainPageContentDtoCopyWith<$Res> {
       @ImageConvertor() String? photo,
       String? region,
       String? address,
+      double? distance,
+      int? reviewCount,
       List<FacilityItemDto>? facilities,
       List<String>? languages,
       double? ratingAverage,
@@ -365,6 +558,8 @@ class _$MainPageContentDtoCopyWithImpl<$Res, $Val extends MainPageContentDto>
     Object? photo = freezed,
     Object? region = freezed,
     Object? address = freezed,
+    Object? distance = freezed,
+    Object? reviewCount = freezed,
     Object? facilities = freezed,
     Object? languages = freezed,
     Object? ratingAverage = freezed,
@@ -403,6 +598,14 @@ class _$MainPageContentDtoCopyWithImpl<$Res, $Val extends MainPageContentDto>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      distance: freezed == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      reviewCount: freezed == reviewCount
+          ? _value.reviewCount
+          : reviewCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       facilities: freezed == facilities
           ? _value.facilities
           : facilities // ignore: cast_nullable_to_non_nullable
@@ -455,6 +658,8 @@ abstract class _$$MainPageContentDtoImplCopyWith<$Res>
       @ImageConvertor() String? photo,
       String? region,
       String? address,
+      double? distance,
+      int? reviewCount,
       List<FacilityItemDto>? facilities,
       List<String>? languages,
       double? ratingAverage,
@@ -485,6 +690,8 @@ class __$$MainPageContentDtoImplCopyWithImpl<$Res>
     Object? photo = freezed,
     Object? region = freezed,
     Object? address = freezed,
+    Object? distance = freezed,
+    Object? reviewCount = freezed,
     Object? facilities = freezed,
     Object? languages = freezed,
     Object? ratingAverage = freezed,
@@ -523,6 +730,14 @@ class __$$MainPageContentDtoImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      distance: freezed == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      reviewCount: freezed == reviewCount
+          ? _value.reviewCount
+          : reviewCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       facilities: freezed == facilities
           ? _value._facilities
           : facilities // ignore: cast_nullable_to_non_nullable
@@ -570,6 +785,8 @@ class _$MainPageContentDtoImpl extends _MainPageContentDto {
       @ImageConvertor() this.photo,
       this.region,
       this.address,
+      this.distance,
+      this.reviewCount,
       final List<FacilityItemDto>? facilities,
       final List<String>? languages,
       this.ratingAverage,
@@ -609,6 +826,10 @@ class _$MainPageContentDtoImpl extends _MainPageContentDto {
   final String? region;
   @override
   final String? address;
+  @override
+  final double? distance;
+  @override
+  final int? reviewCount;
   final List<FacilityItemDto>? _facilities;
   @override
   List<FacilityItemDto>? get facilities {
@@ -646,7 +867,7 @@ class _$MainPageContentDtoImpl extends _MainPageContentDto {
 
   @override
   String toString() {
-    return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, viewType: $viewType)';
+    return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, distance: $distance, reviewCount: $reviewCount, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, viewType: $viewType)';
   }
 
   @override
@@ -662,6 +883,10 @@ class _$MainPageContentDtoImpl extends _MainPageContentDto {
             (identical(other.photo, photo) || other.photo == photo) &&
             (identical(other.region, region) || other.region == region) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.distance, distance) ||
+                other.distance == distance) &&
+            (identical(other.reviewCount, reviewCount) ||
+                other.reviewCount == reviewCount) &&
             const DeepCollectionEquality()
                 .equals(other._facilities, _facilities) &&
             const DeepCollectionEquality()
@@ -690,6 +915,8 @@ class _$MainPageContentDtoImpl extends _MainPageContentDto {
       photo,
       region,
       address,
+      distance,
+      reviewCount,
       const DeepCollectionEquality().hash(_facilities),
       const DeepCollectionEquality().hash(_languages),
       ratingAverage,
@@ -725,6 +952,8 @@ abstract class _MainPageContentDto extends MainPageContentDto {
       @ImageConvertor() final String? photo,
       final String? region,
       final String? address,
+      final double? distance,
+      final int? reviewCount,
       final List<FacilityItemDto>? facilities,
       final List<String>? languages,
       final double? ratingAverage,
@@ -754,6 +983,10 @@ abstract class _MainPageContentDto extends MainPageContentDto {
   String? get region;
   @override
   String? get address;
+  @override
+  double? get distance;
+  @override
+  int? get reviewCount;
   @override
   List<FacilityItemDto>? get facilities;
   @override

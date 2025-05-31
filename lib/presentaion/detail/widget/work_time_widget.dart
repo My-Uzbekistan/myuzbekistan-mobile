@@ -13,11 +13,14 @@ class WorkTimeWidget extends StatelessWidget {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       ItemsTitle(title: title ?? ""),
       Row(
-        spacing: 12,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 4,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Assets.svgIconTime.toSvgImage(colorFilter: ColorFilter.mode(context.appColors.textIconColor.primary, BlendMode.srcIn),height: 24,width: 24,fit: BoxFit.contain),
+          SizedBox(
+            child:
+            Assets.svgIconTime.toSvgImage(colorFilter: ColorFilter.mode(context.appColors.textIconColor.primary, BlendMode.srcIn),height: 16,width: 16,fit: BoxFit.contain),
+          ),
           Flexible(
               child: Text(
             workingHours ?? "",

@@ -11,8 +11,10 @@ final _shellRoute = [
             path: AppRoutePath.shellHome.path,
             name: AppRoutePath.shellHome.name,
             builder: (context, state) => BlocProvider(
-                  create: (context) => getIt<HomeBloc>(),
-                  child: HomePage(),
+                create: (context) => getIt<HomeBloc>(),
+                child:
+                // HomePageV2()
+                HomePage(),
                 ))
       ]),
       // StatefulShellBranch(routes: [

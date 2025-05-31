@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core/src/data/dto_models/about_dto.dart';
 import 'package:core/src/data/dto_models/categories_dto.dart';
 import 'package:core/src/data/dto_models/currency_dto.dart';
@@ -45,6 +46,9 @@ abstract class RestService {
   Future<List<ContentCategoriesDto>> loadMainData(
       {@Query("regionId") int? regionId});
 
+  @GET("weather/region")
+  Future<TemperatureDto> loadWeather({@Query("regionId") int? regionId});
+
   @GET("contents/{contentId}")
   Future<ContentDto> loadContentById({
     @Path("contentId") required int contentId,
@@ -52,6 +56,7 @@ abstract class RestService {
 
   @POST("auth/google-login")
   Future<TokenDto> authGoogle(@Body() Map<String, dynamic> body);
+
   @POST("auth/apple-login")
   Future<TokenDto> authApple(@Body() Map<String, dynamic> body);
 
@@ -60,9 +65,9 @@ abstract class RestService {
 
   @DELETE("favorites")
   Future<dynamic> deleteFavorite({@Query("contentId") required int contentId});
+
   @DELETE("auth/delete")
   Future<dynamic> deleteAccount();
-
 
   @GET("more/currency")
   Future<List<CurrencyDto>> getCurrency();
@@ -72,6 +77,4 @@ abstract class RestService {
 
   @GET("more/useful")
   Future<List<MoreItemDto>> loadMoreUseFull();
-
-
 }

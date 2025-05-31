@@ -76,10 +76,20 @@ class ShellPageWrapper extends HookWidget {
         ColorFilter.mode(unselectedIconColor, BlendMode.srcIn);
     return [
       BottomNavigationBarItem(
-        icon: Assets.svgTabIconHome
-            .toSvgImage(colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconHome
-            .toSvgImage(colorFilter: selectedTabColorFilter),
+        icon: Assets.pngIcSearch
+            .toImage(
+          height: 24,
+          width: 24,
+          fit: BoxFit.contain,
+          tintColor: unselectedIconColor,
+        ),
+        activeIcon: Assets.pngIcSearch
+            .toImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            tintColor: selectedTabColor
+        ),
         label: context.localizations?.nav_home,
       ),
       // BottomNavigationBarItem(

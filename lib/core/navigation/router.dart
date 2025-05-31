@@ -12,7 +12,6 @@ import 'package:uzbekistan_travel/di/injection.dart';
 import 'package:uzbekistan_travel/presentaion/auth/auth_page.dart';
 import 'package:uzbekistan_travel/presentaion/auth/bloc/auth_bloc.dart';
 import 'package:uzbekistan_travel/presentaion/detail/pages/pdf_preview_page.dart';
-import 'package:uzbekistan_travel/presentaion/message_container.dart';
 import 'package:uzbekistan_travel/presentaion/content_by_category/bloc/contents_by_category_bloc.dart'
     show ContentByCategoryBloc, ContentByCategoryEvent;
 import 'package:uzbekistan_travel/presentaion/content_by_category/content_by_categories_page.dart';
@@ -32,6 +31,8 @@ import 'package:uzbekistan_travel/presentaion/shell_more/shell_more_page.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
 import 'package:uzbekistan_travel/presentaion/splash.dart';
 
+import '../../presentaion/home/new_home/homeexperiment.dart';
+
 part 'home_shell_route.dart';
 
 part 'app_route_path.dart';
@@ -46,8 +47,7 @@ final FirebaseAnalyticsObserver observer =
 final GoRouter routes = GoRouter(
     observers: [observer],
     navigatorKey: rootNavigatorKey,
-    initialLocation:
-        Platform.isIOS ? AppRoutePath.shellHome.path : AppRoutePath.splash.path,
+    initialLocation: Platform.isIOS ? AppRoutePath.shellHome.path : AppRoutePath.splash.path,
     routes: [
       GoRoute(
         path: AppRoutePath.splash.path,
@@ -55,16 +55,11 @@ final GoRouter routes = GoRouter(
         builder: (context, state) => SplashScreen(),
       ),
       ..._shellRoute,
-      // GoRoute(
-      //     path: AppRoutePath.home.path,
-      //     name: AppRoutePath.home.name,
-      //     builder: (context, state) =>
-      //         BlocProvider(
-      //           create: (context) =>
-      //           getIt<HomeBloc>()
-      //             ..add(HomeBlocEvent.initial()),
-      //           child: HomePage(),
-      //         )),
+      GoRoute(
+          path: "/ex",
+
+          builder: (context, state) =>
+          Homeexperiment()),
       GoRoute(
         path: AppRoutePath.contentByCategory.path,
         name: AppRoutePath.contentByCategory.name,
@@ -104,7 +99,9 @@ final GoRouter routes = GoRouter(
                     ..add(DetailBlocEvent.initial(
                         contentId:
                             "${state.uri.queryParameters["contentId"]}")),
-                  child: DetailPage(),
+                  child:DetailPage()
+
+                  // DetailPage(),
                 ));
           },
           routes: [

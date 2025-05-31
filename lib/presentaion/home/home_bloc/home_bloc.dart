@@ -30,12 +30,13 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         _appLocaleChangeListener = chl,
         super(HomeBlocState.loading()) {
     on<_HomeBlocInitialEvent>((event, emit) async {
-      add(HomeBlocEvent.loadDataEvent());
+      add(HomeBlocEvent.checkPermission());
       _initialListens();
     });
     on<_LoadDataEvent>(_loadDataEvent);
     on<_ChangeRegion>(_changeRegion);
     on<_LoadContentsEvent>(_loadContentsEvent);
+    on<_CheckPermissionEvent>(_checkPermissionEvent);
     on<_LoadFavoritesEvent>(_loadFavourites);
   }
 
@@ -55,11 +56,19 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     });
   }
 
+  Future<void> _checkPermissionEvent(
+      _CheckPermissionEvent event, Emitter<HomeBlocState> emit) async {
+    final locationManager = LocationManager();
+    await locationManager.getCurrentLocation();
+
+    add(HomeBlocEvent.loadDataEvent());
+  }
+
   Future<void> _loadDataEvent(
       _LoadDataEvent event, Emitter<HomeBlocState> emit) async {
-    if(event.isRefresh){
+    if (event.isRefresh) {
       emit(dataState.copyWith(isRefreshing: true));
-    }else {
+    } else {
       dataState = HomeBlocDataState();
       emit(HomeBlocState.loading());
     }
@@ -70,12 +79,42 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   Future<void> _loadContentsEvent(
       _LoadContentsEvent event, Emitter<HomeBlocState> emit) async {
     try {
-      final result = await _repository.loadContents(
-          regionId: dataState.selectedRegion?.id);
-      dataState = dataState.copyWith(contents: result, loadingContents: false,isRefreshing: false);
+      final regionId = dataState.selectedRegion?.id;
+      final contentFuture = _repository
+          .loadContents(regionId: regionId)
+          .then((value) => value)
+          .catchError((e) {
+        dataState =
+            dataState.copyWith(loadingContents: false, isRefreshing: false);
+        emit(dataState.copyWith(loadingContents: false));
+        return null;
+      });
+
+      final weatherFuture = _repository
+          .loadWeather(regionId: regionId)
+          .then((value) => value)
+          .catchError((e) {
+        dataState =
+            dataState.copyWith(loadingContents: false, isRefreshing: false);
+        emit(dataState.copyWith(loadingContents: false));
+        return null;
+      });
+
+      final result = await Future.wait({
+        contentFuture,
+        weatherFuture,
+      });
+      final contents = result[0] as List<ContentCategories>?;
+      final temperature = result[1] as Temperature?;
+      dataState = dataState.copyWith(
+          contents: contents ?? [],
+          temperature: temperature,
+          loadingContents: false,
+          isRefreshing: false);
       emit(dataState);
     } catch (e) {
-      dataState = dataState.copyWith(loadingContents: false,isRefreshing: false);
+      dataState =
+          dataState.copyWith(loadingContents: false, isRefreshing: false);
       emit(dataState.copyWith(loadingContents: false));
     }
   }
@@ -106,21 +145,21 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     }
   }
 
-  loadData() async {
-    try {
-      final content = await Future.wait(
-          [_repository.loadCategories(), _repository.loadContents()]);
-      final categories = content[0] as List<Categories>;
-      final placeCategories = (content[1] as List<ContentCategories>)
-          .filter((e) => e.contents.isNotEmpty || e.recommended != null)
-          .toList();
-
-      emit(HomeBlocState.dataState(
-          categories: categories, contents: placeCategories));
-    } catch (e) {
-      debugPrint("Exaption ${e}");
-    }
-  }
+  // loadData() async {
+  //   try {
+  //     final content = await Future.wait(
+  //         [_repository.loadCategories(), _repository.loadContents(),_repository.loadWeather()]);
+  //     final categories = content[0] as List<Categories>;
+  //     final placeCategories = (content[1] as List<ContentCategories>)
+  //         .filter((e) => e.contents.isNotEmpty || e.recommended != null)
+  //         .toList();
+  //
+  //     emit(HomeBlocState.dataState(
+  //         categories: categories, contents: placeCategories));
+  //   } catch (e) {
+  //     debugPrint("Exaption ${e}");
+  //   }
+  // }
 
   Future<void> _loadFavourites(
       _LoadFavoritesEvent event, Emitter<HomeBlocState> emit) async {

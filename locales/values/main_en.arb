@@ -51,5 +51,8 @@
   "deleteAccountConfirmation": "Do you want to delete the account?",
   "deleteAccount": "Delete account",
   "cancel": "Cancel",
-  "warning": "Warning"
+  "warning": "Warning",
+  "guest_chose": "Guest selection",
+  "distanceKm": "km",
+  "distanceM": "m"
 }

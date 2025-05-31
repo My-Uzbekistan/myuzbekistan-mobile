@@ -22,6 +22,7 @@ mixin _$HomeBlocEvent {
     required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
+    required TResult Function() checkPermission,
     required TResult Function() loadFavorites,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,6 +32,7 @@ mixin _$HomeBlocEvent {
     TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
+    TResult? Function()? checkPermission,
     TResult? Function()? loadFavorites,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,6 +42,7 @@ mixin _$HomeBlocEvent {
     TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
+    TResult Function()? checkPermission,
     TResult Function()? loadFavorites,
     required TResult orElse(),
   }) =>
@@ -50,6 +53,7 @@ mixin _$HomeBlocEvent {
     required TResult Function(_LoadDataEvent value) loadDataEvent,
     required TResult Function(_ChangeRegion value) changeRegion,
     required TResult Function(_LoadContentsEvent value) loadContents,
+    required TResult Function(_CheckPermissionEvent value) checkPermission,
     required TResult Function(_LoadFavoritesEvent value) loadFavorites,
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +63,7 @@ mixin _$HomeBlocEvent {
     TResult? Function(_LoadDataEvent value)? loadDataEvent,
     TResult? Function(_ChangeRegion value)? changeRegion,
     TResult? Function(_LoadContentsEvent value)? loadContents,
+    TResult? Function(_CheckPermissionEvent value)? checkPermission,
     TResult? Function(_LoadFavoritesEvent value)? loadFavorites,
   }) =>
       throw _privateConstructorUsedError;
@@ -68,6 +73,7 @@ mixin _$HomeBlocEvent {
     TResult Function(_LoadDataEvent value)? loadDataEvent,
     TResult Function(_ChangeRegion value)? changeRegion,
     TResult Function(_LoadContentsEvent value)? loadContents,
+    TResult Function(_CheckPermissionEvent value)? checkPermission,
     TResult Function(_LoadFavoritesEvent value)? loadFavorites,
     required TResult orElse(),
   }) =>
@@ -149,6 +155,7 @@ class _$HomeBlocInitialEventImpl
     required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
+    required TResult Function() checkPermission,
     required TResult Function() loadFavorites,
   }) {
     return initial();
@@ -161,6 +168,7 @@ class _$HomeBlocInitialEventImpl
     TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
+    TResult? Function()? checkPermission,
     TResult? Function()? loadFavorites,
   }) {
     return initial?.call();
@@ -173,6 +181,7 @@ class _$HomeBlocInitialEventImpl
     TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
+    TResult Function()? checkPermission,
     TResult Function()? loadFavorites,
     required TResult orElse(),
   }) {
@@ -189,6 +198,7 @@ class _$HomeBlocInitialEventImpl
     required TResult Function(_LoadDataEvent value) loadDataEvent,
     required TResult Function(_ChangeRegion value) changeRegion,
     required TResult Function(_LoadContentsEvent value) loadContents,
+    required TResult Function(_CheckPermissionEvent value) checkPermission,
     required TResult Function(_LoadFavoritesEvent value) loadFavorites,
   }) {
     return initial(this);
@@ -201,6 +211,7 @@ class _$HomeBlocInitialEventImpl
     TResult? Function(_LoadDataEvent value)? loadDataEvent,
     TResult? Function(_ChangeRegion value)? changeRegion,
     TResult? Function(_LoadContentsEvent value)? loadContents,
+    TResult? Function(_CheckPermissionEvent value)? checkPermission,
     TResult? Function(_LoadFavoritesEvent value)? loadFavorites,
   }) {
     return initial?.call(this);
@@ -213,6 +224,7 @@ class _$HomeBlocInitialEventImpl
     TResult Function(_LoadDataEvent value)? loadDataEvent,
     TResult Function(_ChangeRegion value)? changeRegion,
     TResult Function(_LoadContentsEvent value)? loadContents,
+    TResult Function(_CheckPermissionEvent value)? checkPermission,
     TResult Function(_LoadFavoritesEvent value)? loadFavorites,
     required TResult orElse(),
   }) {
@@ -311,6 +323,7 @@ class _$LoadDataEventImpl
     required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
+    required TResult Function() checkPermission,
     required TResult Function() loadFavorites,
   }) {
     return loadDataEvent(isRefresh);
@@ -323,6 +336,7 @@ class _$LoadDataEventImpl
     TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
+    TResult? Function()? checkPermission,
     TResult? Function()? loadFavorites,
   }) {
     return loadDataEvent?.call(isRefresh);
@@ -335,6 +349,7 @@ class _$LoadDataEventImpl
     TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
+    TResult Function()? checkPermission,
     TResult Function()? loadFavorites,
     required TResult orElse(),
   }) {
@@ -351,6 +366,7 @@ class _$LoadDataEventImpl
     required TResult Function(_LoadDataEvent value) loadDataEvent,
     required TResult Function(_ChangeRegion value) changeRegion,
     required TResult Function(_LoadContentsEvent value) loadContents,
+    required TResult Function(_CheckPermissionEvent value) checkPermission,
     required TResult Function(_LoadFavoritesEvent value) loadFavorites,
   }) {
     return loadDataEvent(this);
@@ -363,6 +379,7 @@ class _$LoadDataEventImpl
     TResult? Function(_LoadDataEvent value)? loadDataEvent,
     TResult? Function(_ChangeRegion value)? changeRegion,
     TResult? Function(_LoadContentsEvent value)? loadContents,
+    TResult? Function(_CheckPermissionEvent value)? checkPermission,
     TResult? Function(_LoadFavoritesEvent value)? loadFavorites,
   }) {
     return loadDataEvent?.call(this);
@@ -375,6 +392,7 @@ class _$LoadDataEventImpl
     TResult Function(_LoadDataEvent value)? loadDataEvent,
     TResult Function(_ChangeRegion value)? changeRegion,
     TResult Function(_LoadContentsEvent value)? loadContents,
+    TResult Function(_CheckPermissionEvent value)? checkPermission,
     TResult Function(_LoadFavoritesEvent value)? loadFavorites,
     required TResult orElse(),
   }) {
@@ -478,6 +496,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
     required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
+    required TResult Function() checkPermission,
     required TResult Function() loadFavorites,
   }) {
     return changeRegion(regionId);
@@ -490,6 +509,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
     TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
+    TResult? Function()? checkPermission,
     TResult? Function()? loadFavorites,
   }) {
     return changeRegion?.call(regionId);
@@ -502,6 +522,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
     TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
+    TResult Function()? checkPermission,
     TResult Function()? loadFavorites,
     required TResult orElse(),
   }) {
@@ -518,6 +539,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
     required TResult Function(_LoadDataEvent value) loadDataEvent,
     required TResult Function(_ChangeRegion value) changeRegion,
     required TResult Function(_LoadContentsEvent value) loadContents,
+    required TResult Function(_CheckPermissionEvent value) checkPermission,
     required TResult Function(_LoadFavoritesEvent value) loadFavorites,
   }) {
     return changeRegion(this);
@@ -530,6 +552,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
     TResult? Function(_LoadDataEvent value)? loadDataEvent,
     TResult? Function(_ChangeRegion value)? changeRegion,
     TResult? Function(_LoadContentsEvent value)? loadContents,
+    TResult? Function(_CheckPermissionEvent value)? checkPermission,
     TResult? Function(_LoadFavoritesEvent value)? loadFavorites,
   }) {
     return changeRegion?.call(this);
@@ -542,6 +565,7 @@ class _$ChangeRegionImpl with DiagnosticableTreeMixin implements _ChangeRegion {
     TResult Function(_LoadDataEvent value)? loadDataEvent,
     TResult Function(_ChangeRegion value)? changeRegion,
     TResult Function(_LoadContentsEvent value)? loadContents,
+    TResult Function(_CheckPermissionEvent value)? checkPermission,
     TResult Function(_LoadFavoritesEvent value)? loadFavorites,
     required TResult orElse(),
   }) {
@@ -617,6 +641,7 @@ class _$LoadContentsEventImpl
     required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
+    required TResult Function() checkPermission,
     required TResult Function() loadFavorites,
   }) {
     return loadContents();
@@ -629,6 +654,7 @@ class _$LoadContentsEventImpl
     TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
+    TResult? Function()? checkPermission,
     TResult? Function()? loadFavorites,
   }) {
     return loadContents?.call();
@@ -641,6 +667,7 @@ class _$LoadContentsEventImpl
     TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
+    TResult Function()? checkPermission,
     TResult Function()? loadFavorites,
     required TResult orElse(),
   }) {
@@ -657,6 +684,7 @@ class _$LoadContentsEventImpl
     required TResult Function(_LoadDataEvent value) loadDataEvent,
     required TResult Function(_ChangeRegion value) changeRegion,
     required TResult Function(_LoadContentsEvent value) loadContents,
+    required TResult Function(_CheckPermissionEvent value) checkPermission,
     required TResult Function(_LoadFavoritesEvent value) loadFavorites,
   }) {
     return loadContents(this);
@@ -669,6 +697,7 @@ class _$LoadContentsEventImpl
     TResult? Function(_LoadDataEvent value)? loadDataEvent,
     TResult? Function(_ChangeRegion value)? changeRegion,
     TResult? Function(_LoadContentsEvent value)? loadContents,
+    TResult? Function(_CheckPermissionEvent value)? checkPermission,
     TResult? Function(_LoadFavoritesEvent value)? loadFavorites,
   }) {
     return loadContents?.call(this);
@@ -681,6 +710,7 @@ class _$LoadContentsEventImpl
     TResult Function(_LoadDataEvent value)? loadDataEvent,
     TResult Function(_ChangeRegion value)? changeRegion,
     TResult Function(_LoadContentsEvent value)? loadContents,
+    TResult Function(_CheckPermissionEvent value)? checkPermission,
     TResult Function(_LoadFavoritesEvent value)? loadFavorites,
     required TResult orElse(),
   }) {
@@ -693,6 +723,145 @@ class _$LoadContentsEventImpl
 
 abstract class _LoadContentsEvent implements HomeBlocEvent {
   factory _LoadContentsEvent() = _$LoadContentsEventImpl;
+}
+
+/// @nodoc
+abstract class _$$CheckPermissionEventImplCopyWith<$Res> {
+  factory _$$CheckPermissionEventImplCopyWith(_$CheckPermissionEventImpl value,
+          $Res Function(_$CheckPermissionEventImpl) then) =
+      __$$CheckPermissionEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CheckPermissionEventImplCopyWithImpl<$Res>
+    extends _$HomeBlocEventCopyWithImpl<$Res, _$CheckPermissionEventImpl>
+    implements _$$CheckPermissionEventImplCopyWith<$Res> {
+  __$$CheckPermissionEventImplCopyWithImpl(_$CheckPermissionEventImpl _value,
+      $Res Function(_$CheckPermissionEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeBlocEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$CheckPermissionEventImpl
+    with DiagnosticableTreeMixin
+    implements _CheckPermissionEvent {
+  _$CheckPermissionEventImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'HomeBlocEvent.checkPermission()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'HomeBlocEvent.checkPermission'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CheckPermissionEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isRefresh) loadDataEvent,
+    required TResult Function(int regionId) changeRegion,
+    required TResult Function() loadContents,
+    required TResult Function() checkPermission,
+    required TResult Function() loadFavorites,
+  }) {
+    return checkPermission();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isRefresh)? loadDataEvent,
+    TResult? Function(int regionId)? changeRegion,
+    TResult? Function()? loadContents,
+    TResult? Function()? checkPermission,
+    TResult? Function()? loadFavorites,
+  }) {
+    return checkPermission?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isRefresh)? loadDataEvent,
+    TResult Function(int regionId)? changeRegion,
+    TResult Function()? loadContents,
+    TResult Function()? checkPermission,
+    TResult Function()? loadFavorites,
+    required TResult orElse(),
+  }) {
+    if (checkPermission != null) {
+      return checkPermission();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_HomeBlocInitialEvent value) initial,
+    required TResult Function(_LoadDataEvent value) loadDataEvent,
+    required TResult Function(_ChangeRegion value) changeRegion,
+    required TResult Function(_LoadContentsEvent value) loadContents,
+    required TResult Function(_CheckPermissionEvent value) checkPermission,
+    required TResult Function(_LoadFavoritesEvent value) loadFavorites,
+  }) {
+    return checkPermission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_HomeBlocInitialEvent value)? initial,
+    TResult? Function(_LoadDataEvent value)? loadDataEvent,
+    TResult? Function(_ChangeRegion value)? changeRegion,
+    TResult? Function(_LoadContentsEvent value)? loadContents,
+    TResult? Function(_CheckPermissionEvent value)? checkPermission,
+    TResult? Function(_LoadFavoritesEvent value)? loadFavorites,
+  }) {
+    return checkPermission?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_HomeBlocInitialEvent value)? initial,
+    TResult Function(_LoadDataEvent value)? loadDataEvent,
+    TResult Function(_ChangeRegion value)? changeRegion,
+    TResult Function(_LoadContentsEvent value)? loadContents,
+    TResult Function(_CheckPermissionEvent value)? checkPermission,
+    TResult Function(_LoadFavoritesEvent value)? loadFavorites,
+    required TResult orElse(),
+  }) {
+    if (checkPermission != null) {
+      return checkPermission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckPermissionEvent implements HomeBlocEvent {
+  factory _CheckPermissionEvent() = _$CheckPermissionEventImpl;
 }
 
 /// @nodoc
@@ -748,6 +917,7 @@ class _$LoadFavoritesEventImpl
     required TResult Function(bool isRefresh) loadDataEvent,
     required TResult Function(int regionId) changeRegion,
     required TResult Function() loadContents,
+    required TResult Function() checkPermission,
     required TResult Function() loadFavorites,
   }) {
     return loadFavorites();
@@ -760,6 +930,7 @@ class _$LoadFavoritesEventImpl
     TResult? Function(bool isRefresh)? loadDataEvent,
     TResult? Function(int regionId)? changeRegion,
     TResult? Function()? loadContents,
+    TResult? Function()? checkPermission,
     TResult? Function()? loadFavorites,
   }) {
     return loadFavorites?.call();
@@ -772,6 +943,7 @@ class _$LoadFavoritesEventImpl
     TResult Function(bool isRefresh)? loadDataEvent,
     TResult Function(int regionId)? changeRegion,
     TResult Function()? loadContents,
+    TResult Function()? checkPermission,
     TResult Function()? loadFavorites,
     required TResult orElse(),
   }) {
@@ -788,6 +960,7 @@ class _$LoadFavoritesEventImpl
     required TResult Function(_LoadDataEvent value) loadDataEvent,
     required TResult Function(_ChangeRegion value) changeRegion,
     required TResult Function(_LoadContentsEvent value) loadContents,
+    required TResult Function(_CheckPermissionEvent value) checkPermission,
     required TResult Function(_LoadFavoritesEvent value) loadFavorites,
   }) {
     return loadFavorites(this);
@@ -800,6 +973,7 @@ class _$LoadFavoritesEventImpl
     TResult? Function(_LoadDataEvent value)? loadDataEvent,
     TResult? Function(_ChangeRegion value)? changeRegion,
     TResult? Function(_LoadContentsEvent value)? loadContents,
+    TResult? Function(_CheckPermissionEvent value)? checkPermission,
     TResult? Function(_LoadFavoritesEvent value)? loadFavorites,
   }) {
     return loadFavorites?.call(this);
@@ -812,6 +986,7 @@ class _$LoadFavoritesEventImpl
     TResult Function(_LoadDataEvent value)? loadDataEvent,
     TResult Function(_ChangeRegion value)? changeRegion,
     TResult Function(_LoadContentsEvent value)? loadContents,
+    TResult Function(_CheckPermissionEvent value)? checkPermission,
     TResult Function(_LoadFavoritesEvent value)? loadFavorites,
     required TResult orElse(),
   }) {
@@ -834,6 +1009,7 @@ mixin _$HomeBlocState {
     required TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -850,6 +1026,7 @@ mixin _$HomeBlocState {
     TResult? Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -866,6 +1043,7 @@ mixin _$HomeBlocState {
     TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -976,6 +1154,7 @@ class _$HomeBlocLoadingStateImpl
     required TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -995,6 +1174,7 @@ class _$HomeBlocLoadingStateImpl
     TResult? Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -1014,6 +1194,7 @@ class _$HomeBlocLoadingStateImpl
     TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -1078,6 +1259,7 @@ abstract class _$$HomeBlocDataStateImplCopyWith<$Res> {
   $Res call(
       {List<Categories> categories,
       List<ContentCategories> contents,
+      Temperature? temperature,
       List<Region> regions,
       List<String> favorites,
       int totalFavoriteCount,
@@ -1101,6 +1283,7 @@ class __$$HomeBlocDataStateImplCopyWithImpl<$Res>
   $Res call({
     Object? categories = null,
     Object? contents = null,
+    Object? temperature = freezed,
     Object? regions = null,
     Object? favorites = null,
     Object? totalFavoriteCount = null,
@@ -1117,6 +1300,10 @@ class __$$HomeBlocDataStateImplCopyWithImpl<$Res>
           ? _value._contents
           : contents // ignore: cast_nullable_to_non_nullable
               as List<ContentCategories>,
+      temperature: freezed == temperature
+          ? _value.temperature
+          : temperature // ignore: cast_nullable_to_non_nullable
+              as Temperature?,
       regions: null == regions
           ? _value._regions
           : regions // ignore: cast_nullable_to_non_nullable
@@ -1153,6 +1340,7 @@ class _$HomeBlocDataStateImpl
   const _$HomeBlocDataStateImpl(
       {final List<Categories> categories = const [],
       final List<ContentCategories> contents = const [],
+      this.temperature,
       final List<Region> regions = const [],
       final List<String> favorites = const [],
       this.totalFavoriteCount = 0,
@@ -1182,6 +1370,8 @@ class _$HomeBlocDataStateImpl
     return EqualUnmodifiableListView(_contents);
   }
 
+  @override
+  final Temperature? temperature;
   final List<Region> _regions;
   @override
   @JsonKey()
@@ -1214,7 +1404,7 @@ class _$HomeBlocDataStateImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HomeBlocState.dataState(categories: $categories, contents: $contents, regions: $regions, favorites: $favorites, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
+    return 'HomeBlocState.dataState(categories: $categories, contents: $contents, temperature: $temperature, regions: $regions, favorites: $favorites, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
   }
 
   @override
@@ -1224,6 +1414,7 @@ class _$HomeBlocDataStateImpl
       ..add(DiagnosticsProperty('type', 'HomeBlocState.dataState'))
       ..add(DiagnosticsProperty('categories', categories))
       ..add(DiagnosticsProperty('contents', contents))
+      ..add(DiagnosticsProperty('temperature', temperature))
       ..add(DiagnosticsProperty('regions', regions))
       ..add(DiagnosticsProperty('favorites', favorites))
       ..add(DiagnosticsProperty('totalFavoriteCount', totalFavoriteCount))
@@ -1240,6 +1431,8 @@ class _$HomeBlocDataStateImpl
             const DeepCollectionEquality()
                 .equals(other._categories, _categories) &&
             const DeepCollectionEquality().equals(other._contents, _contents) &&
+            (identical(other.temperature, temperature) ||
+                other.temperature == temperature) &&
             const DeepCollectionEquality().equals(other._regions, _regions) &&
             const DeepCollectionEquality()
                 .equals(other._favorites, _favorites) &&
@@ -1258,6 +1451,7 @@ class _$HomeBlocDataStateImpl
       runtimeType,
       const DeepCollectionEquality().hash(_categories),
       const DeepCollectionEquality().hash(_contents),
+      temperature,
       const DeepCollectionEquality().hash(_regions),
       const DeepCollectionEquality().hash(_favorites),
       totalFavoriteCount,
@@ -1281,6 +1475,7 @@ class _$HomeBlocDataStateImpl
     required TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -1290,7 +1485,7 @@ class _$HomeBlocDataStateImpl
         dataState,
     required TResult Function() errorState,
   }) {
-    return dataState(categories, contents, regions, favorites,
+    return dataState(categories, contents, temperature, regions, favorites,
         totalFavoriteCount, selectedRegion, loadingContents, isRefreshing);
   }
 
@@ -1301,6 +1496,7 @@ class _$HomeBlocDataStateImpl
     TResult? Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -1310,8 +1506,16 @@ class _$HomeBlocDataStateImpl
         dataState,
     TResult? Function()? errorState,
   }) {
-    return dataState?.call(categories, contents, regions, favorites,
-        totalFavoriteCount, selectedRegion, loadingContents, isRefreshing);
+    return dataState?.call(
+        categories,
+        contents,
+        temperature,
+        regions,
+        favorites,
+        totalFavoriteCount,
+        selectedRegion,
+        loadingContents,
+        isRefreshing);
   }
 
   @override
@@ -1321,6 +1525,7 @@ class _$HomeBlocDataStateImpl
     TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -1332,7 +1537,7 @@ class _$HomeBlocDataStateImpl
     required TResult orElse(),
   }) {
     if (dataState != null) {
-      return dataState(categories, contents, regions, favorites,
+      return dataState(categories, contents, temperature, regions, favorites,
           totalFavoriteCount, selectedRegion, loadingContents, isRefreshing);
     }
     return orElse();
@@ -1377,6 +1582,7 @@ abstract class HomeBlocDataState implements HomeBlocState {
   const factory HomeBlocDataState(
       {final List<Categories> categories,
       final List<ContentCategories> contents,
+      final Temperature? temperature,
       final List<Region> regions,
       final List<String> favorites,
       final int totalFavoriteCount,
@@ -1386,6 +1592,7 @@ abstract class HomeBlocDataState implements HomeBlocState {
 
   List<Categories> get categories;
   List<ContentCategories> get contents;
+  Temperature? get temperature;
   List<Region> get regions;
   List<String> get favorites;
   int get totalFavoriteCount;
@@ -1453,6 +1660,7 @@ class _$HomeBlocErrorStateImpl
     required TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -1472,6 +1680,7 @@ class _$HomeBlocErrorStateImpl
     TResult? Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,
@@ -1491,6 +1700,7 @@ class _$HomeBlocErrorStateImpl
     TResult Function(
             List<Categories> categories,
             List<ContentCategories> contents,
+            Temperature? temperature,
             List<Region> regions,
             List<String> favorites,
             int totalFavoriteCount,

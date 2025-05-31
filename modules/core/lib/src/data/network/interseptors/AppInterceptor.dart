@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart' show Interceptor, RequestInterceptorHandler, RequestOptions;
 
-import '../../../../core.dart' show AppLocaleX, AppPreference;
+import '../../../../core.dart' show AppLocaleX, AppPreference, LocationManager;
 import '../../../shared/local/security_storage.dart';
 
 class AppInterceptor extends Interceptor {
@@ -15,10 +15,19 @@ class AppInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     // TODO: implement onRequest
 
+
     options.queryParameters.addAll({
       "culture": preference.getLocale().culture,
       "platform": Platform.isIOS ? "ios" : "android"
     });
+
+    final locationManager = LocationManager();
+    if(locationManager.getCurrentPosition()!=null){
+      options.queryParameters.addAll({
+        "lat": locationManager.getCurrentPosition()!.latitude,
+        "lon": locationManager.getCurrentPosition()!.longitude,
+      });
+    }
     if (securityStorage.getAccessToken() != null) {
       options.headers.addAll({
         HttpHeaders.authorizationHeader:

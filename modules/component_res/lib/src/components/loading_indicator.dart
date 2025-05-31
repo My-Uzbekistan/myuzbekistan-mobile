@@ -10,6 +10,6 @@ class LoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Platform.isIOS
         ? CupertinoActivityIndicator()
-        : CircularProgressIndicator();
+        : SizedBox(height: 32,width: 32,child: CircularProgressIndicator(),);
   }
 }

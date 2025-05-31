@@ -34,6 +34,9 @@ class ContentDto with _$ContentDto {
           double? price,
           double? priceInDollar,
           String? address,
+          String? region,
+          double? distance,
+          String? reviewCount,
           @Default(ViewType.places) @ViewTypeConvertor() ViewType viewType}) =
       _ContentDto;
 
@@ -91,7 +94,10 @@ class ContentDto with _$ContentDto {
         location: location != null
             ? Field(name: location?.name, value: location?.value)
             : null,
-        isFavorite: isFavorite ?? false);
+        isFavorite: isFavorite ?? false,
+        region: region,
+        reviewCount: reviewCount,
+        distance: distance);
   }
 }
 
@@ -133,8 +139,7 @@ class LanguageItemDto with _$LanguageItemDto {
 @freezed
 class ContactsDto with _$ContactsDto {
   const factory ContactsDto(
-      {
-        @ImageConvertor() String? icon,
+      {@ImageConvertor() String? icon,
       String? name,
       String? contact,
       String? action}) = _ContactsDto;

@@ -92,6 +92,9 @@ _$ContentDtoImpl _$$ContentDtoImplFromJson(Map<String, dynamic> json) =>
       price: (json['price'] as num?)?.toDouble(),
       priceInDollar: (json['priceInDollar'] as num?)?.toDouble(),
       address: json['address'] as String?,
+      region: json['region'] as String?,
+      distance: (json['distance'] as num?)?.toDouble(),
+      reviewCount: json['reviewCount'] as String?,
       viewType: json['viewType'] == null
           ? ViewType.places
           : const ViewTypeConvertor()
@@ -120,6 +123,9 @@ Map<String, dynamic> _$$ContentDtoImplToJson(_$ContentDtoImpl instance) =>
       'price': instance.price,
       'priceInDollar': instance.priceInDollar,
       'address': instance.address,
+      'region': instance.region,
+      'distance': instance.distance,
+      'reviewCount': instance.reviewCount,
       'viewType': const ViewTypeConvertor().toJson(instance.viewType),
     };
 

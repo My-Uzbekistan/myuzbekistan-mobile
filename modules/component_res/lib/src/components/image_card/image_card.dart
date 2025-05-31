@@ -64,9 +64,7 @@ class _AppItemCardImage extends StatelessWidget {
     double height = double.infinity;
     double width = double.infinity;
     if (appImageCardSize == AppImageCardSize.large) {
-      final screenWidth = MediaQuery.of(context).size.width;
-      final itemWidth = screenWidth * 0.25;
-      width = max(156.0, min(200.0, itemWidth));
+      width = 156;
       height = width;
     } else if (appImageCardSize == AppImageCardSize.medium) {
       width = 100;
@@ -77,7 +75,7 @@ class _AppItemCardImage extends StatelessWidget {
       height: height,
       width: width,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
             CachedNetworkImage(
@@ -109,34 +107,6 @@ class _AppItemCardImage extends StatelessWidget {
                 top: 8,
                 child: topRightWidget!,
               ),
-            if (ratingAverage > 0)
-              Positioned(
-                  top: 12,
-                  left: 12,
-                  child: Container(
-                    constraints: BoxConstraints(minHeight: 20, minWidth: 36),
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(32),
-                        color: Colors.white),
-                    child: Text(
-                      "$ratingAverage",
-                      style: CustomTypography.labelSm
-                          .copyWith(color: context.appColors.brand),
-                    ),
-                  )),
-            if (averageCheck > 0)
-              Positioned(
-                  bottom: 12,
-                  right: 12,
-                  child:
-                      PriceCategoryWithContainer(priceCategory: averageCheck)),
-            if (priceText != null && priceText!.isNotEmpty)
-              Positioned(
-                  bottom: 12,
-                  right: 12,
-                  child: PriceContainer(priceText: priceText!))
           ],
         ),
       ),

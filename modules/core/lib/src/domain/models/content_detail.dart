@@ -1,3 +1,4 @@
+
 import 'package:core/src/shared/extensions.dart';
 import 'package:core/src/shared/view_type.dart';
 import 'package:equatable/equatable.dart';
@@ -6,6 +7,10 @@ class ContentDetail extends Equatable {
   final int id;
   final String? title;
   final String? description;
+  final String? region;
+  final double? distance;
+  final String? reviewCount;
+
   final int? categoryId;
   final String? categoryName;
   final Field<String?>? workingHours;
@@ -44,6 +49,9 @@ class ContentDetail extends Equatable {
       this.priceInDollar,
       this.address,
       required this.viewType,
+      this.distance,
+      this.region,
+      this.reviewCount,
       this.isFavorite = false})
       : _photo = photo;
 
@@ -58,6 +66,9 @@ class ContentDetail extends Equatable {
   String get priceText => price?.amountFormatted ?? "";
 
   bool get languagesAvailable => languages?.value?.isNotEmpty == true;
+
+  String? get contentAddress => region?.split(" ").firstOrNull;
+  double? get distanceKm => distance != null ? distance! / 1000 : null;
 
   ContentDetail copyWith({
     int? id,

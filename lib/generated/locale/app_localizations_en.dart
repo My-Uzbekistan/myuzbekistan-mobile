@@ -185,4 +185,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get warning => 'Warning';
+
+  @override
+  String get guest_chose => 'Guest selection';
+
+  @override
+  String get distanceKm => 'km';
+
+  @override
+  String get distanceM => 'm';
 }

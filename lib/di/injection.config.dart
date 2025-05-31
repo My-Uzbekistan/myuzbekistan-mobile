@@ -33,15 +33,16 @@ import 'package:uzbekistan_travel/presentaion/shell_more/bloc/more_bloc.dart'
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
+    await _i494.CorePackageModule().init(gh);
     gh.lazySingleton<_i454.AppStatusChangeListeners>(
         () => _i454.AppSettingsChangeListenerIml());
     gh.factory<_i1037.DetailBloc>(() => _i1037.DetailBloc(

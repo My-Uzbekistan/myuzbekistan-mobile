@@ -6,6 +6,7 @@ Repository {
   Future<List<Categories>> loadCategories();
 
   Future<List<ContentCategories>> loadContents({int? regionId});
+  Future<Temperature> loadWeather({int? regionId});
 
   Future<Favorite> loadFavourites(
       {required int page, required int pageSize, String? search});

@@ -33,6 +33,7 @@ dependencies:
   carousel_slider: ^5.0.0
   fluttertoast: ^8.2.12
   google_maps_flutter: #^2.11.0
+  smooth_page_indicator: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -68,12 +69,14 @@ flutter:
   # have a "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
   fonts:
-     - family: Geist
-       fonts:
-         - asset: fonts/Geist-Regular.ttf
-         - asset: fonts/Geist-Medium.ttf
-         - asset: fonts/Geist-SemiBold.ttf
+    - family: SfPro
+      fonts:
+        - asset: fonts/SF-Pro-Bold.ttf
+        - asset: fonts/SF-Pro-Medium.ttf
+        - asset: fonts/SF-Pro-Regular.ttf
+        - asset: fonts/SF-Pro-Semibold.ttf
 
   #   - family: Trajan Pro
   #     fonts:

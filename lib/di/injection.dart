@@ -7,9 +7,12 @@ import 'injection.config.dart';
 
 final GetIt getIt = GetIt.instance;
 
-@InjectableInit()
+@InjectableInit(
+    includeMicroPackages: true,
+  externalPackageModulesBefore: [ExternalModule(CorePackageModule)]
+)
 Future<void> configureInjection() async {
-  await configureDataInjection();
+  await getIt.init(environment: Environment.dev);
   getIt<Alice>().setNavigatorKey(rootNavigatorKey);
-  getIt.init();
+
 }

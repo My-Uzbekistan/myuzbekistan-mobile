@@ -1,7 +1,7 @@
 part of '../app_color_theme.dart';
 
 abstract class _BaseColors {
-  Color get brand;
+  Color get brandPrimary;
 
   BackgroundColors get background;
 
@@ -105,12 +105,16 @@ class NonOpaque {
   final Color green;
   final Color blue;
   final Color yellow;
+  final Color brand;
+
 
   NonOpaque({
     required this.red,
     required this.green,
     required this.blue,
     required this.yellow,
+    required this.brand
+
   });
 }
 

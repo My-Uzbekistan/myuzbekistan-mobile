@@ -3,7 +3,7 @@ part of '../app_color_theme.dart';
 class DarkColors extends _BaseColors {
   @override
   // TODO: implement brand
-  Color get brand => Color(0xff0099ff);
+  Color get brandPrimary => Color(0xff9B87F5);
 
   @override
   // TODO: implement textColors
@@ -12,7 +12,7 @@ class DarkColors extends _BaseColors {
         secondary: const Color(0xffEBEBF5).withValues(alpha: 0.64),
         tertiary: const Color(0xffEBEBF5).withValues(alpha: 0.32),
         disable: const Color(0xffEBEBF5).withValues(alpha: 0.16),
-        oposite: Colors.black,
+        oposite: const Color(0xff221F26),
       );
 
   @override
@@ -37,7 +37,7 @@ class DarkColors extends _BaseColors {
   @override
   // TODO: implement stroke
   StrokeColors get stroke => StrokeColors(
-      nonOpaque: Colors.white.withValues(alpha: 0.1),
+      nonOpaque: Colors.white.withValues(alpha: 0.12),
       opaque: const Color(0xff2C2C2E));
 
   @override
@@ -51,10 +51,11 @@ class DarkColors extends _BaseColors {
   @override
   // TODO: implement nonOpaque
   NonOpaque get nonOpaque => NonOpaque(
-        red: const Color(0xffFF4534).withValues(alpha: 0.16),
+        red: const Color(0xffFF453A).withValues(alpha: 0.16),
         green: const Color(0xff30D158).withValues(alpha: 0.16),
         blue: const Color(0xff0099FF).withValues(alpha: 0.16),
         yellow: const Color(0xffFFD60A).withValues(alpha: 0.16),
+        brand: const Color(0xff8961FF).withValues(alpha: 0.16),
       );
 
   @override

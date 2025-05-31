@@ -37,6 +37,12 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<Temperature> loadWeather({int? regionId}) {
+    return _restService.loadWeather(regionId: regionId).call((data) {
+      return data.toDomain();
+    });
+  }
+  @override
   Future<Favorite> loadFavourites(
       {required int page, required int pageSize, String? search}) {
     favoriteCanceledToken.cancel();

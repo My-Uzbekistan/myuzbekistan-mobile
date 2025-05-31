@@ -44,6 +44,9 @@ mixin _$ContentDto {
   double? get price => throw _privateConstructorUsedError;
   double? get priceInDollar => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
+  String? get region => throw _privateConstructorUsedError;
+  double? get distance => throw _privateConstructorUsedError;
+  String? get reviewCount => throw _privateConstructorUsedError;
   @ViewTypeConvertor()
   ViewType get viewType => throw _privateConstructorUsedError;
 
@@ -83,6 +86,9 @@ abstract class $ContentDtoCopyWith<$Res> {
       double? price,
       double? priceInDollar,
       String? address,
+      String? region,
+      double? distance,
+      String? reviewCount,
       @ViewTypeConvertor() ViewType viewType});
 }
 
@@ -120,6 +126,9 @@ class _$ContentDtoCopyWithImpl<$Res, $Val extends ContentDto>
     Object? price = freezed,
     Object? priceInDollar = freezed,
     Object? address = freezed,
+    Object? region = freezed,
+    Object? distance = freezed,
+    Object? reviewCount = freezed,
     Object? viewType = null,
   }) {
     return _then(_value.copyWith(
@@ -199,6 +208,18 @@ class _$ContentDtoCopyWithImpl<$Res, $Val extends ContentDto>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      region: freezed == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String?,
+      distance: freezed == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      reviewCount: freezed == reviewCount
+          ? _value.reviewCount
+          : reviewCount // ignore: cast_nullable_to_non_nullable
+              as String?,
       viewType: null == viewType
           ? _value.viewType
           : viewType // ignore: cast_nullable_to_non_nullable
@@ -235,6 +256,9 @@ abstract class _$$ContentDtoImplCopyWith<$Res>
       double? price,
       double? priceInDollar,
       String? address,
+      String? region,
+      double? distance,
+      String? reviewCount,
       @ViewTypeConvertor() ViewType viewType});
 }
 
@@ -270,6 +294,9 @@ class __$$ContentDtoImplCopyWithImpl<$Res>
     Object? price = freezed,
     Object? priceInDollar = freezed,
     Object? address = freezed,
+    Object? region = freezed,
+    Object? distance = freezed,
+    Object? reviewCount = freezed,
     Object? viewType = null,
   }) {
     return _then(_$ContentDtoImpl(
@@ -349,6 +376,18 @@ class __$$ContentDtoImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
+      region: freezed == region
+          ? _value.region
+          : region // ignore: cast_nullable_to_non_nullable
+              as String?,
+      distance: freezed == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      reviewCount: freezed == reviewCount
+          ? _value.reviewCount
+          : reviewCount // ignore: cast_nullable_to_non_nullable
+              as String?,
       viewType: null == viewType
           ? _value.viewType
           : viewType // ignore: cast_nullable_to_non_nullable
@@ -380,6 +419,9 @@ class _$ContentDtoImpl extends _ContentDto {
       this.price,
       this.priceInDollar,
       this.address,
+      this.region,
+      this.distance,
+      this.reviewCount,
       @ViewTypeConvertor() this.viewType = ViewType.places})
       : _photos = photos,
         super._();
@@ -436,13 +478,19 @@ class _$ContentDtoImpl extends _ContentDto {
   @override
   final String? address;
   @override
+  final String? region;
+  @override
+  final double? distance;
+  @override
+  final String? reviewCount;
+  @override
   @JsonKey()
   @ViewTypeConvertor()
   final ViewType viewType;
 
   @override
   String toString() {
-    return 'ContentDto(id: $id, title: $title, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, location: $location, facilities: $facilities, languages: $languages, attachments: $attachments, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, address: $address, viewType: $viewType)';
+    return 'ContentDto(id: $id, title: $title, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, location: $location, facilities: $facilities, languages: $languages, attachments: $attachments, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, address: $address, region: $region, distance: $distance, reviewCount: $reviewCount, viewType: $viewType)';
   }
 
   @override
@@ -482,6 +530,11 @@ class _$ContentDtoImpl extends _ContentDto {
             (identical(other.priceInDollar, priceInDollar) ||
                 other.priceInDollar == priceInDollar) &&
             (identical(other.address, address) || other.address == address) &&
+            (identical(other.region, region) || other.region == region) &&
+            (identical(other.distance, distance) ||
+                other.distance == distance) &&
+            (identical(other.reviewCount, reviewCount) ||
+                other.reviewCount == reviewCount) &&
             (identical(other.viewType, viewType) ||
                 other.viewType == viewType));
   }
@@ -509,6 +562,9 @@ class _$ContentDtoImpl extends _ContentDto {
         price,
         priceInDollar,
         address,
+        region,
+        distance,
+        reviewCount,
         viewType
       ]);
 
@@ -549,6 +605,9 @@ abstract class _ContentDto extends ContentDto {
       final double? price,
       final double? priceInDollar,
       final String? address,
+      final String? region,
+      final double? distance,
+      final String? reviewCount,
       @ViewTypeConvertor() final ViewType viewType}) = _$ContentDtoImpl;
   const _ContentDto._() : super._();
 
@@ -595,6 +654,12 @@ abstract class _ContentDto extends ContentDto {
   double? get priceInDollar;
   @override
   String? get address;
+  @override
+  String? get region;
+  @override
+  double? get distance;
+  @override
+  String? get reviewCount;
   @override
   @ViewTypeConvertor()
   ViewType get viewType;
