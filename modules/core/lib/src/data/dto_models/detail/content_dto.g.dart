@@ -94,7 +94,7 @@ _$ContentDtoImpl _$$ContentDtoImplFromJson(Map<String, dynamic> json) =>
       address: json['address'] as String?,
       region: json['region'] as String?,
       distance: (json['distance'] as num?)?.toDouble(),
-      reviewCount: json['reviewCount'] as String?,
+      reviewCount: (json['reviewCount'] as num?)?.toInt(),
       viewType: json['viewType'] == null
           ? ViewType.places
           : const ViewTypeConvertor()

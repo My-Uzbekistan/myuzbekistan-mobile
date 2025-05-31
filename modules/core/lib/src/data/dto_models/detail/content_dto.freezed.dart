@@ -46,7 +46,7 @@ mixin _$ContentDto {
   String? get address => throw _privateConstructorUsedError;
   String? get region => throw _privateConstructorUsedError;
   double? get distance => throw _privateConstructorUsedError;
-  String? get reviewCount => throw _privateConstructorUsedError;
+  int? get reviewCount => throw _privateConstructorUsedError;
   @ViewTypeConvertor()
   ViewType get viewType => throw _privateConstructorUsedError;
 
@@ -88,7 +88,7 @@ abstract class $ContentDtoCopyWith<$Res> {
       String? address,
       String? region,
       double? distance,
-      String? reviewCount,
+      int? reviewCount,
       @ViewTypeConvertor() ViewType viewType});
 }
 
@@ -219,7 +219,7 @@ class _$ContentDtoCopyWithImpl<$Res, $Val extends ContentDto>
       reviewCount: freezed == reviewCount
           ? _value.reviewCount
           : reviewCount // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       viewType: null == viewType
           ? _value.viewType
           : viewType // ignore: cast_nullable_to_non_nullable
@@ -258,7 +258,7 @@ abstract class _$$ContentDtoImplCopyWith<$Res>
       String? address,
       String? region,
       double? distance,
-      String? reviewCount,
+      int? reviewCount,
       @ViewTypeConvertor() ViewType viewType});
 }
 
@@ -387,7 +387,7 @@ class __$$ContentDtoImplCopyWithImpl<$Res>
       reviewCount: freezed == reviewCount
           ? _value.reviewCount
           : reviewCount // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       viewType: null == viewType
           ? _value.viewType
           : viewType // ignore: cast_nullable_to_non_nullable
@@ -482,7 +482,7 @@ class _$ContentDtoImpl extends _ContentDto {
   @override
   final double? distance;
   @override
-  final String? reviewCount;
+  final int? reviewCount;
   @override
   @JsonKey()
   @ViewTypeConvertor()
@@ -607,7 +607,7 @@ abstract class _ContentDto extends ContentDto {
       final String? address,
       final String? region,
       final double? distance,
-      final String? reviewCount,
+      final int? reviewCount,
       @ViewTypeConvertor() final ViewType viewType}) = _$ContentDtoImpl;
   const _ContentDto._() : super._();
 
@@ -659,7 +659,7 @@ abstract class _ContentDto extends ContentDto {
   @override
   double? get distance;
   @override
-  String? get reviewCount;
+  int? get reviewCount;
   @override
   @ViewTypeConvertor()
   ViewType get viewType;

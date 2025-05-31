@@ -36,7 +36,7 @@ class ContentDto with _$ContentDto {
           String? address,
           String? region,
           double? distance,
-          String? reviewCount,
+          int? reviewCount,
           @Default(ViewType.places) @ViewTypeConvertor() ViewType viewType}) =
       _ContentDto;
 

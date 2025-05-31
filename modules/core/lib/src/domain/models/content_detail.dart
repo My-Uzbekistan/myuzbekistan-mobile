@@ -9,7 +9,7 @@ class ContentDetail extends Equatable {
   final String? description;
   final String? region;
   final double? distance;
-  final String? reviewCount;
+  final int? reviewCount;
 
   final int? categoryId;
   final String? categoryName;
