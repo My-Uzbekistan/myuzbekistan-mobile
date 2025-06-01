@@ -12,6 +12,9 @@ dependencies:
     sdk: flutter
   shared:
     path: ../../modules/shared
+  domain:
+    path: ../../modules/domain
+
 
 
 

@@ -18,6 +18,7 @@ class Assets {
   static const String pngGears = 'assets/png/gears.png';
   static const String pngIcSearch = 'assets/png/ic_search.png';
   static const String pngMap = 'assets/png/map.png';
+  static const String pngNavMore = 'assets/png/nav_more.png';
   static const String pngPersonalDefaultBg = 'assets/png/personal_default_bg.webp';
   static const String pngSearchMaskIcon = 'assets/png/search_mask_icon.png';
   static const String pngSosok = 'assets/png/sosok.png';
@@ -48,7 +49,6 @@ class Assets {
   static const String svgStaroflifeFill = 'assets/svg/staroflife_fill.svg';
   static const String svgTabIconHome = 'assets/svg/tab_icon_home.svg';
   static const String svgTabIconMap = 'assets/svg/tab_icon_map.svg';
-  static const String svgTabIconMore = 'assets/svg/tab_icon_more.svg';
   static const String svgTabIconPayment = 'assets/svg/tab_icon_payment.svg';
   static const String svgTabIconTransfer = 'assets/svg/tab_icon_transfer.svg';
 

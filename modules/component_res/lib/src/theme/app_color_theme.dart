@@ -31,6 +31,10 @@ ThemeData _buildTheme(
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: colors.background.elevation1
       ),
+
+      dialogTheme: DialogThemeData(
+        backgroundColor: colors.background.elevation1
+      ),
       appBarTheme: themeData.appBarTheme.copyWith(
         surfaceTintColor: Colors.transparent,
         iconTheme: IconThemeData(color: colors.textIconColor.primary),

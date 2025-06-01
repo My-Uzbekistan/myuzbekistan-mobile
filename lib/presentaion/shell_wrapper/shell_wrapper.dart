@@ -5,7 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:navigation/navigation.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
+import 'package:uzbekistan_travel/core/navigation/router.dart';
 
 class ShellPageWrapper extends HookWidget {
   final StatefulNavigationShell navigationShell;
@@ -19,9 +21,15 @@ class ShellPageWrapper extends HookWidget {
     );
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
-    var currentIndex = useState(0);
+
+    var currentIndex = useCurrentIndex();
+debugPrint("currentIndex ${currentIndex}");
+
     final selectedTabColor = context.appColors.brand;
     final unselectedColor = context.appColors.textIconColor.secondary;
 
@@ -33,9 +41,9 @@ class ShellPageWrapper extends HookWidget {
               type: BottomNavigationBarType.fixed,
               currentIndex: currentIndex.value,
               onTap: (index) {
-                if (index == currentIndex.value) return;
+                if (index == currentIndex) return;
                 _goBranch(index);
-                currentIndex.value = index;
+
               },
               // fixedColor: context.appColors.background.elevation1Alt,
               backgroundColor: context.appColors.background.elevation1Alt,
@@ -59,7 +67,6 @@ class ShellPageWrapper extends HookWidget {
               onTap: (index) {
                 if (index == currentIndex.value) return;
                 _goBranch(index);
-                currentIndex.value = index;
               },
             ),
     );
@@ -70,10 +77,10 @@ class ShellPageWrapper extends HookWidget {
     required Color selectedTabColor,
     required Color unselectedIconColor,
   }) {
-    final selectedTabColorFilter =
-        ColorFilter.mode(selectedTabColor, BlendMode.srcIn);
-    final unselectedTabColorFilter =
-        ColorFilter.mode(unselectedIconColor, BlendMode.srcIn);
+    // final selectedTabColorFilter =
+    //     ColorFilter.mode(selectedTabColor, BlendMode.srcIn);
+    // final unselectedTabColorFilter =
+    //     ColorFilter.mode(unselectedIconColor, BlendMode.srcIn);
     return [
       BottomNavigationBarItem(
         icon: Assets.pngIcSearch
@@ -114,10 +121,20 @@ class ShellPageWrapper extends HookWidget {
       //   label: context.localizations?.nav_transfer,
       // ),
       BottomNavigationBarItem(
-        icon: Assets.svgTabIconMore
-            .toSvgImage(colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconMore
-            .toSvgImage(colorFilter: selectedTabColorFilter),
+        icon: Assets.pngNavMore
+            .toImage(
+              height: 24,
+              width: 24,
+              fit: BoxFit.contain,
+              tintColor: unselectedIconColor,
+            ),
+        activeIcon: Assets.pngNavMore
+            .toImage(
+                height: 24,
+                width: 24,
+                fit: BoxFit.contain,
+                tintColor: selectedTabColor
+            ),
         label: context.localizations?.nav_more,
       ),
     ];

@@ -38,6 +38,15 @@ dependencies:
   rxdart: ^0.28.0
   permission_handler: ^12.0.0+1
   logger: ^2.5.0
+  equatable: ^2.0.7
+  hive_flutter: ^1.1.0
+  hive: 2.2.3
+  flutter_hooks: ^0.21.2
+  dartx: ^1.2.0
+  url_launcher: ^6.3.1
+  geolocator:
+  flutter_alice:
+    git: git@github.com:IlhomSh/flutter_alice.git
 
 #  flutter_alice:
 #    git: https://github.com/IlhomSh/flutter_alice.git

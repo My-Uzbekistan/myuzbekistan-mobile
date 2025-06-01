@@ -2,45 +2,23 @@ part of 'router.dart';
 
 final _shellRoute = [
   StatefulShellRoute.indexedStack(
-    parentNavigatorKey: rootNavigatorKey,
+    parentNavigatorKey: appRootNavigatorKey,
     builder: (context, state, navShell) =>
         ShellPageWrapper(navigationShell: navShell),
-    branches: [
-      StatefulShellBranch(routes: [
-        GoRoute(
-            path: AppRoutePath.shellHome.path,
-            name: AppRoutePath.shellHome.name,
-            builder: (context, state) => BlocProvider(
-                create: (context) => getIt<HomeBloc>(),
-                child:
-                // HomePageV2()
-                HomePage(),
-                ))
-      ]),
-      // StatefulShellBranch(routes: [
-      //   GoRoute(
-      //       path: "/map",
-      //       name: "map",
-      //       builder: (context, state) => MessageContainer.comingSoonWidget(context))
-      // ]),
-      // StatefulShellBranch(routes: [
-      //   GoRoute(
-      //       path: "/payment",
-      //       name: "payment",
-      //       builder: (context, state) =>MessageContainer.comingSoonWidget(context))
-      // ]),
-      // StatefulShellBranch(routes: [
-      //   GoRoute(
-      //       path: "/transfer",
-      //       name: "transfer",
-      //       builder: (context, state) => MessageContainer.comingSoonWidget(context))
-      // ]),
-      StatefulShellBranch(routes: [
-        GoRoute(
-            path: "/more",
-            name: "more",
-            builder: (context, state) => ShellMorePage())
-      ]),
-    ],
+    branches: [FeatureTravelRouter.shellTravel, FeatureMoreRouter.shellMore],
   )
 ];
+
+extension ShelIndexEx on ShellPageWrapper {
+  ValueNotifier<int> useCurrentIndex() {
+    final location = GoRouter.of(useContext()).state.name;
+    final currentIndex = useState(0);
+    useEffect(() {
+      if (location == AppNavPath.travel.travelHome.name) currentIndex.value = 0;
+      if (location == AppNavPath.more.moreHome.name) currentIndex.value = 1;
+      return null;
+    }, [location]);
+
+    return currentIndex;
+  }
+}
