@@ -6,7 +6,7 @@ mixin class MessageContainer {
   static Widget comingSoonWidget(BuildContext context) {
     return _MessageContainerWidget(
       icon: Assets.pngGears.toImage(),
-      title:"",
+      title: "",
       caption: "",
     );
   }
@@ -14,21 +14,24 @@ mixin class MessageContainer {
   static Widget notFoundWidget(BuildContext context,
       {required String title, required String caption}) {
     return _MessageContainerWidget(
-      icon: Assets.pngSearchMaskIcon.toImage(),
+      icon: Assets.svgTabIconHome.toSvgImage(
+          colorFilter:
+              ColorFilter.mode(context.appColors.brand, BlendMode.srcIn)),
       title: title,
       caption: caption,
     );
   }
 
-
-  static Widget custom({Widget icon = const SizedBox(), required String title, required String caption}) {
+  static Widget custom(
+      {Widget icon = const SizedBox(),
+      required String title,
+      required String caption}) {
     return _MessageContainerWidget(
       icon: icon,
       title: title,
       caption: caption,
     );
   }
-
 }
 
 class _MessageContainerWidget extends StatelessWidget {

@@ -15,7 +15,7 @@ class AppLocalizationsUz extends AppLocalizations {
   String get nav_map => 'Xarita';
 
   @override
-  String get nav_payment => 'To\'lov';
+  String get nav_payment => 'Moliya';
 
   @override
   String get nav_transfer => 'Yo\'nalish';

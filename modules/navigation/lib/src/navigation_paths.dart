@@ -8,6 +8,8 @@ part 'feature_travel/feature_travel_nav_extensions.dart';
 part 'feature_travel/feature_travel_nav_path.dart';
 part 'feature_more/feature_more_nav_extensions.dart';
 part 'feature_more/feature_more_nav_path.dart';
+part 'feature_finance/feature_finance_nav_extensions.dart';
+part 'feature_finance/feature_finance_nav_path.dart';
 
 
 abstract class AppNavPath {
@@ -17,6 +19,7 @@ abstract class AppNavPath {
 
   static _FeatureTravelNavPath get travel => _FeatureTravelNavPath();
   static _FeatureMoreNavPath get more => _FeatureMoreNavPath();
+  static _FeatureFinanceNavPath get finance => _FeatureFinanceNavPath();
 }
 class _NavPathImpl extends AppNavPath {
   const _NavPathImpl({required super.name, required super.path});

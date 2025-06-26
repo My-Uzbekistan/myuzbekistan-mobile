@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:finance/finance.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ final GoRouter routes = GoRouter(
     routes: [
       ..._shellRoute,
       ...FeatureTravelRouter.routes,
+      ...FeatureFinanceRouter.routes,
       ...FeatureMoreRouter.routes,
       GoRoute(
         path: "/splash",

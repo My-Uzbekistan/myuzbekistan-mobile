@@ -1,5 +1,6 @@
 import 'package:data/data.dart';
 import 'package:domain/domain.dart';
+import 'package:finance/finance.dart';
 import 'package:more/more.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
@@ -16,6 +17,7 @@ final GetIt getIt = GetIt.instance;
 ], externalPackageModulesAfter: [
   ExternalModule(TravelPackageModule),
   ExternalModule(MorePackageModule),
+  ExternalModule(FinancePackageModule),
 ])
 Future<void> configureInjection() async {
   await getIt.init(environment: Environment.dev);

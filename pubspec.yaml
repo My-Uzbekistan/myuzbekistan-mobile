@@ -36,6 +36,7 @@ workspace:
   - modules/data
   - modules/features/travel
   - modules/features/more
+  - modules/features/finance
 dependencies:
   flutter:
     sdk: flutter
@@ -66,6 +67,9 @@ dependencies:
 
   more:
     path: ./modules/features/more
+
+  finance:
+    path: ./modules/features/finance
 
   flutter_bloc: ^9.0.0
   go_router: ^14.8.0

@@ -5,7 +5,11 @@ final _shellRoute = [
     parentNavigatorKey: appRootNavigatorKey,
     builder: (context, state, navShell) =>
         ShellPageWrapper(navigationShell: navShell),
-    branches: [FeatureTravelRouter.shellTravel, FeatureMoreRouter.shellMore],
+    branches: [
+      FeatureTravelRouter.shellTravel,
+      FeatureFinanceRouter.shellFinance,
+      FeatureMoreRouter.shellMore
+    ],
   )
 ];
 
@@ -15,7 +19,8 @@ extension ShelIndexEx on ShellPageWrapper {
     final currentIndex = useState(0);
     useEffect(() {
       if (location == AppNavPath.travel.travelHome.name) currentIndex.value = 0;
-      if (location == AppNavPath.more.moreHome.name) currentIndex.value = 1;
+      if (location == AppNavPath.finance.financeHome.name) currentIndex.value = 1;
+      if (location == AppNavPath.more.moreHome.name) currentIndex.value = 2;
       return null;
     }, [location]);
 

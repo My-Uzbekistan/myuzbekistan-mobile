@@ -112,7 +112,7 @@ abstract class AppLocalizations {
   /// No description provided for @nav_payment.
   ///
   /// In en, this message translates to:
-  /// **'Payment'**
+  /// **'Finance'**
   String get nav_payment;
 
   /// No description provided for @nav_transfer.

@@ -10,6 +10,14 @@ extension BuildContextNavExtension on BuildContext {
     return _travel[this] ??= FeatureTravelNavExtension(this);
   }
 
+  static final Expando<FeatureFinanceNavExtension> _finance =
+  Expando<FeatureFinanceNavExtension>();
+
+
+  FeatureFinanceNavExtension get finance {
+    return _finance[this] ??= FeatureFinanceNavExtension(this);
+  }
+
 
   static final Expando<FeatureMoreNavExtension> _more =
   Expando<FeatureMoreNavExtension>();

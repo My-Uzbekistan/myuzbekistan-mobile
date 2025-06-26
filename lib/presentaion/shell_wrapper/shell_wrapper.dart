@@ -21,14 +21,10 @@ class ShellPageWrapper extends HookWidget {
     );
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
     var currentIndex = useCurrentIndex();
-debugPrint("currentIndex ${currentIndex}");
+    debugPrint("currentIndex ${currentIndex}");
 
     final selectedTabColor = context.appColors.brand;
     final unselectedColor = context.appColors.textIconColor.secondary;
@@ -43,13 +39,11 @@ debugPrint("currentIndex ${currentIndex}");
               onTap: (index) {
                 if (index == currentIndex) return;
                 _goBranch(index);
-
               },
               // fixedColor: context.appColors.background.elevation1Alt,
               backgroundColor: context.appColors.background.elevation1Alt,
               selectedItemColor: selectedTabColor,
               unselectedItemColor: unselectedColor,
-
               selectedLabelStyle:
                   CustomTypography.labelSm.copyWith(fontSize: 12),
               unselectedLabelStyle:
@@ -77,64 +71,48 @@ debugPrint("currentIndex ${currentIndex}");
     required Color selectedTabColor,
     required Color unselectedIconColor,
   }) {
-    // final selectedTabColorFilter =
-    //     ColorFilter.mode(selectedTabColor, BlendMode.srcIn);
-    // final unselectedTabColorFilter =
-    //     ColorFilter.mode(unselectedIconColor, BlendMode.srcIn);
+    final selectedTabColorFilter =
+        ColorFilter.mode(selectedTabColor, BlendMode.srcIn);
+    final unselectedTabColorFilter =
+        ColorFilter.mode(unselectedIconColor, BlendMode.srcIn);
     return [
       BottomNavigationBarItem(
-        icon: Assets.pngIcSearch
-            .toImage(
-          height: 24,
-          width: 24,
-          fit: BoxFit.contain,
-          tintColor: unselectedIconColor,
-        ),
-        activeIcon: Assets.pngIcSearch
-            .toImage(
+        icon: Assets.svgTabIconHome.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
-            tintColor: selectedTabColor
-        ),
+            colorFilter: unselectedTabColorFilter),
+        activeIcon: Assets.svgTabIconHome.toSvgImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            colorFilter: selectedTabColorFilter),
         label: context.localizations?.nav_home,
       ),
-      // BottomNavigationBarItem(
-      //   icon: Assets.svgTabIconMap
-      //       .toSvgImage(colorFilter: unselectedTabColorFilter),
-      //   activeIcon: Assets.svgTabIconMap
-      //       .toSvgImage(colorFilter: selectedTabColorFilter),
-      //   label: context.localizations?.nav_map,
-      // ),
-      // BottomNavigationBarItem(
-      //   icon: Assets.svgTabIconPayment
-      //       .toSvgImage(colorFilter: unselectedTabColorFilter),
-      //   activeIcon: Assets.svgTabIconPayment
-      //       .toSvgImage(colorFilter: selectedTabColorFilter),
-      //   label: context.localizations?.nav_payment,
-      // ),
-      // BottomNavigationBarItem(
-      //   icon: Assets.svgTabIconTransfer
-      //       .toSvgImage(colorFilter: unselectedTabColorFilter),
-      //   activeIcon: Assets.svgTabIconTransfer
-      //       .toSvgImage(colorFilter: selectedTabColorFilter),
-      //   label: context.localizations?.nav_transfer,
-      // ),
       BottomNavigationBarItem(
-        icon: Assets.pngNavMore
-            .toImage(
-              height: 24,
-              width: 24,
-              fit: BoxFit.contain,
-              tintColor: unselectedIconColor,
-            ),
-        activeIcon: Assets.pngNavMore
-            .toImage(
-                height: 24,
-                width: 24,
-                fit: BoxFit.contain,
-                tintColor: selectedTabColor
-            ),
+        icon: Assets.svgTabIconFinance.toSvgImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            colorFilter: unselectedTabColorFilter),
+        activeIcon: Assets.svgTabIconFinance.toSvgImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            colorFilter: selectedTabColorFilter),
+        label: context.localizations?.nav_payment,
+      ),
+      BottomNavigationBarItem(
+        icon: Assets.svgTabIconMore.toSvgImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            colorFilter: unselectedTabColorFilter),
+        activeIcon: Assets.svgTabIconMore.toSvgImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            colorFilter: selectedTabColorFilter),
         label: context.localizations?.nav_more,
       ),
     ];

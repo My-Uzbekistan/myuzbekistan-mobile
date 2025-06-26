@@ -15,7 +15,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nav_map => 'Map';
 
   @override
-  String get nav_payment => 'Payment';
+  String get nav_payment => 'Finance';
 
   @override
   String get nav_transfer => 'Transfer';

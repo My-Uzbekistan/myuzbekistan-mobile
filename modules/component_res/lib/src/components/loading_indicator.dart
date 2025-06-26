@@ -4,12 +4,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator({super.key});
+  final double size;
+
+  const LoadingIndicator({super.key, this.size = 32});
 
   @override
   Widget build(BuildContext context) {
     return Platform.isIOS
         ? CupertinoActivityIndicator()
-        : SizedBox(height: 32,width: 32,child: CircularProgressIndicator(),);
+        : SizedBox(
+            height: size,
+            width: size,
+            child: CircularProgressIndicator(),
+          );
   }
 }

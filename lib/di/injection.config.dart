@@ -11,6 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:data/data.dart' as _i437;
 import 'package:domain/domain.dart' as _i494;
+import 'package:finance/finance.dart' as _i587;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:more/more.dart' as _i707;
@@ -31,6 +32,7 @@ extension GetItInjectableX on _i174.GetIt {
     await _i494.DomainPackageModule().init(gh);
     await _i734.TravelPackageModule().init(gh);
     await _i707.MorePackageModule().init(gh);
+    await _i587.FinancePackageModule().init(gh);
     return this;
   }
 }
