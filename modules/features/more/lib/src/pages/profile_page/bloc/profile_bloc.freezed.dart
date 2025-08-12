@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -47,6 +46,142 @@ class $ProfileBlocStateCopyWith<$Res>  {
 $ProfileBlocStateCopyWith(ProfileBlocState _, $Res Function(ProfileBlocState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [ProfileBlocState].
+extension ProfileBlocStatePatterns on ProfileBlocState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ProfileBlocDataState value)?  dataState,TResult Function( ProfileBlocGuestState value)?  guestState,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case ProfileBlocDataState() when dataState != null:
+return dataState(_that);case ProfileBlocGuestState() when guestState != null:
+return guestState(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ProfileBlocDataState value)  dataState,required TResult Function( ProfileBlocGuestState value)  guestState,}){
+final _that = this;
+switch (_that) {
+case ProfileBlocDataState():
+return dataState(_that);case ProfileBlocGuestState():
+return guestState(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ProfileBlocDataState value)?  dataState,TResult? Function( ProfileBlocGuestState value)?  guestState,}){
+final _that = this;
+switch (_that) {
+case ProfileBlocDataState() when dataState != null:
+return dataState(_that);case ProfileBlocGuestState() when guestState != null:
+return guestState(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UserModel? userModel)?  dataState,TResult Function()?  guestState,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case ProfileBlocDataState() when dataState != null:
+return dataState(_that.userModel);case ProfileBlocGuestState() when guestState != null:
+return guestState();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UserModel? userModel)  dataState,required TResult Function()  guestState,}) {final _that = this;
+switch (_that) {
+case ProfileBlocDataState():
+return dataState(_that.userModel);case ProfileBlocGuestState():
+return guestState();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UserModel? userModel)?  dataState,TResult? Function()?  guestState,}) {final _that = this;
+switch (_that) {
+case ProfileBlocDataState() when dataState != null:
+return dataState(_that.userModel);case ProfileBlocGuestState() when guestState != null:
+return guestState();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -193,6 +328,154 @@ class $ProfileBlocEventCopyWith<$Res>  {
 $ProfileBlocEventCopyWith(ProfileBlocEvent _, $Res Function(ProfileBlocEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [ProfileBlocEvent].
+extension ProfileBlocEventPatterns on ProfileBlocEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ProfileBlocInitEvent value)?  initEvent,TResult Function( _ProfileBlocLoadEvent value)?  loadEvent,TResult Function( _ProfileBlocLogOutEvent value)?  logOut,TResult Function( _ProfileBlocDeleteEvent value)?  deleteAccount,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ProfileBlocInitEvent() when initEvent != null:
+return initEvent(_that);case _ProfileBlocLoadEvent() when loadEvent != null:
+return loadEvent(_that);case _ProfileBlocLogOutEvent() when logOut != null:
+return logOut(_that);case _ProfileBlocDeleteEvent() when deleteAccount != null:
+return deleteAccount(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ProfileBlocInitEvent value)  initEvent,required TResult Function( _ProfileBlocLoadEvent value)  loadEvent,required TResult Function( _ProfileBlocLogOutEvent value)  logOut,required TResult Function( _ProfileBlocDeleteEvent value)  deleteAccount,}){
+final _that = this;
+switch (_that) {
+case _ProfileBlocInitEvent():
+return initEvent(_that);case _ProfileBlocLoadEvent():
+return loadEvent(_that);case _ProfileBlocLogOutEvent():
+return logOut(_that);case _ProfileBlocDeleteEvent():
+return deleteAccount(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ProfileBlocInitEvent value)?  initEvent,TResult? Function( _ProfileBlocLoadEvent value)?  loadEvent,TResult? Function( _ProfileBlocLogOutEvent value)?  logOut,TResult? Function( _ProfileBlocDeleteEvent value)?  deleteAccount,}){
+final _that = this;
+switch (_that) {
+case _ProfileBlocInitEvent() when initEvent != null:
+return initEvent(_that);case _ProfileBlocLoadEvent() when loadEvent != null:
+return loadEvent(_that);case _ProfileBlocLogOutEvent() when logOut != null:
+return logOut(_that);case _ProfileBlocDeleteEvent() when deleteAccount != null:
+return deleteAccount(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initEvent,TResult Function()?  loadEvent,TResult Function()?  logOut,TResult Function()?  deleteAccount,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ProfileBlocInitEvent() when initEvent != null:
+return initEvent();case _ProfileBlocLoadEvent() when loadEvent != null:
+return loadEvent();case _ProfileBlocLogOutEvent() when logOut != null:
+return logOut();case _ProfileBlocDeleteEvent() when deleteAccount != null:
+return deleteAccount();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initEvent,required TResult Function()  loadEvent,required TResult Function()  logOut,required TResult Function()  deleteAccount,}) {final _that = this;
+switch (_that) {
+case _ProfileBlocInitEvent():
+return initEvent();case _ProfileBlocLoadEvent():
+return loadEvent();case _ProfileBlocLogOutEvent():
+return logOut();case _ProfileBlocDeleteEvent():
+return deleteAccount();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initEvent,TResult? Function()?  loadEvent,TResult? Function()?  logOut,TResult? Function()?  deleteAccount,}) {final _that = this;
+switch (_that) {
+case _ProfileBlocInitEvent() when initEvent != null:
+return initEvent();case _ProfileBlocLoadEvent() when loadEvent != null:
+return loadEvent();case _ProfileBlocLogOutEvent() when logOut != null:
+return logOut();case _ProfileBlocDeleteEvent() when deleteAccount != null:
+return deleteAccount();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

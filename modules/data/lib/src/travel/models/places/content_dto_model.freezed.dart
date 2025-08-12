@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -14,7 +13,7 @@ part of 'content_dto_model.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$ContentCategoriesDto {
+mixin _$ContentCategoriesDto implements DiagnosticableTreeMixin {
 
  int get categoryId; String get categoryName; int get viewType; MainPageContentDto? get recommended; List<MainPageContentDto> get contents;
 /// Create a copy of ContentCategoriesDto
@@ -26,6 +25,12 @@ $ContentCategoriesDtoCopyWith<ContentCategoriesDto> get copyWith => _$ContentCat
   /// Serializes this ContentCategoriesDto to a JSON map.
   Map<String, dynamic> toJson();
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'ContentCategoriesDto'))
+    ..add(DiagnosticsProperty('categoryId', categoryId))..add(DiagnosticsProperty('categoryName', categoryName))..add(DiagnosticsProperty('viewType', viewType))..add(DiagnosticsProperty('recommended', recommended))..add(DiagnosticsProperty('contents', contents));
+}
 
 @override
 bool operator ==(Object other) {
@@ -37,7 +42,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,categoryId,categoryName,viewType,recommended,const DeepCollectionEquality().hash(contents));
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'ContentCategoriesDto(categoryId: $categoryId, categoryName: $categoryName, viewType: $viewType, recommended: $recommended, contents: $contents)';
 }
 
@@ -92,10 +97,140 @@ $MainPageContentDtoCopyWith<$Res>? get recommended {
 }
 
 
+/// Adds pattern-matching-related methods to [ContentCategoriesDto].
+extension ContentCategoriesDtoPatterns on ContentCategoriesDto {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _ContentCategoriesDto value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _ContentCategoriesDto() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _ContentCategoriesDto value)  $default,){
+final _that = this;
+switch (_that) {
+case _ContentCategoriesDto():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _ContentCategoriesDto value)?  $default,){
+final _that = this;
+switch (_that) {
+case _ContentCategoriesDto() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int categoryId,  String categoryName,  int viewType,  MainPageContentDto? recommended,  List<MainPageContentDto> contents)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _ContentCategoriesDto() when $default != null:
+return $default(_that.categoryId,_that.categoryName,_that.viewType,_that.recommended,_that.contents);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int categoryId,  String categoryName,  int viewType,  MainPageContentDto? recommended,  List<MainPageContentDto> contents)  $default,) {final _that = this;
+switch (_that) {
+case _ContentCategoriesDto():
+return $default(_that.categoryId,_that.categoryName,_that.viewType,_that.recommended,_that.contents);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int categoryId,  String categoryName,  int viewType,  MainPageContentDto? recommended,  List<MainPageContentDto> contents)?  $default,) {final _that = this;
+switch (_that) {
+case _ContentCategoriesDto() when $default != null:
+return $default(_that.categoryId,_that.categoryName,_that.viewType,_that.recommended,_that.contents);case _:
+  return null;
+
+}
+}
+
+}
+
 /// @nodoc
 @JsonSerializable()
 
-class _ContentCategoriesDto extends ContentCategoriesDto {
+class _ContentCategoriesDto extends ContentCategoriesDto with DiagnosticableTreeMixin {
   const _ContentCategoriesDto({required this.categoryId, required this.categoryName, this.viewType = 0, this.recommended, final  List<MainPageContentDto> contents = const []}): _contents = contents,super._();
   factory _ContentCategoriesDto.fromJson(Map<String, dynamic> json) => _$ContentCategoriesDtoFromJson(json);
 
@@ -121,6 +256,12 @@ _$ContentCategoriesDtoCopyWith<_ContentCategoriesDto> get copyWith => __$Content
 Map<String, dynamic> toJson() {
   return _$ContentCategoriesDtoToJson(this, );
 }
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'ContentCategoriesDto'))
+    ..add(DiagnosticsProperty('categoryId', categoryId))..add(DiagnosticsProperty('categoryName', categoryName))..add(DiagnosticsProperty('viewType', viewType))..add(DiagnosticsProperty('recommended', recommended))..add(DiagnosticsProperty('contents', contents));
+}
 
 @override
 bool operator ==(Object other) {
@@ -132,7 +273,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,categoryId,categoryName,viewType,recommended,const DeepCollectionEquality().hash(_contents));
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'ContentCategoriesDto(categoryId: $categoryId, categoryName: $categoryName, viewType: $viewType, recommended: $recommended, contents: $contents)';
 }
 
@@ -189,7 +330,7 @@ $MainPageContentDtoCopyWith<$Res>? get recommended {
 
 
 /// @nodoc
-mixin _$TemperatureDto {
+mixin _$TemperatureDto implements DiagnosticableTreeMixin {
 
  String? get temperature; String? get condition; String? get iconUrl;
 /// Create a copy of TemperatureDto
@@ -201,6 +342,12 @@ $TemperatureDtoCopyWith<TemperatureDto> get copyWith => _$TemperatureDtoCopyWith
   /// Serializes this TemperatureDto to a JSON map.
   Map<String, dynamic> toJson();
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'TemperatureDto'))
+    ..add(DiagnosticsProperty('temperature', temperature))..add(DiagnosticsProperty('condition', condition))..add(DiagnosticsProperty('iconUrl', iconUrl));
+}
 
 @override
 bool operator ==(Object other) {
@@ -212,7 +359,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,temperature,condition,iconUrl);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'TemperatureDto(temperature: $temperature, condition: $condition, iconUrl: $iconUrl)';
 }
 
@@ -253,10 +400,140 @@ as String?,
 }
 
 
+/// Adds pattern-matching-related methods to [TemperatureDto].
+extension TemperatureDtoPatterns on TemperatureDto {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TemperatureDto value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _TemperatureDto() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TemperatureDto value)  $default,){
+final _that = this;
+switch (_that) {
+case _TemperatureDto():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TemperatureDto value)?  $default,){
+final _that = this;
+switch (_that) {
+case _TemperatureDto() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? temperature,  String? condition,  String? iconUrl)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _TemperatureDto() when $default != null:
+return $default(_that.temperature,_that.condition,_that.iconUrl);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? temperature,  String? condition,  String? iconUrl)  $default,) {final _that = this;
+switch (_that) {
+case _TemperatureDto():
+return $default(_that.temperature,_that.condition,_that.iconUrl);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? temperature,  String? condition,  String? iconUrl)?  $default,) {final _that = this;
+switch (_that) {
+case _TemperatureDto() when $default != null:
+return $default(_that.temperature,_that.condition,_that.iconUrl);case _:
+  return null;
+
+}
+}
+
+}
+
 /// @nodoc
 @JsonSerializable()
 
-class _TemperatureDto extends TemperatureDto {
+class _TemperatureDto extends TemperatureDto with DiagnosticableTreeMixin {
   const _TemperatureDto({this.temperature, this.condition, this.iconUrl}): super._();
   factory _TemperatureDto.fromJson(Map<String, dynamic> json) => _$TemperatureDtoFromJson(json);
 
@@ -274,6 +551,12 @@ _$TemperatureDtoCopyWith<_TemperatureDto> get copyWith => __$TemperatureDtoCopyW
 Map<String, dynamic> toJson() {
   return _$TemperatureDtoToJson(this, );
 }
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'TemperatureDto'))
+    ..add(DiagnosticsProperty('temperature', temperature))..add(DiagnosticsProperty('condition', condition))..add(DiagnosticsProperty('iconUrl', iconUrl));
+}
 
 @override
 bool operator ==(Object other) {
@@ -285,7 +568,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,temperature,condition,iconUrl);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'TemperatureDto(temperature: $temperature, condition: $condition, iconUrl: $iconUrl)';
 }
 
@@ -328,9 +611,9 @@ as String?,
 
 
 /// @nodoc
-mixin _$MainPageContentDto {
+mixin _$MainPageContentDto implements DiagnosticableTreeMixin {
 
- int get contentId; String? get title; String? get caption;@ImageArrayConvertor() List<String> get photos;@ImageConvertor() String? get photo; String? get region; String? get address; double? get distance; int? get reviewCount; List<FacilityItemDto>? get facilities; List<String>? get languages; double? get ratingAverage; int? get averageCheck; double? get price; double? get priceInDollar; bool? get isFavorite;@ViewTypeConvertor() ViewType get viewType;
+ int get contentId; String? get title; String? get caption;@ImageArrayConvertor() List<String> get photos;@ImageConvertor() String? get photo; String? get region; String? get address; double? get distance; int? get reviewCount; List<FacilityItemDto>? get facilities; List<String>? get languages; double? get ratingAverage; int? get averageCheck; double? get price; double? get priceInDollar; bool? get isFavorite; int? get viewType;
 /// Create a copy of MainPageContentDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -340,6 +623,12 @@ $MainPageContentDtoCopyWith<MainPageContentDto> get copyWith => _$MainPageConten
   /// Serializes this MainPageContentDto to a JSON map.
   Map<String, dynamic> toJson();
 
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'MainPageContentDto'))
+    ..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('caption', caption))..add(DiagnosticsProperty('photos', photos))..add(DiagnosticsProperty('photo', photo))..add(DiagnosticsProperty('region', region))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('reviewCount', reviewCount))..add(DiagnosticsProperty('facilities', facilities))..add(DiagnosticsProperty('languages', languages))..add(DiagnosticsProperty('ratingAverage', ratingAverage))..add(DiagnosticsProperty('averageCheck', averageCheck))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('priceInDollar', priceInDollar))..add(DiagnosticsProperty('isFavorite', isFavorite))..add(DiagnosticsProperty('viewType', viewType));
+}
 
 @override
 bool operator ==(Object other) {
@@ -351,7 +640,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,contentId,title,caption,const DeepCollectionEquality().hash(photos),photo,region,address,distance,reviewCount,const DeepCollectionEquality().hash(facilities),const DeepCollectionEquality().hash(languages),ratingAverage,averageCheck,price,priceInDollar,isFavorite,viewType);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, distance: $distance, reviewCount: $reviewCount, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, viewType: $viewType)';
 }
 
@@ -363,7 +652,7 @@ abstract mixin class $MainPageContentDtoCopyWith<$Res>  {
   factory $MainPageContentDtoCopyWith(MainPageContentDto value, $Res Function(MainPageContentDto) _then) = _$MainPageContentDtoCopyWithImpl;
 @useResult
 $Res call({
- int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite,@ViewTypeConvertor() ViewType viewType
+ int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite, int? viewType
 });
 
 
@@ -380,7 +669,7 @@ class _$MainPageContentDtoCopyWithImpl<$Res>
 
 /// Create a copy of MainPageContentDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? viewType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? viewType = freezed,}) {
   return _then(_self.copyWith(
 contentId: null == contentId ? _self.contentId : contentId // ignore: cast_nullable_to_non_nullable
 as int,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -398,19 +687,149 @@ as double?,averageCheck: freezed == averageCheck ? _self.averageCheck : averageC
 as int?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double?,priceInDollar: freezed == priceInDollar ? _self.priceInDollar : priceInDollar // ignore: cast_nullable_to_non_nullable
 as double?,isFavorite: freezed == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
-as bool?,viewType: null == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
-as ViewType,
+as bool?,viewType: freezed == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 
 }
 
 
+/// Adds pattern-matching-related methods to [MainPageContentDto].
+extension MainPageContentDtoPatterns on MainPageContentDto {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _MainPageContentDto value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _MainPageContentDto() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _MainPageContentDto value)  $default,){
+final _that = this;
+switch (_that) {
+case _MainPageContentDto():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _MainPageContentDto value)?  $default,){
+final _that = this;
+switch (_that) {
+case _MainPageContentDto() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  int? viewType)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _MainPageContentDto() when $default != null:
+return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.viewType);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  int? viewType)  $default,) {final _that = this;
+switch (_that) {
+case _MainPageContentDto():
+return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.viewType);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  int? viewType)?  $default,) {final _that = this;
+switch (_that) {
+case _MainPageContentDto() when $default != null:
+return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.viewType);case _:
+  return null;
+
+}
+}
+
+}
+
 /// @nodoc
 @JsonSerializable()
 
-class _MainPageContentDto extends MainPageContentDto {
-  const _MainPageContentDto({required this.contentId, this.title, this.caption, @ImageArrayConvertor() final  List<String> photos = const [], @ImageConvertor() this.photo, this.region, this.address, this.distance, this.reviewCount, final  List<FacilityItemDto>? facilities, final  List<String>? languages, this.ratingAverage, this.averageCheck, this.price, this.priceInDollar, this.isFavorite, @ViewTypeConvertor() this.viewType = ViewType.places}): _photos = photos,_facilities = facilities,_languages = languages,super._();
+class _MainPageContentDto extends MainPageContentDto with DiagnosticableTreeMixin {
+  const _MainPageContentDto({required this.contentId, this.title, this.caption, @ImageArrayConvertor() final  List<String> photos = const [], @ImageConvertor() this.photo, this.region, this.address, this.distance, this.reviewCount, final  List<FacilityItemDto>? facilities, final  List<String>? languages, this.ratingAverage, this.averageCheck, this.price, this.priceInDollar, this.isFavorite, this.viewType}): _photos = photos,_facilities = facilities,_languages = languages,super._();
   factory _MainPageContentDto.fromJson(Map<String, dynamic> json) => _$MainPageContentDtoFromJson(json);
 
 @override final  int contentId;
@@ -451,7 +870,7 @@ class _MainPageContentDto extends MainPageContentDto {
 @override final  double? price;
 @override final  double? priceInDollar;
 @override final  bool? isFavorite;
-@override@JsonKey()@ViewTypeConvertor() final  ViewType viewType;
+@override final  int? viewType;
 
 /// Create a copy of MainPageContentDto
 /// with the given fields replaced by the non-null parameter values.
@@ -462,6 +881,12 @@ _$MainPageContentDtoCopyWith<_MainPageContentDto> get copyWith => __$MainPageCon
 @override
 Map<String, dynamic> toJson() {
   return _$MainPageContentDtoToJson(this, );
+}
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'MainPageContentDto'))
+    ..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('caption', caption))..add(DiagnosticsProperty('photos', photos))..add(DiagnosticsProperty('photo', photo))..add(DiagnosticsProperty('region', region))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('reviewCount', reviewCount))..add(DiagnosticsProperty('facilities', facilities))..add(DiagnosticsProperty('languages', languages))..add(DiagnosticsProperty('ratingAverage', ratingAverage))..add(DiagnosticsProperty('averageCheck', averageCheck))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('priceInDollar', priceInDollar))..add(DiagnosticsProperty('isFavorite', isFavorite))..add(DiagnosticsProperty('viewType', viewType));
 }
 
 @override
@@ -474,7 +899,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,contentId,title,caption,const DeepCollectionEquality().hash(_photos),photo,region,address,distance,reviewCount,const DeepCollectionEquality().hash(_facilities),const DeepCollectionEquality().hash(_languages),ratingAverage,averageCheck,price,priceInDollar,isFavorite,viewType);
 
 @override
-String toString() {
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, distance: $distance, reviewCount: $reviewCount, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, viewType: $viewType)';
 }
 
@@ -486,7 +911,7 @@ abstract mixin class _$MainPageContentDtoCopyWith<$Res> implements $MainPageCont
   factory _$MainPageContentDtoCopyWith(_MainPageContentDto value, $Res Function(_MainPageContentDto) _then) = __$MainPageContentDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite,@ViewTypeConvertor() ViewType viewType
+ int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite, int? viewType
 });
 
 
@@ -503,7 +928,7 @@ class __$MainPageContentDtoCopyWithImpl<$Res>
 
 /// Create a copy of MainPageContentDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? viewType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? viewType = freezed,}) {
   return _then(_MainPageContentDto(
 contentId: null == contentId ? _self.contentId : contentId // ignore: cast_nullable_to_non_nullable
 as int,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -521,8 +946,8 @@ as double?,averageCheck: freezed == averageCheck ? _self.averageCheck : averageC
 as int?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double?,priceInDollar: freezed == priceInDollar ? _self.priceInDollar : priceInDollar // ignore: cast_nullable_to_non_nullable
 as double?,isFavorite: freezed == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
-as bool?,viewType: null == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
-as ViewType,
+as bool?,viewType: freezed == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 

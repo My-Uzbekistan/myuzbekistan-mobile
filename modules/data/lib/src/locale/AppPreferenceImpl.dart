@@ -18,12 +18,12 @@ class AppPreferenceImpl extends AppPreference {
   }
 
   @override
-  AppLocale getLocale() {
+  AppLocale? getLocale() {
     final String? locale = _box.get(
       "locale",
     );
 
-    if (locale == null) return AppLocale.en;
+    if (locale == null) return null;
     final appLocale = AppLocale.values.firstWhere((e) => e.name == locale);
     return appLocale;
   }

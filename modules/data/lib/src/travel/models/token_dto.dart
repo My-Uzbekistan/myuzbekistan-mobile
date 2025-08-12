@@ -6,13 +6,15 @@ part 'token_dto.g.dart';
 
 @JsonSerializable()
 class TokenDto {
-  String access_token;
-  String refresh_token;
+  @JsonKey(name: "access_token")
+  String accessToken;
+  @JsonKey(name: "refresh_token")
+  String refreshToken;
   int expires;
 
   TokenDto(
-      {required this.access_token,
-      required this.refresh_token,
+      {required this.accessToken,
+      required this.refreshToken,
       required this.expires});
 
   factory TokenDto.fromJson(Map<String, dynamic> json) =>
@@ -21,6 +23,6 @@ class TokenDto {
   Map<String, dynamic> toJson() => _$TokenDtoToJson(this);
 
 Token toDomain() {
-  return Token(accessToken: access_token,refreshToken: refresh_token,expires: expires);
+  return Token(accessToken: accessToken,refreshToken: refreshToken,expires: expires);
 }
 }

@@ -8,6 +8,10 @@ import 'dart:async' as _i687;
 
 import 'package:data/src/di/module/locale_module.dart' as _i168;
 import 'package:data/src/di/module/network_module.dart' as _i236;
+import 'package:data/src/finance/src/network/api/finance_api_service.dart'
+    as _i210;
+import 'package:data/src/finance/src/network/repository/finance_repository_impl.dart'
+    as _i144;
 import 'package:data/src/locale/AppPreferenceImpl.dart' as _i80;
 import 'package:data/src/locale/security_storage_impl.dart' as _i916;
 import 'package:data/src/travel/network/api/service.dart' as _i926;
@@ -59,9 +63,13 @@ class DataPackageModule extends _i526.MicroPackageModule {
           gh<String>(instanceName: 'baseUrl'),
           gh<_i934.Alice>(),
         ));
-    gh.factory<_i926.RestService>(() => _i926.RestService(gh<_i361.Dio>()));
+    gh.factory<_i210.FinanceApiService>(
+        () => _i210.FinanceApiService.new(gh<_i361.Dio>()));
+    gh.factory<_i926.RestService>(() => _i926.RestService.new(gh<_i811.Dio>()));
     gh.factory<_i494.Repository>(
         () => _i305.RepositoryImp(gh<_i926.RestService>()));
+    gh.factory<_i494.FinanceRepository>(
+        () => _i144.FinanceRepositoryImpl(gh<_i210.FinanceApiService>()));
   }
 }
 

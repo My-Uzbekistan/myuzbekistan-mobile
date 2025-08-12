@@ -31,29 +31,34 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String lanItem(String lang) {
-    String _temp0 = intl.Intl.selectLogic(
-      lang,
-      {
-        'en': 'Английский',
-        'ru': 'Русский',
-        'uz': 'Узбекский',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'Английский',
+      'ru': 'Русский',
+      'uz': 'Узбекский',
+      'other': '',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String langItemDefault(String lang) {
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'English',
+      'ru': 'Русский',
+      'uz': 'O\'zbekcha',
+      'other': '',
+    });
     return '$_temp0';
   }
 
   @override
   String themeModes(String theme) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme,
-      {
-        'system': 'Системный',
-        'light': 'Светлая',
-        'dark': 'Тёмная',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(theme, {
+      'system': 'Системный',
+      'light': 'Светлая',
+      'dark': 'Тёмная',
+      'other': '',
+    });
     return '$_temp0';
   }
 
@@ -80,7 +85,8 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get logout => 'Выйти';
 
   @override
-  String get getStartedDescription => 'Получите полный доступ к возможностям, а также сохраняйте свои любимые вещи';
+  String get getStartedDescription =>
+      'Получите полный доступ к возможностям, а также сохраняйте свои любимые вещи';
 
   @override
   String get continueWithGoogle => 'Продолжить с Google';
@@ -145,7 +151,8 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get pageFailedToLoad => 'Страница не загрузилась';
 
   @override
-  String get something_went_wrong => 'Что-то пошло не так. Пожалуйста, попробуйте еще раз.';
+  String get something_went_wrong =>
+      'Что-то пошло не так. Пожалуйста, попробуйте еще раз.';
 
   @override
   String get generalEmergency => 'Аварийная служба';

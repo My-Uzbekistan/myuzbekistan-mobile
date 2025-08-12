@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:component_res/component_res.dart';
+import 'package:finance/src/core/extension.dart';
 import 'package:finance/src/presentation/add_cards/bloc/add_card_bloc.dart';
+import 'package:finance/src/presentation/add_cards/widget/external_card_page_widget.dart';
+import 'package:finance/src/presentation/add_cards/widget/own_card_page_widget.dart';
 import 'package:finance/src/utils/expire_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 import '../../utils/card_input_formatter.dart';
@@ -17,201 +23,170 @@ class AddCardsPage extends StatefulWidget {
 
 class _AddCardsPageState extends State<AddCardsPage> {
   final TextEditingController _cardNumberController = TextEditingController();
-  final TextEditingController _cardExpireController = TextEditingController();
-  final TextEditingController _cardCvvController = TextEditingController();
-  final TextEditingController _cardAliasController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
-    _cardAliasController.addListener(listener);
-    _cardCvvController.addListener(listener);
-    _cardExpireController.addListener(listener);
-    _cardNumberController.addListener(listener);
+    _cardNumberController.addListener(cardNumberListener);
     bloc = context.read();
   }
 
   @override
   void dispose() {
-    _cardCvvController.removeListener(listener);
-    _cardExpireController.removeListener(listener);
-    _cardNumberController.removeListener(listener);
-    _cardAliasController.removeListener(listener);
-
-    _cardCvvController.dispose();
-    _cardExpireController.dispose();
+    _cardNumberController.removeListener(cardNumberListener);
     _cardNumberController.dispose();
-    _cardAliasController.dispose();
+
     super.dispose();
   }
 
   AddCardBloc? bloc;
 
-  void listener() {
+  void cardNumberListener() {
     if (!mounted) return;
-
     bloc?.add(
-      AddCardEvent.setData(
-        cardNumber: _cardNumberController.text,
-        expire: _cardExpireController.text,
-        cvv: _cardCvvController.text,
-        name: _cardAliasController.text,
-      ),
+      AddCardEvent.setCardNumber(cardNumber: _cardNumberController.text),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-    //   CupertinoTheme(
-    //
-    //   data: CupertinoThemeData(),
-    //   child: CustomScrollView(
-    //     slivers: [
-    //       CupertinoSliverNavigationBar(
-    //         largeTitle: Text("Add cards"),
-    //       )
-    //     ],
-    //   ),
-    // );
-    BlocBuilder<AddCardBloc, AddCardState>(
-      buildWhen: (previous, current) => previous.isLoading != current.isLoading,
+    return BlocConsumer<AddCardBloc, AddCardState>(
+      listenWhen: (previous, current) => previous.navState != current.navState,
+      listener: (context, state) {
+        if (state.navState != null) {
+          navigation(context, state.navState!);
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomInset: true,
-          appBar: AppBar(title: Text("Добавить карту")),
+
+          appBar: AppBar(title: Text(context.localization.addCard)),
           bottomNavigationBar: SafeArea(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               child: AppActionButton(
-                actionText: "Добавить",
+                actionText:context.coreLocalization.action_add,
+                disable: !state.hasDataSuccess(),
+                isLoading: state.isLoading,
                 sizeType: ActionButtonSizeType.large,
+                onPressed: () {
+                  bloc?.add(AddCardEvent.add());
+                },
               ),
             ),
           ),
 
           body: IgnorePointer(
             ignoring: false,
-            child: SafeArea(
-              bottom: true,
-              child: LayoutBuilder(
-                builder:
-                    (context, constraints) => SingleChildScrollView(
-                      padding: EdgeInsets.only(
-                        top: 16,
-                        bottom: MediaQuery.of(context).viewInsets.bottom + 8,
-                      ),
-                      child: Column(
-                        spacing: 24,
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0,
-                            ),
-                            child: Column(
-                              spacing: 16,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                AppInputField(
-                                  controller: _cardNumberController,
-                                  label: "Номер карты",
-                                  hintText: "0000 0000 0000 0000",
-                                  keyboardType: TextInputType.number,
-                                  formatters: [
-                                    FilteringTextInputFormatter.allow(RegExp(r'[0-9 ]')),
-                                    CardInputFormatter()
-                                  ],
-                                ),
-                                Row(
-                                  spacing: 16,
-                                  children: [
-                                    Flexible(
-                                      child: AppInputField(
-                                        controller: _cardExpireController,
-                                        label: "Срок действия",
-                                        hintText: "00/00",
-                                        keyboardType: TextInputType.number,
-                                        formatters: [
-                                          FilteringTextInputFormatter.allow(RegExp(r'[0-9/]')),
-                                          ExpiryDateInputFormatter()
-                                        ],
-                                      ),
-                                    ),
-                                    Flexible(
-                                      child: AppInputField(
-                                        controller: _cardCvvController,
-                                        label: "CVV / CVC",
-                                        hintText: "000",
-                                      keyboardType: TextInputType.number,
-                                        formatters: [
-                                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                AppInputField(
-                                  controller: _cardAliasController,
-                                  label: "Название карты",
-                                  hintText: "Название карты",
-                                ),
-                              ],
-                            ),
-                          ),
+            child: GestureDetector(
+              onTap: () {
+                if (FocusScope.of(context).hasFocus) {
+                  FocusScope.of(context).unfocus(); // back ni yutib yuboramiz
+                }
+              },
 
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 16,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20.0,
-                                ),
-                                child: Text("Цвет карты").labelLg(),
+              child: SizedBox(
+                height: double.maxFinite,
+                child: SafeArea(
+                  bottom: true,
+                  child: SingleChildScrollView(
+                    keyboardDismissBehavior:
+                        ScrollViewKeyboardDismissBehavior.onDrag,
+
+                    child: LayoutBuilder(
+                      builder:
+                          (context, constraints) => SingleChildScrollView(
+                            padding: EdgeInsets.only(
+                              top: 16,
+                              bottom:
+                                  MediaQuery.of(context).viewInsets.bottom + 8,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20.0,
                               ),
-
-                              SizedBox(
-                                height: 40,
-                                child: ListView.separated(
-                                  itemCount: 10,
-                                  padding: EdgeInsets.symmetric(horizontal: 20),
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(width: 12);
-                                  },
-                                  itemBuilder: (context, index) {
-                                    return CircleAvatar(
-                                      radius: 20,
-                                      backgroundColor: Colors.red,
-
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Assets.svgIconCheck.toSvgImage(
-                                          fit: BoxFit.contain,
-                                          colorFilter: ColorFilter.mode(
-                                            Colors.white,
-                                            BlendMode.srcIn,
+                              child: Column(
+                                spacing: 16,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  AppInputField(
+                                    controller: _cardNumberController,
+                                    label: context.localization.card_number_label,
+                                    hintText: "0000 0000 0000 0000",
+                                    keyboardType: TextInputType.number,
+                                    formatters: [
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9 ]'),
+                                      ),
+                                      CardInputFormatter(),
+                                    ],
+                                  ),
+                                  if (state.params is AddCardExternalParams)
+                                    ExternalCardPageWidget(
+                                      updateCardData: (
+                                        expire,
+                                        cvv,
+                                        holderName,
+                                      ) {
+                                        bloc?.add(
+                                          AddCardEvent.setExternalParams(
+                                            expire: expire,
+                                            cvv: cvv,
+                                            holderName: holderName,
                                           ),
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  scrollDirection: Axis.horizontal,
-                                ),
+                                        );
+                                      },
+                                    ),
+                                  if (state.params is AddCardOwnParams)
+                                    OwnCardPageWidget(
+                                      updateCardData: (expire, phone) {
+                                        bloc?.add(
+                                          AddCardEvent.setOwnParams(
+                                            expire: expire,
+                                            phoneNumber: phone,
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ],
-                      ),
                     ),
+                  ),
+                ),
               ),
             ),
           ),
         );
       },
     );
+  }
+
+  void navigation(BuildContext context, AddCardNavState navState) {
+    switch (navState) {
+      case AddCardVerifyNavState():
+        final extra = GoRouterState.of(context).extra;
+        context.finance.pushAddCardVerification(
+          cardId: navState.cardId,
+          extra: extra,
+        );
+        break;
+
+      case AddCardErrorNavState():
+        InfoAlertDialog.show(
+          context,
+          message: navState.message,
+          type: InfoAlertType.error,
+        );
+        break;
+
+      case AddCardCompletedNavState():
+        (GoRouterState.of(context).extra as Completer<bool>?)?.complete(true);
+        context.pop();
+        break;
+    }
   }
 }

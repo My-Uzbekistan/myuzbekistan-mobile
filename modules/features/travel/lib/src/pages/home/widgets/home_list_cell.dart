@@ -8,14 +8,15 @@ class HomeListCell extends StatefulWidget {
   final VoidCallback? openAll;
   final ViewType? viewType;
 
-  const HomeListCell(
-      {super.key,
-      required this.categoryId,
-      required this.categoryName,
-      required this.items,
-      this.onItemTap,
-      this.viewType,
-      this.openAll});
+  const HomeListCell({
+    super.key,
+    required this.categoryId,
+    required this.categoryName,
+    required this.items,
+    this.onItemTap,
+    this.viewType,
+    this.openAll,
+  });
 
   @override
   State<HomeListCell> createState() => _HomeListCellState();
@@ -30,8 +31,9 @@ class _HomeListCellState extends State<HomeListCell>
   @override
   void initState() {
     // TODO: implement initState
-    loadContentBLoc
-        .add(LoadContentCategoryEvent.init(widget.categoryId, widget.items));
+    loadContentBLoc.add(
+      LoadContentCategoryEvent.init(widget.categoryId, widget.items),
+    );
     super.initState();
     scrollController.addListener(_onScroll);
   }
@@ -47,6 +49,7 @@ class _HomeListCellState extends State<HomeListCell>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider<LoadContentBloc>(
       create: (context) => loadContentBLoc,
       child: BlocBuilder<LoadContentBloc, LoadContentCategoryState>(
@@ -74,15 +77,17 @@ class _HomeListCellState extends State<HomeListCell>
                         GestureDetector(
                           onTap: widget.openAll,
                           child: Container(
-                              height: double.infinity,
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              alignment: Alignment.center,
-                              child: Text(
-                                context.localization.action_all,
-                                style: CustomTypography.bodyLg
-                                    .copyWith(color: context.appColors.brand),
-                              )),
-                        )
+                            height: double.infinity,
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            alignment: Alignment.center,
+                            child: Text(
+                              context.localization.action_all,
+                              style: CustomTypography.bodyLg.copyWith(
+                                color: context.appColors.brand,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -91,48 +96,47 @@ class _HomeListCellState extends State<HomeListCell>
                 SizedBox(
                   height: widget.viewType == ViewType.profile ? 122 : 230,
                   child: ListView.separated(
-                      controller: scrollController,
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      separatorBuilder: (context, index) {
-                        return SizedBox(
-                          width: 12,
-                        );
-                      },
-                      scrollDirection: Axis.horizontal,
-                      physics: Platform.isAndroid
-                          ? ClampingScrollPhysics()
-                          : BouncingScrollPhysics(),
-                      itemCount:
-                          state.contents.length + (state.isLoading ? 1 : 0),
-                      itemBuilder: (context, index) {
-                        if (index == state.contents.length) {
-                          return Container(
-                            alignment: Alignment.topLeft,
-                            padding: EdgeInsets.only(top: 70),
-                            child: LoadingIndicator(),
-                          );
-                        }
-                        final item = state.contents[index];
+                    controller: scrollController,
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    separatorBuilder: (context, index) {
+                      return SizedBox(width: 12);
+                    },
+                    scrollDirection: Axis.horizontal,
 
-                        return RepaintBoundary(
-                          key: ValueKey(item),
-                          child: widget.viewType == ViewType.profile
-                              ? ItemCardAvatar(
-                                  avatarUrl: item.mainPhoto,
-                                  name: item.title,
-                                  onTap: () {
-                                    widget.onItemTap?.call(item);
-                                  },
-                                )
-                              : ItemCard(
-                                  content: item,
-                                  distanceText:
-                                      distanceText(context, item.distanceKm),
-                                  onTap: () => widget.onItemTap?.call(item),
-                                ),
+                    physics:
+                        Platform.isAndroid
+                            ? ClampingScrollPhysics()
+                            : BouncingScrollPhysics(),
+                    itemCount:
+                        state.contents.length + (state.isLoading ? 1 : 0),
+                    itemBuilder: (context, index) {
+                      if (index == state.contents.length) {
+                        return Container(
+                          alignment: Alignment.topLeft,
+                          padding: EdgeInsets.only(top: 70),
+                          child: LoadingIndicator(),
                         );
-                      }),
-                )
+                      }
+                      final item = state.contents[index];
+                      return widget.viewType == ViewType.profile
+                          ? ItemCardAvatar(
+                            avatarUrl: item.mainPhoto,
+                            name: item.title,
+                            onTap: () {
+                              widget.onItemTap?.call(item);
+                            },
+                          )
+                          : ItemCard(
+                            content: item,
+                            distanceText: distanceText(
+                              context,
+                              item.distanceKm,
+                            ),
+                            onTap: () => widget.onItemTap?.call(item),
+                          );
+                    },
+                  ),
+                ),
                 // SingleChildScrollView(
                 //   controller: scrollController,
                 //   scrollDirection: Axis.horizontal,
@@ -186,5 +190,5 @@ class _HomeListCellState extends State<HomeListCell>
 
   @override
   // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => false;
+  bool get wantKeepAlive => true;
 }

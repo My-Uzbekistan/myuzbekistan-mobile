@@ -18,7 +18,7 @@ class BalanceWidget extends HookWidget {
           curve: Curves.easeInOut,
           alignment: Alignment.centerLeft,
           child: Text(
-            isVisible.value ? '\$4 500,00' : '******',
+            isVisible.value ? '\$4 500,00' : '••••••',
             key: ValueKey(isVisible.value),
             style: CustomTypography.H1,
           ),

@@ -19,9 +19,11 @@ class CellsWidget extends StatelessWidget {
       children: [
         ItemsTitle(title: title),
         Column(
-            spacing: 12,
-            children: contacts
-                .map((e) => _CellItem(
+          spacing: 12,
+          children:
+              contacts
+                  .map(
+                    (e) => _CellItem(
                       icon: e.icon,
                       name: e.name,
                       contact: e.contact,
@@ -31,8 +33,10 @@ class CellsWidget extends StatelessWidget {
                           LauncherUtils.urlLauncher(e.action!);
                         }
                       },
-                    ))
-                .toList())
+                    ),
+                  )
+                  .toList(),
+        ),
       ],
     );
   }
@@ -45,13 +49,14 @@ class _CellItem extends StatelessWidget {
   final String? contact;
   final VoidCallback? onTap;
 
-  const _CellItem(
-      {super.key,
-      this.contact,
-      this.name,
-      this.icon,
-      this.bgColor,
-      this.onTap});
+  const _CellItem({
+    super.key,
+    this.contact,
+    this.name,
+    this.icon,
+    this.bgColor,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -61,42 +66,43 @@ class _CellItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: bgColor ?? context.appColors.fill.quaternary),
+          borderRadius: BorderRadius.circular(20),
+          color: bgColor ?? context.appColors.fill.quaternary,
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           spacing: 16,
           children: [
             Container(
-                width: 40,
-                height: 40,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: context.appColors.fill.quaternary),
-                child: CachedNetworkImage(
-                  imageUrl: icon??"",
-                  fit: BoxFit.cover,
-                  errorListener: (obj){},
-                  errorWidget: (context, url, error) => SizedBox(),
-                )),
+              width: 40,
+              height: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: context.appColors.fill.quaternary,
+              ),
+              child: ExtendedImage.network(
+                icon ?? "",
+                fit: BoxFit.cover,
+                cache: true,
+                cacheMaxAge: Duration(days: 10),
+              ),
+            ),
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    contact ?? "",
-                    style: CustomTypography.labelLg,
-                  ),
+                  Text(contact ?? "", style: CustomTypography.labelLg),
                   if ((name ?? "").isNotEmpty)
                     Text(
                       name ?? "",
                       style: CustomTypography.bodyMd.copyWith(
-                          color: context.appColors.textIconColor.secondary),
+                        color: context.appColors.textIconColor.secondary,
+                      ),
                     ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

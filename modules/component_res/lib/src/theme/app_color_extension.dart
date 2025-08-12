@@ -2,7 +2,7 @@ part of 'app_color_theme.dart';
 
 class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
   final Color brand;
-  final TextIconColor textIconColor;
+  final LabelColor textIconColor;
   final BackgroundColors background;
   final FillColors fill;
   final StrokeColors stroke;
@@ -12,20 +12,18 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
   final ServiceColors service;
   final RippleColor rippleColor;
 
-
-  _AppColorsExtension(
-      {
-        required this.brand,
-        required this.textIconColor,
-      required this.background,
-      required this.fill,
-      required this.stroke,
-      required this.static,
-      required this.colors,
-      required this.nonOpaque,
-      required this.service,
-      required this.rippleColor,
-      });
+  _AppColorsExtension({
+    required this.brand,
+    required this.textIconColor,
+    required this.background,
+    required this.fill,
+    required this.stroke,
+    required this.static,
+    required this.colors,
+    required this.nonOpaque,
+    required this.service,
+    required this.rippleColor,
+  });
 
   @override
   ThemeExtension<_AppColorsExtension> lerp(
@@ -36,22 +34,21 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
     return _AppColorsExtension(
       brand: other.brand,
       textIconColor: other.textIconColor,
-        background: other.background,
-        fill: other.fill,
-        stroke: other.stroke,
-        static: other.static,
-        colors: other.colors,
-        nonOpaque: other.nonOpaque,
-        service: other.service,
-        rippleColor: other.rippleColor,
-
+      background: other.background,
+      fill: other.fill,
+      stroke: other.stroke,
+      static: other.static,
+      colors: other.colors,
+      nonOpaque: other.nonOpaque,
+      service: other.service,
+      rippleColor: other.rippleColor,
     );
   }
 
   @override
   ThemeExtension<_AppColorsExtension> copyWith(
-      {TextIconColor? textIconColor,
-        Color? brand,
+      {LabelColor? textIconColor,
+      Color? brand,
       BackgroundColors? background,
       FillColors? fill,
       StrokeColors? stroke,
@@ -59,21 +56,18 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
       OtherColors? colors,
       NonOpaque? nonOpaque,
       ServiceColors? service,
-      RippleColor? ripple
-
-      }) {
+      RippleColor? ripple}) {
     return _AppColorsExtension(
-      brand: brand??this.brand,
+      brand: brand ?? this.brand,
       textIconColor: textIconColor ?? this.textIconColor,
-        background: background ?? this.background,
-        fill: fill ?? this.fill,
-        stroke: stroke ?? this.stroke,
-        static: static ?? this.static,
-        colors: colors ?? this.colors,
-        nonOpaque: nonOpaque ?? this.nonOpaque,
-        service: service ?? this.service,
-        rippleColor: ripple?? rippleColor,
-
+      background: background ?? this.background,
+      fill: fill ?? this.fill,
+      stroke: stroke ?? this.stroke,
+      static: static ?? this.static,
+      colors: colors ?? this.colors,
+      nonOpaque: nonOpaque ?? this.nonOpaque,
+      service: service ?? this.service,
+      rippleColor: ripple ?? rippleColor,
     );
   }
 }
@@ -87,4 +81,17 @@ extension ContextEx on BuildContext {
   _AppColorsExtension get appColors => Theme.of(this).appColors;
 
   Brightness get brightness => Theme.of(this).brightness;
+
+  SystemUiOverlayStyle systemOverlyStyle() {
+    return ((brightness == Brightness.light
+            ? SystemUiOverlayStyle.dark
+            : SystemUiOverlayStyle.light))
+        .copyWith(
+      systemNavigationBarContrastEnforced: false,
+      statusBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness:
+          brightness == Brightness.light ? Brightness.dark : Brightness.light,
+      systemNavigationBarColor: appColors.background.elevation1Alt,
+    );
+  }
 }

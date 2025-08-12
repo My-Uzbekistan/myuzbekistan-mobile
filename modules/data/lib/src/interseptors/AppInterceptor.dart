@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart' show Interceptor, RequestInterceptorHandler, RequestOptions;
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
+
 
 
 class AppInterceptor extends Interceptor {
@@ -17,7 +18,7 @@ class AppInterceptor extends Interceptor {
 
 
     options.queryParameters.addAll({
-      "culture": preference.getLocale().culture,
+      "culture": preference.getLocale()?.culture??"en-US",
       "platform": Platform.isIOS ? "ios" : "android"
     });
 
@@ -36,4 +37,54 @@ class AppInterceptor extends Interceptor {
     }
     return handler.next(options);
   }
+
+  // @override
+  // void onError(DioException err, ErrorInterceptorHandler handler) {
+  //   if (err.response != null && err.response?.data is Map<String, dynamic>) {
+  //     final data = err.response!.data as Map<String, dynamic>;
+  //     final appException = AppException.fromJson(data);
+  //     handler.reject(DioException(
+  //       requestOptions: err.requestOptions,
+  //       response: err.response,
+  //       type: err.type,
+  //       error: appException,
+  //     ));
+  //   } else {
+  //     handler.reject(DioException(
+  //       requestOptions: err.requestOptions,
+  //       type: err.type,
+  //       error: AppException.unknown(err.message),
+  //     ));
+  //   }
+  // }
+  }
+
+
+
+class ErrorInterceptor extends Interceptor {
+
+
+  ErrorInterceptor();
+
+
+@override
+void onError(DioException err, ErrorInterceptorHandler handler) {
+  final response = err.response;
+  if (response != null &&
+      response.data is Map<String, dynamic>) {
+    try {
+      final data = response.data as Map<String, dynamic>;
+
+      final appException = AppException.fromJson(data);
+      handler.next(err.copyWith(error: appException));
+      return;
+    } catch (e) {
+      // Parsingda xatolik bo‘lsa fallback ishlaydi
+
+    }
+  }
+
+  final unknown = AppException.unknown(err.message);
+  handler.next(err.copyWith(error: unknown));
+}
 }

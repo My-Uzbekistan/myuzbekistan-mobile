@@ -1,8 +1,10 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
-
 import '../navigation.dart';
+
+
+
 part 'context_extension.dart';
 part 'feature_travel/feature_travel_nav_extensions.dart';
 part 'feature_travel/feature_travel_nav_path.dart';
@@ -17,7 +19,7 @@ abstract class AppNavPath {
   final String name;
   const AppNavPath({required this.name, required this.path});
 
-  static _FeatureTravelNavPath get travel => _FeatureTravelNavPath();
+  static  _FeatureTravelNavPath get travel => _FeatureTravelNavPath();
   static _FeatureMoreNavPath get more => _FeatureMoreNavPath();
   static _FeatureFinanceNavPath get finance => _FeatureFinanceNavPath();
 }

@@ -1,6 +1,7 @@
 
 
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
 part 'load_content_bloc_event.dart';
@@ -27,17 +28,17 @@ class LoadContentBloc
         contents: event.contents,
         isLoading: false,
         categoryId: event.categoryId,
-        hasMore: event.contents.length >= state.pageSize));
+        ));
   }
 
 
   var isLoading=false;
   Future<void> _onLoadNextEvent(
       _LoadNextEvent event, Emitter<LoadContentCategoryState> emit) async {
+    debugPrint("LoadOmesdkfgsdkfjhsldfsdkjf");
     if(!isLoading && state.hasMore) {
       isLoading=true;
       emit(state.copyWith(isLoading: true));
-
       try {
         final result = await _repository.loadContentsByCategory(
             categoryId: state.categoryId,

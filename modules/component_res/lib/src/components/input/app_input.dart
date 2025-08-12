@@ -35,7 +35,7 @@ class AppInputField extends HookWidget {
   Widget build(BuildContext context) {
     final textController = controller ?? useTextEditingController();
     final isNotEmpty = useState(false);
-    final focusNode = useFocusNode();
+    final _focusNode = focusNode??useFocusNode();
     final isFocused = useState(false);
 
     final internSupportText = errorText ?? supportText;
@@ -54,14 +54,14 @@ class AppInputField extends HookWidget {
       }
 
       void listener() {
-        isFocused.value = focusNode.hasFocus;
+        isFocused.value = _focusNode.hasFocus;
       }
 
       textController.addListener(handleTextChange);
-      focusNode.addListener(listener);
+      _focusNode.addListener(listener);
       return () {
         textController.removeListener(handleTextChange);
-        focusNode.removeListener(listener);
+        _focusNode.removeListener(listener);
       };
     }, []);
 
@@ -86,8 +86,11 @@ class AppInputField extends HookWidget {
                     children: [
                       TextFormField(
                         controller: textController,
-                        focusNode: focusNode,
+                        focusNode: _focusNode,
                         maxLength: maxLength,
+                        maxLines: 1,
+                        autofillHints: [AutofillHints.oneTimeCode],
+                        textInputAction: TextInputAction.done,
                         style: CustomTypography.bodyLg.copyWith(
                           color: context.appColors.textIconColor.primary,
                         ),
@@ -153,7 +156,7 @@ class AppInputField extends HookWidget {
                         width: 20,
                         child: Padding(
                           padding: EdgeInsets.all(4),
-                          child: Assets.svgIcCloseVector.toSvgImage(
+                          child: Assets.svgIconClose.toSvgImage(
                               fit: BoxFit.contain,
                               colorFilter: ColorFilter.mode(
                                   context.appColors.textIconColor.secondary,

@@ -7,7 +7,6 @@ import 'package:shared/shared.dart';
 import '../../core/settings_bloc/app_settings_bloc.dart';
 import 'bloc/profile_bloc.dart';
 
-
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -21,181 +20,205 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(),
       body: BlocConsumer<ProfileBloc, ProfileBlocState>(
-          listener: (previous, current) {
-        if (current is ProfileBlocGuestState) {
-          context.travel.goMain();
-        }
-      }, builder: (context, profileState) {
-        return BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
+        listener: (previous, current) {
+          if (current is ProfileBlocGuestState) {
+            context.travel.goMain();
+            GoRouter.of(context).refresh();
+          }
+        },
+        builder: (context, profileState) {
+          return BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
             builder: (context, state) {
-          return ListView(
-            children: [
-              Center(
-                child: AppAvatar(
-                  imageUrl: (profileState is ProfileBlocDataState)
-                      ? profileState.userModel?.photoUrl
-                      : "",
-                  type: AvatarType.circle,
-                  sizeType: AvatarSizeType.large,
-                ),
-              ),
-              profileState is ProfileBlocDataState
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 22.0),
-                        child: Text(
-                          profileState.userModel?.name ?? "",
-                          style: CustomTypography.H2,
-                        ),
-                      ),
-                    )
-                  : Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          context.more.pushAuthPage();
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(top: 16),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: context.appColors.fill.quaternary),
+              return ListView(
+                children: [
+                  Center(
+                    child: AppAvatar(
+                      imageUrl:
+                          (profileState is ProfileBlocDataState)
+                              ? profileState.userModel?.photoUrl
+                              : "",
+                      type: AvatarType.circle,
+                      sizeType: AvatarSizeType.large,
+                    ),
+                  ),
+                  profileState is ProfileBlocDataState
+                      ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 22.0),
                           child: Text(
-                            context.localization.getStarted,
-                            style: CustomTypography.labelMd,
+                            profileState.userModel?.name ?? "",
+                            style: CustomTypography.H2,
+                          ),
+                        ),
+                      )
+                      : Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            context.more.pushAuthPage();
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(top: 16),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 10,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: context.appColors.fill.quaternary,
+                            ),
+                            child: Text(
+                              context.localization.getStarted,
+                              style: CustomTypography.labelMd,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-              SizedBox(
-                height: 40,
-              ),
-              SettingsCell(
-                text: context.localization.language,
-                icon: Assets.svgLanguage.toSvgImage(
-                    width: 24,
-                    height: 24,
-                    colorFilter: ColorFilter.mode(
+                  SizedBox(height: 40),
+                  SettingsCell(
+                    text: context.localization.language,
+                    icon: Assets.svgLanguage.toSvgImage(
+                      width: 24,
+                      height: 24,
+                      colorFilter: ColorFilter.mode(
                         context.appColors.textIconColor.primary,
-                        BlendMode.srcIn)),
-                onTap: () {
-                  context.more.pushChangeLanguagePage();
-                },
-              ),
-              SettingsCell(
-                text: context.localization.theme,
-                onTap: () {
-
-                  context.more.pushChangeThemePage();
-                },
-                icon: Assets.svgIconTheme.toSvgImage(
-                    width: 24,
-                    height: 24,
-                    colorFilter: ColorFilter.mode(
-                        context.appColors.textIconColor.primary,
-                        BlendMode.srcIn)),
-              ),
-              if (profileState is ProfileBlocDataState)
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 16).copyWith(top: 24),
-                  child: Column(
-                    spacing: 8,
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 48),
-                            maximumSize: Size(double.infinity, 48),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            backgroundColor: context.appColors.fill.quaternary,
-                            elevation: 0,
-                            foregroundColor:
-                                context.appColors.textIconColor.primary,
-                            shadowColor: Colors.transparent),
-                        onPressed: () {
-                          showAlertDialog(
-                              content:
-                                  context.localization.logoutConfirmation,
-                              action: context.localization.logout,
-                              onPressed: () {
-                                context
-                                    .read<ProfileBloc>()
-                                    .add(ProfileBlocEvent.logOut());
-                                context.travel.goMain();
-                              });
-                        },
-                        child: Text(context.localization.logout),
+                        BlendMode.srcIn,
                       ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(double.infinity, 48),
-                            maximumSize: Size(double.infinity, 48),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16)),
-                            backgroundColor: context.appColors.fill.quaternary,
-                            elevation: 0,
-                            foregroundColor:
-                                context.appColors.textIconColor.primary,
-                            shadowColor: Colors.transparent),
-                        onPressed: () {
-                          showAlertDialog(
-                              content: context
-                                  .localization.deleteAccountConfirmation,
-                              action: context.localization.deleteAccount,
-                              onPressed: () {
-                                context
-                                    .read<ProfileBloc>()
-                                    .add(ProfileBlocEvent.deleteAccount());
-                                context.travel.goMain();
-                              });
-                        },
-                        child: Text(context.localization.deleteAccount),
-                      )
-                    ],
+                    ),
+                    onTap: () {
+                      context.more.pushChangeLanguagePage();
+                    },
                   ),
-                )
-            ],
+                  SettingsCell(
+                    text: context.localization.theme,
+                    onTap: () {
+                      context.more.pushChangeThemePage();
+                    },
+                    icon: Assets.svgIconTheme.toSvgImage(
+                      width: 24,
+                      height: 24,
+                      colorFilter: ColorFilter.mode(
+                        context.appColors.textIconColor.primary,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                  if (profileState is ProfileBlocDataState)
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ).copyWith(top: 24),
+                      child: Column(
+                        spacing: 8,
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(double.infinity, 48),
+                              maximumSize: Size(double.infinity, 48),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              backgroundColor:
+                                  context.appColors.fill.quaternary,
+                              elevation: 0,
+                              foregroundColor:
+                                  context.appColors.textIconColor.primary,
+                              shadowColor: Colors.transparent,
+                            ),
+                            onPressed: () {
+                              showAlertDialog(
+                                content:
+                                    context.localization.logoutConfirmation,
+                                action: context.localization.logout,
+                                onPressed: () {
+                                  context.read<ProfileBloc>().add(
+                                    ProfileBlocEvent.logOut(),
+                                  );
+                                  context.travel.goMain();
+                                },
+                              );
+                            },
+                            child: Text(context.localization.logout),
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(double.infinity, 48),
+                              maximumSize: Size(double.infinity, 48),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              backgroundColor:
+                                  context.appColors.fill.quaternary,
+                              elevation: 0,
+                              foregroundColor:
+                                  context.appColors.textIconColor.primary,
+                              shadowColor: Colors.transparent,
+                            ),
+                            onPressed: () {
+                              showAlertDialog(
+                                content:
+                                    context
+                                        .localization
+                                        .deleteAccountConfirmation,
+                                action: context.localization.deleteAccount,
+                                onPressed: () {
+                                  context.read<ProfileBloc>().add(
+                                    ProfileBlocEvent.deleteAccount(),
+                                  );
+                                  context.travel.goMain();
+                                },
+                              );
+                            },
+                            child: Text(context.localization.deleteAccount),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              );
+            },
           );
-        });
-      }),
+        },
+      ),
     );
   }
 
-  void showAlertDialog(
-      {required String content,
-      required String action,
-      required VoidCallback onPressed}) {
+  void showAlertDialog({
+    required String content,
+    required String action,
+    required VoidCallback onPressed,
+  }) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              context.localization.warning,
-              style: CustomTypography.bodyLg
-                  .copyWith(color: context.appColors.textIconColor.primary),
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            context.localization.warning,
+            style: CustomTypography.bodyLg.copyWith(
+              color: context.appColors.textIconColor.primary,
             ),
-            content: Text(content),
-            actions: [
-              TextButton(
-                child: Text(
-                  context.localization.cancel,
-                  style: CustomTypography.bodyMd.copyWith(
-                      color: context.appColors.textIconColor.secondary),
+          ),
+          content: Text(content),
+          actions: [
+            TextButton(
+              child: Text(
+                context.localization.cancel,
+                style: CustomTypography.bodyMd.copyWith(
+                  color: context.appColors.textIconColor.secondary,
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop(); // dialogni yopish
-                },
               ),
-              TextButton(
-                child: Text(action),
-                onPressed: () {
-                  onPressed.call();
-                },
-              ),
-            ],
-          );
-        });
+              onPressed: () {
+                Navigator.of(context).pop(); // dialogni yopish
+              },
+            ),
+            TextButton(
+              child: Text(action),
+              onPressed: () {
+                onPressed.call();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }

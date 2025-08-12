@@ -8,66 +8,74 @@ class HomeRegionCard extends StatelessWidget {
 
   final GestureTapCallback onTap;
 
-  const HomeRegionCard(
-      {super.key,
-      required this.title,
-      required this.onTap,
-      this.temperature,
-      this.temperatureImageUrl});
+  const HomeRegionCard({
+    super.key,
+    required this.title,
+    required this.onTap,
+    this.temperature,
+    this.temperatureImageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        height: 54,
-        padding: EdgeInsets.only(left: 20, right: 16),
-        decoration: BoxDecoration(
-            border: Border.all(
-                color: context.appColors.stroke.nonOpaque, width: 0.5),
-            borderRadius: BorderRadius.circular(40),
-            color: context.appColors.background.elevation1),
-        child: Row(
-          spacing: 16,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: Row(
-                spacing: 12,
-                children: [
-                  Assets.svgLocationFill.toSvgImage(
-                      width: 16,
-                      height: 16,
-                      colorFilter: ColorFilter.mode(
-                          context.appColors.textIconColor.secondary,
-                          BlendMode.srcIn)),
-                  Text(
-                    title,
-                    style: CustomTypography.labelMd,
-                  )
-                ],
+      child:
+          Container(
+            height: 54,
+            padding: EdgeInsets.only(left: 20, right: 16),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: context.appColors.stroke.nonOpaque,
+                width: 0.5,
               ),
+              borderRadius: BorderRadius.circular(40),
+              color: context.appColors.background.elevation1,
             ),
-            if (temperature != null)
-              Row(
-                spacing: 4,
-                children: [
-                  Text(
-                    temperature!,
-                    style: CustomTypography.labelMd,
+            child: Row(
+              spacing: 16,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Row(
+                    spacing: 12,
+                    children: [
+                      Assets.svgLocationFill.toSvgImage(
+                        width: 16,
+                        height: 16,
+                        colorFilter: ColorFilter.mode(
+                          context.appColors.textIconColor.secondary,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                      Text(title, style: CustomTypography.labelMd),
+                    ],
                   ),
-                  CachedNetworkImage(
-                      height: 24,
-                      width: 24,
-                      imageUrl: "https:${temperatureImageUrl}",
-                      fit: BoxFit.cover,
+                ),
+                if (temperature != null)
+                  Row(
+                    spacing: 4,
+                    children: [
+                      Text(temperature!, style: CustomTypography.labelMd),
+                      ExtendedImage.network(
+                        "https:${temperatureImageUrl}",
+                        cache: true,
+                        height: 24,
+                        width: 24,
+                        loadStateChanged: (state) {
+                          if (state.extendedImageLoadState ==
+                              LoadState.completed) {
+                            return null;
+                          }
 
-                      errorWidget: (context, url, error) => SizedBox())
-                ],
-              )
-          ],
-        ),
-      ).shadow(),
+                          return SizedBox();
+                        },
+                      ),
+                    ],
+                  ),
+              ],
+            ),
+          ).shadow(context),
     );
   }
 }

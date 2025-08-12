@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -47,6 +46,184 @@ class $ContentByCategoryEventCopyWith<$Res>  {
 $ContentByCategoryEventCopyWith(ContentByCategoryEvent _, $Res Function(ContentByCategoryEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [ContentByCategoryEvent].
+extension ContentByCategoryEventPatterns on ContentByCategoryEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _InitialEvent value)?  init,TResult Function( _InitialFavoriteEvent value)?  initFavorite,TResult Function( _LoadFavoritesEvent value)?  loadFavorites,TResult Function( _RequestFavorieEvent value)?  requestFavorite,TResult Function( _LoadMoreEvent value)?  loadMore,TResult Function( _SetQueryEvent value)?  setQuery,TResult Function( _LoadContentEvent value)?  loadContentEvent,TResult Function( _UpdateItemFavoriteWithPopResult value)?  updateItemFavoriteWithPopResult,TResult Function( _UpdateItemFavoriteEvent value)?  updateItemFavorite,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _InitialEvent() when init != null:
+return init(_that);case _InitialFavoriteEvent() when initFavorite != null:
+return initFavorite(_that);case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites(_that);case _RequestFavorieEvent() when requestFavorite != null:
+return requestFavorite(_that);case _LoadMoreEvent() when loadMore != null:
+return loadMore(_that);case _SetQueryEvent() when setQuery != null:
+return setQuery(_that);case _LoadContentEvent() when loadContentEvent != null:
+return loadContentEvent(_that);case _UpdateItemFavoriteWithPopResult() when updateItemFavoriteWithPopResult != null:
+return updateItemFavoriteWithPopResult(_that);case _UpdateItemFavoriteEvent() when updateItemFavorite != null:
+return updateItemFavorite(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _InitialEvent value)  init,required TResult Function( _InitialFavoriteEvent value)  initFavorite,required TResult Function( _LoadFavoritesEvent value)  loadFavorites,required TResult Function( _RequestFavorieEvent value)  requestFavorite,required TResult Function( _LoadMoreEvent value)  loadMore,required TResult Function( _SetQueryEvent value)  setQuery,required TResult Function( _LoadContentEvent value)  loadContentEvent,required TResult Function( _UpdateItemFavoriteWithPopResult value)  updateItemFavoriteWithPopResult,required TResult Function( _UpdateItemFavoriteEvent value)  updateItemFavorite,}){
+final _that = this;
+switch (_that) {
+case _InitialEvent():
+return init(_that);case _InitialFavoriteEvent():
+return initFavorite(_that);case _LoadFavoritesEvent():
+return loadFavorites(_that);case _RequestFavorieEvent():
+return requestFavorite(_that);case _LoadMoreEvent():
+return loadMore(_that);case _SetQueryEvent():
+return setQuery(_that);case _LoadContentEvent():
+return loadContentEvent(_that);case _UpdateItemFavoriteWithPopResult():
+return updateItemFavoriteWithPopResult(_that);case _UpdateItemFavoriteEvent():
+return updateItemFavorite(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _InitialEvent value)?  init,TResult? Function( _InitialFavoriteEvent value)?  initFavorite,TResult? Function( _LoadFavoritesEvent value)?  loadFavorites,TResult? Function( _RequestFavorieEvent value)?  requestFavorite,TResult? Function( _LoadMoreEvent value)?  loadMore,TResult? Function( _SetQueryEvent value)?  setQuery,TResult? Function( _LoadContentEvent value)?  loadContentEvent,TResult? Function( _UpdateItemFavoriteWithPopResult value)?  updateItemFavoriteWithPopResult,TResult? Function( _UpdateItemFavoriteEvent value)?  updateItemFavorite,}){
+final _that = this;
+switch (_that) {
+case _InitialEvent() when init != null:
+return init(_that);case _InitialFavoriteEvent() when initFavorite != null:
+return initFavorite(_that);case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites(_that);case _RequestFavorieEvent() when requestFavorite != null:
+return requestFavorite(_that);case _LoadMoreEvent() when loadMore != null:
+return loadMore(_that);case _SetQueryEvent() when setQuery != null:
+return setQuery(_that);case _LoadContentEvent() when loadContentEvent != null:
+return loadContentEvent(_that);case _UpdateItemFavoriteWithPopResult() when updateItemFavoriteWithPopResult != null:
+return updateItemFavoriteWithPopResult(_that);case _UpdateItemFavoriteEvent() when updateItemFavorite != null:
+return updateItemFavorite(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int categoryId)?  init,TResult Function()?  initFavorite,TResult Function()?  loadFavorites,TResult Function()?  requestFavorite,TResult Function()?  loadMore,TResult Function( String query)?  setQuery,TResult Function()?  loadContentEvent,TResult Function( bool isFavorite,  int contentId)?  updateItemFavoriteWithPopResult,TResult Function( int contentId,  bool isFavorite)?  updateItemFavorite,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _InitialEvent() when init != null:
+return init(_that.categoryId);case _InitialFavoriteEvent() when initFavorite != null:
+return initFavorite();case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites();case _RequestFavorieEvent() when requestFavorite != null:
+return requestFavorite();case _LoadMoreEvent() when loadMore != null:
+return loadMore();case _SetQueryEvent() when setQuery != null:
+return setQuery(_that.query);case _LoadContentEvent() when loadContentEvent != null:
+return loadContentEvent();case _UpdateItemFavoriteWithPopResult() when updateItemFavoriteWithPopResult != null:
+return updateItemFavoriteWithPopResult(_that.isFavorite,_that.contentId);case _UpdateItemFavoriteEvent() when updateItemFavorite != null:
+return updateItemFavorite(_that.contentId,_that.isFavorite);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int categoryId)  init,required TResult Function()  initFavorite,required TResult Function()  loadFavorites,required TResult Function()  requestFavorite,required TResult Function()  loadMore,required TResult Function( String query)  setQuery,required TResult Function()  loadContentEvent,required TResult Function( bool isFavorite,  int contentId)  updateItemFavoriteWithPopResult,required TResult Function( int contentId,  bool isFavorite)  updateItemFavorite,}) {final _that = this;
+switch (_that) {
+case _InitialEvent():
+return init(_that.categoryId);case _InitialFavoriteEvent():
+return initFavorite();case _LoadFavoritesEvent():
+return loadFavorites();case _RequestFavorieEvent():
+return requestFavorite();case _LoadMoreEvent():
+return loadMore();case _SetQueryEvent():
+return setQuery(_that.query);case _LoadContentEvent():
+return loadContentEvent();case _UpdateItemFavoriteWithPopResult():
+return updateItemFavoriteWithPopResult(_that.isFavorite,_that.contentId);case _UpdateItemFavoriteEvent():
+return updateItemFavorite(_that.contentId,_that.isFavorite);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int categoryId)?  init,TResult? Function()?  initFavorite,TResult? Function()?  loadFavorites,TResult? Function()?  requestFavorite,TResult? Function()?  loadMore,TResult? Function( String query)?  setQuery,TResult? Function()?  loadContentEvent,TResult? Function( bool isFavorite,  int contentId)?  updateItemFavoriteWithPopResult,TResult? Function( int contentId,  bool isFavorite)?  updateItemFavorite,}) {final _that = this;
+switch (_that) {
+case _InitialEvent() when init != null:
+return init(_that.categoryId);case _InitialFavoriteEvent() when initFavorite != null:
+return initFavorite();case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites();case _RequestFavorieEvent() when requestFavorite != null:
+return requestFavorite();case _LoadMoreEvent() when loadMore != null:
+return loadMore();case _SetQueryEvent() when setQuery != null:
+return setQuery(_that.query);case _LoadContentEvent() when loadContentEvent != null:
+return loadContentEvent();case _UpdateItemFavoriteWithPopResult() when updateItemFavoriteWithPopResult != null:
+return updateItemFavoriteWithPopResult(_that.isFavorite,_that.contentId);case _UpdateItemFavoriteEvent() when updateItemFavorite != null:
+return updateItemFavorite(_that.contentId,_that.isFavorite);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -566,6 +743,148 @@ $ContentByCategoryStateCopyWith(ContentByCategoryState _, $Res Function(ContentB
 }
 
 
+/// Adds pattern-matching-related methods to [ContentByCategoryState].
+extension ContentByCategoryStatePatterns on ContentByCategoryState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ContentByCategoryDataState value)?  dataState,TResult Function( ContentByCategoryErrorState value)?  errorState,TResult Function( ContentByCategoryNoContentState value)?  noContentState,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case ContentByCategoryDataState() when dataState != null:
+return dataState(_that);case ContentByCategoryErrorState() when errorState != null:
+return errorState(_that);case ContentByCategoryNoContentState() when noContentState != null:
+return noContentState(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ContentByCategoryDataState value)  dataState,required TResult Function( ContentByCategoryErrorState value)  errorState,required TResult Function( ContentByCategoryNoContentState value)  noContentState,}){
+final _that = this;
+switch (_that) {
+case ContentByCategoryDataState():
+return dataState(_that);case ContentByCategoryErrorState():
+return errorState(_that);case ContentByCategoryNoContentState():
+return noContentState(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ContentByCategoryDataState value)?  dataState,TResult? Function( ContentByCategoryErrorState value)?  errorState,TResult? Function( ContentByCategoryNoContentState value)?  noContentState,}){
+final _that = this;
+switch (_that) {
+case ContentByCategoryDataState() when dataState != null:
+return dataState(_that);case ContentByCategoryErrorState() when errorState != null:
+return errorState(_that);case ContentByCategoryNoContentState() when noContentState != null:
+return noContentState(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<MainPageContent> contents,  int categoryId,  int page,  int pageSize,  bool isLoading,  bool hasMore,  ContentByCategoryType type,  String? query,  ContentsByCategoryNavState? navState,  ErrorState? errorState)?  dataState,TResult Function()?  errorState,TResult Function()?  noContentState,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case ContentByCategoryDataState() when dataState != null:
+return dataState(_that.contents,_that.categoryId,_that.page,_that.pageSize,_that.isLoading,_that.hasMore,_that.type,_that.query,_that.navState,_that.errorState);case ContentByCategoryErrorState() when errorState != null:
+return errorState();case ContentByCategoryNoContentState() when noContentState != null:
+return noContentState();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<MainPageContent> contents,  int categoryId,  int page,  int pageSize,  bool isLoading,  bool hasMore,  ContentByCategoryType type,  String? query,  ContentsByCategoryNavState? navState,  ErrorState? errorState)  dataState,required TResult Function()  errorState,required TResult Function()  noContentState,}) {final _that = this;
+switch (_that) {
+case ContentByCategoryDataState():
+return dataState(_that.contents,_that.categoryId,_that.page,_that.pageSize,_that.isLoading,_that.hasMore,_that.type,_that.query,_that.navState,_that.errorState);case ContentByCategoryErrorState():
+return errorState();case ContentByCategoryNoContentState():
+return noContentState();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<MainPageContent> contents,  int categoryId,  int page,  int pageSize,  bool isLoading,  bool hasMore,  ContentByCategoryType type,  String? query,  ContentsByCategoryNavState? navState,  ErrorState? errorState)?  dataState,TResult? Function()?  errorState,TResult? Function()?  noContentState,}) {final _that = this;
+switch (_that) {
+case ContentByCategoryDataState() when dataState != null:
+return dataState(_that.contents,_that.categoryId,_that.page,_that.pageSize,_that.isLoading,_that.hasMore,_that.type,_that.query,_that.navState,_that.errorState);case ContentByCategoryErrorState() when errorState != null:
+return errorState();case ContentByCategoryNoContentState() when noContentState != null:
+return noContentState();case _:
+  return null;
+
+}
+}
+
+}
+
 /// @nodoc
 
 
@@ -798,6 +1117,136 @@ $ContentsByCategoryNavStateCopyWith(ContentsByCategoryNavState _, $Res Function(
 }
 
 
+/// Adds pattern-matching-related methods to [ContentsByCategoryNavState].
+extension ContentsByCategoryNavStatePatterns on ContentsByCategoryNavState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Unauthorized value)?  unauthorized,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Unauthorized value)  unauthorized,}){
+final _that = this;
+switch (_that) {
+case Unauthorized():
+return unauthorized(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Unauthorized value)?  unauthorized,}){
+final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  unauthorized,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  unauthorized,}) {final _that = this;
+switch (_that) {
+case Unauthorized():
+return unauthorized();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  unauthorized,}) {final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized();case _:
+  return null;
+
+}
+}
+
+}
+
 /// @nodoc
 
 
@@ -871,6 +1320,142 @@ class $ErrorStateCopyWith<$Res>  {
 $ErrorStateCopyWith(ErrorState _, $Res Function(ErrorState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [ErrorState].
+extension ErrorStatePatterns on ErrorState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _NotFoundState value)?  notFound,TResult Function( __FailureState value)?  failure,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _NotFoundState() when notFound != null:
+return notFound(_that);case __FailureState() when failure != null:
+return failure(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _NotFoundState value)  notFound,required TResult Function( __FailureState value)  failure,}){
+final _that = this;
+switch (_that) {
+case _NotFoundState():
+return notFound(_that);case __FailureState():
+return failure(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _NotFoundState value)?  notFound,TResult? Function( __FailureState value)?  failure,}){
+final _that = this;
+switch (_that) {
+case _NotFoundState() when notFound != null:
+return notFound(_that);case __FailureState() when failure != null:
+return failure(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  notFound,TResult Function()?  failure,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _NotFoundState() when notFound != null:
+return notFound();case __FailureState() when failure != null:
+return failure();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  notFound,required TResult Function()  failure,}) {final _that = this;
+switch (_that) {
+case _NotFoundState():
+return notFound();case __FailureState():
+return failure();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  notFound,TResult? Function()?  failure,}) {final _that = this;
+switch (_that) {
+case _NotFoundState() when notFound != null:
+return notFound();case __FailureState() when failure != null:
+return failure();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

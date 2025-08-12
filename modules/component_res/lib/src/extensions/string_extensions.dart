@@ -7,4 +7,6 @@ extension StringExtensions on String {
   String withOutSpace() {
     return replaceAll(RegExp(r'\s+'), '');
   }
+
+  String plus(String text) => "$this$text";
 }

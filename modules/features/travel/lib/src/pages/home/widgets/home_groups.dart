@@ -10,6 +10,7 @@ import 'package:travel/src/di/injection.dart';
 
 import 'item_card_avatar.dart';
 import 'load_content_bloc/load_content_bloc.dart';
+
 part 'model/home_group_data.dart';
 
 part 'home_list_cell.dart';
@@ -23,42 +24,53 @@ class HomeGroupsWidget extends StatefulWidget {
   final ValueChanged<MainPageContent>? onContentItemTap;
   final VoidCallback? onOpenAll;
 
-  const HomeGroupsWidget(
-      {super.key, required this.data, this.onContentItemTap, this.onOpenAll});
+  const HomeGroupsWidget({
+    super.key,
+    required this.data,
+    this.onContentItemTap,
+    this.onOpenAll,
+  });
 
   @override
   State<HomeGroupsWidget> createState() => _HomeGroupsWidgetState();
 }
 
-class _HomeGroupsWidgetState extends State<HomeGroupsWidget> {
+class _HomeGroupsWidgetState extends State<HomeGroupsWidget>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         if (widget.data.recommended != null)
           HomeImagePagerContent(
             recommendText: context.localization.guest_chose,
-            onTap: (){
+            onTap: () {
               widget.onContentItemTap?.call(widget.data.recommended!);
             },
             data: HomePagerContentData(
-                items: widget.data.recommended?.photos ?? [],
-                title: widget.data.recommended?.title ?? "",
-                caption: widget.data.recommended?.region,
-                rating: widget.data.recommended?.ratingAverage),
+              items: widget.data.recommended?.photos ?? [],
+              title: widget.data.recommended?.title ?? "",
+              caption: widget.data.recommended?.region,
+              rating: widget.data.recommended?.ratingAverage,
+            ),
           ),
         // HomeAvatarListItem()
         if (widget.data.items.isNotEmpty)
           HomeListCell(
-            key: ValueKey(widget.data.toString()),
+
             categoryId: widget.data.categoryId,
             items: widget.data.items,
             categoryName: widget.data.title,
             openAll: widget.onOpenAll,
             onItemTap: widget.onContentItemTap,
             viewType: widget.data.viewType,
-          )
+          ),
       ],
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

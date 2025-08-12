@@ -147,7 +147,9 @@ class DetailPage extends HookWidget {
                     background: TopImageWidget(
                       photos: detail.photos ?? [],onImageTap: (){
 
-                      context.travel.pushImagePreview(detail.photos??[]);
+                        if(!isCollapsed.value) {
+                          context.travel.pushImagePreview(detail.photos??[]);
+                        }
                     },
                     ),
                   ),

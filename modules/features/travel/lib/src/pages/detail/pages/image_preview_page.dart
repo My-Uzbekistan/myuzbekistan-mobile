@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class ImagePreviewPage extends HookWidget {
- final  List<String> images;
+  final List<String> images;
 
   const ImagePreviewPage({super.key, required this.images});
 
@@ -31,21 +31,29 @@ class ImagePreviewPage extends HookWidget {
         children: [
           Expanded(
             child: PageView.builder(
-
               controller: pageController,
-
               itemCount: images.length,
-              // onPageChanged: (index) {
-              //   selectedIndex.value = index;
-              // },
-
               itemBuilder: (context, index) {
-
                 final element = images[index];
-                return  Padding(padding: EdgeInsets.symmetric(vertical: 8),child: CachedNetworkImage(imageUrl: element));
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8),
+                  child:  ExtendedImage.network(element,
+                        mode: ExtendedImageMode.gesture, // 👈 Zoom va drag yoqiladi
+                        initGestureConfigHandler: (state) => GestureConfig(
+                          minScale: 1.0,
+                          maxScale: 4.0,
+                          animationMinScale: 0.8,
+                          animationMaxScale: 4.5,
+                          speed: 1.0,
+                          inertialSpeed: 100.0,
+                          initialScale: 1.0,
+                          inPageView: false,
+                          initialAlignment: InitialAlignment.center,
+                        )
+                    ),
+
+                );
               },
-              // children:
-              //     images.map((e) => ).toList(),
             ),
           ),
           SizedBox(
@@ -76,13 +84,15 @@ class ImagePreviewPage extends HookWidget {
                         duration: const Duration(milliseconds: 300),
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(11),
-                            border: isSelected
-                                ? Border.all(
+                          borderRadius: BorderRadius.circular(11),
+                          border:
+                              isSelected
+                                  ? Border.all(
                                     color: context.appColors.brand,
                                     width: 1,
                                   )
-                                : null),
+                                  : null,
+                        ),
                         child: SizedBox(
                           height: 50,
                           width: 50,
@@ -90,11 +100,10 @@ class ImagePreviewPage extends HookWidget {
                             borderRadius: BorderRadius.circular(8),
                             child: Container(
                               color: context.appColors.fill.tertiary,
-                              child: CachedNetworkImage(
-                                  imageUrl: images[index],
-                                  fit: BoxFit.cover,
-                                  errorWidget: (context, url, error) =>
-                                      SizedBox()),
+                              child: ExtendedImage.network(
+                                 images[index],
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -111,9 +120,13 @@ class ImagePreviewPage extends HookWidget {
   }
 
   void _scrollToSelected(
-      ScrollController scrollController, int index, BuildContext context) {
+    ScrollController scrollController,
+    int index,
+    BuildContext context,
+  ) {
     double itemWidth = 50 + 8; // Image width + separator
-    double targetScroll = (index * itemWidth) -
+    double targetScroll =
+        (index * itemWidth) -
         (MediaQuery.of(context).size.width / 2) +
         (itemWidth / 2);
 

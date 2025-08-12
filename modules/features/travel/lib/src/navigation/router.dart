@@ -22,9 +22,9 @@ mixin FeatureTravelRouter {
         final regionId = state.uri.queryParameters["selectRegionId"]!.toInt();
         final regions = state.extra as List<Region>;
 
-        return ModalPage(
+        return ModalSheetPage(
           child: SelectRegionPage(regions: regions, selectedRegionId: regionId),
-          showDragHandle: true,
+
         );
       },
     ),
@@ -56,34 +56,37 @@ mixin FeatureTravelRouter {
       },
     ),
 
-
     GoRoute(
-        path: AppNavPath.travel.travelDetail.path,
-        name: AppNavPath.travel.travelDetail.name,
-        pageBuilder: (context, state) {
-          return buildSlideTransitionPage(
-              context: context,
-              state: state,
-              child: BlocProvider(
-                create: (context) => getIt<DetailBloc>()
-                  ..add(DetailBlocEvent.initial(
-                      contentId:
-                          "${state.uri.queryParameters["contentId"]}")),
-                child:DetailPage()
+      path: AppNavPath.travel.travelDetail.path,
+      name: AppNavPath.travel.travelDetail.name,
+      pageBuilder: (context, state) {
+        return buildSlideTransitionPage(
+          context: context,
+          state: state,
+          child: BlocProvider(
+            create:
+                (context) =>
+                    getIt<DetailBloc>()..add(
+                      DetailBlocEvent.initial(
+                        contentId: "${state.uri.queryParameters["contentId"]}",
+                      ),
+                    ),
+            child: DetailPage(),
 
-                // DetailPage(),
-              ));
-        },
-        routes: [
-          GoRoute(
-              path: AppNavPath.travel.imagePreview.path,
-              name: AppNavPath.travel.imagePreview.name,
-              builder: (context, state) {
-                return ImagePreviewPage(
-                  images: state.extra as List<String>,
-                );
-              }),
-        ]),
+            // DetailPage(),
+          ),
+        );
+      },
+      routes: [
+        GoRoute(
+          path: AppNavPath.travel.imagePreview.path,
+          name: AppNavPath.travel.imagePreview.name,
+          builder: (context, state) {
+            return ImagePreviewPage(images: state.extra as List<String>);
+          },
+        ),
+      ],
+    ),
   ];
 
   static final shellTravel = StatefulShellBranch(
@@ -91,9 +94,16 @@ mixin FeatureTravelRouter {
       GoRoute(
         path: AppNavPath.travel.travelHome.path,
         name: AppNavPath.travel.travelHome.name,
-        builder: (context, state) => BlocProvider(create: (ctx)=>getIt<HomeBloc>(),
-        child: HomePage(),
-        ),
+        redirect: (context, state) {
+          final locale = getIt<AppPreference>().getLocale();
+          if (locale == null) return AppNavPath.more.selectLangPage.path;
+          return null;
+        },
+        builder:
+            (context, state) => BlocProvider(
+              create: (ctx) => getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
+              child: const  HomePage(),
+            ),
       ),
     ],
   );

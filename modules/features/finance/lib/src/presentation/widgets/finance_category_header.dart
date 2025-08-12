@@ -1,37 +1,77 @@
 import 'package:component_res/component_res.dart';
+import 'package:finance/src/core/extension.dart';
 import 'package:flutter/material.dart';
 
 import 'finance_merchants_card.dart';
 
 class FinanceCategoryHeader extends StatelessWidget {
-  const FinanceCategoryHeader({super.key});
+  final String title;
+
+  const FinanceCategoryHeader({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 20,
+        horizontal: 16,
       ).copyWith(top: 24, bottom: 8),
-      child: Text("Restaurants", style: CustomTypography.H3),
+      child: Text(title, style: CustomTypography.H3),
     );
   }
 }
 
 class FinanceMerchantsWithCategory extends StatelessWidget {
-  const FinanceMerchantsWithCategory({super.key});
+  final String title;
+  final List<MerchantWidgetModel> items;
+
+  final ValueChanged<int>? onItemTap;
+
+  const FinanceMerchantsWithCategory({
+    super.key,
+    required this.title,
+    required this.items,
+    this.onItemTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
+
+      spacing: 8,
       children: [
-        FinanceCategoryHeader(),
-        ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            return FinanceMerchantsCard();
-          },
+        FinanceCategoryHeader(title: title),
+        SizedBox(
+          height: 156,
+          child: ListView.separated(
+            itemCount: items.length,
+
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.none,
+            shrinkWrap: true,
+
+            separatorBuilder: (context, index) {
+              return SizedBox(width: 12);
+            },
+            itemBuilder: (context, index) {
+              return  FinanceMerchantsCard(
+                  merchantWidgetModel: items[index],
+                  onTap: () {
+                    onItemTap?.call(index);
+                  },
+                ).shadow(context);
+            },
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 8),
+          child: AppActionButton(
+            actionText: context.localization.show_all_places,
+            type: ActionButtonType.brand,
+            onPressed: () {},
+          ),
         ),
       ],
     );

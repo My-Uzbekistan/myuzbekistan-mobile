@@ -1,5 +1,3 @@
-
-
 import 'package:shared/shared.dart';
 
 import '../../domain.dart';
@@ -35,44 +33,45 @@ class ContentCategories {
   });
 }
 
-
+@immutable
 class MainPageContent extends Equatable {
-  int contentId;
-  String? title;
-  String? caption;
-  List<String> photos;
-  String? photo;
-  String? region;
-  String? address;
-  List<Facility> facilities;
-  List<String> languages;
-  double? ratingAverage;
-  double? distance;
-  int? reviewCount;
-  int? averageCheck;
-  double? price;
-  double? priceInDollar;
-  ViewType viewType;
-  bool isFavorite;
+  final int contentId;
+  final String? title;
+  final String? caption;
+  final  List<String> photos;
+  final  String? photo;
+  final  String? region;
+  final String? address;
+  final  List<Facility> facilities;
+  final  List<String> languages;
+  final double? ratingAverage;
+  final double? distance;
+  final int? reviewCount;
+  final int? averageCheck;
+  final double? price;
+  final double? priceInDollar;
+  final  ViewType viewType;
+  final  bool isFavorite;
 
-  MainPageContent(
-      {required this.contentId,
-      required this.photos,
-      required this.viewType,
-      this.title,
-      this.caption,
-      this.region,
-      this.address,
-      this.averageCheck,
-      this.ratingAverage,
-      this.facilities = const [],
-      this.languages = const [],
-      this.photo,
-      this.price,
-      this.priceInDollar,
-      this.isFavorite = false,
-      this.distance,
-      this.reviewCount});
+const  MainPageContent({
+    required this.contentId,
+    required this.photos,
+    required this.viewType,
+    this.title,
+    this.caption,
+    this.region,
+    this.address,
+    this.averageCheck,
+    this.ratingAverage,
+    this.facilities = const [],
+    this.languages = const [],
+    this.photo,
+    this.price,
+    this.priceInDollar,
+    this.isFavorite = false,
+    this.distance,
+    this.reviewCount,
+  });
 
   String? get mainPhoto => photo ?? photos.firstOrNull;
 

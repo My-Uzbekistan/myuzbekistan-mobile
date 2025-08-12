@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,142 @@ class $DetailBlocEventCopyWith<$Res>  {
 $DetailBlocEventCopyWith(DetailBlocEvent _, $Res Function(DetailBlocEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [DetailBlocEvent].
+extension DetailBlocEventPatterns on DetailBlocEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _DetailBlocInitialEvent value)?  initial,TResult Function( _DetailBlocChangeFavorite value)?  changeFavoriteState,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DetailBlocInitialEvent() when initial != null:
+return initial(_that);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
+return changeFavoriteState(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _DetailBlocInitialEvent value)  initial,required TResult Function( _DetailBlocChangeFavorite value)  changeFavoriteState,}){
+final _that = this;
+switch (_that) {
+case _DetailBlocInitialEvent():
+return initial(_that);case _DetailBlocChangeFavorite():
+return changeFavoriteState(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _DetailBlocInitialEvent value)?  initial,TResult? Function( _DetailBlocChangeFavorite value)?  changeFavoriteState,}){
+final _that = this;
+switch (_that) {
+case _DetailBlocInitialEvent() when initial != null:
+return initial(_that);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
+return changeFavoriteState(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String contentId)?  initial,TResult Function( bool isSetFavorite)?  changeFavoriteState,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DetailBlocInitialEvent() when initial != null:
+return initial(_that.contentId);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
+return changeFavoriteState(_that.isSetFavorite);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String contentId)  initial,required TResult Function( bool isSetFavorite)  changeFavoriteState,}) {final _that = this;
+switch (_that) {
+case _DetailBlocInitialEvent():
+return initial(_that.contentId);case _DetailBlocChangeFavorite():
+return changeFavoriteState(_that.isSetFavorite);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String contentId)?  initial,TResult? Function( bool isSetFavorite)?  changeFavoriteState,}) {final _that = this;
+switch (_that) {
+case _DetailBlocInitialEvent() when initial != null:
+return initial(_that.contentId);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
+return changeFavoriteState(_that.isSetFavorite);case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -204,6 +339,142 @@ $DetailBlocStateCopyWith(DetailBlocState _, $Res Function(DetailBlocState) __);
 }
 
 
+/// Adds pattern-matching-related methods to [DetailBlocState].
+extension DetailBlocStatePatterns on DetailBlocState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( DetailBlocLoadingState value)?  loadingState,TResult Function( DetailBlocDataState value)?  dataState,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case DetailBlocLoadingState() when loadingState != null:
+return loadingState(_that);case DetailBlocDataState() when dataState != null:
+return dataState(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( DetailBlocLoadingState value)  loadingState,required TResult Function( DetailBlocDataState value)  dataState,}){
+final _that = this;
+switch (_that) {
+case DetailBlocLoadingState():
+return loadingState(_that);case DetailBlocDataState():
+return dataState(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( DetailBlocLoadingState value)?  loadingState,TResult? Function( DetailBlocDataState value)?  dataState,}){
+final _that = this;
+switch (_that) {
+case DetailBlocLoadingState() when loadingState != null:
+return loadingState(_that);case DetailBlocDataState() when dataState != null:
+return dataState(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadingState,TResult Function( ContentDetail contentDetail,  NavState? navState)?  dataState,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case DetailBlocLoadingState() when loadingState != null:
+return loadingState();case DetailBlocDataState() when dataState != null:
+return dataState(_that.contentDetail,_that.navState);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadingState,required TResult Function( ContentDetail contentDetail,  NavState? navState)  dataState,}) {final _that = this;
+switch (_that) {
+case DetailBlocLoadingState():
+return loadingState();case DetailBlocDataState():
+return dataState(_that.contentDetail,_that.navState);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadingState,TResult? Function( ContentDetail contentDetail,  NavState? navState)?  dataState,}) {final _that = this;
+switch (_that) {
+case DetailBlocLoadingState() when loadingState != null:
+return loadingState();case DetailBlocDataState() when dataState != null:
+return dataState(_that.contentDetail,_that.navState);case _:
+  return null;
+
+}
+}
+
+}
+
 /// @nodoc
 
 
@@ -345,6 +616,136 @@ class $NavStateCopyWith<$Res>  {
 $NavStateCopyWith(NavState _, $Res Function(NavState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [NavState].
+extension NavStatePatterns on NavState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Unauthorized value)?  unauthorized,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Unauthorized value)  unauthorized,}){
+final _that = this;
+switch (_that) {
+case Unauthorized():
+return unauthorized(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Unauthorized value)?  unauthorized,}){
+final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  unauthorized,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  unauthorized,}) {final _that = this;
+switch (_that) {
+case Unauthorized():
+return unauthorized();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  unauthorized,}) {final _that = this;
+switch (_that) {
+case Unauthorized() when unauthorized != null:
+return unauthorized();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

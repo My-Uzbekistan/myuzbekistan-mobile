@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -27,6 +28,7 @@ class LocationManager {
   Position? getCurrentPosition() {
     return _currentLocation;
   }
+
   /// Permission va servislar tekshirilib, hozirgi joylashuvni olish
   Future<Position?> getCurrentLocation() async {
     // Permissionlar
@@ -40,7 +42,7 @@ class LocationManager {
       print("Location ruxsat berilmadi.");
       return null;
     }
-    _currentLocation= await Geolocator.getCurrentPosition(
+    _currentLocation = await Geolocator.getCurrentPosition(
         locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
 
     return Future.value(_currentLocation);
@@ -64,15 +66,36 @@ class LocationManager {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) return false;
     }
 
-    if (permission == LocationPermission.deniedForever) {
-      // Ruxsatni sozlamalardan ochish kerak
-      await openAppSettings();
-      return false;
-    }
+    // if (context != null) {
+    //   if (permission == LocationPermission.deniedForever) {
+    //     await showDialog(
+    //       context: context,
+    //       builder: (context) => AlertDialog(
+    //         title: Text('Location permission needed'),
+    //         content: Text(
+    //           'This feature requires location access. Please enable it from the Settings app.',
+    //         ),
+    //         actions: [
+    //           TextButton(
+    //             onPressed: () => Navigator.pop(context),
+    //             child: Text('Cancel'),
+    //           ),
+    //           TextButton(
+    //             onPressed: () async {
+    //               Navigator.pop(context);
+    //               await openAppSettings(); // faqat foydalanuvchi istasa ochiladi
+    //             },
+    //             child: Text('Open Settings'),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //     return false;
+    //   }
+    // }
 
-    return true;
+    return permission==LocationPermission.always || permission==LocationPermission.whileInUse;
   }
 }

@@ -6,18 +6,6 @@ extension CurrencyExtensionArray on List<Currency> {
     return map((e) => e.getFlag()).toList();
   }
 
-  List<Currency> filterCurrencies(
-      {List allowCcy = const [
-        "USD",
-        "EUR",
-        "RUB",
-        "CNY",
-        "TRY",
-        "KZT",
-        "KRW"
-      ]}) {
-    return where((e) => allowCcy.contains(e.ccy)).toList();
-  }
 }
 
 extension CurrencyExtension on Currency {

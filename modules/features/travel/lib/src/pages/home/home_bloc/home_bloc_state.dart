@@ -1,6 +1,6 @@
 part of 'home_bloc.dart';
 
-@freezed
+@Freezed(map: FreezedMapOptions(maybeMap: true))
 abstract class HomeBlocState with _$HomeBlocState {
   const factory HomeBlocState.loading() = HomeBlocLoadingState;
 

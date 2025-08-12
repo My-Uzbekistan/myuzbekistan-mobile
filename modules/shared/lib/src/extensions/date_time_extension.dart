@@ -16,6 +16,15 @@ extension DatetTimeX on DateTime? {
     }
   }
 
+  String toFormatDMMM() {
+    try {
+      String formatterDate = DateFormat('d MMMM').format(this!);
+      return formatterDate;
+    } catch (e) {
+      debugPrint("DateTime format exaption ${e}");
+      return "";
+    }
+  }
   String yyyyMMddHHmm() {
     final day = this?.day.toString().padLeft(2, '0');
     final month = this?.month.toString().padLeft(2, '0');

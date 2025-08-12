@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -47,6 +46,166 @@ class $HomeBlocEventCopyWith<$Res>  {
 $HomeBlocEventCopyWith(HomeBlocEvent _, $Res Function(HomeBlocEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [HomeBlocEvent].
+extension HomeBlocEventPatterns on HomeBlocEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _HomeBlocInitialEvent value)?  initial,TResult Function( _LoadDataEvent value)?  loadDataEvent,TResult Function( _ChangeRegion value)?  changeRegion,TResult Function( _LoadContentsEvent value)?  loadContents,TResult Function( _CheckPermissionEvent value)?  checkPermission,TResult Function( _LoadFavoritesEvent value)?  loadFavorites,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _HomeBlocInitialEvent() when initial != null:
+return initial(_that);case _LoadDataEvent() when loadDataEvent != null:
+return loadDataEvent(_that);case _ChangeRegion() when changeRegion != null:
+return changeRegion(_that);case _LoadContentsEvent() when loadContents != null:
+return loadContents(_that);case _CheckPermissionEvent() when checkPermission != null:
+return checkPermission(_that);case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _HomeBlocInitialEvent value)  initial,required TResult Function( _LoadDataEvent value)  loadDataEvent,required TResult Function( _ChangeRegion value)  changeRegion,required TResult Function( _LoadContentsEvent value)  loadContents,required TResult Function( _CheckPermissionEvent value)  checkPermission,required TResult Function( _LoadFavoritesEvent value)  loadFavorites,}){
+final _that = this;
+switch (_that) {
+case _HomeBlocInitialEvent():
+return initial(_that);case _LoadDataEvent():
+return loadDataEvent(_that);case _ChangeRegion():
+return changeRegion(_that);case _LoadContentsEvent():
+return loadContents(_that);case _CheckPermissionEvent():
+return checkPermission(_that);case _LoadFavoritesEvent():
+return loadFavorites(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _HomeBlocInitialEvent value)?  initial,TResult? Function( _LoadDataEvent value)?  loadDataEvent,TResult? Function( _ChangeRegion value)?  changeRegion,TResult? Function( _LoadContentsEvent value)?  loadContents,TResult? Function( _CheckPermissionEvent value)?  checkPermission,TResult? Function( _LoadFavoritesEvent value)?  loadFavorites,}){
+final _that = this;
+switch (_that) {
+case _HomeBlocInitialEvent() when initial != null:
+return initial(_that);case _LoadDataEvent() when loadDataEvent != null:
+return loadDataEvent(_that);case _ChangeRegion() when changeRegion != null:
+return changeRegion(_that);case _LoadContentsEvent() when loadContents != null:
+return loadContents(_that);case _CheckPermissionEvent() when checkPermission != null:
+return checkPermission(_that);case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( bool isRefresh)?  loadDataEvent,TResult Function( int regionId)?  changeRegion,TResult Function()?  loadContents,TResult Function()?  checkPermission,TResult Function()?  loadFavorites,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _HomeBlocInitialEvent() when initial != null:
+return initial();case _LoadDataEvent() when loadDataEvent != null:
+return loadDataEvent(_that.isRefresh);case _ChangeRegion() when changeRegion != null:
+return changeRegion(_that.regionId);case _LoadContentsEvent() when loadContents != null:
+return loadContents();case _CheckPermissionEvent() when checkPermission != null:
+return checkPermission();case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( bool isRefresh)  loadDataEvent,required TResult Function( int regionId)  changeRegion,required TResult Function()  loadContents,required TResult Function()  checkPermission,required TResult Function()  loadFavorites,}) {final _that = this;
+switch (_that) {
+case _HomeBlocInitialEvent():
+return initial();case _LoadDataEvent():
+return loadDataEvent(_that.isRefresh);case _ChangeRegion():
+return changeRegion(_that.regionId);case _LoadContentsEvent():
+return loadContents();case _CheckPermissionEvent():
+return checkPermission();case _LoadFavoritesEvent():
+return loadFavorites();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( bool isRefresh)?  loadDataEvent,TResult? Function( int regionId)?  changeRegion,TResult? Function()?  loadContents,TResult? Function()?  checkPermission,TResult? Function()?  loadFavorites,}) {final _that = this;
+switch (_that) {
+case _HomeBlocInitialEvent() when initial != null:
+return initial();case _LoadDataEvent() when loadDataEvent != null:
+return loadDataEvent(_that.isRefresh);case _ChangeRegion() when changeRegion != null:
+return changeRegion(_that.regionId);case _LoadContentsEvent() when loadContents != null:
+return loadContents();case _CheckPermissionEvent() when checkPermission != null:
+return checkPermission();case _LoadFavoritesEvent() when loadFavorites != null:
+return loadFavorites();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -379,6 +538,148 @@ class $HomeBlocStateCopyWith<$Res>  {
 $HomeBlocStateCopyWith(HomeBlocState _, $Res Function(HomeBlocState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [HomeBlocState].
+extension HomeBlocStatePatterns on HomeBlocState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( HomeBlocLoadingState value)?  loading,TResult Function( HomeBlocDataState value)?  dataState,TResult Function( HomeBlocErrorState value)?  errorState,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case HomeBlocLoadingState() when loading != null:
+return loading(_that);case HomeBlocDataState() when dataState != null:
+return dataState(_that);case HomeBlocErrorState() when errorState != null:
+return errorState(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( HomeBlocLoadingState value)  loading,required TResult Function( HomeBlocDataState value)  dataState,required TResult Function( HomeBlocErrorState value)  errorState,}){
+final _that = this;
+switch (_that) {
+case HomeBlocLoadingState():
+return loading(_that);case HomeBlocDataState():
+return dataState(_that);case HomeBlocErrorState():
+return errorState(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( HomeBlocLoadingState value)?  loading,TResult? Function( HomeBlocDataState value)?  dataState,TResult? Function( HomeBlocErrorState value)?  errorState,}){
+final _that = this;
+switch (_that) {
+case HomeBlocLoadingState() when loading != null:
+return loading(_that);case HomeBlocDataState() when dataState != null:
+return dataState(_that);case HomeBlocErrorState() when errorState != null:
+return errorState(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult Function()?  errorState,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case HomeBlocLoadingState() when loading != null:
+return loading();case HomeBlocDataState() when dataState != null:
+return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return errorState();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)  dataState,required TResult Function()  errorState,}) {final _that = this;
+switch (_that) {
+case HomeBlocLoadingState():
+return loading();case HomeBlocDataState():
+return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState():
+return errorState();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult? Function()?  errorState,}) {final _that = this;
+switch (_that) {
+case HomeBlocLoadingState() when loading != null:
+return loading();case HomeBlocDataState() when dataState != null:
+return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return errorState();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

@@ -8,10 +8,9 @@ part of 'favorite_dto.dart';
 
 FavoriteDto _$FavoriteDtoFromJson(Map<String, dynamic> json) => FavoriteDto(
   totalItems: (json['totalItems'] as num?)?.toInt(),
-  items:
-      (json['items'] as List<dynamic>?)
-          ?.map((e) => MainPageContentDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
+  items: (json['items'] as List<dynamic>?)
+      ?.map((e) => MainPageContentDto.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$FavoriteDtoToJson(FavoriteDto instance) =>

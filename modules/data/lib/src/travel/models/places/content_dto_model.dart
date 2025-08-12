@@ -1,5 +1,6 @@
 
 import 'package:domain/domain.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared/shared.dart';
 
 import '../../../utils/convertors/image_convertor.dart';
@@ -78,7 +79,7 @@ abstract class MainPageContentDto with _$MainPageContentDto {
           double? price,
           double? priceInDollar,
           bool? isFavorite,
-          @Default(ViewType.places) @ViewTypeConvertor() ViewType viewType}) =
+          int? viewType}) =
       _MainPageContentDto;
 
   factory MainPageContentDto.fromJson(Map<String, dynamic> json) =>
@@ -102,7 +103,7 @@ abstract class MainPageContentDto with _$MainPageContentDto {
         averageCheck: averageCheck,
         price: price,
         priceInDollar: priceInDollar,
-        viewType: viewType,
+        viewType: ViewType.getType(viewType),
         distance: distance,
         reviewCount: reviewCount,
         isFavorite: isFavorite ?? false);

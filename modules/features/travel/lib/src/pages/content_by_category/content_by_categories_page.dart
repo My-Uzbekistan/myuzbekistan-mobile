@@ -60,10 +60,8 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
               }
             }
           }, buildWhen: (previous, current) {
-                    debugPrint("uopdateStatez  buildWhen  ${current}");
             return true;
           }, builder: (context, state) {
-                        debugPrint("uopdateStatezjxhcgaksjcslkj  ${state}");
             if (state is ContentByCategoryDataState) {
               return NotificationListener<ScrollNotification>(
                 onNotification: (notification) {

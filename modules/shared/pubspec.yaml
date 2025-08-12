@@ -29,10 +29,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   intl:
-  freezed: ^3.0.6
-  freezed_annotation: ^3.0.0
+  freezed_annotation: ^3.1.0
   get_it: ^8.0.3
-  injectable: ^2.5.0
+  injectable: ^2.5.1
   flutter_bloc: ^9.1.0
   go_router: ^14.8.1
   rxdart: ^0.28.0
@@ -44,10 +43,14 @@ dependencies:
   flutter_hooks: ^0.21.2
   dartx: ^1.2.0
   url_launcher: ^6.3.1
+  dio: ^5.8.0+1
   geolocator:
   flutter_alice:
     git: git@github.com:IlhomSh/flutter_alice.git
+  mobile_scanner: ^7.0.1
 
+  pinput: ^5.0.1
+  keyboard_actions: ^4.2.0
 #  flutter_alice:
 #    git: https://github.com/IlhomSh/flutter_alice.git
 
@@ -55,8 +58,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.15
-  injectable_generator:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

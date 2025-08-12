@@ -1,5 +1,4 @@
 
-import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
@@ -27,7 +26,7 @@ abstract class RestService {
   @GET("regions")
   Future<List<RegionsDto>> loadRegions();
 
-  @GET("categories/{categoryId}/contents")
+  @GET("v2/categories/{categoryId}/contents")
   Future<List<MainPageContentDto>> loadContentsByCategory(
       {@Path("categoryId") required int categoryId,
       @Query("page") required int page,
@@ -42,14 +41,14 @@ abstract class RestService {
     @CancelRequest() CancelToken? cancelToken,
   });
 
-  @GET("categories/main-page")
-  Future<List<ContentCategoriesDto>> loadMainData(
+  @GET("v2/categories/main-page")
+  Future<dynamic> loadMainData(
       {@Query("regionId") int? regionId});
 
   @GET("weather/region")
   Future<TemperatureDto> loadWeather({@Query("regionId") int? regionId});
 
-  @GET("contents/{contentId}")
+  @GET("v2/contents/{contentId}")
   Future<ContentDto> loadContentById({
     @Path("contentId") required int contentId,
   });

@@ -63,15 +63,20 @@ import 'app_localizations_uz.dart';
 /// be consistent with the languages listed in the FeatureMoreLocalizations.supportedLocales
 /// property.
 abstract class FeatureMoreLocalizations {
-  FeatureMoreLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  FeatureMoreLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
   static FeatureMoreLocalizations? of(BuildContext context) {
-    return Localizations.of<FeatureMoreLocalizations>(context, FeatureMoreLocalizations);
+    return Localizations.of<FeatureMoreLocalizations>(
+      context,
+      FeatureMoreLocalizations,
+    );
   }
 
-  static const LocalizationsDelegate<FeatureMoreLocalizations> delegate = _FeatureMoreLocalizationsDelegate();
+  static const LocalizationsDelegate<FeatureMoreLocalizations> delegate =
+      _FeatureMoreLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,18 +88,19 @@ abstract class FeatureMoreLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('ru'),
-    Locale('uz')
+    Locale('uz'),
   ];
 
   /// No description provided for @nav_home.
@@ -144,6 +150,12 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'{lang, select, en{Английский} ru{Русский} uz{Узбекский} other{} }'**
   String lanItem(String lang);
+
+  /// No description provided for @langItemDefault.
+  ///
+  /// In ru, this message translates to:
+  /// **'{lang, select, en{English} ru{Русский} uz{O\'zbekcha} other{} }'**
+  String langItemDefault(String lang);
 
   /// No description provided for @themeModes.
   ///
@@ -416,35 +428,40 @@ abstract class FeatureMoreLocalizations {
   String get distanceM;
 }
 
-class _FeatureMoreLocalizationsDelegate extends LocalizationsDelegate<FeatureMoreLocalizations> {
+class _FeatureMoreLocalizationsDelegate
+    extends LocalizationsDelegate<FeatureMoreLocalizations> {
   const _FeatureMoreLocalizationsDelegate();
 
   @override
   Future<FeatureMoreLocalizations> load(Locale locale) {
-    return SynchronousFuture<FeatureMoreLocalizations>(lookupFeatureMoreLocalizations(locale));
+    return SynchronousFuture<FeatureMoreLocalizations>(
+      lookupFeatureMoreLocalizations(locale),
+    );
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'ru', 'uz'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'ru', 'uz'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_FeatureMoreLocalizationsDelegate old) => false;
 }
 
 FeatureMoreLocalizations lookupFeatureMoreLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return FeatureMoreLocalizationsEn();
-    case 'ru': return FeatureMoreLocalizationsRu();
-    case 'uz': return FeatureMoreLocalizationsUz();
+    case 'en':
+      return FeatureMoreLocalizationsEn();
+    case 'ru':
+      return FeatureMoreLocalizationsRu();
+    case 'uz':
+      return FeatureMoreLocalizationsUz();
   }
 
   throw FlutterError(
     'FeatureMoreLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

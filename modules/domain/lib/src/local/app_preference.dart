@@ -5,15 +5,15 @@ abstract class AppPreference {
 
   Future<void> setTheme(ThemeMode mode);
 
-  AppLocale getLocale();
+  AppLocale? getLocale();
 
   ThemeMode getThemeMode();
 }
 
 enum AppLocale {
-  en,
-  ru,
   uz,
+  ru,
+  en,
 
   // final countryCode;
   //

@@ -15,6 +15,7 @@ class _ItemCardState extends State<ItemCard>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final itemWidth = screenWidth * 0.25;
     final width = max(156.0, min(200.0, itemWidth));
@@ -42,7 +43,7 @@ class _ItemCardState extends State<ItemCard>
           mainAxisSize: MainAxisSize.min,
           children: [
             contentImage,
-            SizedBox(
+            Flexible(child: SizedBox(
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,14 +56,14 @@ class _ItemCardState extends State<ItemCard>
                     style: CustomTypography.bodyMd,
                   ),
                   if((widget.content.contentAddress??"").isNotEmpty)
-                  RichText(text: TextSpan(
-                    children: [
-                      TextSpan(text: widget.content.contentAddress??"" ),
-                      if(widget.content.distanceKm!=null)
-                        TextSpan(text:" • ${widget.distanceText}"),
-                    ],
-                    style: CustomTypography.bodySm.copyWith(color: context.appColors.textIconColor.secondary)
-                  )),
+                    RichText(text: TextSpan(
+                        children: [
+                          TextSpan(text: widget.content.contentAddress??"" ),
+                          if(widget.content.distanceKm!=null)
+                            TextSpan(text:" • ${widget.distanceText}"),
+                        ],
+                        style: CustomTypography.bodySm.copyWith(color: context.appColors.textIconColor.secondary)
+                    )),
                   if ((widget.content.ratingAverage ?? 0) > 0)
                     Row(
                       spacing: 4,
@@ -72,34 +73,32 @@ class _ItemCardState extends State<ItemCard>
                             height: 16,
                             colorFilter: ColorFilter.mode(
                                 context.appColors.textIconColor.primary, BlendMode.srcIn)),
-                       Flexible(child:  RichText(
-                         text: TextSpan(
-                             style: CustomTypography.labelMd.copyWith(
-                                 color:
-                                 context.appColors.textIconColor.primary),
-                             children: [
-                               TextSpan(text: widget.content.ratingAverage.toString()),
-                               if((widget.content.reviewCount??0)>0)
-                                 TextSpan(
-                                   text: " (${widget.content.reviewCount})",
-                                   style: CustomTypography.labelMd.copyWith(
-                                       color: context
-                                           .appColors.textIconColor.secondary),
-                                 ),
-                             ]),
-                       ))
+                        Flexible(child:  RichText(
+                          text: TextSpan(
+                              style: CustomTypography.labelMd.copyWith(
+                                  color:
+                                  context.appColors.textIconColor.primary),
+                              children: [
+                                TextSpan(text: widget.content.ratingAverage.toString()),
+                                if((widget.content.reviewCount??0)>0)
+                                  TextSpan(
+                                    text: " (${widget.content.reviewCount})",
+                                    style: CustomTypography.labelMd.copyWith(
+                                        color: context
+                                            .appColors.textIconColor.secondary),
+                                  ),
+                              ]),
+                        ))
                       ],
                     )
                 ],
               ),
-            )
+            ))
           ],
         ),
-      ),
-    ));
-  }
 
+    )));
+  }
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }

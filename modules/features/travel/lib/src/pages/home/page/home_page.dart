@@ -11,38 +11,47 @@ import '../home_bloc/home_bloc.dart';
 import '../widgets/home_groups.dart';
 import '../widgets/home_region_card.dart';
 
+
 class HomePage extends HookWidget {
-  const HomePage({super.key});
+  const  HomePage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
+    useAutomaticKeepAlive(wantKeepAlive: true);
     var bloc = context.read<HomeBloc>();
-    useEffect(() {
-      bloc.add(HomeBlocEvent.initial());
-      return null;
-    }, []);
-
-    var isRefreshing = useState(false);
+    var completerRef = useRef<Completer<void>?>(null);
 
     final scrollController = useScrollController();
 
     return Scaffold(
-      body: BlocBuilder<HomeBloc, HomeBlocState>(
+      body: BlocConsumer<HomeBloc, HomeBlocState>(
+        listener: (context, state) {
+          if (state is HomeBlocDataState) {
+            if (!state.isRefreshing) {
+              completerRef.value?.complete();
+              completerRef.value = null;
+            }
+          }
+        },
         bloc: bloc,
         buildWhen: (previous, current) => previous != current,
         builder: (context, state) {
-          switch (state) {
-            case HomeBlocLoadingState _:
-              return Center(child: LoadingIndicator());
-            case HomeBlocDataState data:
-              return RefreshIndicator.adaptive(
+          return AnimatedSwitcher(
+            duration: Duration(milliseconds: 300),
+            child: switch (state) {
+              HomeBlocLoadingState _ => _Loading(
+                key: ValueKey("HomeLoadingState"),
+              ),
+              HomeBlocDataState data => RefreshIndicator.adaptive(
+                key: ValueKey("HomeDataState"),
                 displacement: 100,
                 triggerMode: RefreshIndicatorTriggerMode.anywhere,
                 onRefresh: () async {
                   bloc.add(HomeBlocEvent.loadDataEvent(isRefresh: true));
-                  isRefreshing.value = true;
-                  await Future.delayed(Duration(seconds: 2));
-                  isRefreshing.value = false;
+
+                  completerRef.value = Completer();
+                  await completerRef.value?.future;
                 },
                 child: Scaffold(
                   body: SafeArea(
@@ -76,57 +85,60 @@ class HomePage extends HookWidget {
                           },
                         ),
                         Flexible(
-                          child: ListView(
+                          child: CustomScrollView(
                             controller: scrollController,
-                            children: [
+                            slivers: [
                               if (state.favorites.isNotEmpty)
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 16,
-                                    left: 20,
-                                    right: 20,
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      context.travel.pushFavoritesPage();
-                                    },
-                                    child: StackedCard(
-                                      title: Row(
-                                        spacing: 2,
-                                        children: [
-                                          Flexible(
-                                            child: Text(
-                                              context.localization.favorites,
-                                              style: CustomTypography.H3,
+                                SliverToBoxAdapter(
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 16,
+                                      left: 20,
+                                      right: 20,
+                                    ),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        context.travel.pushFavoritesPage();
+                                      },
+                                      child: StackedCard(
+                                        title: Row(
+                                          spacing: 2,
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                context.localization.favorites,
+                                                style: CustomTypography.H3,
+                                              ),
                                             ),
-                                          ),
-                                          Assets.svgIconFilledHeard.toSvgImage(
-                                            width: 24,
-                                            colorFilter: ColorFilter.mode(
-                                              context.appColors.colors.red,
-                                              BlendMode.srcIn,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      caption: Text(
-                                        context.localization.n_items(
-                                          data.totalFavoriteCount,
+                                            Assets.svgIconFilledHeard
+                                                .toSvgImage(
+                                                  width: 24,
+                                                  colorFilter: ColorFilter.mode(
+                                                    context
+                                                        .appColors
+                                                        .colors
+                                                        .red,
+                                                    BlendMode.srcIn,
+                                                  ),
+                                                ),
+                                          ],
                                         ),
-                                        style: CustomTypography.bodySm,
+                                        caption: Text(
+                                          context.localization.n_items(
+                                            data.totalFavoriteCount,
+                                          ),
+                                          style: CustomTypography.bodySm,
+                                        ),
+                                        avatars: data.favorites,
                                       ),
-                                      avatars: data.favorites,
                                     ),
                                   ),
                                 ),
                               !data.loadingContents
-                                  ? ListView.builder(
-                                    shrinkWrap: true,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    itemCount: data.contents.length,
-                                    itemBuilder: (
-                                      BuildContext context,
-                                      int index,
+                                  ? SliverList(
+                                    delegate: SliverChildBuilderDelegate((
+                                      context,
+                                      index,
                                     ) {
                                       final e = data.contents[index];
                                       return HomeGroupsWidget(
@@ -151,13 +163,10 @@ class HomePage extends HookWidget {
                                           items: e.contents,
                                         ),
                                       );
-                                    },
+                                    }, childCount: data.contents.length),
                                   )
-                                  : Center(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(top: 8),
-                                      child: CircularProgressIndicator(),
-                                    ),
+                                  : SliverToBoxAdapter(
+                                    child: LoadingIndicator(),
                                   ),
                             ],
                           ),
@@ -166,45 +175,47 @@ class HomePage extends HookWidget {
                     ),
                   ),
                 ),
-              );
-          }
-
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  MessageContainer.custom(
-                    icon: Assets.pngExclamationmarkSquare.toImage(),
-                    title: context.localization.pageFailedToLoad,
-                    caption: context.localization.something_went_wrong,
-                  ),
-                  SizedBox(height: 24),
-                  SizedBox(
-                    width: double.maxFinite,
-                    height: 48,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 24),
-                      child: FilledButton(
-                        onPressed: () {
-                          bloc.add(HomeBlocEvent.loadDataEvent());
-                        },
-                        style: FilledButton.styleFrom(
-                          elevation: 0,
-                          textStyle: CustomTypography.bodyLg,
-                          backgroundColor: context.appColors.fill.quaternary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+              ),
+              _ => Padding(
+                key: ValueKey("HomeDefaultState"),
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    spacing: 24,
+                    children: [
+                      MessageContainer.custom(
+                        icon: Assets.pngExclamationmarkSquare.toImage(),
+                        title: context.localization.pageFailedToLoad,
+                        caption: context.localization.something_went_wrong,
+                      ),
+                      SizedBox(
+                        width: double.maxFinite,
+                        height: 48,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 24),
+                          child: FilledButton(
+                            onPressed: () {
+                              bloc.add(HomeBlocEvent.loadDataEvent());
+                            },
+                            style: FilledButton.styleFrom(
+                              elevation: 0,
+                              textStyle: CustomTypography.bodyLg,
+                              backgroundColor:
+                                  context.appColors.fill.quaternary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                            child: Text(context.localization.refresh),
                           ),
                         ),
-                        child: Text(context.localization.refresh),
                       ),
-                    ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
+            },
           );
         },
       ),
@@ -218,6 +229,7 @@ class CategoryHeader extends StatefulWidget {
   final ScrollController? scrollController;
 
   const CategoryHeader({
+    super.key,
     required this.categories,
     this.onItemTap,
     this.scrollController,
@@ -269,9 +281,10 @@ class _CategoryHeaderState extends State<CategoryHeader> {
       key: ValueKey("CategoriesHeader"),
       child: SizedBox(
         height: 82 * shrinkFactorParent,
+
         child: ListView.builder(
           itemCount: widget.categories.length,
-          padding: EdgeInsets.symmetric(horizontal: 20),
+
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
@@ -296,53 +309,127 @@ class _CategoryHeaderState extends State<CategoryHeader> {
   }
 }
 
-// class _CategoriesPersistentHeaderDelegate
-//     extends SliverPersistentHeaderDelegate {
-//   final List<Categories> categories;
-//   ValueChanged<Categories>? onItemTap;
-//
-//   _CategoriesPersistentHeaderDelegate(
-//       {required this.categories, this.onItemTap});
-//
-//   @override
-//   Widget build(
-//       BuildContext context, double shrinkOffset, bool overlapsContent) {
-//     return Container(
-//       key: ValueKey("CategoriesHeader"),
-//       color: context.appColors.background.background,
-//       padding: EdgeInsets.symmetric(vertical: 10),
-//       child: ListView.builder(
-//           itemCount: categories.length,
-//           padding: EdgeInsets.symmetric(horizontal: 8),
-//           shrinkWrap: true,
-//           scrollDirection: Axis.horizontal,
-//           itemBuilder: (context, index) {
-//             final item = categories[index];
-//             return RepaintBoundary(
-//               key: ValueKey(item),
-//               child: HomeCategoryItem(
-//                 categoryItem:
-//                     CategoryItem(name: item.name ?? "", icon: item.icon),
-//                 onTap: () {
-//                   onItemTap?.call(item);
-//                 },
-//               ),
-//             );
-//           }),
-//     );
-//   }
-//
-//   @override
-//   double get maxExtent => 100; // Same as SliverAppBar height
-//
-//   @override
-//   double get minExtent => 100;
-//
-//   @override
-//   FloatingHeaderSnapConfiguration? get snapConfiguration => null;
-//
-//   @override
-//   bool shouldRebuild(
-//           covariant _CategoriesPersistentHeaderDelegate oldDelegate) =>
-//       oldDelegate.categories != categories;
-// }
+class _Loading extends StatelessWidget {
+  const _Loading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      ignoring: true,
+      child: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        child: SafeArea(
+          bottom: false,
+          child: Shimmer.fromDefault(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 16,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ).copyWith(top: 8),
+                      child: ShimmerDefaultContainer(height: 54, radius: 40),
+                    ),
+                    SizedBox(height: 16),
+                    SizedBox(
+                      height: 84,
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          return SizedBox(
+                            width: 84,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ).copyWith(bottom: 12),
+                              child: Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ShimmerDefaultContainer(
+                                    height: 48,
+                                    width: 48,
+                                    radius: 48,
+                                  ),
+                                  ShimmerDefaultContainer(height: 12),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 15,
+                        physics: NeverScrollableScrollPhysics(),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ShimmerDefaultContainer(
+                            height: 300,
+                            width: double.maxFinite,
+                          ),
+                          SizedBox(height: 16),
+                          ShimmerDefaultContainer(height: 20, width: 200),
+                          SizedBox(height: 2),
+                          ShimmerDefaultContainer(
+                            height: 18,
+                            width: double.maxFinite,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 40),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: ShimmerDefaultContainer(height: 24, width: 200),
+                    ),
+                  ],
+                ),
+
+                SizedBox(
+                  height: 220,
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) {
+                      return SizedBox(width: 16);
+                    },
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    scrollDirection: Axis.horizontal,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ShimmerDefaultContainer(width: 150, height: 150),
+                          SizedBox(height: 8),
+                          ShimmerDefaultContainer(
+                            height: 16,
+                            width: 120,
+                            radius: 4,
+                          ),
+                          SizedBox(height: 4),
+                          ShimmerDefaultContainer(
+                            height: 14,
+                            width: 110,
+                            radius: 4,
+                          ),
+                        ],
+                      );
+                    },
+                    itemCount: 5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

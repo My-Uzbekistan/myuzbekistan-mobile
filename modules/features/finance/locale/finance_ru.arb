@@ -1,0 +1,32 @@
+{
+  "currency": "{amount} сум",
+  "pay": "Оплатить",
+  "paymentAmount": "Сумма платежа",
+  "addCard": "Добавить карту",
+
+  "cardAddSmsSent": "Отправили SMS с кодом подтверждения для добавления банковской карты",
+  "payment_success": "Оплата прошла успешно",
+  "payment_method": "Payment method",
+  "my_cards_title": "Мои карты",
+  "payment_history_title":"История",
+  "payment_qr_title": "QR Платёж",
+
+  "card_number_label": "Номер карты",
+  "card_expiry_label": "Срок действия",
+  "card_expiry_hint": "ММ/ГГ",
+  "card_holder_label": "Имя на карте",
+  "card_holder_hint": "Владелец",
+  "phone_number_label": "Номер телефона",
+  "resend_in_seconds": "Отправить снова через {time} сек",
+  "action_resend": "Отправить снова",
+  "payment_details": "Детали платежа",
+  "editing": "Редактирование",
+  "alert_title_delete_card": "Удалить карту?",
+  "action_delete": "Удалить",
+  "action_cancel": "Отмена",
+  "nearest_places": "Ближайшие места",
+  "currency_calculator": "Калькулятор валют",
+  "show_all_places": "Список мест"
+
+
+}

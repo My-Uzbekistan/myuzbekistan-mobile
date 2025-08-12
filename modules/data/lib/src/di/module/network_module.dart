@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:data/src/constants.dart';
 import 'package:data/src/interseptors/TokenRefreshInterceptor.dart';
 import 'package:dio/dio.dart';
@@ -12,8 +11,6 @@ import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../interseptors/AppInterceptor.dart';
-
-
 
 @module
 abstract class NetworkModule {
@@ -32,10 +29,15 @@ abstract class NetworkModule {
 
   @lazySingleton
   Dio provideDio(
-      AppPreference preference, SecurityStorage securityStorage,@Named('baseUrl') String baseUrl, Alice alice) {
-    final dioOptions = BaseOptions(baseUrl: baseUrl)
-      ..connectTimeout = const Duration(seconds: 30)
-      ..receiveTimeout = const Duration(seconds: 30);
+    AppPreference preference,
+    SecurityStorage securityStorage,
+    @Named('baseUrl') String baseUrl,
+    Alice alice,
+  ) {
+    final dioOptions =
+        BaseOptions(baseUrl: baseUrl)
+          ..connectTimeout = const Duration(seconds: 30)
+          ..receiveTimeout = const Duration(seconds: 30);
     final dio = Dio(dioOptions);
     // final tokenManager = TokenManager.instance;
     // tokenManager.setToken(
@@ -52,6 +54,7 @@ abstract class NetworkModule {
       dio.interceptors.add(alice.getDioInterceptor());
       dio.interceptors.add(PrettyDioLogger(requestBody: true));
     }
+    dio.interceptors.add(ErrorInterceptor());
     return dio;
   }
 }

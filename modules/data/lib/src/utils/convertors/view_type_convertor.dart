@@ -1,6 +1,5 @@
 
 import 'package:domain/domain.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
 class ViewTypeConvertor implements JsonConverter<ViewType, int?> {
@@ -8,7 +7,6 @@ class ViewTypeConvertor implements JsonConverter<ViewType, int?> {
 
   @override
   ViewType fromJson(int? json) {
-    debugPrint("ViewTypeDataConvertor ${json}");
     if (json == null) return ViewType.places;
     return ViewType.getType(json);
   }

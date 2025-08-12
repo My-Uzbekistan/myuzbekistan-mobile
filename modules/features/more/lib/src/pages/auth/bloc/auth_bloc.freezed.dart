@@ -1,6 +1,5 @@
-// dart format width=80
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -41,6 +40,148 @@ class $AuthEventCopyWith<$Res>  {
 $AuthEventCopyWith(AuthEvent _, $Res Function(AuthEvent) __);
 }
 
+
+/// Adds pattern-matching-related methods to [AuthEvent].
+extension AuthEventPatterns on AuthEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthGoogleEvent value)?  authByGoogle,TResult Function( _AuthAppleEvent value)?  authByApple,TResult Function( _AuthLogOutEvent value)?  logOutEvent,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AuthGoogleEvent() when authByGoogle != null:
+return authByGoogle(_that);case _AuthAppleEvent() when authByApple != null:
+return authByApple(_that);case _AuthLogOutEvent() when logOutEvent != null:
+return logOutEvent(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthGoogleEvent value)  authByGoogle,required TResult Function( _AuthAppleEvent value)  authByApple,required TResult Function( _AuthLogOutEvent value)  logOutEvent,}){
+final _that = this;
+switch (_that) {
+case _AuthGoogleEvent():
+return authByGoogle(_that);case _AuthAppleEvent():
+return authByApple(_that);case _AuthLogOutEvent():
+return logOutEvent(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthGoogleEvent value)?  authByGoogle,TResult? Function( _AuthAppleEvent value)?  authByApple,TResult? Function( _AuthLogOutEvent value)?  logOutEvent,}){
+final _that = this;
+switch (_that) {
+case _AuthGoogleEvent() when authByGoogle != null:
+return authByGoogle(_that);case _AuthAppleEvent() when authByApple != null:
+return authByApple(_that);case _AuthLogOutEvent() when logOutEvent != null:
+return logOutEvent(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  authByGoogle,TResult Function()?  authByApple,TResult Function()?  logOutEvent,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AuthGoogleEvent() when authByGoogle != null:
+return authByGoogle();case _AuthAppleEvent() when authByApple != null:
+return authByApple();case _AuthLogOutEvent() when logOutEvent != null:
+return logOutEvent();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  authByGoogle,required TResult Function()  authByApple,required TResult Function()  logOutEvent,}) {final _that = this;
+switch (_that) {
+case _AuthGoogleEvent():
+return authByGoogle();case _AuthAppleEvent():
+return authByApple();case _AuthLogOutEvent():
+return logOutEvent();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  authByGoogle,TResult? Function()?  authByApple,TResult? Function()?  logOutEvent,}) {final _that = this;
+switch (_that) {
+case _AuthGoogleEvent() when authByGoogle != null:
+return authByGoogle();case _AuthAppleEvent() when authByApple != null:
+return authByApple();case _AuthLogOutEvent() when logOutEvent != null:
+return logOutEvent();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 
@@ -167,6 +308,154 @@ class $AuthStateCopyWith<$Res>  {
 $AuthStateCopyWith(AuthState _, $Res Function(AuthState) __);
 }
 
+
+/// Adds pattern-matching-related methods to [AuthState].
+extension AuthStatePatterns on AuthState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( DefaultState value)?  defaultState,TResult Function( AuthGoogleLoadingState value)?  googleLoading,TResult Function( AuthAppleLoadingState value)?  appleLoading,TResult Function( AuthSuccessState value)?  authSuccessState,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case DefaultState() when defaultState != null:
+return defaultState(_that);case AuthGoogleLoadingState() when googleLoading != null:
+return googleLoading(_that);case AuthAppleLoadingState() when appleLoading != null:
+return appleLoading(_that);case AuthSuccessState() when authSuccessState != null:
+return authSuccessState(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( DefaultState value)  defaultState,required TResult Function( AuthGoogleLoadingState value)  googleLoading,required TResult Function( AuthAppleLoadingState value)  appleLoading,required TResult Function( AuthSuccessState value)  authSuccessState,}){
+final _that = this;
+switch (_that) {
+case DefaultState():
+return defaultState(_that);case AuthGoogleLoadingState():
+return googleLoading(_that);case AuthAppleLoadingState():
+return appleLoading(_that);case AuthSuccessState():
+return authSuccessState(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( DefaultState value)?  defaultState,TResult? Function( AuthGoogleLoadingState value)?  googleLoading,TResult? Function( AuthAppleLoadingState value)?  appleLoading,TResult? Function( AuthSuccessState value)?  authSuccessState,}){
+final _that = this;
+switch (_that) {
+case DefaultState() when defaultState != null:
+return defaultState(_that);case AuthGoogleLoadingState() when googleLoading != null:
+return googleLoading(_that);case AuthAppleLoadingState() when appleLoading != null:
+return appleLoading(_that);case AuthSuccessState() when authSuccessState != null:
+return authSuccessState(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  defaultState,TResult Function()?  googleLoading,TResult Function()?  appleLoading,TResult Function()?  authSuccessState,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case DefaultState() when defaultState != null:
+return defaultState();case AuthGoogleLoadingState() when googleLoading != null:
+return googleLoading();case AuthAppleLoadingState() when appleLoading != null:
+return appleLoading();case AuthSuccessState() when authSuccessState != null:
+return authSuccessState();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  defaultState,required TResult Function()  googleLoading,required TResult Function()  appleLoading,required TResult Function()  authSuccessState,}) {final _that = this;
+switch (_that) {
+case DefaultState():
+return defaultState();case AuthGoogleLoadingState():
+return googleLoading();case AuthAppleLoadingState():
+return appleLoading();case AuthSuccessState():
+return authSuccessState();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  defaultState,TResult? Function()?  googleLoading,TResult? Function()?  appleLoading,TResult? Function()?  authSuccessState,}) {final _that = this;
+switch (_that) {
+case DefaultState() when defaultState != null:
+return defaultState();case AuthGoogleLoadingState() when googleLoading != null:
+return googleLoading();case AuthAppleLoadingState() when appleLoading != null:
+return appleLoading();case AuthSuccessState() when authSuccessState != null:
+return authSuccessState();case _:
+  return null;
+
+}
+}
+
+}
 
 /// @nodoc
 

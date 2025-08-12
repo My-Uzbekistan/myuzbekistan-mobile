@@ -1,12 +1,17 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
+import 'package:finance/finance.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:more/more.dart';
 import 'package:overlay_support/overlay_support.dart';
+import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
 import 'di/injection.dart';
@@ -32,7 +37,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -56,18 +60,21 @@ class _MyAppState extends State<MyApp> {
           builder: (context, state) {
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
               theme: AppColorTheme.lightTheme,
               darkTheme: AppColorTheme.darkTheme,
+              themeMode: state.mode,
               localizationsDelegates: [
                 ...AppLocalizations.localizationsDelegates,
                 ...FeatureTravelLocalizations.localizationsDelegates,
-                ...FeatureMoreLocalizations.localizationsDelegates
+                ...FeatureMoreLocalizations.localizationsDelegates,
+                ...FeatureFinanceLocalizations.localizationsDelegates,
+                ...CoreAppLocalizations.localizationsDelegates
               ],
               supportedLocales: AppLocalizations.supportedLocales,
-              locale: state.appLocale.locale,
-              themeMode: state.mode,
+              locale: state.appLocale?.locale,
               builder: (context, child) {
+                Intl.defaultLocale =
+                    state.appLocale?.locale.languageCode.toString() ?? 'en';
                 return MediaQuery(
                     data: MediaQuery.of(context).copyWith(
                       textScaler: TextScaler.linear(1.0),
@@ -82,4 +89,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-

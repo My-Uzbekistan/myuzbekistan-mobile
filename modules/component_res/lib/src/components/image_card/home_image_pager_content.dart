@@ -18,7 +18,7 @@ class HomePagerContentData {
   });
 }
 
-class HomeImagePagerContent extends StatelessWidget {
+class HomeImagePagerContent extends StatefulWidget {
   final HomePagerContentData data;
   final GestureTapCallback? onTap;
   final String? recommendText;
@@ -26,14 +26,21 @@ class HomeImagePagerContent extends StatelessWidget {
   HomeImagePagerContent(
       {super.key, this.recommendText, required this.data, this.onTap});
 
+  @override
+  State<HomeImagePagerContent> createState() => _HomeImagePagerContentState();
+}
+
+class _HomeImagePagerContentState extends State<HomeImagePagerContent>
+    with AutomaticKeepAliveClientMixin {
   final controller = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: GestureDetector(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
@@ -47,16 +54,14 @@ class HomeImagePagerContent extends StatelessWidget {
                     Positioned.fill(
                         child: PageView.builder(
                             controller: controller,
-                            itemCount: data.items.length,
+                            itemCount: widget.data.items.length,
                             physics: ClampingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             allowImplicitScrolling: true,
                             pageSnapping: true,
                             itemBuilder: (context, index) {
-                              return CachedNetworkImage(
-                                key: ValueKey(index),
-                                imageUrl: data.items[index],
-                                fit: BoxFit.cover,
+                              return _ImagePage(
+                                url: widget.data.items[index],
                               );
                             })),
                     Positioned.fill(
@@ -65,7 +70,7 @@ class HomeImagePagerContent extends StatelessWidget {
                           color: context.appColors.static.black
                               .withValues(alpha: 0.16)),
                     )),
-                    if (recommendText != null)
+                    if (widget.recommendText != null)
                       Align(
                         alignment: Alignment.topLeft,
                         child: Container(
@@ -76,20 +81,20 @@ class HomeImagePagerContent extends StatelessWidget {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(24)),
                           child: Text(
-                            recommendText!,
+                            widget.recommendText!,
                             style: CustomTypography.labelSm
                                 .copyWith(color: Colors.black),
                           ),
                         ),
                       ),
-                    if (data.items.length > 1)
+                    if (widget.data.items.length > 1)
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 12.0),
                           child: SmoothPageIndicator(
                               controller: controller, // PageController
-                              count: data.items.length,
+                              count: widget.data.items.length,
                               effect: WormEffect(
                                 spacing: 4.0,
                                 dotWidth: 6.0,
@@ -115,11 +120,11 @@ class HomeImagePagerContent extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        data.title,
+                        widget.data.title,
                         style: CustomTypography.labelMd,
                       ),
                     ),
-                    if ((data.rating ?? 0) > 0)
+                    if ((widget.data.rating ?? 0) > 0)
                       Row(
                         spacing: 4,
                         children: [
@@ -134,10 +139,10 @@ class HomeImagePagerContent extends StatelessWidget {
                                     color: context
                                         .appColors.textIconColor.primary),
                                 children: [
-                                  TextSpan(text: data.rating.toString()),
-                                  if ((data.review ?? 0) > 0)
+                                  TextSpan(text: widget.data.rating.toString()),
+                                  if ((widget.data.review ?? 0) > 0)
                                     TextSpan(
-                                      text: " ${data.review}",
+                                      text: " ${widget.data.review}",
                                       style: CustomTypography.labelMd.copyWith(
                                           color: context.appColors.textIconColor
                                               .secondary),
@@ -148,9 +153,9 @@ class HomeImagePagerContent extends StatelessWidget {
                       )
                   ],
                 ),
-                if (data.caption != null)
+                if (widget.data.caption != null)
                   Text(
-                    data.caption!,
+                    widget.data.caption!,
                     style: CustomTypography.bodySm.copyWith(
                         color: context.appColors.textIconColor.secondary),
                   )
@@ -161,4 +166,49 @@ class HomeImagePagerContent extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+}
+
+class _ImagePage extends StatefulWidget {
+  final String url;
+
+  const _ImagePage({super.key, required this.url});
+
+  @override
+  State<_ImagePage> createState() => _ImagePageState();
+}
+
+class _ImagePageState extends State<_ImagePage>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context); // MUHIM!
+
+    return RepaintBoundary(
+        child: ExtendedImage.network(
+      widget.url,
+      fit: BoxFit.cover,
+      cache: true,
+      cacheMaxAge: Duration(days: 2),
+      loadStateChanged: (ExtendedImageState state) {
+        switch (state.extendedImageLoadState) {
+          case LoadState.completed:
+            return AnimatedOpacity(
+              opacity: 1.0,
+              duration: Duration(milliseconds: 300),
+              curve: Curves.easeInToLinear,
+              child: state.completedWidget,
+            );
+          default:
+            return Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover);
+        }
+      },
+    ));
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }

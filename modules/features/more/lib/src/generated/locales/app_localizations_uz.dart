@@ -31,29 +31,34 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String lanItem(String lang) {
-    String _temp0 = intl.Intl.selectLogic(
-      lang,
-      {
-        'en': 'Inglizcha',
-        'ru': 'Ruscha',
-        'uz': 'O\'zbekcha',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'Inglizcha',
+      'ru': 'Ruscha',
+      'uz': 'O\'zbekcha',
+      'other': '',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String langItemDefault(String lang) {
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'English',
+      'ru': 'Русский',
+      'uz': 'O\'zbekcha',
+      'other': '',
+    });
     return '$_temp0';
   }
 
   @override
   String themeModes(String theme) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme,
-      {
-        'system': 'Tizim mavzusi',
-        'light': 'Yorug\' mavzu',
-        'dark': 'Qorong\'i mavzu',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(theme, {
+      'system': 'Tizim mavzusi',
+      'light': 'Yorug\' mavzu',
+      'dark': 'Qorong\'i mavzu',
+      'other': '',
+    });
     return '$_temp0';
   }
 
@@ -80,7 +85,8 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get logout => 'Chiqish';
 
   @override
-  String get getStartedDescription => 'Imkoniyatlardan to‘liq foydalanish uchun tizimga kiring va oʻzingiz yoqtirgan narsalarni ham saqlab oling';
+  String get getStartedDescription =>
+      'Imkoniyatlardan to‘liq foydalanish uchun tizimga kiring va oʻzingiz yoqtirgan narsalarni ham saqlab oling';
 
   @override
   String get continueWithGoogle => 'Google orqali kirish';
@@ -145,7 +151,8 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get pageFailedToLoad => 'Sahifa yuklanmadi';
 
   @override
-  String get something_went_wrong => 'Nimadir xato ketdi. Iltimos, qayta urinib ko‘ring.';
+  String get something_went_wrong =>
+      'Nimadir xato ketdi. Iltimos, qayta urinib ko‘ring.';
 
   @override
   String get generalEmergency => 'Favqulodda yordam';

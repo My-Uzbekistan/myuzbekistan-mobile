@@ -10,10 +10,6 @@ class FeatureMoreNavExtension {
     _context.pushType(AppNavPath.more.profilePage, extra: extra);
   }
 
-  // void pushCurrencyPage() {
-  //   _context.pushType(AppNavPath.more.currenciesPage);
-  // }
-
   void pushCurrencies(List<Object> currencies) {
     _context.pushType(AppNavPath.more.currenciesPage, extra: currencies);
   }

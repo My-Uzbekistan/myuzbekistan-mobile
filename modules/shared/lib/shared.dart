@@ -19,7 +19,16 @@ export 'package:flutter_hooks/flutter_hooks.dart';
 export  'package:dartx/dartx.dart';
 export 'src/utils/launcher_utils.dart';
 export 'package:flutter_alice/alice.dart';
+export 'package:dio/dio.dart';
+export 'package:pinput/pinput.dart';
+export 'src/extensions/string_extension.dart';
+export 'package:keyboard_actions/keyboard_actions.dart';
+export 'package:mobile_scanner/mobile_scanner.dart';
+
+export 'package:intl/intl.dart' show DateFormat,Intl;
 // export 'package:flutter_alice/alice.dart';
+
+
 
 
 

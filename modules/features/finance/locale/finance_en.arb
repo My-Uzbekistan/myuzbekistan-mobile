@@ -1,0 +1,30 @@
+{
+  "currency": "{amount} sum",
+  "pay": "Pay",
+  "paymentAmount": "Payment amount",
+  "addCard": "Add card",
+
+  "cardAddSmsSent": "We’ve sent an SMS with a confirmation code to add your bank card.",
+  "payment_success": "Payment was successful",
+  "payment_method": "Payment method",
+  "my_cards_title": "My cards",
+  "payment_history_title":"History",
+  "payment_qr_title": "QR Pay",
+  "card_number_label": "Card number",
+  "card_expiry_label": "Expiry date",
+  "card_expiry_hint": "MM/YY",
+  "card_holder_label": "Name on card",
+  "card_holder_hint": "Cardholder",
+  "phone_number_label": "Phone number",
+  "resend_in_seconds": "Resend in {time} sec",
+  "action_resend": "Resend",
+  "payment_details": "Payment details",
+  "editing": "Editing",
+
+  "alert_title_delete_card": "Do you want to delete the card?",
+  "action_delete": "Delete",
+  "action_cancel": "Cancel",
+  "nearest_places": "Nearest places",
+  "currency_calculator": "Currency calculator",
+  "show_all_places": "Show all places"
+}

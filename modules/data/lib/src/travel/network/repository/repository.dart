@@ -1,11 +1,10 @@
-
-import 'package:dio/dio.dart';
+import 'package:data/src/utils/generic/generics.dart';
 import 'package:domain/domain.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:shared/shared.dart';
 
+import '../../models/places/content_dto_model.dart';
 import '../api/service.dart';
-
 
 @Injectable(as: Repository)
 class RepositoryImp implements Repository {
@@ -25,10 +24,13 @@ class RepositoryImp implements Repository {
   }
 
   @override
-  Future<List<ContentCategories>> loadContents({int? regionId}) async {
-    return _restService.loadMainData(regionId: regionId).call((data) {
-      return data.map((e) => e.toDomain()).toList();
-    });
+  Future<List<ContentCategories>> loadContents({int? regionId}) {
+    return _restService
+        .loadMainData(regionId: regionId)
+        .parseListAsync(
+          mapper: (dto) => dto.toDomain(),
+          fromJson: ContentCategoriesDto.fromJson,
+        );
   }
 
   @override
@@ -37,69 +39,84 @@ class RepositoryImp implements Repository {
       return data.toDomain();
     });
   }
+
   @override
-  Future<Favorite> loadFavourites(
-      {required int page, required int pageSize, String? search}) {
+  Future<Favorite> loadFavourites({
+    required int page,
+    required int pageSize,
+    String? search,
+  }) {
     favoriteCanceledToken.cancel();
     favoriteCanceledToken = CancelToken();
     return _restService
         .loadFavourites(
-            page: page,
-            pageSize: pageSize,
-            search: search,
-            cancelToken: favoriteCanceledToken)
+          page: page,
+          pageSize: pageSize,
+          search: search,
+          cancelToken: favoriteCanceledToken,
+        )
         .call((data) => data.toDomain());
   }
 
   @override
   Future<List<Region>> loadRegions() {
-    return _restService
-        .loadRegions()
-        .call((data) => data.map((e) => e.toDomain()).toList());
+    return _restService.loadRegions().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
   }
 
   @override
-  Future<List<MainPageContent>> loadContentsByCategory(
-      {required int categoryId,
-      required int page,
-      required int pageSize,
-      String? search}) {
+  Future<List<MainPageContent>> loadContentsByCategory({
+    required int categoryId,
+    required int page,
+    required int pageSize,
+    String? search,
+  }) {
     return _restService
         .loadContentsByCategory(
-            categoryId: categoryId,
-            page: page,
-            pageSize: pageSize,
-            search: search)
+          categoryId: categoryId,
+          page: page,
+          pageSize: pageSize,
+          search: search,
+        )
         .call((data) => data.map((e) => e.toDomain()).toList());
   }
 
   @override
-  Future<ContentDetail> loadContentDetail({
-    required int contentId,
-  }) {
+  Future<ContentDetail> loadContentDetail({required int contentId}) {
     return _restService
         .loadContentById(contentId: contentId)
         .call((data) => data.toDomain());
   }
 
   @override
-  Future<Token> authGoogle(
-      {required String idToken, String? fullName, String? photoUrl}) {
-    return _restService.authGoogle({
-      "IdToken": idToken,
-      "userName": fullName,
-      "photoUrl": photoUrl
-    }).call((data) => data.toDomain());
+  Future<Token> authGoogle({
+    required String idToken,
+    String? fullName,
+    String? photoUrl,
+  }) {
+    return _restService
+        .authGoogle({
+          "IdToken": idToken,
+          "userName": fullName,
+          "photoUrl": photoUrl,
+        })
+        .call((data) => data.toDomain());
   }
 
   @override
-  Future<Token> authApple(
-      {required String idToken, String? fullName, String? photoUrl}) {
-    return _restService.authApple({
-      "IdToken": idToken,
-      "userName": fullName,
-      "photoUrl": photoUrl
-    }).call((data) => data.toDomain());
+  Future<Token> authApple({
+    required String idToken,
+    String? fullName,
+    String? photoUrl,
+  }) {
+    return _restService
+        .authApple({
+          "IdToken": idToken,
+          "userName": fullName,
+          "photoUrl": photoUrl,
+        })
+        .call((data) => data.toDomain());
   }
 
   @override
@@ -111,40 +128,27 @@ class RepositoryImp implements Repository {
 
   @override
   Future<List<Currency>> loadCurrencies() {
-    return _restService
-        .getCurrency()
-        .call((data) => data.map((e) => e.toDomain()).toList());
+    return _restService.getCurrency().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
   }
 
   @override
   Future<List<MoreItem>> loadAbout() {
-    return _restService
-        .loadAbouts()
-        .call((data) => data.map((e) => e.toDomain()).toList());
+    return _restService.loadAbouts().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
   }
 
   @override
   Future<List<MoreItem>> loadMoreUseFull() {
-    return _restService
-        .loadMoreUseFull()
-        .call((data) => data.map((e) => e.toDomain()).toList());
+    return _restService.loadMoreUseFull().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
   }
 
   @override
   Future deleteAccount() {
     return _restService.deleteAccount().call();
-  }
-}
-
-extension FutureExtension<T> on Future<T> {
-  Future<M> call<M>([M? Function(T)? converter]) async {
-    try {
-      final result = await this;
-      if (converter != null) return converter.call(result) as M;
-      return result as M;
-    } catch (e) {
-      debugPrint(e.toString());
-      return Future.error(e);
-    }
   }
 }

@@ -11,12 +11,18 @@ class AppCheck extends StatelessWidget {
     return Container(
       width: 20,
       height: 20,
+      padding: EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
           color: isChecked
               ? context.appColors.brand
               : context.appColors.fill.tertiary,
           shape: BoxShape.circle),
-      child: isChecked ? Assets.svgIconCheck.toSvgImage() : SizedBox(),
+      child: isChecked
+          ? Assets.svgIconCheck.toSvgImage(
+              fit: BoxFit.fitHeight,
+              colorFilter: ColorFilter.mode(
+                  context.appColors.static.white, BlendMode.srcIn))
+          : SizedBox(),
     );
   }
 }

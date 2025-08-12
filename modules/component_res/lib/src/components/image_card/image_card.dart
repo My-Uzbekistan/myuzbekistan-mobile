@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +12,12 @@ mixin AppImageCard {
     );
   }
 
-  static _AppItemCardImage large({
-    String? imageUrl,
-    int? star,
-    double ratingAverage = 0,
-    int averageCheck = 0,
-    String? priceText
-  }) {
+  static _AppItemCardImage large(
+      {final String? imageUrl,
+      int? star,
+      double ratingAverage = 0,
+      int averageCheck = 0,
+      String? priceText}) {
     return _AppItemCardImage(
       imageUrl: imageUrl,
       ratingAverage: ratingAverage,
@@ -42,13 +40,13 @@ mixin AppImageCard {
 
 enum AppImageCardSize { medium, large, extraLarge }
 
-class _AppItemCardImage extends StatelessWidget {
+class _AppItemCardImage extends StatefulWidget {
   final String? imageUrl;
   final AppImageCardSize appImageCardSize;
   final double ratingAverage;
   final int averageCheck;
   final String? priceText;
-  final  Widget? topRightWidget;
+  final Widget? topRightWidget;
 
   const _AppItemCardImage(
       {super.key,
@@ -56,17 +54,24 @@ class _AppItemCardImage extends StatelessWidget {
       this.appImageCardSize = AppImageCardSize.large,
       this.ratingAverage = 0,
       this.averageCheck = 0,
-        this.topRightWidget,
+      this.topRightWidget,
       this.priceText});
 
   @override
+  State<_AppItemCardImage> createState() => _AppItemCardImageState();
+}
+
+class _AppItemCardImageState extends State<_AppItemCardImage>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     double height = double.infinity;
     double width = double.infinity;
-    if (appImageCardSize == AppImageCardSize.large) {
+    if (widget.appImageCardSize == AppImageCardSize.large) {
       width = 156;
       height = width;
-    } else if (appImageCardSize == AppImageCardSize.medium) {
+    } else if (widget.appImageCardSize == AppImageCardSize.medium) {
       width = 100;
       height = 100;
     }
@@ -78,38 +83,69 @@ class _AppItemCardImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
-            CachedNetworkImage(
-              imageUrl: imageUrl ?? "",
-              errorListener: (e) {
-                debugPrint(e.toString());
-              },
-              errorWidget: (context, o, s) {
-                return Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover);
-              },
-              placeholder: (context, s) {
-                return Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover);
-              },
-              fit: BoxFit.cover,
-              height: double.maxFinite,
-              width: double.maxFinite,
-            ),
+            _ImageContent(imageUrl: widget.imageUrl ?? ""),
             Positioned.fill(
                 child: Container(
               color: context.appColors.static.black.withValues(
-                  alpha: appImageCardSize == AppImageCardSize.extraLarge
+                  alpha: widget.appImageCardSize == AppImageCardSize.extraLarge
                       ? 0.32
                       : 0.16),
             )),
-
-            if(topRightWidget!=null)
+            if (widget.topRightWidget != null)
               Positioned(
                 right: 8,
                 top: 8,
-                child: topRightWidget!,
+                child: widget.topRightWidget!,
               ),
           ],
         ),
       ),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+}
+
+class _ImageContent extends StatefulWidget {
+  final String imageUrl;
+
+  const _ImageContent({super.key, required this.imageUrl});
+
+  @override
+  State<_ImageContent> createState() => _ImageContentState();
+}
+
+class _ImageContentState extends State<_ImageContent>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return RepaintBoundary(
+      child: ExtendedImage.network(
+        widget.imageUrl,
+        fit: BoxFit.cover,
+        height: double.maxFinite,
+        width: double.maxFinite,
+        cache: true,
+        loadStateChanged: (ExtendedImageState state) {
+          switch (state.extendedImageLoadState) {
+            case LoadState.completed:
+              return AnimatedOpacity(
+                opacity: 1.0,
+                duration: Duration(milliseconds: 200),
+                child: state.completedWidget,
+              ); // ✅ Default image o'zi ko'rsatiladi
+            default:
+              return Assets.pngDefaultContentImage.toImage(fit: BoxFit.fill);
+          }
+        },
+      ),
+
+    );
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 }

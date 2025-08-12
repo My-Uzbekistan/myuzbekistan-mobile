@@ -5,16 +5,18 @@ import 'package:more/src/core/extension.dart';
 import 'package:shared/shared.dart';
 
 class AboutWidget extends HookWidget {
-  AboutWidget({super.key,required this.avatars});
+  AboutWidget({super.key, required this.avatars});
 
-  final List<MoreItem> avatars ;
+  final List<MoreItem> avatars;
+
   @override
   Widget build(BuildContext context) {
     final currentIndex = useState(0);
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: context.appColors.background.elevation1Alt),
+        borderRadius: BorderRadius.circular(24),
+        color: context.appColors.background.elevation1Alt,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         spacing: 12,
@@ -30,13 +32,14 @@ class AboutWidget extends HookWidget {
                   Text(
                     context.localization.about,
                     style: CustomTypography.bodySm.copyWith(
-                        color: context.appColors.textIconColor.secondary),
+                      color: context.appColors.textIconColor.secondary,
+                    ),
                   ),
                   Text(
                     context.localization.uzbekistan,
                     overflow: TextOverflow.ellipsis,
                     style: CustomTypography.H3,
-                  )
+                  ),
                 ],
               ),
             ),
@@ -52,16 +55,19 @@ class AboutWidget extends HookWidget {
             child: Column(
               spacing: 2,
               children: [
-                Text(avatars[currentIndex.value].description ?? "",
-                    style: CustomTypography.labelSm.copyWith(
-                        color: context.appColors.textIconColor.secondary)),
+                Text(
+                  avatars[currentIndex.value].description ?? "",
+                  style: CustomTypography.labelSm.copyWith(
+                    color: context.appColors.textIconColor.secondary,
+                  ),
+                ),
                 Text(
                   avatars[currentIndex.value].title ?? "",
                   style: CustomTypography.bodyMd,
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -136,90 +142,79 @@ class _PagerItem extends StatelessWidget {
   final List<String> items;
   final ValueChanged<int>? onPageChange;
 
-  const _PagerItem(
-      {super.key,
-      this.carouselController,
-      this.items = const [],
-      this.onPageChange});
+  const _PagerItem({
+    super.key,
+    this.carouselController,
+    this.items = const [],
+    this.onPageChange,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      double screenWidth = constraints.maxWidth;
-      double viewportFraction = screenWidth > 800
-          ? 0.3 // Katta ekran: 3 ta element ko'rinadi
-          : screenWidth > 400
-              ? 0.5 // O'rta ekran: 2 ta element ko'rinadi
-              : 0.8; // Kichik ekran: 1 ta element ko'rinadi
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double screenWidth = constraints.maxWidth;
+        double viewportFraction =
+            screenWidth > 800
+                ? 0.3 // Katta ekran: 3 ta element ko'rinadi
+                : screenWidth > 400
+                ? 0.5 // O'rta ekran: 2 ta element ko'rinadi
+                : 0.8; // Kichik ekran: 1 ta element ko'rinadi
 
-      return CarouselSlider.builder(
-        itemCount: items.length,
-        carouselController: carouselController,
-        itemBuilder: (context, index, realIndex) {
-          return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: CachedNetworkImage(
-                  imageUrl: items[index],
-                  width: double.maxFinite,
+        return CarouselSlider.builder(
+          itemCount: items.length,
+          carouselController: carouselController,
+          itemBuilder: (context, index, realIndex) {
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: RepaintBoundary(
+                    child: ExtendedImage.network(
+                      items[index],
+                      cache: true,
+                      fit: BoxFit.fitWidth,
+                      loadStateChanged: (state) {
+                        switch (state.extendedImageLoadState) {
+                          case LoadState.completed:
+                            return AnimatedOpacity(
+                              opacity: 1.0,
+                              duration: Duration(milliseconds: 200),
+                              child: state.completedWidget,
+                            );
 
-                  fit: BoxFit.fitWidth,
-                  errorWidget: (context, o, s) {
-                    return Assets.pngDefaultContentImage
-                        .toImage(fit: BoxFit.cover);
-                  },
-                  placeholder: (context, s) {
-                    return Assets.pngDefaultContentImage
-                        .toImage(fit: BoxFit.cover);
-                  },
+                          default:
+                            return Assets.pngDefaultContentImage.toImage(
+                              fit: BoxFit.cover,
+                            );
+                        }
+                      },
+                    ),
+                  ),
                 ),
               ),
-            ),
-          );
-        },
-        options: CarouselOptions(
-          autoPlay: false,
-          height: 182,
-          enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-          aspectRatio: 262 / 182,
-
-          enlargeCenterPage: true,
-          enableInfiniteScroll: false,
-          viewportFraction: viewportFraction,
-          onPageChanged: (index, reason) {
-            onPageChange?.call(index);
+            );
           },
-          initialPage: 0,
-        ),
-      );
-      // CarouselSlider(
-      //   items: avatars
-      //       .map(
-      //         (e) => ClipRRect(
-      //           borderRadius: BorderRadius.circular(16),
-      //           child: CachedNetworkImage(
-      //             imageUrl: e,
-      //             width: double.maxFinite,
-      //             fit: BoxFit.fitWidth,
-      //           ),
-      //         ),
-      //       )
-      //       .toList(),
-      //   options: CarouselOptions(
-      //     autoPlay: false,
-      //     height: 182,
-      //     aspectRatio: 262 / 182,
-      //     enlargeCenterPage: true,
-      //     enableInfiniteScroll: false,
-      //     viewportFraction: 0.8,
-      //     initialPage: 0,
-      //   ),
-      // );
-    });
+          options: CarouselOptions(
+            autoPlay: false,
+            height: 182,
+            enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+            aspectRatio: 262 / 182,
+
+            enlargeCenterPage: true,
+            enableInfiniteScroll: false,
+            viewportFraction: viewportFraction,
+            onPageChanged: (index, reason) {
+              onPageChange?.call(index);
+            },
+            initialPage: 0,
+          ),
+        );
+      },
+    );
   }
 }

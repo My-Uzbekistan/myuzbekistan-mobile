@@ -6,7 +6,7 @@ part of 'service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
 class _RestService implements RestService {
   _RestService(this._dio, {this.baseUrl, this.errorLogger});
@@ -36,13 +36,9 @@ class _RestService implements RestService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<CategoriesDto> _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) =>
-                    CategoriesDto.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = _result.data!
+          .map((dynamic i) => CategoriesDto.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -69,12 +65,9 @@ class _RestService implements RestService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<RegionsDto> _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) => RegionsDto.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = _result.data!
+          .map((dynamic i) => RegionsDto.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -102,7 +95,7 @@ class _RestService implements RestService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'categories/${categoryId}/contents',
+            'v2/categories/${categoryId}/contents',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -111,13 +104,12 @@ class _RestService implements RestService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<MainPageContentDto> _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) =>
-                    MainPageContentDto.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = _result.data!
+          .map(
+            (dynamic i) =>
+                MainPageContentDto.fromJson(i as Map<String, dynamic>),
+          )
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -164,36 +156,24 @@ class _RestService implements RestService {
   }
 
   @override
-  Future<List<ContentCategoriesDto>> loadMainData({int? regionId}) async {
+  Future<dynamic> loadMainData({int? regionId}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'regionId': regionId};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<List<ContentCategoriesDto>>(
+    final _options = _setStreamType<dynamic>(
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'categories/main-page',
+            'v2/categories/main-page',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<List<dynamic>>(_options);
-    late List<ContentCategoriesDto> _value;
-    try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) =>
-                    ContentCategoriesDto.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
-    } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
-      rethrow;
-    }
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
     return _value;
   }
 
@@ -235,7 +215,7 @@ class _RestService implements RestService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'contents/${contentId}',
+            'v2/contents/${contentId}',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -390,12 +370,9 @@ class _RestService implements RestService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<CurrencyDto> _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) => CurrencyDto.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = _result.data!
+          .map((dynamic i) => CurrencyDto.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -422,12 +399,9 @@ class _RestService implements RestService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<MoreItemDto> _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) => MoreItemDto.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = _result.data!
+          .map((dynamic i) => MoreItemDto.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
@@ -454,12 +428,9 @@ class _RestService implements RestService {
     final _result = await _dio.fetch<List<dynamic>>(_options);
     late List<MoreItemDto> _value;
     try {
-      _value =
-          _result.data!
-              .map(
-                (dynamic i) => MoreItemDto.fromJson(i as Map<String, dynamic>),
-              )
-              .toList();
+      _value = _result.data!
+          .map((dynamic i) => MoreItemDto.fromJson(i as Map<String, dynamic>))
+          .toList();
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

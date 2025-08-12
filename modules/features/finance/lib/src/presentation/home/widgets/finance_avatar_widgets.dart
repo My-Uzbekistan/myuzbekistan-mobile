@@ -1,12 +1,12 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
-class FinanceAvatarWidgets extends StatelessWidget {
+class FinanceTopCardItemWidget extends StatelessWidget {
   final String svgAssets;
   final String text;
   final GestureTapCallback? onTap;
 
-  const FinanceAvatarWidgets({
+  const FinanceTopCardItemWidget({
     super.key,
     required this.text,
     required this.svgAssets,
@@ -17,21 +17,32 @@ class FinanceAvatarWidgets extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: SizedBox(
-        width: 80,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          color: context.appColors.background.elevation1,
+        ),
+        alignment: Alignment.center,
         child: Column(
           spacing: 8,
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
-              radius: 24,
-              backgroundColor: context.appColors.brand,
-
-              child: svgAssets.toSvgImage(
-                width: 24,
-                colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+            svgAssets.toSvgImage(
+              width: 24,
+              colorFilter: ColorFilter.mode(
+                context.appColors.brand,
+                BlendMode.srcIn,
               ),
             ),
-            Text(text, maxLines: 1, style: CustomTypography.labelSm),
+            Text(
+              text,
+              maxLines: 1,
+              style: CustomTypography.labelSm,
+              overflow: TextOverflow.ellipsis,
+            ),
           ],
         ),
       ),

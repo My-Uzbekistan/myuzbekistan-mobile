@@ -56,7 +56,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
       _MoreEventFetchCurrency event, Emitter<MoreState> emit) async {
     try {
       final result = await _repository.loadCurrencies();
-      dataState = dataState.copyWith(currencies: result);
+      dataState = dataState.copyWith(currencies: result.filterCurrencies());
       if (state is MoreDataState) {
         emit(dataState);
       }

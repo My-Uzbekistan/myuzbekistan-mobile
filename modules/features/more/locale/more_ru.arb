@@ -8,6 +8,8 @@
   "language": "Язык",
   "theme": "Тема",
   "lanItem": "{lang, select, en{Английский} ru{Русский} uz{Узбекский} other{} }",
+  "langItemDefault": "{lang, select, en{English} ru{Русский} uz{O'zbekcha} other{} }",
+
   "themeModes": "{theme, select, system{Системный} light{Светлая} dark{Тёмная} other{}}",
   "guest": "Привет Гость",
   "@guest": {

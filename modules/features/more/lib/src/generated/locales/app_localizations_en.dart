@@ -31,29 +31,34 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String lanItem(String lang) {
-    String _temp0 = intl.Intl.selectLogic(
-      lang,
-      {
-        'en': 'English',
-        'ru': 'Russian',
-        'uz': 'Uzbek',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'English',
+      'ru': 'Russian',
+      'uz': 'Uzbek',
+      'other': '',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String langItemDefault(String lang) {
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'English',
+      'ru': 'Русский',
+      'uz': 'O\'zbekcha',
+      'other': '',
+    });
     return '$_temp0';
   }
 
   @override
   String themeModes(String theme) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme,
-      {
-        'system': 'System',
-        'light': 'Light',
-        'dark': 'Dark',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(theme, {
+      'system': 'System',
+      'light': 'Light',
+      'dark': 'Dark',
+      'other': '',
+    });
     return '$_temp0';
   }
 
@@ -80,7 +85,8 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   String get logout => 'Logout';
 
   @override
-  String get getStartedDescription => 'Get full access to opportunities, as well as keep your favorite things';
+  String get getStartedDescription =>
+      'Get full access to opportunities, as well as keep your favorite things';
 
   @override
   String get continueWithGoogle => 'Continue with Google';
