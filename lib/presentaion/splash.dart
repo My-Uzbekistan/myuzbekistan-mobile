@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:navigation/navigation.dart';
 
 class SplashScreen extends HookWidget {
@@ -8,21 +11,43 @@ class SplashScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final images = [
+      Assets.splashSplash1,
+      Assets.splashSplash2,
+      Assets.splashSplash3,
+      Assets.splashSplash4,
+    ];
+    final imagePath = useState<String>("");
+    final opacity = useState<double>(0);
     useEffect(() {
-      Future.delayed(const Duration(milliseconds: 500), () {
-        context.travel.goMain(); // go_router bilan ishlash
+      // 1️⃣ Bir marta random tanlash
+      imagePath.value = images[Random().nextInt(images.length)];
+
+      // 2️⃣ Fade boshlash
+      Future.delayed(const Duration(milliseconds: 100), () {
+        opacity.value = 1;
+      });
+      Future.delayed(const Duration(milliseconds: 1500), () {
+        context.travel.goMain();  // go_router bilan ishlash
       });
       return null;
     }, []);
 
     return Scaffold(
-      body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Center(
-            child: Theme.of(context).brightness == Brightness.dark
-                ? Assets.logoDarkFullLogo.toSvgImage(fit: BoxFit.contain)
-                : Assets.logoLightFullLogo.toSvgImage(fit: BoxFit.contain),
-          )),
+      body: AnimatedOpacity(
+        opacity: opacity.value,
+        curve: Curves.easeInToLinear,
+        duration: const Duration(milliseconds: 800),
+        child: Stack(
+          children: [
+            AppBar(
+              backgroundColor: Colors.transparent,
+            ),
+            Positioned.fill(child: imagePath.value.toImage(fit: BoxFit.cover)),
+            Center(child: Assets.logoMyuzbLogo.toSvgImage(fit: BoxFit.contain))
+          ],
+        ),
+      ),
     );
   }
 }

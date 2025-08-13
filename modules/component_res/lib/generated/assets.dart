@@ -12,6 +12,7 @@ class Assets {
   static const String flagsUz = 'assets/flags/uz.svg';
   static const String logoDarkFullLogo = 'assets/logo/dark_full_logo.svg';
   static const String logoLightFullLogo = 'assets/logo/light_full_logo.svg';
+  static const String logoMyuzbLogo = 'assets/logo/myuzb_logo.svg';
   static const String pngAvatar = 'assets/png/avatar.png';
   static const String pngDefaultContentImage = 'assets/png/default_content_image.webp';
   static const String pngExclamationmarkSquare = 'assets/png/exclamationmark_square.png';
@@ -20,6 +21,11 @@ class Assets {
   static const String pngNavMore = 'assets/png/nav_more.png';
   static const String pngPersonalDefaultBg = 'assets/png/personal_default_bg.webp';
   static const String pngSosok = 'assets/png/sosok.png';
+  static const String splashLoginBg = 'assets/splash/login_bg.webp';
+  static const String splashSplash1 = 'assets/splash/splash1.webp';
+  static const String splashSplash2 = 'assets/splash/splash2.webp';
+  static const String splashSplash3 = 'assets/splash/splash3.webp';
+  static const String splashSplash4 = 'assets/splash/splash4.webp';
   static const String svgAppleLogo = 'assets/svg/apple_logo.svg';
   static const String svgBoltFill = 'assets/svg/bolt_fill.svg';
   static const String svgCrossCaseFill = 'assets/svg/cross_case_fill.svg';

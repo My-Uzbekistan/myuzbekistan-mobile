@@ -93,12 +93,13 @@ mixin FeatureMoreRouter {
       path: AppNavPath.more.authPage.path,
       name: AppNavPath.more.authPage.name,
       pageBuilder:
-          (context, state) => ModalPage(
+          (context, state) => buildSlideTransitionPage(
             child: BlocProvider(
               create: (context) => getIt<AuthBlock>(),
               child: AuthPage(),
             ),
-            showDragHandle: true,
+            context: context,
+            state: state,
           ),
     ),
 

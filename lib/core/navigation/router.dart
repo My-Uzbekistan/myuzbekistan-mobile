@@ -23,9 +23,8 @@ final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 final FirebaseAnalyticsObserver observer =
     FirebaseAnalyticsObserver(analytics: analytics);
 final GoRouter routes = GoRouter(
+
     redirect: (context, state) {
-
-
       if([
         AppNavPath.finance.financeCards.name,
         AppNavPath.finance.financePayment.name,
@@ -38,10 +37,7 @@ final GoRouter routes = GoRouter(
     },
     observers: [observer],
     navigatorKey: appRootNavigatorKey,
-    initialLocation:
-
-        // AppNavPath.finance.verification.path,
-        Platform.isIOS ? AppNavPath.travel.travelHome.path : "/splash",
+    initialLocation: "/splash",
     routes: [
       ..._shellRoute,
       ...FeatureTravelRouter.routes,

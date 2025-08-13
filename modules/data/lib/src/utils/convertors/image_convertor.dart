@@ -37,7 +37,6 @@ String? _convertImage(String? image) {
 }
 
 String _fixUrl(String url) {
-  debugPrint("fixedUrl ${url}");
   if (url.startsWith("https:/") && !url.startsWith("https://")) {
     return url.replaceFirst("https:/", "https://");
   }

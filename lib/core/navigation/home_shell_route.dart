@@ -3,8 +3,8 @@ part of 'router.dart';
 final _shellRoute = [
   StatefulShellRoute.indexedStack(
     parentNavigatorKey: appRootNavigatorKey,
-    builder: (context, state, navShell) =>
-        ShellPageWrapper(navigationShell: navShell),
+    pageBuilder: (context, state, navigationShell) => NoTransitionPage(
+        child: ShellPageWrapper(navigationShell: navigationShell)),
     branches: [
       FeatureTravelRouter.shellTravel,
       FeatureFinanceRouter.shellFinance,

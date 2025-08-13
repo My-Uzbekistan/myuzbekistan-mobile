@@ -24,7 +24,6 @@ mixin FeatureTravelRouter {
 
         return ModalSheetPage(
           child: SelectRegionPage(regions: regions, selectedRegionId: regionId),
-
         );
       },
     ),
@@ -97,13 +96,26 @@ mixin FeatureTravelRouter {
         redirect: (context, state) {
           final locale = getIt<AppPreference>().getLocale();
           if (locale == null) return AppNavPath.more.selectLangPage.path;
+
+          final securityStorage = getIt<SecurityStorage>();
+          if (securityStorage.getAccessToken() == null &&
+              securityStorage.isFirstlyLaunch()) {
+
+            return AppNavPath.more.authPage.path;
+          }
           return null;
         },
-        builder:
-            (context, state) => BlocProvider(
+        pageBuilder: (context, state) {
+          return buildSlideTransitionPage(
+            child: BlocProvider(
               create: (ctx) => getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
-              child: const  HomePage(),
+              child: const HomePage(),
             ),
+            state: state,
+            context: context,
+            slideAlign: SlideAlign.vertical,
+          );
+        },
       ),
     ],
   );

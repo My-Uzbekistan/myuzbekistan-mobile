@@ -10,6 +10,8 @@ abstract class SecurityStorage {
 
 
   String? getAccessToken();
+  bool isFirstlyLaunch();
+  void firstlyLaunched();
 
   String? getRefreshToken();
 

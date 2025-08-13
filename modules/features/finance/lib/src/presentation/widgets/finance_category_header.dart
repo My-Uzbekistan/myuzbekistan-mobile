@@ -69,7 +69,7 @@ class FinanceMerchantsWithCategory extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 8),
           child: AppActionButton(
             actionText: context.localization.show_all_places,
-            type: ActionButtonType.brand,
+            type: ActionButtonType.secondary,
             onPressed: () {},
           ),
         ),
