@@ -2,6 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:finance/src/presentation/widgets/add_card/add_card_widget.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 import '../../../service/FinanceSharedService.dart';
@@ -29,9 +30,17 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
     on<_SetOwnParamsEvent>(_setOwnParams);
     on<_SetCardNumberEvent>(_setCardNumber);
     on<_AddEvent>(_addEvent);
+    on<_LoadCardImagesEvent>(_loadCardImages);
+    on<_SelectColorEvent>(_selectColor);
+
+    add(AddCardEvent.loadCardImages());
   }
 
   bool cardTypeLoading = false;
+
+  void _selectColor(_SelectColorEvent event, Emitter<AddCardState> emitter) {
+    emitter(state.copyWith(selectedImage: event.colors));
+  }
 
   void _setExternalParams(
     _SetExtermalParamsEvent event,
@@ -39,6 +48,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
   ) {
     emitter(
       state.copyWith(
+        cardBrand: state.cardBrand ?? event.cardBrand,
         params: AddCardParams.externalParams(
           expiry: event.expire,
           cvv: event.cvv,
@@ -51,6 +61,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
   void _setOwnParams(_SetOwnParamsEvent event, Emitter<AddCardState> emitter) {
     emitter(
       state.copyWith(
+        cardBrand: state.cardBrand ?? event.cardBrand,
         params: AddCardParams.ownParams(
           expiry: event.expire,
           phone: event.phoneNumber,
@@ -71,7 +82,14 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
           findCardType(pan);
         }
       } else if (pan.length < 6) {
-        emitter(state.copyWith(pan: pan, params: null, navState: null));
+        emitter(
+          state.copyWith(
+            pan: pan,
+            params: null,
+            navState: null,
+            cardBrand: null,
+          ),
+        );
         _cancelRequest();
       }
     }
@@ -92,11 +110,23 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
         pan: cardNumber,
         cancelToken: _cardNumberCancelToken,
       );
+
       result.isExternal == true
           ? add(
-            AddCardEvent.setExternalParams(expire: "", cvv: "", holderName: ""),
+            AddCardEvent.setExternalParams(
+              expire: "",
+              cvv: "",
+              holderName: "",
+              cardBrand: result.cardBrand,
+            ),
           )
-          : add(AddCardEvent.setOwnParams(expire: "", phoneNumber: ""));
+          : add(
+            AddCardEvent.setOwnParams(
+              expire: "",
+              phoneNumber: "",
+              cardBrand: result.cardBrand,
+            ),
+          );
       cardTypeLoading = false;
       _cardNumberCancelToken = null;
     } catch (e) {
@@ -129,6 +159,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
         phoneNumber: phoneNumber,
         cardHolderName: cardHolderName,
         cvv: cvv,
+        image: state.selectedImage,
       );
       if (state.isExternal == true) {
         _financeSharedService.cardsUpdate();
@@ -162,5 +193,12 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
         );
       }
     }
+  }
+
+  _loadCardImages(AddCardEvent event, Emitter<AddCardState> emitter) async {
+    try {
+      final images = await _financeRepository.cardImages();
+      emitter(state.copyWith(images: images,selectedImage: images.firstOrNull));
+    } catch (_) {}
   }
 }

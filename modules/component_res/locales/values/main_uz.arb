@@ -5,6 +5,8 @@
   "action_add": "Qo‘shish",
   "action_close": "Yopish",
   "action_done": "Tayyor",
-  "action_edit": "Tahrirlash"
+  "action_edit": "Tahrirlash",
+  "action_more": "Batafsil"
+
 
 }

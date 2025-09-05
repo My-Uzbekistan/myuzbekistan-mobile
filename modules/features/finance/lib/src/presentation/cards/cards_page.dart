@@ -11,101 +11,104 @@ import '../widgets/add_card/add_card_widget.dart';
 
 enum CardsPageType { list, select }
 
-class CardsPage extends StatefulWidget {
+class CardsPage extends HookWidget {
   final CardsPageType type;
 
-  const CardsPage({super.key, required this.type});
+  CardsPage({super.key, required this.type});
 
-  @override
-  State<CardsPage> createState() => _CardsPageState();
-}
-
-class _CardsPageState extends State<CardsPage> {
   Completer<bool>? completer;
 
-  void listenCompleter() {
+  void listenCompleter(BuildContext context) {
     completer = Completer<bool>();
     completer?.future.then((result) {
-      InfoAlertDialog.show(context, message: "Carta muvaffaqiyatli qoshildi");
+      InfoAlertDialog.show(
+        context,
+        message: context.localization.card_added_success_message,
+      );
     });
-  }
-
-  CardsBloc? cardsBloc;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-    cardsBloc = context.read();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final title =
-        widget.type == CardsPageType.select
-            ? context.localization.payment_method
-            : context.localization.my_cards_title;
+    // final title =
+    //     widget.type == CardsPageType.select
+    //         ? context.localization.payment_method
+    //         : context.localization.my_cards_title;
+
+    final cardsBloc = useMemoized(() => context.read<CardsBloc>());
+
+    final topPadding = kToolbarHeight + MediaQuery.of(context).padding.top + 16;
+
+    final isEdit = useState(false);
 
     return Scaffold(
-      body: BlocBuilder<CardsBloc, CardsState>(
+      body: BlocConsumer<CardsBloc, CardsState>(
+        listener: (context, state) {
+          isEdit.value = state is CardsDataState ? state.isEdit : false;
+        },
         builder: (context, state) {
           final listSize = state is CardsDataState ? state.cards.length : 0;
-          final isEdit = state is CardsDataState ? state.isEdit : false;
-          return SimpleCollapsedContainer(
-            title: isEdit ? context.localization.editing : title,
-            sliverContent: SliverPadding(
-              padding: EdgeInsets.all(16).copyWith(top: 0),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  if (index == listSize) {
-                    return Builder(
-                      builder: (context) {
-                        return AnimatedSwitcher(
-                          duration: Duration(milliseconds: 200),
-                          switchInCurve: Curves.easeInToLinear,
-                          switchOutCurve: Curves.easeOut,
-                          child:
-                              isEdit
-                                  ? SizedBox.shrink(key: ValueKey("empty"))
-                                  : AddCardWidget(
-                                    key: ValueKey("AddCard"),
-                                    onTap: () {
-                                      listenCompleter();
-                                      context.finance.pushAddCardPage(
-                                        extra: completer,
-                                      );
-                                    },
-                                  ),
-                        );
-                      },
-                    );
-                  }
-                  final item = (state as CardsDataState).cards[index];
-                  return GestureDetector(
-                    onTap: () {
-                      if (widget.type == CardsPageType.select) {
-                        context.pop(item);
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: CellCardItem(
-                            iconUrl: item.icon,
-                            text: item.cardTitle,
-                            statusMessage: item.statusMessage,
-                          ),
+          return Scaffold(
+            extendBodyBehindAppBar: true,
+            extendBody: true,
+            appBar: GradientAppBar(
+              title: context.localization.my_cards_title,
+              actions: [
+                Builder(
+                  builder: (context) {
+                    if ((state is CardsDataState)) {
+                      return isEdit.value
+                          ? RoundedButton(
+                            assetsSvgIcon: Assets.svgIconCheck,
+                            hideShadow: true,
+                            backgroundColor: context.appColors.brand,
+                            iconColor: Colors.white,
+
+                            onPressed: () {
+                              cardsBloc.add(CardsEvent.edit());
+                            },
+                          )
+                          : RoundedButton.edit(
+                            onPressed: () {
+                              cardsBloc.add(CardsEvent.edit());
+                            },
+                          );
+                    }
+                    return SizedBox();
+                  },
+                ),
+              ],
+            ),
+            body: ListView.separated(
+              padding: EdgeInsets.all(16).copyWith(top: topPadding),
+              separatorBuilder: (context, index) {
+                return SizedBox(height: 12);
+              },
+              itemBuilder: (context, index) {
+                final item = (state as CardsDataState).cards[index];
+                return GestureDetector(
+                  onTap: () {
+                    if (type == CardsPageType.select) {
+                      context.pop(item);
+                    }
+                  },
+                  child: Row(
+                    spacing: 16,
+                    children: [
+                      Expanded(
+                        child: CellCardItemWithImage(
+                          iconUrl: item.icon,
+                          text: item.cardTitle,
+                          trailing: item.cardExpiry,
+                          statusMessage: item.statusMessage,
+                          photoUrl: item.image,
                         ),
+                      ),
+                      if (isEdit.value)
                         AnimatedSwitcher(
                           duration: Duration(milliseconds: 200),
                           child:
-                              isEdit
+                              isEdit.value
                                   ? GestureDetector(
                                     onTap: () {
                                       showActionAlertDialog(
@@ -120,8 +123,12 @@ class _CardsPageState extends State<CardsPage> {
                                             context.localization.action_cancel,
                                         firstButtonTextColor:
                                             context.appColors.colors.red,
+                                        message:
+                                            context
+                                                .localization
+                                                .card_remove_notice,
                                         onFirstButtonClick: () {
-                                          cardsBloc?.add(
+                                          cardsBloc.add(
                                             CardsEvent.deleteCard(item.id),
                                           );
                                         },
@@ -133,62 +140,50 @@ class _CardsPageState extends State<CardsPage> {
                                       color: Colors.transparent,
                                       child: Assets.svgIconTrashCanLine
                                           .toSvgImage(
+                                            fit: BoxFit.contain,
                                             colorFilter: ColorFilter.mode(
-                                              context
-                                                  .appColors
-                                                  .textIconColor
-                                                  .primary,
+                                              context.appColors.colors.red,
                                               BlendMode.srcIn,
                                             ),
                                           ),
                                     ),
                                   )
-                                  : cellTrailing(state.selectedCardId == item.id),
+                                  : cellTrailing(
+                                    state.selectedCardId == item.id,
+                                  ),
                         ),
-                      ],
-                    ),
-                  );
-                }, childCount: listSize + 1),
-              ),
-            ),
-            trailing: Builder(
-              builder: (context) {
-                if ((state is CardsDataState)) {
-                  final title =
-                      isEdit
-                          ? context.coreLocalization.action_done
-                          : context.coreLocalization.action_edit;
-                  return GestureDetector(
-                    onTap: () {
-                      cardsBloc?.add(CardsEvent.edit());
-                    },
-                    child: AnimatedSwitcher(
-                      duration: Duration(milliseconds: 200),
-                      switchInCurve: Curves.easeInToLinear,
-                      child:
-                          isEdit
-                              ? Text(title, key: ValueKey(title)).labelLg(
-                                color: context.appColors.textIconColor.primary,
-                              )
-                              : Text(title, key: ValueKey(title)).labelLg(
-                                color: context.appColors.textIconColor.primary,
-                              ),
-                    ),
-                  );
-                }
-                return SizedBox();
+                    ],
+                  ),
+                );
               },
+              itemCount: listSize,
             ),
           );
         },
       ),
+      bottomNavigationBar:
+          isEdit.value
+              ? null
+              : SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+                  child: AppActionButton(
+                    actionText: context.localization.addCard,
+                    sizeType: ActionButtonSizeType.large,
+                    onPressed: () {
+                      listenCompleter(context);
+                      context.finance.pushAddCardPage(extra: completer);
+                    },
+                  ),
+                ),
+              ),
     );
   }
 
   Widget cellTrailing(isChecked) {
     Widget w =
-        widget.type == CardsPageType.select
-            ? AppCheck(isChecked: isChecked,)
+        type == CardsPageType.select
+            ? AppCheck(isChecked: isChecked)
             : SizedBox();
 
     return w;

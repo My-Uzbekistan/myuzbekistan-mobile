@@ -10,12 +10,15 @@ abstract class HomeBlocState with _$HomeBlocState {
     Temperature? temperature,
     @Default([]) List<Region> regions,
     @Default([]) List<String> favorites,
+    @Default([]) List<PrayerTimesItemModel> prayers,
     @Default(0) int totalFavoriteCount,
     Region? selectedRegion,
     @Default(true) bool loadingContents,
     @Default(false) bool isRefreshing
 
+
   }) = HomeBlocDataState;
+
 
   const factory HomeBlocState.errorState() = HomeBlocErrorState;
 }

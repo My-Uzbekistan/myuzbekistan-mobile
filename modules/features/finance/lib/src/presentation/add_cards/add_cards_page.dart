@@ -65,9 +65,9 @@ class _AddCardsPageState extends State<AddCardsPage> {
           appBar: AppBar(title: Text(context.localization.addCard)),
           bottomNavigationBar: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: AppActionButton(
-                actionText:context.coreLocalization.action_add,
+                actionText: context.coreLocalization.action_add,
                 disable: !state.hasDataSuccess(),
                 isLoading: state.isLoading,
                 sizeType: ActionButtonSizeType.large,
@@ -103,55 +103,152 @@ class _AddCardsPageState extends State<AddCardsPage> {
                               bottom:
                                   MediaQuery.of(context).viewInsets.bottom + 8,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20.0,
-                              ),
-                              child: Column(
-                                spacing: 16,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  AppInputField(
-                                    controller: _cardNumberController,
-                                    label: context.localization.card_number_label,
-                                    hintText: "0000 0000 0000 0000",
-                                    keyboardType: TextInputType.number,
-                                    formatters: [
-                                      FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9 ]'),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: CellCardItemWithImage(
+                                    text: _cardNumberController.text,
+                                    iconUrl: state.cardBrand,
+                                    trailing: state.cardExpire,
+                                    photoUrl: state.selectedImage,
+                                    showDefaultImage: false,
+                                  ),
+                                ),
+
+                                const SizedBox(height: 16),
+                                SizedBox(
+                                  height: 56,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                    ),
+
+                                    itemBuilder: (context, index) {
+                                      final img = state.images[index];
+                                      return GestureDetector(
+                                        onTap: () {
+                                          HapticFeedback.selectionClick();
+                                          bloc?.add(
+                                            AddCardEvent.selectColor(img),
+                                          );
+                                        },
+                                        behavior: HitTestBehavior.translucent,
+
+                                        child: Container(
+
+                                          width: 56,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              52,
+                                            ),
+                                            border:
+                                                img == state.selectedImage
+                                                    ? Border.all(
+                                                      color:
+                                                          context
+                                                              .appColors
+                                                              .brand,
+                                                      width: 4,
+                                                      strokeAlign:
+                                                          BorderSide
+                                                              .strokeAlignInside,
+                                                    )
+                                                    : null,
+                                          ),
+
+                                          child: Center(
+                                            child: SizedBox(
+                                              height: 40,
+                                              width: 40,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                                child: ExtendedImage.network(
+                                                  img,
+                                                  loadStateChanged: (state) {
+                                                    switch (state
+                                                        .extendedImageLoadState) {
+                                                      case LoadState.completed:
+                                                        return AnimatedOpacity(
+                                                          opacity: 1.0,
+                                                          duration: Duration(
+                                                            milliseconds: 300,
+                                                          ),
+                                                          child:
+                                                              state
+                                                                  .completedWidget,
+                                                        );
+                                                      default:
+                                                        return SizedBox();
+                                                    }
+                                                  },
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    itemCount: state.images.length,
+                                  ),
+                                ),
+                                const SizedBox(height: 32),
+
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
+                                  child: Column(
+                                    spacing: 16,
+                                    children: [
+                                      AppInputField(
+                                        controller: _cardNumberController,
+                                        label:
+                                            context
+                                                .localization
+                                                .card_number_label,
+                                        hintText: "0000 0000 0000 0000",
+                                        keyboardType: TextInputType.number,
+                                        formatters: [
+                                          FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9 ]'),
+                                          ),
+                                          CardInputFormatter(),
+                                        ],
                                       ),
-                                      CardInputFormatter(),
+                                      if (state.params is AddCardExternalParams)
+                                        ExternalCardPageWidget(
+                                          updateCardData: (
+                                            expire,
+                                            cvv,
+                                            holderName,
+                                          ) {
+                                            bloc?.add(
+                                              AddCardEvent.setExternalParams(
+                                                expire: expire,
+                                                cvv: cvv,
+                                                holderName: holderName,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      if (state.params is AddCardOwnParams)
+                                        OwnCardPageWidget(
+                                          updateCardData: (expire, phone) {
+                                            bloc?.add(
+                                              AddCardEvent.setOwnParams(
+                                                expire: expire,
+                                                phoneNumber: phone,
+                                              ),
+                                            );
+                                          },
+                                        ),
                                     ],
                                   ),
-                                  if (state.params is AddCardExternalParams)
-                                    ExternalCardPageWidget(
-                                      updateCardData: (
-                                        expire,
-                                        cvv,
-                                        holderName,
-                                      ) {
-                                        bloc?.add(
-                                          AddCardEvent.setExternalParams(
-                                            expire: expire,
-                                            cvv: cvv,
-                                            holderName: holderName,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  if (state.params is AddCardOwnParams)
-                                    OwnCardPageWidget(
-                                      updateCardData: (expire, phone) {
-                                        bloc?.add(
-                                          AddCardEvent.setOwnParams(
-                                            expire: expire,
-                                            phoneNumber: phone,
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                     ),

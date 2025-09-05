@@ -3,11 +3,15 @@ import 'package:shared/shared.dart';
 
 @injectable
 class LoadMerchantUseCase {
-  final FinanceRepository financeRepository;
+  final FinanceRepository _financeRepository;
 
-  LoadMerchantUseCase(this.financeRepository);
+  LoadMerchantUseCase(this._financeRepository);
 
-  Future<List<Merchant>> call() async {
-    return financeRepository.merchants();
+  Future<List<Merchant>> call() {
+    return _financeRepository.merchants();
+  }
+
+  Future<List<GroupBy<Merchant>>> groupByMerchants() {
+    return _financeRepository.groupByMerchants();
   }
 }

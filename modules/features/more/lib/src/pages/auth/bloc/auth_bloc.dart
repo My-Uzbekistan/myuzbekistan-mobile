@@ -1,10 +1,8 @@
-
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared/shared.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-
 
 part 'auth_event.dart';
 
@@ -18,19 +16,23 @@ class AuthBlock extends Bloc<AuthEvent, AuthState> {
   final SecurityStorage _securityStorage;
   final AppStatusChangeListeners _appLocaleChangeListener;
 
-  AuthBlock(Repository rp, SecurityStorage secS,
-      AppStatusChangeListeners appStatusChangeListeners)
-      : _repository = rp,
-        _securityStorage = secS,
-        _appLocaleChangeListener = appStatusChangeListeners,
-        super(AuthState.defaultState()) {
+  AuthBlock(
+    Repository rp,
+    SecurityStorage secS,
+    AppStatusChangeListeners appStatusChangeListeners,
+  ) : _repository = rp,
+      _securityStorage = secS,
+      _appLocaleChangeListener = appStatusChangeListeners,
+      super(AuthState.defaultState()) {
     on<_AuthGoogleEvent>(_googleAuth);
     on<_AuthAppleEvent>(_appleAuth);
     on<_AuthLogOutEvent>(_logOutEvent);
   }
 
   Future<void> _googleAuth(
-      _AuthGoogleEvent event, Emitter<AuthState> emit) async {
+    _AuthGoogleEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     if (state is DefaultState) {
       try {
         emit(AuthState.googleLoading());
@@ -45,9 +47,14 @@ class AuthBlock extends Bloc<AuthEvent, AuthState> {
             idToken: googleAuth!.idToken!,
           );
           await _securityStorage.setToken(token: token);
+          if (!token.hasPin) {
+            _appLocaleChangeListener.refresh();
+          }
+          _setFirebaseToken();
+          emit(AuthState.authSuccessState(hasPin: token.hasPin));
+        } else {
+          emit(AuthState.defaultState());
         }
-        _appLocaleChangeListener.refresh();
-        emit(AuthState.authSuccessState());
       } catch (e) {
         emit(AuthState.defaultState());
       }
@@ -55,7 +62,9 @@ class AuthBlock extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _appleAuth(
-      _AuthAppleEvent event, Emitter<AuthState> emit) async {
+    _AuthAppleEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     if (state is DefaultState) {
       try {
         emit(AuthState.appleLoading());
@@ -70,23 +79,38 @@ class AuthBlock extends Bloc<AuthEvent, AuthState> {
 
         if (credential.identityToken != null) {
           final token = await _repository.authApple(
-              idToken: credential.identityToken!,
-              fullName: credential.givenName);
-
+            idToken: credential.identityToken!,
+            fullName: credential.givenName,
+          );
           await _securityStorage.setToken(token: token);
-
-          _appLocaleChangeListener.refresh();
+          if (!token.hasPin) {
+            _appLocaleChangeListener.refresh();
+          }
+          _setFirebaseToken();
+          emit(AuthState.authSuccessState(hasPin: token.hasPin));
+        } else {
+          emit(AuthState.defaultState());
         }
-        emit(AuthState.authSuccessState());
       } catch (e) {
-        debugPrint("appleAuthEvent Exaption ${e}");
         emit(AuthState.defaultState());
       }
     }
   }
 
+  Future<void> _setFirebaseToken() async {
+    try {
+      FirebaseMessaging.instance.getToken().then((token) {
+        if (token != null) {
+          _repository.setFirebaseToken(token: token);
+        }
+      });
+    } catch (_) {}
+  }
+
   Future<void> _logOutEvent(
-      _AuthLogOutEvent event, Emitter<AuthState> emit) async {
+    _AuthLogOutEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     await _securityStorage.clearData();
     _appLocaleChangeListener.refresh();
   }

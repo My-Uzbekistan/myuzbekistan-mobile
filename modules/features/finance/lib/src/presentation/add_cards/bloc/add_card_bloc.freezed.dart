@@ -55,14 +55,16 @@ extension AddCardEventPatterns on AddCardEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SetExtermalParamsEvent value)?  setExternalParams,TResult Function( _SetOwnParamsEvent value)?  setOwnParams,TResult Function( _SetCardNumberEvent value)?  setCardNumber,TResult Function( _AddEvent value)?  add,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SetExtermalParamsEvent value)?  setExternalParams,TResult Function( _SetOwnParamsEvent value)?  setOwnParams,TResult Function( _SetCardNumberEvent value)?  setCardNumber,TResult Function( _AddEvent value)?  add,TResult Function( _SelectColorEvent value)?  selectColor,TResult Function( _LoadCardImagesEvent value)?  loadCardImages,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent() when setExternalParams != null:
 return setExternalParams(_that);case _SetOwnParamsEvent() when setOwnParams != null:
 return setOwnParams(_that);case _SetCardNumberEvent() when setCardNumber != null:
 return setCardNumber(_that);case _AddEvent() when add != null:
-return add(_that);case _:
+return add(_that);case _SelectColorEvent() when selectColor != null:
+return selectColor(_that);case _LoadCardImagesEvent() when loadCardImages != null:
+return loadCardImages(_that);case _:
   return orElse();
 
 }
@@ -80,14 +82,16 @@ return add(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SetExtermalParamsEvent value)  setExternalParams,required TResult Function( _SetOwnParamsEvent value)  setOwnParams,required TResult Function( _SetCardNumberEvent value)  setCardNumber,required TResult Function( _AddEvent value)  add,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SetExtermalParamsEvent value)  setExternalParams,required TResult Function( _SetOwnParamsEvent value)  setOwnParams,required TResult Function( _SetCardNumberEvent value)  setCardNumber,required TResult Function( _AddEvent value)  add,required TResult Function( _SelectColorEvent value)  selectColor,required TResult Function( _LoadCardImagesEvent value)  loadCardImages,}){
 final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent():
 return setExternalParams(_that);case _SetOwnParamsEvent():
 return setOwnParams(_that);case _SetCardNumberEvent():
 return setCardNumber(_that);case _AddEvent():
-return add(_that);case _:
+return add(_that);case _SelectColorEvent():
+return selectColor(_that);case _LoadCardImagesEvent():
+return loadCardImages(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +108,16 @@ return add(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SetExtermalParamsEvent value)?  setExternalParams,TResult? Function( _SetOwnParamsEvent value)?  setOwnParams,TResult? Function( _SetCardNumberEvent value)?  setCardNumber,TResult? Function( _AddEvent value)?  add,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SetExtermalParamsEvent value)?  setExternalParams,TResult? Function( _SetOwnParamsEvent value)?  setOwnParams,TResult? Function( _SetCardNumberEvent value)?  setCardNumber,TResult? Function( _AddEvent value)?  add,TResult? Function( _SelectColorEvent value)?  selectColor,TResult? Function( _LoadCardImagesEvent value)?  loadCardImages,}){
 final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent() when setExternalParams != null:
 return setExternalParams(_that);case _SetOwnParamsEvent() when setOwnParams != null:
 return setOwnParams(_that);case _SetCardNumberEvent() when setCardNumber != null:
 return setCardNumber(_that);case _AddEvent() when add != null:
-return add(_that);case _:
+return add(_that);case _SelectColorEvent() when selectColor != null:
+return selectColor(_that);case _LoadCardImagesEvent() when loadCardImages != null:
+return loadCardImages(_that);case _:
   return null;
 
 }
@@ -128,13 +134,15 @@ return add(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String expire,  String cvv,  String holderName)?  setExternalParams,TResult Function( String expire,  String phoneNumber)?  setOwnParams,TResult Function( String cardNumber)?  setCardNumber,TResult Function()?  add,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String expire,  String cvv,  String holderName,  String? cardBrand)?  setExternalParams,TResult Function( String expire,  String phoneNumber,  String? cardBrand)?  setOwnParams,TResult Function( String cardNumber)?  setCardNumber,TResult Function()?  add,TResult Function( String colors)?  selectColor,TResult Function()?  loadCardImages,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent() when setExternalParams != null:
-return setExternalParams(_that.expire,_that.cvv,_that.holderName);case _SetOwnParamsEvent() when setOwnParams != null:
-return setOwnParams(_that.expire,_that.phoneNumber);case _SetCardNumberEvent() when setCardNumber != null:
+return setExternalParams(_that.expire,_that.cvv,_that.holderName,_that.cardBrand);case _SetOwnParamsEvent() when setOwnParams != null:
+return setOwnParams(_that.expire,_that.phoneNumber,_that.cardBrand);case _SetCardNumberEvent() when setCardNumber != null:
 return setCardNumber(_that.cardNumber);case _AddEvent() when add != null:
-return add();case _:
+return add();case _SelectColorEvent() when selectColor != null:
+return selectColor(_that.colors);case _LoadCardImagesEvent() when loadCardImages != null:
+return loadCardImages();case _:
   return orElse();
 
 }
@@ -152,13 +160,15 @@ return add();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String expire,  String cvv,  String holderName)  setExternalParams,required TResult Function( String expire,  String phoneNumber)  setOwnParams,required TResult Function( String cardNumber)  setCardNumber,required TResult Function()  add,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String expire,  String cvv,  String holderName,  String? cardBrand)  setExternalParams,required TResult Function( String expire,  String phoneNumber,  String? cardBrand)  setOwnParams,required TResult Function( String cardNumber)  setCardNumber,required TResult Function()  add,required TResult Function( String colors)  selectColor,required TResult Function()  loadCardImages,}) {final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent():
-return setExternalParams(_that.expire,_that.cvv,_that.holderName);case _SetOwnParamsEvent():
-return setOwnParams(_that.expire,_that.phoneNumber);case _SetCardNumberEvent():
+return setExternalParams(_that.expire,_that.cvv,_that.holderName,_that.cardBrand);case _SetOwnParamsEvent():
+return setOwnParams(_that.expire,_that.phoneNumber,_that.cardBrand);case _SetCardNumberEvent():
 return setCardNumber(_that.cardNumber);case _AddEvent():
-return add();case _:
+return add();case _SelectColorEvent():
+return selectColor(_that.colors);case _LoadCardImagesEvent():
+return loadCardImages();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +185,15 @@ return add();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String expire,  String cvv,  String holderName)?  setExternalParams,TResult? Function( String expire,  String phoneNumber)?  setOwnParams,TResult? Function( String cardNumber)?  setCardNumber,TResult? Function()?  add,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String expire,  String cvv,  String holderName,  String? cardBrand)?  setExternalParams,TResult? Function( String expire,  String phoneNumber,  String? cardBrand)?  setOwnParams,TResult? Function( String cardNumber)?  setCardNumber,TResult? Function()?  add,TResult? Function( String colors)?  selectColor,TResult? Function()?  loadCardImages,}) {final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent() when setExternalParams != null:
-return setExternalParams(_that.expire,_that.cvv,_that.holderName);case _SetOwnParamsEvent() when setOwnParams != null:
-return setOwnParams(_that.expire,_that.phoneNumber);case _SetCardNumberEvent() when setCardNumber != null:
+return setExternalParams(_that.expire,_that.cvv,_that.holderName,_that.cardBrand);case _SetOwnParamsEvent() when setOwnParams != null:
+return setOwnParams(_that.expire,_that.phoneNumber,_that.cardBrand);case _SetCardNumberEvent() when setCardNumber != null:
 return setCardNumber(_that.cardNumber);case _AddEvent() when add != null:
-return add();case _:
+return add();case _SelectColorEvent() when selectColor != null:
+return selectColor(_that.colors);case _LoadCardImagesEvent() when loadCardImages != null:
+return loadCardImages();case _:
   return null;
 
 }
@@ -193,12 +205,13 @@ return add();case _:
 
 
 class _SetExtermalParamsEvent implements AddCardEvent {
-   _SetExtermalParamsEvent({required this.expire, required this.cvv, required this.holderName});
+   _SetExtermalParamsEvent({required this.expire, required this.cvv, required this.holderName, this.cardBrand});
   
 
  final  String expire;
  final  String cvv;
  final  String holderName;
+ final  String? cardBrand;
 
 /// Create a copy of AddCardEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -210,16 +223,16 @@ _$SetExtermalParamsEventCopyWith<_SetExtermalParamsEvent> get copyWith => __$Set
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetExtermalParamsEvent&&(identical(other.expire, expire) || other.expire == expire)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.holderName, holderName) || other.holderName == holderName));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetExtermalParamsEvent&&(identical(other.expire, expire) || other.expire == expire)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.holderName, holderName) || other.holderName == holderName)&&(identical(other.cardBrand, cardBrand) || other.cardBrand == cardBrand));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,expire,cvv,holderName);
+int get hashCode => Object.hash(runtimeType,expire,cvv,holderName,cardBrand);
 
 @override
 String toString() {
-  return 'AddCardEvent.setExternalParams(expire: $expire, cvv: $cvv, holderName: $holderName)';
+  return 'AddCardEvent.setExternalParams(expire: $expire, cvv: $cvv, holderName: $holderName, cardBrand: $cardBrand)';
 }
 
 
@@ -230,7 +243,7 @@ abstract mixin class _$SetExtermalParamsEventCopyWith<$Res> implements $AddCardE
   factory _$SetExtermalParamsEventCopyWith(_SetExtermalParamsEvent value, $Res Function(_SetExtermalParamsEvent) _then) = __$SetExtermalParamsEventCopyWithImpl;
 @useResult
 $Res call({
- String expire, String cvv, String holderName
+ String expire, String cvv, String holderName, String? cardBrand
 });
 
 
@@ -247,12 +260,13 @@ class __$SetExtermalParamsEventCopyWithImpl<$Res>
 
 /// Create a copy of AddCardEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? expire = null,Object? cvv = null,Object? holderName = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? expire = null,Object? cvv = null,Object? holderName = null,Object? cardBrand = freezed,}) {
   return _then(_SetExtermalParamsEvent(
 expire: null == expire ? _self.expire : expire // ignore: cast_nullable_to_non_nullable
 as String,cvv: null == cvv ? _self.cvv : cvv // ignore: cast_nullable_to_non_nullable
 as String,holderName: null == holderName ? _self.holderName : holderName // ignore: cast_nullable_to_non_nullable
-as String,
+as String,cardBrand: freezed == cardBrand ? _self.cardBrand : cardBrand // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -263,11 +277,12 @@ as String,
 
 
 class _SetOwnParamsEvent implements AddCardEvent {
-   _SetOwnParamsEvent({required this.expire, required this.phoneNumber});
+   _SetOwnParamsEvent({required this.expire, required this.phoneNumber, this.cardBrand});
   
 
  final  String expire;
  final  String phoneNumber;
+ final  String? cardBrand;
 
 /// Create a copy of AddCardEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -279,16 +294,16 @@ _$SetOwnParamsEventCopyWith<_SetOwnParamsEvent> get copyWith => __$SetOwnParamsE
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetOwnParamsEvent&&(identical(other.expire, expire) || other.expire == expire)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetOwnParamsEvent&&(identical(other.expire, expire) || other.expire == expire)&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&(identical(other.cardBrand, cardBrand) || other.cardBrand == cardBrand));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,expire,phoneNumber);
+int get hashCode => Object.hash(runtimeType,expire,phoneNumber,cardBrand);
 
 @override
 String toString() {
-  return 'AddCardEvent.setOwnParams(expire: $expire, phoneNumber: $phoneNumber)';
+  return 'AddCardEvent.setOwnParams(expire: $expire, phoneNumber: $phoneNumber, cardBrand: $cardBrand)';
 }
 
 
@@ -299,7 +314,7 @@ abstract mixin class _$SetOwnParamsEventCopyWith<$Res> implements $AddCardEventC
   factory _$SetOwnParamsEventCopyWith(_SetOwnParamsEvent value, $Res Function(_SetOwnParamsEvent) _then) = __$SetOwnParamsEventCopyWithImpl;
 @useResult
 $Res call({
- String expire, String phoneNumber
+ String expire, String phoneNumber, String? cardBrand
 });
 
 
@@ -316,11 +331,12 @@ class __$SetOwnParamsEventCopyWithImpl<$Res>
 
 /// Create a copy of AddCardEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? expire = null,Object? phoneNumber = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? expire = null,Object? phoneNumber = null,Object? cardBrand = freezed,}) {
   return _then(_SetOwnParamsEvent(
 expire: null == expire ? _self.expire : expire // ignore: cast_nullable_to_non_nullable
 as String,phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
-as String,
+as String,cardBrand: freezed == cardBrand ? _self.cardBrand : cardBrand // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -426,9 +442,107 @@ String toString() {
 
 
 /// @nodoc
+
+
+class _SelectColorEvent implements AddCardEvent {
+   _SelectColorEvent(this.colors);
+  
+
+ final  String colors;
+
+/// Create a copy of AddCardEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SelectColorEventCopyWith<_SelectColorEvent> get copyWith => __$SelectColorEventCopyWithImpl<_SelectColorEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SelectColorEvent&&(identical(other.colors, colors) || other.colors == colors));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,colors);
+
+@override
+String toString() {
+  return 'AddCardEvent.selectColor(colors: $colors)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SelectColorEventCopyWith<$Res> implements $AddCardEventCopyWith<$Res> {
+  factory _$SelectColorEventCopyWith(_SelectColorEvent value, $Res Function(_SelectColorEvent) _then) = __$SelectColorEventCopyWithImpl;
+@useResult
+$Res call({
+ String colors
+});
+
+
+
+
+}
+/// @nodoc
+class __$SelectColorEventCopyWithImpl<$Res>
+    implements _$SelectColorEventCopyWith<$Res> {
+  __$SelectColorEventCopyWithImpl(this._self, this._then);
+
+  final _SelectColorEvent _self;
+  final $Res Function(_SelectColorEvent) _then;
+
+/// Create a copy of AddCardEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? colors = null,}) {
+  return _then(_SelectColorEvent(
+null == colors ? _self.colors : colors // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _LoadCardImagesEvent implements AddCardEvent {
+   _LoadCardImagesEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadCardImagesEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AddCardEvent.loadCardImages()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$AddCardState {
 
- String get pan; AddCardParams? get params; AddCardNavState? get navState; bool get isLoading;
+ String get pan; List<String> get images; String? get selectedImage; String? get cardBrand; AddCardParams? get params; AddCardNavState? get navState; bool get isLoading;
 /// Create a copy of AddCardState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -439,16 +553,16 @@ $AddCardStateCopyWith<AddCardState> get copyWith => _$AddCardStateCopyWithImpl<A
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddCardState&&(identical(other.pan, pan) || other.pan == pan)&&(identical(other.params, params) || other.params == params)&&(identical(other.navState, navState) || other.navState == navState)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddCardState&&(identical(other.pan, pan) || other.pan == pan)&&const DeepCollectionEquality().equals(other.images, images)&&(identical(other.selectedImage, selectedImage) || other.selectedImage == selectedImage)&&(identical(other.cardBrand, cardBrand) || other.cardBrand == cardBrand)&&(identical(other.params, params) || other.params == params)&&(identical(other.navState, navState) || other.navState == navState)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,pan,params,navState,isLoading);
+int get hashCode => Object.hash(runtimeType,pan,const DeepCollectionEquality().hash(images),selectedImage,cardBrand,params,navState,isLoading);
 
 @override
 String toString() {
-  return 'AddCardState(pan: $pan, params: $params, navState: $navState, isLoading: $isLoading)';
+  return 'AddCardState(pan: $pan, images: $images, selectedImage: $selectedImage, cardBrand: $cardBrand, params: $params, navState: $navState, isLoading: $isLoading)';
 }
 
 
@@ -459,7 +573,7 @@ abstract mixin class $AddCardStateCopyWith<$Res>  {
   factory $AddCardStateCopyWith(AddCardState value, $Res Function(AddCardState) _then) = _$AddCardStateCopyWithImpl;
 @useResult
 $Res call({
- String pan, AddCardParams? params, AddCardNavState? navState, bool isLoading
+ String pan, List<String> images, String? selectedImage, String? cardBrand, AddCardParams? params, AddCardNavState? navState, bool isLoading
 });
 
 
@@ -476,10 +590,13 @@ class _$AddCardStateCopyWithImpl<$Res>
 
 /// Create a copy of AddCardState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? pan = null,Object? params = freezed,Object? navState = freezed,Object? isLoading = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? pan = null,Object? images = null,Object? selectedImage = freezed,Object? cardBrand = freezed,Object? params = freezed,Object? navState = freezed,Object? isLoading = null,}) {
   return _then(_self.copyWith(
 pan: null == pan ? _self.pan : pan // ignore: cast_nullable_to_non_nullable
-as String,params: freezed == params ? _self.params : params // ignore: cast_nullable_to_non_nullable
+as String,images: null == images ? _self.images : images // ignore: cast_nullable_to_non_nullable
+as List<String>,selectedImage: freezed == selectedImage ? _self.selectedImage : selectedImage // ignore: cast_nullable_to_non_nullable
+as String?,cardBrand: freezed == cardBrand ? _self.cardBrand : cardBrand // ignore: cast_nullable_to_non_nullable
+as String?,params: freezed == params ? _self.params : params // ignore: cast_nullable_to_non_nullable
 as AddCardParams?,navState: freezed == navState ? _self.navState : navState // ignore: cast_nullable_to_non_nullable
 as AddCardNavState?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,
@@ -591,10 +708,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String pan,  AddCardParams? params,  AddCardNavState? navState,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String pan,  List<String> images,  String? selectedImage,  String? cardBrand,  AddCardParams? params,  AddCardNavState? navState,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddCardState() when $default != null:
-return $default(_that.pan,_that.params,_that.navState,_that.isLoading);case _:
+return $default(_that.pan,_that.images,_that.selectedImage,_that.cardBrand,_that.params,_that.navState,_that.isLoading);case _:
   return orElse();
 
 }
@@ -612,10 +729,10 @@ return $default(_that.pan,_that.params,_that.navState,_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String pan,  AddCardParams? params,  AddCardNavState? navState,  bool isLoading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String pan,  List<String> images,  String? selectedImage,  String? cardBrand,  AddCardParams? params,  AddCardNavState? navState,  bool isLoading)  $default,) {final _that = this;
 switch (_that) {
 case _AddCardState():
-return $default(_that.pan,_that.params,_that.navState,_that.isLoading);case _:
+return $default(_that.pan,_that.images,_that.selectedImage,_that.cardBrand,_that.params,_that.navState,_that.isLoading);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -632,10 +749,10 @@ return $default(_that.pan,_that.params,_that.navState,_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String pan,  AddCardParams? params,  AddCardNavState? navState,  bool isLoading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String pan,  List<String> images,  String? selectedImage,  String? cardBrand,  AddCardParams? params,  AddCardNavState? navState,  bool isLoading)?  $default,) {final _that = this;
 switch (_that) {
 case _AddCardState() when $default != null:
-return $default(_that.pan,_that.params,_that.navState,_that.isLoading);case _:
+return $default(_that.pan,_that.images,_that.selectedImage,_that.cardBrand,_that.params,_that.navState,_that.isLoading);case _:
   return null;
 
 }
@@ -647,10 +764,19 @@ return $default(_that.pan,_that.params,_that.navState,_that.isLoading);case _:
 
 
 class _AddCardState extends AddCardState {
-  const _AddCardState({required this.pan, this.params, this.navState, this.isLoading = false}): super._();
+  const _AddCardState({required this.pan, final  List<String> images = const [], this.selectedImage, this.cardBrand, this.params, this.navState, this.isLoading = false}): _images = images,super._();
   
 
 @override final  String pan;
+ final  List<String> _images;
+@override@JsonKey() List<String> get images {
+  if (_images is EqualUnmodifiableListView) return _images;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_images);
+}
+
+@override final  String? selectedImage;
+@override final  String? cardBrand;
 @override final  AddCardParams? params;
 @override final  AddCardNavState? navState;
 @override@JsonKey() final  bool isLoading;
@@ -665,16 +791,16 @@ _$AddCardStateCopyWith<_AddCardState> get copyWith => __$AddCardStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddCardState&&(identical(other.pan, pan) || other.pan == pan)&&(identical(other.params, params) || other.params == params)&&(identical(other.navState, navState) || other.navState == navState)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddCardState&&(identical(other.pan, pan) || other.pan == pan)&&const DeepCollectionEquality().equals(other._images, _images)&&(identical(other.selectedImage, selectedImage) || other.selectedImage == selectedImage)&&(identical(other.cardBrand, cardBrand) || other.cardBrand == cardBrand)&&(identical(other.params, params) || other.params == params)&&(identical(other.navState, navState) || other.navState == navState)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,pan,params,navState,isLoading);
+int get hashCode => Object.hash(runtimeType,pan,const DeepCollectionEquality().hash(_images),selectedImage,cardBrand,params,navState,isLoading);
 
 @override
 String toString() {
-  return 'AddCardState(pan: $pan, params: $params, navState: $navState, isLoading: $isLoading)';
+  return 'AddCardState(pan: $pan, images: $images, selectedImage: $selectedImage, cardBrand: $cardBrand, params: $params, navState: $navState, isLoading: $isLoading)';
 }
 
 
@@ -685,7 +811,7 @@ abstract mixin class _$AddCardStateCopyWith<$Res> implements $AddCardStateCopyWi
   factory _$AddCardStateCopyWith(_AddCardState value, $Res Function(_AddCardState) _then) = __$AddCardStateCopyWithImpl;
 @override @useResult
 $Res call({
- String pan, AddCardParams? params, AddCardNavState? navState, bool isLoading
+ String pan, List<String> images, String? selectedImage, String? cardBrand, AddCardParams? params, AddCardNavState? navState, bool isLoading
 });
 
 
@@ -702,10 +828,13 @@ class __$AddCardStateCopyWithImpl<$Res>
 
 /// Create a copy of AddCardState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? pan = null,Object? params = freezed,Object? navState = freezed,Object? isLoading = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? pan = null,Object? images = null,Object? selectedImage = freezed,Object? cardBrand = freezed,Object? params = freezed,Object? navState = freezed,Object? isLoading = null,}) {
   return _then(_AddCardState(
 pan: null == pan ? _self.pan : pan // ignore: cast_nullable_to_non_nullable
-as String,params: freezed == params ? _self.params : params // ignore: cast_nullable_to_non_nullable
+as String,images: null == images ? _self._images : images // ignore: cast_nullable_to_non_nullable
+as List<String>,selectedImage: freezed == selectedImage ? _self.selectedImage : selectedImage // ignore: cast_nullable_to_non_nullable
+as String?,cardBrand: freezed == cardBrand ? _self.cardBrand : cardBrand // ignore: cast_nullable_to_non_nullable
+as String?,params: freezed == params ? _self.params : params // ignore: cast_nullable_to_non_nullable
 as AddCardParams?,navState: freezed == navState ? _self.navState : navState // ignore: cast_nullable_to_non_nullable
 as AddCardNavState?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,

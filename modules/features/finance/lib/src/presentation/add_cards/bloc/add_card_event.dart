@@ -6,11 +6,13 @@ abstract class AddCardEvent with _$AddCardEvent {
     required String expire,
     required String cvv,
     required String holderName,
+     String? cardBrand,
   }) = _SetExtermalParamsEvent;
 
   factory AddCardEvent.setOwnParams({
     required String expire,
     required String phoneNumber,
+    String? cardBrand,
   }) = _SetOwnParamsEvent;
 
   factory AddCardEvent.setCardNumber({required String cardNumber}) =
@@ -18,5 +20,7 @@ abstract class AddCardEvent with _$AddCardEvent {
 
 
   factory AddCardEvent.add() = _AddEvent;
+  factory AddCardEvent.selectColor(String colors) = _SelectColorEvent;
+  factory AddCardEvent.loadCardImages() = _LoadCardImagesEvent;
 
 }

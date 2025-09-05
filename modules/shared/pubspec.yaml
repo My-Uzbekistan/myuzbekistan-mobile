@@ -44,13 +44,20 @@ dependencies:
   dartx: ^1.2.0
   url_launcher: ^6.3.1
   dio: ^5.8.0+1
+  package_info_plus:
   geolocator:
   flutter_alice:
     git: git@github.com:IlhomSh/flutter_alice.git
   mobile_scanner: ^7.0.1
+  fluttertoast: ^8.2.12
+  firebase_core: ^4.1.0
+  firebase_analytics: ^12.0.1
+  firebase_messaging: ^16.0.1
 
   pinput: ^5.0.1
   keyboard_actions: ^4.2.0
+  flutter_inappwebview: ^6.1.5
+  device_info_plus: ^11.5.0
 #  flutter_alice:
 #    git: https://github.com/IlhomSh/flutter_alice.git
 

@@ -37,6 +37,7 @@ class FinanceRepositoryImpl extends FinanceRepository {
     String phoneNumber = "",
     String cardHolderName = "",
     String cvv = "",
+    String? image,
   }) {
     debugPrint("bindCard");
     // await Future.delayed(Duration(seconds: 5));
@@ -45,6 +46,7 @@ class FinanceRepositoryImpl extends FinanceRepository {
         .bindCard({
           "pan": pan,
           "expiry": expiry,
+          if (image != null) "image": image,
           if (phoneNumber.isNotEmpty)
             "smsNotificationNumber": "998$phoneNumber",
           if (cardHolderName.isNotEmpty) "cardHolderName": cardHolderName,
@@ -92,24 +94,9 @@ class FinanceRepositoryImpl extends FinanceRepository {
   }
 
   @override
-  Future<List<CardColor>> loadCardColors() {
+  Future<List<String>> cardImages() {
     return service.cardColors().call(
-      (data) => data.items.map((e) => e.toDomain()).toList(),
-    );
-  }
-
-  @override
-  Future<List<Merchant>> merchants() {
-    return service.getAllMerchants().parseObjectAsync(
-      mapper: (dto) {
-        return (dto as ItemsResponse<MerchantDto>).items
-            .map((e) => e.toDomain())
-            .toList();
-      },
-      fromJson: (json) => ItemsResponse.fromJson(
-        json,
-        (e) => MerchantDto.fromJson(e as Map<String, dynamic>),
-      ),
+      (data) => data.items.map((e) => e.image).nonNulls.toList(),
     );
   }
 
@@ -143,114 +130,6 @@ class FinanceRepositoryImpl extends FinanceRepository {
     int page = 0,
     int pageSize = 20,
   }) {
-    //     const String paymentHistoryJson = '''
-    // {
-    //   "items": [
-    //     {
-    //       "date": "2025-08-10T12:49:23.754547Z",
-    //       "paymentId": "48d63be2-e18c-48b4-aa9d-e05954dc4634",
-    //       "amount": 1000,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/ac7095a3dca3434fab4fbfe773030a87",
-    //         "name": "child",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:40:14.250097Z",
-    //       "paymentId": null,
-    //       "amount": 50,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/6ebd799ace3d4310ac8bb0cc84e27933",
-    //         "name": "3ch",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:39:54.534508Z",
-    //       "paymentId": null,
-    //       "amount": 50,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/6ebd799ace3d4310ac8bb0cc84e27933",
-    //         "name": "3ch",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:38:29.628406Z",
-    //       "paymentId": null,
-    //       "amount": 50,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/6ebd799ace3d4310ac8bb0cc84e27933",
-    //         "name": "3ch",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:38:17.111848Z",
-    //       "paymentId": null,
-    //       "amount": 50,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/6ebd799ace3d4310ac8bb0cc84e27933",
-    //         "name": "3ch",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:38:14.007611Z",
-    //       "paymentId": null,
-    //       "amount": 5,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/6ebd799ace3d4310ac8bb0cc84e27933",
-    //         "name": "3ch",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:20:01.541431Z",
-    //       "paymentId": null,
-    //       "amount": 5,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/6ebd799ace3d4310ac8bb0cc84e27933",
-    //         "name": "3ch",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:19:32.346776Z",
-    //       "paymentId": null,
-    //       "amount": 5,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/996422764b4d4cf6855aea3ef1ee63b8",
-    //         "name": "2ch",
-    //         "type": "sdfhsd"
-    //       }
-    //     },
-    //     {
-    //       "date": "2025-06-28T10:14:57.171869Z",
-    //       "paymentId": null,
-    //       "amount": 5,
-    //       "merchant": {
-    //         "icon": "https:/minio.uzdc.uz/myzubekistan/uploads/ac7095a3dca3434fab4fbfe773030a87",
-    //         "name": "child",
-    //         "type": "sdfhsd"
-    //       }
-    //     }
-    //   ],
-    //   "totalItems": 9
-    // }
-    // ''';
-    //
-    //     return Future.value(
-    //       ItemsResponse
-    //           .fromJson(
-    //         jsonDecode(paymentHistoryJson),
-    //             (e) => PaymentHistoryItemDto.fromJson(e as Map<String, dynamic>),
-    //       )
-    //           .items
-    //           .map((e) => e.toDomain())
-    //           .toList(),
-    //     );
     return service
         .paymentHistory(page: page, pageSize: pageSize)
         .parseObjectAsync(
@@ -302,5 +181,30 @@ class FinanceRepositoryImpl extends FinanceRepository {
     return service
         .paymentCheck(paymentId: paymentId)
         .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<List<Merchant>> merchants() {
+    return service.getAllMerchants().parseObjectAsync(
+      mapper: (dto) {
+        return (dto as ItemsResponse<MerchantDto>).items
+            .map((e) => e.toDomain())
+            .toList();
+      },
+      fromJson: (json) => ItemsResponse.fromJson(
+        json,
+        (e) => MerchantDto.fromJson(e as Map<String, dynamic>),
+      ),
+    );
+  }
+
+  @override
+  Future<List<GroupBy<Merchant>>> groupByMerchants() {
+    return service.groupByMerchants().parseListAsync(
+      mapper: (dto) {
+        return dto.toDomain();
+      },
+      fromJson: GroupByMerchantsDto.fromJson,
+    );
   }
 }

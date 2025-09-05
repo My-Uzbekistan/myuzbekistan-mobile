@@ -12,17 +12,11 @@ part of 'home_bloc.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$HomeBlocEvent implements DiagnosticableTreeMixin {
+mixin _$HomeBlocEvent {
 
 
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocEvent'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -34,7 +28,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocEvent()';
 }
 
@@ -61,7 +55,7 @@ extension HomeBlocEventPatterns on HomeBlocEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _HomeBlocInitialEvent value)?  initial,TResult Function( _LoadDataEvent value)?  loadDataEvent,TResult Function( _ChangeRegion value)?  changeRegion,TResult Function( _LoadContentsEvent value)?  loadContents,TResult Function( _CheckPermissionEvent value)?  checkPermission,TResult Function( _LoadFavoritesEvent value)?  loadFavorites,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _HomeBlocInitialEvent value)?  initial,TResult Function( _LoadDataEvent value)?  loadDataEvent,TResult Function( _ChangeRegion value)?  changeRegion,TResult Function( _LoadContentsEvent value)?  loadContents,TResult Function( _CheckPermissionEvent value)?  checkPermission,TResult Function( _LoadFavoritesEvent value)?  loadFavorites,TResult Function( _LoadPayerTimes value)?  loadPrayerTimes,TResult Function( _LoadWeatherEvent value)?  loadWeather,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
@@ -70,7 +64,9 @@ return loadDataEvent(_that);case _ChangeRegion() when changeRegion != null:
 return changeRegion(_that);case _LoadContentsEvent() when loadContents != null:
 return loadContents(_that);case _CheckPermissionEvent() when checkPermission != null:
 return checkPermission(_that);case _LoadFavoritesEvent() when loadFavorites != null:
-return loadFavorites(_that);case _:
+return loadFavorites(_that);case _LoadPayerTimes() when loadPrayerTimes != null:
+return loadPrayerTimes(_that);case _LoadWeatherEvent() when loadWeather != null:
+return loadWeather(_that);case _:
   return orElse();
 
 }
@@ -88,7 +84,7 @@ return loadFavorites(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _HomeBlocInitialEvent value)  initial,required TResult Function( _LoadDataEvent value)  loadDataEvent,required TResult Function( _ChangeRegion value)  changeRegion,required TResult Function( _LoadContentsEvent value)  loadContents,required TResult Function( _CheckPermissionEvent value)  checkPermission,required TResult Function( _LoadFavoritesEvent value)  loadFavorites,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _HomeBlocInitialEvent value)  initial,required TResult Function( _LoadDataEvent value)  loadDataEvent,required TResult Function( _ChangeRegion value)  changeRegion,required TResult Function( _LoadContentsEvent value)  loadContents,required TResult Function( _CheckPermissionEvent value)  checkPermission,required TResult Function( _LoadFavoritesEvent value)  loadFavorites,required TResult Function( _LoadPayerTimes value)  loadPrayerTimes,required TResult Function( _LoadWeatherEvent value)  loadWeather,}){
 final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent():
@@ -97,7 +93,9 @@ return loadDataEvent(_that);case _ChangeRegion():
 return changeRegion(_that);case _LoadContentsEvent():
 return loadContents(_that);case _CheckPermissionEvent():
 return checkPermission(_that);case _LoadFavoritesEvent():
-return loadFavorites(_that);case _:
+return loadFavorites(_that);case _LoadPayerTimes():
+return loadPrayerTimes(_that);case _LoadWeatherEvent():
+return loadWeather(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -114,7 +112,7 @@ return loadFavorites(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _HomeBlocInitialEvent value)?  initial,TResult? Function( _LoadDataEvent value)?  loadDataEvent,TResult? Function( _ChangeRegion value)?  changeRegion,TResult? Function( _LoadContentsEvent value)?  loadContents,TResult? Function( _CheckPermissionEvent value)?  checkPermission,TResult? Function( _LoadFavoritesEvent value)?  loadFavorites,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _HomeBlocInitialEvent value)?  initial,TResult? Function( _LoadDataEvent value)?  loadDataEvent,TResult? Function( _ChangeRegion value)?  changeRegion,TResult? Function( _LoadContentsEvent value)?  loadContents,TResult? Function( _CheckPermissionEvent value)?  checkPermission,TResult? Function( _LoadFavoritesEvent value)?  loadFavorites,TResult? Function( _LoadPayerTimes value)?  loadPrayerTimes,TResult? Function( _LoadWeatherEvent value)?  loadWeather,}){
 final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
@@ -123,7 +121,9 @@ return loadDataEvent(_that);case _ChangeRegion() when changeRegion != null:
 return changeRegion(_that);case _LoadContentsEvent() when loadContents != null:
 return loadContents(_that);case _CheckPermissionEvent() when checkPermission != null:
 return checkPermission(_that);case _LoadFavoritesEvent() when loadFavorites != null:
-return loadFavorites(_that);case _:
+return loadFavorites(_that);case _LoadPayerTimes() when loadPrayerTimes != null:
+return loadPrayerTimes(_that);case _LoadWeatherEvent() when loadWeather != null:
+return loadWeather(_that);case _:
   return null;
 
 }
@@ -140,7 +140,7 @@ return loadFavorites(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( bool isRefresh)?  loadDataEvent,TResult Function( int regionId)?  changeRegion,TResult Function()?  loadContents,TResult Function()?  checkPermission,TResult Function()?  loadFavorites,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( bool isRefresh)?  loadDataEvent,TResult Function( int regionId)?  changeRegion,TResult Function()?  loadContents,TResult Function()?  checkPermission,TResult Function()?  loadFavorites,TResult Function()?  loadPrayerTimes,TResult Function()?  loadWeather,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
 return initial();case _LoadDataEvent() when loadDataEvent != null:
@@ -148,7 +148,9 @@ return loadDataEvent(_that.isRefresh);case _ChangeRegion() when changeRegion != 
 return changeRegion(_that.regionId);case _LoadContentsEvent() when loadContents != null:
 return loadContents();case _CheckPermissionEvent() when checkPermission != null:
 return checkPermission();case _LoadFavoritesEvent() when loadFavorites != null:
-return loadFavorites();case _:
+return loadFavorites();case _LoadPayerTimes() when loadPrayerTimes != null:
+return loadPrayerTimes();case _LoadWeatherEvent() when loadWeather != null:
+return loadWeather();case _:
   return orElse();
 
 }
@@ -166,7 +168,7 @@ return loadFavorites();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( bool isRefresh)  loadDataEvent,required TResult Function( int regionId)  changeRegion,required TResult Function()  loadContents,required TResult Function()  checkPermission,required TResult Function()  loadFavorites,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( bool isRefresh)  loadDataEvent,required TResult Function( int regionId)  changeRegion,required TResult Function()  loadContents,required TResult Function()  checkPermission,required TResult Function()  loadFavorites,required TResult Function()  loadPrayerTimes,required TResult Function()  loadWeather,}) {final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent():
 return initial();case _LoadDataEvent():
@@ -174,7 +176,9 @@ return loadDataEvent(_that.isRefresh);case _ChangeRegion():
 return changeRegion(_that.regionId);case _LoadContentsEvent():
 return loadContents();case _CheckPermissionEvent():
 return checkPermission();case _LoadFavoritesEvent():
-return loadFavorites();case _:
+return loadFavorites();case _LoadPayerTimes():
+return loadPrayerTimes();case _LoadWeatherEvent():
+return loadWeather();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,7 +195,7 @@ return loadFavorites();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( bool isRefresh)?  loadDataEvent,TResult? Function( int regionId)?  changeRegion,TResult? Function()?  loadContents,TResult? Function()?  checkPermission,TResult? Function()?  loadFavorites,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( bool isRefresh)?  loadDataEvent,TResult? Function( int regionId)?  changeRegion,TResult? Function()?  loadContents,TResult? Function()?  checkPermission,TResult? Function()?  loadFavorites,TResult? Function()?  loadPrayerTimes,TResult? Function()?  loadWeather,}) {final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
 return initial();case _LoadDataEvent() when loadDataEvent != null:
@@ -199,7 +203,9 @@ return loadDataEvent(_that.isRefresh);case _ChangeRegion() when changeRegion != 
 return changeRegion(_that.regionId);case _LoadContentsEvent() when loadContents != null:
 return loadContents();case _CheckPermissionEvent() when checkPermission != null:
 return checkPermission();case _LoadFavoritesEvent() when loadFavorites != null:
-return loadFavorites();case _:
+return loadFavorites();case _LoadPayerTimes() when loadPrayerTimes != null:
+return loadPrayerTimes();case _LoadWeatherEvent() when loadWeather != null:
+return loadWeather();case _:
   return null;
 
 }
@@ -210,7 +216,7 @@ return loadFavorites();case _:
 /// @nodoc
 
 
-class _HomeBlocInitialEvent with DiagnosticableTreeMixin implements HomeBlocEvent {
+class _HomeBlocInitialEvent implements HomeBlocEvent {
    _HomeBlocInitialEvent();
   
 
@@ -218,12 +224,6 @@ class _HomeBlocInitialEvent with DiagnosticableTreeMixin implements HomeBlocEven
 
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocEvent.initial'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -235,7 +235,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocEvent.initial()';
 }
 
@@ -248,7 +248,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 
 
-class _LoadDataEvent with DiagnosticableTreeMixin implements HomeBlocEvent {
+class _LoadDataEvent implements HomeBlocEvent {
    _LoadDataEvent({this.isRefresh = false});
   
 
@@ -261,12 +261,6 @@ class _LoadDataEvent with DiagnosticableTreeMixin implements HomeBlocEvent {
 _$LoadDataEventCopyWith<_LoadDataEvent> get copyWith => __$LoadDataEventCopyWithImpl<_LoadDataEvent>(this, _$identity);
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocEvent.loadDataEvent'))
-    ..add(DiagnosticsProperty('isRefresh', isRefresh));
-}
 
 @override
 bool operator ==(Object other) {
@@ -278,7 +272,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,isRefresh);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocEvent.loadDataEvent(isRefresh: $isRefresh)';
 }
 
@@ -320,7 +314,7 @@ as bool,
 /// @nodoc
 
 
-class _ChangeRegion with DiagnosticableTreeMixin implements HomeBlocEvent {
+class _ChangeRegion implements HomeBlocEvent {
    _ChangeRegion(this.regionId);
   
 
@@ -333,12 +327,6 @@ class _ChangeRegion with DiagnosticableTreeMixin implements HomeBlocEvent {
 _$ChangeRegionCopyWith<_ChangeRegion> get copyWith => __$ChangeRegionCopyWithImpl<_ChangeRegion>(this, _$identity);
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocEvent.changeRegion'))
-    ..add(DiagnosticsProperty('regionId', regionId));
-}
 
 @override
 bool operator ==(Object other) {
@@ -350,7 +338,7 @@ bool operator ==(Object other) {
 int get hashCode => Object.hash(runtimeType,regionId);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocEvent.changeRegion(regionId: $regionId)';
 }
 
@@ -392,7 +380,7 @@ as int,
 /// @nodoc
 
 
-class _LoadContentsEvent with DiagnosticableTreeMixin implements HomeBlocEvent {
+class _LoadContentsEvent implements HomeBlocEvent {
    _LoadContentsEvent();
   
 
@@ -400,12 +388,6 @@ class _LoadContentsEvent with DiagnosticableTreeMixin implements HomeBlocEvent {
 
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocEvent.loadContents'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -417,7 +399,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocEvent.loadContents()';
 }
 
@@ -430,7 +412,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 
 
-class _CheckPermissionEvent with DiagnosticableTreeMixin implements HomeBlocEvent {
+class _CheckPermissionEvent implements HomeBlocEvent {
    _CheckPermissionEvent();
   
 
@@ -438,12 +420,6 @@ class _CheckPermissionEvent with DiagnosticableTreeMixin implements HomeBlocEven
 
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocEvent.checkPermission'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -455,7 +431,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocEvent.checkPermission()';
 }
 
@@ -468,7 +444,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 
 
-class _LoadFavoritesEvent with DiagnosticableTreeMixin implements HomeBlocEvent {
+class _LoadFavoritesEvent implements HomeBlocEvent {
    _LoadFavoritesEvent();
   
 
@@ -476,12 +452,6 @@ class _LoadFavoritesEvent with DiagnosticableTreeMixin implements HomeBlocEvent 
 
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocEvent.loadFavorites'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -493,7 +463,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocEvent.loadFavorites()';
 }
 
@@ -504,17 +474,75 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 
 
 /// @nodoc
-mixin _$HomeBlocState implements DiagnosticableTreeMixin {
+
+
+class _LoadPayerTimes implements HomeBlocEvent {
+   _LoadPayerTimes();
+  
+
+
 
 
 
 
 @override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocState'))
-    ;
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadPayerTimes);
 }
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeBlocEvent.loadPrayerTimes()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadWeatherEvent implements HomeBlocEvent {
+   _LoadWeatherEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadWeatherEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeBlocEvent.loadWeather()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+mixin _$HomeBlocState {
+
+
+
+
 
 @override
 bool operator ==(Object other) {
@@ -526,7 +554,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocState()';
 }
 
@@ -623,11 +651,11 @@ return errorState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult Function()?  errorState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult Function()?  errorState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState() when loading != null:
 return loading();case HomeBlocDataState() when dataState != null:
-return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
 return errorState();case _:
   return orElse();
 
@@ -646,11 +674,11 @@ return errorState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)  dataState,required TResult Function()  errorState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)  dataState,required TResult Function()  errorState,}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState():
 return loading();case HomeBlocDataState():
-return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState():
+return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState():
 return errorState();case _:
   throw StateError('Unexpected subclass');
 
@@ -668,11 +696,11 @@ return errorState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult? Function()?  errorState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<Categories> categories,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult? Function()?  errorState,}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState() when loading != null:
 return loading();case HomeBlocDataState() when dataState != null:
-return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return dataState(_that.categories,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
 return errorState();case _:
   return null;
 
@@ -684,7 +712,7 @@ return errorState();case _:
 /// @nodoc
 
 
-class HomeBlocLoadingState with DiagnosticableTreeMixin implements HomeBlocState {
+class HomeBlocLoadingState implements HomeBlocState {
   const HomeBlocLoadingState();
   
 
@@ -692,12 +720,6 @@ class HomeBlocLoadingState with DiagnosticableTreeMixin implements HomeBlocState
 
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocState.loading'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -709,7 +731,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocState.loading()';
 }
 
@@ -722,8 +744,8 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 
 
-class HomeBlocDataState with DiagnosticableTreeMixin implements HomeBlocState {
-  const HomeBlocDataState({final  List<Categories> categories = const [], final  List<ContentCategories> contents = const [], this.temperature, final  List<Region> regions = const [], final  List<String> favorites = const [], this.totalFavoriteCount = 0, this.selectedRegion, this.loadingContents = true, this.isRefreshing = false}): _categories = categories,_contents = contents,_regions = regions,_favorites = favorites;
+class HomeBlocDataState implements HomeBlocState {
+  const HomeBlocDataState({final  List<Categories> categories = const [], final  List<ContentCategories> contents = const [], this.temperature, final  List<Region> regions = const [], final  List<String> favorites = const [], final  List<PrayerTimesItemModel> prayers = const [], this.totalFavoriteCount = 0, this.selectedRegion, this.loadingContents = true, this.isRefreshing = false}): _categories = categories,_contents = contents,_regions = regions,_favorites = favorites,_prayers = prayers;
   
 
  final  List<Categories> _categories;
@@ -755,6 +777,13 @@ class HomeBlocDataState with DiagnosticableTreeMixin implements HomeBlocState {
   return EqualUnmodifiableListView(_favorites);
 }
 
+ final  List<PrayerTimesItemModel> _prayers;
+@JsonKey() List<PrayerTimesItemModel> get prayers {
+  if (_prayers is EqualUnmodifiableListView) return _prayers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_prayers);
+}
+
 @JsonKey() final  int totalFavoriteCount;
  final  Region? selectedRegion;
 @JsonKey() final  bool loadingContents;
@@ -767,25 +796,19 @@ class HomeBlocDataState with DiagnosticableTreeMixin implements HomeBlocState {
 $HomeBlocDataStateCopyWith<HomeBlocDataState> get copyWith => _$HomeBlocDataStateCopyWithImpl<HomeBlocDataState>(this, _$identity);
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocState.dataState'))
-    ..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('contents', contents))..add(DiagnosticsProperty('temperature', temperature))..add(DiagnosticsProperty('regions', regions))..add(DiagnosticsProperty('favorites', favorites))..add(DiagnosticsProperty('totalFavoriteCount', totalFavoriteCount))..add(DiagnosticsProperty('selectedRegion', selectedRegion))..add(DiagnosticsProperty('loadingContents', loadingContents))..add(DiagnosticsProperty('isRefreshing', isRefreshing));
-}
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBlocDataState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._contents, _contents)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&const DeepCollectionEquality().equals(other._regions, _regions)&&const DeepCollectionEquality().equals(other._favorites, _favorites)&&(identical(other.totalFavoriteCount, totalFavoriteCount) || other.totalFavoriteCount == totalFavoriteCount)&&(identical(other.selectedRegion, selectedRegion) || other.selectedRegion == selectedRegion)&&(identical(other.loadingContents, loadingContents) || other.loadingContents == loadingContents)&&(identical(other.isRefreshing, isRefreshing) || other.isRefreshing == isRefreshing));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBlocDataState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._contents, _contents)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&const DeepCollectionEquality().equals(other._regions, _regions)&&const DeepCollectionEquality().equals(other._favorites, _favorites)&&const DeepCollectionEquality().equals(other._prayers, _prayers)&&(identical(other.totalFavoriteCount, totalFavoriteCount) || other.totalFavoriteCount == totalFavoriteCount)&&(identical(other.selectedRegion, selectedRegion) || other.selectedRegion == selectedRegion)&&(identical(other.loadingContents, loadingContents) || other.loadingContents == loadingContents)&&(identical(other.isRefreshing, isRefreshing) || other.isRefreshing == isRefreshing));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_contents),temperature,const DeepCollectionEquality().hash(_regions),const DeepCollectionEquality().hash(_favorites),totalFavoriteCount,selectedRegion,loadingContents,isRefreshing);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_contents),temperature,const DeepCollectionEquality().hash(_regions),const DeepCollectionEquality().hash(_favorites),const DeepCollectionEquality().hash(_prayers),totalFavoriteCount,selectedRegion,loadingContents,isRefreshing);
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'HomeBlocState.dataState(categories: $categories, contents: $contents, temperature: $temperature, regions: $regions, favorites: $favorites, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
+String toString() {
+  return 'HomeBlocState.dataState(categories: $categories, contents: $contents, temperature: $temperature, regions: $regions, favorites: $favorites, prayers: $prayers, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
 }
 
 
@@ -796,7 +819,7 @@ abstract mixin class $HomeBlocDataStateCopyWith<$Res> implements $HomeBlocStateC
   factory $HomeBlocDataStateCopyWith(HomeBlocDataState value, $Res Function(HomeBlocDataState) _then) = _$HomeBlocDataStateCopyWithImpl;
 @useResult
 $Res call({
- List<Categories> categories, List<ContentCategories> contents, Temperature? temperature, List<Region> regions, List<String> favorites, int totalFavoriteCount, Region? selectedRegion, bool loadingContents, bool isRefreshing
+ List<Categories> categories, List<ContentCategories> contents, Temperature? temperature, List<Region> regions, List<String> favorites, List<PrayerTimesItemModel> prayers, int totalFavoriteCount, Region? selectedRegion, bool loadingContents, bool isRefreshing
 });
 
 
@@ -813,14 +836,15 @@ class _$HomeBlocDataStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? contents = null,Object? temperature = freezed,Object? regions = null,Object? favorites = null,Object? totalFavoriteCount = null,Object? selectedRegion = freezed,Object? loadingContents = null,Object? isRefreshing = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? contents = null,Object? temperature = freezed,Object? regions = null,Object? favorites = null,Object? prayers = null,Object? totalFavoriteCount = null,Object? selectedRegion = freezed,Object? loadingContents = null,Object? isRefreshing = null,}) {
   return _then(HomeBlocDataState(
 categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Categories>,contents: null == contents ? _self._contents : contents // ignore: cast_nullable_to_non_nullable
 as List<ContentCategories>,temperature: freezed == temperature ? _self.temperature : temperature // ignore: cast_nullable_to_non_nullable
 as Temperature?,regions: null == regions ? _self._regions : regions // ignore: cast_nullable_to_non_nullable
 as List<Region>,favorites: null == favorites ? _self._favorites : favorites // ignore: cast_nullable_to_non_nullable
-as List<String>,totalFavoriteCount: null == totalFavoriteCount ? _self.totalFavoriteCount : totalFavoriteCount // ignore: cast_nullable_to_non_nullable
+as List<String>,prayers: null == prayers ? _self._prayers : prayers // ignore: cast_nullable_to_non_nullable
+as List<PrayerTimesItemModel>,totalFavoriteCount: null == totalFavoriteCount ? _self.totalFavoriteCount : totalFavoriteCount // ignore: cast_nullable_to_non_nullable
 as int,selectedRegion: freezed == selectedRegion ? _self.selectedRegion : selectedRegion // ignore: cast_nullable_to_non_nullable
 as Region?,loadingContents: null == loadingContents ? _self.loadingContents : loadingContents // ignore: cast_nullable_to_non_nullable
 as bool,isRefreshing: null == isRefreshing ? _self.isRefreshing : isRefreshing // ignore: cast_nullable_to_non_nullable
@@ -834,7 +858,7 @@ as bool,
 /// @nodoc
 
 
-class HomeBlocErrorState with DiagnosticableTreeMixin implements HomeBlocState {
+class HomeBlocErrorState implements HomeBlocState {
   const HomeBlocErrorState();
   
 
@@ -842,12 +866,6 @@ class HomeBlocErrorState with DiagnosticableTreeMixin implements HomeBlocState {
 
 
 
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'HomeBlocState.errorState'))
-    ;
-}
 
 @override
 bool operator ==(Object other) {
@@ -859,7 +877,7 @@ bool operator ==(Object other) {
 int get hashCode => runtimeType.hashCode;
 
 @override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+String toString() {
   return 'HomeBlocState.errorState()';
 }
 

@@ -7,7 +7,7 @@ class ImageConvertor implements JsonConverter<String?, String?> {
   const ImageConvertor();
 
   @override
-  String? fromJson(String? image)=>_convertImage(image);
+  String? fromJson(String? image) => _convertImage(image);
 
   @override
   String? toJson(String? object) => object;
@@ -30,15 +30,16 @@ class ImageArrayConvertor
 String? _convertImage(String? image) {
   if (image == null || image.isEmpty) return null;
 
-  if (image.startsWith("https")) {
-    return _fixUrl(image);
+  // HTTPS url'larni tuzatish
+  if (image.startsWith("https:/") && !image.startsWith("https://")) {
+    image = image.replaceFirst("https:/", "https://");
   }
-  return '${AppConstants.baseUrl}$image';
-}
 
-String _fixUrl(String url) {
-  if (url.startsWith("https:/") && !url.startsWith("https://")) {
-    return url.replaceFirst("https:/", "https://");
-  }
-  return url;
+  // To'liq URL bo'lsa
+  if (image.startsWith("https://")) return image;
+
+  // Relative path
+  return image.startsWith("/")
+      ? '${AppConstants.baseUrl}$image'
+      : '${AppConstants.baseUrl}/$image';
 }

@@ -1,3 +1,6 @@
+
+
+
 class Merchant {
   final int id;
   final String? logo;
@@ -8,6 +11,12 @@ class Merchant {
   final String? phone;
   final String? type;
   final double? distance;
+
+
+  String get distanceString {
+    if (distance == null || distance == 0.0) return '';
+    return distance.toString();
+  }
 
   Merchant({
     required this.id,

@@ -30,7 +30,7 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get payment_success => 'To‘lov muvaffaqiyatli amalga oshirildi';
 
   @override
-  String get payment_method => 'Payment method';
+  String get payment_method_title => 'To‘lov usuli';
 
   @override
   String get my_cards_title => 'Kartalarim';
@@ -89,5 +89,29 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get currency_calculator => 'Valyuta kalkulyatori';
 
   @override
-  String get show_all_places => 'Hammasi';
+  String get all_places => 'Barcha joylar';
+
+  @override
+  String get exchange_rates => 'Valyuta kurslari';
+
+  @override
+  String get uzs => 'Oʻzbek soʻmi';
+
+  @override
+  String get card_added_success_message => 'Karta muvaffaqiyatli qo‘shildi.';
+
+  @override
+  String get card_remove_notice => 'Kartangiz ilovadan o‘chiriladi';
+
+  @override
+  String get finance_title => 'Moliya';
+
+  @override
+  String get all_exchange_rates => 'Barcha valyuta kurslari';
+
+  @override
+  String get all_cards => 'Barchasi';
+
+  @override
+  String get fiscalReceipt => 'Soliq cheki';
 }

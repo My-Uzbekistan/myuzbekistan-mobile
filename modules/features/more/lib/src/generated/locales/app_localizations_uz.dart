@@ -9,21 +9,6 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   FeatureMoreLocalizationsUz([String locale = 'uz']) : super(locale);
 
   @override
-  String get nav_home => 'Bosh sahifa';
-
-  @override
-  String get nav_map => 'Xarita';
-
-  @override
-  String get nav_transfer => 'Yo\'nalish';
-
-  @override
-  String get nav_payment => 'To\'lov';
-
-  @override
-  String get nav_more => 'Ko‘proq';
-
-  @override
   String get language => 'Ilova tili';
 
   @override
@@ -54,16 +39,16 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   @override
   String themeModes(String theme) {
     String _temp0 = intl.Intl.selectLogic(theme, {
-      'system': 'Tizim mavzusi',
-      'light': 'Yorug\' mavzu',
-      'dark': 'Qorong\'i mavzu',
+      'system': 'Tizimli',
+      'light': 'Yorug\'',
+      'dark': 'Qorong\'i',
       'other': '',
     });
     return '$_temp0';
   }
 
   @override
-  String get guest => 'Salom Mehmon';
+  String get guest => 'Mehmon';
 
   @override
   String get action_all => 'Barchasi';
@@ -80,9 +65,6 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get getStarted => 'Boshlash';
-
-  @override
-  String get logout => 'Chiqish';
 
   @override
   String get getStartedDescription =>
@@ -119,15 +101,6 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get uzbekistan => 'O\'zbekiston';
-
-  @override
-  String get exchange_rates => 'Valyuta kurslari';
-
-  @override
-  String get uzbek_currency => '*O‘zbekiston valyutasi (UZS) so‘m deb ataladi';
-
-  @override
-  String get exchange_banks => 'Valyuta ayirboshlash banklari';
 
   @override
   String get loading_data => 'Ma\'lumot yuklanmoqda';
@@ -179,16 +152,32 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get usefulTips => 'Foydali maslahatlar';
 
   @override
-  String get logoutConfirmation => 'Tizimdan chiqishni xohlaysizmi?';
+  String get logout => 'Ilovadan chiqish';
 
   @override
-  String get deleteAccountConfirmation => 'Accountni o\'chirishni xohlaysizmi?';
+  String get logout_confirm_title => 'Ilovadan chiqish?';
+
+  @override
+  String get exit => 'Chiqish';
+
+  @override
+  String get logoutConfirmation => 'Ilovadan chiqishni xohlaysizmi';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'Sizning hisobingiz va barcha ma’lumotlaringiz, jumladan saqlangan joylar va bank kartalari o‘chiriladi.';
+
+  @override
+  String get delete_account_confirm_title => 'Hisobni o‘chirish?';
 
   @override
   String get deleteAccount => 'Accountni o\'chirish';
 
   @override
   String get cancel => 'Bekor qilish';
+
+  @override
+  String get delete => 'O\'chirish';
 
   @override
   String get warning => 'Ogohlantirish';
@@ -201,4 +190,84 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get distanceM => 'm';
+
+  @override
+  String get continueAsGuest => 'Mehmon sifatida davom etish';
+
+  @override
+  String get notification => 'Bildirishnomalar';
+
+  @override
+  String get pin_code => 'PIN-kod';
+
+  @override
+  String get biometric_auth => 'Biometrik kirish';
+
+  @override
+  String get prayer_time_widget => 'Namoz vaqti vidjeti';
+
+  @override
+  String get about_app => 'Ilova haqida';
+
+  @override
+  String get log_in => 'Kirish';
+
+  @override
+  String get version => 'Versiya';
+
+  @override
+  String get privacy_policy => 'Maxfiylik siyosati';
+
+  @override
+  String get licenses => 'Litsenziyalar';
+
+  @override
+  String get pin_code_create_title => 'Kirish ko\'zidini yaratish';
+
+  @override
+  String get pin_code_repeat => 'Kodni takrorlang';
+
+  @override
+  String get pinMismatch => 'Kod mos kelmaydi';
+
+  @override
+  String get resetPinTitle => 'PIN-kodni tiklash';
+
+  @override
+  String get resetPinMessage =>
+      'Barcha maʼlumotlar tiklab bo‘lmas darajada oʻchiriladi. Qayta roʻyxatdan oʻtish talab qilinadi.';
+
+  @override
+  String get resetPinAction => 'Kodni\ntiklash';
+
+  @override
+  String get changePinTitle => 'PIN-kodni o‘zgartirish';
+
+  @override
+  String get enter_new_code => 'Yangi kodni kiriting';
+
+  @override
+  String get delete_code => 'Kodni o‘chirish';
+
+  @override
+  String get delete_pin_title => 'PIN-kodni o‘chirish';
+
+  @override
+  String get delete_pin_message =>
+      'PIN orqali kirish o‘chirib qo‘yiladi. Siz istalgan vaqtda yangi PIN yaratishingiz mumkin';
+
+  @override
+  String get pincode_created => 'PinCode muvaffaqqiyatli yaratildi';
+
+  @override
+  String get pincode_deleted => 'PinCode o‘chirildi';
+
+  @override
+  String get enter_code => 'Kodni kiriting';
+
+  @override
+  String get authPrompt => 'Ilovaga kirish uchun autentifikatsiyadan o‘ting';
+
+  @override
+  String get fiscalReceipt => 'Soliq cheki';
 }

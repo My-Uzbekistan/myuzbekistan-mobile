@@ -54,5 +54,9 @@
   "warning": "Warning",
   "guest_chose": "Guest selection",
   "distanceKm": "km",
-  "distanceM": "m"
+  "distanceM": "m",
+
+  "prayerTime": "{time, select, fajr{Fajr} sunrise{Sunrise} dhuhr{Dhuhr} asr{Asr} maghrib{Maghrib} isha{Isha} other{Prayer}}",
+"prayerTimeTitle": "Prayer Times",
+  "notifications": "Notifications"
 }

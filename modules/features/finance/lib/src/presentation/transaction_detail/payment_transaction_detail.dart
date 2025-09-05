@@ -15,23 +15,16 @@ class PaymentTransactionDetail extends StatefulWidget {
 class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.localization.payment_details).labelLg(),
+      extendBodyBehindAppBar: true,
+      appBar: GradientAppBar(
+        title: context.localization.payment_details,
         automaticallyImplyLeading: false,
         actions: [
-          IconButton(
+          RoundedButton.closeButton(
             onPressed: () {
               context.pop();
             },
-            icon: Assets.svgRoundedCloseIcon.toSvgImage(
-              colorFilter: ColorFilter.mode(
-                context.appColors.textIconColor.secondary,
-                BlendMode.srcIn,
-              ),
-            ),
           ),
         ],
       ),
@@ -55,8 +48,6 @@ class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
               return LoadingContent();
             },
             loaded: (transaction) {
-
-              debugPrint("merchandImage ${transaction.merchant.icon ?? ""}");
               return SingleChildScrollView(
                 child: SafeArea(
                   child: Container(
@@ -67,13 +58,12 @@ class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
                     ).copyWith(bottom: kBottomNavigationBarHeight),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      spacing: 12,
                       children: [
                         Column(
                           spacing: 16,
                           children: [
                             ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(24),
                               child: Container(
                                 color: context.appColors.fill.quaternary,
                                 child: ExtendedImage.network(
@@ -81,8 +71,8 @@ class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
                                   width: 80,
                                   height: 80,
                                   fit: BoxFit.fill,
-                                  // colorBlendMode: BlendMode.hardLight,
-
+                                  colorBlendMode: BlendMode.hardLight,
+                                  color: context.appColors.fill.quaternary,
                                   loadStateChanged: (state) {
                                     switch (state.extendedImageLoadState) {
                                       case LoadState.completed:
@@ -99,7 +89,7 @@ class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
                               ),
                             ),
                             Column(
-                              spacing: 2,
+                              spacing: 4,
                               children: [
                                 Text(
                                   transaction.merchant.name ?? "",
@@ -114,50 +104,94 @@ class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 24),
+
                         Text(
                           "-${context.localization.currency(transaction.amount.amountFormatted())}",
-                        ).h1(),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: context.appColors.background.elevation1Alt,
-                          ),
-                          child: ListView.builder(
-                            itemBuilder: (context, index) {
-                              final value = transaction.items[index];
-                              return Padding(
-                                padding: EdgeInsets.all(16),
-                                child: Row(
-                                  spacing: 16,
-                                  children: [
-                                    Expanded(
-                                      child:
-                                          Text(
-                                            value.key,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ).bodyLg(),
-                                    ),
-                                    ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                        maxWidth: screenWidth * 0.6,
+                        ).h2(),
+                        SizedBox(height: 40),
+                        ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return Divider(
+                              height: 0,
+                              thickness: 1,
+                              color: context.appColors.stroke.nonOpaque,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            final value = transaction.items[index];
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                              ),
+                              child: Column(
+                                spacing: 2,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    value.key,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ).bodySm(
+                                    color:
+                                        context
+                                            .appColors
+                                            .textIconColor
+                                            .secondary,
+                                  ),
+                                  Text(
+                                    value.value,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ).bodyLg(),
+                                ],
+                              ),
+                            );
+                          },
+                          itemCount: transaction.items.length,
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                        ),
+                        SizedBox(height: 16),
+                        if
+                        (transaction.taxQr.orEmpty().isNotEmpty)GestureDetector(
+                          onTap: (){
+                            
+                            LauncherUtils.urlLauncher(transaction.taxQr!);
+
+                          },
+                          behavior: HitTestBehavior.translucent,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(vertical: 8),
+                            child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Row(
+                                spacing: 20,
+                                children: [
+                                  Assets.svgFiscalIcon.toSvgImage(
+                                    tintColor: context.appColors.brand,
+                                  ),
+                                  Expanded(
+                                    child: Text(context.localization.fiscalReceipt).bodyLg(),
+                                  ),
+                                  SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: Center(
+                                      child: Assets.svgIconArrowRight.toSvgImage(
+                                        height: 20,
+                                        width: 20,
+                                        fit: BoxFit.cover,
                                       ),
-                                      child:
-                                          Text(
-                                            value.value,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ).bodyLg(),
                                     ),
-                                  ],
-                                ),
-                              );
-                            },
-                            itemCount: transaction.items.length,
-                            shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
+                        ).shadow(
+                          context,
+                          borderRadius: BorderRadius.circular(24),
                         ),
                       ],
                     ),

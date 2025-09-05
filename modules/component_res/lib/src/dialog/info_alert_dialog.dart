@@ -58,12 +58,15 @@ class InfoAlertDialog extends StatelessWidget {
   }
 
   static void show(BuildContext context,
-      {String? message, InfoAlertType type = InfoAlertType.success}) {
+      {String? message,
+      InfoAlertType type = InfoAlertType.success,
+      int seconds = 2,
+      VoidCallback? onDismiss}) {
     Timer? timer;
     showDialog(
         context: context,
         builder: (dialogContext) {
-          timer = Timer(const Duration(seconds: 2), () {
+          timer = Timer( Duration(seconds: seconds), () {
             final navigator = Navigator.of(dialogContext, rootNavigator: true);
             if (navigator.canPop()) {
               navigator.pop();
@@ -75,6 +78,7 @@ class InfoAlertDialog extends StatelessWidget {
           );
         }).then((_) {
       timer?.cancel();
+      onDismiss?.call();
     });
   }
 }

@@ -28,6 +28,8 @@ class CardItemDto {
   final String? cardNumber;
   final String? icon;
   final String? ps;
+  final String? expiry;
+  final String? image;
 
   CardItemDto({
     required this.id,
@@ -37,6 +39,8 @@ class CardItemDto {
     required this.cardNumber,
     required this.icon,
     required this.ps,
+    this.expiry,
+    this.image
   });
 
   factory CardItemDto.fromJson(Map<String, dynamic> json) =>
@@ -50,5 +54,7 @@ class CardItemDto {
     cardNumber: cardNumber,
     icon: icon,
     ps: ps,
+    expiry: expiry,
+    image: image
   );
 }

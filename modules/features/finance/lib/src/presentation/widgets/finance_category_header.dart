@@ -25,12 +25,14 @@ class FinanceMerchantsWithCategory extends StatelessWidget {
   final List<MerchantWidgetModel> items;
 
   final ValueChanged<int>? onItemTap;
+  final VoidCallback?  openAll;
 
   const FinanceMerchantsWithCategory({
     super.key,
     required this.title,
     required this.items,
     this.onItemTap,
+    this.openAll
   });
 
   @override
@@ -38,12 +40,11 @@ class FinanceMerchantsWithCategory extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
-
       spacing: 8,
       children: [
         FinanceCategoryHeader(title: title),
         SizedBox(
-          height: 156,
+          height: 142,
           child: ListView.separated(
             itemCount: items.length,
 
@@ -63,14 +64,6 @@ class FinanceMerchantsWithCategory extends StatelessWidget {
                   },
                 ).shadow(context);
             },
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 8),
-          child: AppActionButton(
-            actionText: context.localization.show_all_places,
-            type: ActionButtonType.secondary,
-            onPressed: () {},
           ),
         ),
       ],

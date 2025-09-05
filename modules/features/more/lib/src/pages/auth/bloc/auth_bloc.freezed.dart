@@ -396,13 +396,13 @@ return authSuccessState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  defaultState,TResult Function()?  googleLoading,TResult Function()?  appleLoading,TResult Function()?  authSuccessState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  defaultState,TResult Function()?  googleLoading,TResult Function()?  appleLoading,TResult Function( bool hasPin)?  authSuccessState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case DefaultState() when defaultState != null:
 return defaultState();case AuthGoogleLoadingState() when googleLoading != null:
 return googleLoading();case AuthAppleLoadingState() when appleLoading != null:
 return appleLoading();case AuthSuccessState() when authSuccessState != null:
-return authSuccessState();case _:
+return authSuccessState(_that.hasPin);case _:
   return orElse();
 
 }
@@ -420,13 +420,13 @@ return authSuccessState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  defaultState,required TResult Function()  googleLoading,required TResult Function()  appleLoading,required TResult Function()  authSuccessState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  defaultState,required TResult Function()  googleLoading,required TResult Function()  appleLoading,required TResult Function( bool hasPin)  authSuccessState,}) {final _that = this;
 switch (_that) {
 case DefaultState():
 return defaultState();case AuthGoogleLoadingState():
 return googleLoading();case AuthAppleLoadingState():
 return appleLoading();case AuthSuccessState():
-return authSuccessState();case _:
+return authSuccessState(_that.hasPin);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -443,13 +443,13 @@ return authSuccessState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  defaultState,TResult? Function()?  googleLoading,TResult? Function()?  appleLoading,TResult? Function()?  authSuccessState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  defaultState,TResult? Function()?  googleLoading,TResult? Function()?  appleLoading,TResult? Function( bool hasPin)?  authSuccessState,}) {final _that = this;
 switch (_that) {
 case DefaultState() when defaultState != null:
 return defaultState();case AuthGoogleLoadingState() when googleLoading != null:
 return googleLoading();case AuthAppleLoadingState() when appleLoading != null:
 return appleLoading();case AuthSuccessState() when authSuccessState != null:
-return authSuccessState();case _:
+return authSuccessState(_that.hasPin);case _:
   return null;
 
 }
@@ -557,32 +557,66 @@ String toString() {
 
 
 class AuthSuccessState implements AuthState {
-   AuthSuccessState();
+   AuthSuccessState({this.hasPin = false});
   
 
+@JsonKey() final  bool hasPin;
 
-
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AuthSuccessStateCopyWith<AuthSuccessState> get copyWith => _$AuthSuccessStateCopyWithImpl<AuthSuccessState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSuccessState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthSuccessState&&(identical(other.hasPin, hasPin) || other.hasPin == hasPin));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,hasPin);
 
 @override
 String toString() {
-  return 'AuthState.authSuccessState()';
+  return 'AuthState.authSuccessState(hasPin: $hasPin)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class $AuthSuccessStateCopyWith<$Res> implements $AuthStateCopyWith<$Res> {
+  factory $AuthSuccessStateCopyWith(AuthSuccessState value, $Res Function(AuthSuccessState) _then) = _$AuthSuccessStateCopyWithImpl;
+@useResult
+$Res call({
+ bool hasPin
+});
 
 
+
+
+}
+/// @nodoc
+class _$AuthSuccessStateCopyWithImpl<$Res>
+    implements $AuthSuccessStateCopyWith<$Res> {
+  _$AuthSuccessStateCopyWithImpl(this._self, this._then);
+
+  final AuthSuccessState _self;
+  final $Res Function(AuthSuccessState) _then;
+
+/// Create a copy of AuthState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? hasPin = null,}) {
+  return _then(AuthSuccessState(
+hasPin: null == hasPin ? _self.hasPin : hasPin // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
 
 // dart format on

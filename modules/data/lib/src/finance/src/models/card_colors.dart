@@ -24,14 +24,9 @@ class CardColors {
 
 @JsonSerializable()
 class CardColorDto {
-  final String? name;
-  final String colorCode;
-  final int id;
+  final String? image;
 
-  CardColorDto({this.name, required this.colorCode, required this.id});
-
+  CardColorDto({this.image});
   factory CardColorDto.fromJson(Map<String, dynamic> json) =>
       _$CardColorDtoFromJson(json);
-
-  CardColor toDomain() => CardColor(name: name, colorCode: colorCode, id: id);
 }

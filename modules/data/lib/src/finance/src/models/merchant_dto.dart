@@ -16,6 +16,22 @@ import 'package:shared/shared.dart';
 part 'merchant_dto.g.dart';
 
 @JsonSerializable()
+class GroupByMerchantsDto {
+  final String? name;
+  final List<MerchantDto> merchants;
+
+  GroupByMerchantsDto({required this.name, required this.merchants});
+
+  factory GroupByMerchantsDto.fromJson(Map<String, dynamic> json) =>
+      _$GroupByMerchantsDtoFromJson(json);
+
+  GroupBy<Merchant> toDomain() => GroupBy(
+    name: name.orEmpty(),
+    items: merchants.map((e) => e.toDomain()).toList(),
+  );
+}
+
+@JsonSerializable()
 class MerchantDto {
   final int id;
   @ImageConvertor()

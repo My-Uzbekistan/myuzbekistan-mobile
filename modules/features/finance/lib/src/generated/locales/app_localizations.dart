@@ -139,11 +139,11 @@ abstract class FeatureFinanceLocalizations {
   /// **'Оплата прошла успешно'**
   String get payment_success;
 
-  /// No description provided for @payment_method.
+  /// No description provided for @payment_method_title.
   ///
   /// In ru, this message translates to:
-  /// **'Payment method'**
-  String get payment_method;
+  /// **'Способ оплаты'**
+  String get payment_method_title;
 
   /// No description provided for @my_cards_title.
   ///
@@ -253,11 +253,59 @@ abstract class FeatureFinanceLocalizations {
   /// **'Калькулятор валют'**
   String get currency_calculator;
 
-  /// No description provided for @show_all_places.
+  /// No description provided for @all_places.
   ///
   /// In ru, this message translates to:
-  /// **'Список мест'**
-  String get show_all_places;
+  /// **'Все места'**
+  String get all_places;
+
+  /// No description provided for @exchange_rates.
+  ///
+  /// In ru, this message translates to:
+  /// **'Курсы валют'**
+  String get exchange_rates;
+
+  /// No description provided for @uzs.
+  ///
+  /// In ru, this message translates to:
+  /// **'Узбекский сум'**
+  String get uzs;
+
+  /// No description provided for @card_added_success_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Карта успешно добавлена.'**
+  String get card_added_success_message;
+
+  /// No description provided for @card_remove_notice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваша карта будет удалена из приложения'**
+  String get card_remove_notice;
+
+  /// No description provided for @finance_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Финансы'**
+  String get finance_title;
+
+  /// No description provided for @all_exchange_rates.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все курсы валют'**
+  String get all_exchange_rates;
+
+  /// No description provided for @all_cards.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все карты'**
+  String get all_cards;
+
+  /// No description provided for @fiscalReceipt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фискальный чек'**
+  String get fiscalReceipt;
 }
 
 class _FeatureFinanceLocalizationsDelegate

@@ -3,12 +3,11 @@
   "pay": "Pay",
   "paymentAmount": "Payment amount",
   "addCard": "Add card",
-
   "cardAddSmsSent": "We’ve sent an SMS with a confirmation code to add your bank card.",
   "payment_success": "Payment was successful",
-  "payment_method": "Payment method",
+  "payment_method_title": "Payment method",
   "my_cards_title": "My cards",
-  "payment_history_title":"History",
+  "payment_history_title": "History",
   "payment_qr_title": "QR Pay",
   "card_number_label": "Card number",
   "card_expiry_label": "Expiry date",
@@ -20,11 +19,18 @@
   "action_resend": "Resend",
   "payment_details": "Payment details",
   "editing": "Editing",
-
   "alert_title_delete_card": "Do you want to delete the card?",
   "action_delete": "Delete",
   "action_cancel": "Cancel",
   "nearest_places": "Nearest places",
   "currency_calculator": "Currency calculator",
-  "show_all_places": "Show all places"
+  "all_places": "All places",
+  "exchange_rates": "Exchange rates",
+  "uzs": "Uzbek som",
+  "card_added_success_message": "The card was successfully added.",
+  "card_remove_notice": "Your card will be removed from the app.",
+  "finance_title": "Finance",
+  "all_exchange_rates": "All exchange rates",
+  "all_cards": "All cards",
+  "fiscalReceipt": "Fiscal receipt"
 }

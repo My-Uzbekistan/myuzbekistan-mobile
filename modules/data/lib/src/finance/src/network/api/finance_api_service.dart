@@ -47,6 +47,9 @@ abstract class FinanceApiService {
   @GET("merchants")
   Future<dynamic> getAllMerchants();
 
+  @GET("merchants/grouped-by-service-type")
+  Future<dynamic> groupByMerchants();
+
   @GET("merchants/{merchantId}")
   Future<MerchantDto> merchant(@Path("merchantId") String merchantId);
 

@@ -1,10 +1,14 @@
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/content_by_category/bloc/contents_by_category_bloc.dart';
 import 'package:travel/src/pages/detail/detail_page.dart';
 import 'package:travel/src/pages/home/home_bloc/home_bloc.dart';
+import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart';
+import 'package:travel/src/pages/notifications/notification_main_page.dart';
+import 'package:travel/src/pages/notifications/page/notification_detail.dart';
 
 import '../di/injection.dart';
 import '../pages/content_by_category/content_by_categories_page.dart';
@@ -86,6 +90,43 @@ mixin FeatureTravelRouter {
         ),
       ],
     ),
+    GoRoute(
+      path: AppNavPath.travel.notifications.path,
+      name: AppNavPath.travel.notifications.name,
+
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            context: context,
+            state: state,
+            child: BlocProvider(
+              create:
+                  (context) =>
+                      getIt<NotificationBloc>()..add(
+                        NotificationEvent.loadNotifications(
+                          initialNotId:
+                              state.uri.queryParameters["notificationId"]
+                                  ?.toIntOrNull(),
+                        ),
+                      ),
+              child: NotificationMainPage(),
+            ),
+          ),
+
+      routes: [
+        GoRoute(
+          path: AppNavPath.travel.notificationsDetail.path,
+          name: AppNavPath.travel.notificationsDetail.name,
+          pageBuilder:
+              (context, state) => buildSlideTransitionPage(
+                context: context,
+                state: state,
+                child: NotificationDetail(
+                  item: state.extra as NotificationItem,
+                ),
+              ),
+        ),
+      ],
+    ),
   ];
 
   static final shellTravel = StatefulShellBranch(
@@ -98,18 +139,23 @@ mixin FeatureTravelRouter {
           if (locale == null) return AppNavPath.more.selectLangPage.path;
 
           final securityStorage = getIt<SecurityStorage>();
+
           if (securityStorage.getAccessToken() == null &&
               securityStorage.isFirstlyLaunch()) {
-
+            securityStorage.firstlyLaunched();
             return AppNavPath.more.authPage.path;
+          } else if (securityStorage.hasPin() &&
+              !securityStorage.isPinVerified()) {
+            return AppNavPath.more.checkPin.path;
           }
           return null;
         },
+
         pageBuilder: (context, state) {
           return buildSlideTransitionPage(
             child: BlocProvider(
               create: (ctx) => getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
-              child: const HomePage(),
+              child: HomePage(),
             ),
             state: state,
             context: context,

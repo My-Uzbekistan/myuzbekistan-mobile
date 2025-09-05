@@ -16,46 +16,79 @@ class PaymentHistoryPage extends StatefulWidget {
 class _PaymentHistoryPageState extends State<PaymentHistoryPage> {
   @override
   Widget build(BuildContext context) {
+    final topPadding = kToolbarHeight + MediaQuery.of(context).padding.top + 16;
     return Scaffold(
-      appBar: AppBar(title: Text(context.localization.payment_history_title)),
+      extendBodyBehindAppBar: true,
+      appBar: GradientAppBar(title: context.localization.payment_history_title),
 
       body: BlocBuilder<HistoryBloc, HistoryState>(
         builder: (context, state) {
           if (state is HistoryLoadedState) {
             return ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: EdgeInsets.all(16).copyWith(top: topPadding),
               itemBuilder: (context, index) {
                 final group = state.items[index];
                 final items = group.items;
-                return StickyHeader(
-                  overlapHeaders: false,
-                  header: Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.only(top: 16, bottom: 12),
-                    color: context.appColors.background.base,
-                    child: Text(group.title),
-                  ),
-                  content: ListView.separated(
-                    shrinkWrap: true,
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
 
-                    physics: NeverScrollableScrollPhysics(),
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: 10);
-                    },
-
-                    itemBuilder: (context, index) {
-                      return HistoryItem(
-                        itemUiModel: items[index],
-                        onTap: () {
-                          context.pushTransactionDetailPage(
-                            items[index].id.toString(),
-                          );
-                        },
-                      );
-                    },
-                    itemCount: items.length,
-                  ),
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 24, bottom: 10),
+                      child: Text(group.title).labelLg(),
+                    ),
+                    ListView.separated(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.zero,
+                      physics: NeverScrollableScrollPhysics(),
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: 10);
+                      },
+                      itemBuilder: (context, index) {
+                        return HistoryItem(
+                          itemUiModel: items[index],
+                          onTap: () {
+                            context.pushTransactionDetailPage(
+                              items[index].id.toString(),
+                            );
+                          },
+                        );
+                      },
+                      itemCount: items.length,
+                    ),
+                  ],
                 );
+                //
+                //   StickyHeader(
+                //   overlapHeaders: false,
+                //   header: Container(
+                //     width: double.maxFinite,
+                //     padding: EdgeInsets.only(top: 16, bottom: 12),
+                //     color: context.appColors.background.base,
+                //     child: Text(group.title),
+                //   ),
+                //   content: ListView.separated(
+                //     shrinkWrap: true,
+                //
+                //     physics: NeverScrollableScrollPhysics(),
+                //     separatorBuilder: (context, index) {
+                //       return SizedBox(height: 10);
+                //     },
+                //
+                //     itemBuilder: (context, index) {
+                //       return HistoryItem(
+                //         itemUiModel: items[index],
+                //         onTap: () {
+                //           context.pushTransactionDetailPage(
+                //             items[index].id.toString(),
+                //           );
+                //         },
+                //       );
+                //     },
+                //     itemCount: items.length,
+                //   ),
+                // );
               },
               itemCount: state.items.length,
             );

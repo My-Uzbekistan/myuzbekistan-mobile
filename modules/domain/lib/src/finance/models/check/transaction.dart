@@ -3,6 +3,7 @@ import 'package:domain/domain.dart';
 class TransactionItem {
   final List<KeyValue> items;
   final DateTime date;
+  final String? taxQr;
   final String paymentId;
   final int amount;
   final MerchantItem merchant;
@@ -13,6 +14,7 @@ class TransactionItem {
     required this.paymentId,
     required this.amount,
     required this.merchant,
+    this.taxQr,
   });
 }
 

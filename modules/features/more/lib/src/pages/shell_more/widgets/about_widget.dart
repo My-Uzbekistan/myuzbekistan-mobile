@@ -2,6 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:more/src/core/extension.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 class AboutWidget extends HookWidget {
@@ -12,65 +13,28 @@ class AboutWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final currentIndex = useState(0);
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        color: context.appColors.background.elevation1Alt,
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        spacing: 12,
-        children: [
-          SizedBox(
-            width: double.maxFinite,
-            child: Padding(
-              padding: EdgeInsets.all(16).copyWith(bottom: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 2,
-                children: [
-                  Text(
-                    context.localization.about,
-                    style: CustomTypography.bodySm.copyWith(
-                      color: context.appColors.textIconColor.secondary,
-                    ),
-                  ),
-                  Text(
-                    context.localization.uzbekistan,
-                    overflow: TextOverflow.ellipsis,
-                    style: CustomTypography.H3,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          _PagerItem(
-            items: avatars.map((e) => e.photo ?? "").toList(),
-            onPageChange: (index) {
-              currentIndex.value = index;
-            },
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24).copyWith(bottom: 24),
-            child: Column(
-              spacing: 2,
-              children: [
-                Text(
-                  avatars[currentIndex.value].description ?? "",
-                  style: CustomTypography.labelSm.copyWith(
-                    color: context.appColors.textIconColor.secondary,
-                  ),
-                ),
-                Text(
-                  avatars[currentIndex.value].title ?? "",
-                  style: CustomTypography.bodyMd,
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+    final pageController = usePageController(viewportFraction: 0.9);
+    return _PagerItem(
+      pageController: pageController,
+      items: avatars,
+      onPageChange: (index) {
+        currentIndex.value = index;
+      },
     );
+    //   Column(
+    //   mainAxisAlignment: MainAxisAlignment.start,
+    //   spacing: 12,
+    //   children: [
+    //     _PagerItem(
+    //       pageController: PageController(viewportFraction: 0.8),
+    //
+    //       items: avatars.map((e) => e.photo ?? "").toList(),
+    //       onPageChange: (index) {
+    //         currentIndex.value = index;
+    //       },
+    //     ),
+    //   ],
+    // );
   }
 }
 
@@ -138,83 +102,152 @@ class AboutWidget extends HookWidget {
 // }
 
 class _PagerItem extends StatelessWidget {
-  final CarouselSliderController? carouselController;
-  final List<String> items;
+  final PageController? pageController;
+  final List<MoreItem> items;
   final ValueChanged<int>? onPageChange;
 
   const _PagerItem({
     super.key,
-    this.carouselController,
+    this.pageController,
     this.items = const [],
     this.onPageChange,
   });
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        double screenWidth = constraints.maxWidth;
-        double viewportFraction =
-            screenWidth > 800
-                ? 0.3 // Katta ekran: 3 ta element ko'rinadi
-                : screenWidth > 400
-                ? 0.5 // O'rta ekran: 2 ta element ko'rinadi
-                : 0.8; // Kichik ekran: 1 ta element ko'rinadi
-
-        return CarouselSlider.builder(
-          itemCount: items.length,
-          carouselController: carouselController,
-          itemBuilder: (context, index, realIndex) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                ),
+    return SizedBox(
+      height: 311,
+      child: PageView.builder(
+        controller: pageController,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: GestureDetector(
+              onTap: () {
+                context.pushNamed(
+                  AppNavPath.more.aboutUsInfoPage.name,
+                  extra: items[index],
+                );
+              },
+              child: AspectRatio(
+                aspectRatio: 1,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: RepaintBoundary(
-                    child: ExtendedImage.network(
-                      items[index],
-                      cache: true,
-                      fit: BoxFit.fitWidth,
-                      loadStateChanged: (state) {
-                        switch (state.extendedImageLoadState) {
-                          case LoadState.completed:
-                            return AnimatedOpacity(
-                              opacity: 1.0,
-                              duration: Duration(milliseconds: 200),
-                              child: state.completedWidget,
-                            );
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: RepaintBoundary(
+                          child: ExtendedImage.network(
+                            items[index].photo ?? "",
+                            cache: true,
+                            fit: BoxFit.cover,
+                            loadStateChanged: (state) {
+                              switch (state.extendedImageLoadState) {
+                                case LoadState.completed:
+                                  return AnimatedOpacity(
+                                    opacity: 1.0,
+                                    duration: Duration(milliseconds: 200),
+                                    child: state.completedWidget,
+                                  );
 
-                          default:
-                            return Assets.pngDefaultContentImage.toImage(
-                              fit: BoxFit.cover,
-                            );
-                        }
-                      },
-                    ),
+                                default:
+                                  return Assets.pngDefaultContentImage.toImage(
+                                    fit: BoxFit.cover,
+                                  );
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 16,
+                        left: 24,
+                        right: 16,
+                        child: Column(
+                          children: [
+                            Text(
+                              items[index].description ?? "",
+                              style: CustomTypography.H3,
+                            ).labelMd(color: Colors.white),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            );
-          },
-          options: CarouselOptions(
-            autoPlay: false,
-            height: 182,
-            enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-            aspectRatio: 262 / 182,
-
-            enlargeCenterPage: true,
-            enableInfiniteScroll: false,
-            viewportFraction: viewportFraction,
-            onPageChanged: (index, reason) {
-              onPageChange?.call(index);
-            },
-            initialPage: 0,
-          ),
-        );
-      },
+            ),
+          );
+        },
+        itemCount: items.length,
+      ),
     );
+
+    //   LayoutBuilder(
+    //   builder: (context, constraints) {
+    //     double screenWidth = constraints.maxWidth;
+    //     double viewportFraction =
+    //         screenWidth > 800
+    //             ? 0.3 // Katta ekran: 3 ta element ko'rinadi
+    //             : screenWidth > 400
+    //             ? 0.5 // O'rta ekran: 2 ta element ko'rinadi
+    //             : 0.8; // Kichik ekran: 1 ta element ko'rinadi
+    //
+    //     return CarouselSlider.builder(
+    //       itemCount: items.length,
+    //       carouselController: carouselController,
+    //       itemBuilder: (context, index, realIndex) {
+    //         return Padding(
+    //           padding: EdgeInsets.symmetric(horizontal: 8),
+    //           child: Container(
+    //             decoration: BoxDecoration(
+    //               borderRadius: BorderRadius.circular(16),
+    //             ),
+    //             child: ClipRRect(
+    //               borderRadius: BorderRadius.circular(16),
+    //               child: RepaintBoundary(
+    //                 child: ExtendedImage.network(
+    //                   items[index],
+    //                   cache: true,
+    //                   fit: BoxFit.fitWidth,
+    //                   loadStateChanged: (state) {
+    //                     switch (state.extendedImageLoadState) {
+    //                       case LoadState.completed:
+    //                         return AnimatedOpacity(
+    //                           opacity: 1.0,
+    //                           duration: Duration(milliseconds: 200),
+    //                           child: state.completedWidget,
+    //                         );
+    //
+    //                       default:
+    //                         return Assets.pngDefaultContentImage.toImage(
+    //                           fit: BoxFit.cover,
+    //                         );
+    //                     }
+    //                   },
+    //                 ),
+    //               ),
+    //             ),
+    //           ),
+    //         );
+    //       },
+    //       options: CarouselOptions(
+    //         autoPlay: false,
+    //         height: 182,
+    //         enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+    //         aspectRatio: 262 / 182,
+    //
+    //         enlargeCenterPage: true,
+    //         enableInfiniteScroll: false,
+    //         viewportFraction: viewportFraction,
+    //         onPageChanged: (index, reason) {
+    //           onPageChange?.call(index);
+    //         },
+    //         initialPage: 0,
+    //       ),
+    //     );
+    //   },
+    // );
   }
 }

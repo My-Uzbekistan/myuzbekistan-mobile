@@ -1,12 +1,16 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:finance/src/di/injection.dart';
 import 'package:finance/src/presentation/add_cards/add_cards_page.dart';
 import 'package:finance/src/presentation/cards/bloc/cards_bloc.dart';
 import 'package:finance/src/presentation/cards/cards_page.dart';
 import 'package:finance/src/presentation/home/FinanceHomePage.dart';
 import 'package:finance/src/presentation/home/bloc/finance_bloc.dart';
+import 'package:finance/src/presentation/merchants/bloc/merchants_bloc.dart';
+import 'package:finance/src/presentation/merchants/merchants_page.dart';
 import 'package:finance/src/presentation/payment/bloc/payment_bloc.dart';
 import 'package:finance/src/presentation/payment/payment_page.dart';
 import 'package:finance/src/presentation/payment_history/bloc/history_bloc.dart';
@@ -22,6 +26,7 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 import '../presentation/add_cards/bloc/add_card_bloc.dart';
+import '../presentation/currencies/currencies_page.dart' show CurrenciesPage;
 import '../presentation/payment_success/payment_success_page.dart';
 import '../presentation/verification/bloc/types.dart';
 
@@ -73,7 +78,11 @@ mixin FeatureFinanceRouter {
           (context, state) => buildSlideTransitionPage(
             child: BlocProvider(
               create: (context) => getIt<PaymentBloc>(),
-              child: PaymentPage(id: state.pathParameters['id'].toString()),
+              child: PaymentPage(
+                id: state.pathParameters['id'].toString(),
+                amount: state.uri.queryParameters["amount"],
+                completer: state.extra as Completer<bool>?,
+              ),
             ),
             context: context,
             state: state,
@@ -104,7 +113,9 @@ mixin FeatureFinanceRouter {
               create:
                   (context) =>
                       getIt<PaymentCheckBloc>()..add(
-                        PaymentCheckEvent.load(paymentId: state.pathParameters["paymentId"]!),
+                        PaymentCheckEvent.load(
+                          paymentId: state.pathParameters["paymentId"]!,
+                        ),
                       ),
               child: PaymentTransactionDetail(),
             ),
@@ -144,6 +155,49 @@ mixin FeatureFinanceRouter {
                   (context) =>
                       getIt<HistoryBloc>()..add(HistoryEvent.loadNext()),
               child: PaymentHistoryPage(),
+            ),
+            context: context,
+            state: state,
+          ),
+    ),
+
+    GoRoute(
+      path: AppNavPath.finance.currenciesPage.path,
+      name: AppNavPath.finance.currenciesPage.name,
+      pageBuilder: (context, state) {
+        final c = state.extra as List<Currency>;
+        return buildSlideTransitionPage(
+          child: CurrenciesPage(currencies: c),
+          context: context,
+          state: state,
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.finance.currenciesModalPage.path,
+      name: AppNavPath.finance.currenciesModalPage.name,
+      pageBuilder: (context, state) {
+        final c = state.extra as Triple;
+        final isModal = state.uri.queryParameters["isModal"] == 'true';
+        return ModalSheetPage(
+          child: CurrenciesPage(
+            currencies: c.first,
+            completer: c.second,
+            currentCurrencyId: c.third,
+            isModal: isModal,
+          ),
+        );
+      },
+    ),
+
+    GoRoute(
+      path: AppNavPath.finance.financeMerchants.path,
+      name: AppNavPath.finance.financeMerchants.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: BlocProvider(
+              create: (context) => getIt<MerchantsBloc>(),
+              child: MerchantsPage(merchants: state.extra as List<Merchant>),
             ),
             context: context,
             state: state,

@@ -1,8 +1,21 @@
 {
-  "nav_home": "Bosh sahifa",
+  "nav_home": "Asosiy",
   "nav_map": "Xarita",
   "nav_payment": "Moliya",
-  "nav_transfer": "Yo'nalish",
-  "nav_more": "Ko‘proq"
+  "nav_services": "Xizmatlar",
+
+  "nav_more": "Ko‘proq",
+
+  "catalogMyEsim": "My eSim",
+  "catalogTravelQuiz": "Travel Quiz",
+  "catalogAviaTickets": "Aviabiletlar",
+  "catalogChargers": "Zaryadlovchilar",
+  "catalogPoster": "Afishalar",
+  "catalogTrainTickets": "Poyezd chiptalari",
+  "catalogHotels": "Mehmonxonalar",
+  "catalogCottages": "Dachalar",
+  "catalogInsurance": "Sug‘urta",
+  "catalogItemStatusNew": "Yangi",
+  "catalogItemStatusSoon": "Tez orada"
 
 }

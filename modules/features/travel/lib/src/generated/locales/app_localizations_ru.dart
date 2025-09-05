@@ -31,29 +31,23 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String lanItem(String lang) {
-    String _temp0 = intl.Intl.selectLogic(
-      lang,
-      {
-        'en': 'Английский',
-        'ru': 'Русский',
-        'uz': 'Узбекский',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'Английский',
+      'ru': 'Русский',
+      'uz': 'Узбекский',
+      'other': '',
+    });
     return '$_temp0';
   }
 
   @override
   String themeModes(String theme) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme,
-      {
-        'system': 'Системный',
-        'light': 'Светлая',
-        'dark': 'Тёмная',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(theme, {
+      'system': 'Системный',
+      'light': 'Светлая',
+      'dark': 'Тёмная',
+      'other': '',
+    });
     return '$_temp0';
   }
 
@@ -80,7 +74,8 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   String get logout => 'Выйти';
 
   @override
-  String get getStartedDescription => 'Получите полный доступ к возможностям, а также сохраняйте свои любимые вещи';
+  String get getStartedDescription =>
+      'Получите полный доступ к возможностям, а также сохраняйте свои любимые вещи';
 
   @override
   String get continueWithGoogle => 'Продолжить с Google';
@@ -145,7 +140,8 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   String get pageFailedToLoad => 'Страница не загрузилась';
 
   @override
-  String get something_went_wrong => 'Что-то пошло не так. Пожалуйста, попробуйте еще раз.';
+  String get something_went_wrong =>
+      'Что-то пошло не так. Пожалуйста, попробуйте еще раз.';
 
   @override
   String get generalEmergency => 'Аварийная служба';
@@ -194,4 +190,24 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get distanceM => 'м';
+
+  @override
+  String prayerTime(String time) {
+    String _temp0 = intl.Intl.selectLogic(time, {
+      'fajr': 'Фаджр',
+      'sunrise': 'Восход',
+      'dhuhr': 'Зухр',
+      'asr': 'Аср',
+      'maghrib': 'Магриб',
+      'isha': 'Иша',
+      'other': 'Намаз',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get prayerTimeTitle => 'Время намаза';
+
+  @override
+  String get notifications => 'Оповещения';
 }

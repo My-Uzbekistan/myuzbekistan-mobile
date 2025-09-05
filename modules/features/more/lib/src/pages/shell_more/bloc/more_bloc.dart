@@ -16,51 +16,62 @@ part 'more_bloc.freezed.dart';
 class MoreBloc extends Bloc<MoreEvent, MoreState> {
   final Repository _repository;
   final AppStatusChangeListeners _appStatusChangeListeners;
-  var dataState = MoreState.dataState() as MoreDataState;
+  final SecurityStorage _securityStorage;
 
   MoreBloc(
-      {required Repository rp,
-      required AppStatusChangeListeners appStatusChangeListeners})
-      : _repository = rp,
-        _appStatusChangeListeners = appStatusChangeListeners,
-        super(MoreState.loading()) {
-    on<_MoreEventInit>(_init);
-    on<_MoreEventFetchCurrency>(_fetchLoadCurrency);
+    this._securityStorage, {
+    required Repository rp,
+    required AppStatusChangeListeners appStatusChangeListeners,
+  }) : _repository = rp,
+       _appStatusChangeListeners = appStatusChangeListeners,
+       super(
+         MoreState(prayerWidgetChecked: _securityStorage.isShowPrayerTimes()),
+       ) {
     on<_MoreEventFetch>(_fetchData);
+    on<_MoreCheckedPrayerWidget>(_checkedPrayerWidget);
+    _init();
   }
 
   StreamSubscription? _streamSubscription;
 
-  void _init(_MoreEventInit event, Emitter<MoreState> emit) {
+  Future<void> _checkedPrayerWidget(
+    _MoreCheckedPrayerWidget event,
+    Emitter<MoreState> emit,
+  ) async {
+    final previousChecked = state.prayerWidgetChecked;
+    emit(state.copyWith(prayerWidgetChecked: !previousChecked));
+    await _securityStorage.changePrayerTimesState(!previousChecked);
+    _appStatusChangeListeners.prayersChange(!previousChecked);
+  }
+
+  void _init() {
     _streamSubscription?.cancel();
+
     add(MoreEvent.fetch());
-    add(MoreEvent.fetchCurrencies());
-    _streamSubscription =
-        _appStatusChangeListeners.refreshListener.listen((data) {
+
+    _streamSubscription = _appStatusChangeListeners.refreshListener.listen((
+      data,
+    ) {
       add(MoreEvent.fetch());
     });
   }
 
   Future<void> _fetchData(
-      _MoreEventFetch event, Emitter<MoreState> emit) async {
-    emit(MoreState.loading());
+    _MoreEventFetch event,
+    Emitter<MoreState> emit,
+  ) async {
+    emit(state.copyWith(isLoading: true));
     try {
-      final result = await Future.wait(
-          [_repository.loadAbout(), _repository.loadMoreUseFull()]);
-      dataState = dataState.copyWith(abouts: result[0], useFull: result[1]);
-      emit(dataState);
-    } catch (e) {}
-  }
-
-  Future<void> _fetchLoadCurrency(
-      _MoreEventFetchCurrency event, Emitter<MoreState> emit) async {
-    try {
-      final result = await _repository.loadCurrencies();
-      dataState = dataState.copyWith(currencies: result.filterCurrencies());
-      if (state is MoreDataState) {
-        emit(dataState);
-      }
-    } catch (e) {}
+      final result = await Future.wait([
+        _repository.loadAbout(),
+        _repository.loadMoreUseFull(),
+      ]);
+      emit(
+        state.copyWith(isLoading: false, abouts: result[0], useFull: result[1]),
+      );
+    } catch (e) {
+      emit(state.copyWith(isLoading: false));
+    }
   }
 
   @override

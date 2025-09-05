@@ -1,8 +1,13 @@
 import 'dart:io';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:more/more.dart';
 import 'package:more/src/core/extension.dart';
+import 'package:more/src/pages/profile_page/pages/change_locale.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 import 'bloc/auth_bloc.dart';
@@ -15,215 +20,156 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+  AppSettingsBloc? appSettingsBloc;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+    appSettingsBloc = context.read<AppSettingsBloc>();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          // Positioned.fill(
-          //   child: Assets.splashLoginBg.toImage(fit: BoxFit.cover),
-          // ),
-          Positioned.fill(
-            child: Column(
-              children: [
-                // Expanded(child: SizedBox()),
-                Column(
-                  spacing: 10,
-                  children: [
-                    SizedBox(height: 100),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: AppActionButton(
-                            actionText: "Label",
-                            icon: Assets.svgIconCusine.toSvgImage(),
-                            type: ActionButtonType.primary,
-                            sizeType: ActionButtonSizeType.large,
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child:Container(
-                            height: 56,
-                            color: Colors.red,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: AppActionButton(
-                            actionText: "Label",
-                            icon: Assets.svgIconCusine.toSvgImage(),
-                            type: ActionButtonType.primary,
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: AppActionButton(
-                            actionText: "Label",
-                            type: ActionButtonType.primary,
-                            icon: Assets.svgIconCusine.toSvgImage(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: AppActionButton(
-                            actionText: "Label",
-                            type: ActionButtonType.secondary,
-                            icon: Assets.svgIconCusine.toSvgImage(),
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: AppActionButton(
-                            actionText: "Label",
-                            type: ActionButtonType.secondary,
-                            icon: Assets.svgIconCusine.toSvgImage(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: AppActionButton(
-                            actionText: "Label",
-                            type: ActionButtonType.text,
-                            icon: Assets.svgIconCusine.toSvgImage(),
-                            onPressed: () {},
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: AppActionButton(
-                            actionText: "Label",
-                            type: ActionButtonType.text,
-                            icon: Assets.svgIconCusine.toSvgImage(),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: context.systemUiOverlyStyle.copyWith(
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarContrastEnforced: false,
+        systemNavigationBarColor: Colors.transparent,
+      ),
+      child: Scaffold(
+        extendBody: true,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          systemOverlayStyle: context.systemUiOverlyStyle.copyWith(
+            statusBarIconBrightness: Brightness.light,
+            systemNavigationBarIconBrightness: Brightness.light,
+          ),
+          actions: [
+            if (!context.canPop())
+              IconButton(
+                onPressed: () {
+                  context.more.pushChangeLanguagePage();
+                },
+                icon: SizedBox(
+                  child: appSettingsBloc?.state.appLocale?.flag.toSvgImage(),
                 ),
-              ],
+              ),
+          ],
+        ),
+
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: Assets.splashLoginBg.toImage(fit: BoxFit.cover),
             ),
-          ),
-          // BlocConsumer<AuthBlock, AuthState>(
-          //   listener: (previous, current) {
-          //     if (current is AuthSuccessState) {
-          //       // context.read<ProfileBloc>().add(ProfileBlocEvent.loadEvent());
-          //       Navigator.pop(context);
-          //     }
-          //   },
-          //   builder: (context, state) {
-          //     return Container(
-          //       padding: EdgeInsets.symmetric(
-          //         horizontal: 16,
-          //       ).copyWith(bottom: 32),
-          //       child: Column(
-          //         mainAxisSize: MainAxisSize.min,
-          //         mainAxisAlignment: MainAxisAlignment.start,
-          //         crossAxisAlignment: CrossAxisAlignment.start,
-          //         children: [
-          //           Text(
-          //             context.localization.getStarted,
-          //             style: CustomTypography.H2,
-          //           ),
-          //           SizedBox(height: 12),
-          //           Text(
-          //             context.localization.getStartedDescription,
-          //             style: CustomTypography.bodyMd.copyWith(
-          //               color: context.appColors.textIconColor.secondary,
-          //             ),
-          //           ),
-          //           SizedBox(height: 24),
-          //           Column(
-          //             mainAxisSize: MainAxisSize.min,
-          //             spacing: 8,
-          //             children: [
-          //               ElevatedButton.icon(
-          //                 style: ElevatedButton.styleFrom(
-          //                   minimumSize: Size(double.infinity, 48),
-          //                   maximumSize: Size(double.infinity, 48),
-          //                   shape: RoundedRectangleBorder(
-          //                     borderRadius: BorderRadius.circular(16),
-          //                   ),
-          //                   backgroundColor: context.appColors.fill.quaternary,
-          //                   elevation: 0,
-          //                   foregroundColor:
-          //                       context.appColors.textIconColor.primary,
-          //                   shadowColor: Colors.transparent,
-          //                 ),
-          //                 icon: Assets.svgGoogleLogo.toSvgImage(),
-          //                 onPressed: () {
-          //                   context.read<AuthBlock>().add(
-          //                     AuthEvent.authByGoogle(),
-          //                   );
-          //                 },
-          //                 label:
-          //                     state is AuthGoogleLoadingState
-          //                         ? SizedBox(
-          //                           height: 24,
-          //                           width: 24,
-          //                           child: LoadingIndicator(),
-          //                         )
-          //                         : Text(
-          //                           context.localization.continueWithGoogle,
-          //                         ),
-          //               ),
-          //               if (Platform.isIOS)
-          //                 ElevatedButton.icon(
-          //                   style: ElevatedButton.styleFrom(
-          //                     minimumSize: Size(double.infinity, 48),
-          //                     maximumSize: Size(double.infinity, 48),
-          //                     shape: RoundedRectangleBorder(
-          //                       borderRadius: BorderRadius.circular(16),
-          //                     ),
-          //                     backgroundColor:
-          //                         context.appColors.fill.quaternary,
-          //                     elevation: 0,
-          //                     foregroundColor:
-          //                         context.appColors.textIconColor.primary,
-          //                     shadowColor: Colors.transparent,
-          //                   ),
-          //                   icon: Assets.svgAppleLogo.toSvgImage(),
-          //                   onPressed: () {
-          //                     context.read<AuthBlock>().add(
-          //                       AuthEvent.authByApple(),
-          //                     );
-          //                   },
-          //                   label:
-          //                       state is AuthAppleLoadingState
-          //                           ? SizedBox(
-          //                             height: 24,
-          //                             width: 24,
-          //                             child: LoadingIndicator(),
-          //                           )
-          //                           : Text(
-          //                             context.localization.continueWithApple,
-          //                           ),
-          //                 ),
-          //             ],
-          //           ),
-          //         ],
-          //       ),
-          //     );
-          //   },
-          // ),
-          AppBar(
-            backgroundColor: Colors.transparent,
-            actions: [Assets.flagsRu.toSvgImage()],
-          ),
-        ],
+
+            Positioned(
+              left: 0,
+              right: 0,
+              top: kToolbarHeight + MediaQuery.of(context).padding.top + 20,
+              child: Assets.logoMyuzbLogo.toSvgImage(),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: BlocConsumer<AuthBlock, AuthState>(
+                listener: (previous, current) {
+                  if (current is AuthSuccessState) {
+                    GlobalHandler().refreshListener?.call();
+                  }
+                },
+                builder: (context, state) {
+                  return IgnorePointer(
+                    ignoring:
+                        state is AuthAppleLoadingState ||
+                        state is AuthGoogleLoadingState,
+                    child: SafeArea(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                        ).copyWith(bottom: 8),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: 12,
+                              children: [
+                                AppActionButton(
+                                  actionText:
+                                      context.localization.continueWithGoogle,
+                                  iconColorFiltered: false,
+                                  icon: Assets.svgGoogleLogo.toSvgImage(),
+                                  isLoading: state is AuthGoogleLoadingState,
+                                  containerColor: Colors.white,
+                                  disableContainerColor: Colors.white,
+                                  contentColor: Colors.black,
+
+                                  type: ActionButtonType.secondary,
+                                  onPressed: () {
+                                    context.read<AuthBlock>().add(
+                                      AuthEvent.authByGoogle(),
+                                    );
+                                  },
+                                ),
+                                if (Platform.isIOS)
+                                  AppActionButton(
+                                    actionText:
+                                        context.localization.continueWithApple,
+                                    iconColorFiltered: false,
+                                    type: ActionButtonType.secondary,
+                                    containerColor: Colors.white,
+                                    disableContainerColor: Colors.white,
+                                    contentColor: Colors.black,
+                                    icon: Assets.svgAppleLogo.toSvgImage(),
+                                    isLoading: state is AuthAppleLoadingState,
+                                    onPressed: () {
+                                      context.read<AuthBlock>().add(
+                                        AuthEvent.authByApple(),
+                                      );
+                                    },
+                                  ),
+
+                                AppActionButton(
+                                  actionText:
+                                      context.localization.continueAsGuest,
+                                  iconColorFiltered: false,
+                                  type: ActionButtonType.text,
+                                  contentColor: Colors.white,
+                                  onPressed: () {
+                                    if (context.canPop()) {
+                                      context.pop();
+                                    } else {
+                                      context.travel.goMain();
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

@@ -128,10 +128,10 @@ return guestState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UserModel? userModel)?  dataState,TResult Function()?  guestState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UserModel? userModel,  bool hasPin)?  dataState,TResult Function()?  guestState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ProfileBlocDataState() when dataState != null:
-return dataState(_that.userModel);case ProfileBlocGuestState() when guestState != null:
+return dataState(_that.userModel,_that.hasPin);case ProfileBlocGuestState() when guestState != null:
 return guestState();case _:
   return orElse();
 
@@ -150,10 +150,10 @@ return guestState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UserModel? userModel)  dataState,required TResult Function()  guestState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UserModel? userModel,  bool hasPin)  dataState,required TResult Function()  guestState,}) {final _that = this;
 switch (_that) {
 case ProfileBlocDataState():
-return dataState(_that.userModel);case ProfileBlocGuestState():
+return dataState(_that.userModel,_that.hasPin);case ProfileBlocGuestState():
 return guestState();case _:
   throw StateError('Unexpected subclass');
 
@@ -171,10 +171,10 @@ return guestState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UserModel? userModel)?  dataState,TResult? Function()?  guestState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UserModel? userModel,  bool hasPin)?  dataState,TResult? Function()?  guestState,}) {final _that = this;
 switch (_that) {
 case ProfileBlocDataState() when dataState != null:
-return dataState(_that.userModel);case ProfileBlocGuestState() when guestState != null:
+return dataState(_that.userModel,_that.hasPin);case ProfileBlocGuestState() when guestState != null:
 return guestState();case _:
   return null;
 
@@ -187,10 +187,11 @@ return guestState();case _:
 
 
 class ProfileBlocDataState with DiagnosticableTreeMixin implements ProfileBlocState {
-   ProfileBlocDataState({this.userModel});
+   ProfileBlocDataState({this.userModel, this.hasPin = false});
   
 
  final  UserModel? userModel;
+@JsonKey() final  bool hasPin;
 
 /// Create a copy of ProfileBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -203,21 +204,21 @@ $ProfileBlocDataStateCopyWith<ProfileBlocDataState> get copyWith => _$ProfileBlo
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ProfileBlocState.dataState'))
-    ..add(DiagnosticsProperty('userModel', userModel));
+    ..add(DiagnosticsProperty('userModel', userModel))..add(DiagnosticsProperty('hasPin', hasPin));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileBlocDataState&&(identical(other.userModel, userModel) || other.userModel == userModel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileBlocDataState&&(identical(other.userModel, userModel) || other.userModel == userModel)&&(identical(other.hasPin, hasPin) || other.hasPin == hasPin));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userModel);
+int get hashCode => Object.hash(runtimeType,userModel,hasPin);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProfileBlocState.dataState(userModel: $userModel)';
+  return 'ProfileBlocState.dataState(userModel: $userModel, hasPin: $hasPin)';
 }
 
 
@@ -228,7 +229,7 @@ abstract mixin class $ProfileBlocDataStateCopyWith<$Res> implements $ProfileBloc
   factory $ProfileBlocDataStateCopyWith(ProfileBlocDataState value, $Res Function(ProfileBlocDataState) _then) = _$ProfileBlocDataStateCopyWithImpl;
 @useResult
 $Res call({
- UserModel? userModel
+ UserModel? userModel, bool hasPin
 });
 
 
@@ -245,10 +246,11 @@ class _$ProfileBlocDataStateCopyWithImpl<$Res>
 
 /// Create a copy of ProfileBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? userModel = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? userModel = freezed,Object? hasPin = null,}) {
   return _then(ProfileBlocDataState(
 userModel: freezed == userModel ? _self.userModel : userModel // ignore: cast_nullable_to_non_nullable
-as UserModel?,
+as UserModel?,hasPin: null == hasPin ? _self.hasPin : hasPin // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

@@ -25,7 +25,7 @@ class PaymentCheckBloc extends Bloc<PaymentCheckEvent, PaymentCheckState> {
       emit(PaymentCheckState.loaded(transactionItem: result));
     } catch (e) {
       if (e is DioException && e.error is AppException) {
-        emit(PaymentCheckState.error(message:e.message));
+        emit(PaymentCheckState.error(message:(e.error as AppException).message));
       } else {
         emit(PaymentCheckState.error());
       }

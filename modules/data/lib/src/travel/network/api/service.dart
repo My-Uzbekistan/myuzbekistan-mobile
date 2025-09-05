@@ -1,4 +1,5 @@
-
+import 'package:data/src/models/items_response.dart';
+import 'package:data/src/travel/models/notification/notification_item_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
@@ -10,7 +11,6 @@ import '../../models/favorite_dto.dart';
 import '../../models/places/content_dto_model.dart';
 import '../../models/regions.dart';
 import '../../models/token_dto.dart';
-
 
 part 'service.g.dart';
 
@@ -27,11 +27,12 @@ abstract class RestService {
   Future<List<RegionsDto>> loadRegions();
 
   @GET("v2/categories/{categoryId}/contents")
-  Future<List<MainPageContentDto>> loadContentsByCategory(
-      {@Path("categoryId") required int categoryId,
-      @Query("page") required int page,
-      @Query("pageSize") required int pageSize,
-      @Query("search") String? search});
+  Future<List<MainPageContentDto>> loadContentsByCategory({
+    @Path("categoryId") required int categoryId,
+    @Query("page") required int page,
+    @Query("pageSize") required int pageSize,
+    @Query("search") String? search,
+  });
 
   @GET("favorites")
   Future<FavoriteDto> loadFavourites({
@@ -42,8 +43,7 @@ abstract class RestService {
   });
 
   @GET("v2/categories/main-page")
-  Future<dynamic> loadMainData(
-      {@Query("regionId") int? regionId});
+  Future<dynamic> loadMainData({@Query("regionId") int? regionId});
 
   @GET("weather/region")
   Future<TemperatureDto> loadWeather({@Query("regionId") int? regionId});
@@ -76,4 +76,28 @@ abstract class RestService {
 
   @GET("more/useful")
   Future<List<MoreItemDto>> loadMoreUseFull();
+
+  @POST("pin/create")
+  Future<void> createPin(@Body() Map<String, dynamic> body);
+
+  @POST("pin/verify")
+  Future<dynamic> verifyPin(@Body() Map<String, dynamic> body);
+
+  @POST("pin/change")
+  Future<dynamic> changePin(@Body() Map<String, dynamic> body);
+
+  @DELETE("pin/remove")
+  Future<dynamic> removePin(@Body() Map<String, dynamic> body);
+
+  @POST("notifications/firebase-token")
+  Future<dynamic> setFirebaseToken(@Body() Map<String, dynamic> body);
+
+  @GET("notifications")
+  Future<ItemsResponse<NotificationItemDto>> getNotifications();
+
+  @GET("notifications/{id}")
+  Future<NotificationItemDto> getNotificationById(@Path("id") int id);
+
+  @POST("notifications/{id}/seen")
+  Future<dynamic> seenNotification(@Path("id") int id);
 }

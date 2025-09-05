@@ -14,7 +14,7 @@ class _FeatureFinanceNavPath {
 
   AppNavPath get financePayment => _NavPathImpl(
     name: 'feature_finance_payment',
-    path: '/finance/payment/:id',
+    path: '/pay/:id',
   );
 
   AppNavPath get verification =>
@@ -36,5 +36,18 @@ class _FeatureFinanceNavPath {
   AppNavPath get paymentTransactionDetailPage => _NavPathImpl(
     name: 'feature_finance_payment_transaction_detail',
     path: '/finance/payment_transaction_detail/:paymentId',
+  );
+  AppNavPath get financeMerchants => _NavPathImpl(
+    name: 'feature_finance_merchants',
+    path: '/finance/merchants',
+  );
+
+  AppNavPath get currenciesPage => _NavPathImpl(
+    name: 'feature_finance_currencies_page',
+    path: '/feature/finance/currencies',
+  );
+  AppNavPath get currenciesModalPage => _NavPathImpl(
+    name: 'feature_finance_currencies_modal_page',
+    path: '/feature/finance/currenciesModal',
   );
 }

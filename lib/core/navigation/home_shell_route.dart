@@ -3,12 +3,27 @@ part of 'router.dart';
 final _shellRoute = [
   StatefulShellRoute.indexedStack(
     parentNavigatorKey: appRootNavigatorKey,
+
     pageBuilder: (context, state, navigationShell) => NoTransitionPage(
         child: ShellPageWrapper(navigationShell: navigationShell)),
     branches: [
       FeatureTravelRouter.shellTravel,
       FeatureFinanceRouter.shellFinance,
-      FeatureMoreRouter.shellMore
+      StatefulShellBranch(
+        routes: [
+          GoRoute(
+              path: "/catalog",
+              name: "catalog",
+
+              builder: (context,state){
+                return CatalogScreen();
+              }
+
+          ),
+        ],
+      ),
+      FeatureMoreRouter.shellMore,
+
     ],
   )
 ];

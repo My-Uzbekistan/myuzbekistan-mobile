@@ -137,41 +137,7 @@ class _HomeListCellState extends State<HomeListCell>
                     },
                   ),
                 ),
-                // SingleChildScrollView(
-                //   controller: scrollController,
-                //   scrollDirection: Axis.horizontal,
-                //   physics: Platform.isAndroid
-                //       ? ClampingScrollPhysics()
-                //       : BouncingScrollPhysics(),
-                //   padding: EdgeInsets.symmetric(horizontal: 16),
-                //   child: Row(
-                //     spacing: 12,
-                //     crossAxisAlignment: CrossAxisAlignment.start,
-                //     children: List.generate(state.contents.length + 1, (index) {
-                //       if (index == state.contents.length) {
-                //         return state.isLoading
-                //             ? LoadingIndicator()
-                //             : SizedBox();
-                //       }
-                //       final item = state.contents[index];
-                //       return RepaintBoundary(
-                //         key:ValueKey(item) ,
-                //         child: item.viewType == ViewType.profile
-                //             ? ItemCardAvatar(
-                //           avatarUrl: item.mainPhoto,
-                //           name: item.title,
-                //           onTap: () {
-                //             widget.onItemTap?.call(item);
-                //           },
-                //         )
-                //             : ItemCard(
-                //           content: item,
-                //           onTap: () => widget.onItemTap?.call(item),
-                //         ),
-                //       );
-                //     }),
-                //   ),
-                // )
+
               ],
             ),
           );

@@ -97,6 +97,12 @@ class _AppItemCardImageState extends State<_AppItemCardImage>
                 top: 8,
                 child: widget.topRightWidget!,
               ),
+            if (widget.averageCheck > 0)
+              Positioned(
+                  bottom: 12,
+                  right: 12,
+                  child:
+                  PriceCategoryWithContainer(priceCategory: widget.averageCheck)),
           ],
         ),
       ),
@@ -117,18 +123,17 @@ class _ImageContent extends StatefulWidget {
   State<_ImageContent> createState() => _ImageContentState();
 }
 
-class _ImageContentState extends State<_ImageContent>
-    with AutomaticKeepAliveClientMixin {
+class _ImageContentState extends State<_ImageContent> {
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return RepaintBoundary(
-      child: ExtendedImage.network(
+    return  ExtendedImage.network(
         widget.imageUrl,
+        key: ValueKey(widget.imageUrl),
         fit: BoxFit.cover,
         height: double.maxFinite,
         width: double.maxFinite,
         cache: true,
+        cacheMaxAge: const Duration(days: 1),
         loadStateChanged: (ExtendedImageState state) {
           switch (state.extendedImageLoadState) {
             case LoadState.completed:
@@ -141,7 +146,7 @@ class _ImageContentState extends State<_ImageContent>
               return Assets.pngDefaultContentImage.toImage(fit: BoxFit.fill);
           }
         },
-      ),
+
 
     );
   }

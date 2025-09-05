@@ -34,12 +34,10 @@ class LocationManager {
     // Permissionlar
     final serviceEnabled = await _isLocationServiceEnabled();
     if (!serviceEnabled) {
-      print("Location service yoqilmagan.");
       return null;
     }
     final hasPermission = await _handlePermission();
     if (!hasPermission) {
-      print("Location ruxsat berilmadi.");
       return null;
     }
     _currentLocation = await Geolocator.getCurrentPosition(

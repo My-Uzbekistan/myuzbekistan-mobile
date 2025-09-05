@@ -1,7 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:finance/src/core/extension.dart';
 import 'package:finance/src/navigation/navigation_extensions.dart';
-import 'package:finance/src/presentation/home/widgets/balance_widget.dart';
 import 'package:finance/src/presentation/home/widgets/currency_calculator/currency_calculator_widget.dart';
 import 'package:finance/src/presentation/home/widgets/currency_widget.dart';
 import 'package:finance/src/presentation/widgets/finance_merchants_card.dart';
@@ -9,10 +8,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
-
 import '../widgets/finance_category_header.dart';
 import 'bloc/finance_bloc.dart';
-import 'widgets/acoount_widget.dart';
 import 'widgets/finance_avatar_widgets.dart';
 
 class FinanceHomePage extends StatefulWidget {
@@ -22,8 +19,7 @@ class FinanceHomePage extends StatefulWidget {
   State<FinanceHomePage> createState() => _FinanceHomepageState();
 }
 
-class _FinanceHomepageState extends State<FinanceHomePage>
-    with AutomaticKeepAliveClientMixin {
+class _FinanceHomepageState extends State<FinanceHomePage> {
   FinanceBloc? financeBloc;
 
   @override
@@ -34,10 +30,13 @@ class _FinanceHomepageState extends State<FinanceHomePage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    final paddingBottom = MediaQuery.of(context).padding.bottom + 16;
+
     return Scaffold(
+      extendBody: true,
       body: CupertinoTheme(
         data: CupertinoThemeData(
+          brightness: Brightness.light,
           textTheme: CupertinoTextThemeData(
             navLargeTitleTextStyle: CustomTypography.H1.copyWith(
               color: context.appColors.textIconColor.primary,
@@ -50,14 +49,32 @@ class _FinanceHomepageState extends State<FinanceHomePage>
         child: BlocBuilder<FinanceBloc, FinanceState>(
           builder: (context, state) {
             return CustomScrollView(
+              physics: BouncingScrollPhysics(),
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               slivers: [
-                CupertinoSliverNavigationBar(
-                  largeTitle: Text("Finance"),
-                  border: null,
-                  stretch: true,
-                  backgroundColor: context.appColors.background.underlayer,
-                  trailing: Row(mainAxisSize: MainAxisSize.min),
+                SliverStack(
+                  children: [
+                    SliverPositioned.fill(
+                      child: Container(
+                        color: context.appColors.background.underlayer,
+                      ),
+                    ),
+                    SliverPersistentHeader(
+                      delegate: BlurHeaderDelegate(
+                        kToolbarHeight + MediaQuery.of(context).padding.top,
+                      ),
+                      pinned: true,
+                    ),
+                    CupertinoSliverNavigationBar(
+                      largeTitle: Text(context.localization.finance_title),
+                      border: null,
+                      stretch: true,
+                      brightness: context.brightness,
+                      backgroundColor: Colors.transparent,
+                      enableBackgroundFilterBlur: false,
+                      trailing: Row(mainAxisSize: MainAxisSize.min),
+                    ),
+                  ],
                 ),
                 SliverList.list(
                   children: [
@@ -80,7 +97,7 @@ class _FinanceHomepageState extends State<FinanceHomePage>
                                     text: context.localization.payment_qr_title,
                                     svgAssets: Assets.svgIconQrCode,
                                     onTap: () {
-                                      context.pushQrCoderReaderPage();
+                                      context.finance.pushQrCoderReaderPage();
                                     },
                                   ),
                                 ),
@@ -101,7 +118,7 @@ class _FinanceHomepageState extends State<FinanceHomePage>
                                             .localization
                                             .payment_history_title,
                                     svgAssets: Assets.svgIconClock,
-                                    onTap: (){
+                                    onTap: () {
                                       context.pushPaymentHistoryPage();
                                     },
                                   ),
@@ -117,7 +134,9 @@ class _FinanceHomepageState extends State<FinanceHomePage>
                       child: Container(
                         width: double.maxFinite,
                         constraints: BoxConstraints(minHeight: 100),
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 16,
+                        ).copyWith(bottom: 40),
                         decoration: BoxDecoration(
                           color: context.appColors.background.base,
                           borderRadius: BorderRadius.circular(24),
@@ -125,42 +144,63 @@ class _FinanceHomepageState extends State<FinanceHomePage>
                         child: Builder(
                           builder: (context) {
                             if (state is FinanceDataState) {
-                              final usdCurrency = state.currencies
-                                  .firstOrNullWhere((e) => e.isUsd);
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  CurrencyWidget(currencies: state.currencies,onTap: (){
-                                    context.more.pushCurrencies(state.currencies);
-                                  },),
-                                  if (usdCurrency != null)
-                                    CurrencyCalculatorWidget(
-                                      currentExchangeRate:
-                                          usdCurrency.rateToDouble(),
-                                    ),
-                                  FinanceMerchantsWithCategory(
-                                    title: context.localization.nearest_places,
-                                    onItemTap: (index) {
-                                      context.finance.pushMerchantPage(
-                                        id:
-                                            state.merchants[index].id
-                                                .toString(),
+                                  CurrencyWidget(
+                                    currencies: state.currencies,
+                                    onTap: () {
+                                      context.pushCurrenciesPage(
+                                        state.currencies,
                                       );
                                     },
-                                    items:
+                                  ),
+                                  if (state.currencies.isNotEmpty)
+                                    CurrencyCalculatorWidget(
+                                      currencies: state.currencies,
+                                    ),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    spacing: 16,
+                                    children: [
+                                      FinanceMerchantsWithCategory(
+                                        title: context.localization.nearest_places,
+                                        onItemTap: (index) {
+                                          context.finance.pushMerchantPage(
+                                            id:
+                                            state.merchants[index].id
+                                                .toString(),
+                                          );
+                                        },
+                                        openAll: () {},
+                                        items:
                                         state.merchants
                                             .map(
                                               (e) => MerchantWidgetModel(
-                                                name: e.name.orEmpty(),
-                                                caption: e.description,
-                                                distance:
-                                                    e.distance?.toString(),
-                                                imageUrl: e.logo?.orEmpty(),
-                                              ),
-                                            )
+                                            name: e.name.orEmpty(),
+                                            caption: e.description,
+                                            distance:
+                                            e.distanceString.toString(),
+                                            imageUrl: e.logo?.orEmpty(),
+                                          ),
+                                        )
                                             .toList(),
-                                  ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 20).copyWith(top: 8),
+                                        child: AppActionButton(
+                                          actionText: context.localization.all_places,
+                                          type: ActionButtonType.secondary,
+                                          onPressed: (){
+
+                                            context.pushMerchantsPage(  state.merchants);
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  )
+
                                 ],
                               );
                             }
@@ -172,6 +212,7 @@ class _FinanceHomepageState extends State<FinanceHomePage>
                     ),
                   ],
                 ),
+                SliverToBoxAdapter(child: SizedBox(height: paddingBottom)),
               ],
             );
           },
@@ -179,10 +220,6 @@ class _FinanceHomepageState extends State<FinanceHomePage>
       ),
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }
 
 class _Loading extends StatelessWidget {
@@ -235,3 +272,4 @@ class _Loading extends StatelessWidget {
     );
   }
 }
+

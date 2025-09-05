@@ -4,12 +4,8 @@
   "nav_payment": "To'lov",
   "nav_transfer": "Yo'nalish",
   "nav_more": "Ko‘proq",
-
-
-
   "language": "Ilova tili",
   "theme": "Dizayn mavzusi",
-
   "lanItem": "{lang, select, en{Inglizcha} ru{Ruscha} uz{O'zbekcha} other{} }",
   "themeModes": "{theme, select, system{Tizim mavzusi} light{Yorug' mavzu} dark{Qorong'i mavzu} other{}}",
   "guest": "Salom Mehmon",
@@ -24,7 +20,6 @@
   "getStartedDescription": "Imkoniyatlardan to‘liq foydalanish uchun tizimga kiring va oʻzingiz yoqtirgan narsalarni ham saqlab oling",
   "continueWithGoogle": "Google orqali kirish",
   "continueWithApple": "Apple orqali kirish",
-
   "averageCheck": "O‘rtacha baxo",
   "search": "Qidiruv",
   "rating": "Reyting",
@@ -59,5 +54,8 @@
   "warning": "Ogohlantirish",
   "guest_chose": "Mehmonlar tanlovi",
   "distanceKm": "km",
-  "distanceM": "m"
+  "distanceM": "m",
+  "prayerTime": "{time, select, fajr{Bomdod} sunrise{Quyosh} dhuhr{Peshin} asr{Asr} maghrib{Shom} isha{Xufton} other{Namoz}}",
+  "prayerTimeTitle": "Namoz vaqti",
+  "notifications": "Xabarnomalar"
 }

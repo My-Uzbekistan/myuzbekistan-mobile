@@ -2,6 +2,20 @@
   "nav_home": "Home",
   "nav_map": "Map",
   "nav_payment": "Finance",
-  "nav_transfer": "Transfer",
-  "nav_more": "More"
+  "nav_services": "Services",
+  "nav_more": "More",
+
+  "catalogMyEsim": "My eSIM",
+  "catalogTravelQuiz": "Travel Quiz",
+  "catalogAviaTickets": "Flight tickets",
+  "catalogChargers": "Chargers",
+  "catalogPoster": "Poster",
+  "catalogTrainTickets": "Train tickets",
+  "catalogHotels": "Hotels",
+  "catalogCottages": "Cottages",
+  "catalogInsurance": "Insurance",
+
+  "catalogItemStatusNew": "New",
+  "catalogItemStatusSoon": "Soon"
+
 }

@@ -50,7 +50,7 @@ class _FinanceMerchantsCardState extends State<FinanceMerchantsCard>  with Autom
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(12)),
@@ -98,13 +98,13 @@ class _FinanceMerchantsCardState extends State<FinanceMerchantsCard>  with Autom
                   ),
                 ],
               ),
-
-              Text(
-                widget.merchantWidgetModel.distance.orEmpty(),
-                style: CustomTypography.labelSm.copyWith(
-                  color: context.appColors.textIconColor.secondary,
-                ),
-              ),
+              //
+              // Text(
+              //   widget.merchantWidgetModel.distance.orEmpty(),
+              //   style: CustomTypography.labelSm.copyWith(
+              //     color: context.appColors.textIconColor.secondary,
+              //   ),
+              // ),
             ],
           ),
         ),

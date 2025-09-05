@@ -5,6 +5,7 @@ abstract class PaymentState with _$PaymentState {
   const PaymentState._();
 
   const factory PaymentState.loadingState() = PaymentLoadingState;
+  const factory PaymentState.errorState({String? message}) = PaymentErrorState;
 
   const factory PaymentState.dataState({
     required Merchant merchant,
@@ -26,12 +27,16 @@ abstract class PaymentState with _$PaymentState {
 @freezed
 abstract class PaymentNavState with _$PaymentNavState {
   const factory PaymentNavState.paymentSuccess({
-    required Merchant merchant,
+    required MerchantItem merchant,
     required int amount,
     required String paymentId,
   }) = PaymentNavStateSuccess;
 
-  const factory PaymentNavState.confirmWithWeb(String confirmUrl) =
+  const factory PaymentNavState.confirmWithWeb(
+      {
+    required String confirmUrl,
+    required String paymentId,
+  }) =
       PaymentNavStateConfirmWithWeb;
 
   const factory PaymentNavState.error({String? message}) =

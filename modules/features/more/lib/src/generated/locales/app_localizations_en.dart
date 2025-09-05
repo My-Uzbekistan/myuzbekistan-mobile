@@ -9,25 +9,10 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   FeatureMoreLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get nav_home => 'Home';
+  String get language => 'App language';
 
   @override
-  String get nav_map => 'Map';
-
-  @override
-  String get nav_transfer => 'Transfer';
-
-  @override
-  String get nav_payment => 'Payment';
-
-  @override
-  String get nav_more => 'More';
-
-  @override
-  String get language => 'Language';
-
-  @override
-  String get theme => 'Theme';
+  String get theme => 'App theme';
 
   @override
   String lanItem(String lang) {
@@ -63,7 +48,7 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   }
 
   @override
-  String get guest => 'Hello Guest';
+  String get guest => 'Guest';
 
   @override
   String get action_all => 'All';
@@ -80,9 +65,6 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get getStarted => 'Get Started';
-
-  @override
-  String get logout => 'Logout';
 
   @override
   String get getStartedDescription =>
@@ -119,15 +101,6 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get uzbekistan => 'Uzbekistan';
-
-  @override
-  String get exchange_rates => 'Exchange rates';
-
-  @override
-  String get uzbek_currency => '*The Uzbek currency (UZS) is called SOUM';
-
-  @override
-  String get exchange_banks => 'Exchange banks';
 
   @override
   String get loading_data => 'Loading data';
@@ -178,16 +151,32 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   String get usefulTips => 'Useful tips';
 
   @override
-  String get logoutConfirmation => 'Do you want to log out?';
+  String get logout => 'Logout';
 
   @override
-  String get deleteAccountConfirmation => 'Do you want to delete the account?';
+  String get logout_confirm_title => 'Exit the app';
+
+  @override
+  String get exit => 'Exit';
+
+  @override
+  String get logoutConfirmation => 'You are about to exit the app';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'Your account and all data, such as saved places and bank cards, will be deleted.';
+
+  @override
+  String get delete_account_confirm_title => 'Delete account?';
 
   @override
   String get deleteAccount => 'Delete account';
 
   @override
   String get cancel => 'Cancel';
+
+  @override
+  String get delete => 'Delete';
 
   @override
   String get warning => 'Warning';
@@ -200,4 +189,84 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get distanceM => 'm';
+
+  @override
+  String get continueAsGuest => 'Continue as guest';
+
+  @override
+  String get notification => 'Notifications';
+
+  @override
+  String get pin_code => 'PIN code';
+
+  @override
+  String get biometric_auth => 'Biometric login';
+
+  @override
+  String get prayer_time_widget => 'Prayer time widget';
+
+  @override
+  String get about_app => 'About App';
+
+  @override
+  String get log_in => 'Sign in';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get privacy_policy => 'Privacy policy';
+
+  @override
+  String get licenses => 'Licenses';
+
+  @override
+  String get pin_code_create_title => 'Create PIN code';
+
+  @override
+  String get pin_code_repeat => 'Repeat the code';
+
+  @override
+  String get pinMismatch => 'PIN does not match';
+
+  @override
+  String get resetPinTitle => 'Reset PIN';
+
+  @override
+  String get resetPinMessage =>
+      'All data will be permanently deleted without the possibility of recovery. A new registration will be required.';
+
+  @override
+  String get resetPinAction => 'Reset\nCode';
+
+  @override
+  String get changePinTitle => 'Change PIN';
+
+  @override
+  String get enter_new_code => 'Enter new code';
+
+  @override
+  String get delete_code => 'Delete code';
+
+  @override
+  String get delete_pin_title => 'Delete PIN code';
+
+  @override
+  String get delete_pin_message =>
+      'PIN login will be disabled. You can create a new PIN at any time';
+
+  @override
+  String get pincode_created => 'PIN code created successfully';
+
+  @override
+  String get pincode_deleted => 'PIN code deleted';
+
+  @override
+  String get enter_code => 'Enter code';
+
+  @override
+  String get authPrompt => 'Please authenticate to access the application';
+
+  @override
+  String get fiscalReceipt => 'Fiscal receipt';
 }

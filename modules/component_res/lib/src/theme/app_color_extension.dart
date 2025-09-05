@@ -80,6 +80,8 @@ extension CustomThemeData on ThemeData {
 extension ContextEx on BuildContext {
   _AppColorsExtension get appColors => Theme.of(this).appColors;
 
+  SystemUiOverlayStyle get systemUiOverlyStyle => systemOverlyStyle();
+
   Brightness get brightness => Theme.of(this).brightness;
 
   SystemUiOverlayStyle systemOverlyStyle() {
@@ -89,9 +91,11 @@ extension ContextEx on BuildContext {
         .copyWith(
       systemNavigationBarContrastEnforced: false,
       statusBarColor: Colors.transparent,
+      statusBarIconBrightness:
+          brightness == Brightness.light ? Brightness.dark : Brightness.light,
       systemNavigationBarIconBrightness:
           brightness == Brightness.light ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: appColors.background.elevation1Alt,
+      systemNavigationBarColor: appColors.background.base,
     );
   }
 }

@@ -74,14 +74,14 @@ class ModalSheetPage<T> extends Page<T> {
   @override
   Route<T> createRoute(BuildContext context) {
     return Platform.isIOS
-        ? CupertinoSheetRoute(builder: (context) => child, settings: this)
+        ? CupertinoSheetRoute(builder: (context) => child, settings: this,)
         : ModalBottomSheetRoute<T>(
           settings: this,
           builder: (context) => child,
           isScrollControlled: true,
           useSafeArea: true,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.only(topRight: Radius.circular(24),topLeft:Radius.circular(24) ),
           ),
           clipBehavior: Clip.antiAlias,
         );

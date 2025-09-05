@@ -8,21 +8,27 @@ class AppCheck extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 20,
-      height: 20,
-      padding: EdgeInsets.symmetric(vertical: 5),
-      decoration: BoxDecoration(
-          color: isChecked
-              ? context.appColors.brand
-              : context.appColors.fill.tertiary,
-          shape: BoxShape.circle),
-      child: isChecked
-          ? Assets.svgIconCheck.toSvgImage(
-              fit: BoxFit.fitHeight,
-              colorFilter: ColorFilter.mode(
-                  context.appColors.static.white, BlendMode.srcIn))
-          : SizedBox(),
+    return SizedBox(
+      width: 24,
+      height: 24,
+      child: Center(
+        child: Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+              color: isChecked
+                  ? context.appColors.brand
+                  : context.appColors.fill.tertiary,
+              shape: BoxShape.circle),
+          alignment: Alignment.center,
+          child: isChecked
+              ? Assets.svgIconCheck.toSvgImage(
+                  fit: BoxFit.contain,
+                  colorFilter: ColorFilter.mode(
+                      context.appColors.static.white, BlendMode.srcIn))
+              : SizedBox(),
+        ),
+      ),
     );
   }
 }

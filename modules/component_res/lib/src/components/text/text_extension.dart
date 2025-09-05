@@ -47,11 +47,18 @@ extension TextStyleExtension on Text {
   Text bodySm({Color? color}) {
     return _withStyle(CustomTypography.bodySm.copyWith(color: color));
   }
+  Text bodyXXsm({Color? color}) {
+    return _withStyle(CustomTypography.bodyXXsm.copyWith(color: color));
+  }
+  Text bodyXsm({Color? color}) {
+    return _withStyle(CustomTypography.bodyXsm.copyWith(color: color));
+  }
 
   Text labelLg({
     Color? color,
     TextDecoration? decoration,
     Color? decorationColor,
+
   }) {
     return _withStyle(CustomTypography.labelLg.copyWith(color: color));
   }

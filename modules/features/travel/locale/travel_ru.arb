@@ -56,5 +56,8 @@
   "warning": "Предупреждение",
   "guest_chose": "Выбор гостей",
   "distanceKm": "км",
-  "distanceM": "м"
+  "distanceM": "м",
+  "prayerTime": "{time, select, fajr{Фаджр} sunrise{Восход} dhuhr{Зухр} asr{Аср} maghrib{Магриб} isha{Иша} other{Намаз}}",
+  "prayerTimeTitle": "Время намаза",
+  "notifications": "Оповещения"
 }

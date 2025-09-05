@@ -6,20 +6,37 @@ abstract class AddCardState with _$AddCardState {
 
   const factory AddCardState({
     required String pan,
+    @Default([]) List<String> images,
+    String? selectedImage,
+    String? cardBrand,
     AddCardParams? params,
     AddCardNavState? navState,
     @Default(false) bool isLoading,
   }) = _AddCardState;
 
   bool hasDataSuccess() {
-    return pan.length >= 16 && params?.hasDataSuccess() == true;
+    final checkImage = images.isNotEmpty ? selectedImage != null : true;
+    return pan.length >= 16 && params?.hasDataSuccess() == true && checkImage;
   }
-  bool  get isExternal => params is AddCardExternalParams;
+
+  bool get isExternal => params is AddCardExternalParams;
+
+  String? get cardExpire {
+    if (params is AddCardExternalParams) {
+      final param = params as AddCardExternalParams;
+      return param.expiry;
+    } else if (params is AddCardOwnParams) {
+      final param = params as AddCardOwnParams;
+      return param.expiry;
+    }
+    return null;
+  }
 }
 
 @freezed
 abstract class AddCardParams with _$AddCardParams {
   const AddCardParams._();
+
   bool hasDataSuccess() {
     if (this is AddCardExternalParams) {
       final param = this as AddCardExternalParams;
@@ -45,10 +62,12 @@ abstract class AddCardParams with _$AddCardParams {
   }) = AddCardOwnParams;
 }
 
-
 @freezed
 abstract class AddCardNavState with _$AddCardNavState {
-  const factory AddCardNavState.verify({required int cardId}) = AddCardVerifyNavState;
+  const factory AddCardNavState.verify({required int cardId}) =
+      AddCardVerifyNavState;
+
   const factory AddCardNavState.error({String? message}) = AddCardErrorNavState;
+
   const factory AddCardNavState.completed() = AddCardCompletedNavState;
 }

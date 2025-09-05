@@ -16,7 +16,7 @@ import '../../interseptors/AppInterceptor.dart';
 abstract class NetworkModule {
   @lazySingleton
   Alice getAlice() {
-    return Alice();
+    return Alice(showInspectorOnShake: true);
   }
 
   @Named('baseUrl')
@@ -48,10 +48,11 @@ abstract class NetworkModule {
     // );
     dio.interceptors.add(AppInterceptor(preference, securityStorage));
     dio.interceptors.add(
-      TokenRefreshInterceptor(securityStorage: securityStorage),
+      TokenRefreshInterceptor(securityStorage: securityStorage,mainDio: dio),
     );
-    if (kDebugMode) {
+
       dio.interceptors.add(alice.getDioInterceptor());
+    if (kDebugMode) {
       dio.interceptors.add(PrettyDioLogger(requestBody: true));
     }
     dio.interceptors.add(ErrorInterceptor());

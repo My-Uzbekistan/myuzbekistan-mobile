@@ -10,7 +10,10 @@ class LauncherUtils {
       if (await canLaunchUrl(uri)) {
         launchUrl(
           uri,
-          mode: LaunchMode.externalApplication,
+          mode: LaunchMode.inAppWebView,
+          webViewConfiguration: const WebViewConfiguration(
+            enableJavaScript: true,
+          ),
         );
       }
     } catch (e) {

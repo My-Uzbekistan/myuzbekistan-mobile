@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 part 'app_color_extension.dart';
+
 part 'base/colors_model.dart';
+
 part 'dark/dark_colors.dart';
+
 part 'light/light_colors.dart';
 
 mixin AppColorTheme {
@@ -29,48 +32,32 @@ ThemeData _buildTheme(
   final defaultTextColor = colors.label.primary;
   return themeData.copyWith(
       brightness: brightness,
-
       colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)
           .copyWith(onPrimary: defaultTextColor, onSurface: defaultTextColor),
       scaffoldBackgroundColor: colors.background.base,
-      bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: colors.background.elevation1
-      ),
+      bottomSheetTheme:
+          BottomSheetThemeData(backgroundColor: colors.background.elevation1),
       dialogTheme: DialogThemeData(
-        backgroundColor: colors.background.elevation1Alt,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28))
-      ),
+          backgroundColor: colors.background.elevation1Alt,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(28))),
       appBarTheme: themeData.appBarTheme.copyWith(
-        surfaceTintColor: Colors.transparent,
-        iconTheme: IconThemeData(color: colors.label.primary),
+          surfaceTintColor: Colors.transparent,
+          iconTheme: IconThemeData(color: colors.label.primary),
           systemOverlayStyle: systemOverlayStyle.copyWith(
-            systemNavigationBarColor: colors.background.elevation1Alt,
-            systemNavigationBarContrastEnforced: true,
-          ),
-
-          // systemOverlayStyle:
-          // SystemUiOverlayStyle(
-          //   statusBarColor: Colors.transparent,
-          //     systemNavigationBarContrastEnforced: false,
-          //     systemNavigationBarColor: colors.colors.green,
-          //     systemNavigationBarIconBrightness: brightness == Brightness.light
-          //         ? Brightness.dark
-          //         : Brightness.light,
-          //     statusBarIconBrightness: brightness
-          //         == Brightness.light
-          //         ? Brightness.dark
-          //         : Brightness.light
-          // ),
+              systemNavigationBarColor: Colors.transparent,
+              systemNavigationBarContrastEnforced: false,
+              systemNavigationBarIconBrightness: brightness == Brightness.light
+                  ? Brightness.dark
+                  : Brightness.light),
           backgroundColor: colors.background.background,
           foregroundColor: colors.background.background,
           titleTextStyle:
               CustomTypography.labelLg.copyWith(color: defaultTextColor)),
-
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        selectedItemColor: colors.brandPrimary,
-        unselectedItemColor: colors.label.secondary,
-        backgroundColor: colors.background.elevation1Alt
-      ),
+          selectedItemColor: colors.brandPrimary,
+          unselectedItemColor: colors.label.secondary,
+          backgroundColor: colors.background.elevation1Alt),
       textTheme: TextTheme(
         displayLarge: CustomTypography.H1.copyWith(color: defaultTextColor),
         displayMedium: CustomTypography.H2.copyWith(color: defaultTextColor),

@@ -118,17 +118,83 @@ abstract class AppLocalizations {
   /// **'Finance'**
   String get nav_payment;
 
-  /// No description provided for @nav_transfer.
+  /// No description provided for @nav_services.
   ///
   /// In en, this message translates to:
-  /// **'Transfer'**
-  String get nav_transfer;
+  /// **'Services'**
+  String get nav_services;
 
   /// No description provided for @nav_more.
   ///
   /// In en, this message translates to:
   /// **'More'**
   String get nav_more;
+
+  /// No description provided for @catalogMyEsim.
+  ///
+  /// In en, this message translates to:
+  /// **'My eSIM'**
+  String get catalogMyEsim;
+
+  /// No description provided for @catalogTravelQuiz.
+  ///
+  /// In en, this message translates to:
+  /// **'Travel Quiz'**
+  String get catalogTravelQuiz;
+
+  /// No description provided for @catalogAviaTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Flight tickets'**
+  String get catalogAviaTickets;
+
+  /// No description provided for @catalogChargers.
+  ///
+  /// In en, this message translates to:
+  /// **'Chargers'**
+  String get catalogChargers;
+
+  /// No description provided for @catalogPoster.
+  ///
+  /// In en, this message translates to:
+  /// **'Poster'**
+  String get catalogPoster;
+
+  /// No description provided for @catalogTrainTickets.
+  ///
+  /// In en, this message translates to:
+  /// **'Train tickets'**
+  String get catalogTrainTickets;
+
+  /// No description provided for @catalogHotels.
+  ///
+  /// In en, this message translates to:
+  /// **'Hotels'**
+  String get catalogHotels;
+
+  /// No description provided for @catalogCottages.
+  ///
+  /// In en, this message translates to:
+  /// **'Cottages'**
+  String get catalogCottages;
+
+  /// No description provided for @catalogInsurance.
+  ///
+  /// In en, this message translates to:
+  /// **'Insurance'**
+  String get catalogInsurance;
+
+  /// No description provided for @catalogItemStatusNew.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get catalogItemStatusNew;
+
+  /// No description provided for @catalogItemStatusSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Soon'**
+  String get catalogItemStatusSoon;
 }
 
 class _AppLocalizationsDelegate

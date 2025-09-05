@@ -63,15 +63,20 @@ import 'app_localizations_uz.dart';
 /// be consistent with the languages listed in the FeatureTravelLocalizations.supportedLocales
 /// property.
 abstract class FeatureTravelLocalizations {
-  FeatureTravelLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  FeatureTravelLocalizations(String locale)
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
   static FeatureTravelLocalizations? of(BuildContext context) {
-    return Localizations.of<FeatureTravelLocalizations>(context, FeatureTravelLocalizations);
+    return Localizations.of<FeatureTravelLocalizations>(
+      context,
+      FeatureTravelLocalizations,
+    );
   }
 
-  static const LocalizationsDelegate<FeatureTravelLocalizations> delegate = _FeatureTravelLocalizationsDelegate();
+  static const LocalizationsDelegate<FeatureTravelLocalizations> delegate =
+      _FeatureTravelLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,18 +88,19 @@ abstract class FeatureTravelLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
+      <LocalizationsDelegate<dynamic>>[
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('en'),
     Locale('ru'),
-    Locale('uz')
+    Locale('uz'),
   ];
 
   /// No description provided for @nav_home.
@@ -414,37 +420,60 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'м'**
   String get distanceM;
+
+  /// No description provided for @prayerTime.
+  ///
+  /// In ru, this message translates to:
+  /// **'{time, select, fajr{Фаджр} sunrise{Восход} dhuhr{Зухр} asr{Аср} maghrib{Магриб} isha{Иша} other{Намаз}}'**
+  String prayerTime(String time);
+
+  /// No description provided for @prayerTimeTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Время намаза'**
+  String get prayerTimeTitle;
+
+  /// No description provided for @notifications.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оповещения'**
+  String get notifications;
 }
 
-class _FeatureTravelLocalizationsDelegate extends LocalizationsDelegate<FeatureTravelLocalizations> {
+class _FeatureTravelLocalizationsDelegate
+    extends LocalizationsDelegate<FeatureTravelLocalizations> {
   const _FeatureTravelLocalizationsDelegate();
 
   @override
   Future<FeatureTravelLocalizations> load(Locale locale) {
-    return SynchronousFuture<FeatureTravelLocalizations>(lookupFeatureTravelLocalizations(locale));
+    return SynchronousFuture<FeatureTravelLocalizations>(
+      lookupFeatureTravelLocalizations(locale),
+    );
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en', 'ru', 'uz'].contains(locale.languageCode);
+  bool isSupported(Locale locale) =>
+      <String>['en', 'ru', 'uz'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_FeatureTravelLocalizationsDelegate old) => false;
 }
 
 FeatureTravelLocalizations lookupFeatureTravelLocalizations(Locale locale) {
-
-
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'en': return FeatureTravelLocalizationsEn();
-    case 'ru': return FeatureTravelLocalizationsRu();
-    case 'uz': return FeatureTravelLocalizationsUz();
+    case 'en':
+      return FeatureTravelLocalizationsEn();
+    case 'ru':
+      return FeatureTravelLocalizationsRu();
+    case 'uz':
+      return FeatureTravelLocalizationsUz();
   }
 
   throw FlutterError(
     'FeatureTravelLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.'
+    'that was used.',
   );
 }

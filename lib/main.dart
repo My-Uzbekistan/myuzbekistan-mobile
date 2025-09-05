@@ -2,30 +2,30 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:finance/finance.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:more/more.dart';
+import 'package:navigation/navigation.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
+import 'package:uzbekistan_travel/core/utils/notification_service.dart';
 import 'di/injection.dart';
 import 'firebase_options.dart';
 import 'generated/locale/app_localizations.dart';
+
+AppLocale? currentLocale;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   await Hive.initFlutter();
   await configureInjection();
+  NotificationService().subscribeToTopic();
   runApp(const MyApp());
 }
 
@@ -39,6 +39,20 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        NotificationService().init();
+      });
+    });
+
+    GlobalHandler().setRefreshListener(() async {
+      appRootNavigatorKey.currentContext!.goNamed("invisiblePage");
+    });
+
+    GlobalHandler().setUnauthorizedListener(() async {
+      appRootNavigatorKey.currentContext!.goNamed(AppNavPath.more.authPage.name,
+          queryParameters: {"slideAlign": "vertical"});
+    });
     super.initState();
   }
 
@@ -73,13 +87,16 @@ class _MyAppState extends State<MyApp> {
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.appLocale?.locale,
               builder: (context, child) {
+                currentLocale = state.appLocale;
                 Intl.defaultLocale =
                     state.appLocale?.locale.languageCode.toString() ?? 'en';
-                return MediaQuery(
-                    data: MediaQuery.of(context).copyWith(
-                      textScaler: TextScaler.linear(1.0),
-                    ),
-                    child: child!);
+                return AnnotatedRegion<SystemUiOverlayStyle>(
+                    value: context.systemUiOverlyStyle,
+                    child: MediaQuery(
+                        data: MediaQuery.of(context).copyWith(
+                          textScaler: TextScaler.linear(1.0),
+                        ),
+                        child: child!));
               },
               routerConfig: routes,
             );

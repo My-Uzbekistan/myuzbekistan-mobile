@@ -23,6 +23,16 @@
   "action_delete": "O'chirish",
   "action_cancel": "Bekor qilish",
   "nearest_places": "Eng yaqin joylar",
+
   "currency_calculator": "Valyuta kalkulyatori",
-  "show_all_places": "Hammasi"
+  "all_places": "Barcha joylar",
+  "exchange_rates": "Valyuta kurslari",
+  "uzs":"Oʻzbek soʻmi",
+  "card_added_success_message":"Karta muvaffaqiyatli qo‘shildi.",
+  "card_remove_notice": "Kartangiz ilovadan o‘chiriladi",
+  "finance_title": "Moliya",
+  "all_exchange_rates": "Barcha valyuta kurslari",
+  "all_cards": "Barchasi",
+  "fiscalReceipt": "Soliq cheki"
+
 }

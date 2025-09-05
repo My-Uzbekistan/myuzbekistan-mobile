@@ -5,7 +5,9 @@
   "action_add": "Добавить",
   "action_close": "Закрыть",
   "action_done": "Готово",
-  "action_edit": "Изменить"
+  "action_edit": "Изменить",
+  "action_more": "Подробнее"
+
 
 
 }

@@ -15,35 +15,24 @@ class AddCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        color: Colors.transparent,
-
-        padding: EdgeInsets.symmetric(vertical: 8),
-        constraints: BoxConstraints(minHeight: 56),
-        child: Row(
-          spacing: 16,
-
-          children: [
-            Container(
-              height: 24,
-              width: 36,
-              decoration: BoxDecoration(
-                color: context.appColors.fill.tertiary,
-                borderRadius: BorderRadius.circular(3),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(3),
-                child: Assets.svgIconPlus.toSvgImage(),
-              ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(24),
+        child: Container(
+          width: double.infinity,
+          color: context.appColors.fill.tertiary,
+          constraints: BoxConstraints(
+            minHeight: 96,
+          ),
+          child: Center(
+            child: Column(
+              spacing: 6,
+              children: [
+                Assets.svgIconPlus.toSvgImage(
+                    tintColor: context.appColors.textIconColor.primary),
+                Text(context.localization.addCard).labelMd()
+              ],
             ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 2,
-                children: [Text(context.localization.addCard).bodyLg()],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

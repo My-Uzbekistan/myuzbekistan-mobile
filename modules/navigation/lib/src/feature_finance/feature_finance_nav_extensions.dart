@@ -17,10 +17,20 @@ class FeatureFinanceNavExtension {
     );
   }
 
-  void pushMerchantPage({required String id}) {
+  void pushMerchantPage({
+    required String id,
+    String? amount,
+    Completer<bool>? extra,
+  }) {
     _context.pushType(
       AppNavPath.finance.financePayment,
       pathParameters: {"id": id},
+      queryParameters: amount != null ? {"amount": amount} : {},
+      extra: extra,
     );
+  }
+
+  void pushQrCoderReaderPage() {
+    _context.pushType(AppNavPath.finance.qrReaderPage);
   }
 }

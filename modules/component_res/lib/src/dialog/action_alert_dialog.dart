@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 void showActionAlertDialog(
   BuildContext context, {
-   String? title,
+  String? title,
   final String? message,
   final String? firstActionText,
   final String? secondActionText,
@@ -20,7 +20,7 @@ void showActionAlertDialog(
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (context) => ActionAlertdialog(
-            title: title??context.coreLocalization.unexpected_error_title,
+            title: title ?? context.coreLocalization.unexpected_error_title,
             contentText: message,
             firstBtnText: firstActionText,
             secondBtnText: secondActionText,
@@ -59,112 +59,47 @@ class ActionAlertdialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isIOS
-        ? CupertinoTheme(
-            data: CupertinoThemeData(
-              primaryColor: context.appColors.colors.blue,
+    return AlertDialog(
+      backgroundColor: context.appColors.background.elevation2,
+      title: null,
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        spacing: 10,
+        children: [
+          Text(title).h3(color: context.appColors.textIconColor.primary),
+          Text(
+            contentText!,
+            textAlign: TextAlign.start,
+          ).bodyMd(color: context.appColors.textIconColor.primary),
+        ],
+      ),
+      actionsPadding: EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 20),
+      buttonPadding: EdgeInsets.zero,
+      titlePadding: EdgeInsets.symmetric(horizontal: 24).copyWith(top: 24),
+      contentPadding:
+          EdgeInsets.symmetric(horizontal: 20).copyWith(top: 20, bottom: 24),
+      actions: [
+        AppActionButton(
+          actionText: firstBtnText ?? context.coreLocalization.action_close,
+          contentColor: firstButtonTextColor,
+          onPressed: onFirstButtonClick,
+          type: ActionButtonType.secondary,
+        ),
+        if (secondBtnText != null)
+          Padding(
+            padding: EdgeInsets.only(top: 10),
+            child: AppActionButton(
+              actionText:
+                  secondBtnText ?? context.coreLocalization.action_close,
+              contentColor: secondBtnTextColor,
+              onPressed: onSecondButtonClick,
+              type: ActionButtonType.secondary,
             ),
-            child: Builder(builder: (context) {
-              return CupertinoAlertDialog(
-                title: Text(title).labelLg(),
-                content: content(
-                  context,
-                ),
-                actions: [
-                  CupertinoDialogAction(
-                    textStyle: CustomTypography.bodyLg
-                        .copyWith(color: firstButtonTextColor),
-                    child: Text(
-                      firstBtnText ?? context.coreLocalization.action_close,
-                    ),
-                    onPressed: () {
-                      onFirstButtonClick?.call();
-                    },
-                  ),
-                  if (secondBtnText != null)
-                    CupertinoDialogAction(
-                      textStyle: CustomTypography.bodyLg
-                          .copyWith(color: secondBtnTextColor),
-                      child: Text(
-                        secondBtnText!,
-                      ),
-                      onPressed: () {
-                        onSecondButtonClick?.call();
-                      },
-                    )
-                ],
-              );
-            }))
-        : AlertDialog(
-            backgroundColor: context.appColors.background.elevation1Alt,
-            title: Text(
-              title,
-              textAlign: TextAlign.start,
-            ).bodyLg(),
-            content: content(context),
-            actionsPadding: EdgeInsets.symmetric(horizontal: 20)
-                .copyWith(bottom: 20, top: 12),
-            buttonPadding: EdgeInsets.zero,
-            titlePadding:
-                EdgeInsets.symmetric(horizontal: 24).copyWith(top: 24),
-            contentPadding: EdgeInsets.symmetric(horizontal: 24),
-            actions: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child: TextButton(
-                  isSemanticButton: false,
-                  onPressed: () {
-                    onFirstButtonClick?.call();
-                  },
-                  style: TextButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 4),
-                      elevation: 0,
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      minimumSize: Size(0, 40),
-                      foregroundColor:
-                          firstButtonTextColor ?? context.appColors.colors.blue,
-                      textStyle: CustomTypography.labelMd.copyWith(),
-                      shape: RoundedRectangleBorder(),
-                      overlayColor: Colors.transparent),
-                  child: Text(
-                    firstBtnText ?? context.coreLocalization.action_close,
-                  ),
-                ),
-              ),
-              if (secondBtnText != null)
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 4),
-                  child: TextButton(
-                    isSemanticButton: false,
-                    onPressed: () {
-                      onSecondButtonClick?.call();
-                    },
-                    style: TextButton.styleFrom(
-                        padding: EdgeInsets.symmetric(horizontal: 4),
-                        elevation: 0,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        minimumSize: Size(0, 40),
-                        foregroundColor:
-                            secondBtnTextColor ?? context.appColors.colors.blue,
-                        textStyle: CustomTypography.labelMd.copyWith(),
-                        shape: RoundedRectangleBorder(),
-                        overlayColor: Colors.transparent),
-                    child: Text(secondBtnText!),
-                  ),
-                )
-
-              // TextButton(
-              //   onPressed: () {},
-              //   child: Text("Action1"),
-              //   style: TextButton.styleFrom(
-              //       elevation: 0,
-              //       padding: EdgeInsets.zero,
-              //       minimumSize: Size(60, 40),
-              //       overlayColor: Colors.transparent),
-              // ),
-            ],
-            actionsOverflowDirection: VerticalDirection.down,
-          );
+          ),
+      ],
+      actionsOverflowDirection: VerticalDirection.down,
+    );
   }
 
   Widget content(BuildContext context) {
@@ -173,8 +108,8 @@ class ActionAlertdialog extends StatelessWidget {
         padding: EdgeInsets.only(top: 8),
         child: Text(
           contentText!,
-          textAlign: TextAlign.center,
-        ).bodySm(color: context.appColors.textIconColor.primary),
+          textAlign: TextAlign.start,
+        ).bodyMd(color: context.appColors.textIconColor.primary),
       );
     }
     return SizedBox();

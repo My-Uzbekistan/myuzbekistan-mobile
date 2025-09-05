@@ -26,6 +26,16 @@ export 'package:keyboard_actions/keyboard_actions.dart';
 export 'package:mobile_scanner/mobile_scanner.dart';
 
 export 'package:intl/intl.dart' show DateFormat,Intl;
+export 'package:package_info_plus/package_info_plus.dart';
+
+export 'package:fluttertoast/fluttertoast.dart';
+export 'package:flutter_inappwebview/flutter_inappwebview.dart' hide Disposable;
+
+export 'package:firebase_core/firebase_core.dart';
+export 'package:firebase_messaging/firebase_messaging.dart';
+export 'package:firebase_analytics/firebase_analytics.dart';
+export 'package:device_info_plus/device_info_plus.dart';
+
 // export 'package:flutter_alice/alice.dart';
 
 

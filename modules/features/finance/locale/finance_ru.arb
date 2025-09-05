@@ -6,7 +6,7 @@
 
   "cardAddSmsSent": "Отправили SMS с кодом подтверждения для добавления банковской карты",
   "payment_success": "Оплата прошла успешно",
-  "payment_method": "Payment method",
+  "payment_method_title": "Способ оплаты",
   "my_cards_title": "Мои карты",
   "payment_history_title":"История",
   "payment_qr_title": "QR Платёж",
@@ -26,7 +26,17 @@
   "action_cancel": "Отмена",
   "nearest_places": "Ближайшие места",
   "currency_calculator": "Калькулятор валют",
-  "show_all_places": "Список мест"
+  "all_places": "Все места",
+  "exchange_rates": "Курсы валют",
+  "uzs":"Узбекский сум",
+  "card_added_success_message":"Карта успешно добавлена.",
+  "card_remove_notice": "Ваша карта будет удалена из приложения",
+  "finance_title": "Финансы",
+  "all_exchange_rates": "Все курсы валют",
+  "all_cards": "Все карты",
+  "fiscalReceipt": "Фискальный чек"
+
+
 
 
 }

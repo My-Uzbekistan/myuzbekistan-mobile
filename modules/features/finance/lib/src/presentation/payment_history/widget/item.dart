@@ -55,6 +55,8 @@ class HistoryItem extends StatelessWidget {
                 width: 40,
                 child: ExtendedImage.network(
                   itemUiModel.iconUrl.orEmpty(),
+                  colorBlendMode: BlendMode.hardLight,
+                  color: context.appColors.fill.quaternary,
                   loadStateChanged: (state) {
                     switch (state.extendedImageLoadState) {
                       case LoadState.completed:

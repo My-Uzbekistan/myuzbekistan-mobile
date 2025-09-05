@@ -6,11 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class PaymentSuccessPageParams {
-  final Merchant merchant;
+  final MerchantItem merchant;
   final int amount;
   final String paymentId;
 
-  const PaymentSuccessPageParams({required this.merchant, required this.amount,required this.paymentId});
+  const PaymentSuccessPageParams({
+    required this.merchant,
+    required this.amount,
+    required this.paymentId,
+  });
 }
 
 class PaymentSuccessPage extends StatefulWidget {
@@ -43,15 +47,16 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
 
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(24),
                         child: Container(
-                          color:  context.appColors.fill.quaternary,
+                          color: context.appColors.fill.quaternary,
                           child: ExtendedImage.network(
-                            widget.params.merchant.logo??"",
+                            widget.params.merchant.icon ?? "",
                             width: 80,
                             height: 80,
                             fit: BoxFit.fill,
                             colorBlendMode: BlendMode.hardLight,
+                            color: context.appColors.fill.quaternary,
 
                             loadStateChanged: (state) {
                               switch (state.extendedImageLoadState) {
@@ -93,7 +98,7 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
                   Column(
                     spacing: 6,
                     children: [
-                      Text(context.localization.payment_success).h3(),
+                      Text(context.localization.payment_success,textAlign: TextAlign.center,).h3(),
                       Text(
                         "-${context.localization.currency(widget.params.amount.amountFormatted())}",
                       ).bodyLg(

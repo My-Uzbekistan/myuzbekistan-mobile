@@ -68,14 +68,14 @@ mixin CustomTypography {
   static TextStyle bodyXsm = _defaultFont.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      height: 16 / 12,
+      height: 14 / 12,
 
 
   );
   static TextStyle bodyXXsm = _defaultFont.copyWith(
       fontSize: 11,
       fontWeight: FontWeight.w500,
-      height: 14 / 11,
+      height: 13 / 11,
 
   );
 }

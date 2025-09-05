@@ -31,29 +31,23 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String lanItem(String lang) {
-    String _temp0 = intl.Intl.selectLogic(
-      lang,
-      {
-        'en': 'English',
-        'ru': 'Russian',
-        'uz': 'Uzbek',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(lang, {
+      'en': 'English',
+      'ru': 'Russian',
+      'uz': 'Uzbek',
+      'other': '',
+    });
     return '$_temp0';
   }
 
   @override
   String themeModes(String theme) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme,
-      {
-        'system': 'System',
-        'light': 'Light',
-        'dark': 'Dark',
-        'other': '',
-      },
-    );
+    String _temp0 = intl.Intl.selectLogic(theme, {
+      'system': 'System',
+      'light': 'Light',
+      'dark': 'Dark',
+      'other': '',
+    });
     return '$_temp0';
   }
 
@@ -80,7 +74,8 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   String get logout => 'Logout';
 
   @override
-  String get getStartedDescription => 'Get full access to opportunities, as well as keep your favorite things';
+  String get getStartedDescription =>
+      'Get full access to opportunities, as well as keep your favorite things';
 
   @override
   String get continueWithGoogle => 'Continue with Google';
@@ -194,4 +189,24 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get distanceM => 'm';
+
+  @override
+  String prayerTime(String time) {
+    String _temp0 = intl.Intl.selectLogic(time, {
+      'fajr': 'Fajr',
+      'sunrise': 'Sunrise',
+      'dhuhr': 'Dhuhr',
+      'asr': 'Asr',
+      'maghrib': 'Maghrib',
+      'isha': 'Isha',
+      'other': 'Prayer',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get prayerTimeTitle => 'Prayer Times';
+
+  @override
+  String get notifications => 'Notifications';
 }

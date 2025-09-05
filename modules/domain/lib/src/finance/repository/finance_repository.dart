@@ -10,6 +10,7 @@ abstract class FinanceRepository {
     String phoneNumber = "",
     String cardHolderName = "",
     String cvv = "",
+    String? image,
   });
 
   Future<void> confirmCard({required String cardId, required String otp});
@@ -19,13 +20,14 @@ abstract class FinanceRepository {
     CancelToken? cancelToken,
   });
 
-  Future<List<CardColor>> loadCardColors();
+  Future<List<String>> cardImages();
 
   Future<List<CardItem>> cards();
 
   Future<void> deleteCard({required int cardId});
 
   Future<List<Merchant>> merchants();
+  Future<List<GroupBy<Merchant>>> groupByMerchants();
 
   Future<Merchant> paymentMerchant({required String merchantId});
 

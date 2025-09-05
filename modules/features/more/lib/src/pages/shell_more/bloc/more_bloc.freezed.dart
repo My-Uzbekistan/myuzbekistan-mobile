@@ -55,13 +55,12 @@ extension MoreEventPatterns on MoreEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MoreEventInit value)?  init,TResult Function( _MoreEventFetch value)?  fetch,TResult Function( _MoreEventFetchCurrency value)?  fetchCurrencies,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MoreEventFetch value)?  fetch,TResult Function( _MoreCheckedPrayerWidget value)?  checkedPrayerWidget,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _MoreEventInit() when init != null:
-return init(_that);case _MoreEventFetch() when fetch != null:
-return fetch(_that);case _MoreEventFetchCurrency() when fetchCurrencies != null:
-return fetchCurrencies(_that);case _:
+case _MoreEventFetch() when fetch != null:
+return fetch(_that);case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
+return checkedPrayerWidget(_that);case _:
   return orElse();
 
 }
@@ -79,13 +78,12 @@ return fetchCurrencies(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MoreEventInit value)  init,required TResult Function( _MoreEventFetch value)  fetch,required TResult Function( _MoreEventFetchCurrency value)  fetchCurrencies,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MoreEventFetch value)  fetch,required TResult Function( _MoreCheckedPrayerWidget value)  checkedPrayerWidget,}){
 final _that = this;
 switch (_that) {
-case _MoreEventInit():
-return init(_that);case _MoreEventFetch():
-return fetch(_that);case _MoreEventFetchCurrency():
-return fetchCurrencies(_that);case _:
+case _MoreEventFetch():
+return fetch(_that);case _MoreCheckedPrayerWidget():
+return checkedPrayerWidget(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +100,12 @@ return fetchCurrencies(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MoreEventInit value)?  init,TResult? Function( _MoreEventFetch value)?  fetch,TResult? Function( _MoreEventFetchCurrency value)?  fetchCurrencies,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MoreEventFetch value)?  fetch,TResult? Function( _MoreCheckedPrayerWidget value)?  checkedPrayerWidget,}){
 final _that = this;
 switch (_that) {
-case _MoreEventInit() when init != null:
-return init(_that);case _MoreEventFetch() when fetch != null:
-return fetch(_that);case _MoreEventFetchCurrency() when fetchCurrencies != null:
-return fetchCurrencies(_that);case _:
+case _MoreEventFetch() when fetch != null:
+return fetch(_that);case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
+return checkedPrayerWidget(_that);case _:
   return null;
 
 }
@@ -125,12 +122,11 @@ return fetchCurrencies(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function()?  fetch,TResult Function()?  fetchCurrencies,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetch,TResult Function()?  checkedPrayerWidget,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _MoreEventInit() when init != null:
-return init();case _MoreEventFetch() when fetch != null:
-return fetch();case _MoreEventFetchCurrency() when fetchCurrencies != null:
-return fetchCurrencies();case _:
+case _MoreEventFetch() when fetch != null:
+return fetch();case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
+return checkedPrayerWidget();case _:
   return orElse();
 
 }
@@ -148,12 +144,11 @@ return fetchCurrencies();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function()  fetch,required TResult Function()  fetchCurrencies,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetch,required TResult Function()  checkedPrayerWidget,}) {final _that = this;
 switch (_that) {
-case _MoreEventInit():
-return init();case _MoreEventFetch():
-return fetch();case _MoreEventFetchCurrency():
-return fetchCurrencies();case _:
+case _MoreEventFetch():
+return fetch();case _MoreCheckedPrayerWidget():
+return checkedPrayerWidget();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,50 +165,17 @@ return fetchCurrencies();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function()?  fetch,TResult? Function()?  fetchCurrencies,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetch,TResult? Function()?  checkedPrayerWidget,}) {final _that = this;
 switch (_that) {
-case _MoreEventInit() when init != null:
-return init();case _MoreEventFetch() when fetch != null:
-return fetch();case _MoreEventFetchCurrency() when fetchCurrencies != null:
-return fetchCurrencies();case _:
+case _MoreEventFetch() when fetch != null:
+return fetch();case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
+return checkedPrayerWidget();case _:
   return null;
 
 }
 }
 
 }
-
-/// @nodoc
-
-
-class _MoreEventInit implements MoreEvent {
-   _MoreEventInit();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MoreEventInit);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'MoreEvent.init()';
-}
-
-
-}
-
-
-
 
 /// @nodoc
 
@@ -250,8 +212,8 @@ String toString() {
 /// @nodoc
 
 
-class _MoreEventFetchCurrency implements MoreEvent {
-   _MoreEventFetchCurrency();
+class _MoreCheckedPrayerWidget implements MoreEvent {
+   _MoreCheckedPrayerWidget();
   
 
 
@@ -261,7 +223,7 @@ class _MoreEventFetchCurrency implements MoreEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MoreEventFetchCurrency);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MoreCheckedPrayerWidget);
 }
 
 
@@ -270,7 +232,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'MoreEvent.fetchCurrencies()';
+  return 'MoreEvent.checkedPrayerWidget()';
 }
 
 
@@ -282,30 +244,64 @@ String toString() {
 /// @nodoc
 mixin _$MoreState {
 
-
+ List<MoreItem> get abouts; List<MoreItem> get useFull; bool get prayerWidgetChecked; bool get isLoading;
+/// Create a copy of MoreState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$MoreStateCopyWith<MoreState> get copyWith => _$MoreStateCopyWithImpl<MoreState>(this as MoreState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreState&&const DeepCollectionEquality().equals(other.abouts, abouts)&&const DeepCollectionEquality().equals(other.useFull, useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(abouts),const DeepCollectionEquality().hash(useFull),prayerWidgetChecked,isLoading);
 
 @override
 String toString() {
-  return 'MoreState()';
+  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, isLoading: $isLoading)';
 }
 
 
 }
 
 /// @nodoc
-class $MoreStateCopyWith<$Res>  {
-$MoreStateCopyWith(MoreState _, $Res Function(MoreState) __);
+abstract mixin class $MoreStateCopyWith<$Res>  {
+  factory $MoreStateCopyWith(MoreState value, $Res Function(MoreState) _then) = _$MoreStateCopyWithImpl;
+@useResult
+$Res call({
+ List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool isLoading
+});
+
+
+
+
+}
+/// @nodoc
+class _$MoreStateCopyWithImpl<$Res>
+    implements $MoreStateCopyWith<$Res> {
+  _$MoreStateCopyWithImpl(this._self, this._then);
+
+  final MoreState _self;
+  final $Res Function(MoreState) _then;
+
+/// Create a copy of MoreState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? isLoading = null,}) {
+  return _then(_self.copyWith(
+abouts: null == abouts ? _self.abouts : abouts // ignore: cast_nullable_to_non_nullable
+as List<MoreItem>,useFull: null == useFull ? _self.useFull : useFull // ignore: cast_nullable_to_non_nullable
+as List<MoreItem>,prayerWidgetChecked: null == prayerWidgetChecked ? _self.prayerWidgetChecked : prayerWidgetChecked // ignore: cast_nullable_to_non_nullable
+as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
 }
 
 
@@ -323,12 +319,11 @@ extension MoreStatePatterns on MoreState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( MoreLoadingState value)?  loading,TResult Function( MoreDataState value)?  dataState,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( MoreDataState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case MoreLoadingState() when loading != null:
-return loading(_that);case MoreDataState() when dataState != null:
-return dataState(_that);case _:
+case MoreDataState() when $default != null:
+return $default(_that);case _:
   return orElse();
 
 }
@@ -346,12 +341,11 @@ return dataState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( MoreLoadingState value)  loading,required TResult Function( MoreDataState value)  dataState,}){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( MoreDataState value)  $default,){
 final _that = this;
 switch (_that) {
-case MoreLoadingState():
-return loading(_that);case MoreDataState():
-return dataState(_that);case _:
+case MoreDataState():
+return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -368,12 +362,11 @@ return dataState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( MoreLoadingState value)?  loading,TResult? Function( MoreDataState value)?  dataState,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( MoreDataState value)?  $default,){
 final _that = this;
 switch (_that) {
-case MoreLoadingState() when loading != null:
-return loading(_that);case MoreDataState() when dataState != null:
-return dataState(_that);case _:
+case MoreDataState() when $default != null:
+return $default(_that);case _:
   return null;
 
 }
@@ -390,11 +383,10 @@ return dataState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  List<Currency> currencies)?  dataState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case MoreLoadingState() when loading != null:
-return loading();case MoreDataState() when dataState != null:
-return dataState(_that.abouts,_that.useFull,_that.currencies);case _:
+case MoreDataState() when $default != null:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading);case _:
   return orElse();
 
 }
@@ -412,11 +404,10 @@ return dataState(_that.abouts,_that.useFull,_that.currencies);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  List<Currency> currencies)  dataState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading)  $default,) {final _that = this;
 switch (_that) {
-case MoreLoadingState():
-return loading();case MoreDataState():
-return dataState(_that.abouts,_that.useFull,_that.currencies);case _:
+case MoreDataState():
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -433,11 +424,10 @@ return dataState(_that.abouts,_that.useFull,_that.currencies);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<MoreItem> abouts,  List<MoreItem> useFull,  List<Currency> currencies)?  dataState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading)?  $default,) {final _that = this;
 switch (_that) {
-case MoreLoadingState() when loading != null:
-return loading();case MoreDataState() when dataState != null:
-return dataState(_that.abouts,_that.useFull,_that.currencies);case _:
+case MoreDataState() when $default != null:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading);case _:
   return null;
 
 }
@@ -448,67 +438,30 @@ return dataState(_that.abouts,_that.useFull,_that.currencies);case _:
 /// @nodoc
 
 
-class MoreLoadingState implements MoreState {
-   MoreLoadingState();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreLoadingState);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'MoreState.loading()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
 class MoreDataState implements MoreState {
-   MoreDataState({final  List<MoreItem> abouts = const [], final  List<MoreItem> useFull = const [], final  List<Currency> currencies = const []}): _abouts = abouts,_useFull = useFull,_currencies = currencies;
+   MoreDataState({final  List<MoreItem> abouts = const [], final  List<MoreItem> useFull = const [], this.prayerWidgetChecked = false, this.isLoading = true}): _abouts = abouts,_useFull = useFull;
   
 
  final  List<MoreItem> _abouts;
-@JsonKey() List<MoreItem> get abouts {
+@override@JsonKey() List<MoreItem> get abouts {
   if (_abouts is EqualUnmodifiableListView) return _abouts;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_abouts);
 }
 
  final  List<MoreItem> _useFull;
-@JsonKey() List<MoreItem> get useFull {
+@override@JsonKey() List<MoreItem> get useFull {
   if (_useFull is EqualUnmodifiableListView) return _useFull;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_useFull);
 }
 
- final  List<Currency> _currencies;
-@JsonKey() List<Currency> get currencies {
-  if (_currencies is EqualUnmodifiableListView) return _currencies;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_currencies);
-}
-
+@override@JsonKey() final  bool prayerWidgetChecked;
+@override@JsonKey() final  bool isLoading;
 
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
+@override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $MoreDataStateCopyWith<MoreDataState> get copyWith => _$MoreDataStateCopyWithImpl<MoreDataState>(this, _$identity);
 
@@ -516,16 +469,16 @@ $MoreDataStateCopyWith<MoreDataState> get copyWith => _$MoreDataStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreDataState&&const DeepCollectionEquality().equals(other._abouts, _abouts)&&const DeepCollectionEquality().equals(other._useFull, _useFull)&&const DeepCollectionEquality().equals(other._currencies, _currencies));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreDataState&&const DeepCollectionEquality().equals(other._abouts, _abouts)&&const DeepCollectionEquality().equals(other._useFull, _useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_abouts),const DeepCollectionEquality().hash(_useFull),const DeepCollectionEquality().hash(_currencies));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_abouts),const DeepCollectionEquality().hash(_useFull),prayerWidgetChecked,isLoading);
 
 @override
 String toString() {
-  return 'MoreState.dataState(abouts: $abouts, useFull: $useFull, currencies: $currencies)';
+  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, isLoading: $isLoading)';
 }
 
 
@@ -534,9 +487,9 @@ String toString() {
 /// @nodoc
 abstract mixin class $MoreDataStateCopyWith<$Res> implements $MoreStateCopyWith<$Res> {
   factory $MoreDataStateCopyWith(MoreDataState value, $Res Function(MoreDataState) _then) = _$MoreDataStateCopyWithImpl;
-@useResult
+@override @useResult
 $Res call({
- List<MoreItem> abouts, List<MoreItem> useFull, List<Currency> currencies
+ List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool isLoading
 });
 
 
@@ -553,12 +506,13 @@ class _$MoreDataStateCopyWithImpl<$Res>
 
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? abouts = null,Object? useFull = null,Object? currencies = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? isLoading = null,}) {
   return _then(MoreDataState(
 abouts: null == abouts ? _self._abouts : abouts // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,useFull: null == useFull ? _self._useFull : useFull // ignore: cast_nullable_to_non_nullable
-as List<MoreItem>,currencies: null == currencies ? _self._currencies : currencies // ignore: cast_nullable_to_non_nullable
-as List<Currency>,
+as List<MoreItem>,prayerWidgetChecked: null == prayerWidgetChecked ? _self.prayerWidgetChecked : prayerWidgetChecked // ignore: cast_nullable_to_non_nullable
+as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

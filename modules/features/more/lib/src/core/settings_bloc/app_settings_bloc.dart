@@ -11,11 +11,10 @@ part 'app_settings_bloc_state.dart';
 @injectable
 class AppSettingsBloc extends Bloc<AppSettingsBlocEvent, AppSettingsBlocState> {
   final AppPreference _appPreference;
-  final AppStatusChangeListeners _appSettingsChangeListener;
 
-  AppSettingsBloc(AppPreference appPreference, AppStatusChangeListeners chl)
+  AppSettingsBloc(AppPreference appPreference)
     : _appPreference = appPreference,
-      _appSettingsChangeListener = chl,
+
       super(
         AppSettingsBlocState(
           appPreference.getLocale(),
@@ -32,11 +31,10 @@ class AppSettingsBloc extends Bloc<AppSettingsBlocEvent, AppSettingsBlocState> {
   ) async {
     await _appPreference.setLocale(event.locale);
     if (state.appLocale != event.locale) {
-      _appSettingsChangeListener.refresh();
+      GlobalHandler().refreshListener?.call();
     }
     emitter(state.copyWith(appLocale: event.locale));
   }
-
   Future<void> _setTheme(
     _SetThemeEvent event,
     Emitter<AppSettingsBlocState> emitter,

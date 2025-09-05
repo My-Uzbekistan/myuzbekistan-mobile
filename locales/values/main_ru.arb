@@ -1,8 +1,21 @@
 {
   "nav_home": "Главная",
   "nav_map": "Карта",
-  "nav_transfer": "Перевод",
+  "nav_services": "Сервисы",
   "nav_payment": "Финансы",
-  "nav_more": "Еще"
+  "nav_more": "Еще",
+
+
+  "catalogMyEsim": "My eSim",
+  "catalogTravelQuiz": "Travel Quiz",
+  "catalogAviaTickets": "Авиабилеты",
+  "catalogChargers": "Зарядки",
+  "catalogPoster": "Афиша",
+  "catalogTrainTickets": "ЖД билеты",
+  "catalogHotels": "Отели",
+  "catalogCottages": "Дачи",
+  "catalogInsurance": "Страховка",
+  "catalogItemStatusNew": "Новое",
+  "catalogItemStatusSoon": "Скоро"
 
 }

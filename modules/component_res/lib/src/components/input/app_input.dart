@@ -35,7 +35,7 @@ class AppInputField extends HookWidget {
   Widget build(BuildContext context) {
     final textController = controller ?? useTextEditingController();
     final isNotEmpty = useState(false);
-    final _focusNode = focusNode??useFocusNode();
+    final _focusNode = focusNode ?? useFocusNode();
     final isFocused = useState(false);
 
     final internSupportText = errorText ?? supportText;
@@ -70,9 +70,12 @@ class AppInputField extends HookWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          constraints: BoxConstraints(
+            minHeight: 56,
+          ),
           padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
             color: containerColor,
           ),
           child: IntrinsicHeight(

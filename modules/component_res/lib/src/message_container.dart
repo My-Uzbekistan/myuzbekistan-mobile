@@ -14,7 +14,7 @@ mixin class MessageContainer {
   static Widget notFoundWidget(BuildContext context,
       {required String title, required String caption}) {
     return _MessageContainerWidget(
-      icon: Assets.svgTabIconHome.toSvgImage(
+      icon: Assets.svgIconSearch.toSvgImage(
           colorFilter:
               ColorFilter.mode(context.appColors.brand, BlendMode.srcIn)),
       title: title,

@@ -1,4 +1,3 @@
-
 import 'package:data/src/finance/src/models/merchant_dto.dart';
 import 'package:data/src/utils/convertors/date_time_converter.dart';
 import 'package:domain/domain.dart';
@@ -7,19 +6,16 @@ import 'package:shared/shared.dart';
 import '../payment_history/payment_history.dart';
 
 part 'transaction_item_dto.g.dart';
+
 @JsonSerializable()
 class KeyValueDto {
   final String key;
   final String value;
 
-  KeyValueDto({
-    required this.key,
-    required this.value,
-  });
+  KeyValueDto({required this.key, required this.value});
 
   factory KeyValueDto.fromJson(Map<String, dynamic> json) =>
       _$KeyValueDtoFromJson(json);
-
 }
 
 @JsonSerializable()
@@ -29,6 +25,7 @@ class TransactionItemDto {
   final DateTime date;
   final String paymentId;
   final int amount;
+  final String? taxQr;
   final MerchantItemDto merchant;
 
   TransactionItemDto({
@@ -37,6 +34,7 @@ class TransactionItemDto {
     required this.paymentId,
     required this.amount,
     required this.merchant,
+    this.taxQr,
   });
 
   factory TransactionItemDto.fromJson(Map<String, dynamic> json) =>
@@ -47,7 +45,7 @@ class TransactionItemDto {
     date: date,
     paymentId: paymentId,
     amount: amount,
+    taxQr: taxQr,
     merchant: merchant.toDomain(),
   );
-
 }

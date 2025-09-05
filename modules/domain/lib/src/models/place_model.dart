@@ -75,7 +75,7 @@ const  MainPageContent({
 
   String? get mainPhoto => photo ?? photos.firstOrNull;
 
-  String? get contentAddress => (address ?? region)?.split(" ").firstOrNull;
+  String? get contentAddress => (address ?? region);
 
   double? get distanceKm => distance != null ? distance! / 1000 : null;
 

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 extension WidgetsSh on Widget {
   Widget shadow(BuildContext context,
-      {Color? backgroundColor, BorderRadius? borderRadius}) {
+      {Color? backgroundColor,
+      BorderRadius? borderRadius,
+      bool hideShadow = false}) {
     return RepaintBoundary(
       child: Container(
         clipBehavior: Clip.none,

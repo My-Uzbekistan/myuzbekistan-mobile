@@ -1,35 +1,29 @@
+import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
 class CalculatorData extends Equatable {
-  final double? currentExchangeRate;
+  final Currency? from;
+  final Currency? to;
   final double value;
-  CalculatorExchangeType type;
 
-  CalculatorData({
-    this.currentExchangeRate,
-    this.value = 1,
-    this.type = CalculatorExchangeType.usdToUzs,
-  });
+  const CalculatorData({this.from, this.to, this.value = 1});
 
-  CalculatorData copyWith({
-    double? currentExchangeRate,
-    double? value,
-    CalculatorExchangeType? type,
-  }) {
+  CalculatorData copyWith({Currency? from, double? value, Currency? to}) {
     return CalculatorData(
-      currentExchangeRate: currentExchangeRate ?? this.currentExchangeRate,
       value: value ?? this.value,
-      type: type ?? this.type,
+      from: from ?? this.from,
+      to: to ?? this.to,
     );
   }
 
-  bool get isUsdToUzs => type == CalculatorExchangeType.usdToUzs;
-
-  String get result =>
-      ( isUsdToUzs ? currentExchangeRate! * value : value / currentExchangeRate!).amountFormatted(withRemain: !isUsdToUzs);
+  String get result {
+    if (from?.rate == null || to?.rate == null) return "";
+    final calculated = value * (from!.rateToDouble() / to!.rateToDouble());
+    return calculated.amountFormatted(withRemain: true);
+  }
 
   @override
-  List<Object?> get props => [currentExchangeRate, value, type];
+  List<Object?> get props => [from, to, value];
 }
 
 enum CalculatorExchangeType { uzsToUsd, usdToUzs }
@@ -37,12 +31,16 @@ enum CalculatorExchangeType { uzsToUsd, usdToUzs }
 class CurrencyCalculatorCubit extends Cubit<CalculatorData> {
   CurrencyCalculatorCubit() : super(CalculatorData());
 
-  void setCurrentExchangeRate(double currentRate) {
-    emit(state.copyWith(currentExchangeRate: currentRate));
+  void changeFromTo() {
+    emit(state.copyWith(from: state.to, to: state.from));
   }
 
-  void setExchangeType(CalculatorExchangeType type) {
-    emit(state.copyWith(type: type));
+  void setFrom(Currency from) {
+    emit(state.copyWith(from: from));
+  }
+
+  void setTo(Currency to) {
+    emit(state.copyWith(to: to));
   }
 
   void setValue(double value) {

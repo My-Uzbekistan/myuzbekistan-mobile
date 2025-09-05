@@ -8,6 +8,8 @@ class CardItem {
   final String? cardNumber;
   final String? icon;
   final String? ps;
+  final String? expiry;
+  final String? image;
 
   CardItem({
     required this.id,
@@ -17,15 +19,29 @@ class CardItem {
     required this.cardNumber,
     required this.icon,
     required this.ps,
+    this.expiry,
+    this.image
   });
 
+  String? get cardExpiry => expiry
+      ?.replaceAllMapped(RegExp(r'.{2}'), (match) {
+    if (match.end == expiry?.length) {
+      return match.group(0)!;
+    }
+    return "${match.group(0)}/";
+  });
   String? get maskedNumber =>
       cardNumber
-          ?.takeLast(8)
-          .replaceAll('*', '•')
+          ?.replaceAll('*', '•')
           .replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} ')
           .trim();
 
-  String get cardTitle =>
-      "${ps.orEmpty().capitalize()} ${maskedNumber.orEmpty()}";
+  // cardNumber
+  //     // ?.takeLast(8)
+  //     .replaceAll('*', '•')
+  //     // .replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} ')
+  //     .trim();
+
+  String get cardTitle => maskedNumber.orEmpty();
+  // "${ps.orEmpty().capitalize()} ${maskedNumber.orEmpty()}";
 }

@@ -30,7 +30,7 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get payment_success => 'Payment was successful';
 
   @override
-  String get payment_method => 'Payment method';
+  String get payment_method_title => 'Payment method';
 
   @override
   String get my_cards_title => 'My cards';
@@ -89,5 +89,29 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get currency_calculator => 'Currency calculator';
 
   @override
-  String get show_all_places => 'Show all places';
+  String get all_places => 'All places';
+
+  @override
+  String get exchange_rates => 'Exchange rates';
+
+  @override
+  String get uzs => 'Uzbek som';
+
+  @override
+  String get card_added_success_message => 'The card was successfully added.';
+
+  @override
+  String get card_remove_notice => 'Your card will be removed from the app.';
+
+  @override
+  String get finance_title => 'Finance';
+
+  @override
+  String get all_exchange_rates => 'All exchange rates';
+
+  @override
+  String get all_cards => 'All cards';
+
+  @override
+  String get fiscalReceipt => 'Fiscal receipt';
 }

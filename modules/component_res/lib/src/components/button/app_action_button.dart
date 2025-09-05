@@ -27,7 +27,10 @@ class AppActionButton extends StatelessWidget {
   final bool isLoading;
   final bool disable;
   final Color? contentColor;
+  final Color? containerColor;
+  final Color? disableContainerColor;
   final Widget? icon;
+  final bool iconColorFiltered;
 
   const AppActionButton(
       {super.key,
@@ -37,7 +40,10 @@ class AppActionButton extends StatelessWidget {
       this.disable = false,
       this.type = ActionButtonType.primary,
       this.contentColor,
+      this.containerColor,
+      this.disableContainerColor,
       this.icon,
+      this.iconColorFiltered = true,
       this.sizeType = ActionButtonSizeType.medium});
 
   @override
@@ -53,20 +59,23 @@ class AppActionButton extends StatelessWidget {
           )
         : Text(
             actionText,
-            style: fontStyle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           );
 
-    final disabledBackgroundColor = switch (type) {
-      ActionButtonType.primary =>
-        context.appColors.brand.withValues(alpha: 0.24),
-      ActionButtonType.secondary => context.appColors.fill.tertiary,
-      ActionButtonType.text => Colors.transparent,
-    };
-    final backgroundColor = switch (type) {
-      ActionButtonType.primary => context.appColors.brand,
-      ActionButtonType.secondary => context.appColors.fill.tertiary,
-      ActionButtonType.text => Colors.transparent,
-    };
+    final disabledBackgroundColor = disableContainerColor ??
+        switch (type) {
+          ActionButtonType.primary =>
+            context.appColors.brand.withValues(alpha: 0.24),
+          ActionButtonType.secondary => context.appColors.fill.tertiary,
+          ActionButtonType.text => Colors.transparent,
+        };
+    final backgroundColor = containerColor ??
+        switch (type) {
+          ActionButtonType.primary => context.appColors.brand,
+          ActionButtonType.secondary => context.appColors.fill.tertiary,
+          ActionButtonType.text => Colors.transparent,
+        };
 
     final foregroundColor = contentColor ??
         switch (type) {
@@ -84,22 +93,32 @@ class AppActionButton extends StatelessWidget {
     return FilledButton.tonalIcon(
       onPressed: isDisabled ? null : onPressed,
       label: labelContent,
-      icon: SizedBox(
-        height: 44,
-        child:
-        ColorFiltered(
-          colorFilter: ColorFilter.mode(
-              isDisabled ? disableForegroundColor : foregroundColor,
-              BlendMode.srcIn),
-          child: icon,
-        ),
-      ),
+      icon: !isLoading && icon != null
+          ? SizedBox(
+              height: sizeType == ActionButtonSizeType.medium ? 20 : 24,
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: iconColorFiltered
+                    ? ColorFiltered(
+                        colorFilter: ColorFilter.mode(
+                            isDisabled
+                                ? disableForegroundColor
+                                : foregroundColor,
+                            BlendMode.srcIn),
+                        child: icon,
+                      )
+                    : icon,
+              ),
+            )
+          : null,
       style: FilledButton.styleFrom(
           minimumSize: Size.fromHeight(sizeType.size),
           disabledForegroundColor: disableForegroundColor,
           iconColor: Colors.red,
+          padding: EdgeInsets.zero,
           foregroundColor: foregroundColor,
           backgroundColor: backgroundColor,
+          textStyle: fontStyle,
           disabledBackgroundColor: disabledBackgroundColor,
           splashFactory: NoSplash.splashFactory,
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,

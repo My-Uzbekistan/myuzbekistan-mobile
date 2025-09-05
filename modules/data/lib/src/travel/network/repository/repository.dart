@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:data/src/utils/generic/generics.dart';
 import 'package:domain/domain.dart';
-import 'package:flutter/foundation.dart';
 import 'package:shared/shared.dart';
 
 import '../../models/places/content_dto_model.dart';
@@ -150,5 +151,76 @@ class RepositoryImp implements Repository {
   @override
   Future deleteAccount() {
     return _restService.deleteAccount().call();
+  }
+
+  // {
+  // "token":"12312",
+  // "osVersion":"ios-16",
+  // "model":"Iphone 16",
+  // "appVersion":"1.1"
+  // }
+  @override
+  Future<dynamic> setFirebaseToken({required String token}) async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    String osVersion = "";
+    String model = "";
+
+    if (Platform.isIOS) {
+      final info = await deviceInfo.iosInfo;
+      osVersion = info.systemVersion;
+      model = info.utsname.machine;
+    } else if (Platform.isAndroid) {
+      final info = await deviceInfo.androidInfo;
+      osVersion = info.version.release;
+      model = info.model;
+    }
+    final info = await PackageInfo.fromPlatform();
+
+    return _restService.setFirebaseToken({
+      "token": token,
+      "osVersion": osVersion,
+      "model": model,
+      "appVersion": info.version,
+    }).call();
+  }
+
+  @override
+  Future<void> createPin({required String pin}) async {
+    // final a = await Future.delayed(Duration(seconds: 2));
+    // return Future.value();
+    // return Future.error(Exception("PinCodeException"));
+    return _restService.createPin({"Pin": pin}).call();
+  }
+
+  @override
+  Future<dynamic> verifyPin({required String pin}) {
+    return _restService.verifyPin({"Pin": pin}).call();
+  }
+
+  @override
+  Future<void> changePin({required String oldPin, required String newPin}) {
+    return _restService.changePin({"OldPin": oldPin, "NewPin": newPin}).call();
+  }
+
+  @override
+  Future<void> removePin({required String pin}) {
+    return _restService.removePin({"Pin": pin}).call();
+  }
+
+  @override
+  Future<List<NotificationItem>> getNotifications() {
+    return _restService.getNotifications().call(
+      (data) => data.items.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future<NotificationItem> getNotificationById({required int id}) {
+    return _restService.getNotificationById(id).call((data) => data.toDomain());
+  }
+
+  @override
+  Future<dynamic> seenNotification({required int id}) {
+    return _restService.seenNotification(id).call();
   }
 }

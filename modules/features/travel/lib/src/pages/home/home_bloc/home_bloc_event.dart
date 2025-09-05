@@ -9,4 +9,6 @@ abstract class HomeBlocEvent with _$HomeBlocEvent{
   factory HomeBlocEvent.loadContents() = _LoadContentsEvent;
   factory HomeBlocEvent.checkPermission() = _CheckPermissionEvent;
   factory HomeBlocEvent.loadFavorites() = _LoadFavoritesEvent;
+  factory HomeBlocEvent.loadPrayerTimes() = _LoadPayerTimes;
+  factory HomeBlocEvent.loadWeather() = _LoadWeatherEvent;
 }

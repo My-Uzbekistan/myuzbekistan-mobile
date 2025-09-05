@@ -18,8 +18,41 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nav_payment => 'Finance';
 
   @override
-  String get nav_transfer => 'Transfer';
+  String get nav_services => 'Services';
 
   @override
   String get nav_more => 'More';
+
+  @override
+  String get catalogMyEsim => 'My eSIM';
+
+  @override
+  String get catalogTravelQuiz => 'Travel Quiz';
+
+  @override
+  String get catalogAviaTickets => 'Flight tickets';
+
+  @override
+  String get catalogChargers => 'Chargers';
+
+  @override
+  String get catalogPoster => 'Poster';
+
+  @override
+  String get catalogTrainTickets => 'Train tickets';
+
+  @override
+  String get catalogHotels => 'Hotels';
+
+  @override
+  String get catalogCottages => 'Cottages';
+
+  @override
+  String get catalogInsurance => 'Insurance';
+
+  @override
+  String get catalogItemStatusNew => 'New';
+
+  @override
+  String get catalogItemStatusSoon => 'Soon';
 }

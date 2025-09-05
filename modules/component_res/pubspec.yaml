@@ -35,6 +35,7 @@ dependencies:
   fluttertoast: ^8.2.12
   google_maps_flutter: #^2.11.0
   smooth_page_indicator: ^1.2.1
+  sliver_tools:
 
   flutter_localizations:
     sdk: flutter
@@ -59,7 +60,10 @@ flutter:
   # like this:
   assets:
      - assets/png/
+     - assets/catalog/
      - assets/svg/
+     - assets/svg/more/
+     - assets/svg/prayers/
      - assets/logo/
      - assets/flags/
      - assets/splash/

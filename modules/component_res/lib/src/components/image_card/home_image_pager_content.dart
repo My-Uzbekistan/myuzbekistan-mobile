@@ -31,12 +31,12 @@ class HomeImagePagerContent extends StatefulWidget {
 }
 
 class _HomeImagePagerContentState extends State<HomeImagePagerContent>
-    with AutomaticKeepAliveClientMixin {
+{
   final controller = PageController(initialPage: 0);
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: GestureDetector(
@@ -55,7 +55,6 @@ class _HomeImagePagerContentState extends State<HomeImagePagerContent>
                         child: PageView.builder(
                             controller: controller,
                             itemCount: widget.data.items.length,
-                            physics: ClampingScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             allowImplicitScrolling: true,
                             pageSnapping: true,
@@ -132,7 +131,7 @@ class _HomeImagePagerContentState extends State<HomeImagePagerContent>
                               width: 16,
                               height: 16,
                               colorFilter: ColorFilter.mode(
-                                  Colors.black, BlendMode.srcIn)),
+                                  context.appColors.textIconColor.primary, BlendMode.srcIn)),
                           RichText(
                             text: TextSpan(
                                 style: CustomTypography.labelMd.copyWith(
@@ -166,10 +165,6 @@ class _HomeImagePagerContentState extends State<HomeImagePagerContent>
       ),
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }
 
 class _ImagePage extends StatefulWidget {
@@ -187,9 +182,9 @@ class _ImagePageState extends State<_ImagePage>
   Widget build(BuildContext context) {
     super.build(context); // MUHIM!
 
-    return RepaintBoundary(
-        child: ExtendedImage.network(
+    return  ExtendedImage.network(
       widget.url,
+      key: ValueKey(widget.url),
       fit: BoxFit.cover,
       cache: true,
       cacheMaxAge: Duration(days: 2),
@@ -206,7 +201,7 @@ class _ImagePageState extends State<_ImagePage>
             return Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover);
         }
       },
-    ));
+    );
   }
 
   @override

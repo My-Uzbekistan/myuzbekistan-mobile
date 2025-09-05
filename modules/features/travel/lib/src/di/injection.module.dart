@@ -14,6 +14,8 @@ import 'package:travel/src/pages/detail/detail_bloc/detail_bloc.dart' as _i776;
 import 'package:travel/src/pages/home/home_bloc/home_bloc.dart' as _i359;
 import 'package:travel/src/pages/home/widgets/load_content_bloc/load_content_bloc.dart'
     as _i335;
+import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart'
+    as _i69;
 
 class TravelPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -25,13 +27,16 @@ class TravelPackageModule extends _i526.MicroPackageModule {
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
         ));
-    gh.factory<_i359.HomeBloc>(() => _i359.HomeBloc(
-          gh<_i494.Repository>(),
-          gh<_i494.AppStatusChangeListeners>(),
-        ));
+    gh.factory<_i69.NotificationBloc>(
+        () => _i69.NotificationBloc(gh<_i494.Repository>()));
     gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
+        ));
+    gh.factory<_i359.HomeBloc>(() => _i359.HomeBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.AppStatusChangeListeners>(),
+          gh<_i494.SecurityStorage>(),
         ));
   }
 }

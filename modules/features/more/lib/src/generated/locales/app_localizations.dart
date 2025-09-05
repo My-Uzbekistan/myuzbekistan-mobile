@@ -103,40 +103,10 @@ abstract class FeatureMoreLocalizations {
     Locale('uz'),
   ];
 
-  /// No description provided for @nav_home.
-  ///
-  /// In ru, this message translates to:
-  /// **'Главная'**
-  String get nav_home;
-
-  /// No description provided for @nav_map.
-  ///
-  /// In ru, this message translates to:
-  /// **'Карта'**
-  String get nav_map;
-
-  /// No description provided for @nav_transfer.
-  ///
-  /// In ru, this message translates to:
-  /// **'Перевод'**
-  String get nav_transfer;
-
-  /// No description provided for @nav_payment.
-  ///
-  /// In ru, this message translates to:
-  /// **'Платеж'**
-  String get nav_payment;
-
-  /// No description provided for @nav_more.
-  ///
-  /// In ru, this message translates to:
-  /// **'Еще'**
-  String get nav_more;
-
   /// No description provided for @language.
   ///
   /// In ru, this message translates to:
-  /// **'Язык'**
+  /// **'Язык приложения'**
   String get language;
 
   /// No description provided for @theme.
@@ -160,13 +130,13 @@ abstract class FeatureMoreLocalizations {
   /// No description provided for @themeModes.
   ///
   /// In ru, this message translates to:
-  /// **'{theme, select, system{Системный} light{Светлая} dark{Тёмная} other{}}'**
+  /// **'{theme, select, system{Системная} light{Светлая} dark{Тёмная} other{}}'**
   String themeModes(String theme);
 
   /// Текст для гостевого пользователя
   ///
   /// In ru, this message translates to:
-  /// **'Привет Гость'**
+  /// **'Гость'**
   String get guest;
 
   /// No description provided for @action_all.
@@ -192,12 +162,6 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Начать'**
   String get getStarted;
-
-  /// No description provided for @logout.
-  ///
-  /// In ru, this message translates to:
-  /// **'Выйти'**
-  String get logout;
 
   /// No description provided for @getStartedDescription.
   ///
@@ -264,24 +228,6 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Узбекистан'**
   String get uzbekistan;
-
-  /// No description provided for @exchange_rates.
-  ///
-  /// In ru, this message translates to:
-  /// **'Курсы валют'**
-  String get exchange_rates;
-
-  /// No description provided for @uzbek_currency.
-  ///
-  /// In ru, this message translates to:
-  /// **'*Узбекская валюта (UZS) называется сум'**
-  String get uzbek_currency;
-
-  /// No description provided for @exchange_banks.
-  ///
-  /// In ru, this message translates to:
-  /// **'Обменные банки'**
-  String get exchange_banks;
 
   /// No description provided for @loading_data.
   ///
@@ -379,22 +325,46 @@ abstract class FeatureMoreLocalizations {
   /// **'Полезные советы'**
   String get usefulTips;
 
+  /// No description provided for @logout.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выйти из приложения'**
+  String get logout;
+
+  /// No description provided for @logout_confirm_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выйти из приложения?'**
+  String get logout_confirm_title;
+
+  /// No description provided for @exit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выйти'**
+  String get exit;
+
   /// No description provided for @logoutConfirmation.
   ///
   /// In ru, this message translates to:
-  /// **'Вы хотите выйти из системы?'**
+  /// **'Вы собираетесь выйти из приложения'**
   String get logoutConfirmation;
 
   /// No description provided for @deleteAccountConfirmation.
   ///
   /// In ru, this message translates to:
-  /// **'Вы хотите удалить аккаунт?'**
+  /// **'Ваша учетная запись и все данные, такие как, сохраненные места и банковские карты будут удалены'**
   String get deleteAccountConfirmation;
+
+  /// No description provided for @delete_account_confirm_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить учетную запись?'**
+  String get delete_account_confirm_title;
 
   /// No description provided for @deleteAccount.
   ///
   /// In ru, this message translates to:
-  /// **'Удалить аккаунт'**
+  /// **'Удалить учетную запись'**
   String get deleteAccount;
 
   /// No description provided for @cancel.
@@ -402,6 +372,12 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Отмена'**
   String get cancel;
+
+  /// No description provided for @delete.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить'**
+  String get delete;
 
   /// No description provided for @warning.
   ///
@@ -426,6 +402,162 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'м'**
   String get distanceM;
+
+  /// No description provided for @continueAsGuest.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продолжить как гость'**
+  String get continueAsGuest;
+
+  /// No description provided for @notification.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления'**
+  String get notification;
+
+  /// No description provided for @pin_code.
+  ///
+  /// In ru, this message translates to:
+  /// **'PIN-код'**
+  String get pin_code;
+
+  /// No description provided for @biometric_auth.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вход со сканером'**
+  String get biometric_auth;
+
+  /// No description provided for @prayer_time_widget.
+  ///
+  /// In ru, this message translates to:
+  /// **'Виджет времени намаза'**
+  String get prayer_time_widget;
+
+  /// No description provided for @about_app.
+  ///
+  /// In ru, this message translates to:
+  /// **'О приложении'**
+  String get about_app;
+
+  /// No description provided for @log_in.
+  ///
+  /// In ru, this message translates to:
+  /// **'Авторизоваться'**
+  String get log_in;
+
+  /// No description provided for @version.
+  ///
+  /// In ru, this message translates to:
+  /// **'Версия'**
+  String get version;
+
+  /// No description provided for @privacy_policy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Политика конфиденциальности'**
+  String get privacy_policy;
+
+  /// No description provided for @licenses.
+  ///
+  /// In ru, this message translates to:
+  /// **'Лицензии'**
+  String get licenses;
+
+  /// No description provided for @pin_code_create_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Придумайте код доступа'**
+  String get pin_code_create_title;
+
+  /// No description provided for @pin_code_repeat.
+  ///
+  /// In ru, this message translates to:
+  /// **'Повторите'**
+  String get pin_code_repeat;
+
+  /// No description provided for @pinMismatch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Код не совпадает'**
+  String get pinMismatch;
+
+  /// No description provided for @resetPinTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сбросить PIN-код'**
+  String get resetPinTitle;
+
+  /// No description provided for @resetPinMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все данные будут удалены без возможности восстановления. Потребуется новая регистрация.'**
+  String get resetPinMessage;
+
+  /// No description provided for @resetPinAction.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сбросить\nкод'**
+  String get resetPinAction;
+
+  /// No description provided for @changePinTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить PIN-код'**
+  String get changePinTitle;
+
+  /// No description provided for @enter_new_code.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите новый код'**
+  String get enter_new_code;
+
+  /// No description provided for @delete_code.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить код'**
+  String get delete_code;
+
+  /// No description provided for @delete_pin_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить PIN-код'**
+  String get delete_pin_title;
+
+  /// No description provided for @delete_pin_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вход по PIN будет отключён. Вы сможете создать новый PIN в любой момент'**
+  String get delete_pin_message;
+
+  /// No description provided for @pincode_created.
+  ///
+  /// In ru, this message translates to:
+  /// **'PIN-код успешно создан'**
+  String get pincode_created;
+
+  /// No description provided for @pincode_deleted.
+  ///
+  /// In ru, this message translates to:
+  /// **'PIN-код удалён'**
+  String get pincode_deleted;
+
+  /// No description provided for @enter_code.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите код'**
+  String get enter_code;
+
+  /// No description provided for @authPrompt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пройдите аутентификацию для доступа к приложению'**
+  String get authPrompt;
+
+  /// No description provided for @fiscalReceipt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фискальный чек'**
+  String get fiscalReceipt;
 }
 
 class _FeatureMoreLocalizationsDelegate

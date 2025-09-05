@@ -1,17 +1,15 @@
-import 'dart:io';
+
 
 import 'package:component_res/component_res.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:navigation/navigation.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
-import 'package:uzbekistan_travel/core/navigation/router.dart';
+
 
 class ShellPageWrapper extends HookWidget {
   final StatefulNavigationShell navigationShell;
-
   const ShellPageWrapper({super.key, required this.navigationShell});
 
   void _goBranch(int index) {
@@ -23,52 +21,39 @@ class ShellPageWrapper extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var currentIndex = useCurrentIndex();
-    useAutomaticKeepAlive(wantKeepAlive: true);
-
-    final selectedTabColor = context.appColors.brand;
-    final unselectedColor = context.appColors.textIconColor.secondary;
-
-    return Stack(
-      children: [
-        Scaffold(
-          appBar:   AppBar(),
-        ),
-        Positioned.fill(child:   Scaffold(
+    // useAutomaticKeepAlive(wantKeepAlive: true);
+    return  Scaffold(
           resizeToAvoidBottomInset: true,
+          extendBody: true,
           body: navigationShell,
-          bottomNavigationBar: Platform.isAndroid
-              ? BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              currentIndex: navigationShell.currentIndex,
-              onTap: (index) {
-                if (index == navigationShell.currentIndex) return;
-                _goBranch(index);
-              },
-
-
-              selectedLabelStyle:
-              CustomTypography.labelSm.copyWith(fontSize: 12),
-              unselectedLabelStyle:
-              CustomTypography.labelSm.copyWith(fontSize: 12),
-              items: bottomNavigationBarItems(
-                  context: context,
-                  selectedTabColor: selectedTabColor,
-                  unselectedIconColor: unselectedColor))
-              : CupertinoTabBar(
-            items: bottomNavigationBarItems(
-                context: context,
-                selectedTabColor: selectedTabColor,
-                unselectedIconColor: unselectedColor),
+          bottomNavigationBar: CustomNavigationBar(
+            centerDotted: true,
             currentIndex: navigationShell.currentIndex,
-            onTap: (index) {
-              if (index == navigationShell.currentIndex) return;
-              _goBranch(index);
+
+            onTap: (index) => _goBranch(index),
+            onTapCenterDotted: (){
+              context.finance.pushQrCoderReaderPage();
             },
-          ),
-        ),)
-      ],
-    );
+            items: [
+              CustomTabItem(
+                label: context.localizations!.nav_home,
+                icon: Assets.svgTabIconHome.toSvgImage(height: 24, width: 24),
+              ),
+              CustomTabItem(
+                label: context.localizations!.nav_payment,
+                icon: Assets.svgTabIconFinance.toSvgImage(height: 24, width: 24),
+              ),
+              CustomTabItem(
+                label: context.localizations!.nav_services,
+                icon: Assets.svgTabIconCatalog.toSvgImage(height: 24, width: 24),
+              ),
+              CustomTabItem(
+                label: context.localizations!.nav_more,
+                icon: Assets.svgTabIconMore.toSvgImage(height: 24, width: 24),
+              )
+            ],
+          ));
+
   }
 
   List<BottomNavigationBarItem> bottomNavigationBarItems({
@@ -95,6 +80,7 @@ class ShellPageWrapper extends HookWidget {
         label: context.localizations?.nav_home,
       ),
       BottomNavigationBarItem(
+
         icon: Assets.svgTabIconFinance.toSvgImage(
             height: 24,
             width: 24,
@@ -106,6 +92,19 @@ class ShellPageWrapper extends HookWidget {
             fit: BoxFit.contain,
             colorFilter: selectedTabColorFilter),
         label: context.localizations?.nav_payment,
+      ),
+      BottomNavigationBarItem(
+        icon: Assets.svgTabIconCatalog.toSvgImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            colorFilter: unselectedTabColorFilter),
+        activeIcon: Assets.svgTabIconCatalog.toSvgImage(
+            height: 24,
+            width: 24,
+            fit: BoxFit.contain,
+            colorFilter: selectedTabColorFilter),
+        label: context.localizations?.nav_services,
       ),
       BottomNavigationBarItem(
         icon: Assets.svgTabIconMore.toSvgImage(
@@ -122,5 +121,4 @@ class ShellPageWrapper extends HookWidget {
       ),
     ];
   }
-
 }

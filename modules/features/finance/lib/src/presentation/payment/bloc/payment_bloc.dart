@@ -21,8 +21,10 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   final FinanceSharedService _financeSharedService;
 
   StreamSubscription? _cardsSubscription;
+  StreamSubscription? _updateCardsSubscription;
 
   var cards = <CardItem>[];
+  String? paymentId;
 
   PaymentBloc(
     this._merchantByIdUseCase,
@@ -37,26 +39,79 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     on<_PaymentSelecteCardEvent>(_selectedCard);
     on<_PaymentSetAmountEvent>(_setAmount);
     on<_PaymentPayEvent>(_pay);
+    on<_CheckPayDetailEvent>(_checkPayDetail);
     _onInit();
   }
 
   void _onInit() {
     _cardsSubscription?.cancel();
+    _updateCardsSubscription?.cancel();
+    _updateCardsSubscription = _financeSharedService.updateCards.listen((c) {
+      add(PaymentEvent.loadCards());
+    });
     _cardsSubscription = _financeSharedService.financeCards.listen((c) {
       cards = c;
       add(PaymentEvent.updateCards());
     });
   }
 
-  void _setAmount(_PaymentSetAmountEvent event, Emitter<PaymentState> emit) {
-    if (state is PaymentDataState) {
-      final dataState = state as PaymentDataState;
+  Future<void> _checkPayDetail(
+    _CheckPayDetailEvent event,
+    Emitter<PaymentState> emit,
+  ) async {
+    if (state is PaymentDataState && paymentId != null) {
       emit(
-        dataState.copyWith(
-          amount: event.amount.replaceAll(RegExp(r'\D'), '').toDoubleOrNull(),
-          navState: null,
+        state.map(
+          dataState:
+              (data) => data.copyWith(isPayLoading: true, navState: null),
+          loadingState: (st) => st,
+          errorState: (st) => st,
         ),
       );
+      try {
+        final result = await _financeRepository.paymentCheck(
+          paymentId: paymentId!,
+        );
+        emit(
+          (state as PaymentDataState).copyWith(
+            isPayLoading: false,
+            navState: PaymentNavState.paymentSuccess(
+              merchant: result.merchant,
+              amount: result.amount,
+              paymentId: paymentId!,
+            ),
+          ),
+        );
+      } catch (e) {
+        emit((state as PaymentDataState).copyWith(isPayLoading: false));
+        if (e is DioException && e.error is AppException) {
+          emit(
+            (state as PaymentDataState).copyWith(
+              isPayLoading: false,
+              navState: PaymentNavState.error(
+                message: (e.error as AppException).message,
+              ),
+            ),
+          );
+        } else {
+          emit(
+            (state as PaymentDataState).copyWith(
+              isPayLoading: false,
+              navState: PaymentNavState.error(),
+            ),
+          );
+        }
+      }
+    }
+  }
+
+  double? amount;
+
+  void _setAmount(_PaymentSetAmountEvent event, Emitter<PaymentState> emit) {
+    amount = event.amount.replaceAll(RegExp(r'\D'), '').toDoubleOrNull();
+    if (state is PaymentDataState) {
+      final dataState = state as PaymentDataState;
+      emit(dataState.copyWith(amount: amount, navState: null));
     }
   }
 
@@ -88,6 +143,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       PaymentState.dataState(
         merchant: event.merchant,
         cards: cards,
+        amount: amount,
         selectedCard: cards.firstOrNull,
       ),
     );
@@ -119,34 +175,51 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     try {
       final result = await _merchantByIdUseCase(event.merchantId);
       add(PaymentEvent.setMerchant(result));
-    } catch (e) {}
+    } catch (e) {
+      if (e is DioException && e.error is AppException) {
+        emit(
+          PaymentState.errorState(message: (e.error as AppException).message),
+        );
+      }
+    }
   }
 
   Future<void> _pay(_PaymentPayEvent event, Emitter<PaymentState> emit) async {
-    // emit(
-    //   (state as PaymentDataState).copyWith(isPayLoading: true, navState: PaymentNavState.paymentSuccess(
-    //     merchant: Merchant(id: 123),
-    //     amount: 5000,
-    //     paymentId:"befc299b-6a3d-49cb-90c1-dbc4215641eb" ,
-    //   ),),
-    // );
     try {
       final st = state as PaymentDataState;
+      emit(st.copyWith(isPayLoading: true, navState: null));
       final result = await _financeRepository.pay(
         merchantId: st.merchant.id.toString(),
         amount: st.amount!,
         cardId: st.selectedCard!.id.toString(),
       );
-      emit(
-        (state as PaymentDataState).copyWith(
-          isPayLoading: false,
-          navState: PaymentNavState.paymentSuccess(
-            merchant: st.merchant,
-            amount: st.amount!.toInt(),
-            paymentId: result.paymentId,
+      paymentId = result.paymentId;
+      if (result.checkUrl.isNotNullOrEmpty) {
+        emit(
+          (state as PaymentDataState).copyWith(
+            isPayLoading: false,
+            navState: PaymentNavState.confirmWithWeb(
+              confirmUrl: result.checkUrl!,
+              paymentId: result.paymentId,
+            ),
           ),
-        ),
-      );
+        );
+      } else {
+        emit(
+          (state as PaymentDataState).copyWith(
+            isPayLoading: false,
+            navState: PaymentNavState.paymentSuccess(
+              merchant: MerchantItem(
+                icon: st.merchant.logo,
+                name: st.merchant.name,
+                type: st.merchant.type,
+              ),
+              amount: st.amount!.toInt(),
+              paymentId: result.paymentId,
+            ),
+          ),
+        );
+      }
     } catch (e) {
       emit((state as PaymentDataState).copyWith(isPayLoading: false));
       if (e is DioException && e.error is AppException) {

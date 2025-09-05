@@ -18,7 +18,8 @@ class FinanceTopCardItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(16),
+        height: 80,
+        padding: EdgeInsets.symmetric(horizontal: 4,vertical: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: context.appColors.background.elevation1,

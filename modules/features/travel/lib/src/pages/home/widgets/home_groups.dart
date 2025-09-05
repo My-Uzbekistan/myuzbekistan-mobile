@@ -36,10 +36,9 @@ class HomeGroupsWidget extends StatefulWidget {
 }
 
 class _HomeGroupsWidgetState extends State<HomeGroupsWidget>
-    with AutomaticKeepAliveClientMixin {
+{
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Column(
       children: [
         if (widget.data.recommended != null)
@@ -69,8 +68,4 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget>
       ],
     );
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

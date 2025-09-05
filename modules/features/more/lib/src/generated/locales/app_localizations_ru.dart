@@ -9,22 +9,7 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   FeatureMoreLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get nav_home => 'Главная';
-
-  @override
-  String get nav_map => 'Карта';
-
-  @override
-  String get nav_transfer => 'Перевод';
-
-  @override
-  String get nav_payment => 'Платеж';
-
-  @override
-  String get nav_more => 'Еще';
-
-  @override
-  String get language => 'Язык';
+  String get language => 'Язык приложения';
 
   @override
   String get theme => 'Тема';
@@ -54,7 +39,7 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   @override
   String themeModes(String theme) {
     String _temp0 = intl.Intl.selectLogic(theme, {
-      'system': 'Системный',
+      'system': 'Системная',
       'light': 'Светлая',
       'dark': 'Тёмная',
       'other': '',
@@ -63,7 +48,7 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   }
 
   @override
-  String get guest => 'Привет Гость';
+  String get guest => 'Гость';
 
   @override
   String get action_all => 'Все';
@@ -80,9 +65,6 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get getStarted => 'Начать';
-
-  @override
-  String get logout => 'Выйти';
 
   @override
   String get getStartedDescription =>
@@ -119,15 +101,6 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get uzbekistan => 'Узбекистан';
-
-  @override
-  String get exchange_rates => 'Курсы валют';
-
-  @override
-  String get uzbek_currency => '*Узбекская валюта (UZS) называется сум';
-
-  @override
-  String get exchange_banks => 'Обменные банки';
 
   @override
   String get loading_data => 'Загрузка данных';
@@ -179,16 +152,32 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get usefulTips => 'Полезные советы';
 
   @override
-  String get logoutConfirmation => 'Вы хотите выйти из системы?';
+  String get logout => 'Выйти из приложения';
 
   @override
-  String get deleteAccountConfirmation => 'Вы хотите удалить аккаунт?';
+  String get logout_confirm_title => 'Выйти из приложения?';
 
   @override
-  String get deleteAccount => 'Удалить аккаунт';
+  String get exit => 'Выйти';
+
+  @override
+  String get logoutConfirmation => 'Вы собираетесь выйти из приложения';
+
+  @override
+  String get deleteAccountConfirmation =>
+      'Ваша учетная запись и все данные, такие как, сохраненные места и банковские карты будут удалены';
+
+  @override
+  String get delete_account_confirm_title => 'Удалить учетную запись?';
+
+  @override
+  String get deleteAccount => 'Удалить учетную запись';
 
   @override
   String get cancel => 'Отмена';
+
+  @override
+  String get delete => 'Удалить';
 
   @override
   String get warning => 'Предупреждение';
@@ -201,4 +190,84 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get distanceM => 'м';
+
+  @override
+  String get continueAsGuest => 'Продолжить как гость';
+
+  @override
+  String get notification => 'Уведомления';
+
+  @override
+  String get pin_code => 'PIN-код';
+
+  @override
+  String get biometric_auth => 'Вход со сканером';
+
+  @override
+  String get prayer_time_widget => 'Виджет времени намаза';
+
+  @override
+  String get about_app => 'О приложении';
+
+  @override
+  String get log_in => 'Авторизоваться';
+
+  @override
+  String get version => 'Версия';
+
+  @override
+  String get privacy_policy => 'Политика конфиденциальности';
+
+  @override
+  String get licenses => 'Лицензии';
+
+  @override
+  String get pin_code_create_title => 'Придумайте код доступа';
+
+  @override
+  String get pin_code_repeat => 'Повторите';
+
+  @override
+  String get pinMismatch => 'Код не совпадает';
+
+  @override
+  String get resetPinTitle => 'Сбросить PIN-код';
+
+  @override
+  String get resetPinMessage =>
+      'Все данные будут удалены без возможности восстановления. Потребуется новая регистрация.';
+
+  @override
+  String get resetPinAction => 'Сбросить\nкод';
+
+  @override
+  String get changePinTitle => 'Изменить PIN-код';
+
+  @override
+  String get enter_new_code => 'Введите новый код';
+
+  @override
+  String get delete_code => 'Удалить код';
+
+  @override
+  String get delete_pin_title => 'Удалить PIN-код';
+
+  @override
+  String get delete_pin_message =>
+      'Вход по PIN будет отключён. Вы сможете создать новый PIN в любой момент';
+
+  @override
+  String get pincode_created => 'PIN-код успешно создан';
+
+  @override
+  String get pincode_deleted => 'PIN-код удалён';
+
+  @override
+  String get enter_code => 'Введите код';
+
+  @override
+  String get authPrompt => 'Пройдите аутентификацию для доступа к приложению';
+
+  @override
+  String get fiscalReceipt => 'Фискальный чек';
 }
