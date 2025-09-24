@@ -9,19 +9,10 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   FeatureTravelLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get nav_home => 'Home';
-
-  @override
-  String get nav_map => 'Map';
-
-  @override
-  String get nav_transfer => 'Transfer';
-
-  @override
   String get nav_payment => 'Payment';
 
   @override
-  String get nav_more => 'More';
+  String get nav_services => 'Services';
 
   @override
   String get language => 'Language';
@@ -209,4 +200,92 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get notifications => 'Notifications';
+
+  @override
+  String get whatAmenitiesAwait => 'What amenities await you';
+
+  @override
+  String get viewAllAmenities => 'View all amenities';
+
+  @override
+  String get contacts => 'Contacts';
+
+  @override
+  String get readMore => 'Read more';
+
+  @override
+  String get aboutPlace => 'About the place';
+
+  @override
+  String get moreDetails => 'More details';
+
+  @override
+  String get location => 'Location';
+
+  @override
+  String get buildRoute => 'Get directions';
+
+  @override
+  String get feedbackImportant =>
+      'Your feedback is very important to us, thank you!';
+
+  @override
+  String get leaveFeedback => 'Leave your feedback';
+
+  @override
+  String reviewsCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reviews',
+      one: '1 review',
+      zero: '0 reviews',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sendFeedback => 'Send feedback';
+
+  @override
+  String get map_open_in => 'Open In';
+
+  @override
+  String get workingHours => 'Working hours';
+
+  @override
+  String get writeReviewInFewSentences => 'Write a review in a few sentences';
+
+  @override
+  String get catalogMyEsim => 'My eSIM';
+
+  @override
+  String get catalogTravelQuiz => 'Travel Quiz';
+
+  @override
+  String get catalogAviaTickets => 'Flight tickets';
+
+  @override
+  String get catalogChargers => 'Chargers';
+
+  @override
+  String get catalogPoster => 'Poster';
+
+  @override
+  String get catalogTrainTickets => 'Train tickets';
+
+  @override
+  String get catalogHotels => 'Hotels';
+
+  @override
+  String get catalogCottages => 'Cottages';
+
+  @override
+  String get catalogInsurance => 'Insurance';
+
+  @override
+  String get catalogItemStatusNew => 'New';
+
+  @override
+  String get catalogItemStatusSoon => 'Soon';
 }

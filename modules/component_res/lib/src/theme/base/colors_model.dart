@@ -93,12 +93,14 @@ class OtherColors {
   final Color green;
   final Color blue;
   final Color yellow;
+  final Color orange;
 
   OtherColors({
     required this.red,
     required this.green,
     required this.blue,
     required this.yellow,
+    required this.orange
   });
 }
 

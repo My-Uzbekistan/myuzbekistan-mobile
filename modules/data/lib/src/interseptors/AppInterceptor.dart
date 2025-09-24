@@ -29,12 +29,12 @@ class AppInterceptor extends Interceptor {
         "lon": locationManager.getCurrentPosition()!.longitude,
       });
     }
-    if (securityStorage.getAccessToken() != null) {
-      options.headers.addAll({
-        HttpHeaders.authorizationHeader:
-            "Bearer ${securityStorage.getAccessToken()}"
-      });
-    }
+    // if (securityStorage.getAccessToken() != null) {
+    //   options.headers.addAll({
+    //     HttpHeaders.authorizationHeader:
+    //         "Bearer ${securityStorage.getAccessToken()}"
+    //   });
+    // }
     return handler.next(options);
   }
 

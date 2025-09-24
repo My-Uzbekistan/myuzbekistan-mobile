@@ -28,77 +28,77 @@ class HomePage extends HookWidget {
       return MediaQuery.of(context).padding.bottom + 16;
     }, []);
 
-    return  BlocConsumer<HomeBloc, HomeBlocState>(
-        listener: (context, state) {
-          if (state is HomeBlocDataState) {
-            if (!state.isRefreshing) {
-              completerRef.value?.complete();
-              completerRef.value = null;
-            }
+    return BlocConsumer<HomeBloc, HomeBlocState>(
+      listener: (context, state) {
+        if (state is HomeBlocDataState) {
+          if (!state.isRefreshing) {
+            completerRef.value?.complete();
+            completerRef.value = null;
           }
-        },
-        bloc: bloc,
-        buildWhen: (previous, current) => previous != current,
-        builder: (context, state) {
-          return AnimatedSwitcher(
-            duration: Duration(milliseconds: 300),
-            child: switch (state) {
-              HomeBlocLoadingState _ => _Loading(
-                key: ValueKey("HomeLoadingState"),
-              ),
-              HomeBlocDataState data => RefreshIndicator.adaptive(
-                key: ValueKey("HomeDataState"),
-                displacement: 100,
-                triggerMode: RefreshIndicatorTriggerMode.anywhere,
-                onRefresh: () async {
-                  bloc.add(HomeBlocEvent.loadDataEvent(isRefresh: true));
-                  completerRef.value = Completer();
-                  await completerRef.value?.future;
-                },
-                child: Scaffold(
-                  extendBody: true,
-                  body: SafeArea(
-                    bottom: false,
-                    child: Column(
-                      children: [
-                        if (state.selectedRegion != null)
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
-                            ).copyWith(bottom: 16, top: 8),
-                            child: HomeRegionCard(
-                              title: state.selectedRegion?.name ?? "",
-                              temperature: state.temperature?.temperature,
-                              temperatureImageUrl: state.temperature?.iconUrl,
-                              onTap: () {
-                                context.travel.pushSelectRegionPage(
-                                  state.regions,
-                                  state.selectedRegion!.id,
-                                );
-                              },
-                            ),
+        }
+      },
+      bloc: bloc,
+      buildWhen: (previous, current) => previous != current,
+      builder: (context, state) {
+        return AnimatedSwitcher(
+          duration: Duration(milliseconds: 300),
+          child: switch (state) {
+            HomeBlocLoadingState _ => _Loading(
+              key: ValueKey("HomeLoadingState"),
+            ),
+            HomeBlocDataState data => RefreshIndicator.adaptive(
+              key: ValueKey("HomeDataState"),
+              displacement: 100,
+              triggerMode: RefreshIndicatorTriggerMode.anywhere,
+              onRefresh: () async {
+                bloc.add(HomeBlocEvent.loadDataEvent(isRefresh: true));
+                completerRef.value = Completer();
+                await completerRef.value?.future;
+              },
+              child: Scaffold(
+                extendBody: true,
+                body: SafeArea(
+                  bottom: false,
+                  child: Column(
+                    children: [
+                      if (state.selectedRegion != null)
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ).copyWith(bottom: 16, top: 8),
+                          child: HomeRegionCard(
+                            title: state.selectedRegion?.name ?? "",
+                            temperature: state.temperature?.temperature,
+                            temperatureImageUrl: state.temperature?.iconUrl,
+                            onTap: () {
+                              context.travel.pushSelectRegionPage(
+                                state.regions,
+                                state.selectedRegion!.id,
+                              );
+                            },
                           ),
-                        CategoryHeader(
-                          categories: state.categories,
-                          scrollController: scrollController,
-                          onItemTap: (item) {
-                            context.travel.pushContentByCategoryPage(
-                              item.name ?? "",
-                              item.id,
-                            );
-                          },
                         ),
-                        Expanded(
-                          child: CustomScrollView(
-                            controller: scrollController,
+                      CategoryHeader(
+                        categories: state.categories,
+                        scrollController: scrollController,
+                        onItemTap: (item) {
+                          context.travel.pushContentByCategoryPage(
+                            item.name ?? "",
+                            item.id,
+                          );
+                        },
+                      ),
+                      Expanded(
+                        child: CustomScrollView(
+                          controller: scrollController,
 
-                            shrinkWrap: true,
+                          shrinkWrap: true,
 
-                            slivers: [
-                              SliverToBoxAdapter(
-                                child: Column(
-                                  children: [
-                                    if(state.prayers.isNotEmpty)
+                          slivers: [
+                            SliverToBoxAdapter(
+                              child: Column(
+                                children: [
+                                  if (state.prayers.isNotEmpty)
                                     Padding(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 16,
@@ -107,194 +107,142 @@ class HomePage extends HookWidget {
                                         prayerTimes: state.prayers,
                                       ),
                                     ),
-                                    if (state.favorites.isNotEmpty)
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          top: 16,
-                                          left: 16,
-                                          right: 16,
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            context.travel.pushFavoritesPage();
-                                          },
-                                          child: StackedCard(
-                                            title: Row(
-                                              spacing: 2,
-                                              children: [
-                                                Flexible(
-                                                  child: Text(
-                                                    context
-                                                        .localization
-                                                        .favorites,
-                                                    style: CustomTypography.H3,
-                                                  ),
+                                  if (state.favorites.isNotEmpty)
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        top: 16,
+                                        left: 16,
+                                        right: 16,
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          context.travel.pushFavoritesPage();
+                                        },
+                                        child: StackedCard(
+                                          title: Row(
+                                            spacing: 2,
+                                            children: [
+                                              Flexible(
+                                                child: Text(
+                                                  context
+                                                      .localization
+                                                      .favorites,
+                                                  style: CustomTypography.H3,
                                                 ),
-                                                Assets.svgIconFilledHeard
-                                                    .toSvgImage(
-                                                      width: 24,
-                                                      colorFilter:
-                                                          ColorFilter.mode(
-                                                            context
-                                                                .appColors
-                                                                .colors
-                                                                .red,
-                                                            BlendMode.srcIn,
-                                                          ),
-                                                    ),
-                                              ],
-                                            ),
-                                            caption: Text(
-                                              context.localization.n_items(
-                                                data.totalFavoriteCount,
                                               ),
-                                              style: CustomTypography.bodySm,
-                                            ),
-                                            avatars: data.favorites,
+                                              Assets.svgIconFilledHeard
+                                                  .toSvgImage(
+                                                    width: 24,
+                                                    colorFilter:
+                                                        ColorFilter.mode(
+                                                          context
+                                                              .appColors
+                                                              .colors
+                                                              .red,
+                                                          BlendMode.srcIn,
+                                                        ),
+                                                  ),
+                                            ],
                                           ),
+                                          caption: Text(
+                                            context.localization.n_items(
+                                              data.totalFavoriteCount,
+                                            ),
+                                            style: CustomTypography.bodySm,
+                                          ),
+                                          avatars: data.favorites,
                                         ),
                                       ),
-                                  ],
-                                ),
-                              ),
-                              // if (state.favorites.isNotEmpty)
-                              //   SliverToBoxAdapter(
-                              //     child: Padding(
-                              //       padding: EdgeInsets.only(
-                              //         top: 16,
-                              //         left: 16,
-                              //         right: 16,
-                              //       ),
-                              //       child: GestureDetector(
-                              //         onTap: () {
-                              //           context.travel.pushFavoritesPage();
-                              //         },
-                              //         child: StackedCard(
-                              //           title: Row(
-                              //             spacing: 2,
-                              //             children: [
-                              //               Flexible(
-                              //                 child: Text(
-                              //                   context
-                              //                       .localization
-                              //                       .favorites,
-                              //                   style: CustomTypography.H3,
-                              //                 ),
-                              //               ),
-                              //               Assets.svgIconFilledHeard
-                              //                   .toSvgImage(
-                              //                     width: 24,
-                              //                     colorFilter:
-                              //                         ColorFilter.mode(
-                              //                           context
-                              //                               .appColors
-                              //                               .colors
-                              //                               .red,
-                              //                           BlendMode.srcIn,
-                              //                         ),
-                              //                   ),
-                              //             ],
-                              //           ),
-                              //           caption: Text(
-                              //             context.localization.n_items(
-                              //               data.totalFavoriteCount,
-                              //             ),
-                              //             style: CustomTypography.bodySm,
-                              //           ),
-                              //           avatars: data.favorites,
-                              //         ),
-                              //       ),
-                              //     ),
-                              //   ),
-                              !data.loadingContents
-                                  ? SliverList(
-                                    delegate: SliverChildBuilderDelegate((
-                                      context,
-                                      index,
-                                    ) {
-                                      final e = data.contents[index];
-                                      return HomeGroupsWidget(
-                                        key: ValueKey(e),
-                                        onOpenAll: () {
-                                          context.travel
-                                              .pushContentByCategoryPage(
-                                                e.categoryName,
-                                                e.categoryId,
-                                              );
-                                        },
-                                        onContentItemTap: (content) {
-                                          context.travel.pushDetailPage(
-                                            content.contentId,
-                                          );
-                                        },
-                                        data: HomeGroupData(
-                                          viewType: e.viewType,
-                                          categoryId: e.categoryId,
-                                          recommended: e.recommended,
-                                          title: e.categoryName,
-                                          items: e.contents,
-                                        ),
-                                      );
-                                    }, childCount: data.contents.length),
-                                  )
-                                  : SliverToBoxAdapter(
-                                    child: LoadingIndicator(),
-                                  ),
-                              SliverToBoxAdapter(
-                                child: SizedBox(height: paddingBottom),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              _ => Padding(
-                key: ValueKey("HomeDefaultState"),
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Center(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 24,
-                    children: [
-                      MessageContainer.custom(
-                        icon: Assets.pngExclamationmarkSquare.toImage(),
-                        title: context.localization.pageFailedToLoad,
-                        caption: context.localization.something_went_wrong,
-                      ),
-                      SizedBox(
-                        width: double.maxFinite,
-                        height: 48,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 24),
-                          child: FilledButton(
-                            onPressed: () {
-                              bloc.add(HomeBlocEvent.loadDataEvent());
-                            },
-                            style: FilledButton.styleFrom(
-                              elevation: 0,
-                              textStyle: CustomTypography.bodyLg,
-                              backgroundColor:
-                                  context.appColors.fill.quaternary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                                    ),
+                                ],
                               ),
                             ),
-                            child: Text(context.localization.refresh),
-                          ),
+                            !data.loadingContents
+                                ? SliverList(
+                                  delegate: SliverChildBuilderDelegate((
+                                    context,
+                                    index,
+                                  ) {
+                                    final e = data.contents[index];
+                                    return HomeGroupsWidget(
+                                      key: ValueKey(e),
+                                      onOpenAll: () {
+                                        context.travel
+                                            .pushContentByCategoryPage(
+                                              e.categoryName,
+                                              e.categoryId,
+                                            );
+                                      },
+                                      onContentItemTap: (content) {
+                                        context.travel.pushDetailPage(
+                                          contentId: content.contentId,
+                                          content: content.toContentDetail(
+                                            categoryName: e.categoryName
+                                          ),
+                                        );
+                                      },
+                                      data: HomeGroupData(
+                                        viewType: e.viewType,
+                                        categoryId: e.categoryId,
+                                        recommended: e.recommended,
+                                        title: e.categoryName,
+                                        items: e.contents,
+                                      ),
+                                    );
+                                  }, childCount: data.contents.length),
+                                )
+                                : SliverToBoxAdapter(child: LoadingIndicator()),
+                            SliverToBoxAdapter(
+                              child: SizedBox(height: paddingBottom),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
               ),
-            },
-          );
-        },
-      );
+            ),
+            _ => Padding(
+              key: ValueKey("HomeDefaultState"),
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 24,
+                  children: [
+                    MessageContainer.custom(
+                      icon: Assets.pngExclamationmarkSquare.toImage(),
+                      title: context.localization.pageFailedToLoad,
+                      caption: context.localization.something_went_wrong,
+                    ),
+                    SizedBox(
+                      width: double.maxFinite,
+                      height: 48,
+                      child:  FilledButton(
+                          onPressed: () {
+                            bloc.add(HomeBlocEvent.loadDataEvent());
+                          },
+                          style: FilledButton.styleFrom(
+                            elevation: 0,
+                            textStyle: CustomTypography.bodyLg,
+                            backgroundColor: context.appColors.fill.quaternary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          child: Text(context.localization.refresh),
+                        ),
 
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          },
+        );
+      },
+    );
   }
 }
 

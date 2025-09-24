@@ -7,11 +7,12 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
-import 'package:uzbekistan_travel/presentaion/catalog/experiment.dart';
+import 'package:uzbekistan_travel/presentaion/experiment/experiment.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
 import 'package:uzbekistan_travel/presentaion/splash.dart';
 
 import '../../presentaion/catalog/catalog.dart';
+
 
 part 'home_shell_route.dart';
 
@@ -26,6 +27,7 @@ final GoRouter routes = GoRouter(
         AppNavPath.finance.financeCards.name,
         AppNavPath.finance.financePayment.name,
         AppNavPath.finance.paymentHistoryPage.name,
+        AppNavPath.travel.addReviewPage.name,
       ].contains(state.topRoute?.name)) {
         if (getIt<SecurityStorage>().getAccessToken() == null) {
           return "${AppNavPath.more.authPage.path}?slideAlign=vertical";
@@ -35,6 +37,7 @@ final GoRouter routes = GoRouter(
     },
     observers: [observer],
     initialLocation: "/splash",
+    // initialLocation: "/experiment",
     routes: [
       ..._shellRoute,
       ...FeatureTravelRouter.routes,

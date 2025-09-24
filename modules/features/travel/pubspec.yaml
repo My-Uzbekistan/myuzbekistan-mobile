@@ -30,7 +30,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shared:
-     path: ../../../modules/shared
+    path: ../../../modules/shared
   navigation:
     path: ../../../modules/navigation
   component_res:

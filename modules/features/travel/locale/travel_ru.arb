@@ -1,9 +1,6 @@
 {
-  "nav_home": "Главная",
-  "nav_map": "Карта",
-  "nav_transfer": "Перевод",
   "nav_payment": "Платеж",
-  "nav_more": "Еще",
+  "nav_services": "Сервисы",
 
   "language": "Язык",
   "theme": "Тема",
@@ -59,5 +56,36 @@
   "distanceM": "м",
   "prayerTime": "{time, select, fajr{Фаджр} sunrise{Восход} dhuhr{Зухр} asr{Аср} maghrib{Магриб} isha{Иша} other{Намаз}}",
   "prayerTimeTitle": "Время намаза",
-  "notifications": "Оповещения"
+  "notifications": "Оповещения",
+  "whatAmenitiesAwait": "Какие удобства вас ждут",
+  "viewAllAmenities": "Смотреть все удобства",
+  "contacts": "Контакты",
+  "readMore": "Читать полностью",
+  "aboutPlace": "О месте",
+  "moreDetails": "Подробнее",
+  "location": "Расположение",
+  "buildRoute": "Построить маршрут",
+  "feedbackImportant": "Ваше мнение очень важно для нас, спасибо!",
+  "leaveFeedback": "Оставьте свой отзыв",
+  "reviewsCount": "{count, plural, =0{0 отзывов} one{{count} отзыв} few{{count} отзыва} many{{count} отзывов} other{{count} отзывов}}",
+  "sendFeedback": "Отправить отзыв",
+  "map_open_in": "Открыть с помощью",
+  "workingHours": "Рабочее время",
+  "writeReviewInFewSentences": "Напиши отзыв в нескольких предложениях",
+
+
+  "catalogMyEsim": "My eSIM",
+  "catalogTravelQuiz": "Travel Quiz",
+  "catalogAviaTickets": "Авиабилеты",
+  "catalogChargers": "Зарядки",
+  "catalogPoster": "Афиша",
+  "catalogTrainTickets": "ЖД билеты",
+  "catalogHotels": "Отели",
+  "catalogCottages": "Дачи",
+  "catalogInsurance": "Страховка",
+  "catalogItemStatusNew": "Новое",
+  "catalogItemStatusSoon": "Скоро"
+
+
+
 }

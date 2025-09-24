@@ -78,8 +78,9 @@
   "delete_pin_title": "PIN-kodni o‘chirish",
   "delete_pin_message": "PIN orqali kirish o‘chirib qo‘yiladi. Siz istalgan vaqtda yangi PIN yaratishingiz mumkin",
   "pincode_created": "PinCode muvaffaqqiyatli yaratildi",
+  "pinUpdated": "PIN kodi muvaffaqiyatli yangilandi.",
   "pincode_deleted": "PinCode o‘chirildi",
   "enter_code": "Kodni kiriting",
-  "authPrompt": "Ilovaga kirish uchun autentifikatsiyadan o‘ting",
+  "authPrompt": "Ilovaga kirish uchun autentifikatsiyadan o‘ting"
 
 }

@@ -24,7 +24,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get nav_more => 'Еще';
 
   @override
-  String get catalogMyEsim => 'My eSim';
+  String get catalogMyEsim => 'My eSIM';
 
   @override
   String get catalogTravelQuiz => 'Travel Quiz';

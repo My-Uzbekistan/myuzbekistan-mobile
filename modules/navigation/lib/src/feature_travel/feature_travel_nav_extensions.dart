@@ -26,10 +26,14 @@ class FeatureTravelNavExtension {
     );
   }
 
-  Future<T?> pushDetailPage<T>(int contentId) {
+  Future<T?> pushDetailPage<T>({
+    ContentDetail? content,
+    required int contentId,
+  }) {
     return _context.pushType(
       AppNavPath.travel.travelDetail,
       queryParameters: {"contentId": "$contentId"},
+      extra: content,
     );
   }
 
@@ -58,7 +62,8 @@ class FeatureTravelNavExtension {
   void pushNotifications({String? notificationId}) {
     _context.pushType(
       AppNavPath.travel.notifications,
-      queryParameters: notificationId != null ? {"notificationId": "1234"} : {},
+      queryParameters:
+          notificationId != null ? {"notificationId": notificationId} : {},
     );
   }
 

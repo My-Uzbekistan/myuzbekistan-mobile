@@ -6,6 +6,7 @@ abstract class SecurityStorage {
   UserModel? getUserModel();
 
   String? getTopic();
+  int? getUserId();
 
   Future<void> setTopic(String topic);
 

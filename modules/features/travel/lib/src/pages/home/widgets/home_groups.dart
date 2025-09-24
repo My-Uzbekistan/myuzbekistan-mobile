@@ -8,6 +8,8 @@ import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/di/injection.dart';
 
+import '../../detail/detail_bloc/detail_bloc.dart';
+import '../../detail/review/bloc/review_bloc.dart';
 import 'item_card_avatar.dart';
 import 'load_content_bloc/load_content_bloc.dart';
 
@@ -35,14 +37,24 @@ class HomeGroupsWidget extends StatefulWidget {
   State<HomeGroupsWidget> createState() => _HomeGroupsWidgetState();
 }
 
-class _HomeGroupsWidgetState extends State<HomeGroupsWidget>
+class _HomeGroupsWidgetState extends State<HomeGroupsWidget> with AutomaticKeepAliveClientMixin
 {
+  late final PageController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = PageController(initialPage: 0);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         if (widget.data.recommended != null)
           HomeImagePagerContent(
+            tag:widget.data.recommended?.contentId.toString(),
+            controller: controller,
             recommendText: context.localization.guest_chose,
             onTap: () {
               widget.onContentItemTap?.call(widget.data.recommended!);
@@ -57,7 +69,6 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget>
         // HomeAvatarListItem()
         if (widget.data.items.isNotEmpty)
           HomeListCell(
-
             categoryId: widget.data.categoryId,
             items: widget.data.items,
             categoryName: widget.data.title,
@@ -68,4 +79,8 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget>
       ],
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive =>true;
 }

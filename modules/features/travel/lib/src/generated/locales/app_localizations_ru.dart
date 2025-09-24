@@ -9,19 +9,10 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   FeatureTravelLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
-  String get nav_home => 'Главная';
-
-  @override
-  String get nav_map => 'Карта';
-
-  @override
-  String get nav_transfer => 'Перевод';
-
-  @override
   String get nav_payment => 'Платеж';
 
   @override
-  String get nav_more => 'Еще';
+  String get nav_services => 'Сервисы';
 
   @override
   String get language => 'Язык';
@@ -210,4 +201,94 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get notifications => 'Оповещения';
+
+  @override
+  String get whatAmenitiesAwait => 'Какие удобства вас ждут';
+
+  @override
+  String get viewAllAmenities => 'Смотреть все удобства';
+
+  @override
+  String get contacts => 'Контакты';
+
+  @override
+  String get readMore => 'Читать полностью';
+
+  @override
+  String get aboutPlace => 'О месте';
+
+  @override
+  String get moreDetails => 'Подробнее';
+
+  @override
+  String get location => 'Расположение';
+
+  @override
+  String get buildRoute => 'Построить маршрут';
+
+  @override
+  String get feedbackImportant => 'Ваше мнение очень важно для нас, спасибо!';
+
+  @override
+  String get leaveFeedback => 'Оставьте свой отзыв';
+
+  @override
+  String reviewsCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count отзывов',
+      many: '$count отзывов',
+      few: '$count отзыва',
+      one: '$count отзыв',
+      zero: '0 отзывов',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sendFeedback => 'Отправить отзыв';
+
+  @override
+  String get map_open_in => 'Открыть с помощью';
+
+  @override
+  String get workingHours => 'Рабочее время';
+
+  @override
+  String get writeReviewInFewSentences =>
+      'Напиши отзыв в нескольких предложениях';
+
+  @override
+  String get catalogMyEsim => 'My eSIM';
+
+  @override
+  String get catalogTravelQuiz => 'Travel Quiz';
+
+  @override
+  String get catalogAviaTickets => 'Авиабилеты';
+
+  @override
+  String get catalogChargers => 'Зарядки';
+
+  @override
+  String get catalogPoster => 'Афиша';
+
+  @override
+  String get catalogTrainTickets => 'ЖД билеты';
+
+  @override
+  String get catalogHotels => 'Отели';
+
+  @override
+  String get catalogCottages => 'Дачи';
+
+  @override
+  String get catalogInsurance => 'Страховка';
+
+  @override
+  String get catalogItemStatusNew => 'Новое';
+
+  @override
+  String get catalogItemStatusSoon => 'Скоро';
 }

@@ -11,20 +11,16 @@ class WebViewPage extends StatefulWidget {
   final String? actionUrl;
 
   const WebViewPage({super.key, this.title, this.actionUrl});
-
   @override
   State<WebViewPage> createState() => _WebViewPageState();
 }
-
 class _WebViewPageState extends State<WebViewPage> {
   @override
   void initState() {
     super.initState();
   }
-
   Future<void> goBack() async {
     final canGoBack = await inAppWebViewController?.canGoBack();
-
     if (canGoBack ?? false) {
       inAppWebViewController?.goBack();
     } else {
@@ -89,6 +85,7 @@ class _WebViewPageState extends State<WebViewPage> {
                                 extra: completer,
                               );
                               final result = await completer.future;
+
                               if (result) {
                                 return {"close": true};
                               }
@@ -146,8 +143,6 @@ class _WebViewPageState extends State<WebViewPage> {
         );
       }
     }
-
-    // Default deny
     return PermissionResponse(
       resources: request.resources,
       action: PermissionResponseAction.DENY,
@@ -156,7 +151,9 @@ class _WebViewPageState extends State<WebViewPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    InAppWebViewController.clearAllCache();
+    inAppWebViewController?.dispose();
+
     super.dispose();
   }
 }

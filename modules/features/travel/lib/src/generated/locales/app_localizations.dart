@@ -103,35 +103,17 @@ abstract class FeatureTravelLocalizations {
     Locale('uz'),
   ];
 
-  /// No description provided for @nav_home.
-  ///
-  /// In ru, this message translates to:
-  /// **'Главная'**
-  String get nav_home;
-
-  /// No description provided for @nav_map.
-  ///
-  /// In ru, this message translates to:
-  /// **'Карта'**
-  String get nav_map;
-
-  /// No description provided for @nav_transfer.
-  ///
-  /// In ru, this message translates to:
-  /// **'Перевод'**
-  String get nav_transfer;
-
   /// No description provided for @nav_payment.
   ///
   /// In ru, this message translates to:
   /// **'Платеж'**
   String get nav_payment;
 
-  /// No description provided for @nav_more.
+  /// No description provided for @nav_services.
   ///
   /// In ru, this message translates to:
-  /// **'Еще'**
-  String get nav_more;
+  /// **'Сервисы'**
+  String get nav_services;
 
   /// No description provided for @language.
   ///
@@ -438,6 +420,162 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Оповещения'**
   String get notifications;
+
+  /// No description provided for @whatAmenitiesAwait.
+  ///
+  /// In ru, this message translates to:
+  /// **'Какие удобства вас ждут'**
+  String get whatAmenitiesAwait;
+
+  /// No description provided for @viewAllAmenities.
+  ///
+  /// In ru, this message translates to:
+  /// **'Смотреть все удобства'**
+  String get viewAllAmenities;
+
+  /// No description provided for @contacts.
+  ///
+  /// In ru, this message translates to:
+  /// **'Контакты'**
+  String get contacts;
+
+  /// No description provided for @readMore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Читать полностью'**
+  String get readMore;
+
+  /// No description provided for @aboutPlace.
+  ///
+  /// In ru, this message translates to:
+  /// **'О месте'**
+  String get aboutPlace;
+
+  /// No description provided for @moreDetails.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подробнее'**
+  String get moreDetails;
+
+  /// No description provided for @location.
+  ///
+  /// In ru, this message translates to:
+  /// **'Расположение'**
+  String get location;
+
+  /// No description provided for @buildRoute.
+  ///
+  /// In ru, this message translates to:
+  /// **'Построить маршрут'**
+  String get buildRoute;
+
+  /// No description provided for @feedbackImportant.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ваше мнение очень важно для нас, спасибо!'**
+  String get feedbackImportant;
+
+  /// No description provided for @leaveFeedback.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оставьте свой отзыв'**
+  String get leaveFeedback;
+
+  /// No description provided for @reviewsCount.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, =0{0 отзывов} one{{count} отзыв} few{{count} отзыва} many{{count} отзывов} other{{count} отзывов}}'**
+  String reviewsCount(num count);
+
+  /// No description provided for @sendFeedback.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отправить отзыв'**
+  String get sendFeedback;
+
+  /// No description provided for @map_open_in.
+  ///
+  /// In ru, this message translates to:
+  /// **'Открыть с помощью'**
+  String get map_open_in;
+
+  /// No description provided for @workingHours.
+  ///
+  /// In ru, this message translates to:
+  /// **'Рабочее время'**
+  String get workingHours;
+
+  /// No description provided for @writeReviewInFewSentences.
+  ///
+  /// In ru, this message translates to:
+  /// **'Напиши отзыв в нескольких предложениях'**
+  String get writeReviewInFewSentences;
+
+  /// No description provided for @catalogMyEsim.
+  ///
+  /// In ru, this message translates to:
+  /// **'My eSIM'**
+  String get catalogMyEsim;
+
+  /// No description provided for @catalogTravelQuiz.
+  ///
+  /// In ru, this message translates to:
+  /// **'Travel Quiz'**
+  String get catalogTravelQuiz;
+
+  /// No description provided for @catalogAviaTickets.
+  ///
+  /// In ru, this message translates to:
+  /// **'Авиабилеты'**
+  String get catalogAviaTickets;
+
+  /// No description provided for @catalogChargers.
+  ///
+  /// In ru, this message translates to:
+  /// **'Зарядки'**
+  String get catalogChargers;
+
+  /// No description provided for @catalogPoster.
+  ///
+  /// In ru, this message translates to:
+  /// **'Афиша'**
+  String get catalogPoster;
+
+  /// No description provided for @catalogTrainTickets.
+  ///
+  /// In ru, this message translates to:
+  /// **'ЖД билеты'**
+  String get catalogTrainTickets;
+
+  /// No description provided for @catalogHotels.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отели'**
+  String get catalogHotels;
+
+  /// No description provided for @catalogCottages.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дачи'**
+  String get catalogCottages;
+
+  /// No description provided for @catalogInsurance.
+  ///
+  /// In ru, this message translates to:
+  /// **'Страховка'**
+  String get catalogInsurance;
+
+  /// No description provided for @catalogItemStatusNew.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новое'**
+  String get catalogItemStatusNew;
+
+  /// No description provided for @catalogItemStatusSoon.
+  ///
+  /// In ru, this message translates to:
+  /// **'Скоро'**
+  String get catalogItemStatusSoon;
 }
 
 class _FeatureTravelLocalizationsDelegate

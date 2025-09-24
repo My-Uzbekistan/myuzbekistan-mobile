@@ -4,12 +4,14 @@ import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
 import '../../models/about_dto.dart';
+import '../../models/catalog/catalog_dto.dart';
 import '../../models/categories_dto.dart';
 import '../../models/currency_dto.dart';
 import '../../models/detail/content_dto.dart';
 import '../../models/favorite_dto.dart';
 import '../../models/places/content_dto_model.dart';
 import '../../models/regions.dart';
+import '../../models/review/review_dto.dart';
 import '../../models/token_dto.dart';
 
 part 'service.g.dart';
@@ -100,4 +102,16 @@ abstract class RestService {
 
   @POST("notifications/{id}/seen")
   Future<dynamic> seenNotification(@Path("id") int id);
+
+  @GET("reviews/content/{contentId}")
+  Future<ItemsResponse<ReviewDto>> getReviews(@Path("contentId") int contentId);
+
+  @GET("reviews/{contentId}/counts")
+  Future<dynamic> getReviewsCounts(@Path("contentId") int contentId);
+
+  @POST("reviews")
+  Future<dynamic> addReview(@Body() Map<String, dynamic> body);
+
+  @GET("catalogs")
+  Future<List<CatalogDto>> getCatalog();
 }

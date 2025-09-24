@@ -1,5 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomePagerContentData {
@@ -18,29 +19,31 @@ class HomePagerContentData {
   });
 }
 
-class HomeImagePagerContent extends StatefulWidget {
+class HomeImagePagerContent extends HookWidget {
   final HomePagerContentData data;
   final GestureTapCallback? onTap;
   final String? recommendText;
+  final String? tag;
+  final PageController controller;
 
-  HomeImagePagerContent(
-      {super.key, this.recommendText, required this.data, this.onTap});
-
-  @override
-  State<HomeImagePagerContent> createState() => _HomeImagePagerContentState();
-}
-
-class _HomeImagePagerContentState extends State<HomeImagePagerContent>
-{
-  final controller = PageController(initialPage: 0);
+  const HomeImagePagerContent(
+      {super.key,
+      this.tag,
+      this.recommendText,
+      required this.controller,
+      required this.data,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    // useAutomaticKeepAlive(wantKeepAlive: true);
+    //
+    // final controller = useState(PageController(initialPage: 1)).value;
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: GestureDetector(
-        onTap: widget.onTap,
+        onTap: onTap,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           spacing: 16,
@@ -52,24 +55,29 @@ class _HomeImagePagerContentState extends State<HomeImagePagerContent>
                 child: Stack(
                   children: [
                     Positioned.fill(
-                        child: PageView.builder(
-                            controller: controller,
-                            itemCount: widget.data.items.length,
-                            scrollDirection: Axis.horizontal,
-                            allowImplicitScrolling: true,
-                            pageSnapping: true,
-                            itemBuilder: (context, index) {
-                              return _ImagePage(
-                                url: widget.data.items[index],
-                              );
-                            })),
+                      child: PageView.builder(
+                          key: ValueKey('home-image-pager'),
+                          controller: controller,
+                          physics: PageScrollPhysics(
+                              parent: ClampingScrollPhysics()),
+                          itemCount: data.items.length,
+                          scrollDirection: Axis.horizontal,
+                          allowImplicitScrolling: true,
+                          pageSnapping: true,
+                          itemBuilder: (context, index) {
+                            return  _ImagePage(
+                                url: data.items[index],
+
+                            );
+                          }),
+                    ),
                     Positioned.fill(
                         child: IgnorePointer(
                       child: Container(
                           color: context.appColors.static.black
                               .withValues(alpha: 0.16)),
                     )),
-                    if (widget.recommendText != null)
+                    if (recommendText != null)
                       Align(
                         alignment: Alignment.topLeft,
                         child: Container(
@@ -80,20 +88,20 @@ class _HomeImagePagerContentState extends State<HomeImagePagerContent>
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(24)),
                           child: Text(
-                            widget.recommendText!,
+                            recommendText!,
                             style: CustomTypography.labelSm
                                 .copyWith(color: Colors.black),
                           ),
                         ),
                       ),
-                    if (widget.data.items.length > 1)
+                    if (data.items.length > 1)
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 12.0),
                           child: SmoothPageIndicator(
                               controller: controller, // PageController
-                              count: widget.data.items.length,
+                              count: data.items.length,
                               effect: WormEffect(
                                 spacing: 4.0,
                                 dotWidth: 6.0,
@@ -119,29 +127,30 @@ class _HomeImagePagerContentState extends State<HomeImagePagerContent>
                   children: [
                     Expanded(
                       child: Text(
-                        widget.data.title,
+                        data.title,
                         style: CustomTypography.labelMd,
                       ),
                     ),
-                    if ((widget.data.rating ?? 0) > 0)
+                    if ((data.rating ?? 0) > 0)
                       Row(
                         spacing: 4,
                         children: [
-                          Assets.svgStar.toSvgImage(
+                          Assets.svgStarFill.toSvgImage(
                               width: 16,
                               height: 16,
                               colorFilter: ColorFilter.mode(
-                                  context.appColors.textIconColor.primary, BlendMode.srcIn)),
+                                  context.appColors.textIconColor.primary,
+                                  BlendMode.srcIn)),
                           RichText(
                             text: TextSpan(
                                 style: CustomTypography.labelMd.copyWith(
                                     color: context
                                         .appColors.textIconColor.primary),
                                 children: [
-                                  TextSpan(text: widget.data.rating.toString()),
-                                  if ((widget.data.review ?? 0) > 0)
+                                  TextSpan(text: data.rating.toString()),
+                                  if ((data.review ?? 0) > 0)
                                     TextSpan(
-                                      text: " ${widget.data.review}",
+                                      text: " ${data.review}",
                                       style: CustomTypography.labelMd.copyWith(
                                           color: context.appColors.textIconColor
                                               .secondary),
@@ -152,9 +161,9 @@ class _HomeImagePagerContentState extends State<HomeImagePagerContent>
                       )
                   ],
                 ),
-                if (widget.data.caption != null)
+                if (data.caption != null)
                   Text(
-                    widget.data.caption!,
+                    data.caption!,
                     style: CustomTypography.bodySm.copyWith(
                         color: context.appColors.textIconColor.secondary),
                   )
@@ -182,7 +191,7 @@ class _ImagePageState extends State<_ImagePage>
   Widget build(BuildContext context) {
     super.build(context); // MUHIM!
 
-    return  ExtendedImage.network(
+    return ExtendedImage.network(
       widget.url,
       key: ValueKey(widget.url),
       fit: BoxFit.cover,

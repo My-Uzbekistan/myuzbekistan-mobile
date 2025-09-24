@@ -1,4 +1,3 @@
-
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +5,18 @@ import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/navigation/navigation_extensions.dart';
+import 'package:travel/src/pages/detail/review/bloc/review_bloc.dart';
+import 'package:travel/src/pages/detail/widget/description_widget.dart';
+import 'package:travel/src/pages/detail/widget/icon_text_cell.dart';
+import 'package:travel/src/pages/detail/widget/info_widget.dart';
+import 'package:travel/src/pages/detail/widget/items_title.dart';
+import 'package:travel/src/pages/detail/review/widgets/detail_reviews_container.dart';
 import 'package:travel/src/pages/detail/widget/work_time_widget.dart';
-
 import 'detail_bloc/detail_bloc.dart';
-import 'widget/cells_widget.dart';
 import 'widget/facilities_widget.dart';
 import 'widget/location_widget.dart';
-import 'widget/menu_group.dart';
 import 'widget/top_image_widget.dart';
-import 'widget/top_widget.dart';
 
 class DetailPage extends HookWidget {
   final double expandedHeight = 300;
@@ -22,18 +24,19 @@ class DetailPage extends HookWidget {
 
   const DetailPage({super.key});
 
+  final duration = 300;
+
   @override
   Widget build(BuildContext context) {
-    final iconTheme = Theme.of(context).iconTheme;
     final scrollController = useScrollController();
     final showCollapsedTitle = useState(false);
     final isCollapsed = useState(false);
+    final screenWidth = MediaQuery.of(context).size.width;
     useEffect(() {
       void listener() {
         if (!scrollController.hasClients) return;
-
         final offset = scrollController.offset;
-        final threshold = expandedHeight - kToolbarHeight;
+        final threshold = screenWidth - kToolbarHeight;
         if (offset > threshold && !isCollapsed.value) {
           isCollapsed.value = true;
         } else if (offset <= threshold && isCollapsed.value) {
@@ -51,203 +54,376 @@ class DetailPage extends HookWidget {
       return () => scrollController.removeListener(listener);
     }, [scrollController]);
     return Scaffold(
-      body:
-          BlocConsumer<DetailBloc, DetailBlocState>(listener: (context, state) {
-        if (state is DetailBlocDataState) {
-          if (state.navState is Unauthorized) {
-            context.more.pushAuthPage();
-          }
-        }
-      }, buildWhen: (previous, current) {
-        if (previous is DetailBlocDataState && current is DetailBlocDataState) {
-          return previous.contentDetail != current.contentDetail;
-        } else {
-          return previous != current;
-        }
-      }, builder: (context, state) {
-            if(state is DetailBlocLoadingState){
-
-              return  Scaffold(
-                // appBar: AppBar(),
-                body: SafeArea(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 20),
-                    alignment: Alignment.topCenter,
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-              );
-            }
-             final detail=(state as DetailBlocDataState).contentDetail;
-            return CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                SliverAppBar(
-                  expandedHeight: expandedHeight,
-                  pinned: true,
-                  stretch: true,
-                  leadingWidth: 56,
-                  leading: GestureDetector(
-                    onTap: (){
-                      context.pop();
-                    },
-                    child: Container(
-                      alignment: Alignment.centerRight,
-                      child: CircleAvatar(
-                        backgroundColor:
-                        isCollapsed.value ? Colors.transparent : Colors.white,
-                        radius: 20,
-                        child: Assets.svgIcBackChevron.toSvgImage(
-                            colorFilter: ColorFilter.mode(
-                                isCollapsed.value
-                                    ? context.appColors.textIconColor.primary
-                                    : Color(0xff221F26),
-                                BlendMode.srcIn)),
-                      ),
-
-                    ),
-                  ),
-                  actionsPadding: EdgeInsets.only(right: 16),
-                  actions: [
-                    GestureDetector(
-                      onTap: () {
-                        HapticFeedback.selectionClick();
-                        context.read<DetailBloc>().add(
-                            DetailBlocEvent.changeFavoriteState(
-                                isSetFavorite: !detail.isFavorite));
-                      },
-                      child: CircleAvatar(
-                          backgroundColor: isCollapsed.value
-                              ? Colors.transparent
-                              : Colors.white,
-                          radius: 20,
-                          child: detail.isFavorite
-                              ? Assets.svgIconFilledHeard.toSvgImage(
-                              colorFilter: ColorFilter.mode(
-                                  context.appColors.colors.red,
-                                  BlendMode.srcIn))
-                              : Assets.svgOutlineHeard.toSvgImage(
-                              colorFilter: ColorFilter.mode(
-                                  isCollapsed.value
-                                      ? (iconTheme.color ?? Colors.white)
-                                      : Color(0xff221F26),
-                                  BlendMode.srcIn))),
-                    ),
-                  ],
-                  stretchTriggerOffset: 0.3,
-                  flexibleSpace: FlexibleSpaceBar(
-                    title: showCollapsedTitle.value
-                        ? Text(
-                      detail.title ?? "",
-                      style: CustomTypography.H2,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    )
-                        : null,
-                    background: TopImageWidget(
-                      photos: detail.photos ?? [],onImageTap: (){
-
-                        if(!isCollapsed.value) {
-                          context.travel.pushImagePreview(detail.photos??[]);
-                        }
-                    },
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0)
-                        .copyWith(top: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          detail.title ?? "",
-                          style: CustomTypography.H2,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        if ((detail.contentAddress ?? "").isNotEmpty)
-                          RichText(
-                              text: TextSpan(
+      body: BlocConsumer<DetailBloc, DetailBlocState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            dataState: (contentDetail, contentId, isLoading, nav) {
+              if (nav is Unauthorized) {
+                context.more.pushAuthPage();
+              }
+            },
+          );
+        },
+        builder: (context, state) {
+          return AnimatedSwitcher(
+            duration: Duration(milliseconds: duration),
+            child:
+                state is DetailBlocDataState
+                    ? Builder(
+                      builder: (context) {
+                        final data = state.contentDetail;
+                        final title =
+                            data.viewType == ViewType.places
+                                ? context.localization.aboutPlace
+                                : context.localization.moreDetails;
+                        return Stack(
+                          children: [
+                            CustomScrollView(
+                              controller: scrollController,
+                              slivers: [
+                                SliverStack(
                                   children: [
-                                    TextSpan(text: detail.contentAddress),
-                                    if (detail.distanceKm != null)
-                                      TextSpan(
-                                          text:
-                                          " • ${distanceText(context, detail.distanceKm)}"),
+                                    SliverAppBar(
+                                      expandedHeight: screenWidth,
+                                      stretch: true,
+                                      stretchTriggerOffset: 0.9,
+                                      floating: false,
+                                      automaticallyImplyLeading: false,
+                                      scrolledUnderElevation: 0,
+                                      elevation: 0,
+                                      iconTheme: IconThemeData(
+                                        color: Colors.white,
+                                      ),
+                                      systemOverlayStyle: context
+                                          .systemUiOverlyStyle
+                                          .copyWith(
+                                            statusBarBrightness:
+                                                Brightness.dark,
+                                          ),
+                                      shadowColor: Colors.transparent,
+                                      backgroundColor: Colors.transparent,
+                                      flexibleSpace: FlexibleSpaceBar(
+                                        titlePadding: EdgeInsetsGeometry.zero,
+                                        expandedTitleScale: 1,
+                                        collapseMode: CollapseMode.parallax,
+                                        centerTitle: true,
+                                        stretchModes: [
+                                          StretchMode.zoomBackground,
+                                        ],
+                                        background: TopImageWidget(
+                                          photos: data.photos ?? [],
+                                          onImageTap: () {
+                                            if (!isCollapsed.value) {
+                                              context.travel.pushImagePreview(
+                                                data.photos ?? [],
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                    if (isCollapsed.value)
+                                      SliverPinnedHeader(
+                                        child: SizedBox(
+                                          height:
+                                              kToolbarHeight +
+                                              MediaQuery.of(
+                                                context,
+                                              ).padding.top,
+                                          child: AppGradientMask(),
+                                        ),
+                                      ),
+                                    SliverPositioned.fill(
+                                      bottom: -1,
+                                      top: 0,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {},
+                                            child: ClipRRect(
+                                              borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(24),
+                                                topLeft: Radius.circular(24),
+                                              ),
+
+                                              child: Container(
+                                                height: 25,
+                                                color:
+                                                    context
+                                                        .appColors
+                                                        .background
+                                                        .background,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
-                                  style: CustomTypography.bodySm.copyWith(
-                                      color: context
-                                          .appColors.textIconColor.secondary))),
-                      ],
+                                ),
+                                SliverPadding(
+                                  padding: EdgeInsets.only(
+                                    bottom:
+                                        MediaQuery.of(context).padding.bottom +
+                                        16,
+                                  ),
+                                  sliver: SliverList(
+                                    delegate: SliverChildListDelegate([
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                        ),
+                                        child: Column(
+                                          spacing: 4,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              data.categoryName.orEmpty(),
+                                            ).bodyMd(
+                                              color:
+                                                  context
+                                                      .appColors
+                                                      .textIconColor
+                                                      .secondary,
+                                            ),
+                                            Text(
+                                              data.title.orEmpty().trim(),
+                                            ).h2(),
+                                          ],
+                                        ),
+                                      ),
+                                      AnimatedSize(
+                                        duration: Duration(
+                                          milliseconds: duration,
+                                        ),
+                                        child:
+                                            state.isLoading
+                                                ? Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                    vertical: 16,
+                                                  ),
+                                                  child: Center(
+                                                    child: LoadingIndicator(),
+                                                  ),
+                                                )
+                                                : SizedBox.shrink(),
+                                      ),
+                                      AnimatedSwitcher(
+                                        duration: Duration(
+                                          milliseconds: duration + 50,
+                                        ),
+
+                                        child:
+                                            data.info != null
+                                                ? InfoWidget(info: data.info!)
+                                                : SizedBox.shrink(),
+                                      ),
+                                      AnimatedSwitcher(
+                                        duration: Duration(
+                                          milliseconds: duration + 50,
+                                        ),
+
+                                        child:
+                                            data.description.orEmpty().isEmpty
+                                                ? SizedBox.shrink()
+                                                : DescriptionWidget(
+                                                  title: title,
+                                                  description: data.description,
+                                                ),
+                                      ),
+                                      AnimatedSwitcher(
+                                        duration: Duration(
+                                          milliseconds: duration + 100,
+                                        ),
+                                        child:
+                                            !data.facilitiesAvailable
+                                                ? SizedBox.shrink()
+                                                : Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 16,
+                                                      ),
+                                                  child: FacilitiesWidget(
+                                                    facilities:
+                                                        data.facilities ?? [],
+                                                  ),
+                                                ),
+                                      ),
+                                      AnimatedSwitcher(
+                                        duration: Duration(
+                                          milliseconds: duration + 150,
+                                        ),
+                                        child:
+                                            !data.contactAvailable
+                                                ? SizedBox.shrink()
+                                                : Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 16,
+                                                      ),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      ItemsTitle(
+                                                        title:
+                                                            context
+                                                                .localization
+                                                                .contacts,
+                                                      ),
+                                                      ...data.contacts
+                                                              ?.take(4)
+                                                              .map(
+                                                                (
+                                                                  e,
+                                                                ) => IconTextCell(
+                                                                  title:
+                                                                      e.contactName
+                                                                          .orEmpty(),
+                                                                  iconUrl:
+                                                                      e.icon,
+                                                                  showArrow:
+                                                                      true,
+                                                                  onTap: () {
+                                                                    if (e.action !=
+                                                                        null) {
+                                                                      LauncherUtils.urlLauncher(
+                                                                        e.actionUrl!,
+                                                                        mode:
+                                                                            LaunchMode.externalApplication,
+                                                                      );
+                                                                    }
+                                                                  },
+                                                                ),
+                                                              )
+                                                              .toList() ??
+                                                          [],
+                                                    ],
+                                                  ),
+                                                ),
+                                      ),
+
+                                      if (data.workingHoursAvailable)
+                                        WorkTimeWidget(
+                                          title:
+                                              context.localization.workingHours,
+                                          workingHours: data.workingHours,
+                                        ),
+                                      AnimatedSwitcher(
+                                        duration: Duration(
+                                          milliseconds: duration + 200,
+                                        ),
+                                        child:
+                                            data.contentAddress != null &&
+                                                    data.location?.isNotEmpty ==
+                                                        true
+                                                ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                        horizontal: 16,
+                                                      ),
+                                                  child: LocationWidget(
+                                                    title:
+                                                        context
+                                                            .localization
+                                                            .location,
+                                                    address:
+                                                        data.contentAddress,
+                                                    coordinates:
+                                                        data.location ?? [],
+                                                  ),
+                                                )
+                                                : SizedBox.shrink(),
+                                      ),
+
+                                      ReviewsContainer(
+                                        addReview: (rating) {
+                                          context.pushAddReviewPage(
+                                            bloc: context.read<ReviewBloc>(),
+                                            contentTitle: data.title.orEmpty(),
+                                            contentType:
+                                                data.categoryName.orEmpty(),
+                                            rating: rating,
+                                          );
+                                        },
+                                        openAllReviews: (index) {
+                                          context.pushAllReviewsPage(
+                                            bloc: context.read<ReviewBloc>(),
+                                          );
+                                        },
+                                      ),
+                                    ]),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ).copyWith(
+                                top: MediaQuery.of(context).padding.top,
+                              ),
+                              child: Row(
+                                children: [
+                                  RoundedButton.arrowLeft(
+                                    onPressed: () {
+                                      context.pop();
+                                    },
+                                  ),
+                                  Expanded(child: SizedBox()),
+                                  AnimatedContainer(
+                                    duration: Duration(milliseconds: 200),
+                                    child:
+                                        state.isLoading
+                                            ? SizedBox()
+                                            : RoundedButton(
+                                              onPressed: () {
+                                                HapticFeedback.selectionClick();
+                                                context.read<DetailBloc>().add(
+                                                  DetailBlocEvent.changeFavoriteState(
+                                                    isSetFavorite:
+                                                        !data.isFavorite,
+                                                  ),
+                                                );
+                                              },
+                                              assetsSvgIcon:
+                                                  data.isFavorite
+                                                      ? Assets
+                                                          .svgIconFilledHeard
+                                                      : Assets.svgOutlineHeard,
+
+                                              iconColor:
+                                                  data.isFavorite
+                                                      ? context
+                                                          .appColors
+                                                          .colors
+                                                          .red
+                                                      : null,
+                                            ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    )
+                    : Scaffold(
+                      appBar: GradientAppBar(),
+                      extendBodyBehindAppBar: false,
+                      body: Container(
+                        padding: EdgeInsets.only(top: 16),
+                        alignment: Alignment.topCenter,
+                        child: LoadingIndicator(),
+                      ),
                     ),
-                  ),
-                ),
-
-
-                SliverPadding(
-                  padding: EdgeInsets.symmetric(horizontal: 20).copyWith(bottom: 48),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate([
-                      if (detail.viewType == ViewType.places)
-                        RatingTopWidget(
-                          ratingAverage: detail.ratingAverage,
-                          averageCheck: detail.averageCheck ?? 0,
-                        ),
-                      if (detail.viewType != ViewType.places)
-                        TopBalanceWidget(
-                          priceText: detail.priceText,
-                          priceInDollar: detail.priceInDollar,
-                        ),
-                      if (detail.description.orEmpty().isNotEmpty)
-                        Padding(
-                          padding: EdgeInsets.only(top: 24, bottom: 16),
-                          child: Text(
-                            "${detail.description}",
-                            style: CustomTypography.bodyLg.copyWith(
-                                color: context.appColors.textIconColor.primary),
-                          ),
-                        ),
-                      if (detail.attachments != null &&
-                          (detail.attachments?.value ?? []).isNotEmpty)
-                        FilesGroup(
-                          attachments: detail.attachments!.value ?? [],
-                          title: detail.attachments!.name ?? "",
-                        ),
-                      if (detail.facilitiesAvailable &&
-                          (detail.facilities?.value ?? []).isNotEmpty)
-                        FacilitiesWidget(
-                          title: detail.facilities?.name ?? "",
-                          facilities: detail.facilities?.value ?? [],
-                        ),
-                      if (detail.languagesAvailable)
-                        LanguagesWidget(
-                            title: detail.languages!.name ?? "",
-                            languages: detail.languages!.value ?? []),
-                      if (detail.workingHoursAvailable)
-                        WorkTimeWidget(
-                          title: detail.workingHours?.name,
-                          workingHours: detail.workingHours?.value,
-                        ),
-                      if (detail.address != null || detail.location != null)
-                        LocationWidget(
-                          title: detail.location?.name ?? "",
-                          address: detail.address,
-                          coordinates: detail.location?.value ?? [],
-                        ),
-                      if (detail.contactAvailable)
-                        CellsWidget(
-                          title: detail.contacts?.name ?? "",
-                          contacts: detail.contacts?.value ?? [],
-                        ),
-                    ]),
-                  ),
-                ),
-              ],
-            );
-
-      }),
+          );
+        },
+      ),
     );
   }
 
@@ -259,5 +435,3 @@ class DetailPage extends HookWidget {
     return "${distance.floor()} ${context.localization.distanceKm}";
   }
 }
-
-

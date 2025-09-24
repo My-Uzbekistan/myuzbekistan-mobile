@@ -1,9 +1,6 @@
 {
-  "nav_home": "Home",
-  "nav_map": "Map",
+  "nav_services": "Services",
   "nav_payment": "Payment",
-  "nav_transfer": "Transfer",
-  "nav_more": "More",
   "action_all": "All",
   "language": "Language",
   "theme": "Theme",
@@ -58,5 +55,35 @@
 
   "prayerTime": "{time, select, fajr{Fajr} sunrise{Sunrise} dhuhr{Dhuhr} asr{Asr} maghrib{Maghrib} isha{Isha} other{Prayer}}",
 "prayerTimeTitle": "Prayer Times",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "whatAmenitiesAwait": "What amenities await you",
+  "viewAllAmenities": "View all amenities",
+  "contacts": "Contacts",
+  "readMore": "Read more",
+  "aboutPlace": "About the place",
+  "moreDetails": "More details",
+  "location": "Location",
+  "buildRoute": "Get directions",
+  "feedbackImportant": "Your feedback is very important to us, thank you!",
+  "leaveFeedback": "Leave your feedback",
+  "reviewsCount": "{count, plural, =0{0 reviews} =1{1 review} other{{count} reviews}}",
+  "sendFeedback": "Send feedback",
+  "map_open_in": "Open In",
+  "workingHours": "Working hours",
+  "writeReviewInFewSentences": "Write a review in a few sentences",
+
+
+  "catalogMyEsim": "My eSIM",
+  "catalogTravelQuiz": "Travel Quiz",
+  "catalogAviaTickets": "Flight tickets",
+  "catalogChargers": "Chargers",
+  "catalogPoster": "Poster",
+  "catalogTrainTickets": "Train tickets",
+  "catalogHotels": "Hotels",
+  "catalogCottages": "Cottages",
+  "catalogInsurance": "Insurance",
+
+  "catalogItemStatusNew": "New",
+  "catalogItemStatusSoon": "Soon"
+
 }

@@ -6,15 +6,13 @@ abstract class DetailBlocState with _$DetailBlocState {
 
   const factory DetailBlocState.dataState({
     required ContentDetail contentDetail,
-
-    NavState ? navState
+    required int contentId,
+    @Default(true) bool isLoading,
+    NavState? navState,
   }) = DetailBlocDataState;
 }
 
-
 @freezed
 abstract class NavState with _$NavState {
-
   const factory NavState.unauthorized() = Unauthorized;
-
 }

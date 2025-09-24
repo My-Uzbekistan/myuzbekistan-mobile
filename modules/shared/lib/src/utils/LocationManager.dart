@@ -40,13 +40,24 @@ class LocationManager {
     if (!hasPermission) {
       return null;
     }
-    _currentLocation = await Geolocator.getCurrentPosition(
-        locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+
+    final lastKnown = await Geolocator.getLastKnownPosition();
+
+    if (lastKnown != null) {
+      final duration = DateTime.now().difference(lastKnown.timestamp);
+      if (duration.inMinutes < 30) {
+        _currentLocation=lastKnown;
+      }
+    }
+
+    if(getCurrentPosition()==null) {
+      _currentLocation = await Geolocator.getCurrentPosition(
+          locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+    }
 
     return Future.value(_currentLocation);
   }
 
-  /// Stream – joylashuv o‘zgarishini kuzatish
   Stream<Position> getPositionStream({
     LocationAccuracy accuracy = LocationAccuracy.high,
     int distanceFilter = 10,

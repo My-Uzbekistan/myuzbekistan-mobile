@@ -541,6 +541,12 @@ abstract class FeatureMoreLocalizations {
   /// **'PIN-код удалён'**
   String get pincode_deleted;
 
+  /// No description provided for @pinUpdated.
+  ///
+  /// In ru, this message translates to:
+  /// **'PIN-код успешно обновлён.'**
+  String get pinUpdated;
+
   /// No description provided for @enter_code.
   ///
   /// In ru, this message translates to:
@@ -552,12 +558,6 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Пройдите аутентификацию для доступа к приложению'**
   String get authPrompt;
-
-  /// No description provided for @fiscalReceipt.
-  ///
-  /// In ru, this message translates to:
-  /// **'Фискальный чек'**
-  String get fiscalReceipt;
 }
 
 class _FeatureMoreLocalizationsDelegate

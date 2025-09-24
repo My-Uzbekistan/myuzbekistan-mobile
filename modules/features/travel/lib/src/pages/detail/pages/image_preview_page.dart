@@ -26,7 +26,8 @@ class ImagePreviewPage extends HookWidget {
     }, [pageController]);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: GradientAppBar(),
+
       body: Column(
         children: [
           Expanded(
@@ -37,9 +38,12 @@ class ImagePreviewPage extends HookWidget {
                 final element = images[index];
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child:  ExtendedImage.network(element,
-                        mode: ExtendedImageMode.gesture, // 👈 Zoom va drag yoqiladi
-                        initGestureConfigHandler: (state) => GestureConfig(
+                  child: ExtendedImage.network(
+                    element,
+                    mode: ExtendedImageMode.gesture,
+                    // 👈 Zoom va drag yoqiladi
+                    initGestureConfigHandler:
+                        (state) => GestureConfig(
                           minScale: 1.0,
                           maxScale: 4.0,
                           animationMinScale: 0.8,
@@ -49,9 +53,8 @@ class ImagePreviewPage extends HookWidget {
                           initialScale: 1.0,
                           inPageView: false,
                           initialAlignment: InitialAlignment.center,
-                        )
-                    ),
-
+                        ),
+                  ),
                 );
               },
             ),
@@ -101,7 +104,7 @@ class ImagePreviewPage extends HookWidget {
                             child: Container(
                               color: context.appColors.fill.tertiary,
                               child: ExtendedImage.network(
-                                 images[index],
+                                images[index],
                                 fit: BoxFit.cover,
                               ),
                             ),

@@ -46,7 +46,7 @@ class _CreatePinCodePageState extends State<CreatePinCodePage> {
           successState: () {
             InfoAlertDialog.show(
               context,
-              message: context.localization.pincode_created,
+              message: widget.changePin?context.localization.pinUpdated:context.localization.pincode_created,
               seconds: 1,
               type: InfoAlertType.success,
               onDismiss: () {

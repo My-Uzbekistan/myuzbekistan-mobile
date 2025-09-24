@@ -30,6 +30,7 @@ class HomeRegionCard extends StatelessWidget {
               child: Container(
                 height: 48,
                 padding: EdgeInsets.only(left: 16, right: 12),
+                alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: context.appColors.stroke.nonOpaque,
@@ -45,10 +46,10 @@ class HomeRegionCard extends StatelessWidget {
                       child: Row(
                         spacing: 12,
                         children: [
-                          Assets.svgLocationFill.toSvgImage(
-                            width: 16,
-                            height: 16,
-                            fit: BoxFit.cover,
+                          Assets.svgLocatorFill.toSvgImage(
+                            width: 18,
+                            height: 18,
+                            fit: BoxFit.fill,
                             colorFilter: ColorFilter.mode(
                               context.appColors.textIconColor.primary,
                               BlendMode.srcIn,
@@ -65,20 +66,22 @@ class HomeRegionCard extends StatelessWidget {
                           Text(temperature!).bodyMd(
                             color: context.appColors.textIconColor.secondary,
                           ),
-                          ExtendedImage.network(
-                            "https:$temperatureImageUrl",
-                            cache: true,
-                            height: 24,
-                            width: 24,
-                            fit: BoxFit.cover,
-                            loadStateChanged: (state) {
-                              if (state.extendedImageLoadState ==
-                                  LoadState.completed) {
-                                return null;
-                              }
+                          SizedBox(
+                            height: 18,
+                            width: 18,
+                            child: ExtendedImage.network(
+                              "https:$temperatureImageUrl",
+                              cache: false,
+                              fit: BoxFit.fill,
+                              loadStateChanged: (state) {
+                                if (state.extendedImageLoadState ==
+                                    LoadState.completed) {
+                                  return null;
+                                }
 
-                              return SizedBox();
-                            },
+                                return SizedBox();
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -90,9 +93,9 @@ class HomeRegionCard extends StatelessWidget {
           AspectRatio(
             aspectRatio: 1,
             child: GestureDetector(
-              behavior: HitTestBehavior.translucent,
+              behavior: HitTestBehavior.opaque,
               onTap: () {
-                context.travel.pushNotifications(notificationId: "123");
+                context.travel.pushNotifications();
               },
               child: Container(
                 height: double.infinity,
@@ -109,17 +112,20 @@ class HomeRegionCard extends StatelessWidget {
                   child: Center(
                     child: Stack(
                       children: [
-                        Assets.svgNotificationIcon.toSvgImage(
-                          tintColor: context.appColors.textIconColor.primary,
+                        Positioned.fill(
+                          child: Center(child: Assets.svgNotificationIcon.toSvgImage(
+                            tintColor: context.appColors.textIconColor.primary,
+                            fit: BoxFit.contain,
+                          ),),
                         ),
-                        Positioned(
-                          right: 3,
-                          top: 0,
-                          child: CircleAvatar(
-                            radius: 3,
-                            backgroundColor: context.appColors.colors.red,
-                          ),
-                        ),
+                        // Positioned(
+                        //   right: 3,
+                        //   top: 0,
+                        //   child: CircleAvatar(
+                        //     radius: 3,
+                        //     backgroundColor: context.appColors.colors.red,
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),

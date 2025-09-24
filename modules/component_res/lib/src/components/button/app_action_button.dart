@@ -85,7 +85,7 @@ class AppActionButton extends StatelessWidget {
         };
 
     final disableForegroundColor = switch (type) {
-      ActionButtonType.primary => Colors.white,
+      ActionButtonType.primary => Colors.white.withValues(alpha: 0.24),
       ActionButtonType.secondary => context.appColors.textIconColor.tertiary,
       ActionButtonType.text => context.appColors.textIconColor.tertiary,
     };

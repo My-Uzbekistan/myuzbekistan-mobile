@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:data/src/travel/models/review/review_dto.dart';
 import 'package:data/src/utils/generic/generics.dart';
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
+import '../../../models/items_response.dart';
 import '../../models/places/content_dto_model.dart';
 import '../api/service.dart';
 
@@ -11,8 +14,10 @@ import '../api/service.dart';
 class RepositoryImp implements Repository {
   final RestService _restService;
   CancelToken favoriteCanceledToken = CancelToken();
+  final SecurityStorage securityStorage;
 
-  RepositoryImp(RestService service) : _restService = service;
+  RepositoryImp(RestService service, this.securityStorage)
+    : _restService = service;
 
   @override
   Future<List<Categories>> loadCategories() async {
@@ -185,10 +190,16 @@ class RepositoryImp implements Repository {
   }
 
   @override
-  Future<void> createPin({required String pin}) async {
-    // final a = await Future.delayed(Duration(seconds: 2));
-    // return Future.value();
-    // return Future.error(Exception("PinCodeException"));
+  Future<void> createPin({
+    required String pin,
+    bool isChangePin = false,
+  }) async {
+    if (isChangePin) {
+      return _restService.changePin({
+        "OldPin": securityStorage.getPin().orEmpty(),
+        "NewPin": pin,
+      }).call();
+    }
     return _restService.createPin({"Pin": pin}).call();
   }
 
@@ -223,4 +234,101 @@ class RepositoryImp implements Repository {
   Future<dynamic> seenNotification({required int id}) {
     return _restService.seenNotification(id).call();
   }
+
+  @override
+  Future addReview({
+    required int contentId,
+    required String comment,
+    required int rating,
+  }) {
+    return _restService.addReview({
+      "ContentId": contentId,
+      "Comment": comment,
+      "Rating": rating,
+    }).call();
+  }
+
+  @override
+  Future<List<ReviewModel>> getReviews({required int contentId}) {
+    return _restService
+        .getReviews(contentId)
+        .call(
+          (data) => data.items
+              .map(
+                (e) => ReviewModel(
+                  userId: e.userId,
+                  comment: e.comment.orEmpty(),
+                  rating: e.rating,
+                  id: e.id,
+                  userName: e.userName,
+                  avatar: e.avatar,
+                  createdAt: e.createdAt,
+                ),
+              )
+              .toList(),
+        );
+  }
+
+  @override
+  Future<Map<int, int>> getRatingCount({required int contentId}) {
+    return _restService
+        .getReviewsCounts(contentId)
+        .call((data) => _ratingFromJson(data));
+  }
+
+  @override
+  Future<List<CatalogItemModel>> getCatalog() async {
+
+    return _restService.getCatalog().call((data)=>data.map((e) => e.toDomain()).toList());
+    await Future.delayed(Duration(seconds: 2));
+    return Future.value([
+      CatalogItemModel(
+        icon: "https://picsum.photos/200/300",
+        color: Color(0xff04A5FE),
+        title: "My eSIM",
+        status: CatalogStatus.newService,
+        actionType: CatalogActionType.inner,
+        authRequired: true,
+        action: "https://esimapp.myuz.uz",
+      ),
+      CatalogItemModel(
+        icon: "https://picsum.photos/200/300",
+        color: Color(0xff37A8C7),
+        title: "Travel Cam AI",
+        status: CatalogStatus.active,
+        actionType: CatalogActionType.inner,
+        action: "https://travel-cam-ai.vercel.app?lang=uz",
+      ),
+
+      CatalogItemModel(
+        icon: "https://picsum.photos/200/300",
+        color: Color(0xff14CB7D),
+        title: "Travel Quiz",
+        status: CatalogStatus.active,
+        actionType: CatalogActionType.inner,
+        action: "https://myuzb.uz/notifications?notificationId=1234",
+      ),
+      CatalogItemModel(
+        icon: "https://picsum.photos/200/300",
+        title: "Авиабилеты",
+        status: CatalogStatus.upcoming,
+        actionType: CatalogActionType.inner,
+      ),
+    ]);
+  }
+}
+
+Map<int, int> _ratingFromJson(Map<String, dynamic>? json) {
+  final defaultMap = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0, 0: 0};
+
+  if (json == null) return defaultMap;
+
+  final parsed = json.map(
+    (key, value) => MapEntry(int.parse(key), value as int),
+  );
+  for (final entry in defaultMap.entries) {
+    parsed.putIfAbsent(entry.key, () => entry.value);
+  }
+
+  return parsed;
 }

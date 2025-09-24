@@ -50,9 +50,9 @@ abstract class NetworkModule {
     dio.interceptors.add(
       TokenRefreshInterceptor(securityStorage: securityStorage,mainDio: dio),
     );
-
-      dio.interceptors.add(alice.getDioInterceptor());
     if (kDebugMode) {
+      dio.interceptors.add(alice.getDioInterceptor());
+
       dio.interceptors.add(PrettyDioLogger(requestBody: true));
     }
     dio.interceptors.add(ErrorInterceptor());

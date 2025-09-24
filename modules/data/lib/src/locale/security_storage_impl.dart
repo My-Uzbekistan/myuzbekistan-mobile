@@ -80,7 +80,10 @@ class SecurityStorageImpl implements SecurityStorage {
     final secund = _box.get("expiresIn");
     if (secund == null) return null;
     final microsecondsSinceEpoch = secund * 1000;
-    return DateTime.fromMillisecondsSinceEpoch(microsecondsSinceEpoch,isUtc: false);
+    return DateTime.fromMillisecondsSinceEpoch(
+      microsecondsSinceEpoch,
+      isUtc: false,
+    );
   }
 
   @override
@@ -136,5 +139,13 @@ class SecurityStorageImpl implements SecurityStorage {
   @override
   Future<void> setTopic(String topic) async {
     return await _box.put("topic", topic);
+  }
+
+  @override
+  int? getUserId() {
+    final token = getAccessToken();
+    if (token == null) return null;
+    final jwt = JwtDecoder.decode(token);
+    return int.tryParse(jwt["sub"]);
   }
 }

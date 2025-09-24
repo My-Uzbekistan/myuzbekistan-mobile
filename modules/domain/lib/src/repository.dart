@@ -24,7 +24,8 @@ abstract interface class Repository {
 
   Future<ContentDetail> loadContentDetail({required int contentId});
 
-  Future<void> createPin({required String pin});
+  Future<void> createPin({required String pin, bool isChangePin});
+
   Future<void> removePin({required String pin});
 
   Future<dynamic> verifyPin({required String pin});
@@ -55,12 +56,24 @@ abstract interface class Repository {
   Future<List<MoreItem>> loadMoreUseFull();
 
   Future<dynamic> deleteAccount();
+
   Future<dynamic> setFirebaseToken({required String token});
 
   Future<List<NotificationItem>> getNotifications();
+
   Future<NotificationItem> getNotificationById({required int id});
+
   Future<dynamic> seenNotification({required int id});
 
+  Future<List<ReviewModel>> getReviews({required int contentId});
 
+  Future<Map<int, int>> getRatingCount({required int contentId});
 
+  Future<dynamic> addReview({
+    required int contentId,
+    required String comment,
+    required int rating,
+  });
+
+  Future<List<CatalogItemModel>> getCatalog();
 }

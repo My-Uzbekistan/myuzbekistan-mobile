@@ -45,8 +45,8 @@ class _MerchantsPageState extends State<MerchantsPage> {
                             .map(
                               (e) => MerchantWidgetModel(
                                 name: e.name.orEmpty(),
-                                caption: e.type,
-                                distance: e.distance?.toString(),
+                                // caption: e.type,
+                                // distance: e.distance?.toString(),
                                 imageUrl: e.logo,
                               ),
                             )

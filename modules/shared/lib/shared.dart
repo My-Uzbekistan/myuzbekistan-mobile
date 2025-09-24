@@ -35,6 +35,11 @@ export 'package:firebase_core/firebase_core.dart';
 export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:firebase_analytics/firebase_analytics.dart';
 export 'package:device_info_plus/device_info_plus.dart';
+export 'package:map_launcher/map_launcher.dart';
+export 'package:url_launcher/url_launcher.dart';
+export 'package:jwt_decoder/jwt_decoder.dart';
+export 'src/utils/notification_service.dart' ;
+export 'package:animations/animations.dart';
 
 // export 'package:flutter_alice/alice.dart';
 

@@ -28,4 +28,15 @@ class _FeatureTravelNavPath {
 
   AppNavPath get imagePreview =>
       _NavPathImpl(name: 'image_preview', path: '/image_preview');
+
+  AppNavPath get detailAllFacilities =>
+      _NavPathImpl(name: 'detail_allFacilities', path: 'detail_allFacilities');
+
+  AppNavPath get detailReadMore =>
+      _NavPathImpl(name: 'detailReadMore', path: 'detailReadMore');
+
+  AppNavPath get addReviewPage =>
+      _NavPathImpl(name: 'addReviewPage', path: 'addReviewPage');
+  AppNavPath get allReviews =>
+      _NavPathImpl(name: 'allReviews', path: 'allReviews');
 }

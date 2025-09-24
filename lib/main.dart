@@ -1,8 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:finance/finance.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:more/more.dart';
@@ -11,12 +9,15 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
-import 'package:uzbekistan_travel/core/utils/notification_service.dart';
 import 'di/injection.dart';
 import 'firebase_options.dart';
 import 'generated/locale/app_localizations.dart';
 
 AppLocale? currentLocale;
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ Future<void> main() async {
   await Hive.initFlutter();
   await configureInjection();
   NotificationService().subscribeToTopic();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 
@@ -40,7 +42,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
-      Future.delayed(const Duration(milliseconds: 1000), () {
+      Future.delayed(const Duration(milliseconds: 2000), () {
         NotificationService().init();
       });
     });
@@ -55,6 +57,8 @@ class _MyAppState extends State<MyApp> {
     });
     super.initState();
   }
+
+  void openNotification() {}
 
   @override
   void dispose() {
@@ -86,6 +90,7 @@ class _MyAppState extends State<MyApp> {
               ],
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.appLocale?.locale,
+              title: "My Uzbekistan",
               builder: (context, child) {
                 currentLocale = state.appLocale;
                 Intl.defaultLocale =

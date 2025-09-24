@@ -122,10 +122,10 @@ return changeFavoriteState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String contentId)?  initial,TResult Function( bool isSetFavorite)?  changeFavoriteState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( ContentDetail? content,  String contentId)?  initial,TResult Function( bool isSetFavorite)?  changeFavoriteState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DetailBlocInitialEvent() when initial != null:
-return initial(_that.contentId);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
+return initial(_that.content,_that.contentId);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
 return changeFavoriteState(_that.isSetFavorite);case _:
   return orElse();
 
@@ -144,10 +144,10 @@ return changeFavoriteState(_that.isSetFavorite);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String contentId)  initial,required TResult Function( bool isSetFavorite)  changeFavoriteState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( ContentDetail? content,  String contentId)  initial,required TResult Function( bool isSetFavorite)  changeFavoriteState,}) {final _that = this;
 switch (_that) {
 case _DetailBlocInitialEvent():
-return initial(_that.contentId);case _DetailBlocChangeFavorite():
+return initial(_that.content,_that.contentId);case _DetailBlocChangeFavorite():
 return changeFavoriteState(_that.isSetFavorite);case _:
   throw StateError('Unexpected subclass');
 
@@ -165,10 +165,10 @@ return changeFavoriteState(_that.isSetFavorite);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String contentId)?  initial,TResult? Function( bool isSetFavorite)?  changeFavoriteState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( ContentDetail? content,  String contentId)?  initial,TResult? Function( bool isSetFavorite)?  changeFavoriteState,}) {final _that = this;
 switch (_that) {
 case _DetailBlocInitialEvent() when initial != null:
-return initial(_that.contentId);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
+return initial(_that.content,_that.contentId);case _DetailBlocChangeFavorite() when changeFavoriteState != null:
 return changeFavoriteState(_that.isSetFavorite);case _:
   return null;
 
@@ -181,9 +181,10 @@ return changeFavoriteState(_that.isSetFavorite);case _:
 
 
 class _DetailBlocInitialEvent implements DetailBlocEvent {
-  const _DetailBlocInitialEvent({required this.contentId});
+  const _DetailBlocInitialEvent({this.content, required this.contentId});
   
 
+ final  ContentDetail? content;
  final  String contentId;
 
 /// Create a copy of DetailBlocEvent
@@ -196,16 +197,16 @@ _$DetailBlocInitialEventCopyWith<_DetailBlocInitialEvent> get copyWith => __$Det
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailBlocInitialEvent&&(identical(other.contentId, contentId) || other.contentId == contentId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DetailBlocInitialEvent&&(identical(other.content, content) || other.content == content)&&(identical(other.contentId, contentId) || other.contentId == contentId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,contentId);
+int get hashCode => Object.hash(runtimeType,content,contentId);
 
 @override
 String toString() {
-  return 'DetailBlocEvent.initial(contentId: $contentId)';
+  return 'DetailBlocEvent.initial(content: $content, contentId: $contentId)';
 }
 
 
@@ -216,7 +217,7 @@ abstract mixin class _$DetailBlocInitialEventCopyWith<$Res> implements $DetailBl
   factory _$DetailBlocInitialEventCopyWith(_DetailBlocInitialEvent value, $Res Function(_DetailBlocInitialEvent) _then) = __$DetailBlocInitialEventCopyWithImpl;
 @useResult
 $Res call({
- String contentId
+ ContentDetail? content, String contentId
 });
 
 
@@ -233,9 +234,10 @@ class __$DetailBlocInitialEventCopyWithImpl<$Res>
 
 /// Create a copy of DetailBlocEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? contentId = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? content = freezed,Object? contentId = null,}) {
   return _then(_DetailBlocInitialEvent(
-contentId: null == contentId ? _self.contentId : contentId // ignore: cast_nullable_to_non_nullable
+content: freezed == content ? _self.content : content // ignore: cast_nullable_to_non_nullable
+as ContentDetail?,contentId: null == contentId ? _self.contentId : contentId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -420,11 +422,11 @@ return dataState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadingState,TResult Function( ContentDetail contentDetail,  NavState? navState)?  dataState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadingState,TResult Function( ContentDetail contentDetail,  int contentId,  bool isLoading,  NavState? navState)?  dataState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case DetailBlocLoadingState() when loadingState != null:
 return loadingState();case DetailBlocDataState() when dataState != null:
-return dataState(_that.contentDetail,_that.navState);case _:
+return dataState(_that.contentDetail,_that.contentId,_that.isLoading,_that.navState);case _:
   return orElse();
 
 }
@@ -442,11 +444,11 @@ return dataState(_that.contentDetail,_that.navState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadingState,required TResult Function( ContentDetail contentDetail,  NavState? navState)  dataState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadingState,required TResult Function( ContentDetail contentDetail,  int contentId,  bool isLoading,  NavState? navState)  dataState,}) {final _that = this;
 switch (_that) {
 case DetailBlocLoadingState():
 return loadingState();case DetailBlocDataState():
-return dataState(_that.contentDetail,_that.navState);case _:
+return dataState(_that.contentDetail,_that.contentId,_that.isLoading,_that.navState);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -463,11 +465,11 @@ return dataState(_that.contentDetail,_that.navState);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadingState,TResult? Function( ContentDetail contentDetail,  NavState? navState)?  dataState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadingState,TResult? Function( ContentDetail contentDetail,  int contentId,  bool isLoading,  NavState? navState)?  dataState,}) {final _that = this;
 switch (_that) {
 case DetailBlocLoadingState() when loadingState != null:
 return loadingState();case DetailBlocDataState() when dataState != null:
-return dataState(_that.contentDetail,_that.navState);case _:
+return dataState(_that.contentDetail,_that.contentId,_that.isLoading,_that.navState);case _:
   return null;
 
 }
@@ -511,10 +513,12 @@ String toString() {
 
 
 class DetailBlocDataState implements DetailBlocState {
-  const DetailBlocDataState({required this.contentDetail, this.navState});
+  const DetailBlocDataState({required this.contentDetail, required this.contentId, this.isLoading = true, this.navState});
   
 
  final  ContentDetail contentDetail;
+ final  int contentId;
+@JsonKey() final  bool isLoading;
  final  NavState? navState;
 
 /// Create a copy of DetailBlocState
@@ -527,16 +531,16 @@ $DetailBlocDataStateCopyWith<DetailBlocDataState> get copyWith => _$DetailBlocDa
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailBlocDataState&&(identical(other.contentDetail, contentDetail) || other.contentDetail == contentDetail)&&(identical(other.navState, navState) || other.navState == navState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DetailBlocDataState&&(identical(other.contentDetail, contentDetail) || other.contentDetail == contentDetail)&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.navState, navState) || other.navState == navState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,contentDetail,navState);
+int get hashCode => Object.hash(runtimeType,contentDetail,contentId,isLoading,navState);
 
 @override
 String toString() {
-  return 'DetailBlocState.dataState(contentDetail: $contentDetail, navState: $navState)';
+  return 'DetailBlocState.dataState(contentDetail: $contentDetail, contentId: $contentId, isLoading: $isLoading, navState: $navState)';
 }
 
 
@@ -547,7 +551,7 @@ abstract mixin class $DetailBlocDataStateCopyWith<$Res> implements $DetailBlocSt
   factory $DetailBlocDataStateCopyWith(DetailBlocDataState value, $Res Function(DetailBlocDataState) _then) = _$DetailBlocDataStateCopyWithImpl;
 @useResult
 $Res call({
- ContentDetail contentDetail, NavState? navState
+ ContentDetail contentDetail, int contentId, bool isLoading, NavState? navState
 });
 
 
@@ -564,10 +568,12 @@ class _$DetailBlocDataStateCopyWithImpl<$Res>
 
 /// Create a copy of DetailBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? contentDetail = null,Object? navState = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? contentDetail = null,Object? contentId = null,Object? isLoading = null,Object? navState = freezed,}) {
   return _then(DetailBlocDataState(
 contentDetail: null == contentDetail ? _self.contentDetail : contentDetail // ignore: cast_nullable_to_non_nullable
-as ContentDetail,navState: freezed == navState ? _self.navState : navState // ignore: cast_nullable_to_non_nullable
+as ContentDetail,contentId: null == contentId ? _self.contentId : contentId // ignore: cast_nullable_to_non_nullable
+as int,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,navState: freezed == navState ? _self.navState : navState // ignore: cast_nullable_to_non_nullable
 as NavState?,
   ));
 }

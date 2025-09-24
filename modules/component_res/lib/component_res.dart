@@ -52,5 +52,6 @@ export 'src/components/gradient_app_bar/gradient_appbar.dart';
 export 'src/components/navigation_bar/custom_navigation_bar.dart';
 export 'src/components/app_switch/app_switch.dart';
 export 'package:sliver_tools/sliver_tools.dart';
+export 'src/components/text/utils.dart';
 
 // export 'src/components/toast/toast.dart';

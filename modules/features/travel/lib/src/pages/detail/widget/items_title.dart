@@ -8,11 +8,14 @@ class ItemsTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 24.0, bottom: 16),
-      child: Text(
-        title,
-        style: CustomTypography.H2,
+    return SizedBox(
+      width: double.maxFinite,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 24.0, bottom: 12),
+        child: Text(
+          title,
+          style: CustomTypography.H2,
+        ),
       ),
     );
   }

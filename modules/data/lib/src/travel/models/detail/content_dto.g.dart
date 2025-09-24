@@ -39,54 +39,24 @@ _ContentDto _$ContentDtoFromJson(Map<String, dynamic> json) => _ContentDto(
   categoryId: (json['categoryId'] as num?)?.toInt(),
   categoryName: json['categoryName'] as String?,
   isFavorite: json['isFavorite'] as bool?,
-  workingHours: json['workingHours'] == null
-      ? null
-      : FieldDto<String?>.fromJson(
-          json['workingHours'] as Map<String, dynamic>,
-          (value) => value as String?,
-        ),
-  location: json['location'] == null
-      ? null
-      : FieldDto<List<double>>.fromJson(
-          json['location'] as Map<String, dynamic>,
-          (value) => (value as List<dynamic>)
-              .map((e) => (e as num).toDouble())
-              .toList(),
-        ),
-  facilities: json['facilities'] == null
-      ? null
-      : FieldDto<List<FacilityItemDto>>.fromJson(
-          json['facilities'] as Map<String, dynamic>,
-          (value) => (value as List<dynamic>)
-              .map((e) => FacilityItemDto.fromJson(e as Map<String, dynamic>))
-              .toList(),
-        ),
-  languages: json['languages'] == null
-      ? null
-      : FieldDto<List<String>>.fromJson(
-          json['languages'] as Map<String, dynamic>,
-          (value) => (value as List<dynamic>).map((e) => e as String).toList(),
-        ),
-  attachments: json['attachments'] == null
-      ? null
-      : FieldDto<List<AttachmentsItemDto>>.fromJson(
-          json['attachments'] as Map<String, dynamic>,
-          (value) => (value as List<dynamic>)
-              .map(
-                (e) => AttachmentsItemDto.fromJson(e as Map<String, dynamic>),
-              )
-              .toList(),
-        ),
+  workingHours: json['workingHours'] as String?,
+  location: (json['location'] as List<dynamic>?)
+      ?.map((e) => (e as num).toDouble())
+      .toList(),
+  facilities: (json['facilities'] as List<dynamic>?)
+      ?.map((e) => FacilityItemDto.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  languages: (json['languages'] as List<dynamic>?)
+      ?.map((e) => e as String)
+      .toList(),
+  attachments: (json['attachments'] as List<dynamic>?)
+      ?.map((e) => AttachmentsItemDto.fromJson(e as Map<String, dynamic>))
+      .toList(),
   photos: const ImageArrayConvertor().fromJson(json['photos'] as List?),
   photo: const ImageConvertor().fromJson(json['photo'] as String?),
-  contacts: json['contacts'] == null
-      ? null
-      : FieldDto<List<ContactsDto>>.fromJson(
-          json['contacts'] as Map<String, dynamic>,
-          (value) => (value as List<dynamic>)
-              .map((e) => ContactsDto.fromJson(e as Map<String, dynamic>))
-              .toList(),
-        ),
+  contacts: (json['contacts'] as List<dynamic>?)
+      ?.map((e) => ContactsDto.fromJson(e as Map<String, dynamic>))
+      .toList(),
   ratingAverage: (json['ratingAverage'] as num?)?.toDouble(),
   averageCheck: (json['averageCheck'] as num?)?.toInt(),
   price: (json['price'] as num?)?.toDouble(),
@@ -95,6 +65,9 @@ _ContentDto _$ContentDtoFromJson(Map<String, dynamic> json) => _ContentDto(
   region: json['region'] as String?,
   distance: (json['distance'] as num?)?.toDouble(),
   reviewCount: (json['reviewCount'] as num?)?.toInt(),
+  info: json['info'] == null
+      ? null
+      : InfoDto.fromJson(json['info'] as Map<String, dynamic>),
   viewType: json['viewType'] == null
       ? ViewType.places
       : const ViewTypeConvertor().fromJson((json['viewType'] as num?)?.toInt()),
@@ -127,6 +100,7 @@ Map<String, dynamic> _$ContentDtoToJson(_ContentDto instance) =>
       'region': instance.region,
       'distance': instance.distance,
       'reviewCount': instance.reviewCount,
+      'info': instance.info,
       'viewType': const ViewTypeConvertor().toJson(instance.viewType),
     };
 
@@ -191,4 +165,31 @@ Map<String, dynamic> _$ContactsDtoToJson(_ContactsDto instance) =>
       'name': instance.name,
       'contact': instance.contact,
       'action': instance.action,
+    };
+
+_InfoDto _$InfoDtoFromJson(Map<String, dynamic> json) => _InfoDto(
+  left: json['left'] == null
+      ? null
+      : InfoItemDto.fromJson(json['left'] as Map<String, dynamic>),
+  right: json['right'] == null
+      ? null
+      : InfoItemDto.fromJson(json['right'] as Map<String, dynamic>),
+);
+
+Map<String, dynamic> _$InfoDtoToJson(_InfoDto instance) => <String, dynamic>{
+  'left': instance.left,
+  'right': instance.right,
+};
+
+_InfoItemDto _$InfoItemDtoFromJson(Map<String, dynamic> json) => _InfoItemDto(
+  key: json['key'] as String,
+  value: json['value'] as String?,
+  type: json['type'] as String?,
+);
+
+Map<String, dynamic> _$InfoItemDtoToJson(_InfoItemDto instance) =>
+    <String, dynamic>{
+      'key': instance.key,
+      'value': instance.value,
+      'type': instance.type,
     };

@@ -45,7 +45,8 @@ class DarkColors extends _BaseColors {
         red: const Color(0xffff453a),
         green: const Color(0xff30d158),
         blue: const Color(0xff0099ff),
-        yellow: const Color(0xffffdd2d), // updated
+        yellow: const Color(0xffffdd2d),
+    orange: const Color(0xfffb5d40),// updated
       );
 
   @override

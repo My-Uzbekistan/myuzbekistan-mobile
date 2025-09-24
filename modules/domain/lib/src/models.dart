@@ -9,3 +9,6 @@ export 'models/view_type.dart';
 export 'models/UserModel.dart';
 export 'models/group_by.dart';
 export 'models/notification_item.dart';
+
+export 'models/review.dart';
+export 'models/catalog_model.dart';

@@ -16,8 +16,8 @@ final GetIt getIt = GetIt.instance;
   ExternalModule(DataPackageModule),
   ExternalModule(DomainPackageModule)
 ], externalPackageModulesAfter: [
+      ExternalModule(MorePackageModule),
   ExternalModule(TravelPackageModule),
-  ExternalModule(MorePackageModule),
   ExternalModule(FinancePackageModule),
 ])
 Future<void> configureInjection() async {

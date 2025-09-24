@@ -79,7 +79,7 @@ class Assets {
   static const String svgIconTime = 'assets/svg/icon_time.svg';
   static const String svgIconTrashCanLine = 'assets/svg/icon_trash_can_line.svg';
   static const String svgIconWarning = 'assets/svg/icon_warning.svg';
-  static const String svgLocationFill = 'assets/svg/location_fill.svg';
+  static const String svgLocatorFill = 'assets/svg/locator_fill.svg';
   static const String svgNotificationIcon = 'assets/svg/notification_icon.svg';
   static const String svgOutlineHeard = 'assets/svg/outline_heard.svg';
   static const String svgPinLocationLine = 'assets/svg/pin_location_line.svg';
@@ -87,8 +87,8 @@ class Assets {
   static const String svgScanIdentification = 'assets/svg/scan_identification.svg';
   static const String svgSearchLine = 'assets/svg/search_line.svg';
   static const String svgShieldFill = 'assets/svg/shield_fill.svg';
-  static const String svgStar = 'assets/svg/star.svg';
-  static const String svgStarLeadinghalfFilled = 'assets/svg/star_leadinghalf_filled.svg';
+  static const String svgStarFill = 'assets/svg/star_fill.svg';
+  static const String svgStarOutline = 'assets/svg/star_outline.svg';
   static const String svgStaroflifeFill = 'assets/svg/staroflife_fill.svg';
   static const String svgTabIconCatalog = 'assets/svg/tab_icon_catalog.svg';
   static const String svgTabIconFinance = 'assets/svg/tab_icon_finance.svg';

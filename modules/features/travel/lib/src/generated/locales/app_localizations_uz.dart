@@ -9,19 +9,10 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   FeatureTravelLocalizationsUz([String locale = 'uz']) : super(locale);
 
   @override
-  String get nav_home => 'Bosh sahifa';
-
-  @override
-  String get nav_map => 'Xarita';
-
-  @override
-  String get nav_transfer => 'Yo\'nalish';
-
-  @override
   String get nav_payment => 'To\'lov';
 
   @override
-  String get nav_more => 'Ko‘proq';
+  String get nav_services => 'Xizmatlar';
 
   @override
   String get language => 'Ilova tili';
@@ -210,4 +201,91 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get notifications => 'Xabarnomalar';
+
+  @override
+  String get whatAmenitiesAwait => 'Qanday qulayliklar kutmoqda';
+
+  @override
+  String get viewAllAmenities => 'Barcha qulayliklarni ko‘rish';
+
+  @override
+  String get contacts => 'Kontaktlar';
+
+  @override
+  String get readMore => 'Ko\'proq ma\'lumot';
+
+  @override
+  String get aboutPlace => 'Joy haqida';
+
+  @override
+  String get moreDetails => 'Batafsil';
+
+  @override
+  String get location => 'Joylashuv';
+
+  @override
+  String get buildRoute => 'Yo\'nalishni ko\'rish';
+
+  @override
+  String get feedbackImportant => 'Fikringiz biz uchun juda muhim, tashakkur!';
+
+  @override
+  String get leaveFeedback => 'Fikringizni qoldiring';
+
+  @override
+  String reviewsCount(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ta sharh',
+      one: '1 ta sharh',
+      zero: '0 ta sharh',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sendFeedback => 'Yuborish';
+
+  @override
+  String get map_open_in => 'Quyidagi orqali ochish';
+
+  @override
+  String get workingHours => 'Ish vaqti';
+
+  @override
+  String get writeReviewInFewSentences => 'Bir necha jumlada fikr bildiring';
+
+  @override
+  String get catalogMyEsim => 'My eSIM';
+
+  @override
+  String get catalogTravelQuiz => 'Travel Quiz';
+
+  @override
+  String get catalogAviaTickets => 'Aviabiletlar';
+
+  @override
+  String get catalogChargers => 'Zaryadlovchilar';
+
+  @override
+  String get catalogPoster => 'Afishalar';
+
+  @override
+  String get catalogTrainTickets => 'Poyezd chiptalari';
+
+  @override
+  String get catalogHotels => 'Mehmonxonalar';
+
+  @override
+  String get catalogCottages => 'Dachalar';
+
+  @override
+  String get catalogInsurance => 'Sug‘urta';
+
+  @override
+  String get catalogItemStatusNew => 'Yangi';
+
+  @override
+  String get catalogItemStatusSoon => 'Tez orada';
 }

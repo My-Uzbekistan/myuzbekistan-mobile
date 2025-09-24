@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 
 enum ViewType {
   places(0),
@@ -10,7 +9,6 @@ enum ViewType {
   const ViewType(this.typeId);
 
   static  ViewType getType(int? typeId) {
-    debugPrint("ViewTypeData ${typeId}");
     if (typeId == null) return ViewType.places;
     return ViewType.values.firstWhere((element) => element.typeId == typeId,
         orElse: () => ViewType.places);

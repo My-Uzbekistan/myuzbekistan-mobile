@@ -44,14 +44,14 @@ class FeatureMoreNavExtension {
   }
 
   void pushWebViewPage({
-    required String? title,
+    String? title,
     required String actionUrl,
     bool? authRequired = false,
   }) {
     _context.pushType(
       AppNavPath.more.webViewPage,
       queryParameters: {
-        "title": title,
+        "title": title??"",
         "actionUrl": actionUrl,
         "authRequired": authRequired.toString(),
       },

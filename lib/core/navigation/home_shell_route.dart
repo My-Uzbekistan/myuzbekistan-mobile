@@ -9,19 +9,20 @@ final _shellRoute = [
     branches: [
       FeatureTravelRouter.shellTravel,
       FeatureFinanceRouter.shellFinance,
-      StatefulShellBranch(
-        routes: [
-          GoRoute(
-              path: "/catalog",
-              name: "catalog",
-
-              builder: (context,state){
-                return CatalogScreen();
-              }
-
-          ),
-        ],
-      ),
+      FeatureTravelRouter.shellCatalog,
+      // StatefulShellBranch(
+      //   routes: [
+      //     GoRoute(
+      //         path: "/catalog",
+      //         name: "catalog",
+      //
+      //         builder: (context,state){
+      //           return CatalogScreen();
+      //         }
+      //
+      //     ),
+      //   ],
+      // ),
       FeatureMoreRouter.shellMore,
 
     ],

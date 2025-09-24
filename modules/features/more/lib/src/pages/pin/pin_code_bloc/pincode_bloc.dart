@@ -98,7 +98,8 @@ class PinCodeBloc extends Bloc<PinCodeEvent, PinCodeState> {
   ) async {
     emitter(PinCodeState.loadingState());
     try {
-      final result = await _repository.createPin(pin: event.pin);
+
+      final result = await _repository.createPin(pin: event.pin,isChangePin: isChangePin);
       await _securityStorage.setHasPin(true);
       await _securityStorage.setPin(event.pin);
       emitter(PinCodeState.successState());

@@ -66,8 +66,10 @@ class DataPackageModule extends _i526.MicroPackageModule {
     gh.factory<_i210.FinanceApiService>(
         () => _i210.FinanceApiService.new(gh<_i361.Dio>()));
     gh.factory<_i926.RestService>(() => _i926.RestService.new(gh<_i811.Dio>()));
-    gh.factory<_i494.Repository>(
-        () => _i305.RepositoryImp(gh<_i926.RestService>()));
+    gh.factory<_i494.Repository>(() => _i305.RepositoryImp(
+          gh<_i926.RestService>(),
+          gh<_i494.SecurityStorage>(),
+        ));
     gh.factory<_i494.FinanceRepository>(
         () => _i144.FinanceRepositoryImpl(gh<_i210.FinanceApiService>()));
   }

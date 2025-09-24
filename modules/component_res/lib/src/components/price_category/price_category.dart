@@ -7,14 +7,14 @@ class PriceCategory extends StatelessWidget {
   final int priceCategory;
   final Color? activeTextColor;
   final Color? inactiveTextColor;
-  final TextStyle? textstyle;
+  final TextStyle? textStyle;
 
   const PriceCategory(
       {super.key,
       this.priceCategory = 2,
       this.activeTextColor,
       this.inactiveTextColor,
-      this.textstyle});
+      this.textStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class PriceCategory extends StatelessWidget {
     for (int i = 0; i < 4; i++) {
       textSpanList.add(TextSpan(
           text: "\$",
-          style: (textstyle ?? CustomTypography.labelSm).copyWith(
+          style: (textStyle ?? CustomTypography.labelSm).copyWith(
             color: i < (priceCategory > 4 ? 4 : priceCategory)
                 ? activeTextColor ?? context.appColors.textIconColor.primary
                 : inactiveTextColor ??

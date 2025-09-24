@@ -26,7 +26,7 @@ class EmergencyContactsPage extends StatelessWidget {
       EmergencyItem(
           title: context.localization.touristPolice,
           contact: "+998 71 233 17 17",
-          assets: Assets.svgStarLeadinghalfFilled),
+          assets: Assets.svgStarFill),
       EmergencyItem(
           title: context.localization.fire,
           contact: "101",

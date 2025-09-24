@@ -263,11 +263,11 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get pincode_deleted => 'PIN-код удалён';
 
   @override
+  String get pinUpdated => 'PIN-код успешно обновлён.';
+
+  @override
   String get enter_code => 'Введите код';
 
   @override
   String get authPrompt => 'Пройдите аутентификацию для доступа к приложению';
-
-  @override
-  String get fiscalReceipt => 'Фискальный чек';
 }

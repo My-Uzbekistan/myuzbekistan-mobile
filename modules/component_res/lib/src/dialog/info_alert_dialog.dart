@@ -63,21 +63,22 @@ class InfoAlertDialog extends StatelessWidget {
       int seconds = 2,
       VoidCallback? onDismiss}) {
     Timer? timer;
+    final navigator = Navigator.of(context, rootNavigator: true);
+    timer = Timer(Duration(seconds: seconds), () {
+      if (navigator.mounted && navigator.canPop()) {
+        timer?.cancel();
+        navigator.pop();
+      }
+    });
     showDialog(
         context: context,
         builder: (dialogContext) {
-          timer = Timer( Duration(seconds: seconds), () {
-            final navigator = Navigator.of(dialogContext, rootNavigator: true);
-            if (navigator.canPop()) {
-              navigator.pop();
-            }
-          });
           return InfoAlertDialog(
             description: message ?? context.coreLocalization.unexpected_error,
             type: type,
           );
-        }).then((_) {
-      timer?.cancel();
+        }).whenComplete(() {
+          timer?.cancel();
       onDismiss?.call();
     });
   }

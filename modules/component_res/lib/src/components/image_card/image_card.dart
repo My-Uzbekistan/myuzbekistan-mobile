@@ -55,6 +55,7 @@ class _AppItemCardImage extends StatefulWidget {
       this.ratingAverage = 0,
       this.averageCheck = 0,
       this.topRightWidget,
+
       this.priceText});
 
   @override
@@ -103,6 +104,11 @@ class _AppItemCardImageState extends State<_AppItemCardImage>
                   right: 12,
                   child:
                   PriceCategoryWithContainer(priceCategory: widget.averageCheck)),
+            if (widget.priceText != null && widget.priceText!.isNotEmpty)
+              Positioned(
+                  bottom: 12,
+                  right: 12,
+                  child: PriceContainer(priceText:widget.priceText!))
           ],
         ),
       ),
@@ -127,28 +133,29 @@ class _ImageContentState extends State<_ImageContent> {
   @override
   Widget build(BuildContext context) {
     return  ExtendedImage.network(
-        widget.imageUrl,
-        key: ValueKey(widget.imageUrl),
-        fit: BoxFit.cover,
-        height: double.maxFinite,
-        width: double.maxFinite,
-        cache: true,
-        cacheMaxAge: const Duration(days: 1),
-        loadStateChanged: (ExtendedImageState state) {
-          switch (state.extendedImageLoadState) {
-            case LoadState.completed:
-              return AnimatedOpacity(
-                opacity: 1.0,
-                duration: Duration(milliseconds: 200),
-                child: state.completedWidget,
-              ); // ✅ Default image o'zi ko'rsatiladi
-            default:
-              return Assets.pngDefaultContentImage.toImage(fit: BoxFit.fill);
-          }
-        },
+          widget.imageUrl,
+          key: ValueKey(widget.imageUrl),
+          fit: BoxFit.cover,
+          height: double.maxFinite,
+          width: double.maxFinite,
+          cache: true,
+          cacheMaxAge: const Duration(days: 1),
+          loadStateChanged: (ExtendedImageState state) {
+            switch (state.extendedImageLoadState) {
+              case LoadState.completed:
+                return AnimatedOpacity(
+                  opacity: 1.0,
+                  duration: Duration(milliseconds: 200),
+                  child: state.completedWidget,
+                ); // ✅ Default image o'zi ko'rsatiladi
+              default:
+                return Assets.pngDefaultContentImage.toImage(fit: BoxFit.fill);
+            }
+          },
 
 
-    );
+      );
+
   }
 
   @override

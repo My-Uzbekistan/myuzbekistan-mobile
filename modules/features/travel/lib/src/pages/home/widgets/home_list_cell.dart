@@ -137,7 +137,6 @@ class _HomeListCellState extends State<HomeListCell>
                     },
                   ),
                 ),
-
               ],
             ),
           );

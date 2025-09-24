@@ -263,11 +263,11 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get pincode_deleted => 'PinCode o‘chirildi';
 
   @override
+  String get pinUpdated => 'PIN kodi muvaffaqiyatli yangilandi.';
+
+  @override
   String get enter_code => 'Kodni kiriting';
 
   @override
   String get authPrompt => 'Ilovaga kirish uchun autentifikatsiyadan o‘ting';
-
-  @override
-  String get fiscalReceipt => 'Soliq cheki';
 }

@@ -38,22 +38,22 @@ class MainPageContent extends Equatable {
   final int contentId;
   final String? title;
   final String? caption;
-  final  List<String> photos;
-  final  String? photo;
-  final  String? region;
+  final List<String> photos;
+  final String? photo;
+  final String? region;
   final String? address;
-  final  List<Facility> facilities;
-  final  List<String> languages;
+  final List<Facility> facilities;
+  final List<String> languages;
   final double? ratingAverage;
   final double? distance;
   final int? reviewCount;
   final int? averageCheck;
   final double? price;
   final double? priceInDollar;
-  final  ViewType viewType;
-  final  bool isFavorite;
+  final ViewType viewType;
+  final bool isFavorite;
 
-const  MainPageContent({
+  const MainPageContent({
     required this.contentId,
     required this.photos,
     required this.viewType,
@@ -72,6 +72,28 @@ const  MainPageContent({
     this.distance,
     this.reviewCount,
   });
+
+  ContentDetail toContentDetail({String? categoryName}) {
+    return ContentDetail(
+      id: contentId,
+      viewType: viewType,
+      title: title,
+      region: region,
+      address: address,
+      averageCheck: averageCheck,
+      ratingAverage: ratingAverage,
+      facilities: facilities,
+      languages: languages,
+      photo: photo,
+      photos: photos,
+      price: price,
+      priceInDollar: priceInDollar,
+      isFavorite: isFavorite,
+      distance: distance,
+      reviewCount: reviewCount,
+      categoryName:categoryName
+    );
+  }
 
   String? get mainPhoto => photo ?? photos.firstOrNull;
 

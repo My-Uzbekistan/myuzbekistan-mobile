@@ -51,7 +51,8 @@ class LightColors extends _BaseColors {
         red: const Color(0xffff3b30),
         green: const Color(0xff34c759),
         blue: const Color(0xff007aff),
-        yellow: const Color(0xffffca2d), // updated
+        yellow: const Color(0xffffca2d),
+        orange: const Color(0xfffb5d40),// updated
       );
 
   @override

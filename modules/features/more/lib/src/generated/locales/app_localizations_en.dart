@@ -262,11 +262,11 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   String get pincode_deleted => 'PIN code deleted';
 
   @override
+  String get pinUpdated => 'PIN code has been successfully updated.';
+
+  @override
   String get enter_code => 'Enter code';
 
   @override
   String get authPrompt => 'Please authenticate to access the application';
-
-  @override
-  String get fiscalReceipt => 'Fiscal receipt';
 }

@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:shared/shared.dart';
 
 import '../constants.dart';
 import '../travel/models/token_dto.dart';
@@ -177,10 +179,10 @@ class TokenRefreshInterceptor extends Interceptor {
   ) async {
     try {
       await _ensureValidToken();
-
-      // Tokenni headerga qo'shamiz
-      options.headers['Authorization'] =
-          'Bearer ${securityStorage.getAccessToken()}';
+      if (securityStorage.getAccessToken().orEmpty().isNotEmpty) {
+        options.headers[HttpHeaders.authorizationHeader] =
+            'Bearer ${securityStorage.getAccessToken()}';
+      }
       handler.next(options);
     } catch (e) {
       handler.next(options);
@@ -198,7 +200,8 @@ class TokenRefreshInterceptor extends Interceptor {
           method: requestOptions.method,
           headers: {
             ...requestOptions.headers,
-            "Authorization": "Bearer ${securityStorage.getAccessToken()}",
+            HttpHeaders.authorizationHeader:
+                "Bearer ${securityStorage.getAccessToken()}",
           },
           responseType: requestOptions.responseType,
           contentType: requestOptions.contentType,

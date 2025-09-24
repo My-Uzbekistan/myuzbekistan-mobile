@@ -76,8 +76,9 @@
   "delete_pin_title": "Delete PIN code",
   "delete_pin_message": "PIN login will be disabled. You can create a new PIN at any time",
   "pincode_created": "PIN code created successfully",
+  "pinUpdated": "PIN code has been successfully updated.",
   "pincode_deleted": "PIN code deleted",
   "enter_code": "Enter code",
-  "authPrompt": "Please authenticate to access the application",
+  "authPrompt": "Please authenticate to access the application"
 
 }
