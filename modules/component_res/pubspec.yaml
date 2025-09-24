@@ -20,6 +20,8 @@ version: 1.0.0+1
 environment:
   sdk: ^3.6.0
 
+resolution: workspace
+
 dependencies:
   flutter:
     sdk: flutter
@@ -28,11 +30,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.17
-  cached_network_image: ^3.4.1
   flutter_hooks: ^0.21.2
   carousel_slider: ^5.0.0
   fluttertoast: ^8.2.12
   google_maps_flutter: #^2.11.0
+  smooth_page_indicator: ^1.2.1
+  sliver_tools:
+
+  flutter_localizations:
+    sdk: flutter
+  extended_image: ^10.0.1
 
 dev_dependencies:
   flutter_test:
@@ -47,14 +54,19 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add Flutter specific assets to your application, add an assets section,
   # like this:
   assets:
      - assets/png/
+     - assets/catalog/
      - assets/svg/
+     - assets/svg/more/
+     - assets/svg/prayers/
      - assets/logo/
      - assets/flags/
+     - assets/splash/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -68,12 +80,21 @@ flutter:
   # have a "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+
   fonts:
-     - family: Geist
-       fonts:
-         - asset: fonts/Geist-Regular.ttf
-         - asset: fonts/Geist-Medium.ttf
-         - asset: fonts/Geist-SemiBold.ttf
+    - family: SfPro
+      fonts:
+        - asset: fonts/SF-Pro-Bold.ttf
+        - asset: fonts/SF-Pro-Medium.ttf
+        - asset: fonts/SF-Pro-Regular.ttf
+        - asset: fonts/SF-Pro-Semibold.ttf
+
+    - family: GoogleSans
+      fonts:
+        - asset: fonts/GoogleSans-Bold.ttf
+        - asset: fonts/GoogleSans-Medium.ttf
+        - asset: fonts/GoogleSans-Regular.ttf
+#        - asset: fonts/SF-Pro-Semibold.ttf
 
   #   - family: Trajan Pro
   #     fonts:

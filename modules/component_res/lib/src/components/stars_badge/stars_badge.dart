@@ -35,7 +35,7 @@ class StarsBadge extends StatelessWidget {
                         style: CustomTypography.labelSm
                             .copyWith(color: Colors.white),
                       ),
-                      Assets.svgStar.toSvgImage()
+                      Assets.svgStarFill.toSvgImage()
                     ],
                   )),
             ),

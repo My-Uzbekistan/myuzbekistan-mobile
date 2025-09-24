@@ -15,174 +15,44 @@ class AppLocalizationsRu extends AppLocalizations {
   String get nav_map => 'Карта';
 
   @override
-  String get nav_payment => 'Платеж';
+  String get nav_payment => 'Финансы';
 
   @override
-  String get nav_transfer => 'Перевод';
+  String get nav_services => 'Сервисы';
 
   @override
   String get nav_more => 'Еще';
 
   @override
-  String get action_all => 'Все';
+  String get catalogMyEsim => 'My eSIM';
 
   @override
-  String get language => 'Язык';
+  String get catalogTravelQuiz => 'Travel Quiz';
 
   @override
-  String get theme => 'Тема';
+  String get catalogAviaTickets => 'Авиабилеты';
 
   @override
-  String lanItem(String lang) {
-    String _temp0 = intl.Intl.selectLogic(
-      lang,
-      {
-        'en': 'Английский',
-        'ru': 'Русский',
-        'uz': 'Узбекский',
-        'other': '',
-      },
-    );
-    return '$_temp0';
-  }
+  String get catalogChargers => 'Зарядки';
 
   @override
-  String themeModes(String theme) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme,
-      {
-        'system': 'Системный',
-        'light': 'Светлая',
-        'dark': 'Тёмная',
-        'other': '',
-      },
-    );
-    return '$_temp0';
-  }
+  String get catalogPoster => 'Афиша';
 
   @override
-  String get guest => 'Привет Гость';
+  String get catalogTrainTickets => 'ЖД билеты';
 
   @override
-  String currency_uzs(Object value) {
-    return '$value сум';
-  }
+  String get catalogHotels => 'Отели';
 
   @override
-  String nPhotos(Object n) {
-    return '$n фото';
-  }
+  String get catalogCottages => 'Дачи';
 
   @override
-  String get getStarted => 'Начать';
+  String get catalogInsurance => 'Страховка';
 
   @override
-  String get logout => 'Выйти';
+  String get catalogItemStatusNew => 'Новое';
 
   @override
-  String get getStartedDescription => 'Получите полный доступ к возможностям, а также сохраняйте свои любимые вещи';
-
-  @override
-  String get continueWithGoogle => 'Продолжить с Google';
-
-  @override
-  String get continueWithApple => 'Продолжить с Apple';
-
-  @override
-  String get averageCheck => 'Средний рейтинг';
-
-  @override
-  String get search => 'Поиск';
-
-  @override
-  String get rating => 'Рейтинг';
-
-  @override
-  String get favorites => 'Избранное';
-
-  @override
-  String n_items(Object n) {
-    return '$n элементов';
-  }
-
-  @override
-  String get select_location => 'Выберите местоположение';
-
-  @override
-  String get about => 'О нас';
-
-  @override
-  String get uzbekistan => 'Узбекистан';
-
-  @override
-  String get exchange_rates => 'Курсы валют';
-
-  @override
-  String get uzbek_currency => '*Узбекская валюта (UZS) называется сум';
-
-  @override
-  String get exchange_banks => 'Обменные банки';
-
-  @override
-  String get loading_data => 'Загрузка данных';
-
-  @override
-  String get coming_soon => 'Вскоре!';
-
-  @override
-  String get coming_soon_message => 'Мы работаем над чем-то великим.';
-
-  @override
-  String get nothing_found => 'Ничего не найдено';
-
-  @override
-  String get nothing_found_message => 'Ничего не найдено. Попробуйте снова!';
-
-  @override
-  String get refresh => 'Обновить';
-
-  @override
-  String get pageFailedToLoad => 'Страница не загрузилась';
-
-  @override
-  String get something_went_wrong => 'Что-то пошло не так. Пожалуйста, попробуйте еще раз.';
-
-  @override
-  String get generalEmergency => 'Аварийная служба';
-
-  @override
-  String get touristPolice => 'Туристическая полиция';
-
-  @override
-  String get fire => 'Пожарная служба';
-
-  @override
-  String get police => 'Полиция';
-
-  @override
-  String get medical => 'Скорая помощь';
-
-  @override
-  String get gasEmergency => 'Газовая аварийная служба';
-
-  @override
-  String get emergencyContacts => 'Экстренные контакты';
-
-  @override
-  String get usefulTips => 'Полезные советы';
-
-  @override
-  String get logoutConfirmation => 'Вы хотите выйти из системы?';
-
-  @override
-  String get deleteAccountConfirmation => 'Вы хотите удалить аккаунт?';
-
-  @override
-  String get deleteAccount => 'Удалить аккаунт';
-
-  @override
-  String get cancel => 'Отмена';
-
-  @override
-  String get warning => 'Предупреждение';
+  String get catalogItemStatusSoon => 'Скоро';
 }

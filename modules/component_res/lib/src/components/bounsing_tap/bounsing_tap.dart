@@ -45,7 +45,7 @@ class _BounceTapState extends State<BounceTap>
     _animationController = AnimationController(
       vsync: this,
       lowerBound: 0.0,
-      upperBound: 0.1,
+      upperBound: 0.06,
       duration: duration,
     )..addListener(() {
       setState(() {});

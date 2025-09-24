@@ -48,11 +48,18 @@ class AppAvatar extends StatelessWidget {
           borderRadius: BorderRadius.circular(radius),
           child: Container(
             color: Color(0xffD9D9D9),
-            child: CachedNetworkImage(
+
+            child: ExtendedImage.network(
+              imageUrl ?? "",
               fit: BoxFit.cover,
-              imageUrl: imageUrl ?? "",
-              errorWidget: (c, w, o) {
-                return Assets.pngAvatar.toImage(fit: BoxFit.cover);
+              filterQuality: FilterQuality.none,
+              loadStateChanged: (state) {
+                switch (state.extendedImageLoadState) {
+                  case LoadState.completed:
+                    return null;
+                  default:
+                    return Assets.pngAvatar.toImage(fit: BoxFit.cover);
+                }
               },
             ),
           ),

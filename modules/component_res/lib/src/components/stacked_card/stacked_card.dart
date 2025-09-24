@@ -16,12 +16,9 @@ class StackedCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14, horizontal: 16),
       decoration: BoxDecoration(
-          color: context.appColors.background.elevation1,
+
           borderRadius: BorderRadius.circular(24),
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 34, color: Color(0x1a001024), offset: Offset(0, 6))
-          ]),
+       ),
       child: IntrinsicHeight(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,7 +42,7 @@ class StackedCard extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ).shadow(context,);
   }
 }
 

@@ -15,174 +15,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nav_map => 'Map';
 
   @override
-  String get nav_payment => 'Payment';
+  String get nav_payment => 'Finance';
 
   @override
-  String get nav_transfer => 'Transfer';
+  String get nav_services => 'Services';
 
   @override
   String get nav_more => 'More';
 
   @override
-  String get action_all => 'All';
+  String get catalogMyEsim => 'My eSIM';
 
   @override
-  String get language => 'Language';
+  String get catalogTravelQuiz => 'Travel Quiz';
 
   @override
-  String get theme => 'Theme';
+  String get catalogAviaTickets => 'Flight tickets';
 
   @override
-  String lanItem(String lang) {
-    String _temp0 = intl.Intl.selectLogic(
-      lang,
-      {
-        'en': 'English',
-        'ru': 'Russian',
-        'uz': 'Uzbek',
-        'other': '',
-      },
-    );
-    return '$_temp0';
-  }
+  String get catalogChargers => 'Chargers';
 
   @override
-  String themeModes(String theme) {
-    String _temp0 = intl.Intl.selectLogic(
-      theme,
-      {
-        'system': 'System',
-        'light': 'Light',
-        'dark': 'Dark',
-        'other': '',
-      },
-    );
-    return '$_temp0';
-  }
+  String get catalogPoster => 'Poster';
 
   @override
-  String get guest => 'Hello Guest';
+  String get catalogTrainTickets => 'Train tickets';
 
   @override
-  String currency_uzs(Object value) {
-    return '$value uzs';
-  }
+  String get catalogHotels => 'Hotels';
 
   @override
-  String nPhotos(Object n) {
-    return '$n photos';
-  }
+  String get catalogCottages => 'Cottages';
 
   @override
-  String get getStarted => 'Get Started';
+  String get catalogInsurance => 'Insurance';
 
   @override
-  String get logout => 'Logout';
+  String get catalogItemStatusNew => 'New';
 
   @override
-  String get getStartedDescription => 'Get full access to opportunities, as well as keep your favorite things';
-
-  @override
-  String get continueWithGoogle => 'Continue with Google';
-
-  @override
-  String get continueWithApple => 'Continue with Apple';
-
-  @override
-  String get averageCheck => 'Average check';
-
-  @override
-  String get search => 'Search';
-
-  @override
-  String get rating => 'Rating';
-
-  @override
-  String get favorites => 'Favorites';
-
-  @override
-  String n_items(Object n) {
-    return '$n items';
-  }
-
-  @override
-  String get select_location => 'Select location';
-
-  @override
-  String get about => 'About';
-
-  @override
-  String get uzbekistan => 'Uzbekistan';
-
-  @override
-  String get exchange_rates => 'Exchange rates';
-
-  @override
-  String get uzbek_currency => '*The Uzbek currency (UZS) is called SOUM';
-
-  @override
-  String get exchange_banks => 'Exchange banks';
-
-  @override
-  String get loading_data => 'Loading data';
-
-  @override
-  String get coming_soon => 'Coming soon!';
-
-  @override
-  String get coming_soon_message => 'We are working on something great.';
-
-  @override
-  String get nothing_found => 'Nothing found';
-
-  @override
-  String get nothing_found_message => 'No results found. Try searching again!';
-
-  @override
-  String get refresh => 'Refresh';
-
-  @override
-  String get pageFailedToLoad => 'Page failed to load';
-
-  @override
-  String get something_went_wrong => 'Something went wrong. Please try again.';
-
-  @override
-  String get generalEmergency => 'General Emergency';
-
-  @override
-  String get touristPolice => 'Tourist police';
-
-  @override
-  String get fire => 'Fire';
-
-  @override
-  String get police => 'Police';
-
-  @override
-  String get medical => 'Medical';
-
-  @override
-  String get gasEmergency => 'Gas Emergency';
-
-  @override
-  String get emergencyContacts => 'Emergency Contacts';
-
-  @override
-  String get usefulTips => 'Useful tips';
-
-  @override
-  String get logoutConfirmation => 'Do you want to log out?';
-
-  @override
-  String get deleteAccountConfirmation => 'Do you want to delete the account?';
-
-  @override
-  String get deleteAccount => 'Delete account';
-
-  @override
-  String get cancel => 'Cancel';
-
-  @override
-  String get warning => 'Warning';
+  String get catalogItemStatusSoon => 'Soon';
 }

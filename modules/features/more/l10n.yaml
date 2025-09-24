@@ -1,0 +1,8 @@
+arb-dir: locale
+template-arb-file: more_ru.arb
+output-class: FeatureMoreLocalizations
+output-localization-file: app_localizations.dart
+output-dir: lib/src/generated/locales/
+synthetic-package: false
+required-resource-attributes: false
+#use-escaping: true

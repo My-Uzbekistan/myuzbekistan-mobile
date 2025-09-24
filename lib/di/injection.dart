@@ -1,15 +1,26 @@
-import 'package:core/core.dart';
-import 'package:get_it/get_it.dart';
-import 'package:injectable/injectable.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
+import 'package:finance/finance.dart';
+import 'package:more/more.dart';
+import 'package:navigation/navigation.dart';
+import 'package:shared/shared.dart';
+import 'package:travel/travel.dart';
 
 import '../core/navigation/router.dart';
 import 'injection.config.dart';
 
 final GetIt getIt = GetIt.instance;
 
-@InjectableInit()
+@InjectableInit(includeMicroPackages: true,
+    externalPackageModulesBefore: [
+  ExternalModule(DataPackageModule),
+  ExternalModule(DomainPackageModule)
+], externalPackageModulesAfter: [
+      ExternalModule(MorePackageModule),
+  ExternalModule(TravelPackageModule),
+  ExternalModule(FinancePackageModule),
+])
 Future<void> configureInjection() async {
-  await configureDataInjection();
-  getIt<Alice>().setNavigatorKey(rootNavigatorKey);
-  getIt.init();
+  await getIt.init(environment: Environment.prod);
+  getIt<Alice>().setNavigatorKey(appRootNavigatorKey);
 }

@@ -2,43 +2,46 @@ part of 'router.dart';
 
 final _shellRoute = [
   StatefulShellRoute.indexedStack(
-    parentNavigatorKey: rootNavigatorKey,
-    builder: (context, state, navShell) =>
-        ShellPageWrapper(navigationShell: navShell),
+    parentNavigatorKey: appRootNavigatorKey,
+
+    pageBuilder: (context, state, navigationShell) => NoTransitionPage(
+        child: ShellPageWrapper(navigationShell: navigationShell)),
     branches: [
-      StatefulShellBranch(routes: [
-        GoRoute(
-            path: AppRoutePath.shellHome.path,
-            name: AppRoutePath.shellHome.name,
-            builder: (context, state) => BlocProvider(
-                  create: (context) => getIt<HomeBloc>(),
-                  child: HomePage(),
-                ))
-      ]),
-      // StatefulShellBranch(routes: [
-      //   GoRoute(
-      //       path: "/map",
-      //       name: "map",
-      //       builder: (context, state) => MessageContainer.comingSoonWidget(context))
-      // ]),
-      // StatefulShellBranch(routes: [
-      //   GoRoute(
-      //       path: "/payment",
-      //       name: "payment",
-      //       builder: (context, state) =>MessageContainer.comingSoonWidget(context))
-      // ]),
-      // StatefulShellBranch(routes: [
-      //   GoRoute(
-      //       path: "/transfer",
-      //       name: "transfer",
-      //       builder: (context, state) => MessageContainer.comingSoonWidget(context))
-      // ]),
-      StatefulShellBranch(routes: [
-        GoRoute(
-            path: "/more",
-            name: "more",
-            builder: (context, state) => ShellMorePage())
-      ]),
+      FeatureTravelRouter.shellTravel,
+      FeatureFinanceRouter.shellFinance,
+      FeatureTravelRouter.shellCatalog,
+      // StatefulShellBranch(
+      //   routes: [
+      //     GoRoute(
+      //         path: "/catalog",
+      //         name: "catalog",
+      //
+      //         builder: (context,state){
+      //           return CatalogScreen();
+      //         }
+      //
+      //     ),
+      //   ],
+      // ),
+      FeatureMoreRouter.shellMore,
+
     ],
   )
 ];
+
+extension ShelIndexEx on ShellPageWrapper {
+  ValueNotifier<int> useCurrentIndex() {
+    final location = GoRouter.of(useContext()).state.name;
+    final currentIndex = useState(0);
+    useEffect(() {
+      if (location == AppNavPath.travel.travelHome.name) currentIndex.value = 0;
+      if (location == AppNavPath.finance.financeHome.name) {
+        currentIndex.value = 1;
+      }
+      if (location == AppNavPath.more.moreHome.name) currentIndex.value = 2;
+      return null;
+    }, [location]);
+
+    return currentIndex;
+  }
+}

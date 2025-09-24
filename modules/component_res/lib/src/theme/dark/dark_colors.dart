@@ -2,85 +2,84 @@ part of '../app_color_theme.dart';
 
 class DarkColors extends _BaseColors {
   @override
-  // TODO: implement brand
-  Color get brand => Color(0xff0099ff);
+  Color get brandPrimary => const Color(0xff177f9B); // updated
 
   @override
-  // TODO: implement textColors
-  TextIconColor get textIconColor => TextIconColor(
+  LabelColor get label => LabelColor(
         primary: Colors.white,
-        secondary: const Color(0xffEBEBF5).withValues(alpha: 0.64),
-        tertiary: const Color(0xffEBEBF5).withValues(alpha: 0.32),
-        disable: const Color(0xffEBEBF5).withValues(alpha: 0.16),
-        oposite: Colors.black,
+        secondary: Colors.white.withValues(alpha: 0.64),
+        tertiary: Colors.white.withValues(alpha: 0.32),
+        disable: Colors.white.withValues(alpha: 0.16),
+        oposite: const Color(0xff14191a),
       );
 
   @override
   BackgroundColors get background => const BackgroundColors(
-        baseIos: Colors.black,
-        baseAndroid: Color(0xff121214),
-        elevation1: Color(0xff1C1C1E),
-        elevation1Alt: Color(0xff1C1C1E),
-        elevation2: Color(0xff2C2C2E),
-        elevation2Alt: Color(0xff2C2C2E),
-        elevation3: Color(0xff3A3A3C),
+        underlayer: Colors.black,
+        base: Color(0xff0E0E10),
+        elevation1: Color(0xff18181a),
+        elevation1Alt: Color(0xff18181a),
+        elevation2: Color(0xff27272b),
+        elevation2Alt: Color(0xff27272b),
+        elevation3: Color(0xff6C6C71),
       );
 
   @override
-  // TODO: implement fill
   FillColors get fill => FillColors(
-        quaternary: const Color(0xff787880).withValues(alpha: 0.18),
-        tertiary: const Color(0xff787880).withValues(alpha: 0.24),
-        secondary: const Color(0xff787880).withValues(alpha: 0.32),
-    primary: Colors.white,
+        quaternary: const Color(0xff9090a2).withValues(alpha: 0.15), // ~18%
+        tertiary: const Color(0xff9090a2).withValues(alpha: 0.27),
+
+
+        secondary: const Color(0xff787880).withAlpha(0x52), // unchanged
+        primary: const Color(0xffffffff),
       );
+
   @override
-  // TODO: implement stroke
   StrokeColors get stroke => StrokeColors(
-      nonOpaque: Colors.white.withValues(alpha: 0.1),
-      opaque: const Color(0xff2C2C2E));
+        nonOpaque: Colors.white.withValues(alpha: 0.1), // updated
+        opaque: const Color(0xff27272b), // updated
+      );
 
   @override
-  // TODO: implement colors
   OtherColors get colors => OtherColors(
-        red: const Color(0xffFF4534),
-        green: const Color(0xff30D158),
-        blue: const Color(0xff0099FF),
-        yellow: const Color(0xffFFD60A),
+        red: const Color(0xffff453a),
+        green: const Color(0xff30d158),
+        blue: const Color(0xff0099ff),
+        yellow: const Color(0xffffdd2d),
+    orange: const Color(0xfffb5d40),// updated
       );
+
   @override
-  // TODO: implement nonOpaque
   NonOpaque get nonOpaque => NonOpaque(
-        red: const Color(0xffFF4534).withValues(alpha: 0.16),
-        green: const Color(0xff30D158).withValues(alpha: 0.16),
-        blue: const Color(0xff0099FF).withValues(alpha: 0.16),
-        yellow: const Color(0xffFFD60A).withValues(alpha: 0.16),
+        red: const Color(0xffff453a).withValues(alpha: 0.16),
+        green: const Color(0xff30d158).withValues(alpha: 0.16),
+        blue: const Color(0xff0a84ff).withValues(alpha: 0.16),
+        yellow: const Color(0xffffdd2d).withValues(alpha: 0.16),
+        brand: const Color(0xff177f9b).withValues(alpha: 0.16), // updated
       );
 
   @override
-  // TODO: implement service
   ServiceColors get service => ServiceColors(
-      overlay: Colors.black.withValues(alpha: 0.6),
-      backdrop: Colors.black.withValues(alpha: 0.4));
+    overlay:  Colors.black.withValues(alpha: 0.6), // updated// updated
+      );
 
   @override
-  // TODO: implement static
-  StaticColors get static =>
-      StaticColors(black: Colors.black, white: Colors.white);
-
+  StaticColors get static => StaticColors(
+        black: const Color(0xff14191a),
+        white: Colors.white,
+      );
 
   @override
-  // TODO: implement ripple
   RippleColor get ripple =>
-      RippleColor(ripple: Colors.white.withValues(alpha: 0.08));
+      RippleColor(ripple: const Color(0xffffffff).withAlpha(0x14)); // 8%
 
   static ThemeData darkTheme() {
     final colors = DarkColors();
-
     return _buildTheme(
-        themeData: ThemeData.dark(useMaterial3: true),
-        colors: colors,
-        brightness: Brightness.dark);
+      themeData: ThemeData.dark(useMaterial3: true),
+      colors: colors,
+      brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.light
+    );
   }
-
 }

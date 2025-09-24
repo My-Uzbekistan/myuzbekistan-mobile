@@ -1,67 +1,72 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
+class CategoryItem {
+  final String name;
+  final String? icon;
+
+  CategoryItem({required this.name, this.icon});
+}
+
 class HomeCategoryItem extends StatelessWidget {
-  final String title;
-  final String? imageUrl;
+  final CategoryItem categoryItem;
   final VoidCallback? onTap;
+  final double shrinkFactor;
 
   const HomeCategoryItem(
-      {super.key, required this.title, this.imageUrl, this.onTap});
+      {super.key,
+      required this.categoryItem,
+      this.onTap,
+      this.shrinkFactor = 1.0});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      splashColor: Colors.grey.withValues(alpha: 0.05),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
-        height: 100,
-        alignment: Alignment.center,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(minWidth: 72, maxWidth: 100),
-          child: Column(
-            children: [
-              Padding(
-                key: ObjectKey("AvatarContainer"),
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                child: Container(
-                  height: 56,
-                  width: 56,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: context.appColors.fill.quaternary),
-                  child: SizedBox(
-                    height: 24,
+        width: 80,
+        height: double.maxFinite,
+        alignment: Alignment.bottomCenter,
+        child: Column(
+          spacing: 8,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              backgroundColor: shrinkFactor != 1.0
+                  ? Colors.transparent
+                  : context.appColors.nonOpaque.brand,
+              radius: 24 * shrinkFactor,
+              child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: ExtendedImage.network(categoryItem.icon ?? "",
+                      height: 24,
                       width: 24,
-                      child: CachedNetworkImage(
-                    height: 24,
-                    width: 24,
-                    color: context.appColors.brand,
-                    imageUrl: imageUrl ?? "",
-                    fit: BoxFit.contain,
-                    errorListener: (ob){},
-                    errorWidget: (c, w, o) {
-                      return SizedBox();
-                    },
-                  )),
-                ),
+                      color: context.appColors.brand,
+                      fit: BoxFit.contain,
+                      filterQuality: FilterQuality.none,
+                      loadStateChanged: (state) {
+                    switch (state.extendedImageLoadState) {
+                      case LoadState.completed:
+                        return null;
+                      default:
+                        return SizedBox();
+                    }
+                  })),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: Text(
+                categoryItem.name,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: CustomTypography.bodyXsm,
+                overflow: TextOverflow.ellipsis,
               ),
-              Expanded(
-                child: SizedBox(
-                  height: 4,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child: Text(
-                  title,
-                  maxLines: 1,
-                  style: CustomTypography.bodySm,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
