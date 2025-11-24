@@ -1,6 +1,7 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:more/src/di/injection.dart';
+import 'package:more/src/pages/force_update/force_update_page.dart';
 import 'package:more/src/pages/pin/check_pin/bloc/check_pin_bloc.dart';
 import 'package:more/src/pages/pin/pin_code_bloc/pincode_bloc.dart';
 import 'package:more/src/pages/pin/pincode_page.dart';
@@ -46,19 +47,19 @@ mixin FeatureMoreRouter {
           ),
       // builder: (context, state) => SelectLangPage(),
     ),
-    // GoRoute(
-    //   path: AppNavPath.more.profilePage.path,
-    //   name: AppNavPath.more.profilePage.name,
-    //   pageBuilder:
-    //       (context, state) => buildSlideTransitionPage(
-    //         child: BlocProvider.value(
-    //           value: state.extra as ProfileBloc,
-    //           child: ProfilePage(),
-    //         ),
-    //         context: context,
-    //         state: state,
-    //       ),
-    // ),
+    GoRoute(
+      path: AppNavPath.more.forceUpdate.path,
+      name: AppNavPath.more.forceUpdate.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: ForceUpdatePage(
+              appStoreLink: state.uri.queryParameters["appStoreLink"]!,
+            ),
+            context: context,
+            state: state,
+            slideAlign: SlideAlign.vertical
+          ),
+    ),
     GoRoute(
       path: AppNavPath.more.emergencyContacts.path,
       name: AppNavPath.more.emergencyContacts.name,

@@ -14,6 +14,7 @@ import 'firebase_options.dart';
 import 'generated/locale/app_localizations.dart';
 
 AppLocale? currentLocale;
+
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -44,6 +45,11 @@ class _MyAppState extends State<MyApp> {
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
       Future.delayed(const Duration(milliseconds: 2000), () {
         NotificationService().init();
+      });
+      VersionChecker.check(context, canUpdate: (versionStatus) {
+        appRootNavigatorKey.currentContext?.pushNamed(
+            AppNavPath.more.forceUpdate.name,
+            queryParameters: {"appStoreLink": versionStatus.appStoreLink});
       });
     });
 
@@ -90,7 +96,7 @@ class _MyAppState extends State<MyApp> {
               ],
               supportedLocales: AppLocalizations.supportedLocales,
               locale: state.appLocale?.locale,
-              title: "My Uzbekistan",
+              title: "MyUzbekistan",
               builder: (context, child) {
                 currentLocale = state.appLocale;
                 Intl.defaultLocale =

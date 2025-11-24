@@ -46,7 +46,7 @@ Page buildSlideTransitionPage({
           Animation<double> secondaryAnimation,
           Widget child,
         ) {
-          return SlideTransition(
+          return SlideTransition( 
             position: Tween<Offset>(
               begin: begin,
               end: Offset(0, 0),

@@ -1,6 +1,5 @@
 import 'package:domain/domain.dart';
 import 'package:finance/finance.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:more/more.dart';
 import 'package:navigation/navigation.dart';
@@ -11,7 +10,6 @@ import 'package:uzbekistan_travel/presentaion/experiment/experiment.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
 import 'package:uzbekistan_travel/presentaion/splash.dart';
 
-import '../../presentaion/catalog/catalog.dart';
 
 
 part 'home_shell_route.dart';
@@ -36,7 +34,9 @@ final GoRouter routes = GoRouter(
       return null;
     },
     observers: [observer],
-    initialLocation: "/splash",
+    initialLocation:
+    // AppNavPath.more.forceUpdate.path,
+    "/splash",
     // initialLocation: "/experiment",
     routes: [
       ..._shellRoute,

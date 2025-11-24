@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:navigation/navigation.dart';
+import 'package:shared/shared.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
 
 class SplashScreen extends HookWidget {
@@ -32,7 +33,9 @@ class SplashScreen extends HookWidget {
         opacity.value = 1;
       });
       Future.delayed(const Duration(milliseconds: 1500), () {
-        context.travel.goMain(); // go_router bilan ishlash
+        if(GoRouter.of(context).state.path=="/splash") {
+          context.travel.goMain(); // go_router bilan ishlash
+        }
       });
       return null;
     }, []);

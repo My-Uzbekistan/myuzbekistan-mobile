@@ -36,7 +36,7 @@ class HomeImagePagerContent extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    // useAutomaticKeepAlive(wantKeepAlive: true);
+    useAutomaticKeepAlive(wantKeepAlive: true);
     //
     // final controller = useState(PageController(initialPage: 1)).value;
 

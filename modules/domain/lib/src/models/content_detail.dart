@@ -1,4 +1,5 @@
 import 'package:domain/src/models/view_type.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
 // part 'content_detail.freezed.dart';
@@ -160,13 +161,12 @@ class Contacts {
 
   String? get actionUrl {
     if(action==null) return null;
-    String normalizedUrl = action!.trim();
 
-
-    if (!normalizedUrl.startsWith('http://') &&
-        !normalizedUrl.startsWith('https://')) {
+    String normalizedUrl = action!;
+    if (normalizedUrl.startsWith('www.')) {
       normalizedUrl = 'https://$normalizedUrl';
     }
+
 
     return normalizedUrl;
   }

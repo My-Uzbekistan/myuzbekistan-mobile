@@ -35,6 +35,7 @@ class Assets {
   static const String pngAvatar = 'assets/png/avatar.png';
   static const String pngDefaultContentImage = 'assets/png/default_content_image.webp';
   static const String pngExclamationmarkSquare = 'assets/png/exclamationmark_square.png';
+  static const String pngForceUpdate = 'assets/png/force_update.png';
   static const String pngGears = 'assets/png/gears.webp';
   static const String pngIcSearch = 'assets/png/ic_search.png';
   static const String pngNavMore = 'assets/png/nav_more.png';

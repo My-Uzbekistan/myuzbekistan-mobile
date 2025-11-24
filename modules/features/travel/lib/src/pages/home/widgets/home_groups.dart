@@ -49,6 +49,7 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> with AutomaticKeepA
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         if (widget.data.recommended != null)

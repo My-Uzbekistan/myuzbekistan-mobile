@@ -2,7 +2,8 @@ part of '../app_color_theme.dart';
 
 class DarkColors extends _BaseColors {
   @override
-  Color get brandPrimary => const Color(0xff177f9B); // updated
+  // Color get brandPrimary => const Color(0xff177f9B); // old
+  Color get brandPrimary => const Color(0xff33BE73); // updated
 
   @override
   LabelColor get label => LabelColor(
@@ -55,7 +56,8 @@ class DarkColors extends _BaseColors {
         green: const Color(0xff30d158).withValues(alpha: 0.16),
         blue: const Color(0xff0a84ff).withValues(alpha: 0.16),
         yellow: const Color(0xffffdd2d).withValues(alpha: 0.16),
-        brand: const Color(0xff177f9b).withValues(alpha: 0.16), // updated
+        // brand: const Color(0xff177f9b).withValues(alpha: 0.16), // old
+        brand: const Color(0xff33BE73).withValues(alpha: 0.12), // updated
       );
 
   @override

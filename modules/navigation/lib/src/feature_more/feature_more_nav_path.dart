@@ -46,5 +46,7 @@ class _FeatureMoreNavPath {
       _NavPathImpl(name: "feature_more_pin_code_page", path: "/pinCodePage");
   AppNavPath get checkPin =>
       _NavPathImpl(name: "feature_more_check_pin", path: "/checkPin");
+  AppNavPath get forceUpdate =>
+      _NavPathImpl(name: "feature_more_force_update", path: "/forceUpdate");
 
 }

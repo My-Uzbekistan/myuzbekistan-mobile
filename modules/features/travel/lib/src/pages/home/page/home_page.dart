@@ -90,9 +90,12 @@ class HomePage extends HookWidget {
                       ),
                       Expanded(
                         child: CustomScrollView(
+                          key: const PageStorageKey('homeScroll'), // scroll pozitsiyasi saqlanadi
+
                           controller: scrollController,
 
                           shrinkWrap: true,
+
 
                           slivers: [
                             SliverToBoxAdapter(
@@ -159,13 +162,14 @@ class HomePage extends HookWidget {
                             ),
                             !data.loadingContents
                                 ? SliverList(
+                              key: const PageStorageKey('imageList'),
                                   delegate: SliverChildBuilderDelegate((
                                     context,
                                     index,
                                   ) {
                                     final e = data.contents[index];
                                     return HomeGroupsWidget(
-                                      key: ValueKey(e),
+                                      // key: ValueKey(e),
                                       onOpenAll: () {
                                         context.travel
                                             .pushContentByCategoryPage(

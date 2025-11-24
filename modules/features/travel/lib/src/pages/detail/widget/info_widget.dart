@@ -1,6 +1,7 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 
 class InfoWidget extends StatelessWidget {
@@ -13,10 +14,17 @@ class InfoWidget extends StatelessWidget {
     final leftValue =
         info.left == null
             ? emptyWidget()
+            : info.left!.type == "dollarRating"
+            ? dollorRation(info.left!.key, info.left?.value?.toIntOrNull() ?? 0)
             : textWidget(title: info.left?.key ?? "", value: info.left?.value);
     final rightValue =
         info.right == null
             ? emptyWidget()
+            : info.right!.type == "dollarRating"
+            ? dollorRation(
+              info.right!.key,
+              info.right?.value?.toIntOrNull() ?? 0,
+            )
             : textWidget(
               title: info.right?.key ?? "",
               value: info.right?.value,
@@ -43,6 +51,16 @@ class InfoWidget extends StatelessWidget {
           ),
           Divider(color: context.appColors.stroke.nonOpaque, thickness: 1),
         ],
+      ),
+    );
+  }
+
+  Widget dollorRation(String text, int category) {
+    return textWidget(
+      title: text,
+      valueWidget: PriceCategory(
+        priceCategory: category,
+        textStyle: CustomTypography.labelLg,
       ),
     );
   }
@@ -83,17 +101,20 @@ class InfoWidget extends StatelessWidget {
   Widget textWidget({
     required String title,
     String? value,
-    // Widget? valueWidget,
+    Widget? valueWidget,
   }) {
     return Column(
       spacing: 3,
       children: [
         Text(title, maxLines: 1, overflow: TextOverflow.ellipsis).bodySm(),
-        Text(
-          value ?? "",
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ).labelLg(),
+        if (valueWidget != null)
+          valueWidget
+        else
+          Text(
+            value ?? "",
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ).labelLg(),
       ],
     );
   }

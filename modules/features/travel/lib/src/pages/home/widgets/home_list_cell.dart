@@ -23,7 +23,7 @@ class HomeListCell extends StatefulWidget {
 }
 
 class _HomeListCellState extends State<HomeListCell>
-    with AutomaticKeepAliveClientMixin {
+{
   final loadContentBLoc = getIt<LoadContentBloc>();
 
   final ScrollController scrollController = ScrollController();
@@ -49,7 +49,6 @@ class _HomeListCellState extends State<HomeListCell>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return BlocProvider<LoadContentBloc>(
       create: (context) => loadContentBLoc,
       child: BlocBuilder<LoadContentBloc, LoadContentCategoryState>(
@@ -96,6 +95,7 @@ class _HomeListCellState extends State<HomeListCell>
                 SizedBox(
                   height: widget.viewType == ViewType.profile ? 122 : 230,
                   child: ListView.separated(
+                    addAutomaticKeepAlives: true,
                     controller: scrollController,
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     separatorBuilder: (context, index) {
@@ -153,7 +153,4 @@ class _HomeListCellState extends State<HomeListCell>
     return "${distance.floor()} ${context.localization.distanceKm}";
   }
 
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }
