@@ -55,11 +55,12 @@ extension FinanceEventPatterns on FinanceEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FinanceInitialEvent value)?  initialEvent,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FinanceInitialEvent value)?  initialEvent,TResult Function( _FinanceSetDataEvent value)?  setDataEvent,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _FinanceInitialEvent() when initialEvent != null:
-return initialEvent(_that);case _:
+return initialEvent(_that);case _FinanceSetDataEvent() when setDataEvent != null:
+return setDataEvent(_that);case _:
   return orElse();
 
 }
@@ -77,11 +78,12 @@ return initialEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FinanceInitialEvent value)  initialEvent,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FinanceInitialEvent value)  initialEvent,required TResult Function( _FinanceSetDataEvent value)  setDataEvent,}){
 final _that = this;
 switch (_that) {
 case _FinanceInitialEvent():
-return initialEvent(_that);case _:
+return initialEvent(_that);case _FinanceSetDataEvent():
+return setDataEvent(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +100,12 @@ return initialEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FinanceInitialEvent value)?  initialEvent,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FinanceInitialEvent value)?  initialEvent,TResult? Function( _FinanceSetDataEvent value)?  setDataEvent,}){
 final _that = this;
 switch (_that) {
 case _FinanceInitialEvent() when initialEvent != null:
-return initialEvent(_that);case _:
+return initialEvent(_that);case _FinanceSetDataEvent() when setDataEvent != null:
+return setDataEvent(_that);case _:
   return null;
 
 }
@@ -119,10 +122,11 @@ return initialEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialEvent,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initialEvent,TResult Function( List<Merchant>? merchants,  List<Currency>? currencies)?  setDataEvent,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FinanceInitialEvent() when initialEvent != null:
-return initialEvent();case _:
+return initialEvent();case _FinanceSetDataEvent() when setDataEvent != null:
+return setDataEvent(_that.merchants,_that.currencies);case _:
   return orElse();
 
 }
@@ -140,10 +144,11 @@ return initialEvent();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialEvent,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initialEvent,required TResult Function( List<Merchant>? merchants,  List<Currency>? currencies)  setDataEvent,}) {final _that = this;
 switch (_that) {
 case _FinanceInitialEvent():
-return initialEvent();case _:
+return initialEvent();case _FinanceSetDataEvent():
+return setDataEvent(_that.merchants,_that.currencies);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +165,11 @@ return initialEvent();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialEvent,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initialEvent,TResult? Function( List<Merchant>? merchants,  List<Currency>? currencies)?  setDataEvent,}) {final _that = this;
 switch (_that) {
 case _FinanceInitialEvent() when initialEvent != null:
-return initialEvent();case _:
+return initialEvent();case _FinanceSetDataEvent() when setDataEvent != null:
+return setDataEvent(_that.merchants,_that.currencies);case _:
   return null;
 
 }
@@ -202,6 +208,90 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _FinanceSetDataEvent implements FinanceEvent {
+   _FinanceSetDataEvent({final  List<Merchant>? merchants, final  List<Currency>? currencies}): _merchants = merchants,_currencies = currencies;
+  
+
+ final  List<Merchant>? _merchants;
+ List<Merchant>? get merchants {
+  final value = _merchants;
+  if (value == null) return null;
+  if (_merchants is EqualUnmodifiableListView) return _merchants;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+ final  List<Currency>? _currencies;
+ List<Currency>? get currencies {
+  final value = _currencies;
+  if (value == null) return null;
+  if (_currencies is EqualUnmodifiableListView) return _currencies;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+
+/// Create a copy of FinanceEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FinanceSetDataEventCopyWith<_FinanceSetDataEvent> get copyWith => __$FinanceSetDataEventCopyWithImpl<_FinanceSetDataEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FinanceSetDataEvent&&const DeepCollectionEquality().equals(other._merchants, _merchants)&&const DeepCollectionEquality().equals(other._currencies, _currencies));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_merchants),const DeepCollectionEquality().hash(_currencies));
+
+@override
+String toString() {
+  return 'FinanceEvent.setDataEvent(merchants: $merchants, currencies: $currencies)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$FinanceSetDataEventCopyWith<$Res> implements $FinanceEventCopyWith<$Res> {
+  factory _$FinanceSetDataEventCopyWith(_FinanceSetDataEvent value, $Res Function(_FinanceSetDataEvent) _then) = __$FinanceSetDataEventCopyWithImpl;
+@useResult
+$Res call({
+ List<Merchant>? merchants, List<Currency>? currencies
+});
+
+
+
+
+}
+/// @nodoc
+class __$FinanceSetDataEventCopyWithImpl<$Res>
+    implements _$FinanceSetDataEventCopyWith<$Res> {
+  __$FinanceSetDataEventCopyWithImpl(this._self, this._then);
+
+  final _FinanceSetDataEvent _self;
+  final $Res Function(_FinanceSetDataEvent) _then;
+
+/// Create a copy of FinanceEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? merchants = freezed,Object? currencies = freezed,}) {
+  return _then(_FinanceSetDataEvent(
+merchants: freezed == merchants ? _self._merchants : merchants // ignore: cast_nullable_to_non_nullable
+as List<Merchant>?,currencies: freezed == currencies ? _self._currencies : currencies // ignore: cast_nullable_to_non_nullable
+as List<Currency>?,
+  ));
+}
+
+
+}
 
 /// @nodoc
 mixin _$FinanceState {

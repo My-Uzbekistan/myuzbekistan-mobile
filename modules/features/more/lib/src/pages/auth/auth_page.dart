@@ -72,7 +72,10 @@ class _AuthPageState extends State<AuthPage> {
               left: 0,
               right: 0,
               top: kToolbarHeight + MediaQuery.of(context).padding.top + 20,
-              child: Assets.logoMyuzbLogo.toSvgImage(),
+              child: Assets.logoDarkMyuzbekistan.toImage(
+                fit: BoxFit.contain,
+                height: 48,
+              ),
             ),
             Positioned(
               bottom: 0,

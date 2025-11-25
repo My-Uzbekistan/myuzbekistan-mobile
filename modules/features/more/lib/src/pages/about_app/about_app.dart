@@ -31,10 +31,11 @@ class AboutApp extends HookWidget {
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Center(
-                child: Assets.logoAppIcon.toImage(
-                  height: 56,
-                  width: 56,
-                  fit: BoxFit.contain,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: Assets.logoNewAppIcon.toImage(
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),

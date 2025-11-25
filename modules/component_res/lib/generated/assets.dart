@@ -16,10 +16,9 @@ class Assets {
   static const String flagsUk = 'assets/flags/uk.svg';
   static const String flagsUs = 'assets/flags/us.svg';
   static const String flagsUz = 'assets/flags/uz.svg';
-  static const String logoAppIcon = 'assets/logo/app_icon.png';
-  static const String logoDarkFullLogo = 'assets/logo/dark_full_logo.svg';
-  static const String logoLightFullLogo = 'assets/logo/light_full_logo.svg';
-  static const String logoMyuzbLogo = 'assets/logo/myuzb_logo.svg';
+  static const String logoDarkMyuzbekistan = 'assets/logo/dark_myuzbekistan.png';
+  static const String logoLightMyuzbekistan = 'assets/logo/light_myuzbekistan.png';
+  static const String logoNewAppIcon = 'assets/logo/new_app_icon.png';
   static const String moreArrowRightToSquare = 'assets/svg/more/arrow_right_to_square.svg';
   static const String moreBell = 'assets/svg/more/bell.svg';
   static const String moreBroomMotion = 'assets/svg/more/broom_motion.svg';

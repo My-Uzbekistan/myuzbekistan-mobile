@@ -148,6 +148,7 @@ class _FinanceHomepageState extends State<FinanceHomePage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
+                                  if (state.currencies.isNotEmpty)
                                   CurrencyWidget(
                                     currencies: state.currencies,
                                     onTap: () {
