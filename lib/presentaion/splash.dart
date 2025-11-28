@@ -56,7 +56,7 @@ class SplashScreen extends HookWidget {
           child: Stack(
             children: [
               Positioned.fill(child: imagePath.value.toImage(fit: BoxFit.cover)),
-              Center(child: Assets.logoDarkMyuzbekistan.toImage(fit: BoxFit.contain,height: 48))
+              Center(child: Assets.logoDarkLogo.toSvgImage(fit: BoxFit.contain))
             ],
           ),
         ),

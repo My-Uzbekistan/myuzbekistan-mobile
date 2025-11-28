@@ -33,13 +33,11 @@ class _SelectLangPageState extends State<SelectLangPage> {
             top: kToolbarHeight + MediaQuery.of(context).padding.top + 20,
             child:
                 Theme.of(context).brightness == Brightness.dark
-                    ? Assets.logoDarkMyuzbekistan.toImage(
+                    ? Assets.logoDarkLogo.toSvgImage(
                       fit: BoxFit.contain,
-                      height: 48,
                     )
-                    : Assets.logoLightMyuzbekistan.toImage(
+                    : Assets.logoLightLogo.toSvgImage(
                       fit: BoxFit.contain,
-                      height: 48,
                     ),
           ),
           Center(
