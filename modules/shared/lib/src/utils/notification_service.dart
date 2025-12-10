@@ -75,6 +75,8 @@ class NotificationService {
     required void Function(RemoteMessage) logRemoteMessage,
   }) {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+
+      debugPrint("Notification Message ${message.data} ");
       logRemoteMessage(message);
     });
     FirebaseMessaging.instance

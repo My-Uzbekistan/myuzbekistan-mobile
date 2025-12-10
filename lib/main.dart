@@ -40,16 +40,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
+
   @override
   void initState() {
+
+
     WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
       Future.delayed(const Duration(milliseconds: 2000), () {
         NotificationService().init();
       });
       VersionChecker.check(context, canUpdate: (versionStatus) {
-        appRootNavigatorKey.currentContext?.pushNamed(
-            AppNavPath.more.forceUpdate.name,
-            queryParameters: {"appStoreLink": versionStatus.appStoreLink});
+    if( versionStatus.canUpdate) {
+          appRootNavigatorKey.currentContext?.pushNamed(
+              AppNavPath.more.forceUpdate.name,
+              queryParameters: {"appStoreLink": versionStatus.appStoreLink});
+        }
       });
     });
 

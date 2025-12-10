@@ -20,6 +20,15 @@ class NotificationItem extends Equatable {
     this.isSeen = false,
   });
 
+  String publishDate() {
+    if (publishAt == null) return "";
+    final date = DateTime.tryParse(publishAt!);
+    return date == null ? "" : DateFormat("dd.MM.yyyy").format(date);
+
+
+
+  }
+
   NotificationItem copyWith({
     int? id,
     String? title,

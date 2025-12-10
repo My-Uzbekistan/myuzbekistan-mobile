@@ -1,4 +1,5 @@
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
 part 'notification_event.dart';
@@ -27,6 +28,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
       final initialNotification = result.firstOrNullWhere(
         (e) => e.id == event.initialNotId,
       );
+
       emit(
         NotificationsState.successState(
           notifications: result,
@@ -36,7 +38,15 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
       if (initialNotification?.isSeen == false) {
         add(NotificationEvent.notificationSeen(notId: initialNotification!.id));
       }
-    } catch (e) {}
+    } catch (e) {
+      // emit(
+      //   NotificationsState.successState(
+      //     notifications: [],
+      //     initialNotification: null,
+      //   ),
+      // );
+      debugPrint("NotificationExaption ${e}");
+    }
   }
 
   Future<void> _notificationSeen(

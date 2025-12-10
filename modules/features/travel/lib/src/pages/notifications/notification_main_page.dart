@@ -29,6 +29,7 @@ class _NotificationMainPageState extends State<NotificationMainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      extendBody: false,
       appBar: GradientAppBar(title: context.localization.notifications),
       body: BlocConsumer<NotificationBloc, NotificationsState>(
         listenWhen: (previous, current) {
@@ -76,10 +77,11 @@ class _NotificationMainPageState extends State<NotificationMainPage> {
               itemBuilder: (context, index) {
                 final item = items[index];
                 return NotificationItemWidget(
+                  title: item.title,
+                  image: item.image,
+                  date: item.publishDate(),
                   onTap: () {
-                    openNotificationDetail(
-                     item
-                    );
+                    openNotificationDetail(item);
 
                     // _bloc?.add(NotificationEvent.notificationSeen(notId: 123));
                   },
@@ -116,7 +118,7 @@ class _LoadingContent extends StatelessWidget {
         itemBuilder: (context, index) {
           return AspectRatio(
             aspectRatio: 343 / 288,
-            child: ShimmerDefaultContainer(height: double.maxFinite),
+            child: ShimmerDefaultContainer(height: double.infinity),
           );
         },
         itemCount: 4,

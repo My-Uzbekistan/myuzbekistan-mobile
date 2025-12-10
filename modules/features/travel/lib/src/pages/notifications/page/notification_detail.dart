@@ -15,7 +15,6 @@ class NotificationDetail extends StatefulWidget {
 class _NotificationDetailState extends State<NotificationDetail> {
   @override
   Widget build(BuildContext context) {
-    debugPrint("itemData ${widget.item}");
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: GradientAppBar(),
@@ -55,7 +54,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
               children: [
                 Text(widget.item.title.orEmpty()).h3(),
                 Text(
-                  widget.item.publishAt.orEmpty(),
+                  widget.item.publishDate(),
                 ).bodySm(color: context.appColors.textIconColor.secondary),
               ],
             ),
