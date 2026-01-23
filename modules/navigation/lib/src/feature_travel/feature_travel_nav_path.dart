@@ -19,6 +19,10 @@ class _FeatureTravelNavPath {
     path: '/select_region',
   );
 
+  AppNavPath get travelCatalogInvestments =>
+      _NavPathImpl(name: 'feature_travel_investments', path: '/catalog/investments');
+
+
   ///notifications?notificationId=123
   AppNavPath get notifications =>
       _NavPathImpl(name: 'notifications', path: '/notifications');

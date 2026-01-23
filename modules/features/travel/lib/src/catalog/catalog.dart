@@ -31,13 +31,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
   @override
   Widget build(BuildContext context) {
     // catalogItems = [
-    //   CatalogItemModel(
-    //     title: context.localization.catalogMyEsim,
-    //     svgAssets: Assets.catalogAntena,
-    //     type: CatalogItemType.esim,
-    //     status: CatalogStatus.active,
-    //     color: Color(0xff04A5FE),
-    //   ),
+
     //   CatalogItemModel(
     //     title: "Travel Cam AI",
     //     svgAssets: Assets.catalogIconCameraAi,
@@ -140,126 +134,141 @@ class _CatalogScreenState extends State<CatalogScreen> {
             ),
             BlocBuilder<CatalogBloc, CatalogState>(
               builder: (context, state) {
-               return SliverAnimatedSwitcher(duration: Duration(milliseconds: 300), child: state.when(
-                 loading: () {
-                   return SliverToBoxAdapter(
-                     child: Shimmer.fromDefault(
-                       child: Padding(
-                         padding: EdgeInsets.symmetric(horizontal: 16).copyWith(
-                           top: 8,
-                           bottom: MediaQuery.of(context).padding.bottom,
-                         ),
-                         child: GridView.builder(
-                           shrinkWrap: true,
-                           padding: EdgeInsets.zero,
-                           physics: NeverScrollableScrollPhysics(),
-                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(  crossAxisCount: 2,
-                             mainAxisSpacing: 16,
-                             crossAxisSpacing: 16,
-                             childAspectRatio: 163 / 104,),
-                           itemBuilder: (context,index){
-                             return  ShimmerDefaultContainer(height: 1);
-                           },
-                           itemCount: 6,
+                return SliverAnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: state.when(
+                    loading: () {
+                      return SliverToBoxAdapter(
+                        child: Shimmer.fromDefault(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ).copyWith(
+                              top: 8,
+                              bottom: MediaQuery.of(context).padding.bottom,
+                            ),
+                            child: GridView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 16,
+                                    crossAxisSpacing: 16,
+                                    childAspectRatio: 163 / 104,
+                                  ),
+                              itemBuilder: (context, index) {
+                                return ShimmerDefaultContainer(height: 1);
+                              },
+                              itemCount: 6,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    loaded: (items) {
+                      // final items = List.of(array)..add(m);
 
+                      return SliverPadding(
+                        padding: EdgeInsets.symmetric(horizontal: 16).copyWith(
+                          top: 8,
+                          bottom: MediaQuery.of(context).padding.bottom,
+                        ),
+                        sliver: SliverGrid(
+                          delegate: SliverChildBuilderDelegate((
+                            context,
+                            index,
+                          ) {
+                            final item = items[index];
+                            return CatalogItem(
+                              item: item,
 
-
-                         ),
-                       ),
-                     ),
-                   );
-                 },
-                 loaded: (items) {
-                   return SliverPadding(
-                     padding: EdgeInsets.symmetric(horizontal: 16).copyWith(
-                       top: 8,
-                       bottom: MediaQuery.of(context).padding.bottom,
-                     ),
-                     sliver: SliverGrid(
-                       delegate: SliverChildBuilderDelegate((context, index) {
-                         final item = items[index];
-                         return CatalogItem(
-                           item: item,
-
-                           onTap: () {
-                             if(item.status!=CatalogStatus.upcoming) {
-                               if (item.action
-                                   .orEmpty()
-                                   .isNotEmpty) {
-                                 pushAction(context, item: item);
-                               }
-                             }else {
-                                   Fluttertoast.showToast(
-                                     gravity: ToastGravity.BOTTOM,
-                                     msg: context.localization.catalogItemStatusSoon,
-                                     textColor:
-                                     context.appColors.textIconColor.primary,
-                                     backgroundColor:
-                                     context.appColors.background.elevation2,
-                                   );
-                             }
-                           },
-
-                         );
-                       }, childCount: items.length),
-                       gridDelegate:
-                       const SliverGridDelegateWithFixedCrossAxisCount(
-                         crossAxisCount: 2,
-                         mainAxisSpacing: 16,
-                         crossAxisSpacing: 16,
-                         childAspectRatio: 163 / 104,
-                       ),
-                     ),
-                   );
-                 },
-                 error: () {
-                   return SliverFillRemaining(
-                     hasScrollBody: false,
-                     child: Padding(
-                       key: ValueKey("CatalogDefaultState"),
-                       padding: EdgeInsets.symmetric(horizontal: 16),
-                       child: Transform.translate(
-                         offset: Offset(0, -kToolbarHeight),
-                         child: Center(
-                           child: Column(
-                             mainAxisSize: MainAxisSize.min,
-                             spacing: 24,
-                             children: [
-                               MessageContainer.custom(
-                                 icon:
-                                 Assets.pngExclamationmarkSquare.toImage(),
-                                 title: context.localization.pageFailedToLoad,
-                                 caption:
-                                 context.localization.something_went_wrong,
-                               ),
-                               SizedBox(
-                                 width: double.maxFinite,
-                                 height: 48,
-                                 child: FilledButton(
-                                   onPressed: () {
-                                     _bloc?.add(CatalogEvent.fetch());
-                                   },
-                                   style: FilledButton.styleFrom(
-                                     elevation: 0,
-                                     textStyle: CustomTypography.bodyLg,
-                                     backgroundColor:
-                                     context.appColors.fill.quaternary,
-                                     shape: RoundedRectangleBorder(
-                                       borderRadius: BorderRadius.circular(16),
-                                     ),
-                                   ),
-                                   child: Text(context.localization.refresh),
-                                 ),
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
-                     ),
-                   );
-                 },
-               ));
-
+                              onTap: () {
+                                if (item.status != CatalogStatus.upcoming) {
+                                  if (item.action.orEmpty().isNotEmpty) {
+                                    pushAction(context, item: item);
+                                  }
+                                } else {
+                                  Fluttertoast.showToast(
+                                    gravity: ToastGravity.BOTTOM,
+                                    msg:
+                                        context
+                                            .localization
+                                            .catalogItemStatusSoon,
+                                    textColor:
+                                        context.appColors.textIconColor.primary,
+                                    backgroundColor:
+                                        context.appColors.background.elevation2,
+                                  );
+                                }
+                              },
+                            );
+                          }, childCount: items.length),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 16,
+                                crossAxisSpacing: 16,
+                                childAspectRatio: 163 / 104,
+                              ),
+                        ),
+                      );
+                    },
+                    error: () {
+                      return SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: Padding(
+                          key: ValueKey("CatalogDefaultState"),
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          child: Transform.translate(
+                            offset: Offset(0, -kToolbarHeight),
+                            child: Center(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                spacing: 24,
+                                children: [
+                                  MessageContainer.custom(
+                                    icon:
+                                        Assets.pngExclamationmarkSquare
+                                            .toImage(),
+                                    title:
+                                        context.localization.pageFailedToLoad,
+                                    caption:
+                                        context
+                                            .localization
+                                            .something_went_wrong,
+                                  ),
+                                  SizedBox(
+                                    width: double.maxFinite,
+                                    height: 48,
+                                    child: FilledButton(
+                                      onPressed: () {
+                                        _bloc?.add(CatalogEvent.fetch());
+                                      },
+                                      style: FilledButton.styleFrom(
+                                        elevation: 0,
+                                        textStyle: CustomTypography.bodyLg,
+                                        backgroundColor:
+                                            context.appColors.fill.quaternary,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            16,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Text(context.localization.refresh),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                );
               },
             ),
 
@@ -274,10 +283,15 @@ class _CatalogScreenState extends State<CatalogScreen> {
   }
 
   void pushAction(BuildContext context, {required CatalogItemModel item}) {
-    var uri = Uri.parse(item.action!);
-
+    var uri = Uri.parse(item.action!.trim());
     if (item.actionType == CatalogActionType.inner) {
-      if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty) {
+      if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||
+          uri.host.isEmpty) {
+        uri= uri.replace(
+          queryParameters: {
+            "title":item.title
+          }
+        );
         context.push(uri.toString());
       } else {
         if (item.authRequired) {

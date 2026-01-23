@@ -92,6 +92,7 @@ class _WebViewPageState extends State<WebViewPage> {
                             } catch (_) {}
                           },
                         );
+
                   },
                   onPermissionRequest: onPermissionRequest,
 
@@ -100,6 +101,19 @@ class _WebViewPageState extends State<WebViewPage> {
                   ),
                   onProgressChanged: (controller, progress) {
                     setState(() => _progress = progress / 100.0);
+                  },
+                  shouldOverrideUrlLoading: (controller,navigationAction) async {
+                    final url = navigationAction.request.url.toString();
+
+                    if (url.startsWith("http") || url.startsWith("https")) {
+                      return NavigationActionPolicy.ALLOW;
+                    }
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await launchUrl(Uri.parse(url));
+                      return NavigationActionPolicy.CANCEL; // WebView ochmasin
+                    }
+                    return NavigationActionPolicy.CANCEL;
+
                   },
                   onLoadStop: (controller, url) {
                     setState(() => _progress = 1.0);

@@ -18,6 +18,7 @@ import 'package:travel/src/pages/notifications/page/notification_detail.dart';
 
 import '../catalog/catalog.dart';
 import '../di/injection.dart';
+import '../pages/catalog_investments/CatalogInvestmentsPage.dart';
 import '../pages/content_by_category/content_by_categories_page.dart';
 import '../pages/detail/detail_bloc/detail_bloc.dart';
 import '../pages/detail/pages/image_preview_page.dart';
@@ -204,6 +205,25 @@ mixin FeatureTravelRouter {
               ),
         ),
       ],
+    ),
+
+    GoRoute(
+      path: AppNavPath.travel.travelCatalogInvestments.path,
+      name: AppNavPath.travel.travelCatalogInvestments.name,
+      pageBuilder: (context, state) {
+        return buildSlideTransitionPage(
+          child: BlocProvider(
+            create:
+                (context) =>
+            getIt<ContentByCategoryBloc>(),
+            child: CatalogInvestmentsPage(
+              title: state.uri.queryParameters["title"].orEmpty(),
+            ),
+          ),
+          context: context,
+          state: state,
+        );
+      },
     ),
   ];
 

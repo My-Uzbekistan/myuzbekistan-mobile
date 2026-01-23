@@ -31,7 +31,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
 
       emit(
         NotificationsState.successState(
-          notifications: result,
+          notifications: result.uniqueById((e)=>e.id),
           initialNotification: initialNotification,
         ),
       );
@@ -75,5 +75,13 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
       );
       _repository.seenNotification(id: event.notId);
     } catch (e) {}
+  }
+}
+
+
+extension UniqueById<T> on List<T> {
+  List<T> uniqueById(int Function(T) getId) {
+    var seen = <int>{};
+    return where((element) => seen.add(getId(element))).toList();
   }
 }
