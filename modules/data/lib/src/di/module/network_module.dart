@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:data/src/constants.dart';
@@ -50,6 +51,9 @@ abstract class NetworkModule {
     dio.interceptors.add(
       TokenRefreshInterceptor(securityStorage: securityStorage,mainDio: dio),
     );
+    // dio.transformer = BackgroundTransformer()..jsonDecodeCallback = (text) {
+    //   return json.decode(utf8.decode(text.codeUnits,allowMalformed: true));
+    // };
     if (kDebugMode) {
       dio.interceptors.add(alice.getDioInterceptor());
 

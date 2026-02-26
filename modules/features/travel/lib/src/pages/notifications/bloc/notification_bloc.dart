@@ -1,6 +1,8 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/src/di/injection.dart';
+import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 part 'notification_event.dart';
 
@@ -38,15 +40,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
       if (initialNotification?.isSeen == false) {
         add(NotificationEvent.notificationSeen(notId: initialNotification!.id));
       }
-    } catch (e) {
-      // emit(
-      //   NotificationsState.successState(
-      //     notifications: [],
-      //     initialNotification: null,
-      //   ),
-      // );
-      debugPrint("NotificationExaption ${e}");
-    }
+    } catch (_) {}
   }
 
   Future<void> _notificationSeen(
@@ -73,7 +67,8 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
           orElse: () => state,
         ),
       );
-      _repository.seenNotification(id: event.notId);
+      await _repository.seenNotification(id: event.notId);
+      getIt<NotificationCountCubit>().loadNotificationCount();
     } catch (e) {}
   }
 }

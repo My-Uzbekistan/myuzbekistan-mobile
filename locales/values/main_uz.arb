@@ -16,6 +16,9 @@
   "catalogCottages": "Dachalar",
   "catalogInsurance": "Sug‘urta",
   "catalogItemStatusNew": "Yangi",
-  "catalogItemStatusSoon": "Tez orada"
-
+  "catalogItemStatusSoon": "Tez orada",
+  "new_version_available": "Yangi versiya mavjud",
+  "new_features_and_security": "Yangi funksiyalar mavjud va xavfsizlik kuchaytirildi. Ilovani yangilashni tavsiya qilamiz.",
+  "update_app_now": "Ilovani yangilash",
+  "update_app_later": "Keyin yangilash"
 }

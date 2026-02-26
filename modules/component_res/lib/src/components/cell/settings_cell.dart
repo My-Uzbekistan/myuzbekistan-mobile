@@ -6,30 +6,44 @@ class SettingsCell extends StatelessWidget {
   final Widget? trailing;
   final String text;
   final VoidCallback? onTap;
+  final EdgeInsets? contentPadding;
+  final BorderRadius? borderRadius;
+  final Color containerColor;
 
   const SettingsCell(
-      {super.key, required this.text, this.icon, this.trailing, this.onTap});
+      {super.key,
+      required this.text,
+      this.icon,
+      this.trailing,
+      this.onTap,
+      this.contentPadding,
+      this.borderRadius,
+      this.containerColor = Colors.transparent});
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        child: Container(
-          padding: EdgeInsets.all(16),
-          child: Row(
-            spacing: 16,
-            children: [
-              if (icon != null) icon!,
-              Expanded(child: Text(text, style: CustomTypography.labelLg)),
-              trailing ??
-                  Assets.svgIconArrowRight.toSvgImage(
-                      colorFilter: ColorFilter.mode(
-                          context.appColors.textIconColor.secondary,
-                          BlendMode.srcIn))
-            ],
-          ),
+    return InkWell(
+      onTap: onTap,
+      borderRadius: borderRadius,
+      child: Container(
+        decoration:
+            BoxDecoration(borderRadius: borderRadius, color: containerColor),
+        padding: contentPadding ?? EdgeInsets.all(16),
+        child: Row(
+          spacing: 16,
+
+          children: [
+            if (icon != null) icon!,
+            Expanded(child: Text(
+              text,
+              softWrap: false,
+            ).labelLg()),
+            trailing ??
+                Assets.svgIconArrowRight.toSvgImage(
+                    colorFilter: ColorFilter.mode(
+                        context.appColors.textIconColor.secondary,
+                        BlendMode.srcIn))
+          ],
         ),
       ),
     );

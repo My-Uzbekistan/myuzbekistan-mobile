@@ -55,4 +55,17 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Скоро';
+
+  @override
+  String get new_version_available => 'Доступна новая версия';
+
+  @override
+  String get new_features_and_security =>
+      'Доступны новые функции и усилена безопасность. Рекомендуем обновить приложение';
+
+  @override
+  String get update_app_now => 'Обновить приложение';
+
+  @override
+  String get update_app_later => 'Обновить позже';
 }

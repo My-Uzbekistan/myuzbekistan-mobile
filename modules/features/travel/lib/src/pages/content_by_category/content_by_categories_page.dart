@@ -19,16 +19,9 @@ class ContentByCategoryPage extends StatefulWidget {
 
 class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
   ContentByCategoryBloc? bloc;
-
-  // final TextEditingController _searchTextEditingController =
-  // TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
-
     bloc = context.read<ContentByCategoryBloc>();
-    // _searchTextEditingController.addListener(_inputListener);
-
     super.initState();
   }
 
@@ -42,12 +35,12 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
       ),
       body: Column(
         children: [
-          SearchInputField(
-            hintText: context.localization.search,
-            onChanged: (text) {
-              bloc?.add(ContentByCategoryEvent.setQuery(text));
-            },
-          ),
+         Padding(padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),child:  SearchInputField(
+           hintText: context.localization.search,
+           onChanged: (text) {
+             bloc?.add(ContentByCategoryEvent.setQuery(text));
+           },
+         ),),
           Expanded(
             child: BlocConsumer<ContentByCategoryBloc, ContentByCategoryState>(
               listener: (context, state) {
@@ -71,9 +64,14 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
 
                       return false;
                     },
-                    child: ListView.builder(
+                    child: ListView.separated(
+                      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+                      padding: EdgeInsets.symmetric(horizontal: 16),
                       itemCount:
                           state.contents.length + (state.isLoading ? 1 : 0),
+                      separatorBuilder: (context, index) {
+                        return SizedBox(height: 20);
+                      },
                       itemBuilder: (context, index) {
                         if (index >= state.contents.length) {
                           return Container(
@@ -109,37 +107,49 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
                         final item = state.contents[index];
                         return RepaintBoundary(
                           key: ValueKey(item.contentId),
-                          child: SearchCell(
-                            onFavoriteChangeTap: () {
-                              HapticFeedback.selectionClick();
-                              bloc?.add(
-                                ContentByCategoryEvent.updateItemFavorite(
-                                  contentId: item.contentId,
-                                  isFavorite: !item.isFavorite,
+                          child: ContentByCategoryItem(
+                            item: item,
+                            onTap: () {
+                              context.travel.pushDetailPage(
+                                contentId: item.contentId,
+                                content: item.toContentDetail(
+                                  categoryName: widget.categoryName,
                                 ),
                               );
                             },
-                            onTap: () async {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                              final result = await context.travel
-                                  .pushDetailPage(
-                                    contentId: item.contentId,
-                                    content: item.toContentDetail(
-                                      categoryName: widget.categoryName,
-                                    ),
-                                  );
-                              if (result != null &&
-                                  result["isFavorite"] != null) {
-                                bloc?.add(
-                                  ContentByCategoryEvent.updateItemFavoriteWithPopResult(
-                                    isFavorite: result["isFavorite"],
-                                    contentId: item.contentId,
-                                  ),
-                                );
-                              }
-                            },
-                            mainPageContent: item,
                           ),
+
+                          // SearchCell(
+                          //   onFavoriteChangeTap: () {
+                          //     HapticFeedback.selectionClick();
+                          //     bloc?.add(
+                          //       ContentByCategoryEvent.updateItemFavorite(
+                          //         contentId: item.contentId,
+                          //         isFavorite: !item.isFavorite,
+                          //       ),
+                          //     );
+                          //   },
+                          //   onTap: () async {
+                          //     FocusManager.instance.primaryFocus?.unfocus();
+                          //     final result = await context.travel
+                          //         .pushDetailPage(
+                          //           contentId: item.contentId,
+                          //           content: item.toContentDetail(
+                          //             categoryName: widget.categoryName,
+                          //           ),
+                          //         );
+                          //     if (result != null &&
+                          //         result["isFavorite"] != null) {
+                          //       bloc?.add(
+                          //         ContentByCategoryEvent.updateItemFavoriteWithPopResult(
+                          //           isFavorite: result["isFavorite"],
+                          //           contentId: item.contentId,
+                          //         ),
+                          //       );
+                          //     }
+                          //   },
+                          //   mainPageContent: item,
+                          // ),
                         );
                       },
                     ),
@@ -213,137 +223,259 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
   }
 }
 
-class SearchCell extends StatelessWidget {
-  final EdgeInsets contentPadding;
-  final MainPageContent mainPageContent;
-  final VoidCallback? onTap;
-  final VoidCallback? onFavoriteChangeTap;
+// class SearchCell extends StatelessWidget {
+//   final EdgeInsets contentPadding;
+//   final MainPageContent mainPageContent;
+//   final VoidCallback? onTap;
+//   final VoidCallback? onFavoriteChangeTap;
+//
+//   const SearchCell({
+//     super.key,
+//     required this.mainPageContent,
+//     this.onTap,
+//     this.onFavoriteChangeTap,
+//     this.contentPadding = const EdgeInsets.all(16),
+//   });
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return InkWell(
+//       onTap: onTap,
+//       child: Padding(
+//         padding: contentPadding,
+//         child: Stack(
+//           children: [
+//             Row(
+//               spacing: 16,
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 AppImageCard.medium(
+//                   imageUrl: mainPageContent.mainPhoto,
+//                   topRightWidget: GestureDetector(
+//                     onTap: onFavoriteChangeTap,
+//                     child: SizedBox(
+//                       height: 24,
+//                       width: 24,
+//                       child:
+//                           mainPageContent.isFavorite
+//                               ? Assets.svgIconFilledHeard.toSvgImage(
+//                                 colorFilter: ColorFilter.mode(
+//                                   context.appColors.colors.red,
+//                                   BlendMode.srcIn,
+//                                 ),
+//                               )
+//                               : Assets.svgOutlineHeard.toSvgImage(),
+//                     ),
+//                   ),
+//                 ),
+//                 Expanded(
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     mainAxisAlignment: MainAxisAlignment.start,
+//                     spacing: 4,
+//                     children: [
+//                       Column(
+//                         mainAxisSize: MainAxisSize.min,
+//                         crossAxisAlignment: CrossAxisAlignment.start,
+//                         mainAxisAlignment: MainAxisAlignment.start,
+//                         children: [
+//                           Padding(
+//                             padding: const EdgeInsets.only(right: 20),
+//                             child: Text(
+//                               mainPageContent.title ?? "",
+//                               style: CustomTypography.labelLg,
+//                               overflow: TextOverflow.ellipsis,
+//                               maxLines: 1,
+//                             ),
+//                           ),
+//                           if (mainPageContent.region != null)
+//                             Text(
+//                               mainPageContent.region!,
+//                               maxLines: 1,
+//                               overflow: TextOverflow.ellipsis,
+//                               style: CustomTypography.bodySm.copyWith(
+//                                 color:
+//                                     context.appColors.textIconColor.secondary,
+//                               ),
+//                             ),
+//                         ],
+//                       ),
+//                       if (mainPageContent.viewType == ViewType.places)
+//                         if ((mainPageContent.averageCheck ?? 0) > 0)
+//                           PriceCategory(
+//                             priceCategory: mainPageContent.averageCheck ?? 0,
+//                           ),
+//                       if (mainPageContent.viewType != ViewType.places)
+//                         if ((mainPageContent.price ?? 0) > 0)
+//                           Text(
+//                             "~\$${mainPageContent.priceInDollar?.floor()}",
+//                             style: CustomTypography.bodySm.copyWith(
+//                               color: context.appColors.textIconColor.primary,
+//                             ),
+//                           ),
+//                       SizedBox(
+//                         height: 32,
+//                         child: SingleChildScrollView(
+//                           scrollDirection: Axis.horizontal,
+//                           child: Row(
+//                             spacing: 6,
+//                             children:
+//                                 mainPageContent.viewType == ViewType.profile
+//                                     ? mainPageContent.languages
+//                                         .map((e) => AppBadge(title: e))
+//                                         .toList()
+//                                     : mainPageContent.facilities
+//                                         .map(
+//                                           (e) => AppBadge(
+//                                             title: e.name,
+//                                             iconUrl: e.icon,
+//                                           ),
+//                                         )
+//                                         .toList(),
+//                           ),
+//                         ),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             if ((mainPageContent.ratingAverage ?? 0) > 0)
+//               Positioned(
+//                 top: 0,
+//                 right: 0,
+//                 child: Text(
+//                   mainPageContent.ratingAverage.toString(),
+//                   style: CustomTypography.labelSm.copyWith(
+//                     color: context.appColors.brand,
+//                   ),
+//                 ),
+//               ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
-  const SearchCell({
-    super.key,
-    required this.mainPageContent,
-    this.onTap,
-    this.onFavoriteChangeTap,
-    this.contentPadding = const EdgeInsets.all(16),
-  });
+class ContentByCategoryItem extends StatelessWidget {
+  final MainPageContent item;
+
+  final GestureTapCallback? onTap;
+
+  const ContentByCategoryItem({super.key, required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
-      child: Padding(
-        padding: contentPadding,
-        child: Stack(
-          children: [
-            Row(
-              spacing: 16,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppImageCard.medium(
-                  imageUrl: mainPageContent.mainPhoto,
-                  topRightWidget: GestureDetector(
-                    onTap: onFavoriteChangeTap,
-                    child: SizedBox(
-                      height: 24,
-                      width: 24,
-                      child:
-                          mainPageContent.isFavorite
-                              ? Assets.svgIconFilledHeard.toSvgImage(
-                                colorFilter: ColorFilter.mode(
-                                  context.appColors.colors.red,
-                                  BlendMode.srcIn,
-                                ),
-                              )
-                              : Assets.svgOutlineHeard.toSvgImage(),
+      behavior: HitTestBehavior.translucent,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 8,
+        children: [
+          SizedBox(
+            height: 200,
+            width: double.maxFinite,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ExtendedImage.network(
+                      item.mainPhoto ?? "",
+                      cache: true,
+                      fit: BoxFit.cover,
+
+                      cacheMaxAge: Duration(days: 10),
+                      loadStateChanged: (ExtendedImageState state) {
+                        switch (state.extendedImageLoadState) {
+                          case LoadState.completed:
+                            return AnimatedOpacity(
+                              opacity: 1.0,
+                              duration: Duration(milliseconds: 200),
+                              child: state.completedWidget,
+                            ); // ✅ Default image o'zi ko'rsatiladi
+                          default:
+                            return Assets.pngDefaultContentImage.toImage(
+                              fit: BoxFit.cover,
+                            );
+                        }
+                      },
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    spacing: 4,
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Text(
-                              mainPageContent.title ?? "",
-                              style: CustomTypography.labelLg,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
-                            ),
-                          ),
-                          if (mainPageContent.region != null)
-                            Text(
-                              mainPageContent.region!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: CustomTypography.bodySm.copyWith(
-                                color:
-                                    context.appColors.textIconColor.secondary,
-                              ),
-                            ),
-                        ],
-                      ),
-                      if (mainPageContent.viewType == ViewType.places)
-                        if ((mainPageContent.averageCheck ?? 0) > 0)
-                          PriceCategory(
-                            priceCategory: mainPageContent.averageCheck ?? 0,
-                          ),
-                      if (mainPageContent.viewType != ViewType.places)
-                        if ((mainPageContent.price ?? 0) > 0)
-                          Text(
-                            "~\$${mainPageContent.priceInDollar?.floor()}",
-                            style: CustomTypography.bodySm.copyWith(
-                              color: context.appColors.textIconColor.primary,
-                            ),
-                          ),
-                      SizedBox(
-                        height: 32,
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            spacing: 6,
-                            children:
-                                mainPageContent.viewType == ViewType.profile
-                                    ? mainPageContent.languages
-                                        .map((e) => AppBadge(title: e))
-                                        .toList()
-                                    : mainPageContent.facilities
-                                        .map(
-                                          (e) => AppBadge(
-                                            title: e.name,
-                                            iconUrl: e.icon,
-                                          ),
-                                        )
-                                        .toList(),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                    Positioned(
+                      bottom: 12,
+                      right: 12,
+                      child: rightContent(context,item)
+
+                      // PriceContainer(
+                      //   priceText: "~\$${item.priceInDollar?.floor()}",
+                      // ),
+                    ),
+
+                  // ~\$${widget.content.priceInDollar?.floor()
+                ],
+              ),
             ),
-            if ((mainPageContent.ratingAverage ?? 0) > 0)
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Text(
-                  mainPageContent.ratingAverage.toString(),
-                  style: CustomTypography.labelSm.copyWith(
-                    color: context.appColors.brand,
-                  ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            spacing: 8,
+            children: [
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 2,
+                  children: [
+                    Text(
+                      item.title.orEmpty(),
+                      maxLines: 2,
+                    ).bodyMd(color: context.appColors.textIconColor.primary),
+                    Text(
+                      item.region.orEmpty(),
+                    ).bodySm(color: context.appColors.textIconColor.secondary),
+                  ],
                 ),
               ),
-          ],
-        ),
+
+              if ((item.ratingAverage ?? 0.0) > 0)
+                Row(
+                  spacing: 4,
+                  children: [
+                    SizedBox(
+                      height: 12,
+                      child: Assets.svgStarFill.toSvgImage(fit: BoxFit.contain),
+                    ),
+                    Text(
+                      item.ratingAverage.toString(),
+                    ).bodyMd(color: context.appColors.textIconColor.primary),
+                  ],
+                ),
+            ],
+          ),
+        ],
       ),
     );
+  }
+
+
+  Widget rightContent(BuildContext context,MainPageContent content){
+
+    if (content.viewType == ViewType.places && (content.averageCheck ?? 0) > 0) {
+      return PriceCategoryWithContainer(
+          priceCategory: content.averageCheck ?? 0,
+        );
+    }
+
+    if (content.viewType != ViewType.places && (content.priceInDollar ?? 0) > 0) {
+      return   PriceContainer(
+      priceText:   "~\$${content.priceInDollar?.floor()}",
+      );
+    }
+
+
+    return SizedBox();
   }
 }

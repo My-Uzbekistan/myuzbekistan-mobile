@@ -576,6 +576,78 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Скоро'**
   String get catalogItemStatusSoon;
+
+  /// No description provided for @investment_in_future.
+  ///
+  /// In ru, this message translates to:
+  /// **'Инвестиция в будущее'**
+  String get investment_in_future;
+
+  /// No description provided for @investment_search_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Что ищете?'**
+  String get investment_search_title;
+
+  /// No description provided for @investments_category_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новостройки'**
+  String get investments_category_title;
+
+  /// No description provided for @investment_amount.
+  ///
+  /// In ru, this message translates to:
+  /// **'{currency, select, UZS{от {amount} сум} USD{от {amount} USD} other{{amount}}}'**
+  String investment_amount(Object amount, String currency);
+
+  /// No description provided for @investment_page_sort_ask.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сначала дешевле'**
+  String get investment_page_sort_ask;
+
+  /// No description provided for @investment_page_sort_desk.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сначала дороже'**
+  String get investment_page_sort_desk;
+
+  /// No description provided for @investment_page_sort_popular.
+  ///
+  /// In ru, this message translates to:
+  /// **'Популярное'**
+  String get investment_page_sort_popular;
+
+  /// No description provided for @investment_page_sort.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сортировка'**
+  String get investment_page_sort;
+
+  /// No description provided for @investment_page_sort_price.
+  ///
+  /// In ru, this message translates to:
+  /// **'Валюта'**
+  String get investment_page_sort_price;
+
+  /// No description provided for @investment_page_sort_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фильтр'**
+  String get investment_page_sort_title;
+
+  /// No description provided for @investment_search_page_initial.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите запрос для поиска...'**
+  String get investment_search_page_initial;
+
+  /// No description provided for @action_cancel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отмена'**
+  String get action_cancel;
 }
 
 class _FeatureTravelLocalizationsDelegate

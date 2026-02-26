@@ -2,6 +2,8 @@
 
 part of 'service.dart';
 
+// dart format off
+
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
@@ -80,14 +82,18 @@ class _RestService implements RestService {
     required int categoryId,
     required int page,
     required int pageSize,
+    int? regionId,
     String? search,
+    Map<String, String>? sort,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
+      r'regionId': regionId,
       r'search': search,
     };
+    queryParameters.addAll(sort ?? <String, dynamic>{});
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -577,6 +583,33 @@ class _RestService implements RestService {
   }
 
   @override
+  Future<int> getNotificationUnreadCount() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<int>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'notifications/unread-count',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<int>(_options);
+    late int _value;
+    try {
+      _value = _result.data!;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<NotificationItemDto> getNotificationById(int id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -613,7 +646,7 @@ class _RestService implements RestService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'notifications/${id}/seen',
+            'notifications/mark-seen/${id}',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -707,7 +740,7 @@ class _RestService implements RestService {
       Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'catalogs',
+            'catalog-snapshots',
             queryParameters: queryParameters,
             data: _data,
           )
@@ -753,3 +786,5 @@ class _RestService implements RestService {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
+
+// dart format on

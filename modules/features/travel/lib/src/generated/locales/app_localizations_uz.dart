@@ -288,4 +288,47 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Tez orada';
+
+  @override
+  String get investment_in_future => 'Kelajakka investitsiya';
+
+  @override
+  String get investment_search_title => 'Nimani qidiryapsiz?';
+
+  @override
+  String get investments_category_title => 'Yangi qurilgan uylar';
+
+  @override
+  String investment_amount(Object amount, String currency) {
+    String _temp0 = intl.Intl.selectLogic(currency, {
+      'UZS': '$amount so\'m dan',
+      'USD': '$amount USD dan',
+      'other': '$amount',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get investment_page_sort_ask => 'Avval arzon';
+
+  @override
+  String get investment_page_sort_desk => 'Avval qimmat';
+
+  @override
+  String get investment_page_sort_popular => 'Mashhur';
+
+  @override
+  String get investment_page_sort => 'Saralash';
+
+  @override
+  String get investment_page_sort_price => 'Valyuta';
+
+  @override
+  String get investment_page_sort_title => 'Filtr';
+
+  @override
+  String get investment_search_page_initial => 'Qidiruv so‘rovini kiriting...';
+
+  @override
+  String get action_cancel => 'Yopish';
 }

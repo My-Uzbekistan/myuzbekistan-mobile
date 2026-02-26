@@ -70,7 +70,10 @@ class _NotificationMainPageState extends State<NotificationMainPage> {
               padding: EdgeInsets.symmetric(
                 horizontal: 16,
                 vertical: 24,
-              ).copyWith(top: MediaQuery.of(context).padding.top + 24),
+              ).copyWith(
+                top: MediaQuery.of(context).padding.top + 24,
+                bottom: MediaQuery.of(context).padding.bottom + 24,
+              ),
               separatorBuilder: (context, index) {
                 return SizedBox(height: 16);
               },
@@ -80,10 +83,9 @@ class _NotificationMainPageState extends State<NotificationMainPage> {
                   title: item.title,
                   image: item.image,
                   date: item.publishDate(),
+                  isSeen: item.isSeen,
                   onTap: () {
                     openNotificationDetail(item);
-
-                    // _bloc?.add(NotificationEvent.notificationSeen(notId: 123));
                   },
                 );
               },
@@ -97,6 +99,7 @@ class _NotificationMainPageState extends State<NotificationMainPage> {
 
   void openNotificationDetail(NotificationItem item) {
     context.travel.pushNotificationsDetail(item: item);
+    _bloc?.add(NotificationEvent.notificationSeen(notId: item.id));
   }
 }
 

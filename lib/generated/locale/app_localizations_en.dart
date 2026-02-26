@@ -55,4 +55,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Soon';
+
+  @override
+  String get new_version_available => 'A new version is available';
+
+  @override
+  String get new_features_and_security =>
+      'New features are available and security has been improved. We recommend updating the app.';
+
+  @override
+  String get update_app_now => 'Update App';
+
+  @override
+  String get update_app_later => 'Update Later';
 }

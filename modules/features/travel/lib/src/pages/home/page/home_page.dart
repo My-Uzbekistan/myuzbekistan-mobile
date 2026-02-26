@@ -7,6 +7,7 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/home/widgets/prayers/prayers.dart';
+import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 import '../home_bloc/home_bloc.dart';
 import '../widgets/home_groups.dart';
@@ -20,6 +21,10 @@ class HomePage extends HookWidget {
     useAutomaticKeepAlive(wantKeepAlive: true);
 
     var bloc = context.read<HomeBloc>();
+    useEffect(() {
+      context.read<NotificationCountCubit>().loadNotificationCount();
+      return null;
+    }, []);
     var completerRef = useRef<Completer<void>?>(null);
 
     final scrollController = useScrollController();
@@ -70,11 +75,19 @@ class HomePage extends HookWidget {
                             title: state.selectedRegion?.name ?? "",
                             temperature: state.temperature?.temperature,
                             temperatureImageUrl: state.temperature?.iconUrl,
-                            onTap: () {
-                              context.travel.pushSelectRegionPage(
-                                state.regions,
-                                state.selectedRegion!.id,
-                              );
+                            onTap: () async {
+                              final result = await context.travel
+                                  .pushSelectRegionPage(
+                                    state.regions,
+                                    state.selectedRegion!.id,
+                                  );
+                              if (result != null) {
+                                bloc.add(
+                                  HomeBlocEvent.changeRegion(
+                                    (result as Region).id,
+                                  ),
+                                );
+                              }
                             },
                           ),
                         ),
@@ -90,12 +103,12 @@ class HomePage extends HookWidget {
                       ),
                       Expanded(
                         child: CustomScrollView(
-                          key: const PageStorageKey('homeScroll'), // scroll pozitsiyasi saqlanadi
+                          key: const PageStorageKey('homeScroll'),
 
+                          // scroll pozitsiyasi saqlanadi
                           controller: scrollController,
 
                           shrinkWrap: true,
-
 
                           slivers: [
                             SliverToBoxAdapter(
@@ -162,7 +175,7 @@ class HomePage extends HookWidget {
                             ),
                             !data.loadingContents
                                 ? SliverList(
-                              key: const PageStorageKey('imageList'),
+                                  key: const PageStorageKey('imageList'),
                                   delegate: SliverChildBuilderDelegate((
                                     context,
                                     index,
@@ -181,7 +194,7 @@ class HomePage extends HookWidget {
                                         context.travel.pushDetailPage(
                                           contentId: content.contentId,
                                           content: content.toContentDetail(
-                                            categoryName: e.categoryName
+                                            categoryName: e.categoryName,
                                           ),
                                         );
                                       },
@@ -223,21 +236,20 @@ class HomePage extends HookWidget {
                     SizedBox(
                       width: double.maxFinite,
                       height: 48,
-                      child:  FilledButton(
-                          onPressed: () {
-                            bloc.add(HomeBlocEvent.loadDataEvent());
-                          },
-                          style: FilledButton.styleFrom(
-                            elevation: 0,
-                            textStyle: CustomTypography.bodyLg,
-                            backgroundColor: context.appColors.fill.quaternary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
+                      child: FilledButton(
+                        onPressed: () {
+                          bloc.add(HomeBlocEvent.loadDataEvent());
+                        },
+                        style: FilledButton.styleFrom(
+                          elevation: 0,
+                          textStyle: CustomTypography.bodyLg,
+                          backgroundColor: context.appColors.fill.quaternary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          child: Text(context.localization.refresh),
                         ),
-
+                        child: Text(context.localization.refresh),
+                      ),
                     ),
                   ],
                 ),

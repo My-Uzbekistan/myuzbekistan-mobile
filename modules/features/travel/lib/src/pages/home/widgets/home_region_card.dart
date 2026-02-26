@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
+import '../../../../travel.dart';
+
 class HomeRegionCard extends StatelessWidget {
   final String title;
   final String? temperature;
@@ -98,7 +100,9 @@ class HomeRegionCard extends StatelessWidget {
                 context.travel.pushNotifications();
               },
               child: Container(
-                height: double.infinity,
+                height: 48,
+                width: 48,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: context.appColors.stroke.nonOpaque,
@@ -111,21 +115,33 @@ class HomeRegionCard extends StatelessWidget {
                   width: 20,
                   child: Center(
                     child: Stack(
+                      clipBehavior: Clip.none,
                       children: [
                         Positioned.fill(
-                          child: Center(child: Assets.svgNotificationIcon.toSvgImage(
-                            tintColor: context.appColors.textIconColor.primary,
-                            fit: BoxFit.contain,
-                          ),),
+                          child: Center(
+                            child: Assets.svgNotificationIcon.toSvgImage(
+                              tintColor:
+                                  context.appColors.textIconColor.primary,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
-                        // Positioned(
-                        //   right: 3,
-                        //   top: 0,
-                        //   child: CircleAvatar(
-                        //     radius: 3,
-                        //     backgroundColor: context.appColors.colors.red,
-                        //   ),
-                        // ),
+                        Positioned(
+                          right: -8,
+                          top: -8,
+                          child: BlocBuilder<NotificationCountCubit, int>(
+                            builder: (context, state) {
+                              if (state == 0) {
+                                return SizedBox();
+                              }
+                              return CircleAvatar(
+                                radius: 8,
+                                backgroundColor: context.appColors.colors.red,
+                                child: Center(child: Text(state.toString(),overflow: TextOverflow.ellipsis,).bodyXXsm(color: Colors.white)),
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),

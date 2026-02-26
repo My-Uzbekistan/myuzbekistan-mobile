@@ -2,6 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 class NotificationDetail extends StatefulWidget {
   final NotificationItem item;
@@ -13,6 +14,13 @@ class NotificationDetail extends StatefulWidget {
 }
 
 class _NotificationDetailState extends State<NotificationDetail> {
+  NotificationCountCubit? countCubit;
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +80,8 @@ class _NotificationDetailState extends State<NotificationDetail> {
                   child: AppActionButton(
                     actionText: context.coreLocalization.action_more,
                     onPressed: () {
+                      // openActionLink("https://myuzb.uz/webViewPage?title&actionUrl=https://track-your-journey.myuz.uz/");
+                      // openActionLink("/webViewPage?title&actionUrl=https://track-your-journey.myuz.uz/");
                       openActionLink(widget.item.actionLink.orEmpty());
                     },
                   ),
@@ -83,7 +93,7 @@ class _NotificationDetailState extends State<NotificationDetail> {
 
   void openActionLink(String actionLink) {
     final uri = Uri.parse(actionLink);
-    if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty) {
+    if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||  uri.host.isEmpty) {
       context.push(uri.toString());
     } else {
       LauncherUtils.urlLauncher(actionLink);

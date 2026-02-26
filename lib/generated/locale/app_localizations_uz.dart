@@ -55,4 +55,17 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Tez orada';
+
+  @override
+  String get new_version_available => 'Yangi versiya mavjud';
+
+  @override
+  String get new_features_and_security =>
+      'Yangi funksiyalar mavjud va xavfsizlik kuchaytirildi. Ilovani yangilashni tavsiya qilamiz.';
+
+  @override
+  String get update_app_now => 'Ilovani yangilash';
+
+  @override
+  String get update_app_later => 'Keyin yangilash';
 }

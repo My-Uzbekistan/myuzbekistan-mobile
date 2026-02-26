@@ -30,6 +30,14 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   @override
   Widget build(BuildContext context) {
+     final  investItem = CatalogItemModel(
+        title: "Investitsiya",
+        icon: Assets.catalogIconCameraAi,
+        status: CatalogStatus.active,
+        color: Color(0xff37A8C7),
+       actionType: CatalogActionType.inner,
+       action: "/catalog/investments"
+      );
     // catalogItems = [
 
     //   CatalogItemModel(
@@ -153,10 +161,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                               physics: NeverScrollableScrollPhysics(),
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
+                                    crossAxisCount: 4,
                                     mainAxisSpacing: 16,
                                     crossAxisSpacing: 16,
-                                    childAspectRatio: 163 / 104,
+                                    childAspectRatio: 1,
                                   ),
                               itemBuilder: (context, index) {
                                 return ShimmerDefaultContainer(height: 1);
@@ -167,9 +175,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         ),
                       );
                     },
-                    loaded: (items) {
-                      // final items = List.of(array)..add(m);
-
+                    loaded: (array) {
+                      final items=List.of(array)..add(investItem);
                       return SliverPadding(
                         padding: EdgeInsets.symmetric(horizontal: 16).copyWith(
                           top: 8,
@@ -207,10 +214,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
                           }, childCount: items.length),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
+                                crossAxisCount: 4,
                                 mainAxisSpacing: 16,
-                                crossAxisSpacing: 16,
-                                childAspectRatio: 163 / 104,
+                                // crossAxisSpacing: 16,
+                                childAspectRatio: 0.8,
                               ),
                         ),
                       );
@@ -287,11 +294,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
     if (item.actionType == CatalogActionType.inner) {
       if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||
           uri.host.isEmpty) {
-        uri= uri.replace(
-          queryParameters: {
-            "title":item.title
-          }
-        );
+        uri = uri.replace(queryParameters: {"title": item.title});
         context.push(uri.toString());
       } else {
         if (item.authRequired) {

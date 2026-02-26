@@ -61,11 +61,10 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   ) async {
     if (state is PaymentDataState && paymentId != null) {
       emit(
-        state.map(
+        state.maybeMap(
           dataState:
               (data) => data.copyWith(isPayLoading: true, navState: null),
-          loadingState: (st) => st,
-          errorState: (st) => st,
+          orElse: () => state,
         ),
       );
       try {

@@ -195,6 +195,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Soon'**
   String get catalogItemStatusSoon;
+
+  /// No description provided for @new_version_available.
+  ///
+  /// In en, this message translates to:
+  /// **'A new version is available'**
+  String get new_version_available;
+
+  /// No description provided for @new_features_and_security.
+  ///
+  /// In en, this message translates to:
+  /// **'New features are available and security has been improved. We recommend updating the app.'**
+  String get new_features_and_security;
+
+  /// No description provided for @update_app_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Update App'**
+  String get update_app_now;
+
+  /// No description provided for @update_app_later.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Later'**
+  String get update_app_later;
 }
 
 class _AppLocalizationsDelegate

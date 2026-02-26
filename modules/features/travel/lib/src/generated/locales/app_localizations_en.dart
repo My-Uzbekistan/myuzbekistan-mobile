@@ -288,4 +288,47 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Soon';
+
+  @override
+  String get investment_in_future => 'Investment in the future';
+
+  @override
+  String get investment_search_title => 'Search';
+
+  @override
+  String get investments_category_title => 'New buildings';
+
+  @override
+  String investment_amount(Object amount, String currency) {
+    String _temp0 = intl.Intl.selectLogic(currency, {
+      'UZS': 'from $amount UZS',
+      'USD': 'from $amount USD',
+      'other': '$amount',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get investment_page_sort_ask => 'Lowest price';
+
+  @override
+  String get investment_page_sort_desk => 'Highest price';
+
+  @override
+  String get investment_page_sort_popular => 'Popular';
+
+  @override
+  String get investment_page_sort => 'Sorting';
+
+  @override
+  String get investment_page_sort_price => 'Currency';
+
+  @override
+  String get investment_page_sort_title => 'Filter';
+
+  @override
+  String get investment_search_page_initial => 'Enter search query...';
+
+  @override
+  String get action_cancel => 'Cancel';
 }

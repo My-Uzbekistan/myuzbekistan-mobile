@@ -100,6 +100,8 @@ class MainPageContent extends Equatable {
   String? get contentAddress => (address ?? region);
 
   double? get distanceKm => distance != null ? distance! / 1000 : null;
+  bool get hasPrice => (price ?? 0) > 0 || (priceInDollar ?? 0) > 0;
+
 
   /// **copyWith funksiyasi**
   MainPageContent copyWith({

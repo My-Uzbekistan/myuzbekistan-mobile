@@ -47,19 +47,19 @@ mixin FeatureMoreRouter {
           ),
       // builder: (context, state) => SelectLangPage(),
     ),
-    GoRoute(
-      path: AppNavPath.more.forceUpdate.path,
-      name: AppNavPath.more.forceUpdate.name,
-      pageBuilder:
-          (context, state) => buildSlideTransitionPage(
-            child: ForceUpdatePage(
-              appStoreLink: state.uri.queryParameters["appStoreLink"]!,
-            ),
-            context: context,
-            state: state,
-            slideAlign: SlideAlign.vertical
-          ),
-    ),
+    // GoRoute(
+    //   path: AppNavPath.more.forceUpdate.path,
+    //   name: AppNavPath.more.forceUpdate.name,
+    //   pageBuilder:
+    //       (context, state) => buildSlideTransitionPage(
+    //         child: ForceUpdatePage(
+    //           appStoreLink: state.uri.queryParameters["appStoreLink"]!,
+    //         ),
+    //         context: context,
+    //         state: state,
+    //         slideAlign: SlideAlign.vertical
+    //       ),
+    // ),
     GoRoute(
       path: AppNavPath.more.emergencyContacts.path,
       name: AppNavPath.more.emergencyContacts.name,

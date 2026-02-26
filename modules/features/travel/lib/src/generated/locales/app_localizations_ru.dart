@@ -291,4 +291,47 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Скоро';
+
+  @override
+  String get investment_in_future => 'Инвестиция в будущее';
+
+  @override
+  String get investment_search_title => 'Что ищете?';
+
+  @override
+  String get investments_category_title => 'Новостройки';
+
+  @override
+  String investment_amount(Object amount, String currency) {
+    String _temp0 = intl.Intl.selectLogic(currency, {
+      'UZS': 'от $amount сум',
+      'USD': 'от $amount USD',
+      'other': '$amount',
+    });
+    return '$_temp0';
+  }
+
+  @override
+  String get investment_page_sort_ask => 'Сначала дешевле';
+
+  @override
+  String get investment_page_sort_desk => 'Сначала дороже';
+
+  @override
+  String get investment_page_sort_popular => 'Популярное';
+
+  @override
+  String get investment_page_sort => 'Сортировка';
+
+  @override
+  String get investment_page_sort_price => 'Валюта';
+
+  @override
+  String get investment_page_sort_title => 'Фильтр';
+
+  @override
+  String get investment_search_page_initial => 'Введите запрос для поиска...';
+
+  @override
+  String get action_cancel => 'Отмена';
 }

@@ -46,6 +46,7 @@ class NotificationItemDto {
       image: image,
       publishAt: publishAt,
       isSeen: isSeen ?? true,
+      actionLink: actionLink
     );
   }
 }

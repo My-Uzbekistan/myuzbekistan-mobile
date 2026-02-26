@@ -222,7 +222,7 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get licenses => 'Litsenziyalar';
 
   @override
-  String get pin_code_create_title => 'Kirish ko\'zidini yaratish';
+  String get pin_code_create_title => 'Kirish ko\'didini yaratish';
 
   @override
   String get pin_code_repeat => 'Kodni takrorlang';

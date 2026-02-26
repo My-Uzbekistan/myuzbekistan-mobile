@@ -19,7 +19,9 @@ abstract interface class Repository {
     required int categoryId,
     required int page,
     required int pageSize,
+     int? regionId,
     String? search,
+    Map<String, String>? sort,
   });
 
   Future<ContentDetail> loadContentDetail({required int contentId});
@@ -60,6 +62,7 @@ abstract interface class Repository {
   Future<dynamic> setFirebaseToken({required String token});
 
   Future<List<NotificationItem>> getNotifications();
+  Future<int> getNotificationUnreadCount();
 
   Future<NotificationItem> getNotificationById({required int id});
 

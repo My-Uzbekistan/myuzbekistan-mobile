@@ -51,10 +51,10 @@ class SelectRegionPage extends HookWidget {
             return SettingsCell(
               text: region.name ?? "",
               onTap: () {
-                if (selectedId.value != region.id) {
+                // if (selectedId.value != region.id) {
                   selectedId.value = region.id;
-                  context.pop(region.id);
-                }
+                  context.pop(region);
+                // }
               },
               trailing: AppCheck(isChecked: selectedId.value == region.id),
             );

@@ -84,7 +84,21 @@
   "catalogCottages": "Дачи",
   "catalogInsurance": "Страховка",
   "catalogItemStatusNew": "Новое",
-  "catalogItemStatusSoon": "Скоро"
+  "catalogItemStatusSoon": "Скоро",
+  "investment_in_future": "Инвестиция в будущее",
+  "investment_search_title": "Что ищете?",
+  "investments_category_title": "Новостройки",
+  "investment_amount": "{currency, select, UZS{от {amount} сум} USD{от {amount} USD} other{{amount}}}",
+  "investment_page_sort_ask": "Сначала дешевле",
+  "investment_page_sort_desk": "Сначала дороже",
+  "investment_page_sort_popular": "Популярное",
+  "investment_page_sort": "Сортировка",
+  "investment_page_sort_price": "Валюта",
+  "investment_page_sort_title": "Фильтр",
+  "investment_search_page_initial": "Введите запрос для поиска...",
+
+  "action_cancel": "Отмена"
+
 
 
 

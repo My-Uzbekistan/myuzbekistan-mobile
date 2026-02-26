@@ -84,6 +84,18 @@
   "catalogInsurance": "Insurance",
 
   "catalogItemStatusNew": "New",
-  "catalogItemStatusSoon": "Soon"
+  "catalogItemStatusSoon": "Soon",
 
+  "investment_in_future": "Investment in the future",
+  "investment_search_title": "Search",
+  "investments_category_title": "New buildings",
+  "investment_amount": "{currency, select, UZS{from {amount} UZS} USD{from {amount} USD} other{{amount}}}",
+  "investment_page_sort_ask": "Lowest price",
+  "investment_page_sort_desk": "Highest price",
+  "investment_page_sort_popular": "Popular",
+  "investment_page_sort": "Sorting",
+  "investment_page_sort_price": "Currency",
+  "investment_page_sort_title": "Filter",
+  "investment_search_page_initial": "Enter search query...",
+  "action_cancel": "Cancel"
 }

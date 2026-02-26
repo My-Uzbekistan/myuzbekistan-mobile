@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
+import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
 
 class ShellPageWrapper extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
@@ -50,36 +51,38 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
   @override
   Widget build(BuildContext context) {
     // useAutomaticKeepAlive(wantKeepAlive: true);
-    return Scaffold(
-        resizeToAvoidBottomInset: true,
-        extendBody: true,
-        body: widget.navigationShell,
-        bottomNavigationBar: CustomNavigationBar(
-          centerDotted: true,
-          currentIndex: widget.navigationShell.currentIndex,
-          onTap: (index) => _goBranch(index),
-          onTapCenterDotted: () {
-            context.finance.pushQrCoderReaderPage();
-          },
-          items: [
-            CustomTabItem(
-              label: context.localizations!.nav_home,
-              icon: Assets.svgTabIconHome.toSvgImage(height: 24, width: 24),
-            ),
-            CustomTabItem(
-              label: context.localizations!.nav_payment,
-              icon: Assets.svgTabIconFinance.toSvgImage(height: 24, width: 24),
-            ),
-            CustomTabItem(
-              label: context.localizations!.nav_services,
-              icon: Assets.svgTabIconCatalog.toSvgImage(height: 24, width: 24),
-            ),
-            CustomTabItem(
-              label: context.localizations!.nav_more,
-              icon: Assets.svgTabIconMore.toSvgImage(height: 24, width: 24),
-            )
-          ],
-        ));
+    return MyUpgradeAlert(
+      child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          extendBody: true,
+          body: widget.navigationShell,
+          bottomNavigationBar: CustomNavigationBar(
+            centerDotted: true,
+            currentIndex: widget.navigationShell.currentIndex,
+            onTap: (index) => _goBranch(index),
+            onTapCenterDotted: () {
+              context.finance.pushQrCoderReaderPage();
+            },
+            items: [
+              CustomTabItem(
+                label: context.localizations!.nav_home,
+                icon: Assets.svgTabIconHome.toSvgImage(height: 24, width: 24),
+              ),
+              CustomTabItem(
+                label: context.localizations!.nav_payment,
+                icon: Assets.svgTabIconFinance.toSvgImage(height: 24, width: 24),
+              ),
+              CustomTabItem(
+                label: context.localizations!.nav_services,
+                icon: Assets.svgTabIconCatalog.toSvgImage(height: 24, width: 24),
+              ),
+              CustomTabItem(
+                label: context.localizations!.nav_more,
+                icon: Assets.svgTabIconMore.toSvgImage(height: 24, width: 24),
+              )
+            ],
+          )),
+    );
   }
 
   List<BottomNavigationBarItem> bottomNavigationBarItems({

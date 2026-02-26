@@ -33,7 +33,9 @@ abstract class RestService {
     @Path("categoryId") required int categoryId,
     @Query("page") required int page,
     @Query("pageSize") required int pageSize,
+    @Query("regionId")  int? regionId,
     @Query("search") String? search,
+    @Queries() Map<String, String>? sort,
   });
 
   @GET("favorites")
@@ -97,10 +99,14 @@ abstract class RestService {
   @GET("notifications")
   Future<ItemsResponse<NotificationItemDto>> getNotifications();
 
+  @GET("notifications/unread-count")
+  Future<int> getNotificationUnreadCount();
+
   @GET("notifications/{id}")
   Future<NotificationItemDto> getNotificationById(@Path("id") int id);
 
-  @POST("notifications/{id}/seen")
+
+  @POST("notifications/mark-seen/{id}")
   Future<dynamic> seenNotification(@Path("id") int id);
 
   @GET("reviews/content/{contentId}")
@@ -112,6 +118,6 @@ abstract class RestService {
   @POST("reviews")
   Future<dynamic> addReview(@Body() Map<String, dynamic> body);
 
-  @GET("catalogs")
+  @GET("catalog-snapshots")
   Future<List<CatalogDto>> getCatalog();
 }

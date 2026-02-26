@@ -76,7 +76,9 @@ class RepositoryImp implements Repository {
     required int categoryId,
     required int page,
     required int pageSize,
+    int? regionId,
     String? search,
+    Map<String, String>? sort,
   }) {
     return _restService
         .loadContentsByCategory(
@@ -84,6 +86,8 @@ class RepositoryImp implements Repository {
           page: page,
           pageSize: pageSize,
           search: search,
+          regionId: regionId,
+          sort: sort,
         )
         .call((data) => data.map((e) => e.toDomain()).toList());
   }
@@ -236,6 +240,11 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<int> getNotificationUnreadCount() {
+    return _restService.getNotificationUnreadCount();
+  }
+
+  @override
   Future addReview({
     required int contentId,
     required String comment,
@@ -278,8 +287,9 @@ class RepositoryImp implements Repository {
 
   @override
   Future<List<CatalogItemModel>> getCatalog() async {
-
-    return _restService.getCatalog().call((data)=>data.map((e) => e.toDomain()).toList());
+    return _restService.getCatalog().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
     await Future.delayed(Duration(seconds: 2));
     return Future.value([
       CatalogItemModel(

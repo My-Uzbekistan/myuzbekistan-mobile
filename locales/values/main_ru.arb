@@ -16,6 +16,9 @@
   "catalogCottages": "Дачи",
   "catalogInsurance": "Страховка",
   "catalogItemStatusNew": "Новое",
-  "catalogItemStatusSoon": "Скоро"
-
+  "catalogItemStatusSoon": "Скоро",
+  "new_version_available": "Доступна новая версия",
+  "new_features_and_security": "Доступны новые функции и усилена безопасность. Рекомендуем обновить приложение",
+  "update_app_now": "Обновить приложение",
+  "update_app_later": "Обновить позже"
 }

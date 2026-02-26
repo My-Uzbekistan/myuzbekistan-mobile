@@ -2,6 +2,8 @@
 
 part of 'finance_api_service.dart';
 
+// dart format off
+
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
@@ -377,3 +379,5 @@ class _FinanceApiService implements FinanceApiService {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
+
+// dart format on

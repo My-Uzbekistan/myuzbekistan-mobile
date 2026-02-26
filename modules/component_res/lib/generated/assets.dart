@@ -55,6 +55,7 @@ class Assets {
   static const String svgBoltFill = 'assets/svg/bolt_fill.svg';
   static const String svgCrossCaseFill = 'assets/svg/cross_case_fill.svg';
   static const String svgDefaultCreditCard = 'assets/svg/default_credit_card.svg';
+  static const String svgFilterConus = 'assets/svg/filter_conus.svg';
   static const String svgFiscalIcon = 'assets/svg/fiscal_icon.svg';
   static const String svgFlameFill = 'assets/svg/flame_fill.svg';
   static const String svgGoogleLogo = 'assets/svg/google_logo.svg';
@@ -83,6 +84,7 @@ class Assets {
   static const String svgNotificationIcon = 'assets/svg/notification_icon.svg';
   static const String svgOutlineHeard = 'assets/svg/outline_heard.svg';
   static const String svgPinLocationLine = 'assets/svg/pin_location_line.svg';
+  static const String svgPinSvg = 'assets/svg/pin_svg.svg';
   static const String svgRoundedCloseIcon = 'assets/svg/rounded_close_icon.svg';
   static const String svgScanIdentification = 'assets/svg/scan_identification.svg';
   static const String svgSearchLine = 'assets/svg/search_line.svg';

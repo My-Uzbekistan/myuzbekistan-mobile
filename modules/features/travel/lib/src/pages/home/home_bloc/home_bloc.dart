@@ -13,6 +13,8 @@ part 'home_bloc_event.dart';
 
 part 'home_bloc_state.dart';
 
+ Region? selectedRegion;
+ List<Region> globalRegions = [];
 @injectable
 class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   final Repository _repository;
@@ -133,10 +135,11 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   }
 
   void _changeRegion(_ChangeRegion event, Emitter<HomeBlocState> emit) {
+    selectedRegion= dataState.regions.firstWhere(
+          (e) => e.id == event.regionId,
+    );
     dataState = dataState.copyWith(
-      selectedRegion: dataState.regions.firstWhere(
-            (e) => e.id == event.regionId,
-      ),
+      selectedRegion:selectedRegion,
       loadingContents: true,
     );
     emit(dataState);
@@ -152,6 +155,8 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       ]);
       final regions = result[0] as List<Region>;
       final categories = result[1] as List<Categories>;
+      globalRegions=regions;
+      selectedRegion= regions.firstOrNull;
       dataState = dataState.copyWith(
         regions: regions,
         selectedRegion: regions.firstOrNull,

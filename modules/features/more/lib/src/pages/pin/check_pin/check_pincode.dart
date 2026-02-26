@@ -24,13 +24,14 @@ class _CheckPinCodePageState extends State<CheckPinCodePage> {
   @override
   void initState() {
     pinCodeBloc = context.read();
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
+
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((t) {
       Future.delayed(const Duration(milliseconds: 200), () {
         authBiometric();
       });
     });
-
-    super.initState();
   }
 
   void authBiometric() {

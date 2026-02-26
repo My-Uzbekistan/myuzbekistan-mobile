@@ -30,8 +30,8 @@ extension GetItInjectableX on _i174.GetIt {
     );
     await _i437.DataPackageModule().init(gh);
     await _i494.DomainPackageModule().init(gh);
-    await _i734.TravelPackageModule().init(gh);
     await _i707.MorePackageModule().init(gh);
+    await _i734.TravelPackageModule().init(gh);
     await _i587.FinancePackageModule().init(gh);
     return this;
   }

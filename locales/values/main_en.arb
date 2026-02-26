@@ -16,6 +16,9 @@
   "catalogInsurance": "Insurance",
 
   "catalogItemStatusNew": "New",
-  "catalogItemStatusSoon": "Soon"
-
+  "catalogItemStatusSoon": "Soon",
+  "new_version_available": "A new version is available",
+  "new_features_and_security": "New features are available and security has been improved. We recommend updating the app.",
+  "update_app_now": "Update App",
+  "update_app_later": "Update Later"
 }

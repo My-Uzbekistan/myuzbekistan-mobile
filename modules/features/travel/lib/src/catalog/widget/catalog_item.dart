@@ -11,90 +11,75 @@ class CatalogItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor =
-        item.status != CatalogStatus.upcoming
-            ? Colors.white
-            : context.appColors.textIconColor.secondary;
-    final bgColor =
-        item.status != CatalogStatus.upcoming
-            ? item.color
-            : context.appColors.fill.quaternary;
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: bgColor,
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                spacing: 8,
-                children: [
-                  Container(
-                    height: 40,
-                    width: 40,
-                    padding: EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: item.color,
-                    ),
-                    child: ExtendedImage.network(
-                      item.icon,
-                      color: Colors.white,
-                      colorBlendMode: BlendMode.srcIn,
-                      loadStateChanged: (state) {
-                        switch (state.extendedImageLoadState) {
-                          case LoadState.completed:
-                            return null;
-                          default:
-                            return SizedBox();
-                        }
-                      },
-                    ),
-                  ),
-                  Flexible(
-                    child: Text(
-                      item.title,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ).labelMd(color: textColor),
-                  ),
-                ],
-              ),
-            ),
+      child:
+      Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: 8,
 
-            if (item.status != CatalogStatus.active)
-              Positioned(
-                right: 12,
-                top: 12,
+        children: [
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 1.5, horizontal: 4),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(56),
-                    color:
-                        item.status == CatalogStatus.newService
-                            ? Color(0xffFFD7F0)
-                            : context.appColors.fill.tertiary,
-                  ),
-                  child: Text(
-                    item.status == CatalogStatus.newService
-                        ? context.localization.catalogItemStatusNew
-                        : context.localization.catalogItemStatusSoon,
-                  ).bodyXXsm(
-                    color:
-                        item.status == CatalogStatus.newService
-                            ? Colors.black
-                            : context.appColors.textIconColor.secondary,
+                  height: 64,
+                  width: 64,
+                  color: Color(0xff28bf5a),
+                  child: ExtendedImage.network(
+                    item.icon,
+                    fit: BoxFit.cover,
+                    loadStateChanged: (state) {
+                      switch (state.extendedImageLoadState) {
+                        case LoadState.completed:
+                          return null;
+                        default:
+                          return SizedBox();
+                      }
+                    },
                   ),
                 ),
               ),
-          ],
-        ),
+              if (item.status != CatalogStatus.active)
+                Positioned(
+                  right: -10,
+                  top: -4,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 1.5, horizontal: 4),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(56),
+                      color:
+                      item.status == CatalogStatus.newService
+                          ? context.appColors.colors.red
+                          : context.appColors.textIconColor.primary,
+                    ),
+                    child: Text(
+                      item.status == CatalogStatus.newService
+                          ? context.localization.catalogItemStatusNew
+                          : context.localization.catalogItemStatusSoon,
+                    ).bodyXXsm(
+                      color: item.status == CatalogStatus.newService ?Colors.white:context.appColors.textIconColor.oposite,
+                    ),
+                  ),
+                ),
+
+            ]
+          ),
+          Flexible(
+            child:
+                Text(
+                  item.title,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ).bodyXXsm(
+
+                ),
+          ),
+        ],
       ),
     );
   }

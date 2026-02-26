@@ -22,6 +22,15 @@ class _FeatureTravelNavPath {
   AppNavPath get travelCatalogInvestments =>
       _NavPathImpl(name: 'feature_travel_investments', path: '/catalog/investments');
 
+  AppNavPath get travelCatalogInvestmentsSearch =>
+      _NavPathImpl(name: 'feature_travel_investments_search', path: '/catalog/investments/search');
+  AppNavPath get travelCatalogInvestmentsSort =>
+      _NavPathImpl(name: 'feature_travel_investments_sort', path: 'sort');
+  AppNavPath get travelCatalogInvestmentsPriceSort =>
+      _NavPathImpl(name: 'feature_travel_investments_price', path: 'price');
+  AppNavPath get travelCatalogInvestmentsSortType =>
+      _NavPathImpl(name: 'feature_travel_investments_type', path: 'type');
+
 
   ///notifications?notificationId=123
   AppNavPath get notifications =>

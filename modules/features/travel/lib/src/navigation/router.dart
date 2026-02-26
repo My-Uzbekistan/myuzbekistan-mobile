@@ -5,6 +5,11 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/catalog/bloc/catalog_bloc.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/pages/catalog_investments/bloc/investments_bloc.dart';
+import 'package:travel/src/pages/catalog_investments/invest_currencs_type.dart';
+import 'package:travel/src/pages/catalog_investments/pages/invest_sort_curency.dart';
+import 'package:travel/src/pages/catalog_investments/pages/search_page/invest_search_page.dart';
+import 'package:travel/src/pages/catalog_investments/sort_cubit/sort_cubit.dart';
 import 'package:travel/src/pages/content_by_category/bloc/contents_by_category_bloc.dart';
 import 'package:travel/src/pages/detail/detail_page.dart';
 import 'package:travel/src/pages/detail/pages/all_facilities.dart';
@@ -19,6 +24,7 @@ import 'package:travel/src/pages/notifications/page/notification_detail.dart';
 import '../catalog/catalog.dart';
 import '../di/injection.dart';
 import '../pages/catalog_investments/CatalogInvestmentsPage.dart';
+import '../pages/catalog_investments/pages/sort_main_page.dart';
 import '../pages/content_by_category/content_by_categories_page.dart';
 import '../pages/detail/detail_bloc/detail_bloc.dart';
 import '../pages/detail/pages/image_preview_page.dart';
@@ -27,6 +33,8 @@ import '../pages/home/page/home_page.dart';
 import '../pages/home/page/select_region/select_region_page.dart';
 
 mixin FeatureTravelRouter {
+  static final _investNavigatorKey = GlobalKey<NavigatorState>();
+
   static final routes = [
     GoRoute(
       path: AppNavPath.travel.travelSelectRegion.path,
@@ -212,16 +220,156 @@ mixin FeatureTravelRouter {
       name: AppNavPath.travel.travelCatalogInvestments.name,
       pageBuilder: (context, state) {
         return buildSlideTransitionPage(
-          child: BlocProvider(
-            create:
-                (context) =>
-            getIt<ContentByCategoryBloc>(),
+          child: MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (context) => getIt<InvestmentsBloc>()),
+              BlocProvider(create: (context) => InvestSortCubit()),
+            ],
             child: CatalogInvestmentsPage(
               title: state.uri.queryParameters["title"].orEmpty(),
             ),
           ),
           context: context,
           state: state,
+        );
+      },
+
+      routes: [
+        GoRoute(
+          path: AppNavPath.travel.travelCatalogInvestmentsSort.path,
+          name: AppNavPath.travel.travelCatalogInvestmentsSort.name,
+          pageBuilder:
+              (context, state) => buildSlideTransitionPage(
+            child: InvestSortMainPage(
+              cubit: state.extra as InvestSortCubit,
+            ),
+            context: context,
+            state: state,
+          ),
+        ),
+        GoRoute(
+          path: AppNavPath.travel.travelCatalogInvestmentsPriceSort.path,
+          name: AppNavPath.travel.travelCatalogInvestmentsPriceSort.name,
+          pageBuilder:
+              (context, state) => buildSlideTransitionPage(
+            child: InvestPriceSortPage(
+              cubit: state.extra as InvestSortCubit,
+            ),
+            context: context,
+            state: state,
+          ),
+        ),
+        GoRoute(
+          path: AppNavPath.travel.travelCatalogInvestmentsSortType.path,
+          name: AppNavPath.travel.travelCatalogInvestmentsSortType.name,
+          pageBuilder:
+              (context, state) => buildSlideTransitionPage(
+            child: InvestSortTypePage(
+              cubit: state.extra as InvestSortCubit,
+            ),
+            context: context,
+            state: state,
+          ),
+        ),
+      ],
+    ),
+    // ShellRoute(
+    //   navigatorKey: _investNavigatorKey,
+    //
+    //   routes: [
+    //     GoRoute(
+    //       path: AppNavPath.travel.travelCatalogInvestments.path,
+    //       name: AppNavPath.travel.travelCatalogInvestments.name,
+    //       parentNavigatorKey: _investNavigatorKey,
+    //       pageBuilder: (context, state) {
+    //         return buildSlideTransitionPage(
+    //           child: CatalogInvestmentsPage(
+    //             title: state.uri.queryParameters["title"].orEmpty(),
+    //           ),
+    //           context: context,
+    //           state: state,
+    //         );
+    //       },
+    //
+    //       routes: [
+    //         GoRoute(
+    //           path: AppNavPath.travel.travelCatalogInvestmentsSort.path,
+    //           name: AppNavPath.travel.travelCatalogInvestmentsSort.name,
+    //           parentNavigatorKey: _investNavigatorKey,
+    //           pageBuilder:
+    //               (context, state) => buildSlideTransitionPage(
+    //                 child: InvestSortMainPage(),
+    //                 context: context,
+    //                 state: state,
+    //               ),
+    //         ),
+    //         GoRoute(
+    //           path: AppNavPath.travel.travelCatalogInvestmentsPriceSort.path,
+    //           name: AppNavPath.travel.travelCatalogInvestmentsPriceSort.name,
+    //           parentNavigatorKey: _investNavigatorKey,
+    //           pageBuilder:
+    //               (context, state) => buildSlideTransitionPage(
+    //                 child: InvestPriceSortPage(),
+    //                 context: context,
+    //                 state: state,
+    //               ),
+    //         ),
+    //         GoRoute(
+    //           path: AppNavPath.travel.travelCatalogInvestmentsSortType.path,
+    //           name: AppNavPath.travel.travelCatalogInvestmentsSortType.name,
+    //           parentNavigatorKey: _investNavigatorKey,
+    //           pageBuilder:
+    //               (context, state) => buildSlideTransitionPage(
+    //                 child: InvestSortTypePage(),
+    //                 context: context,
+    //                 state: state,
+    //               ),
+    //         ),
+    //       ],
+    //     ),
+    //   ],
+    //
+    //   builder: (context, state, child) {
+    //     return MultiBlocProvider(
+    //       providers: [
+    //         BlocProvider(create: (context) => getIt<InvestmentsBloc>()),
+    //         BlocProvider(create: (context) => InvestSortCubit()),
+    //       ],
+    //       child: child,
+    //     );
+    //   },
+    //   // pageBuilder: (context, state, child) {
+    //   //   return buildSlideTransitionPage(
+    //   //     context: context,
+    //   //     state: state,
+    //   //     child: MultiBlocProvider(
+    //   //       providers: [
+    //   //         BlocProvider(create: (context) => getIt<InvestmentsBloc>()),
+    //   //         BlocProvider(create: (context) => InvestSortCubit()),
+    //   //       ],
+    //   //       child: child,
+    //   //     ),
+    //   //   );
+    //   // },
+    // ),
+    GoRoute(
+      path: AppNavPath.travel.travelCatalogInvestmentsSearch.path,
+      name: AppNavPath.travel.travelCatalogInvestmentsSearch.name,
+      // builder: (context,state){
+      //   final  curType=  InvestCurrencyType.type(state.uri.queryParameters["currencyType"]??"");
+      //   return InvestSearchPage(
+      //     currencyType: curType ,
+      //   );
+      // },
+      pageBuilder: (context, state) {
+        final curType = InvestCurrencyType.type(
+          state.uri.queryParameters["currencyType"] ?? "",
+        );
+        return buildSlideTransitionPage(
+          child: InvestSearchPage(currencyType: curType),
+          state: state,
+          context: context,
+          slideAlign: SlideAlign.vertical,
         );
       },
     ),

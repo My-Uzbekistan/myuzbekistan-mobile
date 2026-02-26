@@ -9,6 +9,7 @@ import '../button/rounded_button.dart';
 
 class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final Widget? widget;
   final Widget? leading;
   final List<Widget>? actions;
   final bool? centerTitle;
@@ -17,6 +18,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   const GradientAppBar(
       {super.key,
       this.title,
+        this.widget,
       this.leading,
       this.actions,
       this.centerTitle,
@@ -26,7 +28,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final leadingWidget = Container(
       padding: const EdgeInsets.only(top: 10),
-      alignment: Alignment.topRight,
+      alignment: Alignment.centerRight,
       child: leading ??
           (automaticallyImplyLeading
               ? RoundedButton.arrowLeft(
@@ -49,7 +51,8 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       forceMaterialTransparency: true,
       shadowColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
-      title: title != null ? Text(title!) : null,
+
+      title: title != null ? Text(title!) : widget,
       flexibleSpace: const AppGradientMask(),
       actionsPadding: const EdgeInsets.only(right: 16, top: 10),
       actions: actions,

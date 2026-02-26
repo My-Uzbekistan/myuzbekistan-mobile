@@ -9,6 +9,8 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
+import 'package:uzbekistan_travel/upgrader/mock_upgrader.dart';
+import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
 import 'di/injection.dart';
 import 'firebase_options.dart';
 import 'generated/locale/app_localizations.dart';
@@ -40,25 +42,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
   @override
   void initState() {
-
-
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
-      Future.delayed(const Duration(milliseconds: 2000), () {
-        NotificationService().init();
-      });
-      VersionChecker.check(context, canUpdate: (versionStatus) {
-    if( versionStatus.canUpdate) {
-          appRootNavigatorKey.currentContext?.pushNamed(
-              AppNavPath.more.forceUpdate.name,
-              queryParameters: {"appStoreLink": versionStatus.appStoreLink});
-        }
-      });
-    });
-
     GlobalHandler().setRefreshListener(() async {
       appRootNavigatorKey.currentContext!.goNamed("invisiblePage");
     });
@@ -68,6 +53,13 @@ class _MyAppState extends State<MyApp> {
           queryParameters: {"slideAlign": "vertical"});
     });
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((t) {
+      Future.delayed(const Duration(milliseconds: 2000), () {
+        NotificationService().init();
+      });
+    });
+
+    global.globalInit();
   }
 
   void openNotification() {}
@@ -84,6 +76,9 @@ class _MyAppState extends State<MyApp> {
         providers: [
           BlocProvider(
             create: (context) => getIt<AppSettingsBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<NotificationCountCubit>(),
           ),
         ],
         child: BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(

@@ -70,7 +70,6 @@
   "map_open_in": "Quyidagi orqali ochish",
   "workingHours": "Ish vaqti",
   "writeReviewInFewSentences": "Bir necha jumlada fikr bildiring",
-
   "catalogMyEsim": "My eSIM",
   "catalogTravelQuiz": "Travel Quiz",
   "catalogAviaTickets": "Aviabiletlar",
@@ -81,6 +80,17 @@
   "catalogCottages": "Dachalar",
   "catalogInsurance": "Sug‘urta",
   "catalogItemStatusNew": "Yangi",
-  "catalogItemStatusSoon": "Tez orada"
-
+  "catalogItemStatusSoon": "Tez orada",
+  "investment_in_future": "Kelajakka investitsiya",
+  "investment_search_title": "Nimani qidiryapsiz?",
+  "investments_category_title": "Yangi qurilgan uylar",
+  "investment_amount": "{currency, select, UZS{{amount} so'm dan} USD{{amount} USD dan} other{{amount}}}",
+  "investment_page_sort_ask": "Avval arzon",
+  "investment_page_sort_desk": "Avval qimmat",
+  "investment_page_sort_popular": "Mashhur",
+  "investment_page_sort": "Saralash",
+  "investment_page_sort_price": "Valyuta",
+  "investment_page_sort_title": "Filtr",
+  "investment_search_page_initial": "Qidiruv so‘rovini kiriting...",
+  "action_cancel": "Yopish"
 }
