@@ -290,13 +290,13 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   String get catalogItemStatusSoon => 'Tez orada';
 
   @override
-  String get investment_in_future => 'Kelajakka investitsiya';
-
-  @override
   String get investment_search_title => 'Nimani qidiryapsiz?';
 
   @override
-  String get investments_category_title => 'Yangi qurilgan uylar';
+  String get investment_top_contents_title => 'Tavfsiya etamiz';
+
+  @override
+  String get investments_category_title => 'Barchasi';
 
   @override
   String investment_amount(Object amount, String currency) {

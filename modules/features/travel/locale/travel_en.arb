@@ -86,9 +86,9 @@
   "catalogItemStatusNew": "New",
   "catalogItemStatusSoon": "Soon",
 
-  "investment_in_future": "Investment in the future",
+  "investment_top_contents_title": "Recommended",
   "investment_search_title": "Search",
-  "investments_category_title": "New buildings",
+  "investments_category_title": "All",
   "investment_amount": "{currency, select, UZS{from {amount} UZS} USD{from {amount} USD} other{{amount}}}",
   "investment_page_sort_ask": "Lowest price",
   "investment_page_sort_desk": "Highest price",

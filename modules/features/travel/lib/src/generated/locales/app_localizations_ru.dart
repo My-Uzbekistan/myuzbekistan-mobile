@@ -293,13 +293,13 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   String get catalogItemStatusSoon => 'Скоро';
 
   @override
-  String get investment_in_future => 'Инвестиция в будущее';
-
-  @override
   String get investment_search_title => 'Что ищете?';
 
   @override
-  String get investments_category_title => 'Новостройки';
+  String get investment_top_contents_title => 'Рекомендуем';
+
+  @override
+  String get investments_category_title => 'Все';
 
   @override
   String investment_amount(Object amount, String currency) {

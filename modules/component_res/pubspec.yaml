@@ -117,3 +117,10 @@ flutter:
     androidX: true
     androidPackage: com.example.component_res
     iosBundleIdentifier: com.example.componentRes
+flutter_assets_generator:
+  output_dir: generated/
+  output_filename: assets
+  class_name: Assets
+  auto_detection: true
+  style: robust
+  path_ignore: [ ]

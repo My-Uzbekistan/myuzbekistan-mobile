@@ -16,7 +16,6 @@ class SecurityStorageImpl implements SecurityStorage {
     final dynamic token = getAccessToken();
     if (token == null) return null;
     final jwt = JwtDecoder.decode(token);
-    debugPrint("jwt UserModel $jwt");
     final user = UserModel(
       name: jwt["userName"],
       email: jwt["name"],
@@ -37,7 +36,7 @@ class SecurityStorageImpl implements SecurityStorage {
 
   @override
   bool hasTokenExpire() {
-    return false;
+    return _box.get("expiresIn") != null;
   }
 
   @override
@@ -77,13 +76,21 @@ class SecurityStorageImpl implements SecurityStorage {
 
   @override
   DateTime? getTokenExpire() {
-    final secund = _box.get("expiresIn");
-    if (secund == null) return null;
-    final microsecondsSinceEpoch = secund * 1000;
+    final dynamic secondsRaw = _box.get("expiresIn");
+    if (secondsRaw == null) return null;
+
+    final int? seconds = secondsRaw is int
+        ? secondsRaw
+        : secondsRaw is num
+            ? secondsRaw.toInt()
+            : int.tryParse(secondsRaw.toString());
+    if (seconds == null) return null;
+
+    final int millisecondsSinceEpoch = seconds * 1000;
     return DateTime.fromMillisecondsSinceEpoch(
-      microsecondsSinceEpoch,
-      isUtc: false,
-    );
+      millisecondsSinceEpoch,
+      isUtc: true,
+    ).toLocal();
   }
 
   @override

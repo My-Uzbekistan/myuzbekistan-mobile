@@ -12,6 +12,7 @@ export 'src/components/badges/badges.dart';
 export 'src/components/price_category/price_category.dart';
 export 'src/components/input/search_input_field.dart';
 export 'src/components/input/app_input.dart';
+export 'src/components/input/formatters/phone_input_formatter.dart';
 export 'src/components/bounsing_tap/bounsing_tap.dart';
 export 'src/components/stars_badge/stars_badge.dart';
 export 'src/components/collapsed_container/simple_collapsed_container.dart';

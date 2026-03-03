@@ -21,12 +21,22 @@ EventTransformer<E> debounce<E>({Duration? duration}) {
 class InvestmentsBloc extends Bloc<InvestmentsEvent, InvestmentsState> {
   final Repository _repository;
   Timer? _timer;
-  final int categoryId = 110;
-  final int recommendedCategoryId = 111;
+
+  // var int? contentsId = 110;
+  //   // var int? topContentsId = 111;
+  int? contentsId;
+
+  int? topContentsId;
+
   SortType? _sortType;
   InvestCurrencyType _currencyType = InvestCurrencyType.uzs;
 
   InvestmentsBloc(this._repository) : super(InvestmentsState.loadingState()) {
+    on<_SetContentIdEvent>((event, emit) {
+
+      contentsId = event.contentsId;
+      topContentsId = event.topContentsCategoryId;
+    });
     on<_LoadDataEvent>(_loadDataEvent);
     on<_SortEvent>(
       _sortEvent,
@@ -43,14 +53,14 @@ class InvestmentsBloc extends Bloc<InvestmentsEvent, InvestmentsState> {
       _sortType = event.sortType;
       final result = await Future.wait([
         _repository.loadContentsByCategory(
-          categoryId: categoryId,
+          categoryId: contentsId ?? -1,
           page: 0,
           pageSize: 50,
           regionId: event.selectedRegion?.id,
           sort: event.sortType?.query,
         ),
         _repository.loadContentsByCategory(
-          categoryId: recommendedCategoryId,
+          categoryId: topContentsId ?? -1,
           page: 0,
           pageSize: 50,
           regionId: event.selectedRegion?.id,
@@ -88,7 +98,12 @@ class InvestmentsBloc extends Bloc<InvestmentsEvent, InvestmentsState> {
   _sortEvent(_SortEvent event, Emitter<InvestmentsState> emit) async {
     _currencyType = event.currencyType;
     if (event.sortType != _sortType) {
-      add(InvestmentsEvent.loadDataEvent(sortType: event.sortType,selectedRegion: event.selectedRegion));
+      add(
+        InvestmentsEvent.loadDataEvent(
+          sortType: event.sortType,
+          selectedRegion: event.selectedRegion,
+        ),
+      );
     } else {
       emit(
         state.maybeMap(

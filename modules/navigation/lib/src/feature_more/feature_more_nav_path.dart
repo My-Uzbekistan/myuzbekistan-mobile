@@ -41,6 +41,8 @@ class _FeatureMoreNavPath {
 
   AppNavPath get authPage =>
       _NavPathImpl(name: "feature_more_auth_page", path: "/authPage");
+  AppNavPath get authPhonePage =>
+      _NavPathImpl(name: "feature_more_auth_phone_page", path: "/authPhonePage");
 
   AppNavPath get pinCodePage =>
       _NavPathImpl(name: "feature_more_pin_code_page", path: "/pinCodePage");

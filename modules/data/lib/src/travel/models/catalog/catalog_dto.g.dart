@@ -7,7 +7,7 @@ part of 'catalog_dto.dart';
 // **************************************************************************
 
 CatalogDto _$CatalogDtoFromJson(Map<String, dynamic> json) => CatalogDto(
-  icon: json['icon'] as String,
+  icon: json['icon'] as String?,
   color: _$JsonConverterFromJson<String, Color>(
     json['color'],
     const HexColorConverter().fromJson,

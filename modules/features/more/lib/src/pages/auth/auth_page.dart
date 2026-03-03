@@ -106,6 +106,22 @@ class _AuthPageState extends State<AuthPage> {
                               spacing: 12,
                               children: [
                                 AppActionButton(
+                                  actionText: "Войти по номеру телефона",
+                                  iconColorFiltered: false,
+                                  icon: Assets.svgGoogleLogo.toSvgImage(),
+                                  isLoading: state is AuthGoogleLoadingState,
+                                  containerColor: Colors.white,
+                                  disableContainerColor: Colors.white,
+                                  contentColor: Colors.black,
+
+                                  type: ActionButtonType.secondary,
+                                  onPressed: () {
+                                    context.read<AuthBlock>().add(
+                                      AuthEvent.authByGoogle(),
+                                    );
+                                  },
+                                ),
+                                AppActionButton(
                                   actionText:
                                       context.localization.continueWithGoogle,
                                   iconColorFiltered: false,

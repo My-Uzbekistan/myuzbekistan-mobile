@@ -79,6 +79,12 @@
   "pinUpdated": "PIN code has been successfully updated.",
   "pincode_deleted": "PIN code deleted",
   "enter_code": "Enter code",
-  "authPrompt": "Please authenticate to access the application"
+  "authPrompt": "Please authenticate to access the application",
+  "auth_phone_page_title": "Enter your number",
+  "auth_phone_page_hint": "Phone number",
+  "action_continue": "Continue",
+  "accept_terms": "By clicking the button, you agree to the terms",
+
+  "terms": "Terms of the User Agreement"
 
 }

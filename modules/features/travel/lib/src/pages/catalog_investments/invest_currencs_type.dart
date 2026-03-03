@@ -19,11 +19,6 @@ enum InvestCurrencyType {
 
 }
 
-/*
-popular  = [sortby=popular,]
-ask=[sortby=price&order=asc]
-desk=[sortby=price&order=desc]
- */
 enum SortType { popular, ask, desk }
 
 

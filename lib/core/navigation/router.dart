@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:finance/finance.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:more/more.dart';
 import 'package:navigation/navigation.dart';
@@ -19,7 +20,7 @@ final FirebaseAnalyticsObserver observer =
     FirebaseAnalyticsObserver(analytics: analytics);
 final GoRouter routes = GoRouter(
     navigatorKey: appRootNavigatorKey,
-    debugLogDiagnostics: true,
+    debugLogDiagnostics: kDebugMode,
     redirect: (context, state) {
       if ([
         AppNavPath.finance.financeCards.name,
@@ -35,7 +36,7 @@ final GoRouter routes = GoRouter(
     },
     observers: [observer],
     initialLocation:
-    // AppNavPath.more.forceUpdate.path,
+    // AppNavPath.more.authPhonePage.path,
     "/splash",
     // initialLocation: "/experiment",
     routes: [

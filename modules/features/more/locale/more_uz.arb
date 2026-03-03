@@ -1,8 +1,6 @@
 {
-
   "language": "Ilova tili",
   "theme": "Dizayn mavzusi",
-
   "lanItem": "{lang, select, en{Inglizcha} ru{Ruscha} uz{O'zbekcha} other{} }",
   "themeModes": "{theme, select, system{Tizimli} light{Yorug'} dark{Qorong'i} other{}}",
   "guest": "Mehmon",
@@ -16,7 +14,6 @@
   "getStartedDescription": "Imkoniyatlardan to‘liq foydalanish uchun tizimga kiring va oʻzingiz yoqtirgan narsalarni ham saqlab oling",
   "continueWithGoogle": "Google orqali kirish",
   "continueWithApple": "Apple orqali kirish",
-
   "averageCheck": "O‘rtacha baxo",
   "search": "Qidiruv",
   "rating": "Reyting",
@@ -44,11 +41,9 @@
   "logout": "Ilovadan chiqish",
   "logout_confirm_title": "Ilovadan chiqish?",
   "logoutConfirmation": "Ilovadan chiqishni xohlaysizmi",
-
   "exit": "Chiqish",
   "deleteAccountConfirmation": "Sizning hisobingiz va barcha ma’lumotlaringiz, jumladan saqlangan joylar va bank kartalari o‘chiriladi.",
   "delete_account_confirm_title": "Hisobni o‘chirish?",
-
   "deleteAccount": "Accountni o'chirish",
   "cancel": "Bekor qilish",
   "delete": "O'chirish",
@@ -81,6 +76,10 @@
   "pinUpdated": "PIN kodi muvaffaqiyatli yangilandi.",
   "pincode_deleted": "PinCode o‘chirildi",
   "enter_code": "Kodni kiriting",
-  "authPrompt": "Ilovaga kirish uchun autentifikatsiyadan o‘ting"
-
+  "authPrompt": "Ilovaga kirish uchun autentifikatsiyadan o‘ting",
+  "auth_phone_page_title": "Raqamingizni kiriting",
+  "auth_phone_page_hint": "Telefon raqami",
+  "action_continue": "Davom etish",
+  "accept_terms": "Tugmani bosish orqali siz terms  rozilik bildirasiz",
+  "terms": "Foydalanuvchi kelishuvi shartlariga"
 }

@@ -270,4 +270,20 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get authPrompt => 'Ilovaga kirish uchun autentifikatsiyadan o‘ting';
+
+  @override
+  String get auth_phone_page_title => 'Raqamingizni kiriting';
+
+  @override
+  String get auth_phone_page_hint => 'Telefon raqami';
+
+  @override
+  String get action_continue => 'Davom etish';
+
+  @override
+  String get accept_terms =>
+      'Tugmani bosish orqali siz terms  rozilik bildirasiz';
+
+  @override
+  String get terms => 'Foydalanuvchi kelishuvi shartlariga';
 }

@@ -9,6 +9,8 @@ import 'dart:async' as _i687;
 import 'package:domain/domain.dart' as _i494;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:more/src/core/settings_bloc/app_settings_bloc.dart' as _i830;
+import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart'
+    as _i396;
 import 'package:more/src/pages/auth/bloc/auth_bloc.dart' as _i221;
 import 'package:more/src/pages/pin/check_pin/bloc/check_pin_bloc.dart' as _i578;
 import 'package:more/src/pages/pin/pin_code_bloc/pincode_bloc.dart' as _i977;
@@ -20,6 +22,7 @@ class MorePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
+    gh.factory<_i396.AuthPhoneBloc>(() => _i396.AuthPhoneBloc());
     gh.factory<_i830.AppSettingsBloc>(
         () => _i830.AppSettingsBloc(gh<_i494.AppPreference>()));
     gh.factory<_i201.BiometricUtils>(() => _i201.BiometricUtilsProvider());

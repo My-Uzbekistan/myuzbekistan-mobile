@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared/shared.dart';
 
@@ -169,7 +168,7 @@ class TokenRefreshInterceptor extends Interceptor {
   bool _isRefreshing = false;
   Completer<void>? _refreshCompleter;
 
-  final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseUrlAPi))
+  final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseApiUrl))
     ..interceptors.add(PrettyDioLogger(requestBody: true));
 
   @override

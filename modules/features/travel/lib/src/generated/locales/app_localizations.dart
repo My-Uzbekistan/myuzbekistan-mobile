@@ -577,22 +577,22 @@ abstract class FeatureTravelLocalizations {
   /// **'Скоро'**
   String get catalogItemStatusSoon;
 
-  /// No description provided for @investment_in_future.
-  ///
-  /// In ru, this message translates to:
-  /// **'Инвестиция в будущее'**
-  String get investment_in_future;
-
   /// No description provided for @investment_search_title.
   ///
   /// In ru, this message translates to:
   /// **'Что ищете?'**
   String get investment_search_title;
 
+  /// No description provided for @investment_top_contents_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Рекомендуем'**
+  String get investment_top_contents_title;
+
   /// No description provided for @investments_category_title.
   ///
   /// In ru, this message translates to:
-  /// **'Новостройки'**
+  /// **'Все'**
   String get investments_category_title;
 
   /// No description provided for @investment_amount.

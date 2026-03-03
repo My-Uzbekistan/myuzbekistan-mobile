@@ -1,6 +1,8 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:more/src/di/injection.dart';
+import 'package:more/src/pages/auth/auth_phone/auth_phone_page.dart';
+import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart';
 import 'package:more/src/pages/force_update/force_update_page.dart';
 import 'package:more/src/pages/pin/check_pin/bloc/check_pin_bloc.dart';
 import 'package:more/src/pages/pin/pin_code_bloc/pincode_bloc.dart';
@@ -112,6 +114,19 @@ mixin FeatureMoreRouter {
       },
     ),
 
+    GoRoute(
+      path: AppNavPath.more.authPhonePage.path,
+      name: AppNavPath.more.authPhonePage.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<AuthPhoneBloc>(),
+          child: AuthPhonePage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
     GoRoute(
       path: AppNavPath.more.authPage.path,
       name: AppNavPath.more.authPage.name,

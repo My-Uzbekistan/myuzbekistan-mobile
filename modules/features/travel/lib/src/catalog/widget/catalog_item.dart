@@ -29,8 +29,8 @@ class CatalogItem extends StatelessWidget {
                   height: 64,
                   width: 64,
                   color: Color(0xff28bf5a),
-                  child: ExtendedImage.network(
-                    item.icon,
+                  child: item.icon!=null?ExtendedImage.network(
+                    item.icon!,
                     fit: BoxFit.cover,
                     loadStateChanged: (state) {
                       switch (state.extendedImageLoadState) {
@@ -40,7 +40,7 @@ class CatalogItem extends StatelessWidget {
                           return SizedBox();
                       }
                     },
-                  ),
+                  ):SizedBox(),
                 ),
               ),
               if (item.status != CatalogStatus.active)

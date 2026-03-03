@@ -44,14 +44,14 @@ class DataPackageModule extends _i526.MicroPackageModule {
       preResolve: true,
     );
     gh.lazySingleton<String>(
-      () => networkModule.prodApiUrl,
+      () => networkModule.devApiUrl,
       instanceName: 'baseUrl',
       registerFor: {_dev},
     );
     gh.factory<_i494.AppPreference>(() => _i80.AppPreferenceImpl(
         box: gh<_i811.Box<dynamic>>(instanceName: 'myUzblocaleStorageBox')));
     gh.lazySingleton<String>(
-      () => networkModule.devApiUrl,
+      () => networkModule.prodApiUrl,
       instanceName: 'baseUrl',
       registerFor: {_prod},
     );

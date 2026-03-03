@@ -1,6 +1,5 @@
 import 'package:component_res/component_res.dart';
 import 'package:finance/src/core/extension.dart';
-import 'package:finance/src/utils/phone_input_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 

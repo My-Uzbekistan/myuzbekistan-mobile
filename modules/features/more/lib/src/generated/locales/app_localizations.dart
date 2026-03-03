@@ -558,6 +558,36 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Пройдите аутентификацию для доступа к приложению'**
   String get authPrompt;
+
+  /// No description provided for @auth_phone_page_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите ваш номер'**
+  String get auth_phone_page_title;
+
+  /// No description provided for @auth_phone_page_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Номер телефона'**
+  String get auth_phone_page_hint;
+
+  /// No description provided for @action_continue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продолжить'**
+  String get action_continue;
+
+  /// No description provided for @accept_terms.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нажимая на кнопку, вы принимаете terms'**
+  String get accept_terms;
+
+  /// No description provided for @terms.
+  ///
+  /// In ru, this message translates to:
+  /// **'условия пользовательского соглашения'**
+  String get terms;
 }
 
 class _FeatureMoreLocalizationsDelegate

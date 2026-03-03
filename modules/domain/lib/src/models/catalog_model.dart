@@ -12,7 +12,7 @@
 import 'dart:ui';
 
 class CatalogItemModel {
-  final String icon;
+  final String? icon;
   final Color? color;
   final String title;
   final CatalogStatus status;
@@ -21,7 +21,7 @@ class CatalogItemModel {
   final bool authRequired;
 
   CatalogItemModel({
-    required this.icon,
+    this.icon,
     this.color,
     required this.title,
     required this.status,

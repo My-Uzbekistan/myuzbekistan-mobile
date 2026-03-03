@@ -30,14 +30,24 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   @override
   Widget build(BuildContext context) {
-     final  investItem = CatalogItemModel(
-        title: "Investitsiya",
-        icon: Assets.catalogIconCameraAi,
-        status: CatalogStatus.active,
-        color: Color(0xff37A8C7),
-       actionType: CatalogActionType.inner,
-       action: "/catalog/investments"
-      );
+     final  defaultItems= [
+       CatalogItemModel(
+           title: "Investitsiya",
+           icon: Assets.catalogIconCameraAi,
+           status: CatalogStatus.active,
+           color: Color(0xff37A8C7),
+           actionType: CatalogActionType.inner,
+           action: "https://myuzb.uz/catalog/investments?contentsId=110&topContentsId=111"
+       ),
+       CatalogItemModel(
+           title: "Travel Market",
+           icon: Assets.catalogIconCameraAi,
+           status: CatalogStatus.active,
+           color: Color(0xff37A8C7),
+           actionType: CatalogActionType.inner,
+           action: "https://myuzb.uz/catalog/investments?contentsId=114&topContentsId=113"
+       )
+     ];
     // catalogItems = [
 
     //   CatalogItemModel(
@@ -176,7 +186,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       );
                     },
                     loaded: (array) {
-                      final items=List.of(array)..add(investItem);
+                      final items=[...array,...defaultItems];
                       return SliverPadding(
                         padding: EdgeInsets.symmetric(horizontal: 16).copyWith(
                           top: 8,
@@ -290,11 +300,16 @@ class _CatalogScreenState extends State<CatalogScreen> {
   }
 
   void pushAction(BuildContext context, {required CatalogItemModel item}) {
+
     var uri = Uri.parse(item.action!.trim());
     if (item.actionType == CatalogActionType.inner) {
       if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||
           uri.host.isEmpty) {
-        uri = uri.replace(queryParameters: {"title": item.title});
+        final newQuery = {
+          ...uri.queryParameters,
+          "title": item.title,
+        };
+        uri = uri.replace(queryParameters: newQuery);
         context.push(uri.toString());
       } else {
         if (item.authRequired) {

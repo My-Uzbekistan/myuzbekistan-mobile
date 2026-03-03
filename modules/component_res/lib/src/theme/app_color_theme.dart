@@ -17,23 +17,45 @@ mixin AppColorTheme {
 
   static get lightTheme => LightColors.lightTheme();
 }
-// systemOverlayStyle: (brightness == Brightness.light
-// ? SystemUiOverlayStyle.dark
-//     : SystemUiOverlayStyle.light).copyWith(
-// systemNavigationBarContrastEnforced: false,
-// statusBarColor: Colors.transparent,
-// systemNavigationBarColor: colors.background.background,
-// ),
 ThemeData _buildTheme(
     {required ThemeData themeData,
     required _BaseColors colors,
     required Brightness brightness,
     required SystemUiOverlayStyle systemOverlayStyle}) {
   final defaultTextColor = colors.label.primary;
+  final textTheme = TextTheme(
+    displayLarge: CustomTypography.H1.copyWith(color: defaultTextColor),
+    displayMedium: CustomTypography.H2.copyWith(color: defaultTextColor),
+    displaySmall: CustomTypography.H3.copyWith(color: defaultTextColor),
+    headlineLarge: CustomTypography.H1.copyWith(color: defaultTextColor),
+    headlineMedium: CustomTypography.H2.copyWith(color: defaultTextColor),
+    headlineSmall: CustomTypography.H3.copyWith(color: defaultTextColor),
+    bodyLarge: CustomTypography.bodyLg.copyWith(color: defaultTextColor),
+    bodyMedium: CustomTypography.bodyMd.copyWith(color: defaultTextColor),
+    bodySmall: CustomTypography.bodySm.copyWith(color: defaultTextColor),
+    titleLarge: CustomTypography.labelLg.copyWith(color: defaultTextColor),
+    titleMedium: CustomTypography.labelMd.copyWith(color: defaultTextColor),
+    titleSmall: CustomTypography.labelSm.copyWith(color: defaultTextColor),
+    labelLarge: CustomTypography.labelLg.copyWith(color: defaultTextColor),
+    labelMedium: CustomTypography.labelMd.copyWith(color: defaultTextColor),
+    labelSmall: CustomTypography.labelSm.copyWith(color: defaultTextColor),
+  );
+  final scheme = ColorScheme.fromSeed(
+    seedColor: colors.brandPrimary,
+    brightness: brightness,
+  ).copyWith(
+    primary: colors.brandPrimary,
+    onPrimary: colors.label.oposite,
+    secondary: colors.brandPrimary,
+    onSecondary: colors.label.oposite,
+    surface: colors.background.elevation1,
+    onSurface: defaultTextColor,
+    error: colors.colors.red,
+    onError: colors.label.oposite,
+  );
   return themeData.copyWith(
       brightness: brightness,
-      colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue)
-          .copyWith(onPrimary: defaultTextColor, onSurface: defaultTextColor),
+      colorScheme: scheme,
       scaffoldBackgroundColor: colors.background.base,
       bottomSheetTheme:
           BottomSheetThemeData(backgroundColor: colors.background.elevation1),
@@ -51,32 +73,35 @@ ThemeData _buildTheme(
                   ? Brightness.dark
                   : Brightness.light),
           backgroundColor: colors.background.background,
-          foregroundColor: colors.background.background,
-          titleTextStyle:
-              CustomTypography.labelLg.copyWith(color: defaultTextColor)),
+          foregroundColor: colors.label.primary,
+          titleTextStyle: textTheme.titleLarge),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
           selectedItemColor: colors.brandPrimary,
           unselectedItemColor: colors.label.secondary,
           backgroundColor: colors.background.elevation1Alt),
-      textTheme: TextTheme(
-        displayLarge: CustomTypography.H1.copyWith(color: defaultTextColor),
-        displayMedium: CustomTypography.H2.copyWith(color: defaultTextColor),
-        displaySmall: CustomTypography.H3.copyWith(color: defaultTextColor),
-        headlineLarge: CustomTypography.H1.copyWith(color: defaultTextColor),
-        headlineMedium: CustomTypography.H2.copyWith(color: defaultTextColor),
-        headlineSmall: CustomTypography.H3.copyWith(color: defaultTextColor),
-        bodyLarge: CustomTypography.bodyLg.copyWith(color: defaultTextColor),
-        bodyMedium: CustomTypography.bodyMd.copyWith(color: defaultTextColor),
-        bodySmall: CustomTypography.bodySm.copyWith(color: defaultTextColor),
-        titleLarge: CustomTypography.labelLg.copyWith(color: defaultTextColor),
-        titleMedium: CustomTypography.labelMd.copyWith(color: defaultTextColor),
-        titleSmall: CustomTypography.labelSm.copyWith(color: defaultTextColor),
-        labelLarge: CustomTypography.labelLg.copyWith(color: defaultTextColor),
-        labelMedium: CustomTypography.labelMd.copyWith(color: defaultTextColor),
-        labelSmall: CustomTypography.labelSm.copyWith(color: defaultTextColor),
+      textTheme: textTheme,
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStatePropertyAll(textTheme.labelLarge),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStatePropertyAll(textTheme.labelLarge),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStatePropertyAll(textTheme.labelLarge),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          textStyle: WidgetStatePropertyAll(textTheme.labelLarge),
+        ),
       ),
       extensions: [
-        _AppColorsExtension(
+        AppColorsExtension(
             brand: colors.brandPrimary,
             textIconColor: colors.label,
             background: colors.background,

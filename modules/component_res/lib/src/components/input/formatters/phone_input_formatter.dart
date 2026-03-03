@@ -1,13 +1,13 @@
 import 'package:component_res/component_res.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shared/shared.dart';
 
 class PhoneInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
-    TextEditingValue newValue,
-  ) {
+      TextEditingValue oldValue,
+      TextEditingValue newValue,
+      ) {
     if (newValue.selection.baseOffset == 0) {
       return newValue;
     }

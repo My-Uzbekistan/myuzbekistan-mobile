@@ -219,15 +219,29 @@ mixin FeatureTravelRouter {
       path: AppNavPath.travel.travelCatalogInvestments.path,
       name: AppNavPath.travel.travelCatalogInvestments.name,
       pageBuilder: (context, state) {
+        final contentsId = state.uri.queryParameters["contentsId"];
+        final topContentsId = state.uri.queryParameters["topContentsId"];
+
+        debugPrint("********** uri ${state.uri}");
+        debugPrint("********** ctg ${contentsId}");
+        debugPrint("********** rctg ${topContentsId}");
+        final title = state.uri.queryParameters["title"].orEmpty();
         return buildSlideTransitionPage(
           child: MultiBlocProvider(
             providers: [
-              BlocProvider(create: (context) => getIt<InvestmentsBloc>()),
+              BlocProvider(
+                create:
+                    (context) =>
+                        getIt<InvestmentsBloc>()..add(
+                          InvestmentsEvent.setCategoryId(
+                            contentsId?.toIntOrNull(),
+                            topContentsId?.toIntOrNull(),
+                          ),
+                        ),
+              ),
               BlocProvider(create: (context) => InvestSortCubit()),
             ],
-            child: CatalogInvestmentsPage(
-              title: state.uri.queryParameters["title"].orEmpty(),
-            ),
+            child: CatalogInvestmentsPage(title: title),
           ),
           context: context,
           state: state,
@@ -240,36 +254,36 @@ mixin FeatureTravelRouter {
           name: AppNavPath.travel.travelCatalogInvestmentsSort.name,
           pageBuilder:
               (context, state) => buildSlideTransitionPage(
-            child: InvestSortMainPage(
-              cubit: state.extra as InvestSortCubit,
-            ),
-            context: context,
-            state: state,
-          ),
+                child: InvestSortMainPage(
+                  cubit: state.extra as InvestSortCubit,
+                ),
+                context: context,
+                state: state,
+              ),
         ),
         GoRoute(
           path: AppNavPath.travel.travelCatalogInvestmentsPriceSort.path,
           name: AppNavPath.travel.travelCatalogInvestmentsPriceSort.name,
           pageBuilder:
               (context, state) => buildSlideTransitionPage(
-            child: InvestPriceSortPage(
-              cubit: state.extra as InvestSortCubit,
-            ),
-            context: context,
-            state: state,
-          ),
+                child: InvestPriceSortPage(
+                  cubit: state.extra as InvestSortCubit,
+                ),
+                context: context,
+                state: state,
+              ),
         ),
         GoRoute(
           path: AppNavPath.travel.travelCatalogInvestmentsSortType.path,
           name: AppNavPath.travel.travelCatalogInvestmentsSortType.name,
           pageBuilder:
               (context, state) => buildSlideTransitionPage(
-            child: InvestSortTypePage(
-              cubit: state.extra as InvestSortCubit,
-            ),
-            context: context,
-            state: state,
-          ),
+                child: InvestSortTypePage(
+                  cubit: state.extra as InvestSortCubit,
+                ),
+                context: context,
+                state: state,
+              ),
         ),
       ],
     ),

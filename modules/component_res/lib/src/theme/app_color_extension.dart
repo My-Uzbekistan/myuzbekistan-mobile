@@ -1,6 +1,6 @@
 part of 'app_color_theme.dart';
 
-class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
+class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final Color brand;
   final LabelColor textIconColor;
   final BackgroundColors background;
@@ -12,7 +12,7 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
   final ServiceColors service;
   final RippleColor rippleColor;
 
-  _AppColorsExtension({
+  AppColorsExtension({
     required this.brand,
     required this.textIconColor,
     required this.background,
@@ -26,27 +26,114 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
   });
 
   @override
-  ThemeExtension<_AppColorsExtension> lerp(
-      covariant ThemeExtension<_AppColorsExtension>? other, double t) {
-    if (other is! _AppColorsExtension) {
+  ThemeExtension<AppColorsExtension> lerp(
+      covariant ThemeExtension<AppColorsExtension>? other, double t) {
+    if (other is! AppColorsExtension) {
       return this;
     }
-    return _AppColorsExtension(
-      brand: other.brand,
-      textIconColor: other.textIconColor,
-      background: other.background,
-      fill: other.fill,
-      stroke: other.stroke,
-      static: other.static,
-      colors: other.colors,
-      nonOpaque: other.nonOpaque,
-      service: other.service,
-      rippleColor: other.rippleColor,
+    return AppColorsExtension(
+      brand: Color.lerp(brand, other.brand, t) ?? other.brand,
+      textIconColor: _lerpLabelColor(textIconColor, other.textIconColor, t),
+      background: _lerpBackgroundColors(background, other.background, t),
+      fill: _lerpFillColors(fill, other.fill, t),
+      stroke: _lerpStrokeColors(stroke, other.stroke, t),
+      static: _lerpStaticColors(static, other.static, t),
+      colors: _lerpOtherColors(colors, other.colors, t),
+      nonOpaque: _lerpNonOpaque(nonOpaque, other.nonOpaque, t),
+      service: _lerpServiceColors(service, other.service, t),
+      rippleColor: _lerpRippleColor(rippleColor, other.rippleColor, t),
+    );
+  }
+
+  static LabelColor _lerpLabelColor(LabelColor a, LabelColor b, double t) {
+    return LabelColor(
+      primary: Color.lerp(a.primary, b.primary, t) ?? b.primary,
+      secondary: Color.lerp(a.secondary, b.secondary, t) ?? b.secondary,
+      tertiary: Color.lerp(a.tertiary, b.tertiary, t) ?? b.tertiary,
+      disable: Color.lerp(a.disable, b.disable, t) ?? b.disable,
+      oposite: Color.lerp(a.oposite, b.oposite, t) ?? b.oposite,
+    );
+  }
+
+  static BackgroundColors _lerpBackgroundColors(
+    BackgroundColors a,
+    BackgroundColors b,
+    double t,
+  ) {
+    return BackgroundColors(
+      base: Color.lerp(a.base, b.base, t) ?? b.base,
+      underlayer: Color.lerp(a.underlayer, b.underlayer, t) ?? b.underlayer,
+      elevation1: Color.lerp(a.elevation1, b.elevation1, t) ?? b.elevation1,
+      elevation1Alt:
+          Color.lerp(a.elevation1Alt, b.elevation1Alt, t) ?? b.elevation1Alt,
+      elevation2: Color.lerp(a.elevation2, b.elevation2, t) ?? b.elevation2,
+      elevation2Alt:
+          Color.lerp(a.elevation2Alt, b.elevation2Alt, t) ?? b.elevation2Alt,
+      elevation3: Color.lerp(a.elevation3, b.elevation3, t) ?? b.elevation3,
+    );
+  }
+
+  static FillColors _lerpFillColors(FillColors a, FillColors b, double t) {
+    return FillColors(
+      primary: Color.lerp(a.primary, b.primary, t) ?? b.primary,
+      secondary: Color.lerp(a.secondary, b.secondary, t) ?? b.secondary,
+      tertiary: Color.lerp(a.tertiary, b.tertiary, t) ?? b.tertiary,
+      quaternary: Color.lerp(a.quaternary, b.quaternary, t) ?? b.quaternary,
+    );
+  }
+
+  static StrokeColors _lerpStrokeColors(
+    StrokeColors a,
+    StrokeColors b,
+    double t,
+  ) {
+    return StrokeColors(
+      nonOpaque: Color.lerp(a.nonOpaque, b.nonOpaque, t) ?? b.nonOpaque,
+      opaque: Color.lerp(a.opaque, b.opaque, t) ?? b.opaque,
+    );
+  }
+
+  static StaticColors _lerpStaticColors(StaticColors a, StaticColors b, double t) {
+    return StaticColors(
+      black: Color.lerp(a.black, b.black, t) ?? b.black,
+      white: Color.lerp(a.white, b.white, t) ?? b.white,
+    );
+  }
+
+  static OtherColors _lerpOtherColors(OtherColors a, OtherColors b, double t) {
+    return OtherColors(
+      red: Color.lerp(a.red, b.red, t) ?? b.red,
+      green: Color.lerp(a.green, b.green, t) ?? b.green,
+      blue: Color.lerp(a.blue, b.blue, t) ?? b.blue,
+      yellow: Color.lerp(a.yellow, b.yellow, t) ?? b.yellow,
+      orange: Color.lerp(a.orange, b.orange, t) ?? b.orange,
+    );
+  }
+
+  static NonOpaque _lerpNonOpaque(NonOpaque a, NonOpaque b, double t) {
+    return NonOpaque(
+      red: Color.lerp(a.red, b.red, t) ?? b.red,
+      green: Color.lerp(a.green, b.green, t) ?? b.green,
+      blue: Color.lerp(a.blue, b.blue, t) ?? b.blue,
+      yellow: Color.lerp(a.yellow, b.yellow, t) ?? b.yellow,
+      brand: Color.lerp(a.brand, b.brand, t) ?? b.brand,
+    );
+  }
+
+  static ServiceColors _lerpServiceColors(ServiceColors a, ServiceColors b, double t) {
+    return ServiceColors(
+      overlay: Color.lerp(a.overlay, b.overlay, t) ?? b.overlay,
+    );
+  }
+
+  static RippleColor _lerpRippleColor(RippleColor a, RippleColor b, double t) {
+    return RippleColor(
+      ripple: Color.lerp(a.ripple, b.ripple, t) ?? b.ripple,
     );
   }
 
   @override
-  ThemeExtension<_AppColorsExtension> copyWith(
+  ThemeExtension<AppColorsExtension> copyWith(
       {LabelColor? textIconColor,
       Color? brand,
       BackgroundColors? background,
@@ -57,7 +144,7 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
       NonOpaque? nonOpaque,
       ServiceColors? service,
       RippleColor? ripple}) {
-    return _AppColorsExtension(
+    return AppColorsExtension(
       brand: brand ?? this.brand,
       textIconColor: textIconColor ?? this.textIconColor,
       background: background ?? this.background,
@@ -73,12 +160,12 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
 }
 
 extension CustomThemeData on ThemeData {
-  _AppColorsExtension get appColors =>
-      extensions[_AppColorsExtension] as _AppColorsExtension;
+  AppColorsExtension get appColors =>
+      extensions[AppColorsExtension] as AppColorsExtension;
 }
 
 extension ContextEx on BuildContext {
-  _AppColorsExtension get appColors => Theme.of(this).appColors;
+  AppColorsExtension get appColors => Theme.of(this).appColors;
 
   SystemUiOverlayStyle get systemUiOverlyStyle => systemOverlyStyle();
 

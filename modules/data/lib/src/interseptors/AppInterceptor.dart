@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:domain/domain.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
 
@@ -14,8 +13,6 @@ class AppInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    // TODO: implement onRequest
-
 
     options.queryParameters.addAll({
       "culture": preference.getLocale()?.culture??"en-US",
@@ -29,34 +26,9 @@ class AppInterceptor extends Interceptor {
         "lon": locationManager.getCurrentPosition()!.longitude,
       });
     }
-    // if (securityStorage.getAccessToken() != null) {
-    //   options.headers.addAll({
-    //     HttpHeaders.authorizationHeader:
-    //         "Bearer ${securityStorage.getAccessToken()}"
-    //   });
-    // }
     return handler.next(options);
   }
 
-  // @override
-  // void onError(DioException err, ErrorInterceptorHandler handler) {
-  //   if (err.response != null && err.response?.data is Map<String, dynamic>) {
-  //     final data = err.response!.data as Map<String, dynamic>;
-  //     final appException = AppException.fromJson(data);
-  //     handler.reject(DioException(
-  //       requestOptions: err.requestOptions,
-  //       response: err.response,
-  //       type: err.type,
-  //       error: appException,
-  //     ));
-  //   } else {
-  //     handler.reject(DioException(
-  //       requestOptions: err.requestOptions,
-  //       type: err.type,
-  //       error: AppException.unknown(err.message),
-  //     ));
-  //   }
-  // }
   }
 
 

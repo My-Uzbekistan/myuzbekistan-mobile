@@ -269,4 +269,19 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get authPrompt => 'Please authenticate to access the application';
+
+  @override
+  String get auth_phone_page_title => 'Enter your number';
+
+  @override
+  String get auth_phone_page_hint => 'Phone number';
+
+  @override
+  String get action_continue => 'Continue';
+
+  @override
+  String get accept_terms => 'By clicking the button, you agree to the terms';
+
+  @override
+  String get terms => 'Terms of the User Agreement';
 }

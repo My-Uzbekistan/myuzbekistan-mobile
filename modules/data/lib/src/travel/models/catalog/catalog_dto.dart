@@ -18,7 +18,7 @@ part 'catalog_dto.g.dart';
 
 @JsonSerializable()
 class CatalogDto {
-  final String icon;
+  final String? icon;
   @HexColorConverter()
   final Color? color;
   final String title;

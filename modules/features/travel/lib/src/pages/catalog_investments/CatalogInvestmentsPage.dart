@@ -227,7 +227,7 @@ class _InvestDataStateWidgetState extends State<InvestDataStateWidget> {
               padding: EdgeInsets.symmetric(
                 horizontal: 16,
               ).copyWith(top: 24, bottom: 16),
-              child: Text(context.localization.investment_in_future).h2(),
+              child: Text(context.localization.investment_top_contents_title).h2(),
             ),
           ),
         if (widget.recommended.isNotEmpty)

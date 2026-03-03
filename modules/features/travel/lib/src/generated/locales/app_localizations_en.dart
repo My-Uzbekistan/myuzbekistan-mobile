@@ -290,13 +290,13 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   String get catalogItemStatusSoon => 'Soon';
 
   @override
-  String get investment_in_future => 'Investment in the future';
-
-  @override
   String get investment_search_title => 'Search';
 
   @override
-  String get investments_category_title => 'New buildings';
+  String get investment_top_contents_title => 'Recommended';
+
+  @override
+  String get investments_category_title => 'All';
 
   @override
   String investment_amount(Object amount, String currency) {

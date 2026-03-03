@@ -1,11 +1,9 @@
-import 'dart:convert';
-import 'dart:io';
+
 
 import 'package:data/src/constants.dart';
 import 'package:data/src/interseptors/TokenRefreshInterceptor.dart';
-import 'package:dio/dio.dart';
+import "package:dio/dio.dart" ;
 import 'package:domain/domain.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_alice/alice.dart';
 import 'package:injectable/injectable.dart';
@@ -22,11 +20,11 @@ abstract class NetworkModule {
 
   @Named('baseUrl')
   @LazySingleton(env: [Environment.prod])
-  String get devApiUrl => AppConstants.baseUrlAPi;
+  String get prodApiUrl => AppConstants.baseApiUrl;
 
   @Named('baseUrl')
   @LazySingleton(env: [Environment.dev])
-  String get prodApiUrl => AppConstants.baseUrlDevAPi;
+  String get devApiUrl => AppConstants.baseDevApiUrl;
 
   @lazySingleton
   Dio provideDio(

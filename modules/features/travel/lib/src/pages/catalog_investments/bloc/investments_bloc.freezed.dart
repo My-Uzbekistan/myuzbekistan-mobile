@@ -61,12 +61,13 @@ extension InvestmentsEventPatterns on InvestmentsEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadMoreContentEvent value)?  loadMoreContents,TResult Function( _LoadMoreRecommendedEvent value)?  loadMreRecommended,TResult Function( _LoadDataEvent value)?  loadDataEvent,TResult Function( _SortEvent value)?  sort,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _SetContentIdEvent value)?  setCategoryId,TResult Function( _LoadMoreContentEvent value)?  loadMoreContents,TResult Function( _LoadMoreRecommendedEvent value)?  loadMoreRecommended,TResult Function( _LoadDataEvent value)?  loadDataEvent,TResult Function( _SortEvent value)?  sort,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _LoadMoreContentEvent() when loadMoreContents != null:
-return loadMoreContents(_that);case _LoadMoreRecommendedEvent() when loadMreRecommended != null:
-return loadMreRecommended(_that);case _LoadDataEvent() when loadDataEvent != null:
+case _SetContentIdEvent() when setCategoryId != null:
+return setCategoryId(_that);case _LoadMoreContentEvent() when loadMoreContents != null:
+return loadMoreContents(_that);case _LoadMoreRecommendedEvent() when loadMoreRecommended != null:
+return loadMoreRecommended(_that);case _LoadDataEvent() when loadDataEvent != null:
 return loadDataEvent(_that);case _SortEvent() when sort != null:
 return sort(_that);case _:
   return orElse();
@@ -86,12 +87,13 @@ return sort(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadMoreContentEvent value)  loadMoreContents,required TResult Function( _LoadMoreRecommendedEvent value)  loadMreRecommended,required TResult Function( _LoadDataEvent value)  loadDataEvent,required TResult Function( _SortEvent value)  sort,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _SetContentIdEvent value)  setCategoryId,required TResult Function( _LoadMoreContentEvent value)  loadMoreContents,required TResult Function( _LoadMoreRecommendedEvent value)  loadMoreRecommended,required TResult Function( _LoadDataEvent value)  loadDataEvent,required TResult Function( _SortEvent value)  sort,}){
 final _that = this;
 switch (_that) {
-case _LoadMoreContentEvent():
+case _SetContentIdEvent():
+return setCategoryId(_that);case _LoadMoreContentEvent():
 return loadMoreContents(_that);case _LoadMoreRecommendedEvent():
-return loadMreRecommended(_that);case _LoadDataEvent():
+return loadMoreRecommended(_that);case _LoadDataEvent():
 return loadDataEvent(_that);case _SortEvent():
 return sort(_that);case _:
   throw StateError('Unexpected subclass');
@@ -110,12 +112,13 @@ return sort(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadMoreContentEvent value)?  loadMoreContents,TResult? Function( _LoadMoreRecommendedEvent value)?  loadMreRecommended,TResult? Function( _LoadDataEvent value)?  loadDataEvent,TResult? Function( _SortEvent value)?  sort,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _SetContentIdEvent value)?  setCategoryId,TResult? Function( _LoadMoreContentEvent value)?  loadMoreContents,TResult? Function( _LoadMoreRecommendedEvent value)?  loadMoreRecommended,TResult? Function( _LoadDataEvent value)?  loadDataEvent,TResult? Function( _SortEvent value)?  sort,}){
 final _that = this;
 switch (_that) {
-case _LoadMoreContentEvent() when loadMoreContents != null:
-return loadMoreContents(_that);case _LoadMoreRecommendedEvent() when loadMreRecommended != null:
-return loadMreRecommended(_that);case _LoadDataEvent() when loadDataEvent != null:
+case _SetContentIdEvent() when setCategoryId != null:
+return setCategoryId(_that);case _LoadMoreContentEvent() when loadMoreContents != null:
+return loadMoreContents(_that);case _LoadMoreRecommendedEvent() when loadMoreRecommended != null:
+return loadMoreRecommended(_that);case _LoadDataEvent() when loadDataEvent != null:
 return loadDataEvent(_that);case _SortEvent() when sort != null:
 return sort(_that);case _:
   return null;
@@ -134,11 +137,12 @@ return sort(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadMoreContents,TResult Function()?  loadMreRecommended,TResult Function( Region? selectedRegion,  InvestCurrencyType? currencyType,  SortType? sortType)?  loadDataEvent,TResult Function( InvestCurrencyType currencyType,  SortType? sortType,  Region? selectedRegion)?  sort,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? contentsId,  int? topContentsCategoryId)?  setCategoryId,TResult Function()?  loadMoreContents,TResult Function()?  loadMoreRecommended,TResult Function( Region? selectedRegion,  InvestCurrencyType? currencyType,  SortType? sortType)?  loadDataEvent,TResult Function( InvestCurrencyType currencyType,  SortType? sortType,  Region? selectedRegion)?  sort,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _LoadMoreContentEvent() when loadMoreContents != null:
-return loadMoreContents();case _LoadMoreRecommendedEvent() when loadMreRecommended != null:
-return loadMreRecommended();case _LoadDataEvent() when loadDataEvent != null:
+case _SetContentIdEvent() when setCategoryId != null:
+return setCategoryId(_that.contentsId,_that.topContentsCategoryId);case _LoadMoreContentEvent() when loadMoreContents != null:
+return loadMoreContents();case _LoadMoreRecommendedEvent() when loadMoreRecommended != null:
+return loadMoreRecommended();case _LoadDataEvent() when loadDataEvent != null:
 return loadDataEvent(_that.selectedRegion,_that.currencyType,_that.sortType);case _SortEvent() when sort != null:
 return sort(_that.currencyType,_that.sortType,_that.selectedRegion);case _:
   return orElse();
@@ -158,11 +162,12 @@ return sort(_that.currencyType,_that.sortType,_that.selectedRegion);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadMoreContents,required TResult Function()  loadMreRecommended,required TResult Function( Region? selectedRegion,  InvestCurrencyType? currencyType,  SortType? sortType)  loadDataEvent,required TResult Function( InvestCurrencyType currencyType,  SortType? sortType,  Region? selectedRegion)  sort,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? contentsId,  int? topContentsCategoryId)  setCategoryId,required TResult Function()  loadMoreContents,required TResult Function()  loadMoreRecommended,required TResult Function( Region? selectedRegion,  InvestCurrencyType? currencyType,  SortType? sortType)  loadDataEvent,required TResult Function( InvestCurrencyType currencyType,  SortType? sortType,  Region? selectedRegion)  sort,}) {final _that = this;
 switch (_that) {
-case _LoadMoreContentEvent():
+case _SetContentIdEvent():
+return setCategoryId(_that.contentsId,_that.topContentsCategoryId);case _LoadMoreContentEvent():
 return loadMoreContents();case _LoadMoreRecommendedEvent():
-return loadMreRecommended();case _LoadDataEvent():
+return loadMoreRecommended();case _LoadDataEvent():
 return loadDataEvent(_that.selectedRegion,_that.currencyType,_that.sortType);case _SortEvent():
 return sort(_that.currencyType,_that.sortType,_that.selectedRegion);case _:
   throw StateError('Unexpected subclass');
@@ -181,17 +186,92 @@ return sort(_that.currencyType,_that.sortType,_that.selectedRegion);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadMoreContents,TResult? Function()?  loadMreRecommended,TResult? Function( Region? selectedRegion,  InvestCurrencyType? currencyType,  SortType? sortType)?  loadDataEvent,TResult? Function( InvestCurrencyType currencyType,  SortType? sortType,  Region? selectedRegion)?  sort,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? contentsId,  int? topContentsCategoryId)?  setCategoryId,TResult? Function()?  loadMoreContents,TResult? Function()?  loadMoreRecommended,TResult? Function( Region? selectedRegion,  InvestCurrencyType? currencyType,  SortType? sortType)?  loadDataEvent,TResult? Function( InvestCurrencyType currencyType,  SortType? sortType,  Region? selectedRegion)?  sort,}) {final _that = this;
 switch (_that) {
-case _LoadMoreContentEvent() when loadMoreContents != null:
-return loadMoreContents();case _LoadMoreRecommendedEvent() when loadMreRecommended != null:
-return loadMreRecommended();case _LoadDataEvent() when loadDataEvent != null:
+case _SetContentIdEvent() when setCategoryId != null:
+return setCategoryId(_that.contentsId,_that.topContentsCategoryId);case _LoadMoreContentEvent() when loadMoreContents != null:
+return loadMoreContents();case _LoadMoreRecommendedEvent() when loadMoreRecommended != null:
+return loadMoreRecommended();case _LoadDataEvent() when loadDataEvent != null:
 return loadDataEvent(_that.selectedRegion,_that.currencyType,_that.sortType);case _SortEvent() when sort != null:
 return sort(_that.currencyType,_that.sortType,_that.selectedRegion);case _:
   return null;
 
 }
 }
+
+}
+
+/// @nodoc
+
+
+class _SetContentIdEvent with DiagnosticableTreeMixin implements InvestmentsEvent {
+   _SetContentIdEvent(this.contentsId, this.topContentsCategoryId);
+  
+
+ final  int? contentsId;
+ final  int? topContentsCategoryId;
+
+/// Create a copy of InvestmentsEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SetContentIdEventCopyWith<_SetContentIdEvent> get copyWith => __$SetContentIdEventCopyWithImpl<_SetContentIdEvent>(this, _$identity);
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'InvestmentsEvent.setCategoryId'))
+    ..add(DiagnosticsProperty('contentsId', contentsId))..add(DiagnosticsProperty('topContentsCategoryId', topContentsCategoryId));
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetContentIdEvent&&(identical(other.contentsId, contentsId) || other.contentsId == contentsId)&&(identical(other.topContentsCategoryId, topContentsCategoryId) || other.topContentsCategoryId == topContentsCategoryId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,contentsId,topContentsCategoryId);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'InvestmentsEvent.setCategoryId(contentsId: $contentsId, topContentsCategoryId: $topContentsCategoryId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SetContentIdEventCopyWith<$Res> implements $InvestmentsEventCopyWith<$Res> {
+  factory _$SetContentIdEventCopyWith(_SetContentIdEvent value, $Res Function(_SetContentIdEvent) _then) = __$SetContentIdEventCopyWithImpl;
+@useResult
+$Res call({
+ int? contentsId, int? topContentsCategoryId
+});
+
+
+
+
+}
+/// @nodoc
+class __$SetContentIdEventCopyWithImpl<$Res>
+    implements _$SetContentIdEventCopyWith<$Res> {
+  __$SetContentIdEventCopyWithImpl(this._self, this._then);
+
+  final _SetContentIdEvent _self;
+  final $Res Function(_SetContentIdEvent) _then;
+
+/// Create a copy of InvestmentsEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? contentsId = freezed,Object? topContentsCategoryId = freezed,}) {
+  return _then(_SetContentIdEvent(
+freezed == contentsId ? _self.contentsId : contentsId // ignore: cast_nullable_to_non_nullable
+as int?,freezed == topContentsCategoryId ? _self.topContentsCategoryId : topContentsCategoryId // ignore: cast_nullable_to_non_nullable
+as int?,
+  ));
+}
+
 
 }
 
@@ -247,7 +327,7 @@ class _LoadMoreRecommendedEvent with DiagnosticableTreeMixin implements Investme
 @override
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
-    ..add(DiagnosticsProperty('type', 'InvestmentsEvent.loadMreRecommended'))
+    ..add(DiagnosticsProperty('type', 'InvestmentsEvent.loadMoreRecommended'))
     ;
 }
 
@@ -262,7 +342,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'InvestmentsEvent.loadMreRecommended()';
+  return 'InvestmentsEvent.loadMoreRecommended()';
 }
 
 

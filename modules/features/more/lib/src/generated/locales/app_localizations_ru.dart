@@ -270,4 +270,19 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get authPrompt => 'Пройдите аутентификацию для доступа к приложению';
+
+  @override
+  String get auth_phone_page_title => 'Введите ваш номер';
+
+  @override
+  String get auth_phone_page_hint => 'Номер телефона';
+
+  @override
+  String get action_continue => 'Продолжить';
+
+  @override
+  String get accept_terms => 'Нажимая на кнопку, вы принимаете terms';
+
+  @override
+  String get terms => 'условия пользовательского соглашения';
 }
