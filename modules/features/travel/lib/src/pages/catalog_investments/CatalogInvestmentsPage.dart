@@ -69,7 +69,7 @@ class _CatalogInvestmentsPageState extends State<CatalogInvestmentsPage> {
                         mainAxisSize: MainAxisSize.min,
                         spacing: 8,
                         children: [
-                          Assets.svgPinSvg.toSvgImage(width: 24, height: 24),
+                          Assets.svg.pinSvg.svg(width: 24, height: 24),
                           Text(selectedRegion!.name.orEmpty()),
                         ],
                       ),
@@ -80,7 +80,7 @@ class _CatalogInvestmentsPageState extends State<CatalogInvestmentsPage> {
 
           actions: [
             RoundedButton(
-              assetsSvgIcon: Assets.svgFilterConus,
+              assetsSvgIcon: Assets.svg.filterConus.path,
               onPressed: () {
                 context.pushNamed(
                   AppNavPath.travel.travelCatalogInvestmentsSort.name,
@@ -127,7 +127,7 @@ class _CatalogInvestmentsPageState extends State<CatalogInvestmentsPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         MessageContainer.custom(
-                          icon: Assets.pngExclamationmarkSquare.toImage(),
+                          icon: Assets.png.exclamationmarkSquare.image(),
                           title: context.localization.pageFailedToLoad,
                           caption: context.localization.something_went_wrong,
                         ),
@@ -433,7 +433,7 @@ class _ImageContentState extends State<_ImageContent> {
               child: state.completedWidget,
             ); // ✅ Default image o'zi ko'rsatiladi
           default:
-            return Assets.pngDefaultContentImage.toImage(fit: BoxFit.fill);
+            return Assets.png.defaultContentImage.image(fit: BoxFit.fill);
         }
       },
     );

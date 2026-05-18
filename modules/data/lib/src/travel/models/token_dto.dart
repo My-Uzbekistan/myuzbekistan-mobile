@@ -9,6 +9,7 @@ class TokenDto {
   String accessToken;
   @JsonKey(name: "refresh_token")
   String refreshToken;
+  String? phone;
   int expires;
   bool hasPin;
 
@@ -16,7 +17,9 @@ class TokenDto {
     required this.accessToken,
     required this.refreshToken,
     required this.expires,
+    this.phone,
     this.hasPin = false,
+
   });
 
   factory TokenDto.fromJson(Map<String, dynamic> json) =>
@@ -29,7 +32,8 @@ class TokenDto {
       accessToken: accessToken,
       refreshToken: refreshToken,
       expires: expires,
-      hasPin: hasPin
+      hasPin: hasPin,
+      phone: phone,
     );
   }
 }

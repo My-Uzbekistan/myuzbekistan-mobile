@@ -20,7 +20,7 @@ class AccountWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             spacing: 4,
             children: [
-              Assets.flagsUs.toSvgImage(),
+              Assets.flags.us.svg(),
               Flexible(
                 child: Text("USD account", style: CustomTypography.labelSm),
               ),
@@ -29,7 +29,7 @@ class AccountWidget extends StatelessWidget {
                 width: 16,
                 child: Transform.rotate(
                   angle: pi / 2,
-                  child: Assets.svgIconArrowRight.toSvgImage(),
+                  child: Assets.svg.iconArrowRight.svg(),
                 ),
               ),
             ],

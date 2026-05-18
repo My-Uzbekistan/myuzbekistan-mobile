@@ -55,13 +55,14 @@ extension AuthEventPatterns on AuthEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthGoogleEvent value)?  authByGoogle,TResult Function( _AuthAppleEvent value)?  authByApple,TResult Function( _AuthLogOutEvent value)?  logOutEvent,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthGoogleEvent value)?  authByGoogle,TResult Function( _AuthAppleEvent value)?  authByApple,TResult Function( _AuthLogOutEvent value)?  logOutEvent,TResult Function( _SetFirebaseTokenEvent value)?  setFireBaseToken,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _AuthGoogleEvent() when authByGoogle != null:
 return authByGoogle(_that);case _AuthAppleEvent() when authByApple != null:
 return authByApple(_that);case _AuthLogOutEvent() when logOutEvent != null:
-return logOutEvent(_that);case _:
+return logOutEvent(_that);case _SetFirebaseTokenEvent() when setFireBaseToken != null:
+return setFireBaseToken(_that);case _:
   return orElse();
 
 }
@@ -79,13 +80,14 @@ return logOutEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthGoogleEvent value)  authByGoogle,required TResult Function( _AuthAppleEvent value)  authByApple,required TResult Function( _AuthLogOutEvent value)  logOutEvent,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthGoogleEvent value)  authByGoogle,required TResult Function( _AuthAppleEvent value)  authByApple,required TResult Function( _AuthLogOutEvent value)  logOutEvent,required TResult Function( _SetFirebaseTokenEvent value)  setFireBaseToken,}){
 final _that = this;
 switch (_that) {
 case _AuthGoogleEvent():
 return authByGoogle(_that);case _AuthAppleEvent():
 return authByApple(_that);case _AuthLogOutEvent():
-return logOutEvent(_that);case _:
+return logOutEvent(_that);case _SetFirebaseTokenEvent():
+return setFireBaseToken(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +104,14 @@ return logOutEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthGoogleEvent value)?  authByGoogle,TResult? Function( _AuthAppleEvent value)?  authByApple,TResult? Function( _AuthLogOutEvent value)?  logOutEvent,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthGoogleEvent value)?  authByGoogle,TResult? Function( _AuthAppleEvent value)?  authByApple,TResult? Function( _AuthLogOutEvent value)?  logOutEvent,TResult? Function( _SetFirebaseTokenEvent value)?  setFireBaseToken,}){
 final _that = this;
 switch (_that) {
 case _AuthGoogleEvent() when authByGoogle != null:
 return authByGoogle(_that);case _AuthAppleEvent() when authByApple != null:
 return authByApple(_that);case _AuthLogOutEvent() when logOutEvent != null:
-return logOutEvent(_that);case _:
+return logOutEvent(_that);case _SetFirebaseTokenEvent() when setFireBaseToken != null:
+return setFireBaseToken(_that);case _:
   return null;
 
 }
@@ -125,12 +128,13 @@ return logOutEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  authByGoogle,TResult Function()?  authByApple,TResult Function()?  logOutEvent,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  authByGoogle,TResult Function()?  authByApple,TResult Function()?  logOutEvent,TResult Function()?  setFireBaseToken,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthGoogleEvent() when authByGoogle != null:
 return authByGoogle();case _AuthAppleEvent() when authByApple != null:
 return authByApple();case _AuthLogOutEvent() when logOutEvent != null:
-return logOutEvent();case _:
+return logOutEvent();case _SetFirebaseTokenEvent() when setFireBaseToken != null:
+return setFireBaseToken();case _:
   return orElse();
 
 }
@@ -148,12 +152,13 @@ return logOutEvent();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  authByGoogle,required TResult Function()  authByApple,required TResult Function()  logOutEvent,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  authByGoogle,required TResult Function()  authByApple,required TResult Function()  logOutEvent,required TResult Function()  setFireBaseToken,}) {final _that = this;
 switch (_that) {
 case _AuthGoogleEvent():
 return authByGoogle();case _AuthAppleEvent():
 return authByApple();case _AuthLogOutEvent():
-return logOutEvent();case _:
+return logOutEvent();case _SetFirebaseTokenEvent():
+return setFireBaseToken();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +175,13 @@ return logOutEvent();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  authByGoogle,TResult? Function()?  authByApple,TResult? Function()?  logOutEvent,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  authByGoogle,TResult? Function()?  authByApple,TResult? Function()?  logOutEvent,TResult? Function()?  setFireBaseToken,}) {final _that = this;
 switch (_that) {
 case _AuthGoogleEvent() when authByGoogle != null:
 return authByGoogle();case _AuthAppleEvent() when authByApple != null:
 return authByApple();case _AuthLogOutEvent() when logOutEvent != null:
-return logOutEvent();case _:
+return logOutEvent();case _SetFirebaseTokenEvent() when setFireBaseToken != null:
+return setFireBaseToken();case _:
   return null;
 
 }
@@ -271,6 +277,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'AuthEvent.logOutEvent()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _SetFirebaseTokenEvent implements AuthEvent {
+   _SetFirebaseTokenEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetFirebaseTokenEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthEvent.setFireBaseToken()';
 }
 
 

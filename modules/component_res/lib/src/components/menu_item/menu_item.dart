@@ -44,7 +44,7 @@ class MenuItem extends StatelessWidget {
                         opacity: 1.0,
                         child: state.completedWidget,
                       );
-                      default: return Assets.pngDefaultContentImage.toImage();
+                      default: return Assets.png.defaultContentImage.image();
                     }
                   },
                   )

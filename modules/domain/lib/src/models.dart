@@ -12,3 +12,6 @@ export 'models/notification_item.dart';
 
 export 'models/review.dart';
 export 'models/catalog_model.dart';
+export 'models/onboarding_item.dart';
+
+export 'models/gift_history.dart';

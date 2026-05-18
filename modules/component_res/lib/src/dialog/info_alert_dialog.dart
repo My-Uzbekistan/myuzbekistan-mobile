@@ -16,9 +16,9 @@ class InfoAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final icon = {
-      InfoAlertType.success: Assets.svgIconCheck,
-      InfoAlertType.error: Assets.svgIconClose,
-      InfoAlertType.warning: Assets.svgIconWarning,
+      InfoAlertType.success: Assets.svg.iconCheck.path,
+      InfoAlertType.error: Assets.svg.iconClose.path,
+      InfoAlertType.warning: Assets.svg.iconWarning.path,
     }[type]!;
 
     final backgroundColor = {

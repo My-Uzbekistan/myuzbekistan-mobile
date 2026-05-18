@@ -331,4 +331,74 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get action_cancel => 'Cancel';
+
+  @override
+  String get action_detail => 'In detail';
+
+  @override
+  String get gift_page_title => 'A gift is available for you';
+
+  @override
+  String get gift_page_subtitle => 'Tap to claim';
+
+  @override
+  String get gift_page_action => 'Claim the prize';
+
+  @override
+  String gift_second_page_title_minute(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Возвращайтесь через $count минут',
+      many: 'Возвращайтесь через $count минут',
+      few: 'Возвращайтесь через $count минуты',
+      one: 'Возвращайтесь через $count минуту',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gift_second_page_title_hour(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Come back in $count hours',
+      one: 'Come back in 1 hour',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gift_second_page_title_day(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Come back in $count days',
+      one: 'Come back in 1 day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gift_second_page_subtitle => 'We are preparing your gift';
+
+  @override
+  String get gift_history => 'Prize history';
+
+  @override
+  String get mb => 'MB';
+
+  @override
+  String get gb => 'GB';
+
+  @override
+  String get claim_dialog_caption =>
+      'You received a bonus on your mobile number';
+
+  @override
+  String get claim_warning_page_title => 'Only for Uztelecom subscribers';
+
+  @override
+  String get claim_warning_page_caption =>
+      'To receive the gift, you need to register with an Uztelecom number';
 }

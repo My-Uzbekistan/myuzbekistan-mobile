@@ -22,7 +22,7 @@ class AppCheck extends StatelessWidget {
               shape: BoxShape.circle),
           alignment: Alignment.center,
           child: isChecked
-              ? Assets.svgIconCheck.toSvgImage(
+              ? Assets.svg.iconCheck.path.toSvgImage(
                   fit: BoxFit.contain,
                   colorFilter: ColorFilter.mode(
                       context.appColors.static.white, BlendMode.srcIn))

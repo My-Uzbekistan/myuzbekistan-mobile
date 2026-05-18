@@ -236,7 +236,7 @@ class _PaymentPageState extends State<PaymentPage> with WidgetsBindingObserver {
                                           Text(
                                             context.localization.all_cards,
                                           ).bodyLg(),
-                                          Assets.svgIconArrowRight.toSvgImage(
+                                          Assets.svg.iconArrowRight.svg(
                                             width: 20,
                                             height: 20,
                                             fit: BoxFit.cover,
@@ -304,7 +304,6 @@ class _PaymentPageState extends State<PaymentPage> with WidgetsBindingObserver {
         :final paymentId,
       ):
         widget.completer?.complete(true);
-      debugPrint("navigationResult ${paymentId}");
         context.pushPaymentSuccessPage(
           PaymentSuccessPageParams(
             merchant: merchant,

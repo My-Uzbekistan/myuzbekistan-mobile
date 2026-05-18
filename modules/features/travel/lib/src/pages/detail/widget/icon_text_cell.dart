@@ -57,7 +57,7 @@ class IconTextCell extends StatelessWidget {
               ).bodyLg(),
             ),
             if (showArrow)
-              Assets.svgIconArrowRight.toSvgImage(
+              Assets.svg.iconArrowRight.path.toSvgImage(
                 fit: BoxFit.fill,
                 tintColor: context.appColors.textIconColor.secondary,
               ),

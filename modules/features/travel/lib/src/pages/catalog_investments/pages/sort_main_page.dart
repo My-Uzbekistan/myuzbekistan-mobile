@@ -50,7 +50,7 @@ class _InvestSortMainPageState extends State<InvestSortMainPage> {
                         Flexible(
                           child: InvestCurrencyCell(type: state.currencyType),
                         ),
-                        Assets.svgIconArrowRight.toSvgImage(
+                        Assets.svg.iconArrowRight.path.toSvgImage(
                           height: 18,
                           width: 18,
                           fit: BoxFit.contain,
@@ -96,7 +96,7 @@ class _InvestSortMainPageState extends State<InvestSortMainPage> {
                                     overflow: TextOverflow.ellipsis,
                                   ).bodyLg(),
                             ),
-                            Assets.svgIconArrowRight.toSvgImage(
+                            Assets.svg.iconArrowRight.path.toSvgImage(
                               height: 18,
                               width: 18,
                               fit: BoxFit.contain,
@@ -131,8 +131,8 @@ class InvestCurrencyCell extends StatelessWidget {
       spacing: 8,
       children: [
         type == InvestCurrencyType.uzs
-            ? Assets.flagsUz.toSvgImage(height: 24)
-            : Assets.flagsUs.toSvgImage(height: 24),
+            ? Assets.flags.uz.svg(height: 24)
+            : Assets.flags.us.svg(height: 24),
 
         Text(InvestCurrencyType.usd.value).labelLg(),
       ],

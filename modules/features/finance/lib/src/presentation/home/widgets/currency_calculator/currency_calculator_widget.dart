@@ -141,7 +141,7 @@ class _CurrencyCalculatorWidgetState extends State<CurrencyCalculatorWidget> {
                                 child: SizedBox(
                                   height: 20,
                                   width: 20,
-                                  child: Assets.svgIconArrowRightLeft
+                                  child: Assets.svg.iconArrowRightLeft.path
                                       .toSvgImage(
                                         width: 20,
                                         colorFilter: ColorFilter.mode(

@@ -58,7 +58,7 @@ class AppAvatar extends StatelessWidget {
                   case LoadState.completed:
                     return null;
                   default:
-                    return Assets.pngAvatar.toImage(fit: BoxFit.cover);
+                    return Assets.png.avatar.image(fit: BoxFit.cover);
                 }
               },
             ),

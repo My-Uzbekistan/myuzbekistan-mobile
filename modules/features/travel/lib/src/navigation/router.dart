@@ -16,10 +16,15 @@ import 'package:travel/src/pages/detail/pages/all_facilities.dart';
 import 'package:travel/src/pages/detail/pages/read_more.dart';
 import 'package:travel/src/pages/detail/review/add_review_page.dart';
 import 'package:travel/src/pages/detail/review/bloc/review_bloc.dart';
+import 'package:travel/src/pages/gift/bloc/gift_bloc.dart';
+import 'package:travel/src/pages/gift/history_page.dart';
+import 'package:travel/src/pages/gift/main/main_gift_page.dart';
 import 'package:travel/src/pages/home/home_bloc/home_bloc.dart';
 import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart';
 import 'package:travel/src/pages/notifications/notification_main_page.dart';
 import 'package:travel/src/pages/notifications/page/notification_detail.dart';
+import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart';
+import 'package:travel/src/pages/onboarding/onboarding_page.dart';
 
 import '../catalog/catalog.dart';
 import '../di/injection.dart';
@@ -29,6 +34,7 @@ import '../pages/content_by_category/content_by_categories_page.dart';
 import '../pages/detail/detail_bloc/detail_bloc.dart';
 import '../pages/detail/pages/image_preview_page.dart';
 import '../pages/detail/review/all_reviews_page.dart';
+import '../pages/gift/second/second_gift_page.dart';
 import '../pages/home/page/home_page.dart';
 import '../pages/home/page/select_region/select_region_page.dart';
 
@@ -45,6 +51,15 @@ mixin FeatureTravelRouter {
 
         return ModalSheetPage(
           child: SelectRegionPage(regions: regions, selectedRegionId: regionId),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.travelOnboarding.path,
+      name: AppNavPath.travel.travelOnboarding.name,
+      pageBuilder: (context, state) {
+        return ModalSheetPage(
+          child: OnboardingPage(bloc: state.extra as OnboardingBloc),
         );
       },
     ),
@@ -221,10 +236,6 @@ mixin FeatureTravelRouter {
       pageBuilder: (context, state) {
         final contentsId = state.uri.queryParameters["contentsId"];
         final topContentsId = state.uri.queryParameters["topContentsId"];
-
-        debugPrint("********** uri ${state.uri}");
-        debugPrint("********** ctg ${contentsId}");
-        debugPrint("********** rctg ${topContentsId}");
         final title = state.uri.queryParameters["title"].orEmpty();
         return buildSlideTransitionPage(
           child: MultiBlocProvider(
@@ -369,18 +380,64 @@ mixin FeatureTravelRouter {
     GoRoute(
       path: AppNavPath.travel.travelCatalogInvestmentsSearch.path,
       name: AppNavPath.travel.travelCatalogInvestmentsSearch.name,
-      // builder: (context,state){
-      //   final  curType=  InvestCurrencyType.type(state.uri.queryParameters["currencyType"]??"");
-      //   return InvestSearchPage(
-      //     currencyType: curType ,
-      //   );
-      // },
       pageBuilder: (context, state) {
         final curType = InvestCurrencyType.type(
           state.uri.queryParameters["currencyType"] ?? "",
         );
         return buildSlideTransitionPage(
           child: InvestSearchPage(currencyType: curType),
+          state: state,
+          context: context,
+          slideAlign: SlideAlign.vertical,
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.travelHomeGiftPage.path,
+      name: AppNavPath.travel.travelHomeGiftPage.name,
+      redirect: (context, state) {
+        final state = context.read<GiftBloc>().state;
+        if (!state.haveGift) {
+          final timeLeft = (state.claimStatus?.timeLeft ?? 0).toString();
+          final timeStatus =
+              (state.claimStatus?.timeStatusValue ?? 0).toString();
+
+          return "${AppNavPath.travel.travelHomeGiftOnboardingPage.path}?timeLeft=$timeLeft&timeStatus=$timeStatus";
+        }
+
+        return null;
+      },
+      pageBuilder: (context, state) {
+        return buildSlideTransitionPage(
+          child: MainGiftPage(),
+          state: state,
+          context: context,
+          slideAlign: SlideAlign.vertical,
+        );
+      },
+    ),
+
+    GoRoute(
+      path: AppNavPath.travel.travelHomeGiftOnboardingPage.path,
+      name: AppNavPath.travel.travelHomeGiftOnboardingPage.name,
+      pageBuilder: (context, state) {
+        return buildSlideTransitionPage(
+          child: SecondGiftPage(
+            timeLeft: state.uri.queryParameters["timeLeft"]?.toInt() ?? 0,
+            timeStatus: state.uri.queryParameters["timeStatus"]?.toInt() ?? 0,
+          ),
+          state: state,
+          context: context,
+          slideAlign: SlideAlign.vertical,
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.travelHomeGiftHistory.path,
+      name: AppNavPath.travel.travelHomeGiftHistory.name,
+      pageBuilder: (context, state) {
+        return buildSlideTransitionPage(
+          child: GiftHistoryPage(),
           state: state,
           context: context,
           slideAlign: SlideAlign.vertical,
@@ -397,9 +454,7 @@ mixin FeatureTravelRouter {
         redirect: (context, state) {
           final locale = getIt<AppPreference>().getLocale();
           if (locale == null) return AppNavPath.more.selectLangPage.path;
-
           final securityStorage = getIt<SecurityStorage>();
-
           if (securityStorage.getAccessToken() == null &&
               securityStorage.isFirstlyLaunch()) {
             securityStorage.firstlyLaunched();
@@ -413,8 +468,14 @@ mixin FeatureTravelRouter {
 
         pageBuilder: (context, state) {
           return buildSlideTransitionPage(
-            child: BlocProvider(
-              create: (ctx) => getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create:
+                      (ctx) => getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
+                ),
+                BlocProvider(create: (ctx) => getIt<OnboardingBloc>()),
+              ],
               child: HomePage(),
             ),
             state: state,

@@ -81,5 +81,7 @@
   "auth_phone_page_hint": "Telefon raqami",
   "action_continue": "Davom etish",
   "accept_terms": "Tugmani bosish orqali siz terms  rozilik bildirasiz",
-  "terms": "Foydalanuvchi kelishuvi shartlariga"
+  "terms": "Foydalanuvchi kelishuvi shartlariga",
+  "auth_page_action_phone": "Telefon raqami orqali kirish"
+
 }

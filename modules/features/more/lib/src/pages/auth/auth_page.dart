@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:component_res/component_res.dart';
@@ -22,13 +23,29 @@ class AuthPage extends StatefulWidget {
 class _AuthPageState extends State<AuthPage> {
   AppSettingsBloc? appSettingsBloc;
 
+  AuthBlock? authBlock;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     appSettingsBloc = context.read<AppSettingsBloc>();
+    authBlock = context.read<AuthBlock>();
+  }
+
+  Completer<bool>? completer;
+
+  void listenPhoneAuthCompleter(BuildContext context) {
+    completer?.complete(false);
+    completer = Completer<bool>();
+
+    completer?.future.then((result) {
+      if(result) {
+        GlobalHandler().refreshListener?.call();
+        authBlock?.add(AuthEvent.setFireBaseToken());
+      }
+    });
   }
 
   @override
@@ -65,16 +82,14 @@ class _AuthPageState extends State<AuthPage> {
         body: Stack(
           children: [
             Positioned.fill(
-              child: Assets.splashLoginBg.toImage(fit: BoxFit.cover),
+              child: Assets.splash.loginBg.image(fit: BoxFit.cover),
             ),
 
             Positioned(
               left: 0,
               right: 0,
               top: kToolbarHeight + MediaQuery.of(context).padding.top + 20,
-              child: Assets.logoDarkLogo.toSvgImage(
-                fit: BoxFit.contain,
-              ),
+              child: Assets.logo.darkLogo.svg(fit: BoxFit.contain),
             ),
             Positioned(
               bottom: 0,
@@ -106,26 +121,31 @@ class _AuthPageState extends State<AuthPage> {
                               spacing: 12,
                               children: [
                                 AppActionButton(
-                                  actionText: "Войти по номеру телефона",
+                                  actionText:
+                                      context
+                                          .localization
+                                          .auth_page_action_phone,
                                   iconColorFiltered: false,
-                                  icon: Assets.svgGoogleLogo.toSvgImage(),
-                                  isLoading: state is AuthGoogleLoadingState,
+                                  icon: Assets.svg.icPhone.svg(),
                                   containerColor: Colors.white,
                                   disableContainerColor: Colors.white,
                                   contentColor: Colors.black,
 
                                   type: ActionButtonType.secondary,
                                   onPressed: () {
-                                    context.read<AuthBlock>().add(
-                                      AuthEvent.authByGoogle(),
+                                    listenPhoneAuthCompleter(context);
+                                    context.pushNamed(
+                                      AppNavPath.more.authPhonePage.name,
+                                      extra: completer,
                                     );
+
                                   },
                                 ),
                                 AppActionButton(
                                   actionText:
                                       context.localization.continueWithGoogle,
                                   iconColorFiltered: false,
-                                  icon: Assets.svgGoogleLogo.toSvgImage(),
+                                  icon: Assets.svg.googleLogo.svg(),
                                   isLoading: state is AuthGoogleLoadingState,
                                   containerColor: Colors.white,
                                   disableContainerColor: Colors.white,
@@ -147,7 +167,7 @@ class _AuthPageState extends State<AuthPage> {
                                     containerColor: Colors.white,
                                     disableContainerColor: Colors.white,
                                     contentColor: Colors.black,
-                                    icon: Assets.svgAppleLogo.toSvgImage(),
+                                    icon: Assets.svg.appleLogo.svg(),
                                     isLoading: state is AuthAppleLoadingState,
                                     onPressed: () {
                                       context.read<AuthBlock>().add(

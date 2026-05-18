@@ -95,7 +95,7 @@ class _FinanceHomepageState extends State<FinanceHomePage> {
                                 Expanded(
                                   child: FinanceTopCardItemWidget(
                                     text: context.localization.payment_qr_title,
-                                    svgAssets: Assets.svgIconQrCode,
+                                    svgAssets: Assets.svg.iconQrCode.path,
                                     onTap: () {
                                       context.finance.pushQrCoderReaderPage();
                                     },
@@ -105,7 +105,7 @@ class _FinanceHomepageState extends State<FinanceHomePage> {
                                   child: FinanceTopCardItemWidget(
                                     text: context.localization.my_cards_title,
                                     svgAssets:
-                                        Assets.svgIconFilledDoubleCardCard,
+                                        Assets.svg.iconFilledDoubleCardCard.path,
                                     onTap: () {
                                       context.pushCardsPage();
                                     },
@@ -117,7 +117,7 @@ class _FinanceHomepageState extends State<FinanceHomePage> {
                                         context
                                             .localization
                                             .payment_history_title,
-                                    svgAssets: Assets.svgIconClock,
+                                    svgAssets: Assets.svg.iconClock.path,
                                     onTap: () {
                                       context.pushPaymentHistoryPage();
                                     },

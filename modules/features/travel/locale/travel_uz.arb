@@ -92,5 +92,25 @@
   "investment_page_sort_price": "Valyuta",
   "investment_page_sort_title": "Filtr",
   "investment_search_page_initial": "Qidiruv so‘rovini kiriting...",
-  "action_cancel": "Yopish"
+  "action_cancel": "Yopish",
+  "action_detail": "Batafsil",
+  "gift_page_title": "Sizga sovg‘a mavjud",
+  "gift_page_subtitle": "Olish uchun bosing",
+  "gift_page_action": "Sovg‘ani olish",
+  "gift_second_page_title_day": "{count, plural, =1{1 kunda qayting} other{{count} kunda qayting}}",
+  "gift_second_page_title_minut": "{count, plural, =1{1 minutda qayting} other{{count} minutda qayting}}",
+  "gift_second_page_title_hour": "{count, plural, =1{1 soatda qayting} other{{count} soatda qayting}}",
+  "gift_second_page_subtitle": "Sovg‘angiz tayyorlanmoqda",
+  "gift_history": "Sovg‘alar tarixi",
+  "mb": "MB",
+  "gb": "GB",
+  "claim_dialog_caption": "Sizning mobil raqamingizga bonus berildi",
+  "claim_warning_page_title": "Faqat Uztelecom abonentlari uchun",
+  "claim_warning_page_caption":"Sovg‘ani olish uchun Uztelecom raqamiga ro‘yxatdan o‘tish kerak"
+
+
+
+
+
+
 }

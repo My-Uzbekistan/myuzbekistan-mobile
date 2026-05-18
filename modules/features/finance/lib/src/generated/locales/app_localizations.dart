@@ -306,6 +306,12 @@ abstract class FeatureFinanceLocalizations {
   /// In ru, this message translates to:
   /// **'Фискальный чек'**
   String get fiscalReceipt;
+
+  /// No description provided for @verification_page_code_send_phone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Код подтверждения отправлен на {phone}'**
+  String verification_page_code_send_phone(Object phone);
 }
 
 class _FeatureFinanceLocalizationsDelegate

@@ -16,10 +16,13 @@ class SecurityStorageImpl implements SecurityStorage {
     final dynamic token = getAccessToken();
     if (token == null) return null;
     final jwt = JwtDecoder.decode(token);
+    debugPrint("isUtcClient ${jwt["isUztelecom"]}");
     final user = UserModel(
       name: jwt["userName"],
       email: jwt["name"],
       photoUrl: jwt["photoUrl"],
+      phoneNumber: _box.get("phone"),
+      isUtcClient: jwt["isUztelecom"]=="true"
     );
     return user;
   }
@@ -62,16 +65,21 @@ class SecurityStorageImpl implements SecurityStorage {
       "expiresIn",
       "hasPin",
       "isPinVerified",
+      "isUtcClient",
       "pin",
     ]);
   }
 
   @override
   Future<void> setToken({required Token token}) async {
-    await _box.put("accessToken", token.accessToken);
-    await _box.put("refreshToken", token.refreshToken);
-    await _box.put("expiresIn", token.expires);
-    await _box.put("hasPin", token.hasPin);
+    await _box.putAll({
+      "accessToken": token.accessToken,
+      "refreshToken": token.refreshToken,
+      "expiresIn": token.expires,
+      "hasPin": token.hasPin,
+      "phone": token.phone,
+    });
+
   }
 
   @override

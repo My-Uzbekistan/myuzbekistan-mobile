@@ -13,10 +13,27 @@ class _FeatureTravelNavPath {
     name: 'feature_travel_content_by_category',
     path: '/content_by_category',
   );
+  AppNavPath get travelHomeGiftPage => _NavPathImpl(
+    name: 'feature_travel_home_gift_page',
+    path: '/home_gift_page',
+  );
+
+  AppNavPath get travelHomeGiftOnboardingPage => _NavPathImpl(
+    name: 'feature_travel_home_gift_onboarding_page',
+    path: '/home_gift_onboarding_page',
+  );
+  AppNavPath get travelHomeGiftHistory => _NavPathImpl(
+    name: 'feature_travel_home_gift_history',
+    path: '/home_gift_history');
+
 
   AppNavPath get travelSelectRegion => _NavPathImpl(
     name: 'feature_travel_select_region',
     path: '/select_region',
+  );
+  AppNavPath get travelOnboarding => _NavPathImpl(
+    name: 'feature_travel_onboarding',
+    path: '/onboarding',
   );
 
   AppNavPath get travelCatalogInvestments =>

@@ -50,7 +50,7 @@ class AppChipsLeftRightIcon extends StatelessWidget {
     Widget rightIcon = this.rightIcon ??
         Transform.rotate(
           angle: pi / 2,
-          child: Assets.svgIconArrowRight.toSvgImage(fit: BoxFit.cover),
+          child: Assets.svg.iconArrowRight.svg(fit: BoxFit.cover),
         );
     return InkWell(
       onTap: onTap != null

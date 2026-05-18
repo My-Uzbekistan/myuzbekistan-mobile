@@ -176,7 +176,7 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             MessageContainer.custom(
-                              icon: Assets.pngExclamationmarkSquare.toImage(),
+                              icon: Assets.png.exclamationmarkSquare.image(),
                               title: context.localization.pageFailedToLoad,
                               caption:
                                   context.localization.something_went_wrong,
@@ -398,7 +398,7 @@ class ContentByCategoryItem extends StatelessWidget {
                               child: state.completedWidget,
                             ); // ✅ Default image o'zi ko'rsatiladi
                           default:
-                            return Assets.pngDefaultContentImage.toImage(
+                            return Assets.png.defaultContentImage.image(
                               fit: BoxFit.cover,
                             );
                         }
@@ -446,7 +446,7 @@ class ContentByCategoryItem extends StatelessWidget {
                   children: [
                     SizedBox(
                       height: 12,
-                      child: Assets.svgStarFill.toSvgImage(fit: BoxFit.contain),
+                      child: Assets.svg.starFill.svg(fit: BoxFit.contain),
                     ),
                     Text(
                       item.ratingAverage.toString(),

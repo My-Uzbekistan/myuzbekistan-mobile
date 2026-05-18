@@ -16,14 +16,6 @@ class _Global {
 
   void globalInit() async {
     upgrader =
-    // kDebugMode
-    //     ? Upgrader(
-    //         storeController: UpgraderStoreController(
-    //             onAndroid: () => MockUpgraderAppStore()),
-    //         debugLogging: true,
-    //   debugDisplayAlways: true
-    //       )
-    //     :
     Upgrader(
             durationUntilAlertAgain: const Duration(days: 1),
             debugLogging: true,
@@ -57,13 +49,12 @@ class MyUpgradeAlertState extends UpgradeAlertState {
     required bool barrierDismissible,
     required UpgraderMessages messages,
   }) async {
-    final isBlocked = widget.upgrader.blocked();
-    final showIgnore = isBlocked ? false : widget.showIgnore;
-    final showLater = isBlocked ? false : widget.showLater;
-    final String? appStoreVersion = widget.upgrader.currentAppStoreVersion;
-    final String? installedVersion = widget.upgrader.currentInstalledVersion;
+    // final isBlocked = widget.upgrader.blocked();
+    // final showIgnore = isBlocked ? false : widget.showIgnore;
+    // final showLater = isBlocked ? false : widget.showLater;
+    // final String? appStoreVersion = widget.upgrader.currentAppStoreVersion;
+    // final String? installedVersion = widget.upgrader.currentInstalledVersion;
 
-    debugPrint("Upgarede ${widget.upgrader.shouldDisplayUpgrade()}");
     // widget.upgrader.saveLastAlerted();
     // appRootNavigatorKey.currentContext?.pushNamed(
     //     AppNavPath.more.forceUpdate.name,
@@ -115,7 +106,7 @@ class _ForceUpdatePageState extends State<ForceUpdatePage> {
                 spacing: 12,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Assets.pngForceUpdate.toImage(
+                  Assets.png.forceUpdate.image(
                     width: 120,
                     height: 120,
                     fit: BoxFit.cover,

@@ -159,7 +159,7 @@ class AppInputField extends HookWidget {
                         width: 20,
                         child: Padding(
                           padding: EdgeInsets.all(4),
-                          child: Assets.svgIconClose.toSvgImage(
+                          child: Assets.svg.iconClose.path.toSvgImage(
                               fit: BoxFit.contain,
                               colorFilter: ColorFilter.mode(
                                   context.appColors.textIconColor.secondary,

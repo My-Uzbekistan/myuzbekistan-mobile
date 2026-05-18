@@ -104,7 +104,7 @@ class _CheckPinCodePageState extends State<CheckPinCodePage> {
                               onTap: () {
                                 authBiometric();
                               },
-                              child: Assets.svgScanIdentification.toSvgImage(
+                              child: Assets.svg.scanIdentification.path.toSvgImage(
                                 tintColor:
                                     context.appColors.textIconColor.secondary,
                               ),

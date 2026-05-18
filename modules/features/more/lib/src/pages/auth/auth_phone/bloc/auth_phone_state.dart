@@ -6,6 +6,8 @@ abstract class AuthPhoneState with _$AuthPhoneState {
   const factory AuthPhoneState({
     @Default("") String phoneNumber,
     @Default(false) isLoading,
+    @Default("")  String error,
+    @Default(false) codeSend,
   }) = _AuthPhoneState;
 
   bool get isPhoneNumberValid => phoneNumber.length == 9;

@@ -1,12 +1,11 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:more/src/core/extension.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 class AboutWidget extends HookWidget {
-  AboutWidget({super.key, required this.avatars});
+  const AboutWidget({super.key, required this.avatars});
 
   final List<MoreItem> avatars;
 
@@ -152,7 +151,7 @@ class _PagerItem extends StatelessWidget {
                                   );
 
                                 default:
-                                  return Assets.pngDefaultContentImage.toImage(
+                                  return Assets.png.defaultContentImage.image(
                                     fit: BoxFit.cover,
                                   );
                               }

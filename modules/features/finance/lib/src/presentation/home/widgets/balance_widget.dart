@@ -49,10 +49,8 @@ class BalanceWidget extends HookWidget {
                 ColorFiltered(colorFilter: ColorFilter.mode(
                     context.appColors.textIconColor.secondary, BlendMode.srcIn),
                     child: isVisible.value
-                        ? Assets.svgIconFilledEye.toSvgImage(
-
-                    )
-                        : Assets.svgIconFilledEyeOff.toSvgImage(), )
+                        ? Assets.svg.iconFilledEye.svg()
+                        : Assets.svg.iconFilledEyeOff.svg(), )
             ),
           ),
         ),

@@ -284,4 +284,7 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get terms => 'Terms of the User Agreement';
+
+  @override
+  String get auth_page_action_phone => 'Continue with phone';
 }

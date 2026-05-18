@@ -1,7 +1,6 @@
 {
   "nav_payment": "Платеж",
   "nav_services": "Сервисы",
-
   "language": "Язык",
   "theme": "Тема",
   "lanItem": "{lang, select, en{Английский} ru{Русский} uz{Узбекский} other{} }",
@@ -27,7 +26,6 @@
   "about": "О нас",
   "uzbekistan": "Узбекистан",
   "exchange_rates": "Курсы валют",
-
   "uzbek_currency": "*Узбекская валюта (UZS) называется сум",
   "exchange_banks": "Обменные банки",
   "loading_data": "Загрузка данных",
@@ -72,8 +70,6 @@
   "map_open_in": "Открыть с помощью",
   "workingHours": "Рабочее время",
   "writeReviewInFewSentences": "Напиши отзыв в нескольких предложениях",
-
-
   "catalogMyEsim": "My eSIM",
   "catalogTravelQuiz": "Travel Quiz",
   "catalogAviaTickets": "Авиабилеты",
@@ -96,10 +92,22 @@
   "investment_page_sort_price": "Валюта",
   "investment_page_sort_title": "Фильтр",
   "investment_search_page_initial": "Введите запрос для поиска...",
+  "action_cancel": "Отмена",
+  "action_detail": "Подробно",
+  "gift_page_title": "Вам доступен\nподарок",
+  "gift_page_subtitle": "Нажмите, чтобы забрать",
+  "gift_page_action": "Забрать приз",
+  "gift_second_page_title_minute": "{count, plural, one{Возвращайтесь через {count} минуту} few{Возвращайтесь через {count} минуты} many{Возвращайтесь через {count} минут} other{Возвращайтесь через {count} минут}}",
+  "gift_second_page_title_hour": "{count, plural, one{Возвращайтесь через {count} час} few{Возвращайтесь через {count} часа} many{Возвращайтесь через {count} часов} other{Возвращайтесь через {count} часов}}",
+  "gift_second_page_title_day": "{count, plural, one{Возвращайтесь через {count} день} few{Возвращайтесь через {count} дня} many{Возвращайтесь через {count} дней} other{Возвращайтесь через {count} дней}}",
 
-  "action_cancel": "Отмена"
-
-
+  "gift_second_page_subtitle": "Мы готовим ваш подарок",
+  "gift_history": "История призов",
+  "mb": "МБ",
+  "gb": "ГБ",
+  "claim_dialog_caption": "Вы получили бонус на свой мобильный номер",
+  "claim_warning_page_title": "Только для абонентов Uztelecom",
+  "claim_warning_page_caption":"Для получения подарка необходимо пройти регистрацию на номер Uztelecom"
 
 
 }

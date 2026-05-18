@@ -331,4 +331,73 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get action_cancel => 'Yopish';
+
+  @override
+  String get action_detail => 'Batafsil';
+
+  @override
+  String get gift_page_title => 'Sizga sovg‘a mavjud';
+
+  @override
+  String get gift_page_subtitle => 'Olish uchun bosing';
+
+  @override
+  String get gift_page_action => 'Sovg‘ani olish';
+
+  @override
+  String gift_second_page_title_minute(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Возвращайтесь через $count минут',
+      many: 'Возвращайтесь через $count минут',
+      few: 'Возвращайтесь через $count минуты',
+      one: 'Возвращайтесь через $count минуту',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gift_second_page_title_hour(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count soatda qayting',
+      one: '1 soatda qayting',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gift_second_page_title_day(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count kunda qayting',
+      one: '1 kunda qayting',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gift_second_page_subtitle => 'Sovg‘angiz tayyorlanmoqda';
+
+  @override
+  String get gift_history => 'Sovg‘alar tarixi';
+
+  @override
+  String get mb => 'MB';
+
+  @override
+  String get gb => 'GB';
+
+  @override
+  String get claim_dialog_caption => 'Sizning mobil raqamingizga bonus berildi';
+
+  @override
+  String get claim_warning_page_title => 'Faqat Uztelecom abonentlari uchun';
+
+  @override
+  String get claim_warning_page_caption =>
+      'Sovg‘ani olish uchun Uztelecom raqamiga ro‘yxatdan o‘tish kerak';
 }

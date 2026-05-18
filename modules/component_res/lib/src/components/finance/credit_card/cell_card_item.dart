@@ -44,8 +44,7 @@ class CellCardItem extends StatelessWidget {
                             child: state.completedWidget,
                           ); // ✅ Default image o'zi ko'rsatiladi
                         default:
-                          return Assets.svgDefaultCreditCard
-                              .toSvgImage(fit: BoxFit.cover);
+                          return Assets.svg.defaultCreditCard.svg(fit: BoxFit.cover);
                       }
                     },
                   )),
@@ -153,7 +152,7 @@ class CellCardItemWithImage extends StatelessWidget {
                         ); // ✅ Default image o'zi ko'rsatiladi
                       default:
                         return showDefaultImage
-                            ? Assets.svgDefaultCreditCard.toSvgImage()
+                            ? Assets.svg.defaultCreditCard.svg()
                             : SizedBox();
                     }
                   },

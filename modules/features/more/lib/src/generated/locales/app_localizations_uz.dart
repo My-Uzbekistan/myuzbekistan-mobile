@@ -286,4 +286,7 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get terms => 'Foydalanuvchi kelishuvi shartlariga';
+
+  @override
+  String get auth_page_action_phone => 'Telefon raqami orqali kirish';
 }

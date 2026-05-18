@@ -6,7 +6,7 @@ abstract class VerificationState with _$VerificationState {
 
   const factory VerificationState({
     @Default("") String code,
-    @Default("") String cardId,
+    @Default("") String phone,
     @Default(false) bool isLoading,
     @Default(false) bool isRetry,
     @Default("") String timer,

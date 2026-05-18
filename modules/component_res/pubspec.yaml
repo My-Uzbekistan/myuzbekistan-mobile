@@ -122,5 +122,8 @@ flutter_assets_generator:
   output_filename: assets
   class_name: Assets
   auto_detection: true
+  package_parameter_enabled: true
   style: robust
+
+
   path_ignore: [ ]

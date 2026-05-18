@@ -19,7 +19,7 @@ class TopImageWidget extends HookWidget {
         Positioned.fill(
           child:
               photos.isEmpty
-                  ? Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover)
+                  ? Assets.png.defaultContentImage.image(fit: BoxFit.cover)
                   : GestureDetector(
                     onTap: onImageTap,
                     child: PageView.builder(
@@ -50,7 +50,7 @@ class TopImageWidget extends HookWidget {
                                   ),
                                 ),
 
-                                _ => Assets.pngDefaultContentImage.toSvgImage(),
+                                _ => Assets.png.defaultContentImage.image(),
                               };
                             },
                           );

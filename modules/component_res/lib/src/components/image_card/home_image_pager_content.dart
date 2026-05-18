@@ -135,7 +135,7 @@ class HomeImagePagerContent extends HookWidget {
                       Row(
                         spacing: 4,
                         children: [
-                          Assets.svgStarFill.toSvgImage(
+                          Assets.svg.starFill.path.toSvgImage(
                               width: 16,
                               height: 16,
                               colorFilter: ColorFilter.mode(
@@ -207,7 +207,7 @@ class _ImagePageState extends State<_ImagePage>
               child: state.completedWidget,
             );
           default:
-            return Assets.pngDefaultContentImage.toImage(fit: BoxFit.cover);
+            return Assets.png.defaultContentImage.path.toImage(fit: BoxFit.cover);
         }
       },
     );

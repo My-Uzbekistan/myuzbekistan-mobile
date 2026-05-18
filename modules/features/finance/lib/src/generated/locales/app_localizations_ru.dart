@@ -114,4 +114,9 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
 
   @override
   String get fiscalReceipt => 'Фискальный чек';
+
+  @override
+  String verification_page_code_send_phone(Object phone) {
+    return 'Код подтверждения отправлен на $phone';
+  }
 }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:data/src/travel/models/review/review_dto.dart';
 import 'package:data/src/utils/generic/generics.dart';
 import 'package:domain/domain.dart';
+import 'package:domain/src/models/onboarding_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
@@ -325,6 +326,57 @@ class RepositoryImp implements Repository {
         actionType: CatalogActionType.inner,
       ),
     ]);
+  }
+
+  @override
+  Future<List<OnboardingItem>> getActiveOnboardings() {
+    return _restService.getActiveOnboardings().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future onboardingTrackClick({required int id}) {
+    return _restService.onboardingTrackClick(id).call();
+  }
+
+  @override
+  Future onboardingTrackView({required int id}) {
+    return _restService.onboardingTrackView(id).call();
+  }
+
+  @override
+  Future sendCode({required String phoneNumber}) {
+    return _restService.authPhoneSendCode({"phone": phoneNumber}).call();
+  }
+
+  @override
+  Future<Token> authConfirmCode({
+    required String phoneNumber,
+    required String code,
+  }) {
+    return _restService
+        .authPhoneConfirm({"phone": phoneNumber, "code": code})
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<ClaimStatus?> giftActive() {
+    return _restService.giftActive().call((data)=>data?.toDomain());
+  }
+
+  @override
+  Future<List<ClaimHistory>> giftHistory() {
+    return _restService.giftHistory().call(
+      (data) => data.items.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future<ClaimHistory> giftActivate() {
+    return _restService.giftActivate().call(
+      (data) => data.toDomain(),
+    );
   }
 }
 

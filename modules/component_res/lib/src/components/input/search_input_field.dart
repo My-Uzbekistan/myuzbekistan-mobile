@@ -53,7 +53,7 @@ class SearchInputField extends HookWidget {
                     EdgeInsets.symmetric(vertical: 0, horizontal: 12),
                 fillColor: context.appColors.fill.quaternary,
                 filled: true,
-                prefixIcon: Assets.svgSearchLine.toSvgImage(
+                prefixIcon: Assets.svg.searchLine.path.toSvgImage(
                     colorFilter: ColorFilter.mode(
                         context.appColors.textIconColor.secondary,
                         BlendMode.srcIn)),

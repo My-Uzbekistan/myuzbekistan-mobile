@@ -32,5 +32,6 @@
   "finance_title": "Finance",
   "all_exchange_rates": "All exchange rates",
   "all_cards": "All cards",
-  "fiscalReceipt": "Fiscal receipt"
+  "fiscalReceipt": "Fiscal receipt",
+  "verification_page_code_send_phone": "Verification code sent to {phone}"
 }

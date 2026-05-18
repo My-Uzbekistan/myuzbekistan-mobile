@@ -7,4 +7,6 @@ abstract class AuthPhoneEvent with _$AuthPhoneEvent {
 
   const factory AuthPhoneEvent.sendEvent() =
   _AuthPhoneSendEvent;
+  const factory AuthPhoneEvent.pushedConfirm() =
+  _AuthPushedConfirmEvent;
 }

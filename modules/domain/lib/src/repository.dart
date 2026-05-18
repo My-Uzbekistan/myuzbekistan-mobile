@@ -1,3 +1,5 @@
+import 'package:domain/src/models/onboarding_item.dart';
+
 import 'models.dart';
 
 abstract interface class Repository {
@@ -19,7 +21,7 @@ abstract interface class Repository {
     required int categoryId,
     required int page,
     required int pageSize,
-     int? regionId,
+    int? regionId,
     String? search,
     Map<String, String>? sort,
   });
@@ -39,6 +41,18 @@ abstract interface class Repository {
     String? fullName,
     String? photoUrl,
   });
+
+  //AuthPhone sendCode
+  Future<dynamic> sendCode({
+    required String phoneNumber,
+  });
+
+  Future<Token> authConfirmCode({
+    required String phoneNumber,
+    required String code,
+  });
+
+
 
   Future<Token> authApple({
     required String idToken,
@@ -62,6 +76,7 @@ abstract interface class Repository {
   Future<dynamic> setFirebaseToken({required String token});
 
   Future<List<NotificationItem>> getNotifications();
+
   Future<int> getNotificationUnreadCount();
 
   Future<NotificationItem> getNotificationById({required int id});
@@ -79,4 +94,18 @@ abstract interface class Repository {
   });
 
   Future<List<CatalogItemModel>> getCatalog();
+
+  Future<List<OnboardingItem>> getActiveOnboardings();
+
+  Future<dynamic> onboardingTrackView({required int id});
+
+  Future<dynamic> onboardingTrackClick({required int id});
+
+
+  Future<ClaimStatus?> giftActive();
+  Future<List<ClaimHistory>> giftHistory();
+  Future<ClaimHistory> giftActivate();
+
+
+
 }

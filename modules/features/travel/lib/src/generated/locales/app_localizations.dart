@@ -648,6 +648,90 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Отмена'**
   String get action_cancel;
+
+  /// No description provided for @action_detail.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подробно'**
+  String get action_detail;
+
+  /// No description provided for @gift_page_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вам доступен\nподарок'**
+  String get gift_page_title;
+
+  /// No description provided for @gift_page_subtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нажмите, чтобы забрать'**
+  String get gift_page_subtitle;
+
+  /// No description provided for @gift_page_action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Забрать приз'**
+  String get gift_page_action;
+
+  /// No description provided for @gift_second_page_title_minute.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{Возвращайтесь через {count} минуту} few{Возвращайтесь через {count} минуты} many{Возвращайтесь через {count} минут} other{Возвращайтесь через {count} минут}}'**
+  String gift_second_page_title_minute(num count);
+
+  /// No description provided for @gift_second_page_title_hour.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{Возвращайтесь через {count} час} few{Возвращайтесь через {count} часа} many{Возвращайтесь через {count} часов} other{Возвращайтесь через {count} часов}}'**
+  String gift_second_page_title_hour(num count);
+
+  /// No description provided for @gift_second_page_title_day.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{Возвращайтесь через {count} день} few{Возвращайтесь через {count} дня} many{Возвращайтесь через {count} дней} other{Возвращайтесь через {count} дней}}'**
+  String gift_second_page_title_day(num count);
+
+  /// No description provided for @gift_second_page_subtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мы готовим ваш подарок'**
+  String get gift_second_page_subtitle;
+
+  /// No description provided for @gift_history.
+  ///
+  /// In ru, this message translates to:
+  /// **'История призов'**
+  String get gift_history;
+
+  /// No description provided for @mb.
+  ///
+  /// In ru, this message translates to:
+  /// **'МБ'**
+  String get mb;
+
+  /// No description provided for @gb.
+  ///
+  /// In ru, this message translates to:
+  /// **'ГБ'**
+  String get gb;
+
+  /// No description provided for @claim_dialog_caption.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы получили бонус на свой мобильный номер'**
+  String get claim_dialog_caption;
+
+  /// No description provided for @claim_warning_page_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Только для абонентов Uztelecom'**
+  String get claim_warning_page_title;
+
+  /// No description provided for @claim_warning_page_caption.
+  ///
+  /// In ru, this message translates to:
+  /// **'Для получения подарка необходимо пройти регистрацию на номер Uztelecom'**
+  String get claim_warning_page_caption;
 }
 
 class _FeatureTravelLocalizationsDelegate

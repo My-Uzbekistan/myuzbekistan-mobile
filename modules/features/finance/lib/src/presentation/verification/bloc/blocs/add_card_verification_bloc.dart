@@ -5,14 +5,16 @@ part of '../verification_bloc.dart';
 class AddCardVerificationBloc extends VerificationBloc {
   final FinanceRepository _repository;
   final FinanceSharedService _financeSharedService;
+  late String cardId;
 
   AddCardVerificationBloc(
     FinanceRepository rep,
     FinanceSharedService financeSharedService,
   ) : _repository = rep,
       _financeSharedService = financeSharedService,
-
-      super(VerificationState());
+      super(VerificationState()) {
+    on<_VerificationSetCardIdEvent>(_setCardIdEvent);
+  }
 
   @override
   Future<void> _verify(
@@ -22,7 +24,7 @@ class AddCardVerificationBloc extends VerificationBloc {
     try {
       emitter(state.copyWith(isLoading: true));
       final result = await _repository.confirmCard(
-        cardId: state.cardId,
+        cardId: cardId,
         otp: state.code,
       );
       _financeSharedService.cardsUpdate();
@@ -33,15 +35,22 @@ class AddCardVerificationBloc extends VerificationBloc {
         ),
       );
     } catch (e) {
-      debugPrint("confirm result ${e}");
-      emitter(state.copyWith(isLoading: false,hasError: true));
+      emitter(state.copyWith(isLoading: false, hasError: true));
     }
   }
 
+  void _setCardIdEvent(
+    _VerificationSetCardIdEvent event,
+    Emitter<VerificationState> emitter,
+  ) {
+    cardId = event.cardId;
+  }
+
   @override
-  void _resend(_VerificationResendEvent event, Emitter<VerificationState> emitter) {
-
-
+  void _resend(
+    _VerificationResendEvent event,
+    Emitter<VerificationState> emitter,
+  ) {
     super._resend(event, emitter);
   }
 }

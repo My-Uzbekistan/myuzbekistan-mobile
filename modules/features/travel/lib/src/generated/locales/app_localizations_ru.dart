@@ -334,4 +334,78 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get action_cancel => 'Отмена';
+
+  @override
+  String get action_detail => 'Подробно';
+
+  @override
+  String get gift_page_title => 'Вам доступен\nподарок';
+
+  @override
+  String get gift_page_subtitle => 'Нажмите, чтобы забрать';
+
+  @override
+  String get gift_page_action => 'Забрать приз';
+
+  @override
+  String gift_second_page_title_minute(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Возвращайтесь через $count минут',
+      many: 'Возвращайтесь через $count минут',
+      few: 'Возвращайтесь через $count минуты',
+      one: 'Возвращайтесь через $count минуту',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gift_second_page_title_hour(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Возвращайтесь через $count часов',
+      many: 'Возвращайтесь через $count часов',
+      few: 'Возвращайтесь через $count часа',
+      one: 'Возвращайтесь через $count час',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String gift_second_page_title_day(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Возвращайтесь через $count дней',
+      many: 'Возвращайтесь через $count дней',
+      few: 'Возвращайтесь через $count дня',
+      one: 'Возвращайтесь через $count день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get gift_second_page_subtitle => 'Мы готовим ваш подарок';
+
+  @override
+  String get gift_history => 'История призов';
+
+  @override
+  String get mb => 'МБ';
+
+  @override
+  String get gb => 'ГБ';
+
+  @override
+  String get claim_dialog_caption =>
+      'Вы получили бонус на свой мобильный номер';
+
+  @override
+  String get claim_warning_page_title => 'Только для абонентов Uztelecom';
+
+  @override
+  String get claim_warning_page_caption =>
+      'Для получения подарка необходимо пройти регистрацию на номер Uztelecom';
 }

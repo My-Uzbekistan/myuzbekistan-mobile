@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:finance/finance.dart';
@@ -58,11 +60,25 @@ class _MyAppState extends State<MyApp> {
         NotificationService().init();
       });
     });
-
+    init();
     global.globalInit();
   }
 
-  void openNotification() {}
+  Future<void> init() async {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    remoteConfig.setConfigSettings(  RemoteConfigSettings(
+      fetchTimeout: const Duration(hours: 12),
+      minimumFetchInterval: const Duration(hours: 1), // For testing
+    ),);
+
+    final jsonString = await rootBundle.loadString(
+      'assets/remote_config_defaults.json',
+    );
+    final Map<String, dynamic> jsonMap = json.decode(jsonString);
+    await remoteConfig.setDefaults(jsonMap);
+
+    await FirebaseRemoteConfig.instance.fetchAndActivate();
+  }
 
   @override
   void dispose() {
@@ -79,6 +95,9 @@ class _MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (context) => getIt<NotificationCountCubit>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<GiftBloc>(),
           ),
         ],
         child: BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(

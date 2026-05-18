@@ -85,6 +85,7 @@
   "action_continue": "Continue",
   "accept_terms": "By clicking the button, you agree to the terms",
 
-  "terms": "Terms of the User Agreement"
+  "terms": "Terms of the User Agreement",
+  "auth_page_action_phone": "Continue with phone"
 
 }

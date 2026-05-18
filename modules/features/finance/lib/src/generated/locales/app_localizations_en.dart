@@ -114,4 +114,9 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
 
   @override
   String get fiscalReceipt => 'Fiscal receipt';
+
+  @override
+  String verification_page_code_send_phone(Object phone) {
+    return 'Verification code sent to $phone';
+  }
 }

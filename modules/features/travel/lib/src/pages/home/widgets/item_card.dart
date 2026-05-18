@@ -93,7 +93,7 @@ class _ItemCardState extends State<ItemCard>
                         Row(
                           spacing: 4,
                           children: [
-                            Assets.svgStarFill.toSvgImage(
+                            Assets.svg.starFill.path.toSvgImage(
                               width: 16,
                               height: 16,
                               colorFilter: ColorFilter.mode(

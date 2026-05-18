@@ -43,7 +43,7 @@ class _AboutInfoPageState extends State<AboutInfoPage> {
                         );
 
                       default:
-                        return Assets.pngDefaultContentImage.toImage(
+                        return Assets.png.defaultContentImage.image(
                           fit: BoxFit.cover,
                         );
                     }

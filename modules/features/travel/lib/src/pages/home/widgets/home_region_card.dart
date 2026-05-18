@@ -48,7 +48,7 @@ class HomeRegionCard extends StatelessWidget {
                       child: Row(
                         spacing: 12,
                         children: [
-                          Assets.svgLocatorFill.toSvgImage(
+                          Assets.svg.locatorFill.path.toSvgImage(
                             width: 18,
                             height: 18,
                             fit: BoxFit.fill,
@@ -57,7 +57,7 @@ class HomeRegionCard extends StatelessWidget {
                               BlendMode.srcIn,
                             ),
                           ),
-                          Text(title).labelMd(),
+                         Flexible(child:  Text(title,maxLines: 1,overflow: TextOverflow.ellipsis,).labelMd(),)
                         ],
                       ),
                     ),
@@ -92,6 +92,64 @@ class HomeRegionCard extends StatelessWidget {
               ),
             ),
           ),
+          if (Toggle.giftToggle)
+            BlocBuilder<GiftBloc, GiftBlocState>(
+              builder: (context, state) {
+                return AspectRatio(
+                  aspectRatio: 1,
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: () {
+                        context.pushNamed(
+                          AppNavPath.travel.travelHomeGiftPage.name,
+
+                        );
+                    },
+                    child: Container(
+                      height: 48,
+                      width: 48,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        border:
+                            state.haveGift
+                                ? null
+                                : Border.all(
+                                  color: context.appColors.stroke.nonOpaque,
+                                  width: 1,
+                                ),
+                        gradient:
+                            state.haveGift
+                                ? LinearGradient(
+                                  colors: [
+                                    Color(0xffADEE5C),
+                                    Color(0xff00B93F),
+                                  ],
+                                )
+                                : null,
+                        borderRadius: BorderRadius.circular(40),
+                      ),
+                      child: SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: Center(
+                          child: Assets.svg.iconGift.path.toSvgImage(
+                              tintColor:
+                              state.haveGift
+                                  ? Colors.white
+                                  : context
+                                  .appColors
+                                  .textIconColor
+                                  .primary,
+                              fit: BoxFit.contain,
+                            ),
+
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           AspectRatio(
             aspectRatio: 1,
             child: GestureDetector(
@@ -119,7 +177,7 @@ class HomeRegionCard extends StatelessWidget {
                       children: [
                         Positioned.fill(
                           child: Center(
-                            child: Assets.svgNotificationIcon.toSvgImage(
+                            child: Assets.svg.notificationIcon.path.toSvgImage(
                               tintColor:
                                   context.appColors.textIconColor.primary,
                               fit: BoxFit.contain,
@@ -137,7 +195,12 @@ class HomeRegionCard extends StatelessWidget {
                               return CircleAvatar(
                                 radius: 8,
                                 backgroundColor: context.appColors.colors.red,
-                                child: Center(child: Text(state.toString(),overflow: TextOverflow.ellipsis,).bodyXXsm(color: Colors.white)),
+                                child: Center(
+                                  child: Text(
+                                    state.toString(),
+                                    overflow: TextOverflow.ellipsis,
+                                  ).bodyXXsm(color: Colors.white),
+                                ),
                               );
                             },
                           ),

@@ -55,12 +55,13 @@ extension VerificationEventPatterns on VerificationEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _VerificationSetCodeEvent value)?  setCodeEvent,TResult Function( _VerificationSetCardIdEvent value)?  setCardCardId,TResult Function( _VerificationResendEvent value)?  resendEvent,TResult Function( _VerificationVerifyEvent value)?  verify,TResult Function( _VerificationUpdateTimerEvent value)?  updateTimer,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _VerificationSetCodeEvent value)?  setCodeEvent,TResult Function( _VerificationSetCardIdEvent value)?  setCardCardId,TResult Function( _VerificationSetPhoneEvent value)?  setPhoneEvent,TResult Function( _VerificationResendEvent value)?  resendEvent,TResult Function( _VerificationVerifyEvent value)?  verify,TResult Function( _VerificationUpdateTimerEvent value)?  updateTimer,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _VerificationSetCodeEvent() when setCodeEvent != null:
 return setCodeEvent(_that);case _VerificationSetCardIdEvent() when setCardCardId != null:
-return setCardCardId(_that);case _VerificationResendEvent() when resendEvent != null:
+return setCardCardId(_that);case _VerificationSetPhoneEvent() when setPhoneEvent != null:
+return setPhoneEvent(_that);case _VerificationResendEvent() when resendEvent != null:
 return resendEvent(_that);case _VerificationVerifyEvent() when verify != null:
 return verify(_that);case _VerificationUpdateTimerEvent() when updateTimer != null:
 return updateTimer(_that);case _:
@@ -81,12 +82,13 @@ return updateTimer(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _VerificationSetCodeEvent value)  setCodeEvent,required TResult Function( _VerificationSetCardIdEvent value)  setCardCardId,required TResult Function( _VerificationResendEvent value)  resendEvent,required TResult Function( _VerificationVerifyEvent value)  verify,required TResult Function( _VerificationUpdateTimerEvent value)  updateTimer,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _VerificationSetCodeEvent value)  setCodeEvent,required TResult Function( _VerificationSetCardIdEvent value)  setCardCardId,required TResult Function( _VerificationSetPhoneEvent value)  setPhoneEvent,required TResult Function( _VerificationResendEvent value)  resendEvent,required TResult Function( _VerificationVerifyEvent value)  verify,required TResult Function( _VerificationUpdateTimerEvent value)  updateTimer,}){
 final _that = this;
 switch (_that) {
 case _VerificationSetCodeEvent():
 return setCodeEvent(_that);case _VerificationSetCardIdEvent():
-return setCardCardId(_that);case _VerificationResendEvent():
+return setCardCardId(_that);case _VerificationSetPhoneEvent():
+return setPhoneEvent(_that);case _VerificationResendEvent():
 return resendEvent(_that);case _VerificationVerifyEvent():
 return verify(_that);case _VerificationUpdateTimerEvent():
 return updateTimer(_that);case _:
@@ -106,12 +108,13 @@ return updateTimer(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _VerificationSetCodeEvent value)?  setCodeEvent,TResult? Function( _VerificationSetCardIdEvent value)?  setCardCardId,TResult? Function( _VerificationResendEvent value)?  resendEvent,TResult? Function( _VerificationVerifyEvent value)?  verify,TResult? Function( _VerificationUpdateTimerEvent value)?  updateTimer,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _VerificationSetCodeEvent value)?  setCodeEvent,TResult? Function( _VerificationSetCardIdEvent value)?  setCardCardId,TResult? Function( _VerificationSetPhoneEvent value)?  setPhoneEvent,TResult? Function( _VerificationResendEvent value)?  resendEvent,TResult? Function( _VerificationVerifyEvent value)?  verify,TResult? Function( _VerificationUpdateTimerEvent value)?  updateTimer,}){
 final _that = this;
 switch (_that) {
 case _VerificationSetCodeEvent() when setCodeEvent != null:
 return setCodeEvent(_that);case _VerificationSetCardIdEvent() when setCardCardId != null:
-return setCardCardId(_that);case _VerificationResendEvent() when resendEvent != null:
+return setCardCardId(_that);case _VerificationSetPhoneEvent() when setPhoneEvent != null:
+return setPhoneEvent(_that);case _VerificationResendEvent() when resendEvent != null:
 return resendEvent(_that);case _VerificationVerifyEvent() when verify != null:
 return verify(_that);case _VerificationUpdateTimerEvent() when updateTimer != null:
 return updateTimer(_that);case _:
@@ -131,11 +134,12 @@ return updateTimer(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String code)?  setCodeEvent,TResult Function( String cardId)?  setCardCardId,TResult Function()?  resendEvent,TResult Function()?  verify,TResult Function( String timer,  bool isRetry)?  updateTimer,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String code)?  setCodeEvent,TResult Function( String cardId)?  setCardCardId,TResult Function( String phone)?  setPhoneEvent,TResult Function()?  resendEvent,TResult Function()?  verify,TResult Function( String timer,  bool isRetry)?  updateTimer,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _VerificationSetCodeEvent() when setCodeEvent != null:
 return setCodeEvent(_that.code);case _VerificationSetCardIdEvent() when setCardCardId != null:
-return setCardCardId(_that.cardId);case _VerificationResendEvent() when resendEvent != null:
+return setCardCardId(_that.cardId);case _VerificationSetPhoneEvent() when setPhoneEvent != null:
+return setPhoneEvent(_that.phone);case _VerificationResendEvent() when resendEvent != null:
 return resendEvent();case _VerificationVerifyEvent() when verify != null:
 return verify();case _VerificationUpdateTimerEvent() when updateTimer != null:
 return updateTimer(_that.timer,_that.isRetry);case _:
@@ -156,11 +160,12 @@ return updateTimer(_that.timer,_that.isRetry);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String code)  setCodeEvent,required TResult Function( String cardId)  setCardCardId,required TResult Function()  resendEvent,required TResult Function()  verify,required TResult Function( String timer,  bool isRetry)  updateTimer,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String code)  setCodeEvent,required TResult Function( String cardId)  setCardCardId,required TResult Function( String phone)  setPhoneEvent,required TResult Function()  resendEvent,required TResult Function()  verify,required TResult Function( String timer,  bool isRetry)  updateTimer,}) {final _that = this;
 switch (_that) {
 case _VerificationSetCodeEvent():
 return setCodeEvent(_that.code);case _VerificationSetCardIdEvent():
-return setCardCardId(_that.cardId);case _VerificationResendEvent():
+return setCardCardId(_that.cardId);case _VerificationSetPhoneEvent():
+return setPhoneEvent(_that.phone);case _VerificationResendEvent():
 return resendEvent();case _VerificationVerifyEvent():
 return verify();case _VerificationUpdateTimerEvent():
 return updateTimer(_that.timer,_that.isRetry);case _:
@@ -180,11 +185,12 @@ return updateTimer(_that.timer,_that.isRetry);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String code)?  setCodeEvent,TResult? Function( String cardId)?  setCardCardId,TResult? Function()?  resendEvent,TResult? Function()?  verify,TResult? Function( String timer,  bool isRetry)?  updateTimer,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String code)?  setCodeEvent,TResult? Function( String cardId)?  setCardCardId,TResult? Function( String phone)?  setPhoneEvent,TResult? Function()?  resendEvent,TResult? Function()?  verify,TResult? Function( String timer,  bool isRetry)?  updateTimer,}) {final _that = this;
 switch (_that) {
 case _VerificationSetCodeEvent() when setCodeEvent != null:
 return setCodeEvent(_that.code);case _VerificationSetCardIdEvent() when setCardCardId != null:
-return setCardCardId(_that.cardId);case _VerificationResendEvent() when resendEvent != null:
+return setCardCardId(_that.cardId);case _VerificationSetPhoneEvent() when setPhoneEvent != null:
+return setPhoneEvent(_that.phone);case _VerificationResendEvent() when resendEvent != null:
 return resendEvent();case _VerificationVerifyEvent() when verify != null:
 return verify();case _VerificationUpdateTimerEvent() when updateTimer != null:
 return updateTimer(_that.timer,_that.isRetry);case _:
@@ -330,6 +336,72 @@ as String,
 /// @nodoc
 
 
+class _VerificationSetPhoneEvent implements VerificationEvent {
+  const _VerificationSetPhoneEvent(this.phone);
+  
+
+ final  String phone;
+
+/// Create a copy of VerificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$VerificationSetPhoneEventCopyWith<_VerificationSetPhoneEvent> get copyWith => __$VerificationSetPhoneEventCopyWithImpl<_VerificationSetPhoneEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VerificationSetPhoneEvent&&(identical(other.phone, phone) || other.phone == phone));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,phone);
+
+@override
+String toString() {
+  return 'VerificationEvent.setPhoneEvent(phone: $phone)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$VerificationSetPhoneEventCopyWith<$Res> implements $VerificationEventCopyWith<$Res> {
+  factory _$VerificationSetPhoneEventCopyWith(_VerificationSetPhoneEvent value, $Res Function(_VerificationSetPhoneEvent) _then) = __$VerificationSetPhoneEventCopyWithImpl;
+@useResult
+$Res call({
+ String phone
+});
+
+
+
+
+}
+/// @nodoc
+class __$VerificationSetPhoneEventCopyWithImpl<$Res>
+    implements _$VerificationSetPhoneEventCopyWith<$Res> {
+  __$VerificationSetPhoneEventCopyWithImpl(this._self, this._then);
+
+  final _VerificationSetPhoneEvent _self;
+  final $Res Function(_VerificationSetPhoneEvent) _then;
+
+/// Create a copy of VerificationEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? phone = null,}) {
+  return _then(_VerificationSetPhoneEvent(
+null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
 class _VerificationResendEvent implements VerificationEvent {
   const _VerificationResendEvent();
   
@@ -462,7 +534,7 @@ as bool,
 /// @nodoc
 mixin _$VerificationState {
 
- String get code; String get cardId; bool get isLoading; bool get isRetry; String get timer; bool get hasError; VerificationNavState? get navState;
+ String get code; String get phone; bool get isLoading; bool get isRetry; String get timer; bool get hasError; VerificationNavState? get navState;
 /// Create a copy of VerificationState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -473,16 +545,16 @@ $VerificationStateCopyWith<VerificationState> get copyWith => _$VerificationStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is VerificationState&&(identical(other.code, code) || other.code == code)&&(identical(other.cardId, cardId) || other.cardId == cardId)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isRetry, isRetry) || other.isRetry == isRetry)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.navState, navState) || other.navState == navState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is VerificationState&&(identical(other.code, code) || other.code == code)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isRetry, isRetry) || other.isRetry == isRetry)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.navState, navState) || other.navState == navState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,code,cardId,isLoading,isRetry,timer,hasError,navState);
+int get hashCode => Object.hash(runtimeType,code,phone,isLoading,isRetry,timer,hasError,navState);
 
 @override
 String toString() {
-  return 'VerificationState(code: $code, cardId: $cardId, isLoading: $isLoading, isRetry: $isRetry, timer: $timer, hasError: $hasError, navState: $navState)';
+  return 'VerificationState(code: $code, phone: $phone, isLoading: $isLoading, isRetry: $isRetry, timer: $timer, hasError: $hasError, navState: $navState)';
 }
 
 
@@ -493,7 +565,7 @@ abstract mixin class $VerificationStateCopyWith<$Res>  {
   factory $VerificationStateCopyWith(VerificationState value, $Res Function(VerificationState) _then) = _$VerificationStateCopyWithImpl;
 @useResult
 $Res call({
- String code, String cardId, bool isLoading, bool isRetry, String timer, bool hasError, VerificationNavState? navState
+ String code, String phone, bool isLoading, bool isRetry, String timer, bool hasError, VerificationNavState? navState
 });
 
 
@@ -510,10 +582,10 @@ class _$VerificationStateCopyWithImpl<$Res>
 
 /// Create a copy of VerificationState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? code = null,Object? cardId = null,Object? isLoading = null,Object? isRetry = null,Object? timer = null,Object? hasError = null,Object? navState = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? code = null,Object? phone = null,Object? isLoading = null,Object? isRetry = null,Object? timer = null,Object? hasError = null,Object? navState = freezed,}) {
   return _then(_self.copyWith(
 code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
-as String,cardId: null == cardId ? _self.cardId : cardId // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isRetry: null == isRetry ? _self.isRetry : isRetry // ignore: cast_nullable_to_non_nullable
 as bool,timer: null == timer ? _self.timer : timer // ignore: cast_nullable_to_non_nullable
@@ -616,10 +688,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String code,  String cardId,  bool isLoading,  bool isRetry,  String timer,  bool hasError,  VerificationNavState? navState)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String code,  String phone,  bool isLoading,  bool isRetry,  String timer,  bool hasError,  VerificationNavState? navState)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _VerificationState() when $default != null:
-return $default(_that.code,_that.cardId,_that.isLoading,_that.isRetry,_that.timer,_that.hasError,_that.navState);case _:
+return $default(_that.code,_that.phone,_that.isLoading,_that.isRetry,_that.timer,_that.hasError,_that.navState);case _:
   return orElse();
 
 }
@@ -637,10 +709,10 @@ return $default(_that.code,_that.cardId,_that.isLoading,_that.isRetry,_that.time
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String code,  String cardId,  bool isLoading,  bool isRetry,  String timer,  bool hasError,  VerificationNavState? navState)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String code,  String phone,  bool isLoading,  bool isRetry,  String timer,  bool hasError,  VerificationNavState? navState)  $default,) {final _that = this;
 switch (_that) {
 case _VerificationState():
-return $default(_that.code,_that.cardId,_that.isLoading,_that.isRetry,_that.timer,_that.hasError,_that.navState);case _:
+return $default(_that.code,_that.phone,_that.isLoading,_that.isRetry,_that.timer,_that.hasError,_that.navState);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -657,10 +729,10 @@ return $default(_that.code,_that.cardId,_that.isLoading,_that.isRetry,_that.time
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String code,  String cardId,  bool isLoading,  bool isRetry,  String timer,  bool hasError,  VerificationNavState? navState)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String code,  String phone,  bool isLoading,  bool isRetry,  String timer,  bool hasError,  VerificationNavState? navState)?  $default,) {final _that = this;
 switch (_that) {
 case _VerificationState() when $default != null:
-return $default(_that.code,_that.cardId,_that.isLoading,_that.isRetry,_that.timer,_that.hasError,_that.navState);case _:
+return $default(_that.code,_that.phone,_that.isLoading,_that.isRetry,_that.timer,_that.hasError,_that.navState);case _:
   return null;
 
 }
@@ -672,11 +744,11 @@ return $default(_that.code,_that.cardId,_that.isLoading,_that.isRetry,_that.time
 
 
 class _VerificationState extends VerificationState {
-  const _VerificationState({this.code = "", this.cardId = "", this.isLoading = false, this.isRetry = false, this.timer = "", this.hasError = false, this.navState}): super._();
+  const _VerificationState({this.code = "", this.phone = "", this.isLoading = false, this.isRetry = false, this.timer = "", this.hasError = false, this.navState}): super._();
   
 
 @override@JsonKey() final  String code;
-@override@JsonKey() final  String cardId;
+@override@JsonKey() final  String phone;
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  bool isRetry;
 @override@JsonKey() final  String timer;
@@ -693,16 +765,16 @@ _$VerificationStateCopyWith<_VerificationState> get copyWith => __$VerificationS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VerificationState&&(identical(other.code, code) || other.code == code)&&(identical(other.cardId, cardId) || other.cardId == cardId)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isRetry, isRetry) || other.isRetry == isRetry)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.navState, navState) || other.navState == navState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _VerificationState&&(identical(other.code, code) || other.code == code)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isRetry, isRetry) || other.isRetry == isRetry)&&(identical(other.timer, timer) || other.timer == timer)&&(identical(other.hasError, hasError) || other.hasError == hasError)&&(identical(other.navState, navState) || other.navState == navState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,code,cardId,isLoading,isRetry,timer,hasError,navState);
+int get hashCode => Object.hash(runtimeType,code,phone,isLoading,isRetry,timer,hasError,navState);
 
 @override
 String toString() {
-  return 'VerificationState(code: $code, cardId: $cardId, isLoading: $isLoading, isRetry: $isRetry, timer: $timer, hasError: $hasError, navState: $navState)';
+  return 'VerificationState(code: $code, phone: $phone, isLoading: $isLoading, isRetry: $isRetry, timer: $timer, hasError: $hasError, navState: $navState)';
 }
 
 
@@ -713,7 +785,7 @@ abstract mixin class _$VerificationStateCopyWith<$Res> implements $VerificationS
   factory _$VerificationStateCopyWith(_VerificationState value, $Res Function(_VerificationState) _then) = __$VerificationStateCopyWithImpl;
 @override @useResult
 $Res call({
- String code, String cardId, bool isLoading, bool isRetry, String timer, bool hasError, VerificationNavState? navState
+ String code, String phone, bool isLoading, bool isRetry, String timer, bool hasError, VerificationNavState? navState
 });
 
 
@@ -730,10 +802,10 @@ class __$VerificationStateCopyWithImpl<$Res>
 
 /// Create a copy of VerificationState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? code = null,Object? cardId = null,Object? isLoading = null,Object? isRetry = null,Object? timer = null,Object? hasError = null,Object? navState = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? code = null,Object? phone = null,Object? isLoading = null,Object? isRetry = null,Object? timer = null,Object? hasError = null,Object? navState = freezed,}) {
   return _then(_VerificationState(
 code: null == code ? _self.code : code // ignore: cast_nullable_to_non_nullable
-as String,cardId: null == cardId ? _self.cardId : cardId // ignore: cast_nullable_to_non_nullable
+as String,phone: null == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,isRetry: null == isRetry ? _self.isRetry : isRetry // ignore: cast_nullable_to_non_nullable
 as bool,timer: null == timer ? _self.timer : timer // ignore: cast_nullable_to_non_nullable

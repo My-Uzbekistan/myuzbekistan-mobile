@@ -46,6 +46,13 @@ class FinancePackageModule extends _i526.MicroPackageModule {
           gh<_i83.FinanceSharedService>(),
           gh<_i494.FinanceRepository>(),
         ));
+    gh.factory<_i491.VerificationBloc>(
+      () => _i491.AuthPhoneVerificationBloc(
+        gh<_i494.Repository>(),
+        gh<_i494.SecurityStorage>(),
+      ),
+      instanceName: 'authVerification',
+    );
     gh.factory<_i494.HistoryBloc>(
         () => _i494.HistoryBloc(gh<_i494.FinanceRepository>()));
     gh.factory<_i950.PaymentCheckBloc>(

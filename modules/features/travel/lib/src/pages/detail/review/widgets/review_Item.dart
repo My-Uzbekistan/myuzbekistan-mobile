@@ -167,7 +167,7 @@ class ReviewStars extends StatelessWidget {
 
   Widget star(BuildContext context, int e) {
     if (filled) {
-      return Assets.svgStarFill.toSvgImage(
+      return Assets.svg.starFill.path.toSvgImage(
         fit: BoxFit.fill,
         tintColor:
             e <= stars
@@ -176,11 +176,11 @@ class ReviewStars extends StatelessWidget {
       );
     }
     return e <= stars
-        ? Assets.svgStarFill.toSvgImage(
+        ? Assets.svg.starFill.path.toSvgImage(
           fit: BoxFit.fill,
           tintColor: context.appColors.textIconColor.primary,
         )
-        : Assets.svgStarOutline.toSvgImage(
+        : Assets.svg.starOutline.path.toSvgImage(
           fit: BoxFit.fill,
           tintColor: context.appColors.textIconColor.primary,
         );

@@ -52,9 +52,8 @@
   "guest_chose": "Guest selection",
   "distanceKm": "km",
   "distanceM": "m",
-
   "prayerTime": "{time, select, fajr{Fajr} sunrise{Sunrise} dhuhr{Dhuhr} asr{Asr} maghrib{Maghrib} isha{Isha} other{Prayer}}",
-"prayerTimeTitle": "Prayer Times",
+  "prayerTimeTitle": "Prayer Times",
   "notifications": "Notifications",
   "whatAmenitiesAwait": "What amenities await you",
   "viewAllAmenities": "View all amenities",
@@ -71,8 +70,6 @@
   "map_open_in": "Open In",
   "workingHours": "Working hours",
   "writeReviewInFewSentences": "Write a review in a few sentences",
-
-
   "catalogMyEsim": "My eSIM",
   "catalogTravelQuiz": "Travel Quiz",
   "catalogAviaTickets": "Flight tickets",
@@ -82,10 +79,8 @@
   "catalogHotels": "Hotels",
   "catalogCottages": "Cottages",
   "catalogInsurance": "Insurance",
-
   "catalogItemStatusNew": "New",
   "catalogItemStatusSoon": "Soon",
-
   "investment_top_contents_title": "Recommended",
   "investment_search_title": "Search",
   "investments_category_title": "All",
@@ -97,5 +92,22 @@
   "investment_page_sort_price": "Currency",
   "investment_page_sort_title": "Filter",
   "investment_search_page_initial": "Enter search query...",
-  "action_cancel": "Cancel"
+  "action_cancel": "Cancel",
+  "action_detail": "In detail",
+  "gift_page_title": "A gift is available for you",
+  "gift_page_subtitle": "Tap to claim",
+  "gift_page_action": "Claim the prize",
+  "gift_second_page_title_day": "{count, plural, =1{Come back in 1 day} other{Come back in {count} days}}",
+  "gift_second_page_title_minut": "{count, plural, =1{Come back in 1 minute} other{Come back in {count} minutes}}",
+  "gift_second_page_title_hour": "{count, plural, =1{Come back in 1 hour} other{Come back in {count} hours}}",
+  "gift_second_page_subtitle": "We are preparing your gift",
+  "gift_history": "Prize history",
+  "mb": "MB",
+  "gb": "GB",
+  "claim_dialog_caption": "You received a bonus on your mobile number",
+  "claim_warning_page_title": "Only for Uztelecom subscribers",
+  "claim_warning_page_caption":"To receive the gift, you need to register with an Uztelecom number"
+
+
+
 }

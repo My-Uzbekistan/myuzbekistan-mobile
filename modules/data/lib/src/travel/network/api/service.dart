@@ -1,11 +1,13 @@
 import 'package:data/src/models/items_response.dart';
 import 'package:data/src/travel/models/notification/notification_item_dto.dart';
+import 'package:data/src/travel/models/onboarding_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
 import '../../models/about_dto.dart';
 import '../../models/catalog/catalog_dto.dart';
 import '../../models/categories_dto.dart';
+import '../../models/claim_dto.dart';
 import '../../models/currency_dto.dart';
 import '../../models/detail/content_dto.dart';
 import '../../models/favorite_dto.dart';
@@ -33,7 +35,7 @@ abstract class RestService {
     @Path("categoryId") required int categoryId,
     @Query("page") required int page,
     @Query("pageSize") required int pageSize,
-    @Query("regionId")  int? regionId,
+    @Query("regionId") int? regionId,
     @Query("search") String? search,
     @Queries() Map<String, String>? sort,
   });
@@ -105,7 +107,6 @@ abstract class RestService {
   @GET("notifications/{id}")
   Future<NotificationItemDto> getNotificationById(@Path("id") int id);
 
-
   @POST("notifications/mark-seen/{id}")
   Future<dynamic> seenNotification(@Path("id") int id);
 
@@ -120,4 +121,29 @@ abstract class RestService {
 
   @GET("catalog-snapshots")
   Future<List<CatalogDto>> getCatalog();
+
+  @GET("onboarding/active")
+  Future<List<OnboardingDto>> getActiveOnboardings();
+
+  @POST("onboarding/track-view/{id}")
+  Future<dynamic> onboardingTrackView(@Path("id") int id);
+
+  @POST("onboarding/track-click/{id}")
+  Future<dynamic> onboardingTrackClick(@Path("id") int id);
+
+  //AuthPhone
+  @POST("registration/send-code")
+  Future<dynamic> authPhoneSendCode(@Body() Map<String, dynamic> body);
+
+  @POST("registration/confirm")
+  Future<TokenDto> authPhoneConfirm(@Body() Map<String, dynamic> body);
+
+  @GET("bonus/active")
+  Future<ClaimStatusDto?> giftActive();
+
+  @GET("bonus/history")
+  Future<ItemsResponse<ClaimDto>> giftHistory();
+
+  @POST("bonus/claim")
+  Future<ClaimDto> giftActivate();
 }

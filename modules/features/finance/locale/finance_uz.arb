@@ -33,6 +33,8 @@
   "finance_title": "Moliya",
   "all_exchange_rates": "Barcha valyuta kurslari",
   "all_cards": "Barchasi",
-  "fiscalReceipt": "Soliq cheki"
+  "fiscalReceipt": "Soliq cheki",
+  "verification_page_code_send_phone": "Tasdiqlash kodi {phone}  raqamga yuborildi"
+
 
 }

@@ -22,7 +22,6 @@ class MorePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i396.AuthPhoneBloc>(() => _i396.AuthPhoneBloc());
     gh.factory<_i830.AppSettingsBloc>(
         () => _i830.AppSettingsBloc(gh<_i494.AppPreference>()));
     gh.factory<_i201.BiometricUtils>(() => _i201.BiometricUtilsProvider());
@@ -36,6 +35,8 @@ class MorePackageModule extends _i526.MicroPackageModule {
           rp: gh<_i494.Repository>(),
           appStatusChangeListeners: gh<_i494.AppStatusChangeListeners>(),
         ));
+    gh.factory<_i396.AuthPhoneBloc>(
+        () => _i396.AuthPhoneBloc(gh<_i494.Repository>()));
     gh.factory<_i119.ProfileBloc>(() => _i119.ProfileBloc(
           gh<_i494.SecurityStorage>(),
           gh<_i494.AppStatusChangeListeners>(),

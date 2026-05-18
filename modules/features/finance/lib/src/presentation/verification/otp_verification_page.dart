@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:component_res/component_res.dart';
 import 'package:finance/src/core/extension.dart';
+import 'package:finance/src/presentation/verification/bloc/types.dart';
 import 'package:finance/src/presentation/verification/bloc/verification_bloc.dart';
 import 'package:finance/src/presentation/verification/verificatin_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -10,9 +11,9 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 class OtpVerificationPage extends StatefulWidget {
-  final String cardId;
+  final String verificationType;
 
-  const OtpVerificationPage({super.key, required this.cardId});
+  const OtpVerificationPage({super.key,required this.verificationType});
 
   @override
   State<OtpVerificationPage> createState() => _OtpVerificationPageState();
@@ -29,9 +30,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
 
   @override
   void initState() {
-    verificationBloc =
-        context.read<VerificationBloc>()
-          ..add(VerificationEvent.setCardCardId(widget.cardId));
+    verificationBloc = context.read<VerificationBloc>();
     listen();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -68,7 +67,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
               onPressed: () {
                 context.pop();
               },
-              icon: Assets.svgRoundedCloseIcon.toSvgImage(
+              icon: Assets.svg.roundedCloseIcon.path.toSvgImage(
                 colorFilter: ColorFilter.mode(
                   context.appColors.textIconColor.tertiary,
                   BlendMode.srcIn,
@@ -88,10 +87,18 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
               context.popUntil([
                 AppNavPath.finance.financeCards,
                 AppNavPath.finance.financePayment,
+                AppNavPath.more.authPage,
               ]);
             }
           },
           builder: (context, state) {
+
+            final description = switch(widget.verificationType){
+              VerificationType.addCardVerification => context.localization.cardAddSmsSent,
+              VerificationType.authVerification => context.localization.verification_page_code_send_phone(state.phone),
+              _ => ""
+            };
+
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -103,7 +110,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                       isRetryEnable: state.isRetry,
                       time: state.timer,
                       hasError: state.hasError,
-                      description: context.localization.cardAddSmsSent,
+                      description: description,
                       onCompleted: (code) {
                         verificationBloc?.add(
                           VerificationEvent.setCodeEvent(code),

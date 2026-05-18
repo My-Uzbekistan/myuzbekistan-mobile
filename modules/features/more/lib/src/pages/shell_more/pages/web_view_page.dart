@@ -9,16 +9,20 @@ import 'package:shared/shared.dart';
 class WebViewPage extends StatefulWidget {
   final String? title;
   final String? actionUrl;
+  final bool authRequired;
 
-  const WebViewPage({super.key, this.title, this.actionUrl});
+  const WebViewPage({super.key, this.title, this.actionUrl,this.authRequired=false});
+
   @override
   State<WebViewPage> createState() => _WebViewPageState();
 }
+
 class _WebViewPageState extends State<WebViewPage> {
   @override
   void initState() {
     super.initState();
   }
+
   Future<void> goBack() async {
     final canGoBack = await inAppWebViewController?.canGoBack();
     if (canGoBack ?? false) {
@@ -76,23 +80,22 @@ class _WebViewPageState extends State<WebViewPage> {
                             try {
                               final Map<String, dynamic> json =
                                   Map<String, dynamic>.from(data[0]);
-                              final int serviceId = json["serviceId"];
-                              final int amount = json["amount"];
+                              final String serviceId = json["serviceId"];
+                              final dynamic amount = json["amount"];
                               final completer = Completer<bool>();
+
                               context.finance.pushMerchantPage(
-                                id: serviceId.toString(),
-                                amount: amount.toString(),
+                                id: serviceId,
+                                amount: amount,
                                 extra: completer,
                               );
                               final result = await completer.future;
-
-                              if (result) {
-                                return {"close": true};
-                              }
-                            } catch (_) {}
+                              return {"close": result};
+                            } catch (e) {
+                              return {"close": false, "error": e.toString()};
+                            }
                           },
                         );
-
                   },
                   onPermissionRequest: onPermissionRequest,
 
@@ -102,7 +105,10 @@ class _WebViewPageState extends State<WebViewPage> {
                   onProgressChanged: (controller, progress) {
                     setState(() => _progress = progress / 100.0);
                   },
-                  shouldOverrideUrlLoading: (controller,navigationAction) async {
+                  shouldOverrideUrlLoading: (
+                    controller,
+                    navigationAction,
+                  ) async {
                     final url = navigationAction.request.url.toString();
 
                     if (url.startsWith("http") || url.startsWith("https")) {
@@ -113,7 +119,6 @@ class _WebViewPageState extends State<WebViewPage> {
                       return NavigationActionPolicy.CANCEL; // WebView ochmasin
                     }
                     return NavigationActionPolicy.CANCEL;
-
                   },
                   onLoadStop: (controller, url) {
                     setState(() => _progress = 1.0);

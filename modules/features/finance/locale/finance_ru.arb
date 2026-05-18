@@ -34,8 +34,8 @@
   "finance_title": "Финансы",
   "all_exchange_rates": "Все курсы валют",
   "all_cards": "Все карты",
-  "fiscalReceipt": "Фискальный чек"
-
+  "fiscalReceipt": "Фискальный чек",
+  "verification_page_code_send_phone": "Код подтверждения отправлен на {phone}"
 
 
 

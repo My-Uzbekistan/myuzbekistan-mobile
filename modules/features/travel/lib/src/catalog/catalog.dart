@@ -30,90 +30,25 @@ class _CatalogScreenState extends State<CatalogScreen> {
 
   @override
   Widget build(BuildContext context) {
-     final  defaultItems= [
-       CatalogItemModel(
-           title: "Investitsiya",
-           icon: Assets.catalogIconCameraAi,
-           status: CatalogStatus.active,
-           color: Color(0xff37A8C7),
-           actionType: CatalogActionType.inner,
-           action: "https://myuzb.uz/catalog/investments?contentsId=110&topContentsId=111"
-       ),
-       CatalogItemModel(
-           title: "Travel Market",
-           icon: Assets.catalogIconCameraAi,
-           status: CatalogStatus.active,
-           color: Color(0xff37A8C7),
-           actionType: CatalogActionType.inner,
-           action: "https://myuzb.uz/catalog/investments?contentsId=114&topContentsId=113"
-       )
-     ];
-    // catalogItems = [
+     // final  defaultItems= [
+     //   CatalogItemModel(
+     //       title: "Investitsiya",
+     //       icon: Assets.catalog.iconCameraAi.path,
+     //       status: CatalogStatus.active,
+     //       color: Color(0xff37A8C7),
+     //       actionType: CatalogActionType.inner,
+     //       action: "https://myuzb.uz/catalog/investments?contentsId=110&topContentsId=111"
+     //   ),
+     //   CatalogItemModel(
+     //       title: "Travel Market",
+     //       icon: Assets.catalog.iconCameraAi.path,
+     //       status: CatalogStatus.active,
+     //       color: Color(0xff37A8C7),
+     //       actionType: CatalogActionType.inner,
+     //       action: "https://myuzb.uz/catalog/investments?contentsId=114&topContentsId=113"
+     //   )
+     // ];
 
-    //   CatalogItemModel(
-    //     title: "Travel Cam AI",
-    //     svgAssets: Assets.catalogIconCameraAi,
-    //     type: CatalogItemType.cameraAi,
-    //     status: CatalogStatus.active,
-    //     color: Color(0xff37A8C7),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogTravelQuiz,
-    //     svgAssets: Assets.catalogDice,
-    //     type: CatalogItemType.quiz,
-    //     status: CatalogStatus.inProgress,
-    //     color: Color(0xff14CB7D),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogAviaTickets,
-    //     svgAssets: Assets.catalogAirplane,
-    //     type: CatalogItemType.airplane,
-    //     status: CatalogStatus.active,
-    //     color: Color(0xffff8500),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogChargers,
-    //     svgAssets: Assets.catalogEv,
-    //     type: CatalogItemType.charger,
-    //     status: CatalogStatus.inProgress,
-    //     color: Color(0xff0db006),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogPoster,
-    //     svgAssets: Assets.catalogEvents,
-    //     type: CatalogItemType.charger,
-    //     status: CatalogStatus.inProgress,
-    //     color: Color(0xffff582a),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogTrainTickets,
-    //     svgAssets: Assets.catalogMetro,
-    //     type: CatalogItemType.charger,
-    //     status: CatalogStatus.inProgress,
-    //     color: Color(0xff8317c5),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogHotels,
-    //     svgAssets: Assets.catalogHotels,
-    //     type: CatalogItemType.charger,
-    //     status: CatalogStatus.inProgress,
-    //     color: Color(0xff0077FE),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogCottages,
-    //     svgAssets: Assets.catalogCountryHouse,
-    //     type: CatalogItemType.charger,
-    //     status: CatalogStatus.inProgress,
-    //     color: Color(0xff818c99),
-    //   ),
-    //   CatalogItemModel(
-    //     title: context.localization.catalogInsurance,
-    //     svgAssets: Assets.catalogInsurance,
-    //     type: CatalogItemType.charger,
-    //     status: CatalogStatus.inProgress,
-    //     color: Color(0xffffc107),
-    //   ),
-    // ];
     return Scaffold(
       extendBody: true,
       body: CupertinoTheme(
@@ -185,8 +120,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         ),
                       );
                     },
-                    loaded: (array) {
-                      final items=[...array,...defaultItems];
+                    loaded: (items) {
+                      // final items=//[...array,...defaultItems];
                       return SliverPadding(
                         padding: EdgeInsets.symmetric(horizontal: 16).copyWith(
                           top: 8,
@@ -246,9 +181,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                                 spacing: 24,
                                 children: [
                                   MessageContainer.custom(
-                                    icon:
-                                        Assets.pngExclamationmarkSquare
-                                            .toImage(),
+                                    icon: Assets.png.exclamationmarkSquare.image(),
                                     title:
                                         context.localization.pageFailedToLoad,
                                     caption:
@@ -316,12 +249,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
           uri = uri.replace(
             queryParameters: {
               ...uri.queryParameters,
-              "token": securityStorage.getAccessToken(),
               "theme": context.brightness.name,
             },
           );
         }
-        debugPrint(uri.toString());
         context.more.pushWebViewPage(
           actionUrl: uri.toString(),
           authRequired: item.authRequired,
@@ -341,13 +272,3 @@ class _CatalogScreenState extends State<CatalogScreen> {
   }
 }
 
-//
-// try {
-// final String? deeplink = message.data["deeplink"];
-// if (deeplink != null && deeplink.isNotEmpty) {
-// final uri = Uri.parse(deeplink);
-// if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty) {
-// appRootNavigatorKey.currentContext?.push(uri.toString());
-// }
-// }
-// } catch (_) {}

@@ -55,12 +55,13 @@ extension AuthPhoneEventPatterns on AuthPhoneEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthPhoneSetEvent value)?  setPhone,TResult Function( _AuthPhoneSendEvent value)?  sendEvent,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthPhoneSetEvent value)?  setPhone,TResult Function( _AuthPhoneSendEvent value)?  sendEvent,TResult Function( _AuthPushedConfirmEvent value)?  pushedConfirm,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _AuthPhoneSetEvent() when setPhone != null:
 return setPhone(_that);case _AuthPhoneSendEvent() when sendEvent != null:
-return sendEvent(_that);case _:
+return sendEvent(_that);case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return sendEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthPhoneSetEvent value)  setPhone,required TResult Function( _AuthPhoneSendEvent value)  sendEvent,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthPhoneSetEvent value)  setPhone,required TResult Function( _AuthPhoneSendEvent value)  sendEvent,required TResult Function( _AuthPushedConfirmEvent value)  pushedConfirm,}){
 final _that = this;
 switch (_that) {
 case _AuthPhoneSetEvent():
 return setPhone(_that);case _AuthPhoneSendEvent():
-return sendEvent(_that);case _:
+return sendEvent(_that);case _AuthPushedConfirmEvent():
+return pushedConfirm(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +102,13 @@ return sendEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthPhoneSetEvent value)?  setPhone,TResult? Function( _AuthPhoneSendEvent value)?  sendEvent,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthPhoneSetEvent value)?  setPhone,TResult? Function( _AuthPhoneSendEvent value)?  sendEvent,TResult? Function( _AuthPushedConfirmEvent value)?  pushedConfirm,}){
 final _that = this;
 switch (_that) {
 case _AuthPhoneSetEvent() when setPhone != null:
 return setPhone(_that);case _AuthPhoneSendEvent() when sendEvent != null:
-return sendEvent(_that);case _:
+return sendEvent(_that);case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm(_that);case _:
   return null;
 
 }
@@ -122,11 +125,12 @@ return sendEvent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String phoneNumber)?  setPhone,TResult Function()?  sendEvent,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String phoneNumber)?  setPhone,TResult Function()?  sendEvent,TResult Function()?  pushedConfirm,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthPhoneSetEvent() when setPhone != null:
 return setPhone(_that.phoneNumber);case _AuthPhoneSendEvent() when sendEvent != null:
-return sendEvent();case _:
+return sendEvent();case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm();case _:
   return orElse();
 
 }
@@ -144,11 +148,12 @@ return sendEvent();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String phoneNumber)  setPhone,required TResult Function()  sendEvent,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String phoneNumber)  setPhone,required TResult Function()  sendEvent,required TResult Function()  pushedConfirm,}) {final _that = this;
 switch (_that) {
 case _AuthPhoneSetEvent():
 return setPhone(_that.phoneNumber);case _AuthPhoneSendEvent():
-return sendEvent();case _:
+return sendEvent();case _AuthPushedConfirmEvent():
+return pushedConfirm();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +170,12 @@ return sendEvent();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String phoneNumber)?  setPhone,TResult? Function()?  sendEvent,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String phoneNumber)?  setPhone,TResult? Function()?  sendEvent,TResult? Function()?  pushedConfirm,}) {final _that = this;
 switch (_that) {
 case _AuthPhoneSetEvent() when setPhone != null:
 return setPhone(_that.phoneNumber);case _AuthPhoneSendEvent() when sendEvent != null:
-return sendEvent();case _:
+return sendEvent();case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm();case _:
   return null;
 
 }
@@ -276,9 +282,41 @@ String toString() {
 
 
 /// @nodoc
+
+
+class _AuthPushedConfirmEvent implements AuthPhoneEvent {
+  const _AuthPushedConfirmEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPushedConfirmEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthPhoneEvent.pushedConfirm()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$AuthPhoneState {
 
- String get phoneNumber; dynamic get isLoading;
+ String get phoneNumber; dynamic get isLoading; String get error; dynamic get codeSend;
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -289,16 +327,16 @@ $AuthPhoneStateCopyWith<AuthPhoneState> get copyWith => _$AuthPhoneStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading));
+int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend));
 
 @override
 String toString() {
-  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading)';
+  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend)';
 }
 
 
@@ -309,7 +347,7 @@ abstract mixin class $AuthPhoneStateCopyWith<$Res>  {
   factory $AuthPhoneStateCopyWith(AuthPhoneState value, $Res Function(AuthPhoneState) _then) = _$AuthPhoneStateCopyWithImpl;
 @useResult
 $Res call({
- String phoneNumber, dynamic isLoading
+ String phoneNumber, dynamic isLoading, String error, dynamic codeSend
 });
 
 
@@ -326,10 +364,12 @@ class _$AuthPhoneStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? isLoading = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,}) {
   return _then(_self.copyWith(
 phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as dynamic,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,codeSend: freezed == codeSend ? _self.codeSend : codeSend // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));
 }
@@ -415,10 +455,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthPhoneState() when $default != null:
-return $default(_that.phoneNumber,_that.isLoading);case _:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);case _:
   return orElse();
 
 }
@@ -436,10 +476,10 @@ return $default(_that.phoneNumber,_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend)  $default,) {final _that = this;
 switch (_that) {
 case _AuthPhoneState():
-return $default(_that.phoneNumber,_that.isLoading);case _:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -456,10 +496,10 @@ return $default(_that.phoneNumber,_that.isLoading);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String phoneNumber,  dynamic isLoading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthPhoneState() when $default != null:
-return $default(_that.phoneNumber,_that.isLoading);case _:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);case _:
   return null;
 
 }
@@ -471,11 +511,13 @@ return $default(_that.phoneNumber,_that.isLoading);case _:
 
 
 class _AuthPhoneState extends AuthPhoneState {
-  const _AuthPhoneState({this.phoneNumber = "", this.isLoading = false}): super._();
+  const _AuthPhoneState({this.phoneNumber = "", this.isLoading = false, this.error = "", this.codeSend = false}): super._();
   
 
 @override@JsonKey() final  String phoneNumber;
 @override@JsonKey() final  dynamic isLoading;
+@override@JsonKey() final  String error;
+@override@JsonKey() final  dynamic codeSend;
 
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
@@ -487,16 +529,16 @@ _$AuthPhoneStateCopyWith<_AuthPhoneState> get copyWith => __$AuthPhoneStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading));
+int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend));
 
 @override
 String toString() {
-  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading)';
+  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend)';
 }
 
 
@@ -507,7 +549,7 @@ abstract mixin class _$AuthPhoneStateCopyWith<$Res> implements $AuthPhoneStateCo
   factory _$AuthPhoneStateCopyWith(_AuthPhoneState value, $Res Function(_AuthPhoneState) _then) = __$AuthPhoneStateCopyWithImpl;
 @override @useResult
 $Res call({
- String phoneNumber, dynamic isLoading
+ String phoneNumber, dynamic isLoading, String error, dynamic codeSend
 });
 
 
@@ -524,10 +566,12 @@ class __$AuthPhoneStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? isLoading = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,}) {
   return _then(_AuthPhoneState(
 phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as dynamic,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,codeSend: freezed == codeSend ? _self.codeSend : codeSend // ignore: cast_nullable_to_non_nullable
 as dynamic,
   ));
 }

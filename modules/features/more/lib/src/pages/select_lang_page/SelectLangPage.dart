@@ -33,10 +33,10 @@ class _SelectLangPageState extends State<SelectLangPage> {
             top: kToolbarHeight + MediaQuery.of(context).padding.top + 20,
             child:
                 Theme.of(context).brightness == Brightness.dark
-                    ? Assets.logoDarkLogo.toSvgImage(
+                    ? Assets.logo.darkLogo.svg(
                       fit: BoxFit.contain,
                     )
-                    : Assets.logoLightLogo.toSvgImage(
+                    : Assets.logo.lightLogo.svg(
                       fit: BoxFit.contain,
                     ),
           ),
@@ -84,9 +84,9 @@ class _SelectLangPageState extends State<SelectLangPage> {
 
   String _flag(AppLocale locale) {
     return switch (locale) {
-      AppLocale.en => Assets.flagsUk,
-      AppLocale.uz => Assets.flagsUz,
-      AppLocale.ru => Assets.flagsRu,
+      AppLocale.en => Assets.flags.uk.path,
+      AppLocale.uz => Assets.flags.uz.path,
+      AppLocale.ru => Assets.flags.ru.path,
     };
   }
 }

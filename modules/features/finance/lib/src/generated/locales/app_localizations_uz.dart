@@ -114,4 +114,9 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
 
   @override
   String get fiscalReceipt => 'Soliq cheki';
+
+  @override
+  String verification_page_code_send_phone(Object phone) {
+    return 'Tasdiqlash kodi $phone  raqamga yuborildi';
+  }
 }

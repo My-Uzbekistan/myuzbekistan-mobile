@@ -83,7 +83,7 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
                           backgroundColor: context.appColors.colors.green,
                           child: Padding(
                             padding: const EdgeInsets.all(4.0),
-                            child: Assets.svgIconCheck.toSvgImage(
+                            child: Assets.svg.iconCheck.path.toSvgImage(
                               fit: BoxFit.fill,
                               colorFilter: ColorFilter.mode(
                                 context.appColors.static.white,

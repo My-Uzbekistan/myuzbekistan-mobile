@@ -57,7 +57,7 @@ class PinKeyboard extends StatelessWidget {
                     onTap: () {
                       onClear?.call();
                     },
-                    child: Assets.svgIconDeleteBackFill.toSvgImage(
+                    child: Assets.svg.iconDeleteBackFill.path.toSvgImage(
                       tintColor: context.appColors.textIconColor.secondary,
                     ),
                   ),

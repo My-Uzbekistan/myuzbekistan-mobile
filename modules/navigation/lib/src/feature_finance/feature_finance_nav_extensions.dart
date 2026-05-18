@@ -17,6 +17,14 @@ class FeatureFinanceNavExtension {
     );
   }
 
+  Future<T?> pushAuthVerification<T>({required String phone, Object? extra}) {
+    return _context.pushType<T>(
+      AppNavPath.more.authVerification,
+      queryParameters: {"phone": phone.toString()},
+      extra: extra,
+    );
+  }
+
   void pushMerchantPage({
     required String id,
     String? amount,

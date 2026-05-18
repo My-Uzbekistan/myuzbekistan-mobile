@@ -393,8 +393,8 @@ class DetailPage extends HookWidget {
                                               assetsSvgIcon:
                                                   data.isFavorite
                                                       ? Assets
-                                                          .svgIconFilledHeard
-                                                      : Assets.svgOutlineHeard,
+                                                          .svg.iconFilledHeard.path
+                                                      : Assets.svg.outlineHeard.path,
 
                                               iconColor:
                                                   data.isFavorite

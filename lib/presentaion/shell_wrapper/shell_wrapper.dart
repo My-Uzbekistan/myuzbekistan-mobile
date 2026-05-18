@@ -66,19 +66,19 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
             items: [
               CustomTabItem(
                 label: context.localizations!.nav_home,
-                icon: Assets.svgTabIconHome.toSvgImage(height: 24, width: 24),
+                icon: Assets.svg.tabIconHome.svg(height: 24, width: 24),
               ),
               CustomTabItem(
                 label: context.localizations!.nav_payment,
-                icon: Assets.svgTabIconFinance.toSvgImage(height: 24, width: 24),
+                icon: Assets.svg.tabIconFinance.svg(height: 24, width: 24),
               ),
               CustomTabItem(
                 label: context.localizations!.nav_services,
-                icon: Assets.svgTabIconCatalog.toSvgImage(height: 24, width: 24),
+                icon: Assets.svg.tabIconCatalog.svg(height: 24, width: 24),
               ),
               CustomTabItem(
                 label: context.localizations!.nav_more,
-                icon: Assets.svgTabIconMore.toSvgImage(height: 24, width: 24),
+                icon: Assets.svg.tabIconMore.svg(height: 24, width: 24),
               )
             ],
           )),
@@ -96,12 +96,12 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
         ColorFilter.mode(unselectedIconColor, BlendMode.srcIn);
     return [
       BottomNavigationBarItem(
-        icon: Assets.svgTabIconHome.toSvgImage(
+        icon: Assets.svg.tabIconHome.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
             colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconHome.toSvgImage(
+        activeIcon: Assets.svg.tabIconHome.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
@@ -109,12 +109,12 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
         label: context.localizations?.nav_home,
       ),
       BottomNavigationBarItem(
-        icon: Assets.svgTabIconFinance.toSvgImage(
+        icon: Assets.svg.tabIconFinance.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
             colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconFinance.toSvgImage(
+        activeIcon: Assets.svg.tabIconFinance.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
@@ -122,12 +122,12 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
         label: context.localizations?.nav_payment,
       ),
       BottomNavigationBarItem(
-        icon: Assets.svgTabIconCatalog.toSvgImage(
+        icon: Assets.svg.tabIconCatalog.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
             colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconCatalog.toSvgImage(
+        activeIcon: Assets.svg.tabIconCatalog.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
@@ -135,12 +135,12 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
         label: context.localizations?.nav_services,
       ),
       BottomNavigationBarItem(
-        icon: Assets.svgTabIconMore.toSvgImage(
+        icon: Assets.svg.tabIconMore.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,
             colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconMore.toSvgImage(
+        activeIcon: Assets.svg.tabIconMore.path.toSvgImage(
             height: 24,
             width: 24,
             fit: BoxFit.contain,

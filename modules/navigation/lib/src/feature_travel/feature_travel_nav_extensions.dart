@@ -55,6 +55,13 @@ class FeatureTravelNavExtension {
     );
   }
 
+  Future<T?> pushOnboarding<T>(dynamic extra) {
+    return _context.pushNamed(
+      AppNavPath.travel.travelOnboarding.name,
+      extra: extra,
+    );
+  }
+
   void pushImagePreview(List<String> images) {
     _context.pushType(AppNavPath.travel.imagePreview, extra: images);
   }

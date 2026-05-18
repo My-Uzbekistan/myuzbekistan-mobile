@@ -36,7 +36,7 @@ final GoRouter routes = GoRouter(
     },
     observers: [observer],
     initialLocation:
-    // AppNavPath.more.authPhonePage.path,
+    // AppNavPath.travel.travelOnboarding.path,
     "/splash",
     // initialLocation: "/experiment",
     routes: [

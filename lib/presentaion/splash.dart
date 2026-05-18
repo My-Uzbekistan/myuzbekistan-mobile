@@ -15,26 +15,23 @@ class SplashScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final images = [
-      Assets.splashSplash1,
-      Assets.splashSplash2,
-      Assets.splashSplash3,
-      Assets.splashSplash4,
+      Assets.splash.splash1.path,
+      Assets.splash.splash2.path,
+      Assets.splash.splash3.path,
+      Assets.splash.splash4.path,
     ];
     final imagePath = useState<String>("");
     final opacity = useState<double>(0);
     useEffect(() {
-      // 1️⃣ Bir marta random tanlash
       getIt<SecurityStorage>().clearPinVerified();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       imagePath.value = images[Random().nextInt(images.length)];
-
-      // 2️⃣ Fade boshlash
       Future.delayed(const Duration(milliseconds: 100), () {
         opacity.value = 1;
       });
       Future.delayed(const Duration(milliseconds: 1500), () {
         if(GoRouter.of(context).state.path=="/splash") {
-          context.travel.goMain(); // go_router bilan ishlash
+          context.travel.goMain();
         }
       });
       return null;
@@ -56,7 +53,7 @@ class SplashScreen extends HookWidget {
           child: Stack(
             children: [
               Positioned.fill(child: imagePath.value.toImage(fit: BoxFit.cover)),
-              Center(child: Assets.logoDarkLogo.toSvgImage(fit: BoxFit.contain))
+              Center(child: Assets.logo.darkLogo.svg(fit: BoxFit.contain))
             ],
           ),
         ),

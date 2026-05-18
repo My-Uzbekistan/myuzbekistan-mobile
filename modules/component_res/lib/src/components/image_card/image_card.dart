@@ -149,7 +149,7 @@ class _ImageContentState extends State<_ImageContent> {
                   child: state.completedWidget,
                 ); // ✅ Default image o'zi ko'rsatiladi
               default:
-                return Assets.pngDefaultContentImage.toImage(fit: BoxFit.fill);
+                return Assets.png.defaultContentImage.image(fit: BoxFit.fill);
             }
           },
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:component_res/component_res.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,6 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
     authPhoneBloc = context.read<AuthPhoneBloc>();
     listener();
   }
-
   void listener() {
     _controller?.addListener(() {
       authPhoneBloc?.add(
@@ -38,7 +39,18 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(),
-      body: BlocBuilder<AuthPhoneBloc, AuthPhoneState>(
+      body: BlocConsumer<AuthPhoneBloc, AuthPhoneState>(
+        listenWhen:
+            (previous, current) =>
+                previous.codeSend != current.codeSend &&
+                current.codeSend == true,
+        listener: (context, state) {
+          final extra=GoRouterState.of(context).extra;
+          authPhoneBloc?.add(AuthPhoneEvent.pushedConfirm());
+          context.finance.pushAuthVerification(phone: state.phoneNumber,
+          extra: extra
+          );
+        },
         buildWhen:
             (previous, current) =>
                 previous.isPhoneNumberValid != current.isPhoneNumberValid ||
@@ -71,7 +83,14 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
                           disable: !state.isPhoneNumberValid,
                           isLoading: state.isLoading,
                           onPressed: () {
+                            authPhoneBloc?.add(AuthPhoneEvent.sendEvent());
 
+                            // context.pushNamed(
+                            //   AppNavPath.more.authVerification.name,
+                            //   queryParameters: {
+                            //     "phone": _controller!.text.withOutSpace(),
+                            //   },
+                            // );
                           },
                         ),
                       ],

@@ -168,7 +168,7 @@ class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
                               child: Row(
                                 spacing: 20,
                                 children: [
-                                  Assets.svgFiscalIcon.toSvgImage(
+                                  Assets.svg.fiscalIcon.path.toSvgImage(
                                     tintColor: context.appColors.brand,
                                   ),
                                   Expanded(
@@ -178,7 +178,7 @@ class _PaymentTransactionDetailState extends State<PaymentTransactionDetail> {
                                     height: 24,
                                     width: 24,
                                     child: Center(
-                                      child: Assets.svgIconArrowRight.toSvgImage(
+                                      child: Assets.svg.iconArrowRight.svg(
                                         height: 20,
                                         width: 20,
                                         fit: BoxFit.cover,

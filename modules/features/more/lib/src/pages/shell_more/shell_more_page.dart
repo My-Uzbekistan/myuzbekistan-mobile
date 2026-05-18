@@ -69,7 +69,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                               case LoadState.completed:
                                 return state.completedWidget;
                               default:
-                                return Assets.pngAvatar.toImage(
+                                return Assets.png.avatar.image(
                                   fit: BoxFit.cover,
                                 );
                             }
@@ -80,7 +80,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                   Flexible(
                     child: Text(
                       (profileState is ProfileBlocDataState)
-                          ? profileState.userModel?.name ?? ""
+                          ? profileState.userModel?.userName??""
                           : context.localization.guest,
                       style: CustomTypography.H3,
                     ),
@@ -165,7 +165,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                                   //TODO Pincode and biometric
                                   if (profileState is ProfileBlocDataState) ...[
                                     _MoreCellItem(
-                                      icon: Assets.moreCirclePlus.toSvgImage(),
+                                      icon: Assets.svg.more.circlePlus.svg(),
                                       title:
                                           profileState.hasPin
                                               ? context
@@ -182,7 +182,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                                     ),
                                   ],
                                   _MoreCellItem(
-                                    icon: Assets.moreGlobe.toSvgImage(),
+                                    icon: Assets.svg.more.globe.svg(),
                                     title: context.localization.language,
                                     onTap: () {
                                       context.more.pushChangeLanguagePage();
@@ -197,7 +197,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                                     ),
                                   ),
                                   _MoreCellItem(
-                                    icon: Assets.morePalette.toSvgImage(),
+                                    icon: Assets.svg.more.palette.svg(),
                                     title: context.localization.theme,
                                     onTap: () {
                                       context.more.pushChangeThemePage();
@@ -220,7 +220,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                               child: Column(
                                 children: [
                                   _MoreCellItem(
-                                    icon: Assets.moreMoon.toSvgImage(),
+                                    icon: Assets.svg.more.moon.svg(),
                                     title:
                                         context.localization.prayer_time_widget,
                                     trailing: AppSwitch(
@@ -311,7 +311,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                               child: Column(
                                 children: [
                                   _MoreCellItem(
-                                    icon: Assets.moreCircleInfo.toSvgImage(),
+                                    icon: Assets.svg.more.circlePlus.svg(),
                                     title: context.localization.about_app,
                                     onTap: () {
                                       context.pushNamed(
@@ -326,7 +326,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                                   // ),
                                   if (profileState is ProfileBlocDataState) ...[
                                     _MoreCellItem(
-                                      icon: Assets.moreBroomMotion.toSvgImage(),
+                                      icon: Assets.svg.more.broomMotion.svg(),
                                       title: context.localization.deleteAccount,
                                       onTap: () {
                                         showActionAlertDialog(
@@ -356,8 +356,7 @@ class _ShellMorePageState extends State<ShellMorePage> {
                                     ),
                                     _MoreCellItem(
                                       icon:
-                                          Assets.moreArrowRightToSquare
-                                              .toSvgImage(),
+                                          Assets.svg.more.arrowRightToSquare.svg(),
                                       title: context.localization.logout,
                                       contentColor:
                                           context.appColors.colors.red,
@@ -421,7 +420,7 @@ class TrailingText extends StatelessWidget {
         SizedBox(
           height: 20,
           width: 20,
-          child: Assets.svgIconArrowRight.toSvgImage(
+          child: Assets.svg.iconArrowRight.path.toSvgImage(
             fit: BoxFit.contain,
             colorFilter: ColorFilter.mode(
               context.appColors.textIconColor.secondary,
@@ -450,7 +449,7 @@ class TrailingIcon extends StatelessWidget {
           SizedBox(
             height: 20,
             width: 20,
-            child: Assets.svgIconArrowRight.toSvgImage(
+            child: Assets.svg.iconArrowRight.path.toSvgImage(
               fit: BoxFit.contain,
               colorFilter: ColorFilter.mode(
                 context.appColors.textIconColor.secondary,
@@ -515,7 +514,7 @@ class _MoreCellItem extends StatelessWidget {
                 SizedBox(
                   height: 20,
                   width: 20,
-                  child: Assets.svgIconArrowRight.toSvgImage(
+                  child: Assets.svg.iconArrowRight.path.toSvgImage(
                     fit: BoxFit.contain,
                     colorFilter: ColorFilter.mode(
                       context.appColors.textIconColor.secondary,

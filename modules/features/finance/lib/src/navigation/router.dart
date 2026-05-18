@@ -92,17 +92,40 @@ mixin FeatureFinanceRouter {
       path: AppNavPath.finance.verification.path,
       name: AppNavPath.finance.verification.name,
       pageBuilder:
-          (context, state) => ModalSheetPage(
-            child: BlocProvider(
-              create:
-                  (context) => getIt<VerificationBloc>(
-                    instanceName: VerificationType.addCardVerification,
-                  ),
-              child: OtpVerificationPage(
-                cardId: state.pathParameters["cardId"].toString(),
+          (context, state){
+
+         return   ModalSheetPage(
+              child: BlocProvider(
+                create:
+                    (context) => getIt<VerificationBloc>(
+                  instanceName: VerificationType.addCardVerification,
+                )..add(VerificationEvent.setCardCardId(state.pathParameters["cardId"].toString())),
+                child: OtpVerificationPage(
+                  verificationType: VerificationType.addCardVerification,
+                ),
               ),
+            );
+          },
+    ),
+
+    GoRoute(
+      path: AppNavPath.more.authVerification.path,
+      name: AppNavPath.more.authVerification.name,
+      pageBuilder:
+          (context, state){
+
+        return   ModalSheetPage(
+          child: BlocProvider(
+            create:
+                (context) => getIt<VerificationBloc>(
+              instanceName: VerificationType.authVerification,
+            )..add(VerificationEvent.setPhoneEvent(state.uri.queryParameters["phone"].toString())),
+            child: OtpVerificationPage(
+              verificationType: VerificationType.authVerification,
             ),
           ),
+        );
+      },
     ),
     GoRoute(
       path: AppNavPath.finance.paymentTransactionDetailPage.path,

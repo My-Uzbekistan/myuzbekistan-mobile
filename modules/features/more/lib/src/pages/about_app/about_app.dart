@@ -33,7 +33,7 @@ class AboutApp extends HookWidget {
               child: Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24),
-                  child: Assets.logoNewAppIcon.toImage(
+                  child: Assets.logo.newAppIcon.image(
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -61,7 +61,7 @@ class AboutApp extends HookWidget {
                         child: Text(context.localization.privacy_policy)
                             .bodyLg(),
                       ),
-                      Assets.svgIconArrowRight.toSvgImage(
+                      Assets.svg.iconArrowRight.path.toSvgImage(
                         fit: BoxFit.contain,
                         height: 20,
                         width: 20,
@@ -90,7 +90,7 @@ class AboutApp extends HookWidget {
                       Expanded(
                         child: Text(context.localization.licenses).bodyLg(),
                       ),
-                      Assets.svgIconArrowRight.toSvgImage(
+                      Assets.svg.iconArrowRight.path.toSvgImage(
                         fit: BoxFit.contain,
                         height: 20,
                         width: 20,

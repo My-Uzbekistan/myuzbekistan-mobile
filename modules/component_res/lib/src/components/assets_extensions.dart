@@ -4,8 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 final _package = "component_res";
 
 extension AssetsExtension on String {
-  bool get isAssetPath => RegExp(r'^assets/.*\.(png|jpg|jpeg|gif|webp|svg)$')
-      .hasMatch(this); // assets/ bilan boshlanishi kerak
+  bool get isAssetPath => true;
+  // RegExp(r'^assets/.*\.(png|jpg|jpeg|gif|webp|svg)$')
+  //     .hasMatch(this); // assets/ bilan boshlanishi kerak
 
   Widget toImage(
       {double? width,
@@ -20,7 +21,7 @@ extension AssetsExtension on String {
       width: width,
       height: height,
       fit: fit,
-      package: _package,
+      // package: _package,
       color: tintColor,
     );
   }
@@ -39,7 +40,7 @@ extension AssetsExtension on String {
       width: width,
       height: height,
       fit: fit,
-      package: _package,
+      // package: _package,
       colorFilter: tintColor != null
           ? ColorFilter.mode(tintColor, BlendMode.srcIn)
           : colorFilter,

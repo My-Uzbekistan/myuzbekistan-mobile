@@ -39,7 +39,7 @@ class SettingsCell extends StatelessWidget {
               softWrap: false,
             ).labelLg()),
             trailing ??
-                Assets.svgIconArrowRight.toSvgImage(
+                Assets.svg.iconArrowRight.path.toSvgImage(
                     colorFilter: ColorFilter.mode(
                         context.appColors.textIconColor.secondary,
                         BlendMode.srcIn))

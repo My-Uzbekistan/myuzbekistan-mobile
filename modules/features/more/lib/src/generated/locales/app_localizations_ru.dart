@@ -285,4 +285,7 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get terms => 'условия пользовательского соглашения';
+
+  @override
+  String get auth_page_action_phone => 'Войти по номеру телефона';
 }

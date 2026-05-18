@@ -31,7 +31,7 @@ class SelectRegionPage extends HookWidget {
             onPressed: () {
               context.pop();
             },
-            icon: Assets.svgRoundedCloseIcon.toSvgImage(
+            icon: Assets.svg.roundedCloseIcon.path.toSvgImage(
               colorFilter: ColorFilter.mode(
                 context.appColors.textIconColor.tertiary,
                 BlendMode.srcIn,

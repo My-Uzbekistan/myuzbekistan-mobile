@@ -134,27 +134,27 @@ class PrayerTimesItemWidget extends StatelessWidget {
 
   Widget icons(PrayerTimesType type) {
     return switch (type) {
-      PrayerTimesType.fajr => Assets.prayersFajr.toSvgImage(
+      PrayerTimesType.fajr => Assets.svg.prayers.fajr.path.toSvgImage(
         fit: BoxFit.contain,
         tintColor: const Color(0xffBC8C83),
       ),
-      PrayerTimesType.sunrise => Assets.prayersSunrise.toSvgImage(
+      PrayerTimesType.sunrise => Assets.svg.prayers.sunrise.path.toSvgImage(
         fit: BoxFit.contain,
         tintColor: const Color(0xffFBDB7C),
       ),
-      PrayerTimesType.dhuhr => Assets.prayersDhuhr.toSvgImage(
+      PrayerTimesType.dhuhr => Assets.svg.prayers.dhuhr.path.toSvgImage(
         fit: BoxFit.contain,
         tintColor: const Color(0xffFFCA2D),
       ),
-      PrayerTimesType.asr => Assets.prayersAsr.toSvgImage(
+      PrayerTimesType.asr => Assets.svg.prayers.asr.path.toSvgImage(
         fit: BoxFit.contain,
         tintColor: const Color(0xffFFBC2D),
       ),
-      PrayerTimesType.maghrib => Assets.prayersMagrib.toSvgImage(
+      PrayerTimesType.maghrib => Assets.svg.prayers.magrib.path.toSvgImage(
         fit: BoxFit.contain,
         tintColor: const Color(0xffFF922D),
       ),
-      PrayerTimesType.isha => Assets.prayersIsha.toSvgImage(
+      PrayerTimesType.isha => Assets.svg.prayers.isha.path.toSvgImage(
         fit: BoxFit.contain,
         tintColor: const Color(0xff7496A6),
       ),

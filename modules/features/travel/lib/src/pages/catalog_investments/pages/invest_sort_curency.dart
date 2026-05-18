@@ -46,7 +46,7 @@ class _InvestPriceSortPage extends State<InvestPriceSortPage> {
                       widget.cubit.changeCurrencyType(InvestCurrencyType.usd);
                     },
                     text: InvestCurrencyType.usd.value,
-                    icon: Assets.flagsUs.toSvgImage(height: 24),
+                    icon: Assets.flags.us.svg(height: 24),
                     contentPadding: EdgeInsets.symmetric(
                       vertical: 20,
                       horizontal: 16,
@@ -61,7 +61,7 @@ class _InvestPriceSortPage extends State<InvestPriceSortPage> {
                       widget.cubit.changeCurrencyType(InvestCurrencyType.uzs);
                     },
                     text: InvestCurrencyType.uzs.value,
-                    icon: Assets.flagsUz.toSvgImage(height: 24),
+                    icon: Assets.flags.uz.svg(height: 24),
                     contentPadding: EdgeInsets.symmetric(
                       vertical: 20,
                       horizontal: 16,

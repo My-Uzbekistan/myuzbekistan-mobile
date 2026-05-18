@@ -588,6 +588,12 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'условия пользовательского соглашения'**
   String get terms;
+
+  /// No description provided for @auth_page_action_phone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Войти по номеру телефона'**
+  String get auth_page_action_phone;
 }
 
 class _FeatureMoreLocalizationsDelegate

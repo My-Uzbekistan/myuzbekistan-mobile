@@ -11,6 +11,7 @@ part 'verification_event.dart';
 part 'verification_state.dart';
 
 part 'blocs/add_card_verification_bloc.dart';
+part 'blocs/auth_phone_verification.dart';
 
 part 'verification_bloc.freezed.dart';
 
@@ -24,17 +25,10 @@ abstract class VerificationBloc
     on<_VerificationSetCodeEvent>(_setCode);
     on<_VerificationResendEvent>(_resend);
     on<_VerificationVerifyEvent>(_verify);
-    on<_VerificationSetCardIdEvent>(_setCardIdEvent);
 
     setTimer();
   }
 
-  void _setCardIdEvent(
-    _VerificationSetCardIdEvent event,
-    Emitter<VerificationState> emitter,
-  ) {
-    emitter(state.copyWith(cardId: event.cardId));
-  }
 
   void _updateTimer(
     _VerificationUpdateTimerEvent event,

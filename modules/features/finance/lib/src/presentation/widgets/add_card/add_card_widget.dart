@@ -27,7 +27,7 @@ class AddCardWidget extends StatelessWidget {
             child: Column(
               spacing: 6,
               children: [
-                Assets.svgIconPlus.toSvgImage(
+                Assets.svg.iconPlus.path.toSvgImage(
                     tintColor: context.appColors.textIconColor.primary),
                 Text(context.localization.addCard).labelMd()
               ],

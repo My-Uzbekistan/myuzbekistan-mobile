@@ -88,11 +88,11 @@ extension  AppLocaleX on AppLocale{
   String get flag {
     switch (this) {
       case AppLocale.en:
-        return Assets.flagsUk;
+        return Assets.flags.uk.path;
       case AppLocale.ru:
-        return Assets.flagsRu;
+        return Assets.flags.ru.path;
       case AppLocale.uz:
-        return Assets.flagsUz;
+        return Assets.flags.uz.path;
     }
   }
 }

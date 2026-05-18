@@ -59,7 +59,7 @@ class CardsPage extends HookWidget {
                     if ((state is CardsDataState)) {
                       return isEdit.value
                           ? RoundedButton(
-                            assetsSvgIcon: Assets.svgIconCheck,
+                            assetsSvgIcon: Assets.svg.iconClose.path,
                             hideShadow: true,
                             backgroundColor: context.appColors.brand,
                             iconColor: Colors.white,
@@ -138,7 +138,7 @@ class CardsPage extends HookWidget {
                                       width: 24,
                                       height: 24,
                                       color: Colors.transparent,
-                                      child: Assets.svgIconTrashCanLine
+                                      child: Assets.svg.iconTrashCanLine.path
                                           .toSvgImage(
                                             fit: BoxFit.contain,
                                             colorFilter: ColorFilter.mode(
