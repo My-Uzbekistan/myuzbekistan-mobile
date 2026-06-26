@@ -55,7 +55,7 @@ class MyUpgradeAlertState extends UpgradeAlertState {
     // final String? appStoreVersion = widget.upgrader.currentAppStoreVersion;
     // final String? installedVersion = widget.upgrader.currentInstalledVersion;
 
-    // widget.upgrader.saveLastAlerted();
+    global.upgrader.saveLastAlerted();
     // appRootNavigatorKey.currentContext?.pushNamed(
     //     AppNavPath.more.forceUpdate.name,
     //     queryParameters: {"appStoreLink": "versionStatus.appStoreLink"});

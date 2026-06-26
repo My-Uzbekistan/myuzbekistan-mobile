@@ -110,12 +110,14 @@ class FinanceRepositoryImpl extends FinanceRepository {
     required String merchantId,
     required double amount,
     required String cardId,
+    String? orderId,
   }) {
     return service
         .paymentTopUp({
           "serviceId": merchantId,
           "amount": amount.toInt(),
           "cardId": cardId,
+          if (orderId != null) "orderId": orderId,
         })
         .call(
           (value) => PaymentResultTopUp(

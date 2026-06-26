@@ -35,6 +35,7 @@ abstract class FinanceRepository {
     required String merchantId,
     required double amount,
     required String cardId,
+    String? orderId,
   });
 
   Future<void> confirmPay({required String paymentId});

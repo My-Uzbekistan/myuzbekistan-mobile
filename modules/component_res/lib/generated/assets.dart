@@ -27,6 +27,10 @@ class $AssetsPngGen {
   final AssetGenImage gears = const AssetGenImage('assets/png/gears.webp');
   final AssetGenImage icSearch =
       const AssetGenImage('assets/png/ic_search.png');
+  final AssetGenImage iconPremium =
+      const AssetGenImage('assets/png/icon_premium.png');
+  final AssetGenImage iconPremiumText =
+      const AssetGenImage('assets/png/icon_premium_text.png');
   final AssetGenImage imageGift2 =
       const AssetGenImage('assets/png/image_gift_2.png');
   final AssetGenImage imgGiftBig =
@@ -36,6 +40,14 @@ class $AssetsPngGen {
   final AssetGenImage navMore = const AssetGenImage('assets/png/nav_more.png');
   final AssetGenImage personalDefaultBg =
       const AssetGenImage('assets/png/personal_default_bg.webp');
+  final AssetGenImage premiumCellIconCpuFill =
+      const AssetGenImage('assets/png/premium_cell_icon_cpu_fill.png');
+  final AssetGenImage premiumCellIconDiscountPercentFill = const AssetGenImage(
+      'assets/png/premium_cell_icon_discount_percent_fill.png');
+  final AssetGenImage premiumCellIconImageCircleAiLine = const AssetGenImage(
+      'assets/png/premium_cell_icon_image_circle_ai_line.png');
+  final AssetGenImage premiumCellIconInfinityLine =
+      const AssetGenImage('assets/png/premium_cell_icon_infinity_line.png');
   final AssetGenImage sosok = const AssetGenImage('assets/png/sosok.png');
 }
 
@@ -347,27 +359,6 @@ class SvgGenImage {
       clipBehavior: clipBehavior,
     );
   }
-
-  Widget custom({
-    Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
-  }) {
-    return Builder(
-      key: key,
-      builder: (context) => builder(context, _assetName),
-    );
-  }
-
-  String get path => 'packages/component_res/$_assetName';
-
-  String get keyName => _assetName;
-}
-
-class LottieGenImage {
-  const LottieGenImage(this._assetName);
-
-  final String _assetName;
-  static const String package = 'component_res';
 
   Widget custom({
     Key? key,

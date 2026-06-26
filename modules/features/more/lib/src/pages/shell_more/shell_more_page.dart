@@ -50,6 +50,9 @@ class _ShellMorePageState extends State<ShellMorePage> {
                 mainAxisSize: MainAxisSize.min,
                 spacing: 16,
                 children: [
+                  FilledButton(onPressed: (){
+                    context.pushNamed(AppNavPath.travel.premiumOnboardingPage.name);
+                  }, child: Text("Premium")),
                   if (profileState is ProfileBlocDataState)
                     Container(
                       height: 40,
@@ -156,12 +159,6 @@ class _ShellMorePageState extends State<ShellMorePage> {
                               ),
                               child: Column(
                                 children: [
-                                  // _MoreCellItem(
-                                  //   icon: Assets.moreBell.toSvgImage(),
-                                  //   title: context.localization.notification,
-                                  //   trailing: AppSwitch(onChanged: (value) {}),
-                                  // ),
-
                                   //TODO Pincode and biometric
                                   if (profileState is ProfileBlocDataState) ...[
                                     _MoreCellItem(

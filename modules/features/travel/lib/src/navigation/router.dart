@@ -25,6 +25,8 @@ import 'package:travel/src/pages/notifications/notification_main_page.dart';
 import 'package:travel/src/pages/notifications/page/notification_detail.dart';
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart';
 import 'package:travel/src/pages/onboarding/onboarding_page.dart';
+import 'package:travel/src/premium/bloc/premium_bloc.dart';
+import 'package:travel/src/premium/premium_onboarding.dart';
 
 import '../catalog/catalog.dart';
 import '../di/injection.dart';
@@ -298,85 +300,6 @@ mixin FeatureTravelRouter {
         ),
       ],
     ),
-    // ShellRoute(
-    //   navigatorKey: _investNavigatorKey,
-    //
-    //   routes: [
-    //     GoRoute(
-    //       path: AppNavPath.travel.travelCatalogInvestments.path,
-    //       name: AppNavPath.travel.travelCatalogInvestments.name,
-    //       parentNavigatorKey: _investNavigatorKey,
-    //       pageBuilder: (context, state) {
-    //         return buildSlideTransitionPage(
-    //           child: CatalogInvestmentsPage(
-    //             title: state.uri.queryParameters["title"].orEmpty(),
-    //           ),
-    //           context: context,
-    //           state: state,
-    //         );
-    //       },
-    //
-    //       routes: [
-    //         GoRoute(
-    //           path: AppNavPath.travel.travelCatalogInvestmentsSort.path,
-    //           name: AppNavPath.travel.travelCatalogInvestmentsSort.name,
-    //           parentNavigatorKey: _investNavigatorKey,
-    //           pageBuilder:
-    //               (context, state) => buildSlideTransitionPage(
-    //                 child: InvestSortMainPage(),
-    //                 context: context,
-    //                 state: state,
-    //               ),
-    //         ),
-    //         GoRoute(
-    //           path: AppNavPath.travel.travelCatalogInvestmentsPriceSort.path,
-    //           name: AppNavPath.travel.travelCatalogInvestmentsPriceSort.name,
-    //           parentNavigatorKey: _investNavigatorKey,
-    //           pageBuilder:
-    //               (context, state) => buildSlideTransitionPage(
-    //                 child: InvestPriceSortPage(),
-    //                 context: context,
-    //                 state: state,
-    //               ),
-    //         ),
-    //         GoRoute(
-    //           path: AppNavPath.travel.travelCatalogInvestmentsSortType.path,
-    //           name: AppNavPath.travel.travelCatalogInvestmentsSortType.name,
-    //           parentNavigatorKey: _investNavigatorKey,
-    //           pageBuilder:
-    //               (context, state) => buildSlideTransitionPage(
-    //                 child: InvestSortTypePage(),
-    //                 context: context,
-    //                 state: state,
-    //               ),
-    //         ),
-    //       ],
-    //     ),
-    //   ],
-    //
-    //   builder: (context, state, child) {
-    //     return MultiBlocProvider(
-    //       providers: [
-    //         BlocProvider(create: (context) => getIt<InvestmentsBloc>()),
-    //         BlocProvider(create: (context) => InvestSortCubit()),
-    //       ],
-    //       child: child,
-    //     );
-    //   },
-    //   // pageBuilder: (context, state, child) {
-    //   //   return buildSlideTransitionPage(
-    //   //     context: context,
-    //   //     state: state,
-    //   //     child: MultiBlocProvider(
-    //   //       providers: [
-    //   //         BlocProvider(create: (context) => getIt<InvestmentsBloc>()),
-    //   //         BlocProvider(create: (context) => InvestSortCubit()),
-    //   //       ],
-    //   //       child: child,
-    //   //     ),
-    //   //   );
-    //   // },
-    // ),
     GoRoute(
       path: AppNavPath.travel.travelCatalogInvestmentsSearch.path,
       name: AppNavPath.travel.travelCatalogInvestmentsSearch.name,
@@ -441,6 +364,22 @@ mixin FeatureTravelRouter {
           state: state,
           context: context,
           slideAlign: SlideAlign.vertical,
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.premiumOnboardingPage.path,
+      name: AppNavPath.travel.premiumOnboardingPage.name,
+      pageBuilder: (context, state) {
+        return buildSlideTransitionPage(
+          child: BlocProvider(
+            create:
+                (context) =>
+                    getIt.get<PremiumBloc>()..add(PremiumEvent.fetchStatus()),
+            child: PremiumOnboardingPage(),
+          ),
+          state: state,
+          context: context,
         );
       },
     ),

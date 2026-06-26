@@ -15,9 +15,10 @@ import 'package:shared/shared.dart';
 class PaymentPage extends StatefulWidget {
   final String id;
   final String? amount;
+  final String? orderId;
   final Completer<bool>? completer;
 
-  const PaymentPage({super.key, required this.id, this.amount, this.completer});
+  const PaymentPage({super.key, required this.id, this.amount,this.orderId, this.completer});
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -37,7 +38,7 @@ class _PaymentPageState extends State<PaymentPage> with WidgetsBindingObserver {
     bloc = context.read();
     WidgetsBinding.instance.addObserver(this);
 
-    bloc?.add(PaymentEvent.loadMerchantById(merchantId: widget.id));
+    bloc?.add(PaymentEvent.loadMerchantById(merchantId: widget.id,orderId:widget.orderId));
     _amountController.addListener(listener);
     if (widget.amount != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {

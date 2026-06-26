@@ -26,44 +26,47 @@ import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart'
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart'
     as _i45;
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart' as _i638;
+import 'package:travel/src/premium/bloc/premium_bloc.dart' as _i482;
 
 class TravelPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i335.LoadContentBloc>(
-        () => _i335.LoadContentBloc(gh<_i494.Repository>()));
-    gh.factory<_i514.ContentByCategoryBloc>(() => _i514.ContentByCategoryBloc(
-          gh<_i494.Repository>(),
-          gh<_i494.AppStatusChangeListeners>(),
-        ));
-    gh.factory<_i236.CatalogBloc>(() => _i236.CatalogBloc(
-          gh<_i494.Repository>(),
-          gh<_i494.AppStatusChangeListeners>(),
-        ));
-    gh.lazySingleton<_i45.NotificationCountCubit>(
-        () => _i45.NotificationCountCubit(gh<_i494.Repository>()));
-    gh.factory<_i669.GiftBloc>(() => _i669.GiftBloc(gh<_i494.Repository>()));
-    gh.factory<_i369.InvestmentsBloc>(
-        () => _i369.InvestmentsBloc(gh<_i494.Repository>()));
-    gh.factory<_i69.NotificationBloc>(
-        () => _i69.NotificationBloc(gh<_i494.Repository>()));
-    gh.factory<_i638.OnboardingBloc>(
-        () => _i638.OnboardingBloc(gh<_i494.Repository>()));
     gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
         ));
-    gh.factory<_i1065.InvestSearchBloc>(
-        () => _i1065.InvestSearchBloc(gh<_i494.Repository>()));
+    gh.factory<_i335.LoadContentBloc>(
+        () => _i335.LoadContentBloc(gh<_i494.Repository>()));
     gh.factory<_i109.ReviewBloc>(() => _i109.ReviewBloc(
           gh<_i494.Repository>(),
           gh<_i494.SecurityStorage>(),
+        ));
+    gh.factory<_i514.ContentByCategoryBloc>(() => _i514.ContentByCategoryBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.AppStatusChangeListeners>(),
         ));
     gh.factory<_i359.HomeBloc>(() => _i359.HomeBloc(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
           gh<_i494.SecurityStorage>(),
         ));
+    gh.factory<_i1065.InvestSearchBloc>(
+        () => _i1065.InvestSearchBloc(gh<_i494.Repository>()));
+    gh.factory<_i236.CatalogBloc>(() => _i236.CatalogBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.AppStatusChangeListeners>(),
+        ));
+    gh.lazySingleton<_i45.NotificationCountCubit>(
+        () => _i45.NotificationCountCubit(gh<_i494.Repository>()));
+    gh.factory<_i369.InvestmentsBloc>(
+        () => _i369.InvestmentsBloc(gh<_i494.Repository>()));
+    gh.factory<_i669.GiftBloc>(() => _i669.GiftBloc(gh<_i494.Repository>()));
+    gh.factory<_i69.NotificationBloc>(
+        () => _i69.NotificationBloc(gh<_i494.Repository>()));
+    gh.factory<_i638.OnboardingBloc>(
+        () => _i638.OnboardingBloc(gh<_i494.Repository>()));
+    gh.factory<_i482.PremiumBloc>(
+        () => _i482.PremiumBloc(gh<_i494.PremiumRepository>()));
   }
 }

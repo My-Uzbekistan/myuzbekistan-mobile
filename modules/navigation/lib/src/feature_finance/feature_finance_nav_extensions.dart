@@ -28,12 +28,16 @@ class FeatureFinanceNavExtension {
   void pushMerchantPage({
     required String id,
     String? amount,
+    String? orderId,
     Completer<bool>? extra,
   }) {
     _context.pushType(
       AppNavPath.finance.financePayment,
       pathParameters: {"id": id},
-      queryParameters: amount != null ? {"amount": amount} : {},
+      queryParameters: {
+        if (amount != null) "amount": amount,
+        if (orderId != null) "orderId": orderId,
+      },
       extra: extra,
     );
   }

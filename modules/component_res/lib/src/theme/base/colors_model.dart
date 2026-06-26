@@ -1,7 +1,8 @@
 part of '../app_color_theme.dart';
 
 abstract class _BaseColors {
-  Color get brandPrimary;
+  Color get brandSeaBlue;
+  Color get brandFlamingo;
 
   BackgroundColors get background;
 
@@ -94,13 +95,15 @@ class OtherColors {
   final Color blue;
   final Color yellow;
   final Color orange;
+  final Color lime;
 
   OtherColors({
     required this.red,
     required this.green,
     required this.blue,
     required this.yellow,
-    required this.orange
+    required this.orange,
+    required this.lime
   });
 }
 

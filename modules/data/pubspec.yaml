@@ -33,6 +33,8 @@ dependencies:
   shared:
     path: ../shared
 
+  json_annotation:
+
 
   jwt_decoder: ^2.0.1
 

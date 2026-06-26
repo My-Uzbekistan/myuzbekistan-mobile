@@ -80,13 +80,15 @@ class _WebViewPageState extends State<WebViewPage> {
                             try {
                               final Map<String, dynamic> json =
                                   Map<String, dynamic>.from(data[0]);
-                              final String serviceId = json["serviceId"];
+                              final dynamic serviceId = json["serviceId"];
                               final dynamic amount = json["amount"];
+                              final dynamic orderId = json["orderId"];
                               final completer = Completer<bool>();
 
                               context.finance.pushMerchantPage(
-                                id: serviceId,
-                                amount: amount,
+                                id: serviceId.toString(),
+                                amount: amount.toString(),
+                                orderId: orderId?.toString(),
                                 extra: completer,
                               );
                               final result = await completer.future;

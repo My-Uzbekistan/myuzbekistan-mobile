@@ -78,17 +78,26 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   Future<void> _checkPermissionEvent(_CheckPermissionEvent event,
       Emitter<HomeBlocState> emit,) async {
+
+  try{
     final locationManager = LocationManager();
     await locationManager.getCurrentLocation();
+  }catch(_){
+
+
+  }
+
     add(HomeBlocEvent.loadDataEvent());
     add(HomeBlocEvent.loadPrayerTimes());
   }
 
   Future<void> _loadDataEvent(_LoadDataEvent event,
       Emitter<HomeBlocState> emit,) async {
+    debugPrint("HomeBlock 1");
     if (event.isRefresh) {
       emit(dataState.copyWith(isRefreshing: true));
     } else {
+      debugPrint("HomeBlock 2");
       dataState = HomeBlocDataState();
       emit(HomeBlocState.loading());
     }
@@ -149,6 +158,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   Future<void> _loadCategoriesAndRegions(Emitter<HomeBlocState> e) async {
     try {
+      debugPrint("HomeBlock 3");
       final result = await Future.wait([
         _repository.loadRegions(),
         _repository.loadCategories(),
@@ -165,6 +175,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       add(HomeBlocEvent.loadContents());
       add(HomeBlocEvent.loadWeather());
     } catch (e) {
+      debugPrint("HomeBlock 4");
       emit(HomeBlocState.errorState());
     }
   }
@@ -185,6 +196,8 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   void _loadPrayerTimes(_LoadPayerTimes event, Emitter<HomeBlocState> emit) {
     var prayers = dataState.prayers;
+
+
 
 
     if (prayers.isEmpty && _securityStorage.isShowPrayerTimes()) {

@@ -41,12 +41,12 @@ ThemeData _buildTheme(
     labelSmall: CustomTypography.labelSm.copyWith(color: defaultTextColor),
   );
   final scheme = ColorScheme.fromSeed(
-    seedColor: colors.brandPrimary,
+    seedColor: colors.brandSeaBlue,
     brightness: brightness,
   ).copyWith(
-    primary: colors.brandPrimary,
+    primary: colors.brandSeaBlue,
     onPrimary: colors.label.oposite,
-    secondary: colors.brandPrimary,
+    secondary: colors.brandSeaBlue,
     onSecondary: colors.label.oposite,
     surface: colors.background.elevation1,
     onSurface: defaultTextColor,
@@ -76,7 +76,7 @@ ThemeData _buildTheme(
           foregroundColor: colors.label.primary,
           titleTextStyle: textTheme.titleLarge),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: colors.brandPrimary,
+          selectedItemColor: colors.brandSeaBlue,
           unselectedItemColor: colors.label.secondary,
           backgroundColor: colors.background.elevation1Alt),
       textTheme: textTheme,
@@ -102,7 +102,8 @@ ThemeData _buildTheme(
       ),
       extensions: [
         AppColorsExtension(
-            brand: colors.brandPrimary,
+            brand: colors.brandSeaBlue,
+            brandFlamingo: colors.brandFlamingo,
             textIconColor: colors.label,
             background: colors.background,
             fill: colors.fill,

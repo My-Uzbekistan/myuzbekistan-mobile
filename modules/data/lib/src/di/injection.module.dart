@@ -14,6 +14,8 @@ import 'package:data/src/finance/src/network/repository/finance_repository_impl.
     as _i144;
 import 'package:data/src/locale/AppPreferenceImpl.dart' as _i80;
 import 'package:data/src/locale/security_storage_impl.dart' as _i916;
+import 'package:data/src/premium/premium_service.dart' as _i282;
+import 'package:data/src/premium/repository/PremiumRepository.dart' as _i872;
 import 'package:data/src/travel/network/api/service.dart' as _i926;
 import 'package:data/src/travel/network/repository/repository.dart' as _i305;
 import 'package:dio/dio.dart' as _i361;
@@ -50,13 +52,13 @@ class DataPackageModule extends _i526.MicroPackageModule {
     );
     gh.factory<_i494.AppPreference>(() => _i80.AppPreferenceImpl(
         box: gh<_i811.Box<dynamic>>(instanceName: 'myUzblocaleStorageBox')));
+    gh.factory<_i494.SecurityStorage>(() => _i916.SecurityStorageImpl(
+        box: gh<_i811.Box<dynamic>>(instanceName: 'myUzblocalesecurityBox01')));
     gh.lazySingleton<String>(
       () => networkModule.prodApiUrl,
       instanceName: 'baseUrl',
       registerFor: {_prod},
     );
-    gh.factory<_i494.SecurityStorage>(() => _i916.SecurityStorageImpl(
-        box: gh<_i811.Box<dynamic>>(instanceName: 'myUzblocalesecurityBox01')));
     gh.lazySingleton<_i361.Dio>(() => networkModule.provideDio(
           gh<_i494.AppPreference>(),
           gh<_i494.SecurityStorage>(),
@@ -64,14 +66,18 @@ class DataPackageModule extends _i526.MicroPackageModule {
           gh<_i934.Alice>(),
         ));
     gh.factory<_i210.FinanceApiService>(
-        () => _i210.FinanceApiService.new(gh<_i361.Dio>()));
-    gh.factory<_i926.RestService>(() => _i926.RestService.new(gh<_i811.Dio>()));
+        () => _i210.FinanceApiService(gh<_i361.Dio>()));
+    gh.factory<_i282.PremiumService>(
+        () => _i282.PremiumService(gh<_i811.Dio>()));
+    gh.factory<_i926.RestService>(() => _i926.RestService(gh<_i811.Dio>()));
     gh.factory<_i494.Repository>(() => _i305.RepositoryImp(
           gh<_i926.RestService>(),
           gh<_i494.SecurityStorage>(),
         ));
     gh.factory<_i494.FinanceRepository>(
         () => _i144.FinanceRepositoryImpl(gh<_i210.FinanceApiService>()));
+    gh.factory<_i494.PremiumRepository>(
+        () => _i872.PremiumRepositoryImpl(gh<_i282.PremiumService>()));
   }
 }
 

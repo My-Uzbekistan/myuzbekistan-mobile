@@ -105,6 +105,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   }
 
   double? amount;
+  String? orderId;
 
   void _setAmount(_PaymentSetAmountEvent event, Emitter<PaymentState> emit) {
     amount = event.amount.replaceAll(RegExp(r'\D'), '').toDoubleOrNull();
@@ -168,6 +169,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     _PaymentMerchantEvent event,
     Emitter<PaymentState> emit,
   ) async {
+    orderId=event.orderId;
     if (!_financeSharedService.hasSetCards()) {
       add(PaymentEvent.loadCards());
     }
@@ -191,6 +193,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         merchantId: st.merchant.id.toString(),
         amount: st.amount!,
         cardId: st.selectedCard!.id.toString(),
+        orderId: orderId
       );
       paymentId = result.paymentId;
       if (result.checkUrl.isNotNullOrEmpty) {

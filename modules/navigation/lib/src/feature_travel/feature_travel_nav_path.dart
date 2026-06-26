@@ -69,4 +69,10 @@ class _FeatureTravelNavPath {
       _NavPathImpl(name: 'addReviewPage', path: 'addReviewPage');
   AppNavPath get allReviews =>
       _NavPathImpl(name: 'allReviews', path: 'allReviews');
+
+
+  AppNavPath get premiumOnboardingPage => _NavPathImpl(
+    name: 'premium_onboarding',
+    path: '/premium_onboarding',
+  );
 }

@@ -140,7 +140,7 @@ return setAmount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pay,TResult Function()?  updateCards,TResult Function()?  loadCards,TResult Function()?  checkPayDetail,TResult Function( Merchant merchant)?  setMerchant,TResult Function( CardItem item)?  selectedCard,TResult Function( String merchantId)?  loadMerchantById,TResult Function( String amount)?  setAmount,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pay,TResult Function()?  updateCards,TResult Function()?  loadCards,TResult Function()?  checkPayDetail,TResult Function( Merchant merchant)?  setMerchant,TResult Function( CardItem item)?  selectedCard,TResult Function( String merchantId,  String? orderId)?  loadMerchantById,TResult Function( String amount)?  setAmount,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PaymentPayEvent() when pay != null:
 return pay();case _PaymentPayUpdateCardsEvent() when updateCards != null:
@@ -149,7 +149,7 @@ return loadCards();case _CheckPayDetailEvent() when checkPayDetail != null:
 return checkPayDetail();case _PaymentSetMerchantEvent() when setMerchant != null:
 return setMerchant(_that.merchant);case _PaymentSelecteCardEvent() when selectedCard != null:
 return selectedCard(_that.item);case _PaymentMerchantEvent() when loadMerchantById != null:
-return loadMerchantById(_that.merchantId);case _PaymentSetAmountEvent() when setAmount != null:
+return loadMerchantById(_that.merchantId,_that.orderId);case _PaymentSetAmountEvent() when setAmount != null:
 return setAmount(_that.amount);case _:
   return orElse();
 
@@ -168,7 +168,7 @@ return setAmount(_that.amount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pay,required TResult Function()  updateCards,required TResult Function()  loadCards,required TResult Function()  checkPayDetail,required TResult Function( Merchant merchant)  setMerchant,required TResult Function( CardItem item)  selectedCard,required TResult Function( String merchantId)  loadMerchantById,required TResult Function( String amount)  setAmount,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pay,required TResult Function()  updateCards,required TResult Function()  loadCards,required TResult Function()  checkPayDetail,required TResult Function( Merchant merchant)  setMerchant,required TResult Function( CardItem item)  selectedCard,required TResult Function( String merchantId,  String? orderId)  loadMerchantById,required TResult Function( String amount)  setAmount,}) {final _that = this;
 switch (_that) {
 case _PaymentPayEvent():
 return pay();case _PaymentPayUpdateCardsEvent():
@@ -177,7 +177,7 @@ return loadCards();case _CheckPayDetailEvent():
 return checkPayDetail();case _PaymentSetMerchantEvent():
 return setMerchant(_that.merchant);case _PaymentSelecteCardEvent():
 return selectedCard(_that.item);case _PaymentMerchantEvent():
-return loadMerchantById(_that.merchantId);case _PaymentSetAmountEvent():
+return loadMerchantById(_that.merchantId,_that.orderId);case _PaymentSetAmountEvent():
 return setAmount(_that.amount);case _:
   throw StateError('Unexpected subclass');
 
@@ -195,7 +195,7 @@ return setAmount(_that.amount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pay,TResult? Function()?  updateCards,TResult? Function()?  loadCards,TResult? Function()?  checkPayDetail,TResult? Function( Merchant merchant)?  setMerchant,TResult? Function( CardItem item)?  selectedCard,TResult? Function( String merchantId)?  loadMerchantById,TResult? Function( String amount)?  setAmount,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pay,TResult? Function()?  updateCards,TResult? Function()?  loadCards,TResult? Function()?  checkPayDetail,TResult? Function( Merchant merchant)?  setMerchant,TResult? Function( CardItem item)?  selectedCard,TResult? Function( String merchantId,  String? orderId)?  loadMerchantById,TResult? Function( String amount)?  setAmount,}) {final _that = this;
 switch (_that) {
 case _PaymentPayEvent() when pay != null:
 return pay();case _PaymentPayUpdateCardsEvent() when updateCards != null:
@@ -204,7 +204,7 @@ return loadCards();case _CheckPayDetailEvent() when checkPayDetail != null:
 return checkPayDetail();case _PaymentSetMerchantEvent() when setMerchant != null:
 return setMerchant(_that.merchant);case _PaymentSelecteCardEvent() when selectedCard != null:
 return selectedCard(_that.item);case _PaymentMerchantEvent() when loadMerchantById != null:
-return loadMerchantById(_that.merchantId);case _PaymentSetAmountEvent() when setAmount != null:
+return loadMerchantById(_that.merchantId,_that.orderId);case _PaymentSetAmountEvent() when setAmount != null:
 return setAmount(_that.amount);case _:
   return null;
 
@@ -477,10 +477,11 @@ as CardItem,
 
 
 class _PaymentMerchantEvent implements PaymentEvent {
-  const _PaymentMerchantEvent({required this.merchantId});
+  const _PaymentMerchantEvent({required this.merchantId, this.orderId});
   
 
  final  String merchantId;
+ final  String? orderId;
 
 /// Create a copy of PaymentEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -492,16 +493,16 @@ _$PaymentMerchantEventCopyWith<_PaymentMerchantEvent> get copyWith => __$Payment
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentMerchantEvent&&(identical(other.merchantId, merchantId) || other.merchantId == merchantId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentMerchantEvent&&(identical(other.merchantId, merchantId) || other.merchantId == merchantId)&&(identical(other.orderId, orderId) || other.orderId == orderId));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,merchantId);
+int get hashCode => Object.hash(runtimeType,merchantId,orderId);
 
 @override
 String toString() {
-  return 'PaymentEvent.loadMerchantById(merchantId: $merchantId)';
+  return 'PaymentEvent.loadMerchantById(merchantId: $merchantId, orderId: $orderId)';
 }
 
 
@@ -512,7 +513,7 @@ abstract mixin class _$PaymentMerchantEventCopyWith<$Res> implements $PaymentEve
   factory _$PaymentMerchantEventCopyWith(_PaymentMerchantEvent value, $Res Function(_PaymentMerchantEvent) _then) = __$PaymentMerchantEventCopyWithImpl;
 @useResult
 $Res call({
- String merchantId
+ String merchantId, String? orderId
 });
 
 
@@ -529,10 +530,11 @@ class __$PaymentMerchantEventCopyWithImpl<$Res>
 
 /// Create a copy of PaymentEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? merchantId = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? merchantId = null,Object? orderId = freezed,}) {
   return _then(_PaymentMerchantEvent(
 merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
-as String,
+as String,orderId: freezed == orderId ? _self.orderId : orderId // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

@@ -81,6 +81,7 @@ mixin FeatureFinanceRouter {
               child: PaymentPage(
                 id: state.pathParameters['id'].toString(),
                 amount: state.uri.queryParameters["amount"],
+                orderId: state.uri.queryParameters["orderId"],
                 completer: state.extra as Completer<bool>?,
               ),
             ),

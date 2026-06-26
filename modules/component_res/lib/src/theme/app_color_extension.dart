@@ -2,6 +2,7 @@ part of 'app_color_theme.dart';
 
 class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final Color brand;
+  final Color brandFlamingo;
   final LabelColor textIconColor;
   final BackgroundColors background;
   final FillColors fill;
@@ -14,6 +15,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
 
   AppColorsExtension({
     required this.brand,
+    required this.brandFlamingo,
     required this.textIconColor,
     required this.background,
     required this.fill,
@@ -33,6 +35,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     }
     return AppColorsExtension(
       brand: Color.lerp(brand, other.brand, t) ?? other.brand,
+      brandFlamingo: Color.lerp(brandFlamingo, other.brandFlamingo, t) ?? other.brandFlamingo,
       textIconColor: _lerpLabelColor(textIconColor, other.textIconColor, t),
       background: _lerpBackgroundColors(background, other.background, t),
       fill: _lerpFillColors(fill, other.fill, t),
@@ -107,6 +110,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       blue: Color.lerp(a.blue, b.blue, t) ?? b.blue,
       yellow: Color.lerp(a.yellow, b.yellow, t) ?? b.yellow,
       orange: Color.lerp(a.orange, b.orange, t) ?? b.orange,
+        lime: Color.lerp(a.lime, b.lime, t) ?? b.lime,
     );
   }
 
@@ -136,6 +140,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   ThemeExtension<AppColorsExtension> copyWith(
       {LabelColor? textIconColor,
       Color? brand,
+      Color? brandFlamingo,
       BackgroundColors? background,
       FillColors? fill,
       StrokeColors? stroke,
@@ -146,6 +151,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       RippleColor? ripple}) {
     return AppColorsExtension(
       brand: brand ?? this.brand,
+      brandFlamingo: brandFlamingo ?? this.brandFlamingo,
       textIconColor: textIconColor ?? this.textIconColor,
       background: background ?? this.background,
       fill: fill ?? this.fill,
@@ -155,6 +161,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       nonOpaque: nonOpaque ?? this.nonOpaque,
       service: service ?? this.service,
       rippleColor: ripple ?? rippleColor,
+
     );
   }
 }
