@@ -23,6 +23,27 @@ class _WebViewPageState extends State<WebViewPage> {
     super.initState();
   }
 
+  final externalHosts = {
+    "t.me",
+    "telegram.me",
+    "instagram.com",
+    "www.instagram.com",
+    "facebook.com",
+    "www.facebook.com",
+    "m.facebook.com",
+    "linkedin.com",
+    "www.linkedin.com",
+    "x.com",
+    "www.x.com",
+    "twitter.com",
+    "www.twitter.com",
+    "youtube.com",
+    "www.youtube.com",
+    "youtu.be",
+    "wa.me",
+    "whatsapp.com",
+  };
+
   Future<void> goBack() async {
     final canGoBack = await inAppWebViewController?.canGoBack();
     if (canGoBack ?? false) {
@@ -111,16 +132,31 @@ class _WebViewPageState extends State<WebViewPage> {
                     controller,
                     navigationAction,
                   ) async {
-                    final url = navigationAction.request.url.toString();
+                    final uri = navigationAction.request.url;
 
-                    if (url.startsWith("http") || url.startsWith("https")) {
-                      return NavigationActionPolicy.ALLOW;
+                    if (uri == null) {
+                      return NavigationActionPolicy.CANCEL;
                     }
-                    if (await canLaunchUrl(Uri.parse(url))) {
-                      await launchUrl(Uri.parse(url));
-                      return NavigationActionPolicy.CANCEL; // WebView ochmasin
+
+                    // Telefon, SMS, Email
+                    if (["tel", "sms", "mailto"].contains(uri.scheme)) {
+                      await launchUrl(
+                        uri,
+                        mode: LaunchMode.externalApplication,
+                      );
+                      return NavigationActionPolicy.CANCEL;
                     }
-                    return NavigationActionPolicy.CANCEL;
+
+                    // Ijtimoiy tarmoqlar
+                    if (shouldOpenExternally(uri)) {
+                      await launchUrl(
+                        uri,
+                        mode: LaunchMode.externalApplication,
+                      );
+                      return NavigationActionPolicy.CANCEL;
+                    }
+
+                    return NavigationActionPolicy.ALLOW;
                   },
                   onLoadStop: (controller, url) {
                     setState(() => _progress = 1.0);
@@ -135,6 +171,12 @@ class _WebViewPageState extends State<WebViewPage> {
           ),
         ),
       ),
+    );
+  }
+
+  bool shouldOpenExternally(Uri uri) {
+    return externalHosts.any(
+          (host) => uri.host == host || uri.host.endsWith(".$host"),
     );
   }
 

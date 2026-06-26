@@ -56,7 +56,6 @@ class _PaymentPageState extends State<PaymentPage> with WidgetsBindingObserver {
   }
 
   void listener() {
-    debugPrint("listener  ${_amountController.text}");
     bloc?.add(PaymentEvent.setAmount(amount: _amountController.text));
   }
 
