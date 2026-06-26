@@ -55,13 +55,12 @@ extension PremiumEventPatterns on PremiumEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Plans value)?  plans,TResult Function( _SelectPlan value)?  selectPlan,TResult Function( _PaymentSucceeded value)?  paymentSucceeded,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Plans value)?  plans,TResult Function( _SelectPlan value)?  selectPlan,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans(_that);case _SelectPlan() when selectPlan != null:
-return selectPlan(_that);case _PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded(_that);case _:
+return selectPlan(_that);case _:
   return orElse();
 
 }
@@ -79,13 +78,12 @@ return paymentSucceeded(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Plans value)  plans,required TResult Function( _SelectPlan value)  selectPlan,required TResult Function( _PaymentSucceeded value)  paymentSucceeded,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Plans value)  plans,required TResult Function( _SelectPlan value)  selectPlan,}){
 final _that = this;
 switch (_that) {
 case _Plans():
 return plans(_that);case _SelectPlan():
-return selectPlan(_that);case _PaymentSucceeded():
-return paymentSucceeded(_that);case _:
+return selectPlan(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +100,12 @@ return paymentSucceeded(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Plans value)?  plans,TResult? Function( _SelectPlan value)?  selectPlan,TResult? Function( _PaymentSucceeded value)?  paymentSucceeded,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Plans value)?  plans,TResult? Function( _SelectPlan value)?  selectPlan,}){
 final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans(_that);case _SelectPlan() when selectPlan != null:
-return selectPlan(_that);case _PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded(_that);case _:
+return selectPlan(_that);case _:
   return null;
 
 }
@@ -125,12 +122,11 @@ return paymentSucceeded(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  plans,TResult Function( PremiumPlansModel item)?  selectPlan,TResult Function()?  paymentSucceeded,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  plans,TResult Function( PremiumPlansModel item)?  selectPlan,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans();case _SelectPlan() when selectPlan != null:
-return selectPlan(_that.item);case _PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded();case _:
+return selectPlan(_that.item);case _:
   return orElse();
 
 }
@@ -148,12 +144,11 @@ return paymentSucceeded();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  plans,required TResult Function( PremiumPlansModel item)  selectPlan,required TResult Function()  paymentSucceeded,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  plans,required TResult Function( PremiumPlansModel item)  selectPlan,}) {final _that = this;
 switch (_that) {
 case _Plans():
 return plans();case _SelectPlan():
-return selectPlan(_that.item);case _PaymentSucceeded():
-return paymentSucceeded();case _:
+return selectPlan(_that.item);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +165,11 @@ return paymentSucceeded();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  plans,TResult? Function( PremiumPlansModel item)?  selectPlan,TResult? Function()?  paymentSucceeded,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  plans,TResult? Function( PremiumPlansModel item)?  selectPlan,}) {final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans();case _SelectPlan() when selectPlan != null:
-return selectPlan(_that.item);case _PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded();case _:
+return selectPlan(_that.item);case _:
   return null;
 
 }
@@ -282,41 +276,9 @@ as PremiumPlansModel,
 }
 
 /// @nodoc
-
-
-class _PaymentSucceeded implements PremiumEvent {
-   _PaymentSucceeded();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentSucceeded);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'PremiumEvent.paymentSucceeded()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
 mixin _$PremiumState {
 
- bool get isLoading; List<PremiumPlansModel> get plans; PremiumPlansModel? get item; PremiumStatusModel? get navToCancel;
+ bool get isLoading; List<PremiumPlansModel> get plans; PremiumPlansModel? get item;
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -327,16 +289,16 @@ $PremiumStateCopyWith<PremiumState> get copyWith => _$PremiumStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.plans, plans)&&(identical(other.item, item) || other.item == item)&&(identical(other.navToCancel, navToCancel) || other.navToCancel == navToCancel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.plans, plans)&&(identical(other.item, item) || other.item == item));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(plans),item,navToCancel);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(plans),item);
 
 @override
 String toString() {
-  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item, navToCancel: $navToCancel)';
+  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item)';
 }
 
 
@@ -347,7 +309,7 @@ abstract mixin class $PremiumStateCopyWith<$Res>  {
   factory $PremiumStateCopyWith(PremiumState value, $Res Function(PremiumState) _then) = _$PremiumStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item, PremiumStatusModel? navToCancel
+ bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item
 });
 
 
@@ -364,13 +326,12 @@ class _$PremiumStateCopyWithImpl<$Res>
 
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,Object? navToCancel = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,plans: null == plans ? _self.plans : plans // ignore: cast_nullable_to_non_nullable
 as List<PremiumPlansModel>,item: freezed == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as PremiumPlansModel?,navToCancel: freezed == navToCancel ? _self.navToCancel : navToCancel // ignore: cast_nullable_to_non_nullable
-as PremiumStatusModel?,
+as PremiumPlansModel?,
   ));
 }
 
@@ -455,10 +416,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item,  PremiumStatusModel? navToCancel)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PremiumState() when $default != null:
-return $default(_that.isLoading,_that.plans,_that.item,_that.navToCancel);case _:
+return $default(_that.isLoading,_that.plans,_that.item);case _:
   return orElse();
 
 }
@@ -476,10 +437,10 @@ return $default(_that.isLoading,_that.plans,_that.item,_that.navToCancel);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item,  PremiumStatusModel? navToCancel)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item)  $default,) {final _that = this;
 switch (_that) {
 case _PremiumState():
-return $default(_that.isLoading,_that.plans,_that.item,_that.navToCancel);case _:
+return $default(_that.isLoading,_that.plans,_that.item);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -496,10 +457,10 @@ return $default(_that.isLoading,_that.plans,_that.item,_that.navToCancel);case _
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item,  PremiumStatusModel? navToCancel)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item)?  $default,) {final _that = this;
 switch (_that) {
 case _PremiumState() when $default != null:
-return $default(_that.isLoading,_that.plans,_that.item,_that.navToCancel);case _:
+return $default(_that.isLoading,_that.plans,_that.item);case _:
   return null;
 
 }
@@ -511,7 +472,7 @@ return $default(_that.isLoading,_that.plans,_that.item,_that.navToCancel);case _
 
 
 class _PremiumState implements PremiumState {
-   _PremiumState({this.isLoading = true, final  List<PremiumPlansModel> plans = const [], this.item, this.navToCancel}): _plans = plans;
+   _PremiumState({this.isLoading = true, final  List<PremiumPlansModel> plans = const [], this.item}): _plans = plans;
   
 
 @override@JsonKey() final  bool isLoading;
@@ -523,7 +484,6 @@ class _PremiumState implements PremiumState {
 }
 
 @override final  PremiumPlansModel? item;
-@override final  PremiumStatusModel? navToCancel;
 
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
@@ -535,16 +495,16 @@ _$PremiumStateCopyWith<_PremiumState> get copyWith => __$PremiumStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._plans, _plans)&&(identical(other.item, item) || other.item == item)&&(identical(other.navToCancel, navToCancel) || other.navToCancel == navToCancel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._plans, _plans)&&(identical(other.item, item) || other.item == item));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_plans),item,navToCancel);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_plans),item);
 
 @override
 String toString() {
-  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item, navToCancel: $navToCancel)';
+  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item)';
 }
 
 
@@ -555,7 +515,7 @@ abstract mixin class _$PremiumStateCopyWith<$Res> implements $PremiumStateCopyWi
   factory _$PremiumStateCopyWith(_PremiumState value, $Res Function(_PremiumState) _then) = __$PremiumStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item, PremiumStatusModel? navToCancel
+ bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item
 });
 
 
@@ -572,13 +532,12 @@ class __$PremiumStateCopyWithImpl<$Res>
 
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,Object? navToCancel = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,}) {
   return _then(_PremiumState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,plans: null == plans ? _self._plans : plans // ignore: cast_nullable_to_non_nullable
 as List<PremiumPlansModel>,item: freezed == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as PremiumPlansModel?,navToCancel: freezed == navToCancel ? _self.navToCancel : navToCancel // ignore: cast_nullable_to_non_nullable
-as PremiumStatusModel?,
+as PremiumPlansModel?,
   ));
 }
 

@@ -131,5 +131,11 @@
   "premiumServiceLocked": "Эта услуга и многое другое доступно в Premium",
   "premiumLearnMore": "Узнать подробнее",
   "premiumLimitReachedTitle": "У вас закончились бесплатные лимиты",
-  "premiumLimitReachedDesc": "Для неограниченного доступа ко всем услугам, вам необходимо подключить Premium"
+  "premiumLimitReachedDesc": "Для неограниченного доступа ко всем услугам, вам необходимо подключить Premium",
+  "premiumSuccessTitle": "Вы подключили подписку",
+  "premiumSuccessSubtitle": "Вам доступны все преимущества Premium подписки",
+  "premiumCancelConfirmTitle": "Отменить подписку?",
+  "premiumCancelConfirmMessage": "Premium подписка будет отменена, и все возможности станут недоступны.",
+  "premiumCancelConfirmAction": "Да, отменить",
+  "premiumCancelDismiss": "Нет"
 }

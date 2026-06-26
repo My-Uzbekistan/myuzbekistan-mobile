@@ -876,6 +876,42 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Для неограниченного доступа ко всем услугам, вам необходимо подключить Premium'**
   String get premiumLimitReachedDesc;
+
+  /// No description provided for @premiumSuccessTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы подключили подписку'**
+  String get premiumSuccessTitle;
+
+  /// No description provided for @premiumSuccessSubtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вам доступны все преимущества Premium подписки'**
+  String get premiumSuccessSubtitle;
+
+  /// No description provided for @premiumCancelConfirmTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменить подписку?'**
+  String get premiumCancelConfirmTitle;
+
+  /// No description provided for @premiumCancelConfirmMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Premium подписка будет отменена, и все возможности станут недоступны.'**
+  String get premiumCancelConfirmMessage;
+
+  /// No description provided for @premiumCancelConfirmAction.
+  ///
+  /// In ru, this message translates to:
+  /// **'Да, отменить'**
+  String get premiumCancelConfirmAction;
+
+  /// No description provided for @premiumCancelDismiss.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет'**
+  String get premiumCancelDismiss;
 }
 
 class _FeatureTravelLocalizationsDelegate

@@ -56,6 +56,50 @@ class PremiumRequiredDialog extends StatelessWidget {
   }
 }
 
+class PremiumSuccessDialog extends StatelessWidget {
+  const PremiumSuccessDialog({super.key});
+
+  static Future<void> show(BuildContext context) {
+    return showDialog(
+      context: context,
+      builder: (_) => const PremiumSuccessDialog(),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: context.appColors.background.elevation3,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Assets.png.iconPremium.image(height: 96),
+            const SizedBox(height: 16),
+            Text(
+              context.localization.premiumSuccessTitle,
+              style: CustomTypography.H2.copyWith(
+                color: context.appColors.textIconColor.primary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              context.localization.premiumSuccessSubtitle,
+              style: CustomTypography.bodyMd.copyWith(
+                color: context.appColors.textIconColor.secondary,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class LimitReachedDialog extends StatelessWidget {
   const LimitReachedDialog({super.key});
 

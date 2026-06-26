@@ -130,7 +130,13 @@
   "premiumServiceLocked": "Bu xizmat va yana ko‘plari Premiumda mavjud",
   "premiumLearnMore": "Batafsil ma’lumot",
   "premiumLimitReachedTitle": "Bepul limitlaringiz tugadi",
-  "premiumLimitReachedDesc": "Barcha xizmatlardan cheksiz foydalanish uchun Premiumni ulashingiz kerak"
+  "premiumLimitReachedDesc": "Barcha xizmatlardan cheksiz foydalanish uchun Premiumni ulashingiz kerak",
+  "premiumSuccessTitle": "Obunani uladingiz",
+  "premiumSuccessSubtitle": "Premium obunaning barcha imkoniyatlari siz uchun ochiq",
+  "premiumCancelConfirmTitle": "Obunani bekor qilasizmi?",
+  "premiumCancelConfirmMessage": "Premium obuna bekor qilinadi va barcha imkoniyatlar yopiladi.",
+  "premiumCancelConfirmAction": "Ha, bekor qilish",
+  "premiumCancelDismiss": "Yo‘q"
 
 
 }

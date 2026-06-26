@@ -6,6 +6,7 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
+import 'package:travel/src/premium/widgets/premium_access_dialogs.dart';
 
 import 'widgets/discount_item.dart';
 
@@ -28,17 +29,7 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<PremiumBloc, PremiumState>(
-      listenWhen: (p, c) => p.navToCancel != c.navToCancel,
-      listener: (context, state) {
-        final status = state.navToCancel;
-        if (status != null) {
-          context.pushType(
-            AppNavPath.travel.premiumCancelPage,
-            extra: status,
-          );
-        }
-      },
+    return BlocBuilder<PremiumBloc, PremiumState>(
       builder: (context, state) {
         return Scaffold(
           appBar: GradientAppBar(),
@@ -66,7 +57,13 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                     );
                     final result = await completer.future;
                     if (result) {
-                      bloc?.add(PremiumEvent.paymentSucceeded());
+                      context.travel.goMain();
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        final rootContext = appRootNavigatorKey.currentContext;
+                        if (rootContext != null) {
+                          PremiumSuccessDialog.show(rootContext);
+                        }
+                      });
                     }
                   },
                   disable: state.item == null,

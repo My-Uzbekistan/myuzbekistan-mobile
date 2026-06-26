@@ -130,5 +130,11 @@
   "premiumServiceLocked": "This service and much more is available in Premium",
   "premiumLearnMore": "Learn more",
   "premiumLimitReachedTitle": "You've run out of free limits",
-  "premiumLimitReachedDesc": "For unlimited access to all services, you need to get Premium"
+  "premiumLimitReachedDesc": "For unlimited access to all services, you need to get Premium",
+  "premiumSuccessTitle": "You've activated the subscription",
+  "premiumSuccessSubtitle": "All Premium subscription benefits are now available to you",
+  "premiumCancelConfirmTitle": "Cancel subscription?",
+  "premiumCancelConfirmMessage": "Your Premium subscription will be cancelled and all benefits will be lost.",
+  "premiumCancelConfirmAction": "Yes, cancel",
+  "premiumCancelDismiss": "No"
 }
