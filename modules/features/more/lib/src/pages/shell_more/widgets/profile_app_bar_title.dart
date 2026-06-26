@@ -35,6 +35,23 @@ class ProfileAppBarTitle extends StatelessWidget {
             ? (state.userModel?.userName ?? "")
             : context.localization.guest;
 
+    // Mehmon — Premium (badge/obuna) ko'rsatilmaydi, faqat ism.
+    if (!isLoggedIn) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: Text(
+              name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: CustomTypography.H3,
+            ),
+          ),
+        ],
+      );
+    }
+
     if (!premiumLoaded) {
       return Row(
         mainAxisSize: MainAxisSize.min,
