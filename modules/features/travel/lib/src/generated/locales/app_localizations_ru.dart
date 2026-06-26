@@ -507,4 +507,24 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   @override
   String get premiumLimitReachedDesc =>
       'Для неограниченного доступа ко всем услугам, вам необходимо подключить Premium';
+
+  @override
+  String get premiumSuccessTitle => 'Вы подключили подписку';
+
+  @override
+  String get premiumSuccessSubtitle =>
+      'Вам доступны все преимущества Premium подписки';
+
+  @override
+  String get premiumCancelConfirmTitle => 'Отменить подписку?';
+
+  @override
+  String get premiumCancelConfirmMessage =>
+      'Premium подписка будет отменена, и все возможности станут недоступны.';
+
+  @override
+  String get premiumCancelConfirmAction => 'Да, отменить';
+
+  @override
+  String get premiumCancelDismiss => 'Нет';
 }

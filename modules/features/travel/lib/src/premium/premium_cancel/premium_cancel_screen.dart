@@ -87,8 +87,19 @@ class PremiumCancelScreen extends StatelessWidget {
               actionText: context.localization.premiumCancelSubscription,
               isLoading: state.isCancelling,
               onPressed: () {
-                context.read<PremiumCancelBloc>().add(
-                  PremiumCancelEvent.cancel(),
+                showActionAlertDialog(
+                  context,
+                  title: context.localization.premiumCancelConfirmTitle,
+                  message: context.localization.premiumCancelConfirmMessage,
+                  firstActionText:
+                      context.localization.premiumCancelConfirmAction,
+                  firstButtonTextColor: context.appColors.colors.red,
+                  secondActionText: context.localization.premiumCancelDismiss,
+                  onFirstButtonClick: () {
+                    context.read<PremiumCancelBloc>().add(
+                      PremiumCancelEvent.cancel(),
+                    );
+                  },
                 );
               },
               containerColor: context.appColors.fill.tertiary,

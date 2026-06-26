@@ -79,6 +79,11 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
   }
 
   Future<void> _loadPremiumStatus(Emitter<MoreState> emit) async {
+    // Mehmon (login qilmagan) bo'lsa — premium so'rovi yuborilmaydi.
+    if (_securityStorage.getAccessToken() == null) {
+      emit(state.copyWith(premiumStatus: null, premiumLoaded: false));
+      return;
+    }
     try {
       final premiumStatus = await _premiumRepository.status();
       emit(state.copyWith(premiumStatus: premiumStatus, premiumLoaded: true));

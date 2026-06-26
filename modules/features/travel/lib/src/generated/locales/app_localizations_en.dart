@@ -496,4 +496,24 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   @override
   String get premiumLimitReachedDesc =>
       'For unlimited access to all services, you need to get Premium';
+
+  @override
+  String get premiumSuccessTitle => 'You\'ve activated the subscription';
+
+  @override
+  String get premiumSuccessSubtitle =>
+      'All Premium subscription benefits are now available to you';
+
+  @override
+  String get premiumCancelConfirmTitle => 'Cancel subscription?';
+
+  @override
+  String get premiumCancelConfirmMessage =>
+      'Your Premium subscription will be cancelled and all benefits will be lost.';
+
+  @override
+  String get premiumCancelConfirmAction => 'Yes, cancel';
+
+  @override
+  String get premiumCancelDismiss => 'No';
 }

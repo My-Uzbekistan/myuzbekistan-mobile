@@ -7,7 +7,7 @@ import 'package:navigation/navigation.dart';
 import '../../profile_page/bloc/profile_bloc.dart';
 
 const _premiumGradient = LinearGradient(
-  colors: [Color(0xFFF3D98B), Color(0xFFCBA052)],
+  colors: [Color(0xFFF7CE5F), Color(0xFFFEEA7B), Color(0xFFCB9030)],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
 );
@@ -34,6 +34,23 @@ class ProfileAppBarTitle extends StatelessWidget {
         isLoggedIn
             ? (state.userModel?.userName ?? "")
             : context.localization.guest;
+
+    // Mehmon — Premium (badge/obuna) ko'rsatilmaydi, faqat ism.
+    if (!isLoggedIn) {
+      return Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: Text(
+              name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: CustomTypography.H3,
+            ),
+          ),
+        ],
+      );
+    }
 
     if (!premiumLoaded) {
       return Row(
@@ -81,13 +98,13 @@ class ProfileAppBarTitle extends StatelessWidget {
                     name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: CustomTypography.H3,
+                    style: CustomTypography.H2,
                   ),
                   Text(
                     context.localization.premiumActiveSubtitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: CustomTypography.bodySm.copyWith(
+                    style: CustomTypography.labelSm.copyWith(
                       color: const Color(0xFFCBA052),
                     ),
                   ),
@@ -136,8 +153,8 @@ class _Avatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final url = photoUrl ?? "";
     final avatar = SizedBox(
-      height: 40,
-      width: 40,
+      height: 48,
+      width: 48,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(40),
         child:
@@ -163,7 +180,7 @@ class _Avatar extends StatelessWidget {
     if (!isPremium) return avatar;
 
     return Container(
-      padding: const EdgeInsets.all(2),
+      padding: const EdgeInsets.all(3),
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         gradient: _premiumGradient,

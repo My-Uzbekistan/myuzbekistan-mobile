@@ -484,4 +484,24 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   @override
   String get premiumLimitReachedDesc =>
       'Barcha xizmatlardan cheksiz foydalanish uchun Premiumni ulashingiz kerak';
+
+  @override
+  String get premiumSuccessTitle => 'Obunani uladingiz';
+
+  @override
+  String get premiumSuccessSubtitle =>
+      'Premium obunaning barcha imkoniyatlari siz uchun ochiq';
+
+  @override
+  String get premiumCancelConfirmTitle => 'Obunani bekor qilasizmi?';
+
+  @override
+  String get premiumCancelConfirmMessage =>
+      'Premium obuna bekor qilinadi va barcha imkoniyatlar yopiladi.';
+
+  @override
+  String get premiumCancelConfirmAction => 'Ha, bekor qilish';
+
+  @override
+  String get premiumCancelDismiss => 'Yo‘q';
 }
