@@ -19,6 +19,11 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   final LoadCardsUseCase _loadCardsUseCase;
   final FinanceRepository _financeRepository;
   final FinanceSharedService _financeSharedService;
+  final PremiumRepository _premiumRepository;
+
+  /// Premium obuna to'lovi shu merchant orqali amalga oshiriladi. Faqat shu
+  /// merchant uchun to'lov muvaffaqiyatli bo'lganda `premium/subscribe` chaqiriladi.
+  static const _premiumMerchantId = "50";
 
   StreamSubscription? _cardsSubscription;
   StreamSubscription? _updateCardsSubscription;
@@ -31,6 +36,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     this._loadCardsUseCase,
     this._financeSharedService,
     this._financeRepository,
+    this._premiumRepository,
   ) : super(PaymentState.loadingState()) {
     on<_PaymentMerchantEvent>(_loadMerchantById);
     on<_PaymentPayUpdateCardsEvent>(_updatePaymentCards);
@@ -71,6 +77,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         final result = await _financeRepository.paymentCheck(
           paymentId: paymentId!,
         );
+        await _subscribePremiumIfNeeded(state as PaymentDataState);
         emit(
           (state as PaymentDataState).copyWith(
             isPayLoading: false,
@@ -106,6 +113,17 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
   double? amount;
   String? orderId;
+
+  Future<void> _subscribePremiumIfNeeded(PaymentDataState st) async {
+    if (st.merchant.id.toString() != _premiumMerchantId) return;
+    final planId = orderId?.toIntOrNull();
+    if (planId == null) return;
+    try {
+      await _premiumRepository.subscribe(planId);
+    } catch (e) {
+      logger.e("Premium subscribe error $e");
+    }
+  }
 
   void _setAmount(_PaymentSetAmountEvent event, Emitter<PaymentState> emit) {
     amount = event.amount.replaceAll(RegExp(r'\D'), '').toDoubleOrNull();
@@ -207,6 +225,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
           ),
         );
       } else {
+        await _subscribePremiumIfNeeded(st);
         emit(
           (state as PaymentDataState).copyWith(
             isPayLoading: false,

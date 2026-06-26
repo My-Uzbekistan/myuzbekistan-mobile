@@ -1,10 +1,10 @@
 import 'package:component_res/component_res.dart';
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:more/more.dart';
 import 'package:more/src/core/extension.dart';
 import 'package:more/src/pages/profile_page/pages/change_locale.dart';
 import 'package:more/src/pages/shell_more/widgets/about_widget.dart';
+import 'package:more/src/pages/shell_more/widgets/profile_app_bar_title.dart';
 import 'package:more/src/pages/shell_more/widgets/version.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
@@ -46,49 +46,14 @@ class _ShellMorePageState extends State<ShellMorePage> {
               flexibleSpace: AppGradientMask(),
               backgroundColor: Colors.transparent,
 
-              title: Row(
-                mainAxisSize: MainAxisSize.min,
-                spacing: 16,
-                children: [
-                  FilledButton(onPressed: (){
-                    context.pushNamed(AppNavPath.travel.premiumOnboardingPage.name);
-                  }, child: Text("Premium")),
-                  if (profileState is ProfileBlocDataState)
-                    Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(40),
-                        child: ExtendedImage.network(
-                          profileState.userModel?.photoUrl ?? "",
-                          fit: BoxFit.cover,
-
-                          cache: true,
-                          cacheMaxAge: Duration(days: 10),
-                          loadStateChanged: (state) {
-                            switch (state.extendedImageLoadState) {
-                              case LoadState.completed:
-                                return state.completedWidget;
-                              default:
-                                return Assets.png.avatar.image(
-                                  fit: BoxFit.cover,
-                                );
-                            }
-                          },
-                        ),
-                      ),
-                    ),
-                  Flexible(
-                    child: Text(
-                      (profileState is ProfileBlocDataState)
-                          ? profileState.userModel?.userName??""
-                          : context.localization.guest,
-                      style: CustomTypography.H3,
-                    ),
-                  ),
-                ],
+              title: BlocBuilder<MoreBloc, MoreState>(
+                builder: (context, moreState) {
+                  return ProfileAppBarTitle(
+                    profileState: profileState,
+                    premiumStatus: moreState.premiumStatus,
+                    premiumLoaded: moreState.premiumLoaded,
+                  );
+                },
               ),
 
               actionsPadding: EdgeInsets.only(right: 16),

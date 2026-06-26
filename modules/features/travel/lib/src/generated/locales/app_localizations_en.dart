@@ -401,4 +401,99 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   @override
   String get claim_warning_page_caption =>
       'To receive the gift, you need to register with an Uztelecom number';
+
+  @override
+  String get premiumConnect => 'Get Premium';
+
+  @override
+  String get premiumCancelAnytime => 'You can cancel anytime.';
+
+  @override
+  String get premiumTerms => 'Terms of use';
+
+  @override
+  String get premiumFeatureAiTitle => 'Unlimited AI services';
+
+  @override
+  String get premiumFeatureAiDesc =>
+      'Caloria AI, Trip Planner, Travel Cam AI and more';
+
+  @override
+  String get premiumFeatureEsimTitle => 'eSIM promo code';
+
+  @override
+  String get premiumFeatureEsimDesc => 'Discount on a gold number';
+
+  @override
+  String get premiumFeatureDiscountTitle => 'Discounts section';
+
+  @override
+  String get premiumFeatureDiscountDesc => 'Exclusive discounts from partners';
+
+  @override
+  String get premiumFeatureProfileTitle => 'Profile photo';
+
+  @override
+  String get premiumFeatureProfileDesc => 'Personalize your profile';
+
+  @override
+  String premiumMonths(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count months',
+      one: '$count month',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String premiumDiscountBadge(Object percent) {
+    return 'discount -$percent%';
+  }
+
+  @override
+  String get premiumCancelSubscription => 'Cancel subscription';
+
+  @override
+  String premiumSubscriptionTitle(Object plan) {
+    return '$plan subscription';
+  }
+
+  @override
+  String get statusActive => 'Active';
+
+  @override
+  String get premiumStartDate => 'Start date';
+
+  @override
+  String get premiumExpiryDate => 'Valid until';
+
+  @override
+  String get premiumDaysRemaining => 'Time remaining';
+
+  @override
+  String premiumDaysValue(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days',
+      one: '$count day',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get premiumServiceLocked =>
+      'This service and much more is available in Premium';
+
+  @override
+  String get premiumLearnMore => 'Learn more';
+
+  @override
+  String get premiumLimitReachedTitle => 'You\'ve run out of free limits';
+
+  @override
+  String get premiumLimitReachedDesc =>
+      'For unlimited access to all services, you need to get Premium';
 }

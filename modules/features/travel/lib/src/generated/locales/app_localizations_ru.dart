@@ -408,4 +408,103 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   @override
   String get claim_warning_page_caption =>
       'Для получения подарка необходимо пройти регистрацию на номер Uztelecom';
+
+  @override
+  String get premiumConnect => 'Подключить Premium';
+
+  @override
+  String get premiumCancelAnytime => 'Отменить можно в любое время.';
+
+  @override
+  String get premiumTerms => 'Условия использования';
+
+  @override
+  String get premiumFeatureAiTitle => 'Безлимитные AI-сервисы';
+
+  @override
+  String get premiumFeatureAiDesc =>
+      'Caloria AI, Trip Planer, Travel Cam AI и многое другое';
+
+  @override
+  String get premiumFeatureEsimTitle => 'Промокод eSIM';
+
+  @override
+  String get premiumFeatureEsimDesc => 'Скидка на золотой номер';
+
+  @override
+  String get premiumFeatureDiscountTitle => 'Раздел скидок';
+
+  @override
+  String get premiumFeatureDiscountDesc => 'Эксклюзивные скидки от партнёров';
+
+  @override
+  String get premiumFeatureProfileTitle => 'Фото профиля';
+
+  @override
+  String get premiumFeatureProfileDesc => 'Персонализируйте свой профиль';
+
+  @override
+  String premiumMonths(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count месяцев',
+      many: '$count месяцев',
+      few: '$count месяца',
+      one: '$count месяц',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String premiumDiscountBadge(Object percent) {
+    return 'скидка -$percent%';
+  }
+
+  @override
+  String get premiumCancelSubscription => 'Отменить подписку';
+
+  @override
+  String premiumSubscriptionTitle(Object plan) {
+    return 'Подписка $plan';
+  }
+
+  @override
+  String get statusActive => 'Активна';
+
+  @override
+  String get premiumStartDate => 'Дата начала';
+
+  @override
+  String get premiumExpiryDate => 'Срок действия';
+
+  @override
+  String get premiumDaysRemaining => 'Осталось времени';
+
+  @override
+  String premiumDaysValue(num count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count дней',
+      many: '$count дней',
+      few: '$count дня',
+      one: '$count день',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get premiumServiceLocked =>
+      'Эта услуга и многое другое доступно в Premium';
+
+  @override
+  String get premiumLearnMore => 'Узнать подробнее';
+
+  @override
+  String get premiumLimitReachedTitle => 'У вас закончились бесплатные лимиты';
+
+  @override
+  String get premiumLimitReachedDesc =>
+      'Для неограниченного доступа ко всем услугам, вам необходимо подключить Premium';
 }

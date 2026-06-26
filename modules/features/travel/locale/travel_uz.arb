@@ -106,11 +106,31 @@
   "gb": "GB",
   "claim_dialog_caption": "Sizning mobil raqamingizga bonus berildi",
   "claim_warning_page_title": "Faqat Uztelecom abonentlari uchun",
-  "claim_warning_page_caption":"Sovg‘ani olish uchun Uztelecom raqamiga ro‘yxatdan o‘tish kerak"
-
-
-
-
+  "claim_warning_page_caption":"Sovg‘ani olish uchun Uztelecom raqamiga ro‘yxatdan o‘tish kerak",
+  "premiumConnect": "Premiumni ulash",
+  "premiumCancelAnytime": "Istagan vaqtda bekor qilish mumkin.",
+  "premiumTerms": "Foydalanish shartlari",
+  "premiumFeatureAiTitle": "Cheksiz AI xizmatlar",
+  "premiumFeatureAiDesc": "Caloria AI, Trip Planer, Travel Cam AI va barchasi",
+  "premiumFeatureEsimTitle": "eSIM promokod",
+  "premiumFeatureEsimDesc": "Oltin raqam uchun chegirma",
+  "premiumFeatureDiscountTitle": "Chegirmalar bo‘limi",
+  "premiumFeatureDiscountDesc": "Hamkor xizmatlardan eksklyuziv chegirmalar",
+  "premiumFeatureProfileTitle": "Profil rasmi",
+  "premiumFeatureProfileDesc": "Profilingizni shaxsiylashtiring",
+  "premiumMonths": "{count} oy",
+  "premiumDiscountBadge": "chegirma -{percent}%",
+  "premiumCancelSubscription": "Obunani bekor qilish",
+  "premiumSubscriptionTitle": "{plan} obuna",
+  "statusActive": "Faol",
+  "premiumStartDate": "Boshlanish sanasi",
+  "premiumExpiryDate": "Amal qilish muddati",
+  "premiumDaysRemaining": "Qolgan muddat",
+  "premiumDaysValue": "{count} kun",
+  "premiumServiceLocked": "Bu xizmat va yana ko‘plari Premiumda mavjud",
+  "premiumLearnMore": "Batafsil ma’lumot",
+  "premiumLimitReachedTitle": "Bepul limitlaringiz tugadi",
+  "premiumLimitReachedDesc": "Barcha xizmatlardan cheksiz foydalanish uchun Premiumni ulashingiz kerak"
 
 
 }

@@ -55,12 +55,13 @@ extension CatalogEventPatterns on CatalogEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _CatalogLoadedData value)?  loadedData,TResult Function( _CatalogFetchEvent value)?  fetch,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _CatalogLoadedData value)?  loadedData,TResult Function( _CatalogFetchEvent value)?  fetch,TResult Function( _PremiumCard value)?  premiumCard,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _CatalogLoadedData() when loadedData != null:
 return loadedData(_that);case _CatalogFetchEvent() when fetch != null:
-return fetch(_that);case _:
+return fetch(_that);case _PremiumCard() when premiumCard != null:
+return premiumCard(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return fetch(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _CatalogLoadedData value)  loadedData,required TResult Function( _CatalogFetchEvent value)  fetch,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _CatalogLoadedData value)  loadedData,required TResult Function( _CatalogFetchEvent value)  fetch,required TResult Function( _PremiumCard value)  premiumCard,}){
 final _that = this;
 switch (_that) {
 case _CatalogLoadedData():
 return loadedData(_that);case _CatalogFetchEvent():
-return fetch(_that);case _:
+return fetch(_that);case _PremiumCard():
+return premiumCard(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +102,13 @@ return fetch(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _CatalogLoadedData value)?  loadedData,TResult? Function( _CatalogFetchEvent value)?  fetch,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _CatalogLoadedData value)?  loadedData,TResult? Function( _CatalogFetchEvent value)?  fetch,TResult? Function( _PremiumCard value)?  premiumCard,}){
 final _that = this;
 switch (_that) {
 case _CatalogLoadedData() when loadedData != null:
 return loadedData(_that);case _CatalogFetchEvent() when fetch != null:
-return fetch(_that);case _:
+return fetch(_that);case _PremiumCard() when premiumCard != null:
+return premiumCard(_that);case _:
   return null;
 
 }
@@ -122,11 +125,12 @@ return fetch(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<CatalogItemModel> items)?  loadedData,TResult Function()?  fetch,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( List<CatalogItemModel> items)?  loadedData,TResult Function()?  fetch,TResult Function( int id,  CatalogItemModel item)?  premiumCard,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CatalogLoadedData() when loadedData != null:
 return loadedData(_that.items);case _CatalogFetchEvent() when fetch != null:
-return fetch();case _:
+return fetch();case _PremiumCard() when premiumCard != null:
+return premiumCard(_that.id,_that.item);case _:
   return orElse();
 
 }
@@ -144,11 +148,12 @@ return fetch();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<CatalogItemModel> items)  loadedData,required TResult Function()  fetch,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( List<CatalogItemModel> items)  loadedData,required TResult Function()  fetch,required TResult Function( int id,  CatalogItemModel item)  premiumCard,}) {final _that = this;
 switch (_that) {
 case _CatalogLoadedData():
 return loadedData(_that.items);case _CatalogFetchEvent():
-return fetch();case _:
+return fetch();case _PremiumCard():
+return premiumCard(_that.id,_that.item);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +170,12 @@ return fetch();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<CatalogItemModel> items)?  loadedData,TResult? Function()?  fetch,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( List<CatalogItemModel> items)?  loadedData,TResult? Function()?  fetch,TResult? Function( int id,  CatalogItemModel item)?  premiumCard,}) {final _that = this;
 switch (_that) {
 case _CatalogLoadedData() when loadedData != null:
 return loadedData(_that.items);case _CatalogFetchEvent() when fetch != null:
-return fetch();case _:
+return fetch();case _PremiumCard() when premiumCard != null:
+return premiumCard(_that.id,_that.item);case _:
   return null;
 
 }
@@ -280,6 +286,74 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _PremiumCard implements CatalogEvent {
+   _PremiumCard({required this.id, required this.item});
+  
+
+ final  int id;
+ final  CatalogItemModel item;
+
+/// Create a copy of CatalogEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PremiumCardCopyWith<_PremiumCard> get copyWith => __$PremiumCardCopyWithImpl<_PremiumCard>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PremiumCard&&(identical(other.id, id) || other.id == id)&&(identical(other.item, item) || other.item == item));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,id,item);
+
+@override
+String toString() {
+  return 'CatalogEvent.premiumCard(id: $id, item: $item)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PremiumCardCopyWith<$Res> implements $CatalogEventCopyWith<$Res> {
+  factory _$PremiumCardCopyWith(_PremiumCard value, $Res Function(_PremiumCard) _then) = __$PremiumCardCopyWithImpl;
+@useResult
+$Res call({
+ int id, CatalogItemModel item
+});
+
+
+
+
+}
+/// @nodoc
+class __$PremiumCardCopyWithImpl<$Res>
+    implements _$PremiumCardCopyWith<$Res> {
+  __$PremiumCardCopyWithImpl(this._self, this._then);
+
+  final _PremiumCard _self;
+  final $Res Function(_PremiumCard) _then;
+
+/// Create a copy of CatalogEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? id = null,Object? item = null,}) {
+  return _then(_PremiumCard(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int,item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
+as CatalogItemModel,
+  ));
+}
+
+
+}
 
 /// @nodoc
 mixin _$CatalogState {
@@ -395,11 +469,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<CatalogItemModel> items)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<CatalogItemModel> items,  PremiumAccessStatus accessStatus,  CatalogItemModel? pendingItem)?  loaded,TResult Function()?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadingState() when loading != null:
 return loading();case _LoadedState() when loaded != null:
-return loaded(_that.items);case _ErrorState() when error != null:
+return loaded(_that.items,_that.accessStatus,_that.pendingItem);case _ErrorState() when error != null:
 return error();case _:
   return orElse();
 
@@ -418,11 +492,11 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<CatalogItemModel> items)  loaded,required TResult Function()  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<CatalogItemModel> items,  PremiumAccessStatus accessStatus,  CatalogItemModel? pendingItem)  loaded,required TResult Function()  error,}) {final _that = this;
 switch (_that) {
 case _LoadingState():
 return loading();case _LoadedState():
-return loaded(_that.items);case _ErrorState():
+return loaded(_that.items,_that.accessStatus,_that.pendingItem);case _ErrorState():
 return error();case _:
   throw StateError('Unexpected subclass');
 
@@ -440,11 +514,11 @@ return error();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<CatalogItemModel> items)?  loaded,TResult? Function()?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<CatalogItemModel> items,  PremiumAccessStatus accessStatus,  CatalogItemModel? pendingItem)?  loaded,TResult? Function()?  error,}) {final _that = this;
 switch (_that) {
 case _LoadingState() when loading != null:
 return loading();case _LoadedState() when loaded != null:
-return loaded(_that.items);case _ErrorState() when error != null:
+return loaded(_that.items,_that.accessStatus,_that.pendingItem);case _ErrorState() when error != null:
 return error();case _:
   return null;
 
@@ -489,7 +563,7 @@ String toString() {
 
 
 class _LoadedState implements CatalogState {
-   _LoadedState({required final  List<CatalogItemModel> items}): _items = items;
+   _LoadedState({required final  List<CatalogItemModel> items, this.accessStatus = PremiumAccessStatus.idle, this.pendingItem}): _items = items;
   
 
  final  List<CatalogItemModel> _items;
@@ -499,6 +573,8 @@ class _LoadedState implements CatalogState {
   return EqualUnmodifiableListView(_items);
 }
 
+@JsonKey() final  PremiumAccessStatus accessStatus;
+ final  CatalogItemModel? pendingItem;
 
 /// Create a copy of CatalogState
 /// with the given fields replaced by the non-null parameter values.
@@ -510,16 +586,16 @@ _$LoadedStateCopyWith<_LoadedState> get copyWith => __$LoadedStateCopyWithImpl<_
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadedState&&const DeepCollectionEquality().equals(other._items, _items));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadedState&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.accessStatus, accessStatus) || other.accessStatus == accessStatus)&&(identical(other.pendingItem, pendingItem) || other.pendingItem == pendingItem));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items));
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items),accessStatus,pendingItem);
 
 @override
 String toString() {
-  return 'CatalogState.loaded(items: $items)';
+  return 'CatalogState.loaded(items: $items, accessStatus: $accessStatus, pendingItem: $pendingItem)';
 }
 
 
@@ -530,7 +606,7 @@ abstract mixin class _$LoadedStateCopyWith<$Res> implements $CatalogStateCopyWit
   factory _$LoadedStateCopyWith(_LoadedState value, $Res Function(_LoadedState) _then) = __$LoadedStateCopyWithImpl;
 @useResult
 $Res call({
- List<CatalogItemModel> items
+ List<CatalogItemModel> items, PremiumAccessStatus accessStatus, CatalogItemModel? pendingItem
 });
 
 
@@ -547,10 +623,12 @@ class __$LoadedStateCopyWithImpl<$Res>
 
 /// Create a copy of CatalogState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? items = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? items = null,Object? accessStatus = null,Object? pendingItem = freezed,}) {
   return _then(_LoadedState(
 items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
-as List<CatalogItemModel>,
+as List<CatalogItemModel>,accessStatus: null == accessStatus ? _self.accessStatus : accessStatus // ignore: cast_nullable_to_non_nullable
+as PremiumAccessStatus,pendingItem: freezed == pendingItem ? _self.pendingItem : pendingItem // ignore: cast_nullable_to_non_nullable
+as CatalogItemModel?,
   ));
 }
 

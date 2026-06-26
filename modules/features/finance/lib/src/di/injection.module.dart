@@ -34,18 +34,12 @@ class FinancePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i922.MerchantByIdUseCase>(
-        () => _i922.MerchantByIdUseCase(gh<_i494.FinanceRepository>()));
     gh.factory<_i799.LoadCardsUseCase>(
         () => _i799.LoadCardsUseCase(gh<_i494.FinanceRepository>()));
-    gh.lazySingleton<_i83.FinanceSharedService>(
-        () => _i83.FinanceSharedServiceIml());
-    gh.factory<_i509.PaymentBloc>(() => _i509.PaymentBloc(
-          gh<_i922.MerchantByIdUseCase>(),
-          gh<_i799.LoadCardsUseCase>(),
-          gh<_i83.FinanceSharedService>(),
-          gh<_i494.FinanceRepository>(),
-        ));
+    gh.factory<_i922.MerchantByIdUseCase>(
+        () => _i922.MerchantByIdUseCase(gh<_i494.FinanceRepository>()));
+    gh.factory<_i754.LoadMerchantUseCase>(
+        () => _i754.LoadMerchantUseCase(gh<_i494.FinanceRepository>()));
     gh.factory<_i491.VerificationBloc>(
       () => _i491.AuthPhoneVerificationBloc(
         gh<_i494.Repository>(),
@@ -57,9 +51,11 @@ class FinancePackageModule extends _i526.MicroPackageModule {
         () => _i494.HistoryBloc(gh<_i494.FinanceRepository>()));
     gh.factory<_i950.PaymentCheckBloc>(
         () => _i950.PaymentCheckBloc(gh<_i494.FinanceRepository>()));
-    gh.factory<_i40.CardsBloc>(() => _i40.CardsBloc(
-          gh<_i799.LoadCardsUseCase>(),
-          gh<_i83.FinanceSharedService>(),
+    gh.lazySingleton<_i83.FinanceSharedService>(
+        () => _i83.FinanceSharedServiceIml());
+    gh.factory<_i724.AddCardBloc>(() => _i724.AddCardBloc(
+          financeRepository: gh<_i494.FinanceRepository>(),
+          financeSharedService: gh<_i83.FinanceSharedService>(),
         ));
     gh.factory<_i491.VerificationBloc>(
       () => _i491.AddCardVerificationBloc(
@@ -68,18 +64,23 @@ class FinancePackageModule extends _i526.MicroPackageModule {
       ),
       instanceName: 'addCardVerification',
     );
-    gh.factory<_i754.LoadMerchantUseCase>(
-        () => _i754.LoadMerchantUseCase(gh<_i494.FinanceRepository>()));
-    gh.factory<_i724.AddCardBloc>(() => _i724.AddCardBloc(
-          financeRepository: gh<_i494.FinanceRepository>(),
-          financeSharedService: gh<_i83.FinanceSharedService>(),
-        ));
-    gh.factory<_i1061.MerchantsBloc>(
-        () => _i1061.MerchantsBloc(gh<_i754.LoadMerchantUseCase>()));
     gh.factory<_i59.FinanceBloc>(() => _i59.FinanceBloc(
           loadMerchantUseCase: gh<_i754.LoadMerchantUseCase>(),
           currenciesUseCase: gh<_i494.CurrenciesUseCase>(),
           chl: gh<_i494.AppStatusChangeListeners>(),
+        ));
+    gh.factory<_i1061.MerchantsBloc>(
+        () => _i1061.MerchantsBloc(gh<_i754.LoadMerchantUseCase>()));
+    gh.factory<_i509.PaymentBloc>(() => _i509.PaymentBloc(
+          gh<_i922.MerchantByIdUseCase>(),
+          gh<_i799.LoadCardsUseCase>(),
+          gh<_i83.FinanceSharedService>(),
+          gh<_i494.FinanceRepository>(),
+          gh<_i494.PremiumRepository>(),
+        ));
+    gh.factory<_i40.CardsBloc>(() => _i40.CardsBloc(
+          gh<_i799.LoadCardsUseCase>(),
+          gh<_i83.FinanceSharedService>(),
         ));
   }
 }

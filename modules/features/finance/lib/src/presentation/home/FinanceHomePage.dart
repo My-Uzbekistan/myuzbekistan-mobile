@@ -169,8 +169,7 @@ class _FinanceHomepageState extends State<FinanceHomePage> {
                                         title: context.localization.nearest_places,
                                         onItemTap: (index) {
                                           context.finance.pushMerchantPage(
-                                            id:
-                                            state.merchants[index].id
+                                            id: state.merchants[index].id
                                                 .toString(),
                                           );
                                         },

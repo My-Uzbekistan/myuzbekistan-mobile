@@ -83,5 +83,7 @@
   "action_continue": "Продолжить",
   "accept_terms": "Нажимая на кнопку, вы принимаете terms",
   "terms": "условия пользовательского соглашения",
-  "auth_page_action_phone": "Войти по номеру телефона"
+  "auth_page_action_phone": "Войти по номеру телефона",
+  "premium": "Premium",
+  "premiumActiveSubtitle": "Premium подписка активна"
 }

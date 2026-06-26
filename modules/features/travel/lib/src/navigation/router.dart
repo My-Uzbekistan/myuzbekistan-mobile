@@ -25,8 +25,10 @@ import 'package:travel/src/pages/notifications/notification_main_page.dart';
 import 'package:travel/src/pages/notifications/page/notification_detail.dart';
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart';
 import 'package:travel/src/pages/onboarding/onboarding_page.dart';
-import 'package:travel/src/premium/bloc/premium_bloc.dart';
-import 'package:travel/src/premium/premium_onboarding.dart';
+import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart';
+import 'package:travel/src/premium/premium_cancel/premium_cancel_screen.dart';
+import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
+import 'package:travel/src/premium/premium_onboarding/premium_onboarding.dart';
 
 import '../catalog/catalog.dart';
 import '../di/injection.dart';
@@ -375,8 +377,25 @@ mixin FeatureTravelRouter {
           child: BlocProvider(
             create:
                 (context) =>
-                    getIt.get<PremiumBloc>()..add(PremiumEvent.fetchStatus()),
+                    getIt.get<PremiumBloc>()..add(PremiumEvent.plans()),
             child: PremiumOnboardingPage(),
+          ),
+          state: state,
+          context: context,
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.premiumCancelPage.path,
+      name: AppNavPath.travel.premiumCancelPage.name,
+      pageBuilder: (context, state) {
+        final status = state.extra as PremiumStatusModel?;
+        return buildSlideTransitionPage(
+          child: BlocProvider(
+            create:
+                (context) =>
+                    getIt.get<PremiumCancelBloc>(),
+            child: PremiumCancelScreen(status: status),
           ),
           state: state,
           context: context,

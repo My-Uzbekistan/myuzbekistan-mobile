@@ -594,6 +594,18 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Войти по номеру телефона'**
   String get auth_page_action_phone;
+
+  /// No description provided for @premium.
+  ///
+  /// In ru, this message translates to:
+  /// **'Premium'**
+  String get premium;
+
+  /// No description provided for @premiumActiveSubtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Premium подписка активна'**
+  String get premiumActiveSubtitle;
 }
 
 class _FeatureMoreLocalizationsDelegate

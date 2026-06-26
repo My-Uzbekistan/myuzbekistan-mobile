@@ -82,6 +82,7 @@
   "action_continue": "Davom etish",
   "accept_terms": "Tugmani bosish orqali siz terms  rozilik bildirasiz",
   "terms": "Foydalanuvchi kelishuvi shartlariga",
-  "auth_page_action_phone": "Telefon raqami orqali kirish"
-
+  "auth_page_action_phone": "Telefon raqami orqali kirish",
+  "premium": "Premium",
+  "premiumActiveSubtitle": "Premium obuna faol"
 }

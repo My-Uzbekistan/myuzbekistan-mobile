@@ -289,4 +289,10 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get auth_page_action_phone => 'Telefon raqami orqali kirish';
+
+  @override
+  String get premium => 'Premium';
+
+  @override
+  String get premiumActiveSubtitle => 'Premium obuna faol';
 }

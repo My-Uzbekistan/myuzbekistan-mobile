@@ -22,18 +22,24 @@ class MorePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
+    gh.factory<_i201.BiometricUtils>(() => _i201.BiometricUtilsProvider());
     gh.factory<_i830.AppSettingsBloc>(
         () => _i830.AppSettingsBloc(gh<_i494.AppPreference>()));
-    gh.factory<_i201.BiometricUtils>(() => _i201.BiometricUtilsProvider());
-    gh.factory<_i221.AuthBlock>(() => _i221.AuthBlock(
-          gh<_i494.Repository>(),
-          gh<_i494.SecurityStorage>(),
-          gh<_i494.AppStatusChangeListeners>(),
-        ));
     gh.factory<_i507.MoreBloc>(() => _i507.MoreBloc(
           gh<_i494.SecurityStorage>(),
           rp: gh<_i494.Repository>(),
           appStatusChangeListeners: gh<_i494.AppStatusChangeListeners>(),
+          premiumRepository: gh<_i494.PremiumRepository>(),
+        ));
+    gh.factory<_i977.PinCodeBloc>(() => _i977.PinCodeBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.SecurityStorage>(),
+          gh<_i494.AppStatusChangeListeners>(),
+        ));
+    gh.factory<_i221.AuthBlock>(() => _i221.AuthBlock(
+          gh<_i494.Repository>(),
+          gh<_i494.SecurityStorage>(),
+          gh<_i494.AppStatusChangeListeners>(),
         ));
     gh.factory<_i396.AuthPhoneBloc>(
         () => _i396.AuthPhoneBloc(gh<_i494.Repository>()));
@@ -41,11 +47,6 @@ class MorePackageModule extends _i526.MicroPackageModule {
           gh<_i494.SecurityStorage>(),
           gh<_i494.AppStatusChangeListeners>(),
           gh<_i494.Repository>(),
-        ));
-    gh.factory<_i977.PinCodeBloc>(() => _i977.PinCodeBloc(
-          gh<_i494.Repository>(),
-          gh<_i494.SecurityStorage>(),
-          gh<_i494.AppStatusChangeListeners>(),
         ));
     gh.factory<_i578.CheckPinCodeBloc>(() => _i578.CheckPinCodeBloc(
           gh<_i494.Repository>(),

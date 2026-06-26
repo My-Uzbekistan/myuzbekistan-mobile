@@ -75,4 +75,9 @@ class _FeatureTravelNavPath {
     name: 'premium_onboarding',
     path: '/premium_onboarding',
   );
+
+  AppNavPath get premiumCancelPage => _NavPathImpl(
+    name: 'premium_cancel',
+    path: '/premium_cancel',
+  );
 }
