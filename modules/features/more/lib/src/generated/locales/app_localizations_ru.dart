@@ -288,4 +288,10 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get auth_page_action_phone => 'Войти по номеру телефона';
+
+  @override
+  String get premium => 'Premium';
+
+  @override
+  String get premiumActiveSubtitle => 'Premium подписка активна';
 }

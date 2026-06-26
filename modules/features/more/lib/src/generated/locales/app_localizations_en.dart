@@ -287,4 +287,10 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get auth_page_action_phone => 'Continue with phone';
+
+  @override
+  String get premium => 'Premium';
+
+  @override
+  String get premiumActiveSubtitle => 'Premium subscription active';
 }

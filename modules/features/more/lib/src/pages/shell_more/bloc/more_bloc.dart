@@ -17,13 +17,16 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
   final Repository _repository;
   final AppStatusChangeListeners _appStatusChangeListeners;
   final SecurityStorage _securityStorage;
+  final PremiumRepository _premiumRepository;
 
   MoreBloc(
     this._securityStorage, {
     required Repository rp,
     required AppStatusChangeListeners appStatusChangeListeners,
+    required PremiumRepository premiumRepository,
   }) : _repository = rp,
        _appStatusChangeListeners = appStatusChangeListeners,
+       _premiumRepository = premiumRepository,
        super(
          MoreState(prayerWidgetChecked: _securityStorage.isShowPrayerTimes()),
        ) {
@@ -71,6 +74,16 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
       );
     } catch (e) {
       emit(state.copyWith(isLoading: false));
+    }
+    await _loadPremiumStatus(emit);
+  }
+
+  Future<void> _loadPremiumStatus(Emitter<MoreState> emit) async {
+    try {
+      final premiumStatus = await _premiumRepository.status();
+      emit(state.copyWith(premiumStatus: premiumStatus, premiumLoaded: true));
+    } catch (_) {
+      emit(state.copyWith(premiumLoaded: true));
     }
   }
 

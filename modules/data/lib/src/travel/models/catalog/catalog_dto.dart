@@ -18,6 +18,7 @@ part 'catalog_dto.g.dart';
 
 @JsonSerializable()
 class CatalogDto {
+  final int? id;
   final String? icon;
   @HexColorConverter()
   final Color? color;
@@ -26,21 +27,26 @@ class CatalogDto {
   final String? action;
   final int? actionType;
   final bool? authRequired;
+  final bool? isPremiumOnly;
+  final int? freeUsageLimit;
+
 
   const CatalogDto({
+    this.id,
     required this.icon,
     this.color,
     required this.title,
     this.status,
     this.action,
     this.actionType,
-    this.authRequired,
+    this.authRequired, this.isPremiumOnly, this.freeUsageLimit,
   });
 
   factory CatalogDto.fromJson(Map<String, dynamic> json) =>
       _$CatalogDtoFromJson(json);
 
   CatalogItemModel toDomain() => CatalogItemModel(
+    id: id,
     icon: icon,
     color: color,
     title: title,
@@ -54,5 +60,7 @@ class CatalogDto {
       orElse: () => CatalogActionType.inner,
     ),
     authRequired: authRequired ?? false,
+    isPremiumOnly: isPremiumOnly ?? false,
+    freeUsageLimit: freeUsageLimit,
   );
 }

@@ -7,6 +7,7 @@ part of 'catalog_dto.dart';
 // **************************************************************************
 
 CatalogDto _$CatalogDtoFromJson(Map<String, dynamic> json) => CatalogDto(
+  id: (json['id'] as num?)?.toInt(),
   icon: json['icon'] as String?,
   color: _$JsonConverterFromJson<String, Color>(
     json['color'],
@@ -17,10 +18,13 @@ CatalogDto _$CatalogDtoFromJson(Map<String, dynamic> json) => CatalogDto(
   action: json['action'] as String?,
   actionType: (json['actionType'] as num?)?.toInt(),
   authRequired: json['authRequired'] as bool?,
+  isPremiumOnly: json['isPremiumOnly'] as bool?,
+  freeUsageLimit: (json['freeUsageLimit'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$CatalogDtoToJson(CatalogDto instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'icon': instance.icon,
       'color': _$JsonConverterToJson<String, Color>(
         instance.color,
@@ -31,6 +35,8 @@ Map<String, dynamic> _$CatalogDtoToJson(CatalogDto instance) =>
       'action': instance.action,
       'actionType': instance.actionType,
       'authRequired': instance.authRequired,
+      'isPremiumOnly': instance.isPremiumOnly,
+      'freeUsageLimit': instance.freeUsageLimit,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

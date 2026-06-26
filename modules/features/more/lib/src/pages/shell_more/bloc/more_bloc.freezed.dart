@@ -244,7 +244,7 @@ String toString() {
 /// @nodoc
 mixin _$MoreState {
 
- List<MoreItem> get abouts; List<MoreItem> get useFull; bool get prayerWidgetChecked; bool get isLoading;
+ List<MoreItem> get abouts; List<MoreItem> get useFull; bool get prayerWidgetChecked; bool get isLoading; bool get premiumLoaded; PremiumStatusModel? get premiumStatus;
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -255,16 +255,16 @@ $MoreStateCopyWith<MoreState> get copyWith => _$MoreStateCopyWithImpl<MoreState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreState&&const DeepCollectionEquality().equals(other.abouts, abouts)&&const DeepCollectionEquality().equals(other.useFull, useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreState&&const DeepCollectionEquality().equals(other.abouts, abouts)&&const DeepCollectionEquality().equals(other.useFull, useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.premiumLoaded, premiumLoaded) || other.premiumLoaded == premiumLoaded)&&(identical(other.premiumStatus, premiumStatus) || other.premiumStatus == premiumStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(abouts),const DeepCollectionEquality().hash(useFull),prayerWidgetChecked,isLoading);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(abouts),const DeepCollectionEquality().hash(useFull),prayerWidgetChecked,isLoading,premiumLoaded,premiumStatus);
 
 @override
 String toString() {
-  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, isLoading: $isLoading)';
+  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, isLoading: $isLoading, premiumLoaded: $premiumLoaded, premiumStatus: $premiumStatus)';
 }
 
 
@@ -275,7 +275,7 @@ abstract mixin class $MoreStateCopyWith<$Res>  {
   factory $MoreStateCopyWith(MoreState value, $Res Function(MoreState) _then) = _$MoreStateCopyWithImpl;
 @useResult
 $Res call({
- List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool isLoading
+ List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool isLoading, bool premiumLoaded, PremiumStatusModel? premiumStatus
 });
 
 
@@ -292,13 +292,15 @@ class _$MoreStateCopyWithImpl<$Res>
 
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? isLoading = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? isLoading = null,Object? premiumLoaded = null,Object? premiumStatus = freezed,}) {
   return _then(_self.copyWith(
 abouts: null == abouts ? _self.abouts : abouts // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,useFull: null == useFull ? _self.useFull : useFull // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,prayerWidgetChecked: null == prayerWidgetChecked ? _self.prayerWidgetChecked : prayerWidgetChecked // ignore: cast_nullable_to_non_nullable
 as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,premiumLoaded: null == premiumLoaded ? _self.premiumLoaded : premiumLoaded // ignore: cast_nullable_to_non_nullable
+as bool,premiumStatus: freezed == premiumStatus ? _self.premiumStatus : premiumStatus // ignore: cast_nullable_to_non_nullable
+as PremiumStatusModel?,
   ));
 }
 
@@ -383,10 +385,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case MoreDataState() when $default != null:
-return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading);case _:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading,_that.premiumLoaded,_that.premiumStatus);case _:
   return orElse();
 
 }
@@ -404,10 +406,10 @@ return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoa
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus)  $default,) {final _that = this;
 switch (_that) {
 case MoreDataState():
-return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading);case _:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading,_that.premiumLoaded,_that.premiumStatus);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -424,10 +426,10 @@ return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoa
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus)?  $default,) {final _that = this;
 switch (_that) {
 case MoreDataState() when $default != null:
-return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading);case _:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoading,_that.premiumLoaded,_that.premiumStatus);case _:
   return null;
 
 }
@@ -439,7 +441,7 @@ return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.isLoa
 
 
 class MoreDataState implements MoreState {
-   MoreDataState({final  List<MoreItem> abouts = const [], final  List<MoreItem> useFull = const [], this.prayerWidgetChecked = false, this.isLoading = true}): _abouts = abouts,_useFull = useFull;
+   MoreDataState({final  List<MoreItem> abouts = const [], final  List<MoreItem> useFull = const [], this.prayerWidgetChecked = false, this.isLoading = true, this.premiumLoaded = false, this.premiumStatus}): _abouts = abouts,_useFull = useFull;
   
 
  final  List<MoreItem> _abouts;
@@ -458,6 +460,8 @@ class MoreDataState implements MoreState {
 
 @override@JsonKey() final  bool prayerWidgetChecked;
 @override@JsonKey() final  bool isLoading;
+@override@JsonKey() final  bool premiumLoaded;
+@override final  PremiumStatusModel? premiumStatus;
 
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
@@ -469,16 +473,16 @@ $MoreDataStateCopyWith<MoreDataState> get copyWith => _$MoreDataStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreDataState&&const DeepCollectionEquality().equals(other._abouts, _abouts)&&const DeepCollectionEquality().equals(other._useFull, _useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreDataState&&const DeepCollectionEquality().equals(other._abouts, _abouts)&&const DeepCollectionEquality().equals(other._useFull, _useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.premiumLoaded, premiumLoaded) || other.premiumLoaded == premiumLoaded)&&(identical(other.premiumStatus, premiumStatus) || other.premiumStatus == premiumStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_abouts),const DeepCollectionEquality().hash(_useFull),prayerWidgetChecked,isLoading);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_abouts),const DeepCollectionEquality().hash(_useFull),prayerWidgetChecked,isLoading,premiumLoaded,premiumStatus);
 
 @override
 String toString() {
-  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, isLoading: $isLoading)';
+  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, isLoading: $isLoading, premiumLoaded: $premiumLoaded, premiumStatus: $premiumStatus)';
 }
 
 
@@ -489,7 +493,7 @@ abstract mixin class $MoreDataStateCopyWith<$Res> implements $MoreStateCopyWith<
   factory $MoreDataStateCopyWith(MoreDataState value, $Res Function(MoreDataState) _then) = _$MoreDataStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool isLoading
+ List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool isLoading, bool premiumLoaded, PremiumStatusModel? premiumStatus
 });
 
 
@@ -506,13 +510,15 @@ class _$MoreDataStateCopyWithImpl<$Res>
 
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? isLoading = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? isLoading = null,Object? premiumLoaded = null,Object? premiumStatus = freezed,}) {
   return _then(MoreDataState(
 abouts: null == abouts ? _self._abouts : abouts // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,useFull: null == useFull ? _self._useFull : useFull // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,prayerWidgetChecked: null == prayerWidgetChecked ? _self.prayerWidgetChecked : prayerWidgetChecked // ignore: cast_nullable_to_non_nullable
 as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,premiumLoaded: null == premiumLoaded ? _self.premiumLoaded : premiumLoaded // ignore: cast_nullable_to_non_nullable
+as bool,premiumStatus: freezed == premiumStatus ? _self.premiumStatus : premiumStatus // ignore: cast_nullable_to_non_nullable
+as PremiumStatusModel?,
   ));
 }
 

@@ -9,5 +9,6 @@ abstract class CatalogEvent with _$CatalogEvent{
     required List<CatalogItemModel> items,}
   ) = _CatalogLoadedData;
   factory CatalogEvent.fetch() = _CatalogFetchEvent;
+  factory CatalogEvent.premiumCard({required int id, required CatalogItemModel item}) = _PremiumCard;
 
 }

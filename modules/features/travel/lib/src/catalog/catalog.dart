@@ -7,6 +7,7 @@ import 'package:shared/shared.dart';
 import 'package:travel/src/catalog/bloc/catalog_bloc.dart';
 import 'package:travel/src/catalog/widget/catalog_item.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/premium/widgets/premium_access_dialogs.dart';
 
 import '../di/injection.dart';
 
@@ -49,7 +50,26 @@ class _CatalogScreenState extends State<CatalogScreen> {
      //   )
      // ];
 
-    return Scaffold(
+    return BlocListener<CatalogBloc, CatalogState>(
+      listenWhen: (_, current) => current.maybeWhen(
+        loaded: (_, status, __) => status != PremiumAccessStatus.idle,
+        orElse: () => false,
+      ),
+      listener: (context, state) {
+        state.maybeWhen(
+          loaded: (_, status, pendingItem) {
+            if (status == PremiumAccessStatus.allowed && pendingItem != null) {
+              pushAction(context, item: pendingItem);
+            } else if (status == PremiumAccessStatus.premiumRequired) {
+              PremiumRequiredDialog.show(context);
+            } else if (status == PremiumAccessStatus.limitReached) {
+              LimitReachedDialog.show(context);
+            }
+          },
+          orElse: () {},
+        );
+      },
+      child: Scaffold(
       extendBody: true,
       body: CupertinoTheme(
         data: CupertinoThemeData(
@@ -120,7 +140,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         ),
                       );
                     },
-                    loaded: (items) {
+                    loaded: (items, _, __) {
                       // final items=//[...array,...defaultItems];
                       return SliverPadding(
                         padding: EdgeInsets.symmetric(horizontal: 16).copyWith(
@@ -139,7 +159,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
                               onTap: () {
                                 if (item.status != CatalogStatus.upcoming) {
                                   if (item.action.orEmpty().isNotEmpty) {
-                                    pushAction(context, item: item);
+                                    if (item.isPremiumOnly == true && item.id != null) {
+                                      _bloc?.add(CatalogEvent.premiumCard(id: item.id!, item: item));
+                                    } else {
+                                      pushAction(context, item: item);
+                                    }
                                   }
                                 } else {
                                   Fluttertoast.showToast(
@@ -229,11 +253,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
           ],
         ),
       ),
+    ),
     );
   }
 
   void pushAction(BuildContext context, {required CatalogItemModel item}) {
-
     var uri = Uri.parse(item.action!.trim());
     if (item.actionType == CatalogActionType.inner) {
       if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||

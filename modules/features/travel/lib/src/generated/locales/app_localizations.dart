@@ -732,6 +732,150 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Для получения подарка необходимо пройти регистрацию на номер Uztelecom'**
   String get claim_warning_page_caption;
+
+  /// No description provided for @premiumConnect.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подключить Premium'**
+  String get premiumConnect;
+
+  /// No description provided for @premiumCancelAnytime.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменить можно в любое время.'**
+  String get premiumCancelAnytime;
+
+  /// No description provided for @premiumTerms.
+  ///
+  /// In ru, this message translates to:
+  /// **'Условия использования'**
+  String get premiumTerms;
+
+  /// No description provided for @premiumFeatureAiTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Безлимитные AI-сервисы'**
+  String get premiumFeatureAiTitle;
+
+  /// No description provided for @premiumFeatureAiDesc.
+  ///
+  /// In ru, this message translates to:
+  /// **'Caloria AI, Trip Planer, Travel Cam AI и многое другое'**
+  String get premiumFeatureAiDesc;
+
+  /// No description provided for @premiumFeatureEsimTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Промокод eSIM'**
+  String get premiumFeatureEsimTitle;
+
+  /// No description provided for @premiumFeatureEsimDesc.
+  ///
+  /// In ru, this message translates to:
+  /// **'Скидка на золотой номер'**
+  String get premiumFeatureEsimDesc;
+
+  /// No description provided for @premiumFeatureDiscountTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Раздел скидок'**
+  String get premiumFeatureDiscountTitle;
+
+  /// No description provided for @premiumFeatureDiscountDesc.
+  ///
+  /// In ru, this message translates to:
+  /// **'Эксклюзивные скидки от партнёров'**
+  String get premiumFeatureDiscountDesc;
+
+  /// No description provided for @premiumFeatureProfileTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото профиля'**
+  String get premiumFeatureProfileTitle;
+
+  /// No description provided for @premiumFeatureProfileDesc.
+  ///
+  /// In ru, this message translates to:
+  /// **'Персонализируйте свой профиль'**
+  String get premiumFeatureProfileDesc;
+
+  /// No description provided for @premiumMonths.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} месяц} few{{count} месяца} many{{count} месяцев} other{{count} месяцев}}'**
+  String premiumMonths(num count);
+
+  /// No description provided for @premiumDiscountBadge.
+  ///
+  /// In ru, this message translates to:
+  /// **'скидка -{percent}%'**
+  String premiumDiscountBadge(Object percent);
+
+  /// No description provided for @premiumCancelSubscription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменить подписку'**
+  String get premiumCancelSubscription;
+
+  /// No description provided for @premiumSubscriptionTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подписка {plan}'**
+  String premiumSubscriptionTitle(Object plan);
+
+  /// No description provided for @statusActive.
+  ///
+  /// In ru, this message translates to:
+  /// **'Активна'**
+  String get statusActive;
+
+  /// No description provided for @premiumStartDate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дата начала'**
+  String get premiumStartDate;
+
+  /// No description provided for @premiumExpiryDate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Срок действия'**
+  String get premiumExpiryDate;
+
+  /// No description provided for @premiumDaysRemaining.
+  ///
+  /// In ru, this message translates to:
+  /// **'Осталось времени'**
+  String get premiumDaysRemaining;
+
+  /// No description provided for @premiumDaysValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count, plural, one{{count} день} few{{count} дня} many{{count} дней} other{{count} дней}}'**
+  String premiumDaysValue(num count);
+
+  /// No description provided for @premiumServiceLocked.
+  ///
+  /// In ru, this message translates to:
+  /// **'Эта услуга и многое другое доступно в Premium'**
+  String get premiumServiceLocked;
+
+  /// No description provided for @premiumLearnMore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Узнать подробнее'**
+  String get premiumLearnMore;
+
+  /// No description provided for @premiumLimitReachedTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'У вас закончились бесплатные лимиты'**
+  String get premiumLimitReachedTitle;
+
+  /// No description provided for @premiumLimitReachedDesc.
+  ///
+  /// In ru, this message translates to:
+  /// **'Для неограниченного доступа ко всем услугам, вам необходимо подключить Premium'**
+  String get premiumLimitReachedDesc;
 }
 
 class _FeatureTravelLocalizationsDelegate

@@ -1,7 +1,13 @@
+import 'dart:async';
+
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
-import 'package:travel/src/premium/bloc/premium_bloc.dart';
+import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
+
+import 'widgets/discount_item.dart';
 
 class PremiumOnboardingPage extends StatefulWidget {
   const PremiumOnboardingPage({super.key});
@@ -12,17 +18,27 @@ class PremiumOnboardingPage extends StatefulWidget {
 
 class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
   PremiumBloc? bloc;
+  static const merchantId = "50";
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     bloc = context.read();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PremiumBloc, PremiumState>(
+    return BlocConsumer<PremiumBloc, PremiumState>(
+      listenWhen: (p, c) => p.navToCancel != c.navToCancel,
+      listener: (context, state) {
+        final status = state.navToCancel;
+        if (status != null) {
+          context.pushType(
+            AppNavPath.travel.premiumCancelPage,
+            extra: status,
+          );
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: GradientAppBar(),
@@ -38,20 +54,34 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
               spacing: 16,
               children: [
                 AppActionButton(
-                  actionText: "Premiumni ulash",
-                  onPressed: () {},
+                  actionText: context.localization.premiumConnect,
+                  onPressed: () async {
+                    final completer = Completer<bool>();
+                    context.finance.pushMerchantPage(
+                      id: merchantId,
+                      orderId: state.item?.id.toString(),
+                      extra: completer,
+                      amount:
+                          ((state.item?.price ?? 0) / 100).toInt().toString(),
+                    );
+                    final result = await completer.future;
+                    if (result) {
+                      bloc?.add(PremiumEvent.paymentSucceeded());
+                    }
+                  },
+                  disable: state.item == null,
                 ),
                 RichText(
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Istagan vaqtda bekor qilish mumkin.",
+                        text: context.localization.premiumCancelAnytime,
                         style: CustomTypography.bodyXsm.copyWith(
                           color: context.appColors.textIconColor.secondary,
                         ),
                       ),
                       TextSpan(
-                        text: "\nFoydalanish shartlari",
+                        text: "\n${context.localization.premiumTerms}",
                         style: CustomTypography.bodyXsm.copyWith(
                           decoration: TextDecoration.underline,
                           color: context.appColors.textIconColor.secondary,
@@ -87,39 +117,51 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                       children: [
                         PremiumItemCell(
                           asset: Assets.png.premiumCellIconInfinityLine,
-                          title: "Cheksiz AI xizmatlar",
+                          title: context.localization.premiumFeatureAiTitle,
                           description:
-                              "Caloria AI, Trip Planer, Travel Cam AI va barchasi",
+                              context.localization.premiumFeatureAiDesc,
                         ),
                         PremiumItemCell(
                           asset: Assets.png.premiumCellIconCpuFill,
-                          title: "eSIM promokod",
-                          description: "Oltin raqam uchun chegirma",
+                          title: context.localization.premiumFeatureEsimTitle,
+                          description:
+                              context.localization.premiumFeatureEsimDesc,
                         ),
                         PremiumItemCell(
                           asset: Assets.png.premiumCellIconDiscountPercentFill,
-                          title: "Chegirmalar bo'limi",
+                          title:
+                              context.localization.premiumFeatureDiscountTitle,
                           description:
-                              "Hamkor xizmatlardan eksklyuziv chegirmalar",
+                              context.localization.premiumFeatureDiscountDesc,
                         ),
                         PremiumItemCell(
                           asset: Assets.png.premiumCellIconImageCircleAiLine,
-                          title: "Profil rasmi",
-                          description: "Profilingizni shaxsiylashtiring",
+                          title:
+                              context.localization.premiumFeatureProfileTitle,
+                          description:
+                              context.localization.premiumFeatureProfileDesc,
                         ),
                       ],
                     ),
                   ),
                   SingleChildScrollView(
+                    padding: const EdgeInsets.only(top: 36),
                     scrollDirection: Axis.horizontal,
                     clipBehavior: Clip.none,
                     child: Row(
-                      spacing: 8,
-                      children: [
-                        DiscountItem(),
-                        DiscountItem(),
-                        DiscountItem(),
-                      ],
+                      children:
+                          state.plans
+                              .mapIndexed(
+                                (index, data) => DiscountItem(
+                                  isSelect: state.item?.id == data.id,
+                                  item: data,
+                                  onTap:
+                                      () => bloc?.add(
+                                        PremiumEvent.selectPlan(item: data),
+                                      ),
+                                ),
+                              )
+                              .toList(),
                     ),
                   ),
                 ],
@@ -160,64 +202,6 @@ class PremiumItemCell extends StatelessWidget {
                 description,
               ).bodyMd(color: context.appColors.textIconColor.secondary),
             ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class DiscountItem extends StatelessWidget {
-  const DiscountItem({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        Container(
-          height: 98,
-          width: 140,
-          padding: EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: context.appColors.stroke.nonOpaque),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("12 oy").labelMd(),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("49 999 so'm", maxLines: 1).labelLg(),
-                  Text(
-                    "71 988 so'm",
-                    maxLines: 1,
-                    style: CustomTypography.bodyXXsm.copyWith(
-                      color: context.appColors.textIconColor.secondary,
-                      decoration: TextDecoration.lineThrough,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          top: -12,
-          left: 9,
-
-          child: Container(
-            height: 20,
-            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 8),
-            decoration: BoxDecoration(
-              color: context.appColors.brandFlamingo,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Text("chegirma -30%").labelSm(color: Colors.black),
           ),
         ),
       ],

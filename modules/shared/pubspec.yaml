@@ -47,7 +47,7 @@ dependencies:
   package_info_plus:
   geolocator:
   flutter_alice:
-    git: git@github.com:IlhomSh/flutter_alice.git
+    git: https://github.com/IlhomSh/flutter_alice.git
   mobile_scanner: ^7.0.1
   fluttertoast: ^8.2.12
   firebase_core: ^4.11.0

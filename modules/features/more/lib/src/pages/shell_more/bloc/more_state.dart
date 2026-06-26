@@ -10,5 +10,7 @@ abstract class MoreState with _$MoreState {
     @Default([]) List<MoreItem> useFull,
     @Default(false) bool prayerWidgetChecked,
    @Default(true) bool isLoading,
+    @Default(false) bool premiumLoaded,
+    PremiumStatusModel? premiumStatus,
   }) = MoreDataState;
 }

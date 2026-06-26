@@ -86,6 +86,7 @@
   "accept_terms": "By clicking the button, you agree to the terms",
 
   "terms": "Terms of the User Agreement",
-  "auth_page_action_phone": "Continue with phone"
-
+  "auth_page_action_phone": "Continue with phone",
+  "premium": "Premium",
+  "premiumActiveSubtitle": "Premium subscription active"
 }

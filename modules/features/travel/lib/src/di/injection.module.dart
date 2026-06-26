@@ -26,14 +26,24 @@ import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart'
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart'
     as _i45;
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart' as _i638;
-import 'package:travel/src/premium/bloc/premium_bloc.dart' as _i482;
+import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart'
+    as _i631;
+import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart'
+    as _i917;
 
 class TravelPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
+    gh.factory<_i917.PremiumBloc>(
+        () => _i917.PremiumBloc(gh<_i494.PremiumRepository>()));
     gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
           gh<_i494.Repository>(),
+          gh<_i494.AppStatusChangeListeners>(),
+        ));
+    gh.factory<_i236.CatalogBloc>(() => _i236.CatalogBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.PremiumRepository>(),
           gh<_i494.AppStatusChangeListeners>(),
         ));
     gh.factory<_i335.LoadContentBloc>(
@@ -51,12 +61,12 @@ class TravelPackageModule extends _i526.MicroPackageModule {
           gh<_i494.AppStatusChangeListeners>(),
           gh<_i494.SecurityStorage>(),
         ));
-    gh.factory<_i1065.InvestSearchBloc>(
-        () => _i1065.InvestSearchBloc(gh<_i494.Repository>()));
-    gh.factory<_i236.CatalogBloc>(() => _i236.CatalogBloc(
-          gh<_i494.Repository>(),
+    gh.factory<_i631.PremiumCancelBloc>(() => _i631.PremiumCancelBloc(
+          gh<_i494.PremiumRepository>(),
           gh<_i494.AppStatusChangeListeners>(),
         ));
+    gh.factory<_i1065.InvestSearchBloc>(
+        () => _i1065.InvestSearchBloc(gh<_i494.Repository>()));
     gh.lazySingleton<_i45.NotificationCountCubit>(
         () => _i45.NotificationCountCubit(gh<_i494.Repository>()));
     gh.factory<_i369.InvestmentsBloc>(
@@ -66,7 +76,5 @@ class TravelPackageModule extends _i526.MicroPackageModule {
         () => _i69.NotificationBloc(gh<_i494.Repository>()));
     gh.factory<_i638.OnboardingBloc>(
         () => _i638.OnboardingBloc(gh<_i494.Repository>()));
-    gh.factory<_i482.PremiumBloc>(
-        () => _i482.PremiumBloc(gh<_i494.PremiumRepository>()));
   }
 }

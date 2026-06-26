@@ -106,8 +106,29 @@
   "gb": "GB",
   "claim_dialog_caption": "You received a bonus on your mobile number",
   "claim_warning_page_title": "Only for Uztelecom subscribers",
-  "claim_warning_page_caption":"To receive the gift, you need to register with an Uztelecom number"
-
-
-
+  "claim_warning_page_caption":"To receive the gift, you need to register with an Uztelecom number",
+  "premiumConnect": "Get Premium",
+  "premiumCancelAnytime": "You can cancel anytime.",
+  "premiumTerms": "Terms of use",
+  "premiumFeatureAiTitle": "Unlimited AI services",
+  "premiumFeatureAiDesc": "Caloria AI, Trip Planner, Travel Cam AI and more",
+  "premiumFeatureEsimTitle": "eSIM promo code",
+  "premiumFeatureEsimDesc": "Discount on a gold number",
+  "premiumFeatureDiscountTitle": "Discounts section",
+  "premiumFeatureDiscountDesc": "Exclusive discounts from partners",
+  "premiumFeatureProfileTitle": "Profile photo",
+  "premiumFeatureProfileDesc": "Personalize your profile",
+  "premiumMonths": "{count, plural, one{{count} month} other{{count} months}}",
+  "premiumDiscountBadge": "discount -{percent}%",
+  "premiumCancelSubscription": "Cancel subscription",
+  "premiumSubscriptionTitle": "{plan} subscription",
+  "statusActive": "Active",
+  "premiumStartDate": "Start date",
+  "premiumExpiryDate": "Valid until",
+  "premiumDaysRemaining": "Time remaining",
+  "premiumDaysValue": "{count, plural, one{{count} day} other{{count} days}}",
+  "premiumServiceLocked": "This service and much more is available in Premium",
+  "premiumLearnMore": "Learn more",
+  "premiumLimitReachedTitle": "You've run out of free limits",
+  "premiumLimitReachedDesc": "For unlimited access to all services, you need to get Premium"
 }

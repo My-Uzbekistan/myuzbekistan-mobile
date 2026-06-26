@@ -13,6 +13,7 @@ export 'src/finance/finance.dart';
 
 export 'src/use_cases/currencies_use_case.dart';
 export 'src/models/app_exception.dart';
-export 'src/premium/repository.dart';
+export 'src/premium/premium.dart';
+
 
 

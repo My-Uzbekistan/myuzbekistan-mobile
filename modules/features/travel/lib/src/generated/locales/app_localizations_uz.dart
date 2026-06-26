@@ -400,4 +400,88 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   @override
   String get claim_warning_page_caption =>
       'Sovg‘ani olish uchun Uztelecom raqamiga ro‘yxatdan o‘tish kerak';
+
+  @override
+  String get premiumConnect => 'Premiumni ulash';
+
+  @override
+  String get premiumCancelAnytime => 'Istagan vaqtda bekor qilish mumkin.';
+
+  @override
+  String get premiumTerms => 'Foydalanish shartlari';
+
+  @override
+  String get premiumFeatureAiTitle => 'Cheksiz AI xizmatlar';
+
+  @override
+  String get premiumFeatureAiDesc =>
+      'Caloria AI, Trip Planer, Travel Cam AI va barchasi';
+
+  @override
+  String get premiumFeatureEsimTitle => 'eSIM promokod';
+
+  @override
+  String get premiumFeatureEsimDesc => 'Oltin raqam uchun chegirma';
+
+  @override
+  String get premiumFeatureDiscountTitle => 'Chegirmalar bo‘limi';
+
+  @override
+  String get premiumFeatureDiscountDesc =>
+      'Hamkor xizmatlardan eksklyuziv chegirmalar';
+
+  @override
+  String get premiumFeatureProfileTitle => 'Profil rasmi';
+
+  @override
+  String get premiumFeatureProfileDesc => 'Profilingizni shaxsiylashtiring';
+
+  @override
+  String premiumMonths(num count) {
+    return '$count oy';
+  }
+
+  @override
+  String premiumDiscountBadge(Object percent) {
+    return 'chegirma -$percent%';
+  }
+
+  @override
+  String get premiumCancelSubscription => 'Obunani bekor qilish';
+
+  @override
+  String premiumSubscriptionTitle(Object plan) {
+    return '$plan obuna';
+  }
+
+  @override
+  String get statusActive => 'Faol';
+
+  @override
+  String get premiumStartDate => 'Boshlanish sanasi';
+
+  @override
+  String get premiumExpiryDate => 'Amal qilish muddati';
+
+  @override
+  String get premiumDaysRemaining => 'Qolgan muddat';
+
+  @override
+  String premiumDaysValue(num count) {
+    return '$count kun';
+  }
+
+  @override
+  String get premiumServiceLocked =>
+      'Bu xizmat va yana ko‘plari Premiumda mavjud';
+
+  @override
+  String get premiumLearnMore => 'Batafsil ma’lumot';
+
+  @override
+  String get premiumLimitReachedTitle => 'Bepul limitlaringiz tugadi';
+
+  @override
+  String get premiumLimitReachedDesc =>
+      'Barcha xizmatlardan cheksiz foydalanish uchun Premiumni ulashingiz kerak';
 }

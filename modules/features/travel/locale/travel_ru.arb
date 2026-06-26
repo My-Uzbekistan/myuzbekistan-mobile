@@ -107,7 +107,29 @@
   "gb": "ГБ",
   "claim_dialog_caption": "Вы получили бонус на свой мобильный номер",
   "claim_warning_page_title": "Только для абонентов Uztelecom",
-  "claim_warning_page_caption":"Для получения подарка необходимо пройти регистрацию на номер Uztelecom"
-
-
+  "claim_warning_page_caption":"Для получения подарка необходимо пройти регистрацию на номер Uztelecom",
+  "premiumConnect": "Подключить Premium",
+  "premiumCancelAnytime": "Отменить можно в любое время.",
+  "premiumTerms": "Условия использования",
+  "premiumFeatureAiTitle": "Безлимитные AI-сервисы",
+  "premiumFeatureAiDesc": "Caloria AI, Trip Planer, Travel Cam AI и многое другое",
+  "premiumFeatureEsimTitle": "Промокод eSIM",
+  "premiumFeatureEsimDesc": "Скидка на золотой номер",
+  "premiumFeatureDiscountTitle": "Раздел скидок",
+  "premiumFeatureDiscountDesc": "Эксклюзивные скидки от партнёров",
+  "premiumFeatureProfileTitle": "Фото профиля",
+  "premiumFeatureProfileDesc": "Персонализируйте свой профиль",
+  "premiumMonths": "{count, plural, one{{count} месяц} few{{count} месяца} many{{count} месяцев} other{{count} месяцев}}",
+  "premiumDiscountBadge": "скидка -{percent}%",
+  "premiumCancelSubscription": "Отменить подписку",
+  "premiumSubscriptionTitle": "Подписка {plan}",
+  "statusActive": "Активна",
+  "premiumStartDate": "Дата начала",
+  "premiumExpiryDate": "Срок действия",
+  "premiumDaysRemaining": "Осталось времени",
+  "premiumDaysValue": "{count, plural, one{{count} день} few{{count} дня} many{{count} дней} other{{count} дней}}",
+  "premiumServiceLocked": "Эта услуга и многое другое доступно в Premium",
+  "premiumLearnMore": "Узнать подробнее",
+  "premiumLimitReachedTitle": "У вас закончились бесплатные лимиты",
+  "premiumLimitReachedDesc": "Для неограниченного доступа ко всем услугам, вам необходимо подключить Premium"
 }
