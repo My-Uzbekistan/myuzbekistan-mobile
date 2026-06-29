@@ -84,5 +84,11 @@
   "terms": "Foydalanuvchi kelishuvi shartlariga",
   "auth_page_action_phone": "Telefon raqami orqali kirish",
   "premium": "Premium",
-  "premiumActiveSubtitle": "Premium obuna faol"
+  "premiumActiveSubtitle": "Premium obuna faol",
+  "changePhotoTitle": "Profil rasmi",
+  "takePhotoFromCamera": "Kamera orqali suratga olish",
+  "chooseFromGallery": "Galereyadan tanlash",
+  "photoUpdated": "Profil rasmi yangilandi",
+  "photoUploadError": "Rasmni yuklab bo'lmadi. Qayta urinib ko'ring",
+  "premiumRequiredForPhoto": "Bu funksiya faqat Premium foydalanuvchilar uchun"
 }

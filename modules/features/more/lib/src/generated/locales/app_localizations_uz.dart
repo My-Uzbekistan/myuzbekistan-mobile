@@ -295,4 +295,24 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get premiumActiveSubtitle => 'Premium obuna faol';
+
+  @override
+  String get changePhotoTitle => 'Profil rasmi';
+
+  @override
+  String get takePhotoFromCamera => 'Kamera orqali suratga olish';
+
+  @override
+  String get chooseFromGallery => 'Galereyadan tanlash';
+
+  @override
+  String get photoUpdated => 'Profil rasmi yangilandi';
+
+  @override
+  String get photoUploadError =>
+      'Rasmni yuklab bo\'lmadi. Qayta urinib ko\'ring';
+
+  @override
+  String get premiumRequiredForPhoto =>
+      'Bu funksiya faqat Premium foydalanuvchilar uchun';
 }

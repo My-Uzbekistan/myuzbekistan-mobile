@@ -128,10 +128,10 @@ return guestState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UserModel? userModel,  bool hasPin)?  dataState,TResult Function()?  guestState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( UserModel? userModel,  bool hasPin,  bool isLoading)?  dataState,TResult Function()?  guestState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ProfileBlocDataState() when dataState != null:
-return dataState(_that.userModel,_that.hasPin);case ProfileBlocGuestState() when guestState != null:
+return dataState(_that.userModel,_that.hasPin,_that.isLoading);case ProfileBlocGuestState() when guestState != null:
 return guestState();case _:
   return orElse();
 
@@ -150,10 +150,10 @@ return guestState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UserModel? userModel,  bool hasPin)  dataState,required TResult Function()  guestState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( UserModel? userModel,  bool hasPin,  bool isLoading)  dataState,required TResult Function()  guestState,}) {final _that = this;
 switch (_that) {
 case ProfileBlocDataState():
-return dataState(_that.userModel,_that.hasPin);case ProfileBlocGuestState():
+return dataState(_that.userModel,_that.hasPin,_that.isLoading);case ProfileBlocGuestState():
 return guestState();case _:
   throw StateError('Unexpected subclass');
 
@@ -171,10 +171,10 @@ return guestState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UserModel? userModel,  bool hasPin)?  dataState,TResult? Function()?  guestState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( UserModel? userModel,  bool hasPin,  bool isLoading)?  dataState,TResult? Function()?  guestState,}) {final _that = this;
 switch (_that) {
 case ProfileBlocDataState() when dataState != null:
-return dataState(_that.userModel,_that.hasPin);case ProfileBlocGuestState() when guestState != null:
+return dataState(_that.userModel,_that.hasPin,_that.isLoading);case ProfileBlocGuestState() when guestState != null:
 return guestState();case _:
   return null;
 
@@ -187,11 +187,12 @@ return guestState();case _:
 
 
 class ProfileBlocDataState with DiagnosticableTreeMixin implements ProfileBlocState {
-   ProfileBlocDataState({this.userModel, this.hasPin = false});
+   ProfileBlocDataState({this.userModel, this.hasPin = false, this.isLoading = false});
   
 
  final  UserModel? userModel;
 @JsonKey() final  bool hasPin;
+@JsonKey() final  bool isLoading;
 
 /// Create a copy of ProfileBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -204,21 +205,21 @@ $ProfileBlocDataStateCopyWith<ProfileBlocDataState> get copyWith => _$ProfileBlo
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ProfileBlocState.dataState'))
-    ..add(DiagnosticsProperty('userModel', userModel))..add(DiagnosticsProperty('hasPin', hasPin));
+    ..add(DiagnosticsProperty('userModel', userModel))..add(DiagnosticsProperty('hasPin', hasPin))..add(DiagnosticsProperty('isLoading', isLoading));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileBlocDataState&&(identical(other.userModel, userModel) || other.userModel == userModel)&&(identical(other.hasPin, hasPin) || other.hasPin == hasPin));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileBlocDataState&&(identical(other.userModel, userModel) || other.userModel == userModel)&&(identical(other.hasPin, hasPin) || other.hasPin == hasPin)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,userModel,hasPin);
+int get hashCode => Object.hash(runtimeType,userModel,hasPin,isLoading);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ProfileBlocState.dataState(userModel: $userModel, hasPin: $hasPin)';
+  return 'ProfileBlocState.dataState(userModel: $userModel, hasPin: $hasPin, isLoading: $isLoading)';
 }
 
 
@@ -229,7 +230,7 @@ abstract mixin class $ProfileBlocDataStateCopyWith<$Res> implements $ProfileBloc
   factory $ProfileBlocDataStateCopyWith(ProfileBlocDataState value, $Res Function(ProfileBlocDataState) _then) = _$ProfileBlocDataStateCopyWithImpl;
 @useResult
 $Res call({
- UserModel? userModel, bool hasPin
+ UserModel? userModel, bool hasPin, bool isLoading
 });
 
 
@@ -246,10 +247,11 @@ class _$ProfileBlocDataStateCopyWithImpl<$Res>
 
 /// Create a copy of ProfileBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? userModel = freezed,Object? hasPin = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? userModel = freezed,Object? hasPin = null,Object? isLoading = null,}) {
   return _then(ProfileBlocDataState(
 userModel: freezed == userModel ? _self.userModel : userModel // ignore: cast_nullable_to_non_nullable
 as UserModel?,hasPin: null == hasPin ? _self.hasPin : hasPin // ignore: cast_nullable_to_non_nullable
+as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -345,14 +347,16 @@ extension ProfileBlocEventPatterns on ProfileBlocEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ProfileBlocInitEvent value)?  initEvent,TResult Function( _ProfileBlocLoadEvent value)?  loadEvent,TResult Function( _ProfileBlocLogOutEvent value)?  logOut,TResult Function( _ProfileBlocDeleteEvent value)?  deleteAccount,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _ProfileBlocInitEvent value)?  initEvent,TResult Function( _ProfileBlocLoadEvent value)?  loadEvent,TResult Function( _ProfileBlocLogOutEvent value)?  logOut,TResult Function( _ProfileBlocDeleteEvent value)?  deleteAccount,TResult Function( _ProfileBlocUploadAvatarEvent value)?  uploadAvatar,TResult Function( _ProfileBlocSyncAvatarEvent value)?  syncAvatar,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _ProfileBlocInitEvent() when initEvent != null:
 return initEvent(_that);case _ProfileBlocLoadEvent() when loadEvent != null:
 return loadEvent(_that);case _ProfileBlocLogOutEvent() when logOut != null:
 return logOut(_that);case _ProfileBlocDeleteEvent() when deleteAccount != null:
-return deleteAccount(_that);case _:
+return deleteAccount(_that);case _ProfileBlocUploadAvatarEvent() when uploadAvatar != null:
+return uploadAvatar(_that);case _ProfileBlocSyncAvatarEvent() when syncAvatar != null:
+return syncAvatar(_that);case _:
   return orElse();
 
 }
@@ -370,14 +374,16 @@ return deleteAccount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ProfileBlocInitEvent value)  initEvent,required TResult Function( _ProfileBlocLoadEvent value)  loadEvent,required TResult Function( _ProfileBlocLogOutEvent value)  logOut,required TResult Function( _ProfileBlocDeleteEvent value)  deleteAccount,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _ProfileBlocInitEvent value)  initEvent,required TResult Function( _ProfileBlocLoadEvent value)  loadEvent,required TResult Function( _ProfileBlocLogOutEvent value)  logOut,required TResult Function( _ProfileBlocDeleteEvent value)  deleteAccount,required TResult Function( _ProfileBlocUploadAvatarEvent value)  uploadAvatar,required TResult Function( _ProfileBlocSyncAvatarEvent value)  syncAvatar,}){
 final _that = this;
 switch (_that) {
 case _ProfileBlocInitEvent():
 return initEvent(_that);case _ProfileBlocLoadEvent():
 return loadEvent(_that);case _ProfileBlocLogOutEvent():
 return logOut(_that);case _ProfileBlocDeleteEvent():
-return deleteAccount(_that);case _:
+return deleteAccount(_that);case _ProfileBlocUploadAvatarEvent():
+return uploadAvatar(_that);case _ProfileBlocSyncAvatarEvent():
+return syncAvatar(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -394,14 +400,16 @@ return deleteAccount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ProfileBlocInitEvent value)?  initEvent,TResult? Function( _ProfileBlocLoadEvent value)?  loadEvent,TResult? Function( _ProfileBlocLogOutEvent value)?  logOut,TResult? Function( _ProfileBlocDeleteEvent value)?  deleteAccount,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _ProfileBlocInitEvent value)?  initEvent,TResult? Function( _ProfileBlocLoadEvent value)?  loadEvent,TResult? Function( _ProfileBlocLogOutEvent value)?  logOut,TResult? Function( _ProfileBlocDeleteEvent value)?  deleteAccount,TResult? Function( _ProfileBlocUploadAvatarEvent value)?  uploadAvatar,TResult? Function( _ProfileBlocSyncAvatarEvent value)?  syncAvatar,}){
 final _that = this;
 switch (_that) {
 case _ProfileBlocInitEvent() when initEvent != null:
 return initEvent(_that);case _ProfileBlocLoadEvent() when loadEvent != null:
 return loadEvent(_that);case _ProfileBlocLogOutEvent() when logOut != null:
 return logOut(_that);case _ProfileBlocDeleteEvent() when deleteAccount != null:
-return deleteAccount(_that);case _:
+return deleteAccount(_that);case _ProfileBlocUploadAvatarEvent() when uploadAvatar != null:
+return uploadAvatar(_that);case _ProfileBlocSyncAvatarEvent() when syncAvatar != null:
+return syncAvatar(_that);case _:
   return null;
 
 }
@@ -418,13 +426,15 @@ return deleteAccount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initEvent,TResult Function()?  loadEvent,TResult Function()?  logOut,TResult Function()?  deleteAccount,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initEvent,TResult Function()?  loadEvent,TResult Function()?  logOut,TResult Function()?  deleteAccount,TResult Function( File file)?  uploadAvatar,TResult Function()?  syncAvatar,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileBlocInitEvent() when initEvent != null:
 return initEvent();case _ProfileBlocLoadEvent() when loadEvent != null:
 return loadEvent();case _ProfileBlocLogOutEvent() when logOut != null:
 return logOut();case _ProfileBlocDeleteEvent() when deleteAccount != null:
-return deleteAccount();case _:
+return deleteAccount();case _ProfileBlocUploadAvatarEvent() when uploadAvatar != null:
+return uploadAvatar(_that.file);case _ProfileBlocSyncAvatarEvent() when syncAvatar != null:
+return syncAvatar();case _:
   return orElse();
 
 }
@@ -442,13 +452,15 @@ return deleteAccount();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initEvent,required TResult Function()  loadEvent,required TResult Function()  logOut,required TResult Function()  deleteAccount,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initEvent,required TResult Function()  loadEvent,required TResult Function()  logOut,required TResult Function()  deleteAccount,required TResult Function( File file)  uploadAvatar,required TResult Function()  syncAvatar,}) {final _that = this;
 switch (_that) {
 case _ProfileBlocInitEvent():
 return initEvent();case _ProfileBlocLoadEvent():
 return loadEvent();case _ProfileBlocLogOutEvent():
 return logOut();case _ProfileBlocDeleteEvent():
-return deleteAccount();case _:
+return deleteAccount();case _ProfileBlocUploadAvatarEvent():
+return uploadAvatar(_that.file);case _ProfileBlocSyncAvatarEvent():
+return syncAvatar();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -465,13 +477,15 @@ return deleteAccount();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initEvent,TResult? Function()?  loadEvent,TResult? Function()?  logOut,TResult? Function()?  deleteAccount,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initEvent,TResult? Function()?  loadEvent,TResult? Function()?  logOut,TResult? Function()?  deleteAccount,TResult? Function( File file)?  uploadAvatar,TResult? Function()?  syncAvatar,}) {final _that = this;
 switch (_that) {
 case _ProfileBlocInitEvent() when initEvent != null:
 return initEvent();case _ProfileBlocLoadEvent() when loadEvent != null:
 return loadEvent();case _ProfileBlocLogOutEvent() when logOut != null:
 return logOut();case _ProfileBlocDeleteEvent() when deleteAccount != null:
-return deleteAccount();case _:
+return deleteAccount();case _ProfileBlocUploadAvatarEvent() when uploadAvatar != null:
+return uploadAvatar(_that.file);case _ProfileBlocSyncAvatarEvent() when syncAvatar != null:
+return syncAvatar();case _:
   return null;
 
 }
@@ -623,6 +637,116 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
   return 'ProfileBlocEvent.deleteAccount()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _ProfileBlocUploadAvatarEvent with DiagnosticableTreeMixin implements ProfileBlocEvent {
+   _ProfileBlocUploadAvatarEvent(this.file);
+  
+
+ final  File file;
+
+/// Create a copy of ProfileBlocEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ProfileBlocUploadAvatarEventCopyWith<_ProfileBlocUploadAvatarEvent> get copyWith => __$ProfileBlocUploadAvatarEventCopyWithImpl<_ProfileBlocUploadAvatarEvent>(this, _$identity);
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'ProfileBlocEvent.uploadAvatar'))
+    ..add(DiagnosticsProperty('file', file));
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileBlocUploadAvatarEvent&&(identical(other.file, file) || other.file == file));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,file);
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'ProfileBlocEvent.uploadAvatar(file: $file)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ProfileBlocUploadAvatarEventCopyWith<$Res> implements $ProfileBlocEventCopyWith<$Res> {
+  factory _$ProfileBlocUploadAvatarEventCopyWith(_ProfileBlocUploadAvatarEvent value, $Res Function(_ProfileBlocUploadAvatarEvent) _then) = __$ProfileBlocUploadAvatarEventCopyWithImpl;
+@useResult
+$Res call({
+ File file
+});
+
+
+
+
+}
+/// @nodoc
+class __$ProfileBlocUploadAvatarEventCopyWithImpl<$Res>
+    implements _$ProfileBlocUploadAvatarEventCopyWith<$Res> {
+  __$ProfileBlocUploadAvatarEventCopyWithImpl(this._self, this._then);
+
+  final _ProfileBlocUploadAvatarEvent _self;
+  final $Res Function(_ProfileBlocUploadAvatarEvent) _then;
+
+/// Create a copy of ProfileBlocEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? file = null,}) {
+  return _then(_ProfileBlocUploadAvatarEvent(
+null == file ? _self.file : file // ignore: cast_nullable_to_non_nullable
+as File,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _ProfileBlocSyncAvatarEvent with DiagnosticableTreeMixin implements ProfileBlocEvent {
+   _ProfileBlocSyncAvatarEvent();
+  
+
+
+
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'ProfileBlocEvent.syncAvatar'))
+    ;
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileBlocSyncAvatarEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'ProfileBlocEvent.syncAvatar()';
 }
 
 

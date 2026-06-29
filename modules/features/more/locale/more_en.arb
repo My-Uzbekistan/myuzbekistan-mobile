@@ -88,5 +88,11 @@
   "terms": "Terms of the User Agreement",
   "auth_page_action_phone": "Continue with phone",
   "premium": "Premium",
-  "premiumActiveSubtitle": "Premium subscription active"
+  "premiumActiveSubtitle": "Premium subscription active",
+  "changePhotoTitle": "Profile photo",
+  "takePhotoFromCamera": "Take a photo",
+  "chooseFromGallery": "Choose from gallery",
+  "photoUpdated": "Profile photo updated",
+  "photoUploadError": "Failed to upload photo. Please try again",
+  "premiumRequiredForPhoto": "This feature is for Premium users only"
 }

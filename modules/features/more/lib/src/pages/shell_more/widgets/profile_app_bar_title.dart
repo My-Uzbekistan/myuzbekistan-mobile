@@ -5,6 +5,7 @@ import 'package:more/src/core/extension.dart';
 import 'package:navigation/navigation.dart';
 
 import '../../profile_page/bloc/profile_bloc.dart';
+import 'change_avatar_sheet.dart';
 
 const _premiumGradient = LinearGradient(
   colors: [Color(0xFFF7CE5F), Color(0xFFFEEA7B), Color(0xFFCB9030)],
@@ -30,10 +31,16 @@ class ProfileAppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = profileState;
     final isLoggedIn = state is ProfileBlocDataState;
+    final isAvatarLoading = state is ProfileBlocDataState && state.isLoading;
     final name =
         isLoggedIn
             ? (state.userModel?.userName ?? "")
             : context.localization.guest;
+
+    // Avatar faqat Premium foydalanuvchilar uchun tahrirlanadi.
+    final canEditAvatar = isLoggedIn && _isPremium;
+    final VoidCallback? avatarTap =
+        canEditAvatar ? () => changeProfileAvatar(context) : null;
 
     // Mehmon — Premium (badge/obuna) ko'rsatilmaydi, faqat ism.
     if (!isLoggedIn) {
@@ -58,7 +65,12 @@ class ProfileAppBarTitle extends StatelessWidget {
         spacing: 16,
         children: [
           if (isLoggedIn)
-            _Avatar(photoUrl: state.userModel?.photoUrl, isPremium: false),
+            _Avatar(
+              photoUrl: state.userModel?.photoUrl,
+              isPremium: false,
+              isLoading: isAvatarLoading,
+              onTap: avatarTap,
+            ),
           Flexible(
             child: Text(
               name,
@@ -88,6 +100,8 @@ class ProfileAppBarTitle extends StatelessWidget {
               _Avatar(
                 photoUrl: state.userModel?.photoUrl,
                 isPremium: true,
+                isLoading: isAvatarLoading,
+                onTap: avatarTap,
               ),
             Flexible(
               child: Column(
@@ -124,6 +138,8 @@ class ProfileAppBarTitle extends StatelessWidget {
           _Avatar(
             photoUrl: state.userModel?.photoUrl,
             isPremium: false,
+            isLoading: isAvatarLoading,
+            onTap: avatarTap,
           ),
         Flexible(
           child: Text(
@@ -146,8 +162,15 @@ class ProfileAppBarTitle extends StatelessWidget {
 class _Avatar extends StatelessWidget {
   final String? photoUrl;
   final bool isPremium;
+  final bool isLoading;
+  final VoidCallback? onTap;
 
-  const _Avatar({this.photoUrl, required this.isPremium});
+  const _Avatar({
+    this.photoUrl,
+    required this.isPremium,
+    this.isLoading = false,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +180,9 @@ class _Avatar extends StatelessWidget {
       width: 48,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(40),
-        child:
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
             url.isEmpty
                 ? Assets.png.avatar.image(fit: BoxFit.cover)
                 : ExtendedImage.network(
@@ -174,18 +199,55 @@ class _Avatar extends StatelessWidget {
                     }
                   },
                 ),
+            if (isLoading)
+              ColoredBox(
+                color: Colors.black.withValues(alpha: 0.4),
+                child: const Center(child: LoadingIndicator(size: 20)),
+              ),
+          ],
+        ),
       ),
     );
 
-    if (!isPremium) return avatar;
+    Widget content =
+        isPremium
+            ? Container(
+              padding: const EdgeInsets.all(3),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: _premiumGradient,
+              ),
+              child: avatar,
+            )
+            : avatar;
 
-    return Container(
-      padding: const EdgeInsets.all(3),
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: _premiumGradient,
+    if (onTap == null) return content;
+
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          content,
+          Positioned(
+            right: -2,
+            bottom: -2,
+            child: Container(
+              padding: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: context.appColors.brand,
+                border: Border.all(
+                  color: context.appColors.background.elevation1,
+                  width: 1.5,
+                ),
+              ),
+              child: const Icon(Icons.edit, size: 10, color: Colors.white),
+            ),
+          ),
+        ],
       ),
-      child: avatar,
     );
   }
 }

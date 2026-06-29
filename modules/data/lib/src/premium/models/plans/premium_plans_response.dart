@@ -1,3 +1,4 @@
+import 'package:data/src/premium/models/plans/premium_feature_response.dart';
 import 'package:domain/domain.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -19,6 +20,8 @@ class PremiumPlansResponse {
   final int? originalPrice;
   @JsonKey(name: "discountPercent")
   final int? discountPercent;
+  @JsonKey(name: "features")
+  final List<PremiumFeatureResponse>? features;
 
   PremiumPlansResponse({
     this.id,
@@ -28,6 +31,7 @@ class PremiumPlansResponse {
     this.price,
     this.originalPrice,
     this.discountPercent,
+    this.features,
   });
 
   factory PremiumPlansResponse.fromJson(Map<String, dynamic> json) =>
@@ -44,6 +48,7 @@ class PremiumPlansResponse {
       price: price,
       originalPrice: originalPrice,
       discountPercent: discountPercent,
+      features: features?.map((e) => e.toDomain()).toList() ?? const [],
     );
   }
 }

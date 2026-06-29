@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:domain/domain.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +24,7 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
     AppStatusChangeListeners appStatusChangeListeners,
     this.repository,
   ) : _securityStorage = securityStorage,
-        _appStatusChangeListeners = appStatusChangeListeners,
+      _appStatusChangeListeners = appStatusChangeListeners,
       super(ProfileBlocState.guestState()) {
     on<_ProfileBlocInitEvent>((event, emit) {
       _init();
@@ -38,6 +39,8 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
             hasPin: securityStorage.hasPin(),
           ),
         );
+        // Lokal kesh darhol ko'rsatildi; avatarni user-info bilan sinxronlaymiz.
+        add(ProfileBlocEvent.syncAvatar());
       } else {
         emit(ProfileBlocState.guestState());
       }
@@ -53,6 +56,63 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
       await _securityStorage.clearData();
       GlobalHandler().refreshListener?.call();
     });
+    on<_ProfileBlocUploadAvatarEvent>(_onUploadAvatar);
+    on<_ProfileBlocSyncAvatarEvent>(_onSyncAvatar);
+  }
+
+  Future<void> _onSyncAvatar(
+    _ProfileBlocSyncAvatarEvent event,
+    Emitter<ProfileBlocState> emit,
+  ) async {
+    final current = state;
+    if (current is! ProfileBlocDataState) return;
+
+    try {
+      final info = await repository.getUserInfo();
+      if (info.profilePictureUrl == _securityStorage.getProfilePicture()) {
+        return;
+      }
+
+      await _securityStorage.saveProfilePicture(info.profilePictureUrl);
+      emit(current.copyWith(userModel: _securityStorage.getUserModel()));
+    } catch (_) {
+      // Offline yoki xato — lokal kesh saqlanadi.
+    }
+  }
+
+  Future<void> _onUploadAvatar(
+    _ProfileBlocUploadAvatarEvent event,
+    Emitter<ProfileBlocState> emit,
+  ) async {
+    final current = state;
+    if (current is! ProfileBlocDataState) return;
+
+    emit(current.copyWith(isLoading: true));
+
+    try {
+      final uploadedUrl = await repository.uploadProfilePicture(
+        file: event.file,
+      );
+      UserInfoModel? info;
+      try {
+        info = await repository.getUserInfo();
+      } catch (_) {
+        info = null;
+      }
+      final pictureUrl = info?.profilePictureUrl ?? uploadedUrl;
+
+      await _securityStorage.saveProfilePicture(pictureUrl);
+
+      emit(
+        current.copyWith(
+          userModel: _securityStorage.getUserModel(),
+          isLoading: false,
+        ),
+      );
+      _appStatusChangeListeners.refreshProfile();
+    } catch (_) {
+      emit(current.copyWith(isLoading: false));
+    }
   }
 
   void _init() {
@@ -63,11 +123,11 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
       add(ProfileBlocEvent.loadEvent());
     });
     _refreshProfileSubscription?.cancel();
-    _refreshProfileSubscription = _appStatusChangeListeners.refreshProfileListener.listen((
-      event,
-    ) {
-      add(ProfileBlocEvent.loadEvent());
-    });
+    _refreshProfileSubscription = _appStatusChangeListeners
+        .refreshProfileListener
+        .listen((event) {
+          add(ProfileBlocEvent.loadEvent());
+        });
   }
 
   @override

@@ -294,4 +294,23 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get premiumActiveSubtitle => 'Premium подписка активна';
+
+  @override
+  String get changePhotoTitle => 'Фото профиля';
+
+  @override
+  String get takePhotoFromCamera => 'Сделать фото';
+
+  @override
+  String get chooseFromGallery => 'Выбрать из галереи';
+
+  @override
+  String get photoUpdated => 'Фото профиля обновлено';
+
+  @override
+  String get photoUploadError => 'Не удалось загрузить фото. Повторите попытку';
+
+  @override
+  String get premiumRequiredForPhoto =>
+      'Эта функция доступна только для Premium';
 }

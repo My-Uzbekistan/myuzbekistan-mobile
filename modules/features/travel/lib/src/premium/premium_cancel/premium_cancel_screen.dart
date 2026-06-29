@@ -15,6 +15,14 @@ class PremiumCancelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Fallback icons shown while a feature's network icon loads or fails.
+    final featureIcons = <AssetGenImage>[
+      Assets.png.premiumCellIconInfinityLine,
+      Assets.png.premiumCellIconCpuFill,
+      Assets.png.premiumCellIconDiscountPercentFill,
+      Assets.png.premiumCellIconImageCircleAiLine,
+    ];
+    final features = status?.features ?? const <PremiumFeatureModel>[];
     return Scaffold(
       appBar: GradientAppBar(),
       body: SingleChildScrollView(
@@ -39,30 +47,16 @@ class PremiumCancelScreen extends StatelessWidget {
                 padding: EdgeInsets.only(top: 6),
                 child: Column(
                   spacing: 12,
-                  children: [
-                    PremiumItemCell(
-                      asset: Assets.png.premiumCellIconInfinityLine,
-                      title: context.localization.premiumFeatureAiTitle,
-                      description: context.localization.premiumFeatureAiDesc,
-                    ),
-                    PremiumItemCell(
-                      asset: Assets.png.premiumCellIconCpuFill,
-                      title: context.localization.premiumFeatureEsimTitle,
-                      description: context.localization.premiumFeatureEsimDesc,
-                    ),
-                    PremiumItemCell(
-                      asset: Assets.png.premiumCellIconDiscountPercentFill,
-                      title: context.localization.premiumFeatureDiscountTitle,
-                      description:
-                          context.localization.premiumFeatureDiscountDesc,
-                    ),
-                    PremiumItemCell(
-                      asset: Assets.png.premiumCellIconImageCircleAiLine,
-                      title: context.localization.premiumFeatureProfileTitle,
-                      description:
-                          context.localization.premiumFeatureProfileDesc,
-                    ),
-                  ],
+                  children: features
+                      .mapIndexed(
+                        (index, feature) => PremiumItemCell(
+                          asset: featureIcons[index % featureIcons.length],
+                          iconUrl: feature.icon,
+                          title: feature.title ?? "",
+                          description: feature.description ?? "",
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ],

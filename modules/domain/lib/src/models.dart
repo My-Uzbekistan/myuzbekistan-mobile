@@ -7,6 +7,7 @@ export 'models/Token.dart';
 export 'models/content_detail.dart';
 export 'models/view_type.dart';
 export 'models/UserModel.dart';
+export 'models/user_info_model.dart';
 export 'models/group_by.dart';
 export 'models/notification_item.dart';
 

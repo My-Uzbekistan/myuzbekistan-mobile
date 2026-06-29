@@ -293,4 +293,23 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get premiumActiveSubtitle => 'Premium subscription active';
+
+  @override
+  String get changePhotoTitle => 'Profile photo';
+
+  @override
+  String get takePhotoFromCamera => 'Take a photo';
+
+  @override
+  String get chooseFromGallery => 'Choose from gallery';
+
+  @override
+  String get photoUpdated => 'Profile photo updated';
+
+  @override
+  String get photoUploadError => 'Failed to upload photo. Please try again';
+
+  @override
+  String get premiumRequiredForPhoto =>
+      'This feature is for Premium users only';
 }

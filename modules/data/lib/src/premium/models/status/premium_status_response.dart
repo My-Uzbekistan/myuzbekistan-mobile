@@ -1,3 +1,4 @@
+import 'package:data/src/premium/models/plans/premium_feature_response.dart';
 import 'package:domain/domain.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -19,6 +20,8 @@ class PremiumStatusResponse {
   final int? durationInMonths;
   @JsonKey(name: "daysRemaining")
   final int? daysRemaining;
+  @JsonKey(name: "features")
+  final List<PremiumFeatureResponse>? features;
 
   PremiumStatusResponse({
     this.isPremium,
@@ -28,6 +31,7 @@ class PremiumStatusResponse {
     this.endDate,
     this.durationInMonths,
     this.daysRemaining,
+    this.features,
   });
 
   factory PremiumStatusResponse.fromJson(Map<String, dynamic> json) =>
@@ -44,6 +48,7 @@ class PremiumStatusResponse {
       endDate: DateTime.tryParse(endDate ?? ""),
       durationInMonths: durationInMonths,
       daysRemaining: daysRemaining,
+      features: features?.map((e) => e.toDomain()).toList() ?? const [],
     );
   }
 }

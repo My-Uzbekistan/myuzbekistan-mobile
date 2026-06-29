@@ -5,6 +5,7 @@ abstract class ProfileBlocState with _$ProfileBlocState {
   factory ProfileBlocState.dataState({
     UserModel? userModel,
     @Default(false) bool hasPin,
+    @Default(false) bool isLoading,
   }) = ProfileBlocDataState;
 
   factory ProfileBlocState.guestState() = ProfileBlocGuestState;

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:domain/src/models/onboarding_item.dart';
 
 import 'models.dart';
@@ -72,6 +74,10 @@ abstract interface class Repository {
   Future<List<MoreItem>> loadMoreUseFull();
 
   Future<dynamic> deleteAccount();
+
+  Future<String?> uploadProfilePicture({required File file});
+
+  Future<UserInfoModel> getUserInfo();
 
   Future<dynamic> setFirebaseToken({required String token});
 

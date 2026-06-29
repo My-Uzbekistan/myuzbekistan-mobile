@@ -31,6 +31,7 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
       emitter(state.copyWith(isLoading: false));
     }
   }
+
   void _selectPlan(_SelectPlan event, Emitter<PremiumState> emitter) async {
     emitter(state.copyWith(item: event.item));
   }

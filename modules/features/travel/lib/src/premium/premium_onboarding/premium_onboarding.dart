@@ -31,6 +31,13 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<PremiumBloc, PremiumState>(
       builder: (context, state) {
+        // Fallback icons shown while a feature's network icon loads or fails.
+        final featureIcons = <AssetGenImage>[
+          Assets.png.premiumCellIconInfinityLine,
+          Assets.png.premiumCellIconCpuFill,
+          Assets.png.premiumCellIconDiscountPercentFill,
+          Assets.png.premiumCellIconImageCircleAiLine,
+        ];
         return Scaffold(
           appBar: GradientAppBar(),
           bottomNavigationBar: Container(
@@ -42,52 +49,79 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
             width: double.maxFinite,
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16,
               children: [
-                AppActionButton(
-                  actionText: context.localization.premiumConnect,
-                  onPressed: () async {
-                    final completer = Completer<bool>();
-                    context.finance.pushMerchantPage(
-                      id: merchantId,
-                      orderId: state.item?.id.toString(),
-                      extra: completer,
-                      amount:
-                          ((state.item?.price ?? 0) / 100).toInt().toString(),
-                    );
-                    final result = await completer.future;
-                    if (result) {
-                      context.travel.goMain();
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        final rootContext = appRootNavigatorKey.currentContext;
-                        if (rootContext != null) {
-                          PremiumSuccessDialog.show(rootContext);
-                        }
-                      });
-                    }
-                  },
-                  disable: state.item == null,
-                ),
-                RichText(
-                  text: TextSpan(
-                    children: [
-                      TextSpan(
-                        text: context.localization.premiumCancelAnytime,
-                        style: CustomTypography.bodyXsm.copyWith(
-                          color: context.appColors.textIconColor.secondary,
-                        ),
-                      ),
-                      TextSpan(
-                        text: "\n${context.localization.premiumTerms}",
-                        style: CustomTypography.bodyXsm.copyWith(
-                          decoration: TextDecoration.underline,
-                          color: context.appColors.textIconColor.secondary,
-                        ),
-                      ),
-                    ],
+                SingleChildScrollView(
+                  padding: const EdgeInsets.only(top: 36),
+                  scrollDirection: Axis.horizontal,
+                  clipBehavior: Clip.none,
+                  child: Row(
+
+                    children:
+                        state.plans
+                            .mapIndexed(
+                              (index, data) => DiscountItem(
+                                isSelect: state.item?.id == data.id,
+                                item: data,
+                                onTap:
+                                    () => bloc?.add(
+                                      PremiumEvent.selectPlan(item: data),
+                                    ),
+                              ),
+                            )
+                            .toList(),
                   ),
-                  textAlign: TextAlign.center,
                 ),
+                Column(
+                  spacing: 16,
+                  children: [
+                  AppActionButton(
+                    actionText: context.localization.premiumConnect,
+                    onPressed: () async {
+                      final completer = Completer<bool>();
+                      context.finance.pushMerchantPage(
+                        id: merchantId,
+                        orderId: state.item?.id.toString(),
+                        extra: completer,
+                        amount:
+                        ((state.item?.price ?? 0) / 100).toInt().toString(),
+                      );
+                      final result = await completer.future;
+                      if (result) {
+                        context.travel.goMain();
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          final rootContext = appRootNavigatorKey.currentContext;
+                          if (rootContext != null) {
+                            PremiumSuccessDialog.show(rootContext);
+                          }
+                        });
+                      }
+                    },
+                    disable: state.item == null,
+                  ),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: context.localization.premiumCancelAnytime,
+                          style: CustomTypography.bodyXsm.copyWith(
+                            color: context.appColors.textIconColor.secondary,
+                          ),
+                        ),
+                        TextSpan(
+                          text: "\n${context.localization.premiumTerms}",
+                          style: CustomTypography.bodyXsm.copyWith(
+                            decoration: TextDecoration.underline,
+                            color: context.appColors.textIconColor.secondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],)
+
               ],
             ),
           ),
@@ -112,53 +146,15 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                     child: Column(
                       spacing: 12,
                       children: [
-                        PremiumItemCell(
-                          asset: Assets.png.premiumCellIconInfinityLine,
-                          title: context.localization.premiumFeatureAiTitle,
-                          description:
-                              context.localization.premiumFeatureAiDesc,
-                        ),
-                        PremiumItemCell(
-                          asset: Assets.png.premiumCellIconCpuFill,
-                          title: context.localization.premiumFeatureEsimTitle,
-                          description:
-                              context.localization.premiumFeatureEsimDesc,
-                        ),
-                        PremiumItemCell(
-                          asset: Assets.png.premiumCellIconDiscountPercentFill,
-                          title:
-                              context.localization.premiumFeatureDiscountTitle,
-                          description:
-                              context.localization.premiumFeatureDiscountDesc,
-                        ),
-                        PremiumItemCell(
-                          asset: Assets.png.premiumCellIconImageCircleAiLine,
-                          title:
-                              context.localization.premiumFeatureProfileTitle,
-                          description:
-                              context.localization.premiumFeatureProfileDesc,
+                        ...?state.item?.features.mapIndexed(
+                          (index, feature) => PremiumItemCell(
+                            asset: featureIcons[index % featureIcons.length],
+                            iconUrl: feature.icon,
+                            title: feature.title ?? "",
+                            description: feature.description ?? "",
+                          ),
                         ),
                       ],
-                    ),
-                  ),
-                  SingleChildScrollView(
-                    padding: const EdgeInsets.only(top: 36),
-                    scrollDirection: Axis.horizontal,
-                    clipBehavior: Clip.none,
-                    child: Row(
-                      children:
-                          state.plans
-                              .mapIndexed(
-                                (index, data) => DiscountItem(
-                                  isSelect: state.item?.id == data.id,
-                                  item: data,
-                                  onTap:
-                                      () => bloc?.add(
-                                        PremiumEvent.selectPlan(item: data),
-                                      ),
-                                ),
-                              )
-                              .toList(),
                     ),
                   ),
                 ],
@@ -172,23 +168,50 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
 }
 
 class PremiumItemCell extends StatelessWidget {
-  final AssetGenImage asset;
+  final AssetGenImage? asset;
+  final String? iconUrl;
   final String title;
   final String description;
 
   const PremiumItemCell({
     super.key,
-    required this.asset,
+    this.asset,
+    this.iconUrl,
     required this.title,
     required this.description,
   });
+
+  Widget _icon() {
+    final fallback =
+        asset?.image(height: 32, width: 32, fit: BoxFit.contain) ??
+        const SizedBox(height: 32, width: 32);
+    final url = iconUrl;
+    if (url == null || url.isEmpty) return fallback;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: ExtendedImage.network(
+        url,
+        height: 32,
+        width: 32,
+        fit: BoxFit.contain,
+        loadStateChanged: (state) {
+          switch (state.extendedImageLoadState) {
+            case LoadState.completed:
+              return null;
+            default:
+              return fallback;
+          }
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       spacing: 16,
       children: [
-        asset.image(height: 32),
+        _icon(),
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

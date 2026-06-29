@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:data/src/models/items_response.dart';
 import 'package:data/src/travel/models/notification/notification_item_dto.dart';
 import 'package:data/src/travel/models/onboarding_dto.dart';
+import 'package:data/src/travel/models/user_info_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
@@ -73,6 +76,13 @@ abstract class RestService {
 
   @DELETE("auth/delete")
   Future<dynamic> deleteAccount();
+
+  @POST('/auth/profile-picture')
+  @MultiPart()
+  Future<dynamic> uploadProfilePicture(@Part(name: 'file') MultipartFile file);
+
+  @GET("auth/user-info")
+  Future<UserInfoDto> getUserInfo();
 
   @GET("more/currency")
   Future<List<CurrencyDto>> getCurrency();

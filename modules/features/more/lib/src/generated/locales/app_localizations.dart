@@ -606,6 +606,42 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Premium подписка активна'**
   String get premiumActiveSubtitle;
+
+  /// No description provided for @changePhotoTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото профиля'**
+  String get changePhotoTitle;
+
+  /// No description provided for @takePhotoFromCamera.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сделать фото'**
+  String get takePhotoFromCamera;
+
+  /// No description provided for @chooseFromGallery.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выбрать из галереи'**
+  String get chooseFromGallery;
+
+  /// No description provided for @photoUpdated.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото профиля обновлено'**
+  String get photoUpdated;
+
+  /// No description provided for @photoUploadError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось загрузить фото. Повторите попытку'**
+  String get photoUploadError;
+
+  /// No description provided for @premiumRequiredForPhoto.
+  ///
+  /// In ru, this message translates to:
+  /// **'Эта функция доступна только для Premium'**
+  String get premiumRequiredForPhoto;
 }
 
 class _FeatureMoreLocalizationsDelegate

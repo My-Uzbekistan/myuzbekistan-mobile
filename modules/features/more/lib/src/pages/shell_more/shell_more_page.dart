@@ -318,7 +318,8 @@ class _ShellMorePageState extends State<ShellMorePage> {
                                     ),
                                     _MoreCellItem(
                                       icon:
-                                          Assets.svg.more.arrowRightToSquare.svg(),
+                                          Assets.svg.more.arrowRightToSquare
+                                              .svg(),
                                       title: context.localization.logout,
                                       contentColor:
                                           context.appColors.colors.red,

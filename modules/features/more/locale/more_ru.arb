@@ -85,5 +85,11 @@
   "terms": "условия пользовательского соглашения",
   "auth_page_action_phone": "Войти по номеру телефона",
   "premium": "Premium",
-  "premiumActiveSubtitle": "Premium подписка активна"
+  "premiumActiveSubtitle": "Premium подписка активна",
+  "changePhotoTitle": "Фото профиля",
+  "takePhotoFromCamera": "Сделать фото",
+  "chooseFromGallery": "Выбрать из галереи",
+  "photoUpdated": "Фото профиля обновлено",
+  "photoUploadError": "Не удалось загрузить фото. Повторите попытку",
+  "premiumRequiredForPhoto": "Эта функция доступна только для Premium"
 }

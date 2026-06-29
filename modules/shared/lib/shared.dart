@@ -24,6 +24,8 @@ export 'package:pinput/pinput.dart';
 export 'src/extensions/string_extension.dart';
 export 'package:keyboard_actions/keyboard_actions.dart';
 export 'package:mobile_scanner/mobile_scanner.dart';
+export 'src/permissions/camera_and_gallery/camera_storage.dart';
+export 'package:image_picker/image_picker.dart' show ImageSource, XFile;
 
 export 'package:intl/intl.dart' show DateFormat,Intl;
 export 'package:package_info_plus/package_info_plus.dart';

@@ -16,6 +16,9 @@ PremiumPlansResponse _$PremiumPlansResponseFromJson(
   price: (json['price'] as num?)?.toInt(),
   originalPrice: (json['originalPrice'] as num?)?.toInt(),
   discountPercent: (json['discountPercent'] as num?)?.toInt(),
+  features: (json['features'] as List<dynamic>?)
+      ?.map((e) => PremiumFeatureResponse.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$PremiumPlansResponseToJson(
@@ -28,4 +31,5 @@ Map<String, dynamic> _$PremiumPlansResponseToJson(
   'price': instance.price,
   'originalPrice': instance.originalPrice,
   'discountPercent': instance.discountPercent,
+  'features': instance.features,
 };

@@ -16,6 +16,9 @@ PremiumStatusResponse _$PremiumStatusResponseFromJson(
   endDate: json['endDate'] as String?,
   durationInMonths: (json['durationInMonths'] as num?)?.toInt(),
   daysRemaining: (json['daysRemaining'] as num?)?.toInt(),
+  features: (json['features'] as List<dynamic>?)
+      ?.map((e) => PremiumFeatureResponse.fromJson(e as Map<String, dynamic>))
+      .toList(),
 );
 
 Map<String, dynamic> _$PremiumStatusResponseToJson(
@@ -28,4 +31,5 @@ Map<String, dynamic> _$PremiumStatusResponseToJson(
   'endDate': instance.endDate,
   'durationInMonths': instance.durationInMonths,
   'daysRemaining': instance.daysRemaining,
+  'features': instance.features,
 };

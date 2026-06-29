@@ -163,6 +163,23 @@ class RepositoryImp implements Repository {
     return _restService.deleteAccount().call();
   }
 
+  @override
+  Future<String?> uploadProfilePicture({required File file}) async {
+    final multipartFile = await MultipartFile.fromFile(
+      file.path,
+      filename: file.path.split('/').last,
+    );
+    return _restService.uploadProfilePicture(multipartFile).call((data) {
+      if (data is Map) return data["profilePictureUrl"] as String?;
+      return null;
+    });
+  }
+
+  @override
+  Future<UserInfoModel> getUserInfo() {
+    return _restService.getUserInfo().call((data) => data.toDomain());
+  }
+
   // {
   // "token":"12312",
   // "osVersion":"ios-16",
