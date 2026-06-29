@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
@@ -57,6 +58,7 @@ class _WebViewPageState extends State<WebViewPage> {
 
   InAppWebViewController? inAppWebViewController;
   double _progress = 0;
+  bool _showCloseButton = false;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,40 @@ class _WebViewPageState extends State<WebViewPage> {
               color: context.appColors.stroke.nonOpaque,
             ),
           ),
+
+          actions: [
+            if(_showCloseButton)Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap:
+                () {
+              HapticFeedback.mediumImpact();
+              context.pop();
+
+            },
+            child: SizedBox(
+              width: 40,
+              height: 40,
+              child: ClipRRect(
+                clipBehavior: Clip.none,
+                child:  Center(
+                    child: Assets.svg.iconClose.path.toSvgImage(
+                          width: 20,
+                          height: 20,
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                               context.appColors.textIconColor.primary,
+                              BlendMode.srcIn)),
+
+                  ),
+                ),
+            )
+            ),
+          ),
+        ]
         ),
+
 
         body: SafeArea(
           bottom: Platform.isAndroid,
@@ -119,6 +154,15 @@ class _WebViewPageState extends State<WebViewPage> {
                             }
                           },
                         );
+                  },
+
+                  onUpdateVisitedHistory: (controller, url, isReload) async {
+                    final canGoBack = await controller.canGoBack();
+                    if (_showCloseButton != canGoBack) {
+                      setState(() {
+                        _showCloseButton = canGoBack;
+                      });
+                    }
                   },
                   onPermissionRequest: onPermissionRequest,
 
