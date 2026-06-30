@@ -5,12 +5,6 @@ abstract class SecurityStorage {
 
   UserModel? getUserModel();
 
-  /// user-info dan kelgan profil rasmi (JWT dan emas). Premium tugasa `null`.
-  String? getProfilePicture();
-
-  /// user-info dan kelgan profil rasmini saqlaydi. `null` — rasmni o'chiradi.
-  Future<void> saveProfilePicture(String? url);
-
   String? getTopic();
   int? getUserId();
 

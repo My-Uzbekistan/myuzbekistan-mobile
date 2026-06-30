@@ -37,12 +37,9 @@ class ProfileAppBarTitle extends StatelessWidget {
             ? (state.userModel?.userName ?? "")
             : context.localization.guest;
 
-    // Avatar faqat Premium foydalanuvchilar uchun tahrirlanadi.
     final canEditAvatar = isLoggedIn && _isPremium;
     final VoidCallback? avatarTap =
         canEditAvatar ? () => changeProfileAvatar(context) : null;
-
-    // Mehmon — Premium (badge/obuna) ko'rsatilmaydi, faqat ism.
     if (!isLoggedIn) {
       return Row(
         mainAxisSize: MainAxisSize.min,
@@ -184,7 +181,7 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final url = photoUrl ?? "";
+    final url = isPremium ? (photoUrl ?? "") : "";
     final avatar = SizedBox(
       height: 56,
       width: 56,
@@ -218,8 +215,6 @@ class _Avatar extends StatelessWidget {
         ),
       ),
     );
-
-
 
     if (onTap == null) return avatar;
 

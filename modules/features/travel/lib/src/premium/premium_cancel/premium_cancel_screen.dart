@@ -64,7 +64,7 @@ class PremiumCancelScreen extends StatelessWidget {
           listenWhen: (prev, curr) => prev.isCancelled != curr.isCancelled,
           listener: (context, state) {
             if (state.isCancelled) {
-              context.pop();
+              GlobalHandler().refreshListener?.call();
             }
           },
           builder: (context, state) {

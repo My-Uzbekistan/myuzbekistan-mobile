@@ -20,29 +20,13 @@ class SecurityStorageImpl implements SecurityStorage {
     final user = UserModel(
       name: jwt["userName"],
       email: jwt["name"],
-      // Avatar user-info dan o'qiladi (JWT dan emas). Saqlangan bo'lsa
-      // o'shani, bo'lmasa JWT dagi rasmga fallback qilamiz.
-      photoUrl: getProfilePicture() ?? jwt["photoUrl"],
+      // Avatar hech qayerga saqlanmaydi — live user-info dan ProfileBloc
+      // tomonidan to'ldiriladi. Bu yerda faqat JWT dagi rasm (odatda bo'sh).
+      photoUrl: jwt["photoUrl"],
       phoneNumber: _box.get("phone"),
       isUtcClient: jwt["isUztelecom"]=="true"
     );
     return user;
-  }
-
-  @override
-  String? getProfilePicture() {
-    final url = _box.get("profilePictureUrl");
-    if (url is String && url.isNotEmpty) return url;
-    return null;
-  }
-
-  @override
-  Future<void> saveProfilePicture(String? url) async {
-    if (url == null || url.isEmpty) {
-      await _box.delete("profilePictureUrl");
-    } else {
-      await _box.put("profilePictureUrl", url);
-    }
   }
 
   @override

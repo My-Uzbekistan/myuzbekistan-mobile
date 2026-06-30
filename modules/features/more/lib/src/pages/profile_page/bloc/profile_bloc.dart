@@ -68,15 +68,13 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
     if (current is! ProfileBlocDataState) return;
 
     try {
+      // Avatar saqlanmaydi — har safar user-info dan jonli o'qiladi.
+      // Premium tugaganda profilePictureUrl `null` keladi va avatar tozalanadi.
       final info = await repository.getUserInfo();
-      if (info.profilePictureUrl == _securityStorage.getProfilePicture()) {
-        return;
-      }
-
-      await _securityStorage.saveProfilePicture(info.profilePictureUrl);
-      emit(current.copyWith(userModel: _securityStorage.getUserModel()));
+      final base = _securityStorage.getUserModel();
+      emit(current.copyWith(userModel: base?.withPhotoUrl(info.profilePictureUrl)));
     } catch (_) {
-      // Offline yoki xato — lokal kesh saqlanadi.
+      // Offline yoki xato — joriy holat o'zgarmaydi.
     }
   }
 
@@ -101,15 +99,14 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
       }
       final pictureUrl = info?.profilePictureUrl ?? uploadedUrl;
 
-      await _securityStorage.saveProfilePicture(pictureUrl);
-
+      // Saqlanmaydi — yangi URL faqat state ga qo'yiladi.
+      final base = _securityStorage.getUserModel();
       emit(
         current.copyWith(
-          userModel: _securityStorage.getUserModel(),
+          userModel: base?.withPhotoUrl(pictureUrl),
           isLoading: false,
         ),
       );
-      _appStatusChangeListeners.refreshProfile();
     } catch (_) {
       emit(current.copyWith(isLoading: false));
     }

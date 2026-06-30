@@ -23,6 +23,16 @@ class UserModel {
     return {"name": name, "email": email, "photoUrl": photoUrl, "phoneNumber": phoneNumber};
   }
 
+  /// Avatar (photoUrl) live user-info dan keladi — hech qayerga saqlanmaydi.
+  /// [url] `null` bo'lsa avatar ham tozalanadi (masalan premium tugaganda).
+  UserModel withPhotoUrl(String? url) => UserModel(
+    name: name,
+    email: email,
+    photoUrl: url,
+    phoneNumber: phoneNumber,
+    isUtcClient: isUtcClient,
+  );
+
   String get userName {
 
     if (phoneNumber != null && phoneNumber!.isNotEmpty) {
