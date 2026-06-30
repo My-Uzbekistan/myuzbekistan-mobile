@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
@@ -89,12 +90,15 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                       );
                       final result = await completer.future;
                       if (result) {
-                        context.travel.goMain();
+                        GlobalHandler().refreshListener?.call();
                         WidgetsBinding.instance.addPostFrameCallback((_) {
-                          final rootContext = appRootNavigatorKey.currentContext;
-                          if (rootContext != null) {
-                            PremiumSuccessDialog.show(rootContext);
-                          }
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            final rootContext =
+                                appRootNavigatorKey.currentContext;
+                            if (rootContext != null) {
+                              PremiumSuccessDialog.show(rootContext);
+                            }
+                          });
                         });
                       }
                     },
