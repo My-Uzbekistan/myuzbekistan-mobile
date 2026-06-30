@@ -108,18 +108,28 @@ class ProfileAppBarTitle extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    name,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: CustomTypography.H2,
-                  ),
-                  Text(
-                    context.localization.premiumActiveSubtitle,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: CustomTypography.labelSm.copyWith(
-                      color: const Color(0xFFCBA052),
+                  Row(
+                    children: [
+                    Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTypography.H2,
+                    ),
+                    Assets.svg.premiumCheck.svg(width: 22,height: 22),
+                  ],),
+
+                  ShaderMask(
+                    shaderCallback:
+                        (bounds) => _premiumGradient.createShader(bounds),
+                    blendMode: BlendMode.srcIn,
+                    child: Text(
+                      context.localization.premiumActiveSubtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: CustomTypography.labelSm.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
@@ -176,8 +186,8 @@ class _Avatar extends StatelessWidget {
   Widget build(BuildContext context) {
     final url = photoUrl ?? "";
     final avatar = SizedBox(
-      height: 48,
-      width: 48,
+      height: 56,
+      width: 56,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(40),
         child: Stack(
@@ -209,19 +219,9 @@ class _Avatar extends StatelessWidget {
       ),
     );
 
-    Widget content =
-        isPremium
-            ? Container(
-              padding: const EdgeInsets.all(3),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: _premiumGradient,
-              ),
-              child: avatar,
-            )
-            : avatar;
 
-    if (onTap == null) return content;
+
+    if (onTap == null) return avatar;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -229,7 +229,7 @@ class _Avatar extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          content,
+          avatar,
           Positioned(
             right: -2,
             bottom: -2,
@@ -269,10 +269,7 @@ class _PremiumBadge extends StatelessWidget {
         ),
         child: Text(
           context.localization.premium,
-          style: CustomTypography.labelSm.copyWith(
-            color: Colors.black,
-            fontWeight: FontWeight.w600,
-          ),
+          style: CustomTypography.labelSm,
         ),
       ),
     );

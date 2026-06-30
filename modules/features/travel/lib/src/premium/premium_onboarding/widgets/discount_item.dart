@@ -8,8 +8,9 @@ class DiscountItem extends StatelessWidget {
   final PremiumPlansModel? item;
   final VoidCallback? onTap;
   final bool isSelect;
+  final int index;
 
-  const DiscountItem({super.key, this.item, this.onTap, required this.isSelect});
+  const DiscountItem({super.key, this.item, this.onTap, required this.isSelect, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,8 @@ class DiscountItem extends StatelessWidget {
           Container(
             height: 98,
             width: 136,
-            padding: EdgeInsets.all(16),
+            padding:const EdgeInsets.all(16),
+            margin:  EdgeInsets.only(left: index==0 ? 0: 8),
             decoration: BoxDecoration(
               color:
                   isSelect

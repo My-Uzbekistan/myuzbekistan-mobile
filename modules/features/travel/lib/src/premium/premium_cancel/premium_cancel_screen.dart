@@ -15,13 +15,6 @@ class PremiumCancelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Fallback icons shown while a feature's network icon loads or fails.
-    final featureIcons = <AssetGenImage>[
-      Assets.png.premiumCellIconInfinityLine,
-      Assets.png.premiumCellIconCpuFill,
-      Assets.png.premiumCellIconDiscountPercentFill,
-      Assets.png.premiumCellIconImageCircleAiLine,
-    ];
     final features = status?.features ?? const <PremiumFeatureModel>[];
     return Scaffold(
       appBar: GradientAppBar(),
@@ -50,7 +43,6 @@ class PremiumCancelScreen extends StatelessWidget {
                   children: features
                       .mapIndexed(
                         (index, feature) => PremiumItemCell(
-                          asset: featureIcons[index % featureIcons.length],
                           iconUrl: feature.icon,
                           title: feature.title ?? "",
                           description: feature.description ?? "",

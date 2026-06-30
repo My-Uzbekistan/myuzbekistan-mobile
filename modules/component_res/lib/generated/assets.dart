@@ -134,6 +134,8 @@ class $AssetsSvgGen {
   final SvgGenImage pinLocationLine =
       const SvgGenImage('assets/svg/pin_location_line.svg');
   final SvgGenImage pinSvg = const SvgGenImage('assets/svg/pin_svg.svg');
+  final SvgGenImage premiumCheck =
+      const SvgGenImage('assets/svg/premium_check.svg');
   final SvgGenImage roundedCloseIcon =
       const SvgGenImage('assets/svg/rounded_close_icon.svg');
   final SvgGenImage scanIdentification =

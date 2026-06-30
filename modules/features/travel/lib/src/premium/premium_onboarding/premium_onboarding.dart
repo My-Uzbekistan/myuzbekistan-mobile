@@ -32,13 +32,6 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
   Widget build(BuildContext context) {
     return BlocBuilder<PremiumBloc, PremiumState>(
       builder: (context, state) {
-        // Fallback icons shown while a feature's network icon loads or fails.
-        final featureIcons = <AssetGenImage>[
-          Assets.png.premiumCellIconInfinityLine,
-          Assets.png.premiumCellIconCpuFill,
-          Assets.png.premiumCellIconDiscountPercentFill,
-          Assets.png.premiumCellIconImageCircleAiLine,
-        ];
         return Scaffold(
           appBar: GradientAppBar(),
           bottomNavigationBar: Container(
@@ -58,7 +51,6 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.none,
                   child: Row(
-
                     children:
                         state.plans
                             .mapIndexed(
@@ -68,7 +60,7 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                                 onTap:
                                     () => bloc?.add(
                                       PremiumEvent.selectPlan(item: data),
-                                    ),
+                                    ), index: index,
                               ),
                             )
                             .toList(),
@@ -77,55 +69,57 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                 Column(
                   spacing: 16,
                   children: [
-                  AppActionButton(
-                    actionText: context.localization.premiumConnect,
-                    onPressed: () async {
-                      final completer = Completer<bool>();
-                      context.finance.pushMerchantPage(
-                        id: merchantId,
-                        orderId: state.item?.id.toString(),
-                        extra: completer,
-                        amount:
-                        ((state.item?.price ?? 0) / 100).toInt().toString(),
-                      );
-                      final result = await completer.future;
-                      if (result) {
-                        GlobalHandler().refreshListener?.call();
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                    AppActionButton(
+                      actionText: context.localization.premiumConnect,
+                      onPressed: () async {
+                        final completer = Completer<bool>();
+                        context.finance.pushMerchantPage(
+                          id: merchantId,
+                          orderId: state.item?.id.toString(),
+                          extra: completer,
+                          amount:
+                              ((state.item?.price ?? 0) / 100)
+                                  .toInt()
+                                  .toString(),
+                        );
+                        final result = await completer.future;
+                        if (result) {
+                          GlobalHandler().refreshListener?.call();
                           WidgetsBinding.instance.addPostFrameCallback((_) {
-                            final rootContext =
-                                appRootNavigatorKey.currentContext;
-                            if (rootContext != null) {
-                              PremiumSuccessDialog.show(rootContext);
-                            }
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              final rootContext =
+                                  appRootNavigatorKey.currentContext;
+                              if (rootContext != null) {
+                                PremiumSuccessDialog.show(rootContext);
+                              }
+                            });
                           });
-                        });
-                      }
-                    },
-                    disable: state.item == null,
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: context.localization.premiumCancelAnytime,
-                          style: CustomTypography.bodyXsm.copyWith(
-                            color: context.appColors.textIconColor.secondary,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "\n${context.localization.premiumTerms}",
-                          style: CustomTypography.bodyXsm.copyWith(
-                            decoration: TextDecoration.underline,
-                            color: context.appColors.textIconColor.secondary,
-                          ),
-                        ),
-                      ],
+                        }
+                      },
+                      disable: state.item == null,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                ],)
-
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: context.localization.premiumCancelAnytime,
+                            style: CustomTypography.bodyXsm.copyWith(
+                              color: context.appColors.textIconColor.secondary,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "\n${context.localization.premiumTerms}",
+                            style: CustomTypography.bodyXsm.copyWith(
+                              decoration: TextDecoration.underline,
+                              color: context.appColors.textIconColor.secondary,
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -149,16 +143,17 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
                     padding: EdgeInsets.only(top: 6),
                     child: Column(
                       spacing: 12,
-                      children: [
-                        ...?state.item?.features.mapIndexed(
-                          (index, feature) => PremiumItemCell(
-                            asset: featureIcons[index % featureIcons.length],
-                            iconUrl: feature.icon,
-                            title: feature.title ?? "",
-                            description: feature.description ?? "",
-                          ),
-                        ),
-                      ],
+                      children:
+                          state.item?.features
+                              .mapIndexed(
+                                (index, feature) => PremiumItemCell(
+                                  iconUrl: feature.icon,
+                                  title: feature.title ?? "",
+                                  description: feature.description ?? "",
+                                ),
+                              )
+                              .toList() ??
+                          [],
                     ),
                   ),
                 ],
@@ -172,25 +167,20 @@ class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
 }
 
 class PremiumItemCell extends StatelessWidget {
-  final AssetGenImage? asset;
   final String? iconUrl;
   final String title;
   final String description;
 
   const PremiumItemCell({
     super.key,
-    this.asset,
     this.iconUrl,
     required this.title,
     required this.description,
   });
 
-  Widget _icon() {
-    final fallback =
-        asset?.image(height: 32, width: 32, fit: BoxFit.contain) ??
-        const SizedBox(height: 32, width: 32);
+  Widget? _icon() {
     final url = iconUrl;
-    if (url == null || url.isEmpty) return fallback;
+    if (url == null || url.isEmpty) return null;
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: ExtendedImage.network(
@@ -203,7 +193,7 @@ class PremiumItemCell extends StatelessWidget {
             case LoadState.completed:
               return null;
             default:
-              return fallback;
+              return const SizedBox(height: 32, width: 32);
           }
         },
       ),
@@ -212,10 +202,11 @@ class PremiumItemCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final icon = _icon();
     return Row(
       spacing: 16,
       children: [
-        _icon(),
+        if (icon != null) icon,
         Flexible(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
