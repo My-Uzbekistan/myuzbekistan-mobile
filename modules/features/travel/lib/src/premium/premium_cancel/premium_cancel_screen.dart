@@ -5,8 +5,7 @@ import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart';
 import 'package:travel/src/premium/premium_cancel/widgets/subscription_info_card.dart';
-
-import '../premium_onboarding/premium_onboarding.dart';
+import '../premium_onboarding/widgets/premium_item_cell.dart';
 
 class PremiumCancelScreen extends StatelessWidget {
   final PremiumStatusModel? status;
