@@ -42,9 +42,13 @@ class DiscountItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  context.localization.premiumMonths(
-                    item?.durationInMonths ?? 0,
-                  ),
+                  (item?.durationInMonths ?? 0) > 0
+                      ? context.localization.premiumMonths(
+                        item?.durationInMonths ?? 0,
+                      )
+                      : context.localization.premiumDaysValue(
+                        item?.durationInDays ?? 0,
+                      ),
                 ).labelMd(),
 
                 Column(

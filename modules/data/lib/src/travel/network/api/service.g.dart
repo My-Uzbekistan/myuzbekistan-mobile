@@ -358,13 +358,13 @@ class _RestService implements RestService {
   }
 
   @override
-  Future<void> uploadProfilePicture(MultipartFile file) async {
+  Future<dynamic> uploadProfilePicture(MultipartFile file) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = FormData();
     _data.files.add(MapEntry('file', file));
-    final _options = _setStreamType<void>(
+    final _options = _setStreamType<dynamic>(
       Options(
             method: 'POST',
             headers: _headers,
@@ -379,7 +379,9 @@ class _RestService implements RestService {
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    await _dio.fetch<void>(_options);
+    final _result = await _dio.fetch(_options);
+    final _value = _result.data;
+    return _value;
   }
 
   @override

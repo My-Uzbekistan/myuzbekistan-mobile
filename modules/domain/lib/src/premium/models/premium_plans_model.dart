@@ -5,6 +5,7 @@ class PremiumPlansModel {
   final String? name;
   final String? description;
   final int? durationInMonths;
+  final int? durationInDays;
   final int? price;
   final int? originalPrice;
   final int? discountPercent;
@@ -16,6 +17,7 @@ class PremiumPlansModel {
     this.name,
     this.description,
     this.durationInMonths,
+    this.durationInDays,
     this.price,
     this.originalPrice,
     this.discountPercent,
@@ -28,6 +30,7 @@ class PremiumPlansModel {
     String? name,
     String? description,
     int? durationInMonths,
+    int? durationInDays,
     int? price,
     int? originalPrice,
     int? discountPercent,
@@ -39,6 +42,7 @@ class PremiumPlansModel {
       name: name ?? this.name,
       description: description ?? this.description,
       durationInMonths: durationInMonths ?? this.durationInMonths,
+      durationInDays: durationInDays ?? this.durationInDays,
       price: price ?? this.price,
       originalPrice: originalPrice ?? this.originalPrice,
       discountPercent: discountPercent ?? this.discountPercent,

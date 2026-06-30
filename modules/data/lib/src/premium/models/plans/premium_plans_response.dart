@@ -14,6 +14,8 @@ class PremiumPlansResponse {
   final String? description;
   @JsonKey(name: "durationInMonths")
   final int? durationInMonths;
+  @JsonKey(name: "durationInDays")
+  final int? durationInDays;
   @JsonKey(name: "price")
   final int? price;
   @JsonKey(name: "originalPrice")
@@ -28,6 +30,7 @@ class PremiumPlansResponse {
     this.name,
     this.description,
     this.durationInMonths,
+    this.durationInDays,
     this.price,
     this.originalPrice,
     this.discountPercent,
@@ -45,6 +48,7 @@ class PremiumPlansResponse {
       name: name,
       description: description,
       durationInMonths: durationInMonths,
+      durationInDays: durationInDays,
       price: price,
       originalPrice: originalPrice,
       discountPercent: discountPercent,
