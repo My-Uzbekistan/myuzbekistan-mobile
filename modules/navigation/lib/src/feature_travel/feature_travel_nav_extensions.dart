@@ -66,6 +66,10 @@ class FeatureTravelNavExtension {
     _context.pushType(AppNavPath.travel.imagePreview, extra: images);
   }
 
+  Future<T?> pushServices<T>() {
+    return _context.pushType(AppNavPath.travel.travelServices);
+  }
+
   void pushInvestments() {
     _context.pushType(AppNavPath.travel.travelCatalogInvestments);
   }

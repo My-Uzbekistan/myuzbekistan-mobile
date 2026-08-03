@@ -74,11 +74,13 @@ android {
 //            storePassword keystoreProperties['storePassword']
 //        }
         create("release") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storePassword = keystoreProperties.getProperty("storePassword")
-            storeFile = project.file(keystoreProperties.getProperty("storeFile"))
-
+            val storeFilePath = keystoreProperties.getProperty("storeFile")
+            if (storeFilePath != null) {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storePassword = keystoreProperties.getProperty("storePassword")
+                storeFile = project.file(storeFilePath)
+            }
         }
     }
 

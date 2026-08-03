@@ -17,6 +17,7 @@ mixin AppColorTheme {
 
   static get lightTheme => LightColors.lightTheme();
 }
+
 ThemeData _buildTheme(
     {required ThemeData themeData,
     required _BaseColors colors,
@@ -112,6 +113,7 @@ ThemeData _buildTheme(
             colors: colors.colors,
             nonOpaque: colors.nonOpaque,
             service: colors.service,
-            rippleColor: colors.ripple)
+            rippleColor: colors.ripple,
+            brandSeaBlue: colors.brandSeaBlue)
       ]);
 }

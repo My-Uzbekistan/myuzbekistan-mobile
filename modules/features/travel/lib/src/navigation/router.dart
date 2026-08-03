@@ -40,7 +40,9 @@ import '../pages/detail/pages/image_preview_page.dart';
 import '../pages/detail/review/all_reviews_page.dart';
 import '../pages/gift/second/second_gift_page.dart';
 import '../pages/home/page/home_page.dart';
+import '../pages/home/page/home_screen.dart';
 import '../pages/home/page/select_region/select_region_page.dart';
+import '../pages/services/services_sheet.dart';
 
 mixin FeatureTravelRouter {
   static final _investNavigatorKey = GlobalKey<NavigatorState>();
@@ -65,6 +67,13 @@ mixin FeatureTravelRouter {
         return ModalSheetPage(
           child: OnboardingPage(bloc: state.extra as OnboardingBloc),
         );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.travelServices.path,
+      name: AppNavPath.travel.travelServices.name,
+      pageBuilder: (context, state) {
+        return const ModalSheetPage(child: ServicesSheet());
       },
     ),
     GoRoute(
@@ -444,6 +453,24 @@ mixin FeatureTravelRouter {
       ),
     ],
   );
+
+  static final shellHomeScreen = StatefulShellBranch(
+    routes: [
+      GoRoute(
+        path: AppNavPath.travel.travelHomeScreen.path,
+        name: AppNavPath.travel.travelHomeScreen.name,
+        pageBuilder: (context, state) {
+          return buildSlideTransitionPage(
+            child: HomeScreen(),
+            state: state,
+            context: context,
+            slideAlign: SlideAlign.vertical,
+          );
+        },
+      ),
+    ],
+  );
+
   static final shellCatalog = StatefulShellBranch(
     routes: [
       GoRoute(

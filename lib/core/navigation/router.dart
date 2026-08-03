@@ -7,7 +7,6 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
-import 'package:uzbekistan_travel/presentaion/experiment/experiment.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
 import 'package:uzbekistan_travel/presentaion/splash.dart';
 
@@ -37,8 +36,8 @@ final GoRouter routes = GoRouter(
     observers: [observer],
     initialLocation:
     // AppNavPath.travel.travelOnboarding.path,
-    "/splash",
-    // initialLocation: "/experiment",
+    // "/splash",
+    "/home",
     routes: [
       ..._shellRoute,
       ...FeatureTravelRouter.routes,
@@ -54,11 +53,6 @@ final GoRouter routes = GoRouter(
         name: "invisiblePage",
         pageBuilder: (context, state) =>
             NoTransitionPage(child: InvisiblePage()),
-      ),
-      GoRoute(
-        path: "/experiment",
-        name: "experiment",
-        builder: (context, state) => Experiment(),
       ),
     ]);
 

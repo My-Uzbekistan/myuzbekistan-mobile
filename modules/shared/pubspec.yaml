@@ -57,6 +57,7 @@ dependencies:
   jwt_decoder: ^2.0.1
   animations: ^2.0.11
   firebase_remote_config: ^6.2.0
+  liquid_glass_widgets: ^0.28.1
 
 
   pinput: ^5.0.1

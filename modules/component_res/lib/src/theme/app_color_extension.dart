@@ -3,6 +3,7 @@ part of 'app_color_theme.dart';
 class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final Color brand;
   final Color brandFlamingo;
+  final Color brandSeaBlue;
   final LabelColor textIconColor;
   final BackgroundColors background;
   final FillColors fill;
@@ -25,6 +26,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     required this.nonOpaque,
     required this.service,
     required this.rippleColor,
+    required this.brandSeaBlue,
   });
 
   @override
@@ -35,7 +37,8 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     }
     return AppColorsExtension(
       brand: Color.lerp(brand, other.brand, t) ?? other.brand,
-      brandFlamingo: Color.lerp(brandFlamingo, other.brandFlamingo, t) ?? other.brandFlamingo,
+      brandFlamingo: Color.lerp(brandFlamingo, other.brandFlamingo, t) ??
+          other.brandFlamingo,
       textIconColor: _lerpLabelColor(textIconColor, other.textIconColor, t),
       background: _lerpBackgroundColors(background, other.background, t),
       fill: _lerpFillColors(fill, other.fill, t),
@@ -45,6 +48,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       nonOpaque: _lerpNonOpaque(nonOpaque, other.nonOpaque, t),
       service: _lerpServiceColors(service, other.service, t),
       rippleColor: _lerpRippleColor(rippleColor, other.rippleColor, t),
+      brandSeaBlue: Color.lerp(brandSeaBlue, other.brandSeaBlue, t) ?? other.brandSeaBlue,
     );
   }
 
@@ -96,7 +100,8 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     );
   }
 
-  static StaticColors _lerpStaticColors(StaticColors a, StaticColors b, double t) {
+  static StaticColors _lerpStaticColors(
+      StaticColors a, StaticColors b, double t) {
     return StaticColors(
       black: Color.lerp(a.black, b.black, t) ?? b.black,
       white: Color.lerp(a.white, b.white, t) ?? b.white,
@@ -110,7 +115,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       blue: Color.lerp(a.blue, b.blue, t) ?? b.blue,
       yellow: Color.lerp(a.yellow, b.yellow, t) ?? b.yellow,
       orange: Color.lerp(a.orange, b.orange, t) ?? b.orange,
-        lime: Color.lerp(a.lime, b.lime, t) ?? b.lime,
+      lime: Color.lerp(a.lime, b.lime, t) ?? b.lime,
     );
   }
 
@@ -124,7 +129,8 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     );
   }
 
-  static ServiceColors _lerpServiceColors(ServiceColors a, ServiceColors b, double t) {
+  static ServiceColors _lerpServiceColors(
+      ServiceColors a, ServiceColors b, double t) {
     return ServiceColors(
       overlay: Color.lerp(a.overlay, b.overlay, t) ?? b.overlay,
     );
@@ -140,6 +146,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   ThemeExtension<AppColorsExtension> copyWith(
       {LabelColor? textIconColor,
       Color? brand,
+      Color? brandSeaBlue,
       Color? brandFlamingo,
       BackgroundColors? background,
       FillColors? fill,
@@ -160,8 +167,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       colors: colors ?? this.colors,
       nonOpaque: nonOpaque ?? this.nonOpaque,
       service: service ?? this.service,
-      rippleColor: ripple ?? rippleColor,
-
+      rippleColor: ripple ?? rippleColor, brandSeaBlue:  brandSeaBlue ?? this.brandSeaBlue,
     );
   }
 }
@@ -189,7 +195,7 @@ extension ContextEx on BuildContext {
           brightness == Brightness.light ? Brightness.dark : Brightness.light,
       systemNavigationBarIconBrightness:
           brightness == Brightness.light ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: appColors.background.base,
+      systemNavigationBarColor: Colors.transparent,
     );
   }
 }

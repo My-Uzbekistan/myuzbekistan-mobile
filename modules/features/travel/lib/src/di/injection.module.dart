@@ -18,6 +18,8 @@ import 'package:travel/src/pages/content_by_category/bloc/contents_by_category_b
 import 'package:travel/src/pages/detail/detail_bloc/detail_bloc.dart' as _i776;
 import 'package:travel/src/pages/detail/review/bloc/review_bloc.dart' as _i109;
 import 'package:travel/src/pages/gift/bloc/gift_bloc.dart' as _i669;
+import 'package:travel/src/pages/home/home_bloc/calculator_cubit/currency_calculator_cubit.dart'
+    as _i404;
 import 'package:travel/src/pages/home/home_bloc/home_bloc.dart' as _i359;
 import 'package:travel/src/pages/home/widgets/load_content_bloc/load_content_bloc.dart'
     as _i335;
@@ -65,6 +67,8 @@ class TravelPackageModule extends _i526.MicroPackageModule {
           gh<_i494.PremiumRepository>(),
           gh<_i494.AppStatusChangeListeners>(),
         ));
+    gh.factory<_i404.CurrencyCalculatorCubit>(
+        () => _i404.CurrencyCalculatorCubit(gh<_i494.CurrenciesUseCase>()));
     gh.factory<_i1065.InvestSearchBloc>(
         () => _i1065.InvestSearchBloc(gh<_i494.Repository>()));
     gh.lazySingleton<_i45.NotificationCountCubit>(

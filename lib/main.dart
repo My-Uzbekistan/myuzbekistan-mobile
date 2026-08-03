@@ -26,6 +26,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await LiquidGlassWidgets.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -33,6 +34,10 @@ Future<void> main() async {
   await configureInjection();
   NotificationService().subscribeToTopic();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // Edge-to-edge'ni GLOBAL yoqamiz: app "/home" dan boshlanadi (splash o'tkazib
+  // yuborilgan), shu sabab bu yerda yoqilmasa tizim nav paneli transparent
+  // bo'lolmay qora bo'lib qoladi va kontent/gradient uning ortiga chizilmaydi.
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   runApp(const MyApp());
 }
 

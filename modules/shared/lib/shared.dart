@@ -46,6 +46,17 @@ export 'package:animations/animations.dart';
 export 'package:firebase_remote_config/firebase_remote_config.dart';
 
 export 'src/remote_configs/toggle.dart';
+
+// Liquid Glass: qayta ishlatiladigan AdaptiveGlass widgeti (iOS liquid, aks holda
+// blur), tayyor liquid glass bottom bar, va main() dagi shader pre-warm uchun
+// LiquidGlassWidgets. Nom to'qnashuvidan qochish uchun faqat kerakli simvollar.
+export 'src/widgets/adaptive_glass.dart';
+export 'package:liquid_glass_widgets/liquid_glass_widgets.dart'
+    show
+        LiquidGlassWidgets,
+        LiquidGlassSettings,
+        GlassTabBar,
+        GlassTab;
 // export 'package:flutter_alice/alice.dart';
 
 
