@@ -26,13 +26,25 @@ class SmallServiceTile extends StatelessWidget {
               color: item.color,
               borderRadius: BorderRadius.circular(20),
             ),
+            clipBehavior: Clip.antiAlias,
             alignment: Alignment.center,
-            child: item.iconPath.toSvgImage(
-              width: iconSize * 0.5,
-              height: iconSize * 0.5,
-              fit: BoxFit.contain,
-              tintColor: Colors.white,
-            ),
+            child: item.iconUrl != null
+                ? ExtendedImage.network(
+                    item.iconUrl!,
+                    fit: BoxFit.cover,
+                    width: iconSize,
+                    height: iconSize,
+                    loadStateChanged: (state) =>
+                        state.extendedImageLoadState == LoadState.completed
+                            ? null
+                            : const SizedBox(),
+                  )
+                : item.iconPath?.toSvgImage(
+                    width: iconSize * 0.5,
+                    height: iconSize * 0.5,
+                    fit: BoxFit.contain,
+                    tintColor: Colors.white,
+                  ),
           ),
           const SizedBox(height: 8),
           Text(
@@ -75,11 +87,24 @@ class FeatureServiceTile extends StatelessWidget {
               ).h3(color: context.appColors.textIconColor.primary),
             ),
             const SizedBox(width: 8),
-            item.iconPath.toSvgImage(
+            SizedBox(
               width: 48,
               height: 48,
-              fit: BoxFit.contain,
-              tintColor: context.appColors.brandSeaBlue,
+              child: item.iconUrl != null
+                  ? ExtendedImage.network(
+                      item.iconUrl!,
+                      fit: BoxFit.cover,
+                      loadStateChanged: (state) =>
+                          state.extendedImageLoadState == LoadState.completed
+                              ? null
+                              : const SizedBox(),
+                    )
+                  : item.iconPath?.toSvgImage(
+                      width: 48,
+                      height: 48,
+                      fit: BoxFit.contain,
+                      tintColor: context.appColors.brandSeaBlue,
+                    ),
             ),
           ],
         ),
@@ -91,15 +116,15 @@ class FeatureServiceTile extends StatelessWidget {
 /// Bitta qator: chapda katta plitka (flex 2), o'ngda 2 ta kichik plitka.
 class ServiceFeatureRow extends StatelessWidget {
   final ServiceItem feature;
-  final ServiceItem small1;
-  final ServiceItem small2;
+  final ServiceItem? small1;
+  final ServiceItem? small2;
   final double spacing;
 
   const ServiceFeatureRow({
     super.key,
     required this.feature,
-    required this.small1,
-    required this.small2,
+    this.small1,
+    this.small2,
     this.spacing = 12,
   });
 
@@ -111,9 +136,17 @@ class ServiceFeatureRow extends StatelessWidget {
         children: [
           Expanded(flex: 2, child: FeatureServiceTile(item: feature)),
           SizedBox(width: spacing),
-          Expanded(child: Center(child: SmallServiceTile(item: small1))),
+          Expanded(
+            child: small1 == null
+                ? const SizedBox()
+                : Center(child: SmallServiceTile(item: small1!)),
+          ),
           SizedBox(width: spacing),
-          Expanded(child: Center(child: SmallServiceTile(item: small2))),
+          Expanded(
+            child: small2 == null
+                ? const SizedBox()
+                : Center(child: SmallServiceTile(item: small2!)),
+          ),
         ],
       ),
     );

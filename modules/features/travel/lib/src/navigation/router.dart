@@ -73,7 +73,11 @@ mixin FeatureTravelRouter {
       path: AppNavPath.travel.travelServices.path,
       name: AppNavPath.travel.travelServices.name,
       pageBuilder: (context, state) {
-        return const ModalSheetPage(child: ServicesSheet());
+        return ModalSheetPage(
+          child: ServicesSheet(
+            services: (state.extra as List<CatalogItemModel>?) ?? const [],
+          ),
+        );
       },
     ),
     GoRoute(
@@ -459,9 +463,32 @@ mixin FeatureTravelRouter {
       GoRoute(
         path: AppNavPath.travel.travelHomeScreen.path,
         name: AppNavPath.travel.travelHomeScreen.name,
+        redirect: (context, state) {
+          final locale = getIt<AppPreference>().getLocale();
+          if (locale == null) return AppNavPath.more.selectLangPage.path;
+          final securityStorage = getIt<SecurityStorage>();
+          if (securityStorage.getAccessToken() == null &&
+              securityStorage.isFirstlyLaunch()) {
+            securityStorage.firstlyLaunched();
+            return AppNavPath.more.authPage.path;
+          } else if (securityStorage.hasPin() &&
+              !securityStorage.isPinVerified()) {
+            return AppNavPath.more.checkPin.path;
+          }
+          return null;
+        },
         pageBuilder: (context, state) {
           return buildSlideTransitionPage(
-            child: HomeScreen(),
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create:
+                      (ctx) => getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
+                ),
+                BlocProvider(create: (ctx) => getIt<OnboardingBloc>()),
+              ],
+              child: HomeScreen(),
+            ),
             state: state,
             context: context,
             slideAlign: SlideAlign.vertical,

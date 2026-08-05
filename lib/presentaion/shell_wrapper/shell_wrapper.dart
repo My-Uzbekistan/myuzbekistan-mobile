@@ -1,7 +1,9 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
+import 'package:more/more.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
+import 'package:uzbekistan_travel/di/injection.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/app_bottom_nav_bar.dart';
 import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
 
@@ -54,9 +56,21 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
         backgroundColor: context.appColors.background.underlayer,
         extendBody: true,
         body: widget.navigationShell,
-        bottomNavigationBar: AppBottomNavBar(
-          selectedIndex: widget.navigationShell.currentIndex,
-          onTabSelected: _goBranch,
+        bottomNavigationBar: BlocProvider(
+          create: (_) => getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
+          child: BlocBuilder<ProfileBloc, ProfileBlocState>(
+            builder: (context, state) {
+              // photoUrl faqat premium bo'lganda backend'dan keladi; null bo'lsa
+              // NavProfileAvatar default avatar ko'rsatadi.
+              final photoUrl =
+                  state is ProfileBlocDataState ? state.userModel?.photoUrl : null;
+              return AppBottomNavBar(
+                selectedIndex: widget.navigationShell.currentIndex,
+                onTabSelected: _goBranch,
+                profilePhotoUrl: photoUrl,
+              );
+            },
+          ),
         ),
       ),
     );

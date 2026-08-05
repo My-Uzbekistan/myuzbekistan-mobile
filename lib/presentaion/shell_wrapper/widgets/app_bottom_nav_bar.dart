@@ -18,10 +18,14 @@ class AppBottomNavBar extends StatelessWidget {
     super.key,
     required this.selectedIndex,
     required this.onTabSelected,
+    this.profilePhotoUrl,
   });
 
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
+
+  /// Profil tab avatari uchun rasm URL (null bo'lsa default avatar).
+  final String? profilePhotoUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +33,12 @@ class AppBottomNavBar extends StatelessWidget {
         ? IosGlassNavBar(
             selectedIndex: selectedIndex,
             onTabSelected: onTabSelected,
+            profilePhotoUrl: profilePhotoUrl,
           )
         : TelegramNavBar(
             selectedIndex: selectedIndex,
             onTabSelected: onTabSelected,
+            profilePhotoUrl: profilePhotoUrl,
           );
 
     return Stack(

@@ -6,6 +6,8 @@ abstract class HomeBlocState with _$HomeBlocState {
 
   const factory HomeBlocState.dataState({
     @Default([]) List<Categories> categories,
+    @Default([]) List<ServiceAction> services,
+    @Default([]) List<CatalogItemModel> catalogServices,
     @Default([]) List<ContentCategories> contents,
     Temperature? temperature,
     @Default([]) List<Region> regions,

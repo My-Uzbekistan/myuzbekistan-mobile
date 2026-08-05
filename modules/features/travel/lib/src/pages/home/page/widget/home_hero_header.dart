@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 part 'home_hero_header/collapsing_card.dart';
 part 'home_hero_header/header_metrics.dart';

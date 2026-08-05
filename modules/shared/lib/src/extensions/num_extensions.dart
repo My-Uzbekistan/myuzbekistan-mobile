@@ -26,3 +26,15 @@ extension IntFormatting on int {
         .replaceAll(",", replace);
   }
 }
+
+int? parseInt(String? value) =>
+    (value == null || value == "null") ? null : int.tryParse(value);
+
+double? parseDouble(String? value) =>
+    (value == null || value == "null") ? null : double.tryParse(value);
+
+String? parseString(String? value) =>
+    (value == null || value == "null") ? null : value;
+
+bool? parseBool(String? value) =>
+    (value == null || value == "null") ? null : bool.parse(value);

@@ -16,3 +16,4 @@ export 'models/catalog_model.dart';
 export 'models/onboarding_item.dart';
 
 export 'models/gift_history.dart';
+export 'models/service_action.dart';

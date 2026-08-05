@@ -17,6 +17,7 @@ import '../../models/favorite_dto.dart';
 import '../../models/places/content_dto_model.dart';
 import '../../models/regions.dart';
 import '../../models/review/review_dto.dart';
+import '../../models/service_action_dto.dart';
 import '../../models/token_dto.dart';
 
 part 'service.g.dart';
@@ -32,6 +33,9 @@ abstract class RestService {
 
   @GET("regions")
   Future<List<RegionsDto>> loadRegions();
+
+  @GET("services")
+  Future<List<ServiceActionDto>> getServices();
 
   @GET("v2/categories/{categoryId}/contents")
   Future<List<MainPageContentDto>> loadContentsByCategory({
@@ -131,6 +135,14 @@ abstract class RestService {
 
   @GET("catalog-snapshots")
   Future<List<CatalogDto>> getCatalog();
+
+  @GET("catalog-v3")
+  Future<List<CatalogDto>> getCatalogV3({
+    @Query("page") required int page,
+    @Query("pageSize") required int pageSize,
+    @Query("search") String? search,
+    @Query("catalogStatus") int? catalogStatus,
+  });
 
   @GET("onboarding/active")
   Future<List<OnboardingDto>> getActiveOnboardings();

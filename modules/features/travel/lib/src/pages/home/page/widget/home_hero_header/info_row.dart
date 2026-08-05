@@ -26,61 +26,63 @@ class _InfoRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onRegionTap,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Opacity(
-                  opacity: 0.6,
-                  child: Row(
+          child: GlassFade(
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: onRegionTap,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Opacity(
+                    opacity: 0.6,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Assets.svg.locatorFill.path.toSvgImage(
+                          width: 16,
+                          height: 16,
+                          tintColor: Colors.white,
+                        ),
+                        const SizedBox(width: 4),
+                        Flexible(
+                          child: Text(
+                            regionName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ).bodySm(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Assets.svg.locatorFill.path.toSvgImage(
-                        width: 16,
-                        height: 16,
-                        tintColor: Colors.white,
-                      ),
+                      const Text("☀️", style: TextStyle(fontSize: 15)),
                       const SizedBox(width: 4),
-                      Flexible(
-                        child: Text(
-                          regionName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ).bodySm(color: Colors.white),
-                      ),
+                      Text(temperature).labelMd(color: Colors.white),
+                      if (airQuality != null) ...[
+                        const SizedBox(width: 6),
+                        Container(
+                          width: 1,
+                          height: 20,
+                          color: Colors.white.withValues(alpha: 0.2),
+                        ),
+                        const SizedBox(width: 6),
+                        _AqiBadge(value: airQuality!),
+                      ],
                     ],
                   ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text("☀️", style: TextStyle(fontSize: 15)),
-                    const SizedBox(width: 4),
-                    Text(temperature).labelMd(color: Colors.white),
-                    if (airQuality != null) ...[
-                      const SizedBox(width: 6),
-                      Container(
-                        width: 1,
-                        height: 20,
-                        color: Colors.white.withValues(alpha: 0.2),
-                      ),
-                      const SizedBox(width: 6),
-                      _AqiBadge(value: airQuality!),
-                    ],
-                  ],
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
         const SizedBox(width: 8),
         _PrayerPill(label: prayerLabel, time: prayerTime),
         const SizedBox(width: 8),
-        _NotificationBell(onTap: onNotificationTap),
+        GlassFade(child: _NotificationBell(onTap: onNotificationTap)),
       ],
     );
   }
@@ -163,8 +165,8 @@ class _PrayerPillState extends State<_PrayerPill> {
   Widget build(BuildContext context) {
     return AdaptiveGlass(
       borderRadius: 20,
-      blur: 14,
-      tint: const Color(0x1AFFFFFF),
+      blur: 2,
+      tint: const Color(0x14FFFFFF),
       child: Container(
         height: 44,
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -175,7 +177,7 @@ class _PrayerPillState extends State<_PrayerPill> {
             SizedBox(
               width: 24,
               height: 24,
-              child: Assets.svg.prayers.magrib.path.toSvgImage(
+              child: Assets.svg.namazIcon.path.toSvgImage(
                 fit: BoxFit.contain,
                 tintColor: Colors.white,
               ),
@@ -230,15 +232,28 @@ class _NotificationBell extends StatelessWidget {
               ),
             ),
             Positioned(
-              right: -1,
-              top: -1,
-              child: Container(
-                width: 8,
-                height: 8,
-                decoration: BoxDecoration(
-                  color: context.appColors.colors.red,
-                  shape: BoxShape.circle,
-                ),
+              right: -4,
+              top: -4,
+              child: BlocBuilder<NotificationCountCubit, int>(
+                builder: (context, count) {
+                  if (count == 0) return const SizedBox.shrink();
+                  return Container(
+                    constraints: const BoxConstraints(
+                      minWidth: 16,
+                      minHeight: 16,
+                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: context.appColors.colors.red,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Text(
+                      count.toString(),
+                      overflow: TextOverflow.ellipsis,
+                    ).bodyXXsm(color: Colors.white),
+                  );
+                },
               ),
             ),
           ],

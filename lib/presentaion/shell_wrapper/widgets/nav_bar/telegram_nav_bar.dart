@@ -15,10 +15,14 @@ class TelegramNavBar extends StatelessWidget {
     super.key,
     required this.selectedIndex,
     required this.onTabSelected,
+    this.profilePhotoUrl,
   });
 
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
+
+  /// Profil tab avatari uchun rasm URL (null bo'lsa default avatar).
+  final String? profilePhotoUrl;
 
   static const double _barHeight = 66;
   static const double _radius = 34;
@@ -29,7 +33,7 @@ class TelegramNavBar extends StatelessWidget {
     final unselected = context.appColors.textIconColor.primary;
     final pill = NavBarStyle.white.withValues(alpha: 0.6);
     final bottomInset = MediaQuery.viewPaddingOf(context).bottom;
-    final tabs = navBarTabs(context);
+    final tabs = navBarTabs(context, profilePhotoUrl: profilePhotoUrl);
 
     return Padding(
       padding: EdgeInsets.fromLTRB(12, 0, 12, bottomInset > 0 ? bottomInset : 12),
@@ -54,6 +58,7 @@ class TelegramNavBar extends StatelessWidget {
                       Expanded(
                         child: TelegramNavTab(
                           asset: tabs[i].asset,
+                          iconBuilder: tabs[i].iconBuilder,
                           label: tabs[i].label,
                           selected: selectedIndex == i,
                           selectedColor: selected,

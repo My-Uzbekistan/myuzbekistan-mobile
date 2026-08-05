@@ -74,6 +74,7 @@ class $AssetsSvgGen {
 
   final $AssetsMoreGen more = const $AssetsMoreGen();
   final $AssetsPrayersGen prayers = const $AssetsPrayersGen();
+  final SvgGenImage namazIcon = const SvgGenImage('assets/svg/Namaz icon.svg');
   final SvgGenImage appleLogo = const SvgGenImage('assets/svg/apple_logo.svg');
   final SvgGenImage boltFill = const SvgGenImage('assets/svg/bolt_fill.svg');
   final SvgGenImage crossCaseFill =

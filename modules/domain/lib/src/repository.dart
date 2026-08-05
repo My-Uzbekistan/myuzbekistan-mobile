@@ -19,6 +19,8 @@ abstract interface class Repository {
 
   Future<List<Region>> loadRegions();
 
+  Future<List<ServiceAction>> getServices();
+
   Future<List<MainPageContent>> loadContentsByCategory({
     required int categoryId,
     required int page,
@@ -100,6 +102,13 @@ abstract interface class Repository {
   });
 
   Future<List<CatalogItemModel>> getCatalog();
+
+  Future<List<CatalogItemModel>> getCatalogV3({
+    int page = 1,
+    int pageSize = 50,
+    String? search,
+    int? catalogStatus,
+  });
 
   Future<List<OnboardingItem>> getActiveOnboardings();
 

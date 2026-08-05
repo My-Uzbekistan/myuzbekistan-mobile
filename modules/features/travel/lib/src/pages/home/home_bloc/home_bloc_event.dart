@@ -11,4 +11,5 @@ abstract class HomeBlocEvent with _$HomeBlocEvent{
   factory HomeBlocEvent.loadFavorites() = _LoadFavoritesEvent;
   factory HomeBlocEvent.loadPrayerTimes() = _LoadPayerTimes;
   factory HomeBlocEvent.loadWeather() = _LoadWeatherEvent;
+  factory HomeBlocEvent.loadServices() = _LoadServicesEvent;
 }

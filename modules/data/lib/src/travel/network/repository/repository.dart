@@ -73,6 +73,13 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<List<ServiceAction>> getServices() {
+    return _restService.getServices().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
   Future<List<MainPageContent>> loadContentsByCategory({
     required int categoryId,
     required int page,
@@ -304,45 +311,27 @@ class RepositoryImp implements Repository {
   }
 
   @override
-  Future<List<CatalogItemModel>> getCatalog() async {
+  Future<List<CatalogItemModel>> getCatalog() {
     return _restService.getCatalog().call(
       (data) => data.map((e) => e.toDomain()).toList(),
     );
-    await Future.delayed(Duration(seconds: 2));
-    return Future.value([
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        color: Color(0xff04A5FE),
-        title: "My eSIM",
-        status: CatalogStatus.newService,
-        actionType: CatalogActionType.inner,
-        authRequired: true,
-        action: "https://esimapp.myuz.uz",
-      ),
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        color: Color(0xff37A8C7),
-        title: "Travel Cam AI",
-        status: CatalogStatus.active,
-        actionType: CatalogActionType.inner,
-        action: "https://travel-cam-ai.vercel.app?lang=uz",
-      ),
+  }
 
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        color: Color(0xff14CB7D),
-        title: "Travel Quiz",
-        status: CatalogStatus.active,
-        actionType: CatalogActionType.inner,
-        action: "https://myuzb.uz/notifications?notificationId=1234",
-      ),
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        title: "Авиабилеты",
-        status: CatalogStatus.upcoming,
-        actionType: CatalogActionType.inner,
-      ),
-    ]);
+  @override
+  Future<List<CatalogItemModel>> getCatalogV3({
+    int page = 1,
+    int pageSize = 50,
+    String? search,
+    int? catalogStatus,
+  }) {
+    return _restService
+        .getCatalogV3(
+          page: page,
+          pageSize: pageSize,
+          search: search,
+          catalogStatus: catalogStatus,
+        )
+        .call((data) => data.map((e) => e.toDomain()).toList());
   }
 
   @override

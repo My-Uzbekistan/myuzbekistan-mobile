@@ -39,6 +39,7 @@ class _HeaderMetrics {
     return _HeaderMetrics._(
       topInset: topInset,
       t: t,
+      overscroll: overscroll,
       // Overscroll'da fon rasm markazdan parallax zoom bo'ladi.
       zoom: 1.0 + (overscroll / 260).clamp(0.0, 0.6),
       // Kontent (ob-havo/tez amallar) yig'ilishning ~yarmida so'nadi.
@@ -54,6 +55,7 @@ class _HeaderMetrics {
   const _HeaderMetrics._({
     required this.topInset,
     required this.t,
+    required this.overscroll,
     required this.zoom,
     required this.contentOpacity,
     required this.imageOpacity,
@@ -63,6 +65,11 @@ class _HeaderMetrics {
 
   final double topInset;
   final double t;
+
+  /// `_kExpanded`dan oshib ketgan cho'zilish (overscroll) miqdori — kontentni
+  /// karta bilan bir tekis pastga surish uchun.
+  final double overscroll;
+
   final double zoom;
   final double contentOpacity;
   final double imageOpacity;

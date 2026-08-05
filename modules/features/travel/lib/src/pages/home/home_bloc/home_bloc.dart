@@ -43,6 +43,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     on<_LoadFavoritesEvent>(_loadFavourites);
     on<_LoadPayerTimes>(_loadPrayerTimes);
     on<_LoadWeatherEvent>(_loadWeatherEvent);
+    on<_LoadServicesEvent>(_loadServicesEvent);
   }
 
   void _initialListens() {
@@ -104,6 +105,23 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     await _loadCategoriesAndRegions(emit);
     add(HomeBlocEvent.loadFavorites());
     add(HomeBlocEvent.loadPrayerTimes());
+    add(HomeBlocEvent.loadServices());
+  }
+
+  Future<void> _loadServicesEvent(
+    _LoadServicesEvent event,
+    Emitter<HomeBlocState> emit,
+  ) async {
+    try {
+      final catalogServices = await _repository.getCatalogV3(
+        page: 1,
+        pageSize: 50,
+      );
+      dataState = dataState.copyWith(catalogServices: catalogServices);
+      if (state is HomeBlocDataState) {
+        emit(dataState);
+      }
+    } catch (_) {}
   }
 
   Future<void> _loadContentsEvent(_LoadContentsEvent event,
@@ -162,15 +180,18 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       final result = await Future.wait([
         _repository.loadRegions(),
         _repository.loadCategories(),
+        _repository.getServices(),
       ]);
       final regions = result[0] as List<Region>;
       final categories = result[1] as List<Categories>;
+      final services = result[2] as List<ServiceAction>;
       globalRegions=regions;
       selectedRegion= regions.firstOrNull;
       dataState = dataState.copyWith(
         regions: regions,
         selectedRegion: regions.firstOrNull,
         categories: categories,
+        services: services,
       );
       add(HomeBlocEvent.loadContents());
       add(HomeBlocEvent.loadWeather());

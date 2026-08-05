@@ -15,9 +15,9 @@ class DomainPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i1066.CurrenciesUseCase>(
-        () => _i1066.CurrenciesUseCase(gh<_i494.Repository>()));
     gh.lazySingleton<_i757.AppStatusChangeListeners>(
         () => _i757.AppSettingsChangeListenerIml());
+    gh.factory<_i1066.CurrenciesUseCase>(
+        () => _i1066.CurrenciesUseCase(gh<_i494.Repository>()));
   }
 }

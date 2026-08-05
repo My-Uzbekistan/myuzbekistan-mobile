@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
@@ -8,22 +10,29 @@ import 'nav_tab_data.dart';
 
 /// iOS: Liquid Glass ("suyuq shisha") uslubidagi pastki navigatsiya.
 ///
-/// Tablar [navBarTabs] yagona ro'yxatidan quriladi — bu yerda faqat glass
-/// ko'rinishi (rang, indikator, blur) sozlanadi.
+/// Tablar [navBarTabs] yagona ro'yxatidan quriladi. Indikator — iOS'ning
+/// o'z (native) glass kapsulasi: shaklni package boshqaradi (kontentni
+/// quchoqlab, oval/kapsula ko'rinishida). Bu yerda faqat rang, blur va
+/// indikator ORTIDAGI soya sozlanadi.
 class IosGlassNavBar extends StatelessWidget {
   const IosGlassNavBar({
     super.key,
     required this.selectedIndex,
     required this.onTabSelected,
+    this.profilePhotoUrl,
   });
 
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
 
+  /// Profil tab avatari uchun rasm URL (null bo'lsa default avatar).
+  final String? profilePhotoUrl;
+
   @override
   Widget build(BuildContext context) {
     final selected = context.appColors.brandSeaBlue; // tanlangan (active) rang
-    final unselected = context.appColors.textIconColor.primary; // tanlanmagan rang
+    final unselected =
+        context.appColors.textIconColor.primary; // tanlanmagan rang
 
     return GlassTabBar.bottom(
       selectedIndex: selectedIndex,
@@ -43,11 +52,13 @@ class IosGlassNavBar extends StatelessWidget {
         refractiveIndex: 1.59,
       ),
       tabs: [
-        for (final tab in navBarTabs(context))
+        for (final tab in navBarTabs(context, profilePhotoUrl: profilePhotoUrl))
           GlassTab(
             label: tab.label,
-            icon: navSvgIcon(tab.asset, unselected),
-            activeIcon: navSvgIcon(tab.asset, selected),
+            icon: tab.iconBuilder?.call(false, unselected) ??
+                navSvgIcon(tab.asset, unselected),
+            activeIcon: tab.iconBuilder?.call(true, selected) ??
+                navSvgIcon(tab.asset, selected),
           ),
       ],
     );

@@ -17,9 +17,14 @@ class TelegramNavTab extends StatelessWidget {
     required this.unselectedColor,
     required this.pillColor,
     required this.onTap,
+    this.iconBuilder,
   });
 
   final SvgGenImage asset;
+
+  /// Ixtiyoriy maxsus ikon builder (masalan Profil avatari) — berilsa SVG
+  /// o'rniga shu chiziladi va rang bilan bo'yalmaydi.
+  final Widget Function(bool selected, Color color)? iconBuilder;
   final String label;
   final bool selected;
   final Color selectedColor;
@@ -56,7 +61,11 @@ class TelegramNavTab extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Transform.scale(scale: iconScale, child: navSvgIcon(asset, color)),
+                  Transform.scale(
+                    scale: iconScale,
+                    child: iconBuilder?.call(selected, color) ??
+                        navSvgIcon(asset, color),
+                  ),
                   const SizedBox(height: 2),
                   Text(
                     label,
