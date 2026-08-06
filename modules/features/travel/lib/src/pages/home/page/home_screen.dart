@@ -18,6 +18,9 @@ import 'widget/events_widget.dart';
 import 'widget/home_content_groups.dart';
 import 'widget/hotels_widget.dart';
 import 'widget/services_widget.dart';
+import 'widget/shimmer/home_banner_shimmer.dart';
+import 'widget/shimmer/home_content_groups_shimmer.dart';
+import 'widget/shimmer/home_horizontal_section_shimmer.dart';
 
 class HomeScreen extends HookWidget {
   const HomeScreen({super.key});
@@ -62,10 +65,48 @@ class HomeScreen extends HookWidget {
           bloc: bloc,
           buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
-            return switch (state) {
-              HomeBlocLoadingState _ => const Center(child: LoadingIndicator()),
-              HomeBlocDataState data => RefreshIndicator.adaptive(
-                key: ValueKey("HomeDataState"),
+            if (state is HomeBlocErrorState) {
+              return Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 24,
+                  children: [
+                    MessageContainer.custom(
+                      icon: Assets.png.exclamationmarkSquare.image(),
+                      title: context.localization.pageFailedToLoad,
+                      caption: context.localization.something_went_wrong,
+                    ),
+                    SizedBox(
+                      width: double.maxFinite,
+                      height: 48,
+                      child: FilledButton(
+                        onPressed: () {
+                          context.read<HomeBloc>().add(
+                            HomeBlocEvent.loadDataEvent(),
+                          );
+                        },
+                        style: FilledButton.styleFrom(
+                          elevation: 0,
+                          textStyle: CustomTypography.bodyLg,
+                          foregroundColor:
+                              context.appColors.textIconColor.primary,
+                          backgroundColor: context.appColors.fill.quaternary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                        ),
+                        child: Text(context.localization.refresh),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+            final data = state is HomeBlocDataState
+                ? state
+                : const HomeBlocDataState();
+            return RefreshIndicator.adaptive(
+              key: const ValueKey("HomeDataState"),
                 displacement: 100,
                 triggerMode: RefreshIndicatorTriggerMode.anywhere,
                 onRefresh: () async {
@@ -86,6 +127,8 @@ class HomeScreen extends HookWidget {
                       nextPrayer: data.prayers
                           .where((p) => p.isNext)
                           .firstOrNull,
+                      onPrayerExpired: () =>
+                          bloc.add(HomeBlocEvent.loadPrayerTimes()),
                       hintText: context.localization.home_search_hint,
                       onRegionTap: data.selectedRegion == null
                           ? null
@@ -140,6 +183,11 @@ class HomeScreen extends HookWidget {
                             },
                           ),
                         ),
+                      )
+                    else if (data.loadingContents)
+                      const SliverPadding(
+                        padding: EdgeInsets.only(top: 12),
+                        sliver: SliverToBoxAdapter(child: HomeBannerShimmer()),
                       ),
                     if (data.favorites.isNotEmpty)
                       SliverPadding(
@@ -188,6 +236,16 @@ class HomeScreen extends HookWidget {
                       CitiesWidget(
                         cities: data.cities,
                         weekend: data.citiesWeekend,
+                      )
+                    else if (data.loadingContents)
+                      const SliverToBoxAdapter(
+                        child: HomeHorizontalSectionShimmer(
+                          cardWidth: 220,
+                          imageHeight: 280,
+                          listHeight: 280,
+                          hasSubtitle: true,
+                          hasSeeAll: false,
+                        ),
                       ),
                     if (data.hotels.isNotEmpty)
                       HotelsWidget(
@@ -198,6 +256,15 @@ class HomeScreen extends HookWidget {
                         ),
                         onHotelTap: (h) => context.travel.pushDetailPage(
                           contentId: h.contentId,
+                        ),
+                      )
+                    else if (data.loadingContents)
+                      const SliverToBoxAdapter(
+                        child: HomeHorizontalSectionShimmer(
+                          cardWidth: 156,
+                          imageHeight: 156,
+                          listHeight: 244,
+                          withCaptions: true,
                         ),
                       ),
                     if (data.events.isNotEmpty)
@@ -210,14 +277,19 @@ class HomeScreen extends HookWidget {
                         onEventTap: (e) => context.travel.pushDetailPage(
                           contentId: e.contentId,
                         ),
+                      )
+                    else if (data.loadingContents)
+                      const SliverToBoxAdapter(
+                        child: HomeHorizontalSectionShimmer(
+                          cardWidth: 320,
+                          imageHeight: 280,
+                          listHeight: 280,
+                        ),
                       ),
 
                     if (data.loadingContents)
                       const SliverToBoxAdapter(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 24),
-                          child: LoadingIndicator(),
-                        ),
+                        child: HomeContentGroupsShimmer(),
                       )
                     else
                       HomeContentGroups(contents: data.contents),
@@ -227,43 +299,7 @@ class HomeScreen extends HookWidget {
                     ),
                   ],
                 ),
-              ),
-              _ => Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  spacing: 24,
-                  children: [
-                    MessageContainer.custom(
-                      icon: Assets.png.exclamationmarkSquare.image(),
-                      title: context.localization.pageFailedToLoad,
-                      caption: context.localization.something_went_wrong,
-                    ),
-                    SizedBox(
-                      width: double.maxFinite,
-                      height: 48,
-                      child: FilledButton(
-                        onPressed: () {
-                          context.read<HomeBloc>().add(
-                            HomeBlocEvent.loadDataEvent(),
-                          );
-                        },
-                        style: FilledButton.styleFrom(
-                          elevation: 0,
-                          textStyle: CustomTypography.bodyLg,
-                          foregroundColor:
-                              context.appColors.textIconColor.primary,
-                          backgroundColor: context.appColors.fill.quaternary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                        ),
-                        child: Text(context.localization.refresh),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            };
+              );
           },
         ),
       ),
@@ -271,7 +307,5 @@ class HomeScreen extends HookWidget {
   }
 }
 
-/// Kategoriya nomini BE dan kelgan (tarjima qilingan) ro'yxatdan oladi —
-/// "Все" bosilganda ochiladigan sahifa sarlavhasi uchun.
 String _categoryName(HomeBlocDataState data, int id) =>
     data.categories.where((c) => c.id == id).firstOrNull?.name ?? "";

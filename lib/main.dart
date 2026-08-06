@@ -34,9 +34,9 @@ Future<void> main() async {
   await configureInjection();
   NotificationService().subscribeToTopic();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // Edge-to-edge'ni GLOBAL yoqamiz: app "/home" dan boshlanadi (splash o'tkazib
-  // yuborilgan), shu sabab bu yerda yoqilmasa tizim nav paneli transparent
-  // bo'lolmay qora bo'lib qoladi va kontent/gradient uning ortiga chizilmaydi.
+  // Edge-to-edge'ni GLOBAL yoqamiz: tizim nav paneli transparent bo'lib,
+  // kontent/gradient uning ortiga chizilishi uchun. Splash o'zi ham buni
+  // yoqadi, lekin bu yerda global yoqilgani boshqa ekranlarga ham kafolat beradi.
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   runApp(const MyApp());
 }

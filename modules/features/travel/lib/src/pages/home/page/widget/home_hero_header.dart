@@ -14,11 +14,6 @@ part 'home_hero_header/info_row.dart';
 part 'home_hero_header/quick_actions.dart';
 part 'home_hero_header/search_row.dart';
 
-/// Bosh sahifa "hero" header'i — yig'iluvchi (collapsing) [SliverAppBar].
-///
-/// Pastga tortilganda fon rasm parallax bilan cho'ziladi; tepaga scroll
-/// qilinganda ob-havo va tez amallar so'nadi, qidiruv qatori esa oq panelda
-/// pinned bo'lib qotadi.
 class HomeHeader extends StatelessWidget {
   const HomeHeader({
     super.key,
@@ -34,16 +29,15 @@ class HomeHeader extends StatelessWidget {
     this.onSearchTap,
     this.onQrTap,
     this.onFavoriteTap,
+    this.onPrayerExpired,
   });
 
   final String regionName;
   final String temperature;
   final String? airQuality;
 
-  /// IQAir `level` — havo sifati rang darajasi (0-3).
   final int? airQualityLevel;
 
-  /// Keyingi (yaqinlashayotgan) namoz vaqti — `null` bo'lsa pill ko'rsatilmaydi.
   final PrayerTimesItemModel? nextPrayer;
   final String hintText;
   final List<HomeQuickAction> quickActions;
@@ -53,13 +47,12 @@ class HomeHeader extends StatelessWidget {
   final VoidCallback? onSearchTap;
   final VoidCallback? onQrTap;
   final VoidCallback? onFavoriteTap;
+  final VoidCallback? onPrayerExpired;
 
   @override
   Widget build(BuildContext context) {
     final topInset = MediaQuery.of(context).padding.top;
 
-    // Scroll holatidan mustaqil bola'lar — layout har o'zgarganda emas,
-    // faqat bir marta quriladi.
     final infoRow = _InfoRow(
       regionName: regionName,
       temperature: temperature,
@@ -68,6 +61,7 @@ class HomeHeader extends StatelessWidget {
       nextPrayer: nextPrayer,
       onRegionTap: onRegionTap,
       onNotificationTap: onNotificationTap,
+      onPrayerExpired: onPrayerExpired,
     );
     final quickRow = _QuickActions(actions: quickActions);
     final searchRow = _SearchRow(

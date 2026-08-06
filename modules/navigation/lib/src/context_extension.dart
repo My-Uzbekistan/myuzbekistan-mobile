@@ -38,8 +38,11 @@ extension BuildContextNavExtension on BuildContext {
   }
 
   void popUntil<T>(List<AppNavPath> types) async {
-    return Navigator.of(
-      this,
-    ).popUntil((route) =>  types.map((e)=>e.name).contains(route.settings.name));
+    final names = types.map((e) => e.name).toSet();
+    return Navigator.of(this).popUntil(
+      // route.isFirst — stack'ni butunlay bo'shatib yubormaslik uchun himoya
+      // (aks holda go_router "no pages left" bilan crash bo'ladi).
+      (route) => names.contains(route.settings.name) || route.isFirst,
+    );
   }
 }

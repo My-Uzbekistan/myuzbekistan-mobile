@@ -32,6 +32,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         _appLocaleChangeListener = chl,
         super(HomeBlocState.loading()) {
     on<_HomeBlocInitialEvent>((event, emit) async {
+      emit(dataState);
       add(HomeBlocEvent.checkPermission());
 
       _initialListens();
@@ -51,9 +52,8 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     on<_LoadAirQualityEvent>(_loadAirQualityEvent);
   }
 
-  /// Bosh sahifadagi maxsus bo'limlarning kategoriya id lari (BE docs).
-  static const int _hotelsCategoryId = 5; // Отели
-  static const int _eventsCategoryId = 7; // События
+  static const int _hotelsCategoryId = 5;
+  static const int _eventsCategoryId = 7;
 
   void _initialListens() {
     _streamSubscription?.cancel();
@@ -109,7 +109,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     } else {
       debugPrint("HomeBlock 2");
       dataState = HomeBlocDataState();
-      emit(HomeBlocState.loading());
+      emit(dataState);
     }
     await _loadCategoriesAndRegions(emit);
     add(HomeBlocEvent.loadFavorites());
@@ -176,7 +176,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       final events = await _repository.loadContentsByCategory(
         categoryId: _eventsCategoryId,
         page: 1,
-        pageSize: 20,
+        pageSize: 50,
       );
       dataState = dataState.copyWith(events: events);
       if (state is HomeBlocDataState) {
@@ -191,7 +191,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   ) async {
     try {
       final position = LocationManager().getCurrentPosition();
-      // lat/lon birga yuborilishi shart — joylashuv bo'lmasa so'rov yubormaymiz.
       if (position == null) return;
       final airQuality = await _repository.loadAirQuality(
         lat: position.latitude,
@@ -209,8 +208,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     Emitter<HomeBlocState> emit,
   ) async {
     try {
-      // Bosh sahifada faqat dastlabki 6 ta xizmat ko'rsatiladi;
-      // to'liq ro'yxat "Все" bosilganda sheet ichida alohida yuklanadi.
       final catalogServices = await _repository.getCatalogV3(
         page: 1,
         pageSize: 6,
@@ -291,6 +288,9 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         categories: categories,
         services: services,
       );
+      if (state is HomeBlocDataState) {
+        e(dataState);
+      }
       add(HomeBlocEvent.loadContents());
       add(HomeBlocEvent.loadWeather());
     } catch (e) {
@@ -314,41 +314,43 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   }
 
   void _loadPrayerTimes(_LoadPayerTimes event, Emitter<HomeBlocState> emit) {
-    var prayers = dataState.prayers;
-
-
-
-
-    if (prayers.isEmpty && _securityStorage.isShowPrayerTimes()) {
-        final locationManager = LocationManager();
-        final currentLocation = locationManager.getCurrentPosition();
-        final prayerTimes = getPrayerTimes(
-          latLng:
-          currentLocation != null
-              ? LatLng(currentLocation.latitude, currentLocation.longitude)
-              : null,);
-        prayers = [
-          PrayerTimesItemModel(
-              time: prayerTimes.fajr, type: PrayerTimesType.fajr),
-          PrayerTimesItemModel(
-            time: prayerTimes.sunrise,
-            type: PrayerTimesType.sunrise,
-          ),
-          PrayerTimesItemModel(
-            time: prayerTimes.dhuhr,
-            type: PrayerTimesType.dhuhr,
-          ),
-          PrayerTimesItemModel(
-              time: prayerTimes.asr, type: PrayerTimesType.asr),
-          PrayerTimesItemModel(
-            time: prayerTimes.maghrib,
-            type: PrayerTimesType.maghrib,
-          ),
-          PrayerTimesItemModel(
-              time: prayerTimes.isha, type: PrayerTimesType.isha),
-        ];
-
+    if (!_securityStorage.isShowPrayerTimes()) {
+      if (dataState.prayers.isNotEmpty) {
+        dataState = dataState.copyWith(prayers: []);
+        if (state is HomeBlocDataState) {
+          emit(dataState);
+        }
+      }
+      return;
     }
+
+    final currentLocation = LocationManager().getCurrentPosition();
+    final latLng = currentLocation != null
+        ? LatLng(currentLocation.latitude, currentLocation.longitude)
+        : null;
+
+    final now = DateTime.now();
+
+    // Har safar qayta hisoblaymiz — kun almashsa ham to'g'ri bo'lsin.
+    var prayers = PrayerTimesItemModel.fromPrayerTimes(
+      getPrayerTimes(latLng: latLng, date: now),
+    );
+
+    // Bugungi barcha vaqtlar o'tib bo'lgan bo'lsa (xufton o'tgan) —
+    // ertangi kun vaqtlarini qo'shamiz, keyingisi ertangi bomdod bo'ladi.
+    final hasNext = prayers.any((p) => p.time.isAfter(now));
+    if (!hasNext) {
+      prayers = [
+        ...prayers,
+        ...PrayerTimesItemModel.fromPrayerTimes(
+          getPrayerTimes(
+            latLng: latLng,
+            date: now.add(const Duration(days: 1)),
+          ),
+        ),
+      ];
+    }
+
     dataState = dataState.copyWith(
       prayers: PrayerTimesItemModel.markNext(prayers),
     );

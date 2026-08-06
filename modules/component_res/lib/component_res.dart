@@ -1,6 +1,7 @@
 library;
 
 export 'generated/assets.dart';
+export 'src/splash_background.dart';
 export 'generated/locale/app_localizations.dart' show CoreAppLocalizations;
 export 'src/components/assets_extensions.dart';
 export 'src/components/image_card/image_card.dart';

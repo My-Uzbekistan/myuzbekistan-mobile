@@ -3,7 +3,7 @@ import 'package:component_res/component_res.dart';
 
 final _defaultLocation = LatLng(41.311081, 69.240562);
 
-PrayerTimes getPrayerTimes({LatLng? latLng}) {
+PrayerTimes getPrayerTimes({LatLng? latLng, DateTime? date}) {
   final loc = latLng ?? _defaultLocation;
   final coordinates = Coordinates(loc.latitude, loc.longitude);
   final params = CalculationParameters(
@@ -21,8 +21,8 @@ PrayerTimes getPrayerTimes({LatLng? latLng}) {
       isha: 0,
     ),
   );
-  final today = DateComponents.from(DateTime.now());
-  final prayerTimes = PrayerTimes(coordinates, today, params);
+  final dateComponents = DateComponents.from(date ?? DateTime.now());
+  final prayerTimes = PrayerTimes(coordinates, dateComponents, params);
 
   return prayerTimes;
 }

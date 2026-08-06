@@ -1,10 +1,5 @@
 part of '../home_hero_header.dart';
 
-/// Tez amallar qatori (Otel / Aviabilet / ...).
-///
-/// iOS'da barcha katakchalar YAGONA liquid glass blend-guruhida — bir sirtdek
-/// refraction qiladi va yaqin katakchalar suyuqlikdek qo'shiladi. Android/web'da
-/// har biri alohida frosted blur bo'ladi. Qarang: [AdaptiveGlassRow].
 class _QuickActions extends StatelessWidget {
   const _QuickActions({required this.actions});
 
@@ -12,6 +7,9 @@ class _QuickActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (actions.isEmpty) {
+      return const GlassFade(child: _QuickActionsShimmer());
+    }
     return AdaptiveGlassRow(
       borderRadius: 20,
       blur: 2,
@@ -28,8 +26,26 @@ class _QuickActions extends StatelessWidget {
   }
 }
 
-/// Bitta tez amal katakchasining ichki kontenti (icon + yorliq) — shisha sirti
-/// [AdaptiveGlassRow] tomonidan beriladi.
+class _QuickActionsShimmer extends StatelessWidget {
+  const _QuickActionsShimmer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromDefault(
+      child: Row(
+        children: [
+          for (var i = 0; i < 4; i++) ...[
+            if (i > 0) const SizedBox(width: 6),
+            const Expanded(
+              child: ShimmerDefaultContainer(height: 68, radius: 20),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
 class _QuickActionContent extends StatelessWidget {
   const _QuickActionContent({required this.action});
 

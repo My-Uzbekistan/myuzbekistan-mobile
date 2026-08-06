@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/src/core/extension.dart';
 
-/// Bosh sahifadagi "Мероприятия" bo'limi — to'g'ridan-to'g'ri domain modeli
-/// [MainPageContent] bilan ishlaydi (alohida UI-model yo'q).
 class EventsWidget extends StatelessWidget {
   final List<MainPageContent> events;
   final VoidCallback? onSeeAll;
@@ -224,8 +222,6 @@ class _EventBadge extends StatelessWidget {
   }
 }
 
-/// "20 ноября • Концерт" — sana ilova tomonda locale'ga mos formatlanadi,
-/// `eventType` esa BE dan tayyor matn (so'ralgan tilda) keladi.
 String _eventBadge(BuildContext context, DateTime? date, String? type) {
   final parts = <String>[];
   if (date != null) parts.add(_formatEventDate(context, date));

@@ -2,6 +2,8 @@
   "language": "Ilova tili",
   "theme": "Dizayn mavzusi",
   "lanItem": "{lang, select, en{Inglizcha} ru{Ruscha} uz{O'zbekcha} other{} }",
+  "selectLanguageTitle": "Interfeys tilini tanlang",
+  "welcomeTitle": "Xush kelibsiz",
   "themeModes": "{theme, select, system{Tizimli} light{Yorug'} dark{Qorong'i} other{}}",
   "guest": "Mehmon",
   "@guest": {
@@ -79,6 +81,8 @@
   "authPrompt": "Ilovaga kirish uchun autentifikatsiyadan o‘ting",
   "auth_phone_page_title": "Raqamingizni kiriting",
   "auth_phone_page_hint": "Telefon raqami",
+  "auth_phone_sms_hint": "Sizga SMS-kod yuboramiz",
+  "auth_phone_invalid_format": "Raqam formati noto‘g‘ri",
   "action_continue": "Davom etish",
   "accept_terms": "Tugmani bosish orqali siz terms  rozilik bildirasiz",
   "terms": "Foydalanuvchi kelishuvi shartlariga",

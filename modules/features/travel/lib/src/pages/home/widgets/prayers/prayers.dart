@@ -1,3 +1,4 @@
+import 'package:adhan/adhan.dart';
 import 'package:shared/shared.dart';
 
 class PrayerTimesItemModel {
@@ -25,19 +26,28 @@ class PrayerTimesItemModel {
     return DateFormat.Hm().format(time);
   }
 
+  /// Bitta [PrayerTimes] obyektidan tartiblangan nomoz vaqtlari ro'yxatini quradi.
+  static List<PrayerTimesItemModel> fromPrayerTimes(PrayerTimes t) {
+    return [
+      PrayerTimesItemModel(time: t.fajr, type: PrayerTimesType.fajr),
+      PrayerTimesItemModel(time: t.sunrise, type: PrayerTimesType.sunrise),
+      PrayerTimesItemModel(time: t.dhuhr, type: PrayerTimesType.dhuhr),
+      PrayerTimesItemModel(time: t.asr, type: PrayerTimesType.asr),
+      PrayerTimesItemModel(time: t.maghrib, type: PrayerTimesType.maghrib),
+      PrayerTimesItemModel(time: t.isha, type: PrayerTimesType.isha),
+    ];
+  }
+
+  /// Hozirgi vaqtdan keyingi eng yaqin vaqtni `isNext = true` qilib belgilaydi.
+  /// Bugungi barcha vaqtlar o'tib bo'lgan bo'lsa, hech biri belgilanmaydi
+  /// (bu holatda ro'yxatga ertangi kun vaqtlari qo'shilgan bo'lishi kerak).
   static List<PrayerTimesItemModel> markNext(List<PrayerTimesItemModel> times) {
     final now = DateTime.now();
-    PrayerTimesItemModel? next;
-    try {
-      next = times.firstWhere((item) => item.time.isAfter(now));
-    } catch (_) {
-      next = null;
-    }
+    final next = times
+        .where((item) => item.time.isAfter(now))
+        .firstOrNull;
     return times.map((item) {
-      if (next != null && item == next) {
-        return item.copyWith(isNext: true);
-      }
-      return item.copyWith(isNext: false);
+      return item.copyWith(isNext: next != null && identical(item, next));
     }).toList();
   }
 }

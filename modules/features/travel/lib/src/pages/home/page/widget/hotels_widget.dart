@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/src/core/extension.dart';
 
-/// Bosh sahifadagi "Отели" bo'limi — to'g'ridan-to'g'ri domain modeli
-/// [MainPageContent] bilan ishlaydi (alohida UI-model yo'q).
 class HotelsWidget extends StatelessWidget {
   final List<MainPageContent> hotels;
   final VoidCallback? onSeeAll;
@@ -159,7 +157,6 @@ class _HotelCard extends StatelessWidget {
   }
 }
 
-/// `distanse` (metr) -> "10 км" yoki "300 м". `lat`/`lon` yuborilmasa `0` keladi.
 String _distanceText(BuildContext context, double? distanceKm) {
   if (distanceKm == null || distanceKm == 0) return "";
   if (distanceKm < 0.5) {

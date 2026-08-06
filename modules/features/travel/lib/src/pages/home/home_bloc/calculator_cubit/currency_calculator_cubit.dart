@@ -5,7 +5,6 @@ part 'currency_calculator_cubit.freezed.dart';
 
 part 'currency_calculator_state.dart';
 
-/// Molya (Finance) bo'limidagi kalkulyator logikasi bilan bir xil.
 @injectable
 class CurrencyCalculatorCubit extends Cubit<CalculatorData> {
   final CurrenciesUseCase _currenciesUseCase;

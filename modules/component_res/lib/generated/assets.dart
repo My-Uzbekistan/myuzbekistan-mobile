@@ -222,8 +222,6 @@ class $AssetsFlagsGen {
 class $AssetsSplashGen {
   const $AssetsSplashGen();
 
-  final AssetGenImage loginBg =
-      const AssetGenImage('assets/splash/login_bg.webp');
   final AssetGenImage splash1 =
       const AssetGenImage('assets/splash/splash1.webp');
   final AssetGenImage splash2 =
@@ -232,6 +230,8 @@ class $AssetsSplashGen {
       const AssetGenImage('assets/splash/splash3.webp');
   final AssetGenImage splash4 =
       const AssetGenImage('assets/splash/splash4.webp');
+  final AssetGenImage splash5 =
+      const AssetGenImage('assets/splash/splash5.webp');
 }
 
 class AssetGenImage {

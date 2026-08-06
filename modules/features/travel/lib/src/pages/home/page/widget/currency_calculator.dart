@@ -41,7 +41,6 @@ class _CurrencyCalculatorState extends State<CurrencyCalculator> {
     super.dispose();
   }
 
-  /// Molya (Finance) bo'limidagi aynan o'sha valyuta tanlash modalini ochadi.
   void _pickCurrency(CalculatorData state, {required bool isFrom}) {
     if (state.currencies.isEmpty) return;
     final completer = Completer<Currency>();
@@ -143,7 +142,6 @@ class _CurrencyCalculatorState extends State<CurrencyCalculator> {
   }
 }
 
-/// Bitta qator: chapda qiymat (input yoki natija), o'ngda valyuta tanlagich.
 class _CalculatorRow extends StatelessWidget {
   final bool filled;
   final Currency? currency;
@@ -182,7 +180,6 @@ class _CalculatorRow extends StatelessWidget {
   }
 }
 
-/// Valyuta tanlagich chip: bayroq + kod + pastga o'q.
 class _CurrencySelector extends StatelessWidget {
   final Currency? currency;
   final VoidCallback onTap;
@@ -245,7 +242,6 @@ class _CurrencyFlag extends StatelessWidget {
   }
 }
 
-/// O'rtadagi yashil almashtirish tugmasi.
 class _ExchangeButton extends StatelessWidget {
   final VoidCallback onTap;
 
@@ -284,7 +280,6 @@ class _ExchangeButton extends StatelessWidget {
   }
 }
 
-/// Minglik ajratgich formatter (masalan 1000 -> "1 000").
 class _ThousandsFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(

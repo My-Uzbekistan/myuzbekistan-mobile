@@ -5,7 +5,6 @@ import 'package:navigation/navigation.dart';
 
 import '../../widgets/home_groups.dart';
 
-/// Bosh sahifadagi dinamik kategoriyalar ro'yxati (`data.contents`).
 class HomeContentGroups extends StatelessWidget {
   final List<ContentCategories> contents;
 
@@ -17,8 +16,6 @@ class HomeContentGroups extends StatelessWidget {
       key: const PageStorageKey('imageList'),
       delegate: SliverChildBuilderDelegate((context, index) {
         final e = contents[index];
-        // Butun group EventsWidget kabi elevation1 seksiya-kartaga o'raladi —
-        // home_screen'dagi boshqa bo'limlar bilan bir xil stilda.
         return Container(
           margin: const EdgeInsets.only(top: 12),
           padding: const EdgeInsets.symmetric(vertical: 16),

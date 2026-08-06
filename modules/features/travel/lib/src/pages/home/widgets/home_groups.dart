@@ -48,8 +48,6 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> with AutomaticKeepA
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    // "Выбор гостей" (recommended) kartasi ro'yxatda takrorlanmasligi uchun
-    // uni gorizontal ro'yxatdan `contentId` bo'yicha chiqarib tashlaymiz.
     final recommendedId = widget.data.recommended?.contentId;
     final items = recommendedId == null
         ? widget.data.items
@@ -73,7 +71,6 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> with AutomaticKeepA
               rating: widget.data.recommended?.ratingAverage,
             ),
           ),
-        // HomeAvatarListItem()
         if (items.isNotEmpty)
           HomeListCell(
             categoryId: widget.data.categoryId,
@@ -88,6 +85,5 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> with AutomaticKeepA
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive =>true;
 }

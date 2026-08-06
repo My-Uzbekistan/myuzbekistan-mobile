@@ -81,9 +81,10 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
               (previous, current) => previous.navState != current.navState,
           listener: (context, state) {
             if (state.navState is VerificationNavStateComplete) {
-              (GoRouterState.of(context).extra as Completer<bool>?)?.complete(
-                true,
-              );
+              final completer = GoRouterState.of(context).extra;
+              if (completer is Completer<bool> && !completer.isCompleted) {
+                completer.complete(true);
+              }
               context.popUntil([
                 AppNavPath.finance.financeCards,
                 AppNavPath.finance.financePayment,

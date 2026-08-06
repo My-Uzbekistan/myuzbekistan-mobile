@@ -1,6 +1,5 @@
 part of '../home_hero_header.dart';
 
-/// Yuqori info qatori: hudud + ob-havo, namoz vaqti va bildirishnoma qo'ng'irog'i.
 class _InfoRow extends StatelessWidget {
   const _InfoRow({
     required this.regionName,
@@ -10,19 +9,19 @@ class _InfoRow extends StatelessWidget {
     required this.nextPrayer,
     required this.onRegionTap,
     required this.onNotificationTap,
+    this.onPrayerExpired,
   });
 
   final String regionName;
   final String temperature;
   final String? airQuality;
 
-  /// IQAir `level` — rang darajasi: 0 yashil, 1 sariq, 2 qizil, 3 qora.
   final int? airQualityLevel;
 
-  /// Keyingi namoz vaqti — `null` bo'lsa countdown pill ko'rsatilmaydi.
   final PrayerTimesItemModel? nextPrayer;
   final VoidCallback? onRegionTap;
   final VoidCallback? onNotificationTap;
+  final VoidCallback? onPrayerExpired;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +87,8 @@ class _InfoRow extends StatelessWidget {
           ),
         ),
 
-        if (nextPrayer != null) _PrayerPill(prayer: nextPrayer!),
+        if (nextPrayer != null)
+          _PrayerPill(prayer: nextPrayer!, onExpired: onPrayerExpired),
 
         GlassFade(child: _NotificationBell(onTap: onNotificationTap)),
       ],
@@ -96,10 +96,6 @@ class _InfoRow extends StatelessWidget {
   }
 }
 
-/// Havo sifati (AQI) belgisi.
-///
-/// Rang va emoji IQAir `level` bo'yicha tanlanadi (server faqat raqamni beradi):
-/// 0 yashil 🙂, 1 sariq 😐, 2 qizil 🙁, 3 (va undan yuqori) qora 😷.
 class _AqiBadge extends StatelessWidget {
   const _AqiBadge({required this.value, required this.level});
 
@@ -133,11 +129,11 @@ class _AqiBadge extends StatelessWidget {
   }
 }
 
-/// Keyingi namoz vaqtigacha qolgan jonli sanoq (countdown) ko'rsatuvchi pill.
 class _PrayerPill extends HookWidget {
-  const _PrayerPill({required this.prayer});
+  const _PrayerPill({required this.prayer, this.onExpired});
 
   final PrayerTimesItemModel prayer;
+  final VoidCallback? onExpired;
 
   @override
   Widget build(BuildContext context) {
@@ -145,8 +141,15 @@ class _PrayerPill extends HookWidget {
 
     useEffect(() {
       left.value = _remaining(prayer.time);
+      var notified = false;
       final timer = Timer.periodic(const Duration(seconds: 1), (_) {
-        left.value = _remaining(prayer.time);
+        final remaining = _remaining(prayer.time);
+        left.value = remaining;
+        // Vaqt tugadi — keyingi nomozni qayta hisoblash uchun xabar beramiz.
+        if (remaining == Duration.zero && !notified) {
+          notified = true;
+          onExpired?.call();
+        }
       });
       return timer.cancel;
     }, [prayer.time]);
@@ -199,7 +202,6 @@ class _PrayerPill extends HookWidget {
   }
 }
 
-/// Bildirishnoma qo'ng'irog'i (o'qilmagan uchun qizil nuqta bilan).
 class _NotificationBell extends StatelessWidget {
   const _NotificationBell({required this.onTap});
 

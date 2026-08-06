@@ -127,6 +127,18 @@ abstract class FeatureMoreLocalizations {
   /// **'{lang, select, en{English} ru{Русский} uz{O\'zbekcha} other{} }'**
   String langItemDefault(String lang);
 
+  /// No description provided for @selectLanguageTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите язык интерфейса'**
+  String get selectLanguageTitle;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добро пожаловать'**
+  String get welcomeTitle;
+
   /// No description provided for @themeModes.
   ///
   /// In ru, this message translates to:
@@ -570,6 +582,18 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Номер телефона'**
   String get auth_phone_page_hint;
+
+  /// No description provided for @auth_phone_sms_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мы вышлем вам SMS-код'**
+  String get auth_phone_sms_hint;
+
+  /// No description provided for @auth_phone_invalid_format.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный формат номера'**
+  String get auth_phone_invalid_format;
 
   /// No description provided for @action_continue.
   ///

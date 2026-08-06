@@ -1,83 +1,117 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:more/more.dart';
 import 'package:more/src/core/extension.dart';
+import 'package:more/src/widgets/auth_background.dart';
+import 'package:more/src/widgets/staggered_fade_slide.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
-class SelectLangPage extends StatefulWidget {
+class SelectLangPage extends HookWidget {
   const SelectLangPage({super.key});
 
   @override
-  State<SelectLangPage> createState() => _SelectLangPageState();
-}
-
-class _SelectLangPageState extends State<SelectLangPage> {
-  AppSettingsBloc? appSettingsBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    appSettingsBloc = context.read();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            left: 0,
-            right: 0,
-            top: kToolbarHeight + MediaQuery.of(context).padding.top + 20,
-            child:
-                Theme.of(context).brightness == Brightness.dark
-                    ? Assets.logo.darkLogo.svg(
-                      fit: BoxFit.contain,
-                    )
-                    : Assets.logo.lightLogo.svg(
-                      fit: BoxFit.contain,
+    final appSettingsBloc = context.read<AppSettingsBloc>();
+
+    // Bitta controller ikki bosqichni boshqaradi:
+    //  - ochilganda (entering=true): kontent tepadan pastga, navbatma-navbat,
+    //    opacity bilan paydo bo'ladi.
+    //  - til tanlanganda (entering=false): xuddi shu tartibda pastga tushib
+    //    yo'qoladi. Animatsiya tugagach setLocale yuboriladi.
+    final controller = useAnimationController(
+      duration: const Duration(milliseconds: 520),
+    );
+    final entering = useState<bool>(true);
+    final pendingLocale = useState<AppLocale?>(null);
+
+    useEffect(() {
+      controller.forward(); // ochilish animatsiyasi
+
+      void statusListener(AnimationStatus status) {
+        if (status == AnimationStatus.completed &&
+            !entering.value &&
+            pendingLocale.value != null) {
+          appSettingsBloc.add(
+            AppSettingsBlocEvent.setLocale(pendingLocale.value!),
+          );
+        }
+      }
+
+      controller.addStatusListener(statusListener);
+      return () => controller.removeStatusListener(statusListener);
+    }, [controller]);
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: context.systemUiOverlyStyle.copyWith(
+        statusBarIconBrightness: Brightness.light,
+        systemNavigationBarIconBrightness: Brightness.light,
+        systemNavigationBarContrastEnforced: false,
+        systemNavigationBarColor: Colors.transparent,
+      ),
+      child: Scaffold(
+        body: AuthBackground(
+          child: BlocListener<AppSettingsBloc, AppSettingsBlocState>(
+            listener: (context, state) {
+              if (state.appLocale != null) {
+                context.travel.goMain();
+              }
+            },
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ).copyWith(bottom: 24),
+                child: StaggeredFadeSlide(
+                  animation: controller,
+                  entering: entering.value,
+                  // ochilish — tepadan (subtil), yo'qolish — pastga tushib
+                  offset:
+                      entering.value
+                          ? const Offset(0, -28)
+                          : const Offset(0, 48),
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12),
+                      child: Text(
+                        context.localization.selectLanguageTitle,
+                        style: CustomTypography.H2.copyWith(
+                          color: Colors.white.withValues(alpha: 0.6),
+                        ),
+                      ),
                     ),
-          ),
-          Center(
-            child: BlocListener<AppSettingsBloc, AppSettingsBlocState>(
-              listener: (context, state) {
-                if (state.appLocale != null) {
-                  context.travel.goMain();
-                }
-              },
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 12,
-                    children:
-                        AppLocale.values.map((e) {
-                          return SizedBox(
-                            width: double.infinity,
-                            child: AppActionButton(
-                              actionText: context.localization.langItemDefault(
-                                e.name,
-                              ),
-                              icon: _flag(e).toSvgImage(),
-                              type: ActionButtonType.secondary,
-                              iconColorFiltered: false,
-                              onPressed: () {
-                                appSettingsBloc?.add(
-                                  AppSettingsBlocEvent.setLocale(e),
-                                );
-                              },
-                            ),
-                          );
-                        }).toList(),
-                  ),
+                    for (final locale in AppLocale.values)
+                      AppActionButton(
+                        actionText: context.localization.langItemDefault(
+                          locale.name,
+                        ),
+                        icon: _flag(locale).toSvgImage(),
+                        type: ActionButtonType.secondary,
+                        sizeType: ActionButtonSizeType.large,
+                        iconColorFiltered: false,
+                        containerColor: Colors.white,
+                        contentColor: Colors.black,
+                        onPressed: () {
+                          if (controller.isAnimating ||
+                              pendingLocale.value != null) {
+                            return;
+                          }
+                          pendingLocale.value = locale;
+                          entering.value = false; // yo'qolish bosqichiga o'tish
+                          controller
+                            ..reset()
+                            ..forward();
+                        },
+                      ),
+                  ],
                 ),
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

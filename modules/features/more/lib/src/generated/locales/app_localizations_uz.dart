@@ -37,6 +37,12 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   }
 
   @override
+  String get selectLanguageTitle => 'Interfeys tilini tanlang';
+
+  @override
+  String get welcomeTitle => 'Xush kelibsiz';
+
+  @override
   String themeModes(String theme) {
     String _temp0 = intl.Intl.selectLogic(theme, {
       'system': 'Tizimli',
@@ -276,6 +282,12 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get auth_phone_page_hint => 'Telefon raqami';
+
+  @override
+  String get auth_phone_sms_hint => 'Sizga SMS-kod yuboramiz';
+
+  @override
+  String get auth_phone_invalid_format => 'Raqam formati noto‘g‘ri';
 
   @override
   String get action_continue => 'Davom etish';

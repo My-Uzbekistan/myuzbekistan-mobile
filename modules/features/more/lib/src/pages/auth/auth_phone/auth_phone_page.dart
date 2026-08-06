@@ -1,10 +1,10 @@
-import 'dart:async';
-
 import 'package:component_res/component_res.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:more/src/core/extension.dart';
 import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart';
+import 'package:more/src/pages/auth/auth_phone/widgets/phone_input_field.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
@@ -53,9 +53,18 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
         },
         buildWhen:
             (previous, current) =>
+                previous.phoneNumber != current.phoneNumber ||
                 previous.isPhoneNumberValid != current.isPhoneNumberValid ||
+                previous.error != current.error ||
                 previous.isLoading != current.isLoading,
         builder: (context, state) {
+          // Raqam kiritilgan bo'lsa "SMS-kod yuboramiz" yordamchi matni chiqadi.
+          // Qizil xato faqat haqiqiy xato (state.error) kelganda ko'rsatiladi —
+          // raqam yozayotganda qizil bo'lib turmaydi.
+          final isEmpty = state.phoneNumber.isEmpty;
+          final hasError = state.error.isNotEmpty;
+          final keyboardOpen = MediaQuery.viewInsetsOf(context).bottom > 0;
+
           return Column(
             children: [
               Expanded(
@@ -68,30 +77,23 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
                       spacing: 20,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(context.localization.auth_phone_page_title).h1(),
-                        AppInputField(
-                          key: ValueKey("input"),
-                          keyboardType: TextInputType.phone,
-                          controller: _controller,
-                          prefixText: "+998",
-                          hintText: context.localization.auth_phone_page_hint,
-                          formatters: [PhoneInputFormatter()],
+                        Text(context.localization.auth_phone_page_title).h1(
+                          color: context.appColors.textIconColor.primary,
                         ),
-
-                        AppActionButton(
-                          actionText: context.localization.action_continue,
-                          disable: !state.isPhoneNumberValid,
-                          isLoading: state.isLoading,
-                          onPressed: () {
-                            authPhoneBloc?.add(AuthPhoneEvent.sendEvent());
-
-                            // context.pushNamed(
-                            //   AppNavPath.more.authVerification.name,
-                            //   queryParameters: {
-                            //     "phone": _controller!.text.withOutSpace(),
-                            //   },
-                            // );
-                          },
+                        PhoneInputField(
+                          key: ValueKey("input"),
+                          controller: _controller!,
+                          prefixText: "+998",
+                          label: context.localization.auth_phone_page_hint,
+                          supportText: (isEmpty || hasError)
+                              ? null
+                              : context.localization.auth_phone_sms_hint,
+                          errorText: hasError ? state.error : null,
+                          formatters: [
+                            // Faqat raqam (va oraliq bo'sh joy) — harf kiritilmaydi
+                            FilteringTextInputFormatter.allow(RegExp(r'[\d ]')),
+                            PhoneInputFormatter(),
+                          ],
                         ),
                       ],
                     ),
@@ -100,15 +102,26 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
               ),
 
               Padding(
-                padding: EdgeInsets.all(
-                  16,
-                ).copyWith(bottom: MediaQuery.of(context).padding.bottom),
-                child: terms(),
-
-                // Text(
-                // "Нажимая на кнопку, вы принимаете условия пользовательского соглашения",
-                // textAlign: TextAlign.center,
-                // )
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    AppActionButton(
+                      actionText: context.localization.action_continue,
+                      sizeType: ActionButtonSizeType.large,
+                      disable: !state.isPhoneNumberValid,
+                      isLoading: state.isLoading,
+                      onPressed: () {
+                        authPhoneBloc?.add(AuthPhoneEvent.sendEvent());
+                      },
+                    ),
+                    if (!keyboardOpen) ...[
+                      const SizedBox(height: 16),
+                      terms(),
+                      SizedBox(height: MediaQuery.of(context).padding.bottom),
+                    ],
+                  ],
+                ),
               ),
             ],
           );

@@ -36,8 +36,7 @@ final GoRouter routes = GoRouter(
     observers: [observer],
     initialLocation:
     // AppNavPath.travel.travelOnboarding.path,
-    // "/splash",
-    "/home",
+    "/splash",
     routes: [
       ..._shellRoute,
       ...FeatureTravelRouter.routes,

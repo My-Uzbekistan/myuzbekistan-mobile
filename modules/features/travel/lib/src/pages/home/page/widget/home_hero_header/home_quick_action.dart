@@ -1,6 +1,5 @@
 part of '../home_hero_header.dart';
 
-/// Bosh sahifadagi tez amal (Otel / Aviabilet / ...) tugmasi ma'lumoti.
 class HomeQuickAction {
   const HomeQuickAction({
     required this.iconPath,

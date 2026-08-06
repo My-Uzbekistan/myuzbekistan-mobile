@@ -3,9 +3,6 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/src/core/extension.dart';
 
-/// Bosh sahifadagi "Города" bo'limi — to'g'ridan-to'g'ri domain modeli [City]
-/// bilan ishlaydi (alohida UI-model yo'q). [weekend] — barcha shaharlar uchun
-/// umumiy dam olish kunlari matni.
 class CitiesWidget extends StatelessWidget {
   final List<City> cities;
   final String? weekend;

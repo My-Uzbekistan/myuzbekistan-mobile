@@ -7,10 +7,6 @@ import 'package:travel/src/core/extension.dart';
 import '../../../services/widgets/service_feature_rows.dart';
 import '../../../services/widgets/services_shimmer.dart';
 
-/// Bosh sahifadagi "Сервисы" bloki — dastlabki 6 ta xizmat ko'rsatiladi.
-///
-/// "Все" bosilganda to'liq ro'yxat [ServicesSheet]da alohida so'rov bilan
-/// yuklanadi (bu yerga ro'yxat uzatilmaydi).
 class ServicesWidget extends StatelessWidget {
   final List<CatalogItemModel> services;
 

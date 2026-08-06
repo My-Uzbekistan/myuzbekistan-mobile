@@ -37,6 +37,12 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   }
 
   @override
+  String get selectLanguageTitle => 'Выберите язык интерфейса';
+
+  @override
+  String get welcomeTitle => 'Добро пожаловать';
+
+  @override
   String themeModes(String theme) {
     String _temp0 = intl.Intl.selectLogic(theme, {
       'system': 'Системная',
@@ -276,6 +282,12 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get auth_phone_page_hint => 'Номер телефона';
+
+  @override
+  String get auth_phone_sms_hint => 'Мы вышлем вам SMS-код';
+
+  @override
+  String get auth_phone_invalid_format => 'Неверный формат номера';
 
   @override
   String get action_continue => 'Продолжить';

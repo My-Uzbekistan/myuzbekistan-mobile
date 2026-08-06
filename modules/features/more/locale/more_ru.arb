@@ -3,6 +3,8 @@
   "theme": "Тема",
   "lanItem": "{lang, select, en{Английский} ru{Русский} uz{Узбекский} other{} }",
   "langItemDefault": "{lang, select, en{English} ru{Русский} uz{O'zbekcha} other{} }",
+  "selectLanguageTitle": "Выберите язык интерфейса",
+  "welcomeTitle": "Добро пожаловать",
   "themeModes": "{theme, select, system{Системная} light{Светлая} dark{Тёмная} other{}}",
   "guest": "Гость",
   "@guest": {
@@ -80,6 +82,8 @@
   "authPrompt": "Пройдите аутентификацию для доступа к приложению",
   "auth_phone_page_title": "Введите ваш номер",
   "auth_phone_page_hint": "Номер телефона",
+  "auth_phone_sms_hint": "Мы вышлем вам SMS-код",
+  "auth_phone_invalid_format": "Неверный формат номера",
   "action_continue": "Продолжить",
   "accept_terms": "Нажимая на кнопку, вы принимаете terms",
   "terms": "условия пользовательского соглашения",

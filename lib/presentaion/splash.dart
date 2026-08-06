@@ -19,6 +19,7 @@ class SplashScreen extends HookWidget {
       Assets.splash.splash2.path,
       Assets.splash.splash3.path,
       Assets.splash.splash4.path,
+      Assets.splash.splash5.path,
     ];
     final imagePath = useState<String>("");
     final opacity = useState<double>(0);

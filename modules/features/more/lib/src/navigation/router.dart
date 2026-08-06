@@ -131,19 +131,42 @@ mixin FeatureMoreRouter {
     GoRoute(
       path: AppNavPath.more.authPage.path,
       name: AppNavPath.more.authPage.name,
-      pageBuilder:
-          (context, state) => buildSlideTransitionPage(
-            child: BlocProvider(
-              create: (context) => getIt<AuthBlock>(),
-              child: AuthPage(),
-            ),
-            context: context,
-            state: state,
-            slideAlign:
-                state.uri.queryParameters["slideAlign"] == "vertical"
-                    ? SlideAlign.vertical
-                    : SlideAlign.horizontal,
-          ),
+      pageBuilder: (context, state) {
+        final slideAlign = state.uri.queryParameters["slideAlign"];
+        final child = BlocProvider(
+          create: (context) => getIt<AuthBlock>(),
+          child: AuthPage(),
+        );
+
+        // Til tanlash / birinchi ochilish oqimida (slideAlign yo'q) — butun
+        // sahifani surmasdan fade qilamiz. Fon rasmi ikkala ekranda bir xil
+        // bo'lgani uchun fade ko'rinmaydi, faqat kontent silliq almashadi.
+        if (slideAlign == null) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(milliseconds: 400),
+            reverseTransitionDuration: const Duration(milliseconds: 300),
+            child: child,
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                alwaysIncludeSemantics: false,
+                child: child,
+              );
+            },
+          );
+        }
+
+        return buildSlideTransitionPage(
+          child: child,
+          context: context,
+          state: state,
+          slideAlign:
+              slideAlign == "vertical"
+                  ? SlideAlign.vertical
+                  : SlideAlign.horizontal,
+        );
+      },
     ),
     GoRoute(
       path: AppNavPath.more.pinCodePage.path,

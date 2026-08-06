@@ -30,7 +30,6 @@ class _HomeListCellState extends State<HomeListCell>
 
   @override
   void initState() {
-    // TODO: implement initState
     loadContentBLoc.add(
       LoadContentCategoryEvent.init(widget.categoryId, widget.items),
     );

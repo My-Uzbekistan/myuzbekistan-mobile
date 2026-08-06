@@ -1,6 +1,5 @@
 part of '../home_hero_header.dart';
 
-/// Qidiruv qatori: input maydoni + QR va sevimlilar tugmalari.
 class _SearchRow extends StatelessWidget {
   const _SearchRow({
     required this.hintText,
