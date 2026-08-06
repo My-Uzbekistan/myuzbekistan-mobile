@@ -71,6 +71,7 @@ abstract class MainPageContentDto with _$MainPageContentDto {
           String? region,
           String? address,
           double? distance,
+          @JsonKey(name: 'distanse') int? distanse,
           int? reviewCount,
           List<FacilityItemDto>? facilities,
           List<String>? languages,
@@ -79,6 +80,9 @@ abstract class MainPageContentDto with _$MainPageContentDto {
           double? price,
           double? priceInDollar,
           bool? isFavorite,
+          DateTime? eventDate,
+          String? eventType,
+          String? priceUnit,
           int? viewType}) =
       _MainPageContentDto;
 
@@ -104,8 +108,13 @@ abstract class MainPageContentDto with _$MainPageContentDto {
         price: price,
         priceInDollar: priceInDollar,
         viewType: ViewType.getType(viewType),
-        distance: distance,
+        // BE `v2/categories/{id}/contents` `distanse` (metrda, int) qaytaradi;
+        // eski `main-page` esa `distance` (double). Ikkalasini ham qo'llab-quvvatlaymiz.
+        distance: distanse?.toDouble() ?? distance,
         reviewCount: reviewCount,
-        isFavorite: isFavorite ?? false);
+        isFavorite: isFavorite ?? false,
+        eventDate: eventDate,
+        eventType: eventType,
+        priceUnit: priceUnit);
   }
 }

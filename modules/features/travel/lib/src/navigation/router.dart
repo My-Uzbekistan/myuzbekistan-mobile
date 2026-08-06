@@ -11,6 +11,8 @@ import 'package:travel/src/pages/catalog_investments/pages/invest_sort_curency.d
 import 'package:travel/src/pages/catalog_investments/pages/search_page/invest_search_page.dart';
 import 'package:travel/src/pages/catalog_investments/sort_cubit/sort_cubit.dart';
 import 'package:travel/src/pages/content_by_category/bloc/contents_by_category_bloc.dart';
+import 'package:travel/src/pages/contract/bloc/contract_detail_bloc.dart';
+import 'package:travel/src/pages/contract/contract_detail_page.dart';
 import 'package:travel/src/pages/detail/detail_page.dart';
 import 'package:travel/src/pages/detail/pages/all_facilities.dart';
 import 'package:travel/src/pages/detail/pages/read_more.dart';
@@ -39,9 +41,9 @@ import '../pages/detail/detail_bloc/detail_bloc.dart';
 import '../pages/detail/pages/image_preview_page.dart';
 import '../pages/detail/review/all_reviews_page.dart';
 import '../pages/gift/second/second_gift_page.dart';
-import '../pages/home/page/home_page.dart';
 import '../pages/home/page/home_screen.dart';
 import '../pages/home/page/select_region/select_region_page.dart';
+import '../pages/services/bloc/services_cubit.dart';
 import '../pages/services/services_sheet.dart';
 
 mixin FeatureTravelRouter {
@@ -74,8 +76,9 @@ mixin FeatureTravelRouter {
       name: AppNavPath.travel.travelServices.name,
       pageBuilder: (context, state) {
         return ModalSheetPage(
-          child: ServicesSheet(
-            services: (state.extra as List<CatalogItemModel>?) ?? const [],
+          child: BlocProvider(
+            create: (context) => getIt<ServicesCubit>()..load(),
+            child: const ServicesSheet(),
           ),
         );
       },
@@ -415,6 +418,24 @@ mixin FeatureTravelRouter {
         );
       },
     ),
+    GoRoute(
+      path: AppNavPath.travel.travelContractDetail.path,
+      name: AppNavPath.travel.travelContractDetail.name,
+      pageBuilder: (context, state) {
+        final contractId =
+            parseInt(state.uri.queryParameters["contractId"]) ?? 0;
+        return buildSlideTransitionPage(
+          child: BlocProvider(
+            create: (context) => getIt.get<ContractDetailBloc>()
+              ..add(ContractDetailEvent.load(contractId)),
+            child: const ContractDetailPage(),
+          ),
+          state: state,
+          context: context,
+          slideAlign: SlideAlign.vertical,
+        );
+      },
+    ),
   ];
 
   static final shellTravel = StatefulShellBranch(
@@ -437,46 +458,6 @@ mixin FeatureTravelRouter {
           return null;
         },
 
-        pageBuilder: (context, state) {
-          return buildSlideTransitionPage(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create:
-                      (ctx) => getIt<HomeBloc>()..add(HomeBlocEvent.initial()),
-                ),
-                BlocProvider(create: (ctx) => getIt<OnboardingBloc>()),
-              ],
-              child: HomePage(),
-            ),
-            state: state,
-            context: context,
-            slideAlign: SlideAlign.vertical,
-          );
-        },
-      ),
-    ],
-  );
-
-  static final shellHomeScreen = StatefulShellBranch(
-    routes: [
-      GoRoute(
-        path: AppNavPath.travel.travelHomeScreen.path,
-        name: AppNavPath.travel.travelHomeScreen.name,
-        redirect: (context, state) {
-          final locale = getIt<AppPreference>().getLocale();
-          if (locale == null) return AppNavPath.more.selectLangPage.path;
-          final securityStorage = getIt<SecurityStorage>();
-          if (securityStorage.getAccessToken() == null &&
-              securityStorage.isFirstlyLaunch()) {
-            securityStorage.firstlyLaunched();
-            return AppNavPath.more.authPage.path;
-          } else if (securityStorage.hasPin() &&
-              !securityStorage.isPinVerified()) {
-            return AppNavPath.more.checkPin.path;
-          }
-          return null;
-        },
         pageBuilder: (context, state) {
           return buildSlideTransitionPage(
             child: MultiBlocProvider(

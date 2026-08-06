@@ -32,6 +32,15 @@ abstract interface class Repository {
 
   Future<ContentDetail> loadContentDetail({required int contentId});
 
+  /// Bosh sahifadagi "Shaharlar" bo'limi — `GET /api/cities`.
+  Future<CitiesResult> loadCities();
+
+  /// Bosh sahifa banner karuseli — `GET /api/banners`.
+  Future<List<BannerItem>> loadBanners();
+
+  /// Havo sifati ko'rsatkichi — `GET /api/air-quality?lat=&lon=`.
+  Future<AirQuality> loadAirQuality({required double lat, required double lon});
+
   Future<void> createPin({required String pin, bool isChangePin});
 
   Future<void> removePin({required String pin});

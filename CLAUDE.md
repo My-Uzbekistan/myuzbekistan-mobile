@@ -204,6 +204,50 @@ emit(state.copyWith(isLoading: false));
 
 ---
 
+## State Boshqaruvi Qoidasi — `setState` ISHLATILMAYDI
+
+`setState` **umuman ishlatilmaydi**. Widget ichidagi lokal, o'zgaruvchan holat uchun `flutter_hooks` ishlatiladi (`HookWidget` + `useState`, `useEffect`, `useRef` va h.k.). Kengroq/biznes holat uchun BLoC/Cubit ishlatiladi.
+
+- `StatefulWidget` + `setState` yozma — o'rniga `HookWidget` ol.
+- Timer, subscription, controller kabi resurslar `useEffect` ichida ochilib, uning `dispose` (return) funksiyasida yopiladi.
+- `flutter_hooks` `package:shared/shared.dart` orqali eksport qilinadi (alohida import shart emas).
+
+**Noto'g'ri:**
+```dart
+class _Pill extends StatefulWidget { ... }
+class _PillState extends State<_Pill> {
+  late Duration _left;
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 1), (_) {
+      setState(() => _left = _remaining()); // XATO — setState
+    });
+  }
+}
+```
+
+**To'g'ri:**
+```dart
+class _Pill extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    final left = useState(_remaining());
+    useEffect(() {
+      final timer = Timer.periodic(const Duration(seconds: 1), (_) {
+        left.value = _remaining(); // hook — setState yo'q
+      });
+      return timer.cancel; // dispose
+    }, const []);
+    return Text(_format(left.value));
+  }
+}
+```
+
+> Eslatma: eski kodda hali `setState` ishlatilgan joylar bo'lishi mumkin (masalan `home_page.dart` ichidagi `CategoryHeader` scroll shrink logikasi). Ularga tegayotganda `HookWidget`ga o'tkazish tavsiya etiladi.
+
+---
+
 ## Yangi Feature Qo'shish Qoidalari
 
 ### 1. Fayl Tuzilmasi

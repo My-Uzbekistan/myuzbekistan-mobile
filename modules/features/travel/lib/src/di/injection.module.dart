@@ -15,6 +15,8 @@ import 'package:travel/src/pages/catalog_investments/pages/search_page/bloc/inve
     as _i1065;
 import 'package:travel/src/pages/content_by_category/bloc/contents_by_category_bloc.dart'
     as _i514;
+import 'package:travel/src/pages/contract/bloc/contract_detail_bloc.dart'
+    as _i161;
 import 'package:travel/src/pages/detail/detail_bloc/detail_bloc.dart' as _i776;
 import 'package:travel/src/pages/detail/review/bloc/review_bloc.dart' as _i109;
 import 'package:travel/src/pages/gift/bloc/gift_bloc.dart' as _i669;
@@ -28,6 +30,7 @@ import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart'
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart'
     as _i45;
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart' as _i638;
+import 'package:travel/src/pages/services/bloc/services_cubit.dart' as _i29;
 import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart'
     as _i631;
 import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart'
@@ -54,6 +57,8 @@ class TravelPackageModule extends _i526.MicroPackageModule {
           gh<_i494.Repository>(),
           gh<_i494.SecurityStorage>(),
         ));
+    gh.factory<_i161.ContractDetailBloc>(
+        () => _i161.ContractDetailBloc(gh<_i494.ContractRepository>()));
     gh.factory<_i514.ContentByCategoryBloc>(() => _i514.ContentByCategoryBloc(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
@@ -80,5 +85,7 @@ class TravelPackageModule extends _i526.MicroPackageModule {
         () => _i69.NotificationBloc(gh<_i494.Repository>()));
     gh.factory<_i638.OnboardingBloc>(
         () => _i638.OnboardingBloc(gh<_i494.Repository>()));
+    gh.factory<_i29.ServicesCubit>(
+        () => _i29.ServicesCubit(gh<_i494.Repository>()));
   }
 }

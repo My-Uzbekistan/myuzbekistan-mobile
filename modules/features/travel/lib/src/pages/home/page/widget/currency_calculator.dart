@@ -7,6 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
+import 'package:travel/src/core/extension.dart';
+
 import '../../../../di/injection.dart';
 import '../../home_bloc/calculator_cubit/currency_calculator_cubit.dart';
 
@@ -78,7 +80,7 @@ class _CurrencyCalculatorState extends State<CurrencyCalculator> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Калькулятор валют").h3(),
+                  Text(context.localization.home_currency_calculator).h3(),
                   const SizedBox(height: 16),
                   Stack(
                     alignment: Alignment.center,

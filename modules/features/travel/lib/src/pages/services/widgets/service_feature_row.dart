@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+
+import '../service_item.dart';
+import 'feature_service_tile.dart';
+import 'small_service_tile.dart';
+
+/// Bitta qator: chapda katta plitka (flex 2), o'ngda 2 ta kichik plitka.
+class ServiceFeatureRow extends StatelessWidget {
+  final ServiceItem feature;
+  final ServiceItem? small1;
+  final ServiceItem? small2;
+  final double spacing;
+
+  const ServiceFeatureRow({
+    super.key,
+    required this.feature,
+    this.small1,
+    this.small2,
+    this.spacing = 8,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IntrinsicHeight(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(flex: 2, child: FeatureServiceTile(item: feature)),
+          SizedBox(width: spacing),
+          Expanded(
+            child: small1 == null
+                ? const SizedBox()
+                : Center(child: SmallServiceTile(item: small1!)),
+          ),
+          SizedBox(width: spacing),
+          Expanded(
+            child: small2 == null
+                ? const SizedBox()
+                : Center(child: SmallServiceTile(item: small2!)),
+          ),
+        ],
+      ),
+    );
+  }
+}

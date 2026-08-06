@@ -12,4 +12,9 @@ abstract class HomeBlocEvent with _$HomeBlocEvent{
   factory HomeBlocEvent.loadPrayerTimes() = _LoadPayerTimes;
   factory HomeBlocEvent.loadWeather() = _LoadWeatherEvent;
   factory HomeBlocEvent.loadServices() = _LoadServicesEvent;
+  factory HomeBlocEvent.loadCities() = _LoadCitiesEvent;
+  factory HomeBlocEvent.loadBanners() = _LoadBannersEvent;
+  factory HomeBlocEvent.loadHotels() = _LoadHotelsEvent;
+  factory HomeBlocEvent.loadEvents() = _LoadEventsEvent;
+  factory HomeBlocEvent.loadAirQuality() = _LoadAirQualityEvent;
 }

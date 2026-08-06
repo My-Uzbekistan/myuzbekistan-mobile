@@ -15,6 +15,7 @@ import 'widget/home_hero_header.dart';
 import 'widget/cities_widget.dart';
 import 'widget/currency_calculator.dart';
 import 'widget/events_widget.dart';
+import 'widget/home_content_groups.dart';
 import 'widget/hotels_widget.dart';
 import 'widget/services_widget.dart';
 
@@ -39,11 +40,6 @@ class HomeScreen extends HookWidget {
     }, []);
     var completerRef = useRef<Completer<void>?>(null);
 
-    final List<String> banners = [
-      'https://picsum.photos/800/400?random=1',
-      'https://picsum.photos/800/400?random=2',
-      'https://picsum.photos/800/400?random=3',
-    ];
     return BlocListener<OnboardingBloc, OnboardingState>(
       bloc: onboardingBloc,
       listenWhen: (previous, current) => previous != current,
@@ -85,12 +81,12 @@ class HomeScreen extends HookWidget {
                     HomeHeader(
                       regionName: data.selectedRegion?.name ?? "",
                       temperature: data.temperature?.temperature ?? "",
-                      airQuality: "38",
-                      prayerLabel: "Maghrib",
-                      prayerTime: DateTime.now().add(
-                        const Duration(hours: 2, minutes: 5, seconds: 7),
-                      ),
-                      hintText: "Кудахотите поехать?",
+                      airQuality: data.airQuality?.aqi.toString(),
+                      airQualityLevel: data.airQuality?.level,
+                      nextPrayer: data.prayers
+                          .where((p) => p.isNext)
+                          .firstOrNull,
+                      hintText: context.localization.home_search_hint,
                       onRegionTap: data.selectedRegion == null
                           ? null
                           : () async {
@@ -126,88 +122,105 @@ class HomeScreen extends HookWidget {
                       )).toList()
                     ),
 
-                    SliverPadding(
-                      padding: const EdgeInsets.only(top: 12),
-                      sliver: SliverToBoxAdapter(
-                        child: CustomInfiniteCarousel(
-                          imageUrls: banners,
-                          onItemTap: (index) {
-                            logger.i('Bosilgan rasm indeksi: $index');
-                          },
+
+
+                    if (data.banners.isNotEmpty)
+                      SliverPadding(
+                        padding: const EdgeInsets.only(top: 12),
+                        sliver: SliverToBoxAdapter(
+                          child: CustomInfiniteCarousel(
+                            imageUrls: data.banners
+                                .map((b) => b.imageUrl)
+                                .toList(),
+                            onItemTap: (index) {
+                              final link = data.banners[index].url;
+                              if (link != null && link.isNotEmpty) {
+                                LauncherUtils.urlLauncher(link);
+                              }
+                            },
+                          ),
                         ),
                       ),
-                    ),
+                    if (data.favorites.isNotEmpty)
+                      SliverPadding(
+                        padding: const EdgeInsets.only(
+                          top: 16,
+                          left: 16,
+                          right: 16,
+                        ),
+                        sliver: SliverToBoxAdapter(
+                          child: GestureDetector(
+                            onTap: () => context.travel.pushFavoritesPage(),
+                            child: StackedCard(
+                              title: Row(
+                                spacing: 2,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      context.localization.favorites,
+                                      style: CustomTypography.H3,
+                                    ),
+                                  ),
+                                  Assets.svg.iconFilledHeard.path.toSvgImage(
+                                    width: 24,
+                                    colorFilter: ColorFilter.mode(
+                                      context.appColors.colors.red,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              caption: Text(
+                                context.localization.n_items(
+                                  data.totalFavoriteCount,
+                                ),
+                                style: CustomTypography.bodySm,
+                              ),
+                              avatars: data.favorites,
+                            ),
+                          ),
+                        ),
+                      ),
+
                     ServicesWidget(services: data.catalogServices),
                     CurrencyCalculator(),
-                    CitiesWidget(
-                      cities: const [
-                        CityData(
-                          imageUrl: 'https://picsum.photos/440/560?random=11',
-                          title: "Хива",
-                          date: "1 — 2 август",
+                    if (data.cities.isNotEmpty)
+                      CitiesWidget(
+                        cities: data.cities,
+                        weekend: data.citiesWeekend,
+                      ),
+                    if (data.hotels.isNotEmpty)
+                      HotelsWidget(
+                        hotels: data.hotels,
+                        onSeeAll: () => context.travel.pushContentByCategoryPage(
+                          _categoryName(data, 5),
+                          5,
                         ),
-                        CityData(
-                          imageUrl: 'https://picsum.photos/440/560?random=12',
-                          title: "Самарканд",
-                          date: "1 — 2 август",
+                        onHotelTap: (h) => context.travel.pushDetailPage(
+                          contentId: h.contentId,
                         ),
-                        CityData(
-                          imageUrl: 'https://picsum.photos/440/560?random=13',
-                          title: "Бухара",
-                          date: "1 — 2 август",
+                      ),
+                    if (data.events.isNotEmpty)
+                      EventsWidget(
+                        events: data.events,
+                        onSeeAll: () => context.travel.pushContentByCategoryPage(
+                          _categoryName(data, 7),
+                          7,
                         ),
-                      ],
-                    ),
-                    HotelsWidget(
-                      hotels: const [
-                        HotelData(
-                          imageUrl: 'https://picsum.photos/312/312?random=21',
-                          name: "Samarkand Regency",
-                          location: "Самарканд",
-                          distance: "300 км",
-                          rating: "4,9",
-                          price: "4 000 000",
+                        onEventTap: (e) => context.travel.pushDetailPage(
+                          contentId: e.contentId,
                         ),
-                        HotelData(
-                          imageUrl: 'https://picsum.photos/312/312?random=22',
-                          name: "Hyatt Regency",
-                          location: "Ташкент",
-                          distance: "10 км",
-                          rating: "4,9",
-                          price: "2 550 000",
+                      ),
+
+                    if (data.loadingContents)
+                      const SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 24),
+                          child: LoadingIndicator(),
                         ),
-                        HotelData(
-                          imageUrl: 'https://picsum.photos/312/312?random=23',
-                          name: "Praga Hotel",
-                          location: "Ташкент",
-                          distance: "16 км",
-                          rating: "4,9",
-                          price: "320 000",
-                        ),
-                      ],
-                    ),
-                    EventsWidget(
-                      events: const [
-                        EventData(
-                          imageUrl: 'https://picsum.photos/640/560?random=31',
-                          title: "G‘aybulla Tursunov",
-                          location: "Ташкент",
-                          badgeText: "20 Ноябрь • Концерт",
-                        ),
-                        EventData(
-                          imageUrl: 'https://picsum.photos/640/560?random=32',
-                          title: "Lola Yuldasheva",
-                          location: "Самарканд",
-                          badgeText: "25 Ноябрь • Концерт",
-                        ),
-                        EventData(
-                          imageUrl: 'https://picsum.photos/640/560?random=33',
-                          title: "Ozodbek Nazarbekov",
-                          location: "Бухара",
-                          badgeText: "1 Декабрь • Концерт",
-                        ),
-                      ],
-                    ),
+                      )
+                    else
+                      HomeContentGroups(contents: data.contents),
 
                     SliverToBoxAdapter(
                       child: SizedBox(height: MediaQuery.paddingOf(context).bottom),
@@ -257,3 +270,8 @@ class HomeScreen extends HookWidget {
     );
   }
 }
+
+/// Kategoriya nomini BE dan kelgan (tarjima qilingan) ro'yxatdan oladi —
+/// "Все" bosilganda ochiladigan sahifa sarlavhasi uchun.
+String _categoryName(HomeBlocDataState data, int id) =>
+    data.categories.where((c) => c.id == id).firstOrNull?.name ?? "";

@@ -55,7 +55,7 @@ extension HomeBlocEventPatterns on HomeBlocEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _HomeBlocInitialEvent value)?  initial,TResult Function( _LoadDataEvent value)?  loadDataEvent,TResult Function( _ChangeRegion value)?  changeRegion,TResult Function( _LoadContentsEvent value)?  loadContents,TResult Function( _CheckPermissionEvent value)?  checkPermission,TResult Function( _LoadFavoritesEvent value)?  loadFavorites,TResult Function( _LoadPayerTimes value)?  loadPrayerTimes,TResult Function( _LoadWeatherEvent value)?  loadWeather,TResult Function( _LoadServicesEvent value)?  loadServices,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _HomeBlocInitialEvent value)?  initial,TResult Function( _LoadDataEvent value)?  loadDataEvent,TResult Function( _ChangeRegion value)?  changeRegion,TResult Function( _LoadContentsEvent value)?  loadContents,TResult Function( _CheckPermissionEvent value)?  checkPermission,TResult Function( _LoadFavoritesEvent value)?  loadFavorites,TResult Function( _LoadPayerTimes value)?  loadPrayerTimes,TResult Function( _LoadWeatherEvent value)?  loadWeather,TResult Function( _LoadServicesEvent value)?  loadServices,TResult Function( _LoadCitiesEvent value)?  loadCities,TResult Function( _LoadBannersEvent value)?  loadBanners,TResult Function( _LoadHotelsEvent value)?  loadHotels,TResult Function( _LoadEventsEvent value)?  loadEvents,TResult Function( _LoadAirQualityEvent value)?  loadAirQuality,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
@@ -67,7 +67,12 @@ return checkPermission(_that);case _LoadFavoritesEvent() when loadFavorites != n
 return loadFavorites(_that);case _LoadPayerTimes() when loadPrayerTimes != null:
 return loadPrayerTimes(_that);case _LoadWeatherEvent() when loadWeather != null:
 return loadWeather(_that);case _LoadServicesEvent() when loadServices != null:
-return loadServices(_that);case _:
+return loadServices(_that);case _LoadCitiesEvent() when loadCities != null:
+return loadCities(_that);case _LoadBannersEvent() when loadBanners != null:
+return loadBanners(_that);case _LoadHotelsEvent() when loadHotels != null:
+return loadHotels(_that);case _LoadEventsEvent() when loadEvents != null:
+return loadEvents(_that);case _LoadAirQualityEvent() when loadAirQuality != null:
+return loadAirQuality(_that);case _:
   return orElse();
 
 }
@@ -85,7 +90,7 @@ return loadServices(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _HomeBlocInitialEvent value)  initial,required TResult Function( _LoadDataEvent value)  loadDataEvent,required TResult Function( _ChangeRegion value)  changeRegion,required TResult Function( _LoadContentsEvent value)  loadContents,required TResult Function( _CheckPermissionEvent value)  checkPermission,required TResult Function( _LoadFavoritesEvent value)  loadFavorites,required TResult Function( _LoadPayerTimes value)  loadPrayerTimes,required TResult Function( _LoadWeatherEvent value)  loadWeather,required TResult Function( _LoadServicesEvent value)  loadServices,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _HomeBlocInitialEvent value)  initial,required TResult Function( _LoadDataEvent value)  loadDataEvent,required TResult Function( _ChangeRegion value)  changeRegion,required TResult Function( _LoadContentsEvent value)  loadContents,required TResult Function( _CheckPermissionEvent value)  checkPermission,required TResult Function( _LoadFavoritesEvent value)  loadFavorites,required TResult Function( _LoadPayerTimes value)  loadPrayerTimes,required TResult Function( _LoadWeatherEvent value)  loadWeather,required TResult Function( _LoadServicesEvent value)  loadServices,required TResult Function( _LoadCitiesEvent value)  loadCities,required TResult Function( _LoadBannersEvent value)  loadBanners,required TResult Function( _LoadHotelsEvent value)  loadHotels,required TResult Function( _LoadEventsEvent value)  loadEvents,required TResult Function( _LoadAirQualityEvent value)  loadAirQuality,}){
 final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent():
@@ -97,7 +102,12 @@ return checkPermission(_that);case _LoadFavoritesEvent():
 return loadFavorites(_that);case _LoadPayerTimes():
 return loadPrayerTimes(_that);case _LoadWeatherEvent():
 return loadWeather(_that);case _LoadServicesEvent():
-return loadServices(_that);case _:
+return loadServices(_that);case _LoadCitiesEvent():
+return loadCities(_that);case _LoadBannersEvent():
+return loadBanners(_that);case _LoadHotelsEvent():
+return loadHotels(_that);case _LoadEventsEvent():
+return loadEvents(_that);case _LoadAirQualityEvent():
+return loadAirQuality(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -114,7 +124,7 @@ return loadServices(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _HomeBlocInitialEvent value)?  initial,TResult? Function( _LoadDataEvent value)?  loadDataEvent,TResult? Function( _ChangeRegion value)?  changeRegion,TResult? Function( _LoadContentsEvent value)?  loadContents,TResult? Function( _CheckPermissionEvent value)?  checkPermission,TResult? Function( _LoadFavoritesEvent value)?  loadFavorites,TResult? Function( _LoadPayerTimes value)?  loadPrayerTimes,TResult? Function( _LoadWeatherEvent value)?  loadWeather,TResult? Function( _LoadServicesEvent value)?  loadServices,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _HomeBlocInitialEvent value)?  initial,TResult? Function( _LoadDataEvent value)?  loadDataEvent,TResult? Function( _ChangeRegion value)?  changeRegion,TResult? Function( _LoadContentsEvent value)?  loadContents,TResult? Function( _CheckPermissionEvent value)?  checkPermission,TResult? Function( _LoadFavoritesEvent value)?  loadFavorites,TResult? Function( _LoadPayerTimes value)?  loadPrayerTimes,TResult? Function( _LoadWeatherEvent value)?  loadWeather,TResult? Function( _LoadServicesEvent value)?  loadServices,TResult? Function( _LoadCitiesEvent value)?  loadCities,TResult? Function( _LoadBannersEvent value)?  loadBanners,TResult? Function( _LoadHotelsEvent value)?  loadHotels,TResult? Function( _LoadEventsEvent value)?  loadEvents,TResult? Function( _LoadAirQualityEvent value)?  loadAirQuality,}){
 final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
@@ -126,7 +136,12 @@ return checkPermission(_that);case _LoadFavoritesEvent() when loadFavorites != n
 return loadFavorites(_that);case _LoadPayerTimes() when loadPrayerTimes != null:
 return loadPrayerTimes(_that);case _LoadWeatherEvent() when loadWeather != null:
 return loadWeather(_that);case _LoadServicesEvent() when loadServices != null:
-return loadServices(_that);case _:
+return loadServices(_that);case _LoadCitiesEvent() when loadCities != null:
+return loadCities(_that);case _LoadBannersEvent() when loadBanners != null:
+return loadBanners(_that);case _LoadHotelsEvent() when loadHotels != null:
+return loadHotels(_that);case _LoadEventsEvent() when loadEvents != null:
+return loadEvents(_that);case _LoadAirQualityEvent() when loadAirQuality != null:
+return loadAirQuality(_that);case _:
   return null;
 
 }
@@ -143,7 +158,7 @@ return loadServices(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( bool isRefresh)?  loadDataEvent,TResult Function( int regionId)?  changeRegion,TResult Function()?  loadContents,TResult Function()?  checkPermission,TResult Function()?  loadFavorites,TResult Function()?  loadPrayerTimes,TResult Function()?  loadWeather,TResult Function()?  loadServices,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( bool isRefresh)?  loadDataEvent,TResult Function( int regionId)?  changeRegion,TResult Function()?  loadContents,TResult Function()?  checkPermission,TResult Function()?  loadFavorites,TResult Function()?  loadPrayerTimes,TResult Function()?  loadWeather,TResult Function()?  loadServices,TResult Function()?  loadCities,TResult Function()?  loadBanners,TResult Function()?  loadHotels,TResult Function()?  loadEvents,TResult Function()?  loadAirQuality,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
 return initial();case _LoadDataEvent() when loadDataEvent != null:
@@ -154,7 +169,12 @@ return checkPermission();case _LoadFavoritesEvent() when loadFavorites != null:
 return loadFavorites();case _LoadPayerTimes() when loadPrayerTimes != null:
 return loadPrayerTimes();case _LoadWeatherEvent() when loadWeather != null:
 return loadWeather();case _LoadServicesEvent() when loadServices != null:
-return loadServices();case _:
+return loadServices();case _LoadCitiesEvent() when loadCities != null:
+return loadCities();case _LoadBannersEvent() when loadBanners != null:
+return loadBanners();case _LoadHotelsEvent() when loadHotels != null:
+return loadHotels();case _LoadEventsEvent() when loadEvents != null:
+return loadEvents();case _LoadAirQualityEvent() when loadAirQuality != null:
+return loadAirQuality();case _:
   return orElse();
 
 }
@@ -172,7 +192,7 @@ return loadServices();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( bool isRefresh)  loadDataEvent,required TResult Function( int regionId)  changeRegion,required TResult Function()  loadContents,required TResult Function()  checkPermission,required TResult Function()  loadFavorites,required TResult Function()  loadPrayerTimes,required TResult Function()  loadWeather,required TResult Function()  loadServices,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( bool isRefresh)  loadDataEvent,required TResult Function( int regionId)  changeRegion,required TResult Function()  loadContents,required TResult Function()  checkPermission,required TResult Function()  loadFavorites,required TResult Function()  loadPrayerTimes,required TResult Function()  loadWeather,required TResult Function()  loadServices,required TResult Function()  loadCities,required TResult Function()  loadBanners,required TResult Function()  loadHotels,required TResult Function()  loadEvents,required TResult Function()  loadAirQuality,}) {final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent():
 return initial();case _LoadDataEvent():
@@ -183,7 +203,12 @@ return checkPermission();case _LoadFavoritesEvent():
 return loadFavorites();case _LoadPayerTimes():
 return loadPrayerTimes();case _LoadWeatherEvent():
 return loadWeather();case _LoadServicesEvent():
-return loadServices();case _:
+return loadServices();case _LoadCitiesEvent():
+return loadCities();case _LoadBannersEvent():
+return loadBanners();case _LoadHotelsEvent():
+return loadHotels();case _LoadEventsEvent():
+return loadEvents();case _LoadAirQualityEvent():
+return loadAirQuality();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,7 +225,7 @@ return loadServices();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( bool isRefresh)?  loadDataEvent,TResult? Function( int regionId)?  changeRegion,TResult? Function()?  loadContents,TResult? Function()?  checkPermission,TResult? Function()?  loadFavorites,TResult? Function()?  loadPrayerTimes,TResult? Function()?  loadWeather,TResult? Function()?  loadServices,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( bool isRefresh)?  loadDataEvent,TResult? Function( int regionId)?  changeRegion,TResult? Function()?  loadContents,TResult? Function()?  checkPermission,TResult? Function()?  loadFavorites,TResult? Function()?  loadPrayerTimes,TResult? Function()?  loadWeather,TResult? Function()?  loadServices,TResult? Function()?  loadCities,TResult? Function()?  loadBanners,TResult? Function()?  loadHotels,TResult? Function()?  loadEvents,TResult? Function()?  loadAirQuality,}) {final _that = this;
 switch (_that) {
 case _HomeBlocInitialEvent() when initial != null:
 return initial();case _LoadDataEvent() when loadDataEvent != null:
@@ -211,7 +236,12 @@ return checkPermission();case _LoadFavoritesEvent() when loadFavorites != null:
 return loadFavorites();case _LoadPayerTimes() when loadPrayerTimes != null:
 return loadPrayerTimes();case _LoadWeatherEvent() when loadWeather != null:
 return loadWeather();case _LoadServicesEvent() when loadServices != null:
-return loadServices();case _:
+return loadServices();case _LoadCitiesEvent() when loadCities != null:
+return loadCities();case _LoadBannersEvent() when loadBanners != null:
+return loadBanners();case _LoadHotelsEvent() when loadHotels != null:
+return loadHotels();case _LoadEventsEvent() when loadEvents != null:
+return loadEvents();case _LoadAirQualityEvent() when loadAirQuality != null:
+return loadAirQuality();case _:
   return null;
 
 }
@@ -576,6 +606,166 @@ String toString() {
 
 
 /// @nodoc
+
+
+class _LoadCitiesEvent implements HomeBlocEvent {
+   _LoadCitiesEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadCitiesEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeBlocEvent.loadCities()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadBannersEvent implements HomeBlocEvent {
+   _LoadBannersEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadBannersEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeBlocEvent.loadBanners()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadHotelsEvent implements HomeBlocEvent {
+   _LoadHotelsEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadHotelsEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeBlocEvent.loadHotels()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadEventsEvent implements HomeBlocEvent {
+   _LoadEventsEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadEventsEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeBlocEvent.loadEvents()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _LoadAirQualityEvent implements HomeBlocEvent {
+   _LoadAirQualityEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoadAirQualityEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeBlocEvent.loadAirQuality()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$HomeBlocState {
 
 
@@ -689,11 +879,11 @@ return errorState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult Function()?  errorState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult Function()?  errorState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState() when loading != null:
 return loading();case HomeBlocDataState() when dataState != null:
-return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
 return errorState();case _:
   return orElse();
 
@@ -712,11 +902,11 @@ return errorState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)  dataState,required TResult Function()  errorState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)  dataState,required TResult Function()  errorState,}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState():
 return loading();case HomeBlocDataState():
-return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState():
+return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState():
 return errorState();case _:
   throw StateError('Unexpected subclass');
 
@@ -734,11 +924,11 @@ return errorState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult? Function()?  errorState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  List<String> favorites,  List<PrayerTimesItemModel> prayers,  int totalFavoriteCount,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult? Function()?  errorState,}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState() when loading != null:
 return loading();case HomeBlocDataState() when dataState != null:
-return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.favorites,_that.prayers,_that.totalFavoriteCount,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
 return errorState();case _:
   return null;
 
@@ -783,7 +973,7 @@ String toString() {
 
 
 class HomeBlocDataState implements HomeBlocState {
-  const HomeBlocDataState({final  List<Categories> categories = const [], final  List<ServiceAction> services = const [], final  List<CatalogItemModel> catalogServices = const [], final  List<ContentCategories> contents = const [], this.temperature, final  List<Region> regions = const [], final  List<String> favorites = const [], final  List<PrayerTimesItemModel> prayers = const [], this.totalFavoriteCount = 0, this.selectedRegion, this.loadingContents = true, this.isRefreshing = false}): _categories = categories,_services = services,_catalogServices = catalogServices,_contents = contents,_regions = regions,_favorites = favorites,_prayers = prayers;
+  const HomeBlocDataState({final  List<Categories> categories = const [], final  List<ServiceAction> services = const [], final  List<CatalogItemModel> catalogServices = const [], final  List<ContentCategories> contents = const [], final  List<City> cities = const [], this.citiesWeekend, final  List<BannerItem> banners = const [], final  List<MainPageContent> hotels = const [], final  List<MainPageContent> events = const [], this.airQuality, this.temperature, final  List<Region> regions = const [], final  List<String> favorites = const [], final  List<PrayerTimesItemModel> prayers = const [], this.totalFavoriteCount = 0, this.selectedRegion, this.loadingContents = true, this.isRefreshing = false}): _categories = categories,_services = services,_catalogServices = catalogServices,_contents = contents,_cities = cities,_banners = banners,_hotels = hotels,_events = events,_regions = regions,_favorites = favorites,_prayers = prayers;
   
 
  final  List<Categories> _categories;
@@ -814,6 +1004,36 @@ class HomeBlocDataState implements HomeBlocState {
   return EqualUnmodifiableListView(_contents);
 }
 
+ final  List<City> _cities;
+@JsonKey() List<City> get cities {
+  if (_cities is EqualUnmodifiableListView) return _cities;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_cities);
+}
+
+ final  String? citiesWeekend;
+ final  List<BannerItem> _banners;
+@JsonKey() List<BannerItem> get banners {
+  if (_banners is EqualUnmodifiableListView) return _banners;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_banners);
+}
+
+ final  List<MainPageContent> _hotels;
+@JsonKey() List<MainPageContent> get hotels {
+  if (_hotels is EqualUnmodifiableListView) return _hotels;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_hotels);
+}
+
+ final  List<MainPageContent> _events;
+@JsonKey() List<MainPageContent> get events {
+  if (_events is EqualUnmodifiableListView) return _events;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_events);
+}
+
+ final  AirQuality? airQuality;
  final  Temperature? temperature;
  final  List<Region> _regions;
 @JsonKey() List<Region> get regions {
@@ -851,16 +1071,16 @@ $HomeBlocDataStateCopyWith<HomeBlocDataState> get copyWith => _$HomeBlocDataStat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBlocDataState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._services, _services)&&const DeepCollectionEquality().equals(other._catalogServices, _catalogServices)&&const DeepCollectionEquality().equals(other._contents, _contents)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&const DeepCollectionEquality().equals(other._regions, _regions)&&const DeepCollectionEquality().equals(other._favorites, _favorites)&&const DeepCollectionEquality().equals(other._prayers, _prayers)&&(identical(other.totalFavoriteCount, totalFavoriteCount) || other.totalFavoriteCount == totalFavoriteCount)&&(identical(other.selectedRegion, selectedRegion) || other.selectedRegion == selectedRegion)&&(identical(other.loadingContents, loadingContents) || other.loadingContents == loadingContents)&&(identical(other.isRefreshing, isRefreshing) || other.isRefreshing == isRefreshing));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBlocDataState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._services, _services)&&const DeepCollectionEquality().equals(other._catalogServices, _catalogServices)&&const DeepCollectionEquality().equals(other._contents, _contents)&&const DeepCollectionEquality().equals(other._cities, _cities)&&(identical(other.citiesWeekend, citiesWeekend) || other.citiesWeekend == citiesWeekend)&&const DeepCollectionEquality().equals(other._banners, _banners)&&const DeepCollectionEquality().equals(other._hotels, _hotels)&&const DeepCollectionEquality().equals(other._events, _events)&&(identical(other.airQuality, airQuality) || other.airQuality == airQuality)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&const DeepCollectionEquality().equals(other._regions, _regions)&&const DeepCollectionEquality().equals(other._favorites, _favorites)&&const DeepCollectionEquality().equals(other._prayers, _prayers)&&(identical(other.totalFavoriteCount, totalFavoriteCount) || other.totalFavoriteCount == totalFavoriteCount)&&(identical(other.selectedRegion, selectedRegion) || other.selectedRegion == selectedRegion)&&(identical(other.loadingContents, loadingContents) || other.loadingContents == loadingContents)&&(identical(other.isRefreshing, isRefreshing) || other.isRefreshing == isRefreshing));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_services),const DeepCollectionEquality().hash(_catalogServices),const DeepCollectionEquality().hash(_contents),temperature,const DeepCollectionEquality().hash(_regions),const DeepCollectionEquality().hash(_favorites),const DeepCollectionEquality().hash(_prayers),totalFavoriteCount,selectedRegion,loadingContents,isRefreshing);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_services),const DeepCollectionEquality().hash(_catalogServices),const DeepCollectionEquality().hash(_contents),const DeepCollectionEquality().hash(_cities),citiesWeekend,const DeepCollectionEquality().hash(_banners),const DeepCollectionEquality().hash(_hotels),const DeepCollectionEquality().hash(_events),airQuality,temperature,const DeepCollectionEquality().hash(_regions),const DeepCollectionEquality().hash(_favorites),const DeepCollectionEquality().hash(_prayers),totalFavoriteCount,selectedRegion,loadingContents,isRefreshing);
 
 @override
 String toString() {
-  return 'HomeBlocState.dataState(categories: $categories, services: $services, catalogServices: $catalogServices, contents: $contents, temperature: $temperature, regions: $regions, favorites: $favorites, prayers: $prayers, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
+  return 'HomeBlocState.dataState(categories: $categories, services: $services, catalogServices: $catalogServices, contents: $contents, cities: $cities, citiesWeekend: $citiesWeekend, banners: $banners, hotels: $hotels, events: $events, airQuality: $airQuality, temperature: $temperature, regions: $regions, favorites: $favorites, prayers: $prayers, totalFavoriteCount: $totalFavoriteCount, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
 }
 
 
@@ -871,7 +1091,7 @@ abstract mixin class $HomeBlocDataStateCopyWith<$Res> implements $HomeBlocStateC
   factory $HomeBlocDataStateCopyWith(HomeBlocDataState value, $Res Function(HomeBlocDataState) _then) = _$HomeBlocDataStateCopyWithImpl;
 @useResult
 $Res call({
- List<Categories> categories, List<ServiceAction> services, List<CatalogItemModel> catalogServices, List<ContentCategories> contents, Temperature? temperature, List<Region> regions, List<String> favorites, List<PrayerTimesItemModel> prayers, int totalFavoriteCount, Region? selectedRegion, bool loadingContents, bool isRefreshing
+ List<Categories> categories, List<ServiceAction> services, List<CatalogItemModel> catalogServices, List<ContentCategories> contents, List<City> cities, String? citiesWeekend, List<BannerItem> banners, List<MainPageContent> hotels, List<MainPageContent> events, AirQuality? airQuality, Temperature? temperature, List<Region> regions, List<String> favorites, List<PrayerTimesItemModel> prayers, int totalFavoriteCount, Region? selectedRegion, bool loadingContents, bool isRefreshing
 });
 
 
@@ -888,13 +1108,19 @@ class _$HomeBlocDataStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? services = null,Object? catalogServices = null,Object? contents = null,Object? temperature = freezed,Object? regions = null,Object? favorites = null,Object? prayers = null,Object? totalFavoriteCount = null,Object? selectedRegion = freezed,Object? loadingContents = null,Object? isRefreshing = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? services = null,Object? catalogServices = null,Object? contents = null,Object? cities = null,Object? citiesWeekend = freezed,Object? banners = null,Object? hotels = null,Object? events = null,Object? airQuality = freezed,Object? temperature = freezed,Object? regions = null,Object? favorites = null,Object? prayers = null,Object? totalFavoriteCount = null,Object? selectedRegion = freezed,Object? loadingContents = null,Object? isRefreshing = null,}) {
   return _then(HomeBlocDataState(
 categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Categories>,services: null == services ? _self._services : services // ignore: cast_nullable_to_non_nullable
 as List<ServiceAction>,catalogServices: null == catalogServices ? _self._catalogServices : catalogServices // ignore: cast_nullable_to_non_nullable
 as List<CatalogItemModel>,contents: null == contents ? _self._contents : contents // ignore: cast_nullable_to_non_nullable
-as List<ContentCategories>,temperature: freezed == temperature ? _self.temperature : temperature // ignore: cast_nullable_to_non_nullable
+as List<ContentCategories>,cities: null == cities ? _self._cities : cities // ignore: cast_nullable_to_non_nullable
+as List<City>,citiesWeekend: freezed == citiesWeekend ? _self.citiesWeekend : citiesWeekend // ignore: cast_nullable_to_non_nullable
+as String?,banners: null == banners ? _self._banners : banners // ignore: cast_nullable_to_non_nullable
+as List<BannerItem>,hotels: null == hotels ? _self._hotels : hotels // ignore: cast_nullable_to_non_nullable
+as List<MainPageContent>,events: null == events ? _self._events : events // ignore: cast_nullable_to_non_nullable
+as List<MainPageContent>,airQuality: freezed == airQuality ? _self.airQuality : airQuality // ignore: cast_nullable_to_non_nullable
+as AirQuality?,temperature: freezed == temperature ? _self.temperature : temperature // ignore: cast_nullable_to_non_nullable
 as Temperature?,regions: null == regions ? _self._regions : regions // ignore: cast_nullable_to_non_nullable
 as List<Region>,favorites: null == favorites ? _self._favorites : favorites // ignore: cast_nullable_to_non_nullable
 as List<String>,prayers: null == prayers ? _self._prayers : prayers // ignore: cast_nullable_to_non_nullable

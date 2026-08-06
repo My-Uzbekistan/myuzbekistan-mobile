@@ -260,6 +260,27 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   String get catalogMyEsim => 'My eSIM';
 
   @override
+  String get currency_som => 'sum';
+
+  @override
+  String get home_events => 'Events';
+
+  @override
+  String get home_cities => 'Cities';
+
+  @override
+  String get home_cities_subtitle => 'Where to go on the weekend?';
+
+  @override
+  String get home_city_badge => 'Want to visit';
+
+  @override
+  String get home_search_hint => 'Where do you want to go?';
+
+  @override
+  String get home_currency_calculator => 'Currency calculator';
+
+  @override
   String get catalogTravelQuiz => 'Travel Quiz';
 
   @override
@@ -516,4 +537,124 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get premiumCancelDismiss => 'No';
+
+  @override
+  String get contractDetailsTitle => 'Contract details';
+
+  @override
+  String contractTitle(Object number) {
+    return 'Contract number №$number';
+  }
+
+  @override
+  String get contractInfoSection => 'Contract information';
+
+  @override
+  String get contractDate => 'Contract date';
+
+  @override
+  String get contractCurrency => 'Currency';
+
+  @override
+  String get contractDiscussionEndDate => 'Discussion end date';
+
+  @override
+  String get contractTotalAmount => 'Total amount';
+
+  @override
+  String get contractEndDate => 'End date';
+
+  @override
+  String get contractOqsAmount => 'OQS amount';
+
+  @override
+  String get contractBasis => 'Basis';
+
+  @override
+  String get contractAdvanceAmount => 'Advance amount';
+
+  @override
+  String get contractRegion => 'Region';
+
+  @override
+  String get contractPaymentTerms => 'Payment terms';
+
+  @override
+  String get contractAdvancePaymentDay => 'Advance payment day';
+
+  @override
+  String get contractPaymentPeriod => 'Payment period';
+
+  @override
+  String get contractDeliveryPeriod => 'Delivery period';
+
+  @override
+  String contractDaysValue(Object days) {
+    return '$days days';
+  }
+
+  @override
+  String get contractProducts => 'Products';
+
+  @override
+  String get contractProductName => 'Product name';
+
+  @override
+  String get contractCode => 'Code';
+
+  @override
+  String get contractQuantity => 'Quantity';
+
+  @override
+  String get contractPrice => 'Price';
+
+  @override
+  String get contractAdvance => 'Advance';
+
+  @override
+  String get contractDescription => 'Description';
+
+  @override
+  String get contractProductProperties => 'Product properties';
+
+  @override
+  String get contractUnitOfMeasure => 'Unit of measure';
+
+  @override
+  String get contractGoods => 'Goods';
+
+  @override
+  String get contractStartingPrice => 'Starting price per unit';
+
+  @override
+  String get contractTotalPrice => 'Total price';
+
+  @override
+  String get contractGoodQuantity => 'Goods quantity';
+
+  @override
+  String get contractGoodSpec => 'Goods specification';
+
+  @override
+  String get contractType => 'Type';
+
+  @override
+  String get contractGoodDescription => 'Goods description';
+
+  @override
+  String get contractPaymentInfo => 'Payment information';
+
+  @override
+  String get contractPrepaymentPeriod => 'Prepayment period';
+
+  @override
+  String get contractAdvancePercent => 'Advance payment percent';
+
+  @override
+  String contractWorkDaysValue(Object days) {
+    return '$days working days';
+  }
+
+  @override
+  String get contractCustomerAddress => 'Customer address';
 }

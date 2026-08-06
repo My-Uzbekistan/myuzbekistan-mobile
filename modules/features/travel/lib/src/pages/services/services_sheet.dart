@@ -2,41 +2,24 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/src/core/extension.dart';
 
-import 'catalog_action.dart';
-import 'service_item.dart';
-import 'widgets/service_tiles.dart';
+import 'bloc/services_cubit.dart';
+import 'service_item_mapper.dart';
+import 'widgets/service_feature_rows.dart';
+import 'widgets/service_small_grid.dart';
+import 'widgets/services_shimmer.dart';
 
-/// "Сервисы" to'liq ro'yxati — pastdan ochiluvchi sheet (route orqali,
-/// reklama sheet uslubida — yopish tugmasi yo'q).
+/// "Сервисы" to'liq ro'yxati — pastdan ochiluvchi sheet.
 ///
-/// Ma'lumot `catalog-v3` ([CatalogItemModel]) dan keladi. Element bosilganda
-/// havola ochiladi ([openCatalogItem]).
+/// Ma'lumot sheet ochilganda [ServicesCubit] orqali alohida yuklanadi
+/// (bosh sahifadan uzatilmaydi). Xato [Toast] orqali ko'rsatiladi.
 class ServicesSheet extends StatelessWidget {
-  final List<CatalogItemModel> services;
-
-  const ServicesSheet({super.key, required this.services});
-
+  const ServicesSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ServiceItem featuredOf(CatalogItemModel m) => ServiceItem(
-          title: m.title,
-          iconUrl: m.icon,
-          color: context.appColors.fill.quaternary,
-          featured: true,
-          onTap: () => openCatalogItem(context, m),
-        );
-
-    ServiceItem smallOf(CatalogItemModel m) => ServiceItem(
-          title: m.title,
-          iconUrl: m.icon,
-          color: context.appColors.fill.quaternary,
-          onTap: () => openCatalogItem(context, m),
-        );
-
     return Scaffold(
       backgroundColor: context.appColors.background.elevation1,
       appBar: GradientAppBar(
@@ -48,64 +31,64 @@ class ServicesSheet extends StatelessWidget {
       ),
       body: SafeArea(
         top: false,
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
-          slivers: [
-            SliverPadding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(context.localization.nav_services).h1(),
-                    const SizedBox(height: 24),
-                    ..._buildRows(featuredOf, smallOf),
-                  ],
-                ),
+        child: BlocConsumer<ServicesCubit, ServicesState>(
+          listenWhen: (prev, cur) =>
+              cur.errorMessage != null &&
+              prev.errorMessage != cur.errorMessage,
+          listener: (context, state) {
+            if (state.errorMessage != null) {
+              Toast.showToast(state.errorMessage!);
+            }
+          },
+          builder: (context, state) {
+            return CustomScrollView(
+              physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
               ),
-            ),
-          ],
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(16, 24, 16, 32),
+                  sliver: SliverToBoxAdapter(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(context.localization.nav_services).h1(),
+                        const SizedBox(height: 24),
+                        if (state.services.isEmpty && state.isLoading)
+                          const ServicesShimmer(rows: 4)
+                        else
+                          ..._buildRows(context, state.services),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
   List<Widget> _buildRows(
-    ServiceItem Function(CatalogItemModel) featuredOf,
-    ServiceItem Function(CatalogItemModel) smallOf,
+    BuildContext context,
+    List<CatalogItemModel> services,
   ) {
-    final widgets = <Widget>[];
-    var i = 0;
+    // Dastlabki 6 element — featured layout (2 qator).
+    final widgets = buildServiceFeatureRows(context, services);
 
-    // Dastlabki 2 qator — featured layout (jami 6 element).
-    var featuredRows = 0;
-    while (i < services.length && featuredRows < 2) {
-      final s1 = i + 1 < services.length ? services[i + 1] : null;
-      final s2 = i + 2 < services.length ? services[i + 2] : null;
-      if (widgets.isNotEmpty) widgets.add(const SizedBox(height: 16));
-      widgets.add(
-        ServiceFeatureRow(
-          feature: featuredOf(services[i]),
-          small1: s1 == null ? null : smallOf(s1),
-          small2: s2 == null ? null : smallOf(s2),
-        ),
-      );
-      i += 3;
-      featuredRows++;
-    }
-
-    // Qolgan elementlar — kichik plitkalar grid'i.
-    if (i < services.length) {
-      widgets.add(const SizedBox(height: 16));
+    // Qolgan elementlar — 4 ustunli kichik plitkalar grid'i.
+    if (services.length > 6) {
+      widgets.add(const SizedBox(height: 20));
       widgets.add(
         ServiceSmallGrid(
-          items: [for (var j = i; j < services.length; j++) smallOf(services[j])],
+          items: [
+            for (var i = 6; i < services.length; i++)
+              services[i].toServiceItem(context),
+          ],
         ),
       );
     }
-
     return widgets;
   }
 }

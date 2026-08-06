@@ -31,9 +31,11 @@ class _ItemCardState extends State<ItemCard>
               imageUrl: widget.content.mainPhoto,
               ratingAverage: widget.content.ratingAverage ?? 0,
               averageCheck: widget.content.averageCheck ?? 0,
+              blur: true,
             )
             : AppImageCard.large(
               imageUrl: widget.content.mainPhoto,
+              blur: true,
               priceText:
                   (widget.content.priceInDollar ?? 0).floor() > 0
                       ? "~\$${widget.content.priceInDollar?.floor()}"

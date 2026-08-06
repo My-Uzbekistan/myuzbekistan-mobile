@@ -6,10 +6,6 @@ class _FeatureTravelNavPath {
   AppNavPath get travelHome =>
       _NavPathImpl(name: 'feature_travel_home', path: '/home');
 
-  // Vaqtinchalik: yangi UI (HomeScreen) uchun. UI tayyor bo'lgach o'chiriladi.
-  AppNavPath get travelHomeScreen =>
-      _NavPathImpl(name: 'feature_travel_home_screen', path: '/home_screen');
-
   AppNavPath get travelServices =>
       _NavPathImpl(name: 'feature_travel_services', path: '/services');
 
@@ -86,5 +82,10 @@ class _FeatureTravelNavPath {
   AppNavPath get premiumCancelPage => _NavPathImpl(
     name: 'premium_cancel',
     path: '/premium_cancel',
+  );
+
+  AppNavPath get travelContractDetail => _NavPathImpl(
+    name: 'feature_travel_contract_detail',
+    path: '/contract_detail',
   );
 }

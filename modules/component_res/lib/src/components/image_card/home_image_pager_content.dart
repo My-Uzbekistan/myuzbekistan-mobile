@@ -191,25 +191,40 @@ class _ImagePageState extends State<_ImagePage>
   Widget build(BuildContext context) {
     super.build(context); // MUHIM!
 
-    return ExtendedImage.network(
-      widget.url,
-      key: ValueKey(widget.url),
-      fit: BoxFit.cover,
-      cache: true,
-      cacheMaxAge: Duration(days: 2),
-      loadStateChanged: (ExtendedImageState state) {
-        switch (state.extendedImageLoadState) {
-          case LoadState.completed:
-            return AnimatedOpacity(
-              opacity: 1.0,
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeInToLinear,
-              child: state.completedWidget,
-            );
-          default:
-            return Assets.png.defaultContentImage.path.toImage(fit: BoxFit.cover);
-        }
-      },
+    return SoftEdgeBlur(
+      edges: [
+        EdgeBlur(
+          type: EdgeType.bottomEdge,
+          size: 160,
+          sigma: 6,
+          tileMode: TileMode.mirror,
+          controlPoints: [
+            ControlPoint(position: 0.8, type: ControlPointType.visible),
+            ControlPoint(position: 1, type: ControlPointType.transparent),
+          ],
+        ),
+      ],
+      child: ExtendedImage.network(
+        widget.url,
+        key: ValueKey(widget.url),
+        fit: BoxFit.cover,
+        cache: true,
+        cacheMaxAge: Duration(days: 2),
+        loadStateChanged: (ExtendedImageState state) {
+          switch (state.extendedImageLoadState) {
+            case LoadState.completed:
+              return AnimatedOpacity(
+                opacity: 1.0,
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInToLinear,
+                child: state.completedWidget,
+              );
+            default:
+              return Assets.png.defaultContentImage.path
+                  .toImage(fit: BoxFit.cover);
+          }
+        },
+      ),
     );
   }
 

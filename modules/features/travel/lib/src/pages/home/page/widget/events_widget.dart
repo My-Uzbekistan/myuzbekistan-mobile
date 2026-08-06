@@ -1,12 +1,17 @@
 import 'dart:ui';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:shared/shared.dart' hide Toast;
+import 'package:travel/src/core/extension.dart';
 
+/// Bosh sahifadagi "Мероприятия" bo'limi — to'g'ridan-to'g'ri domain modeli
+/// [MainPageContent] bilan ishlaydi (alohida UI-model yo'q).
 class EventsWidget extends StatelessWidget {
-  final List<EventData> events;
+  final List<MainPageContent> events;
   final VoidCallback? onSeeAll;
-  final ValueChanged<EventData>? onEventTap;
+  final ValueChanged<MainPageContent>? onEventTap;
 
   const EventsWidget({
     super.key,
@@ -34,7 +39,7 @@ class EventsWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "Мероприятия",
+                      context.localization.home_events,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ).h3(),
@@ -43,7 +48,7 @@ class EventsWidget extends StatelessWidget {
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: onSeeAll,
-                    child: Text("Все")
+                    child: Text(context.localization.action_all)
                         .bodyLg(color: context.appColors.brandSeaBlue),
                   ),
                 ],
@@ -73,13 +78,14 @@ class EventsWidget extends StatelessWidget {
 }
 
 class _EventCard extends StatelessWidget {
-  final EventData event;
+  final MainPageContent event;
   final VoidCallback? onTap;
 
   const _EventCard({required this.event, this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final badge = _eventBadge(context, event.eventDate, event.eventType);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -90,28 +96,28 @@ class _EventCard extends StatelessWidget {
           height: 280,
           child: Stack(
             children: [
-              SoftEdgeBlur(
-                edges: [
-                  EdgeBlur(
-                    type: EdgeType.bottomEdge,
-                    size: 160,
-                    sigma: 6,
-                    tileMode: TileMode.mirror,
-                    controlPoints: [
-                      ControlPoint(
-                        position: 0.8,
-                        type: ControlPointType.visible,
-                      ),
-                      ControlPoint(
-                        position: 1,
-                        type: ControlPointType.transparent,
-                      ),
-                    ],
-                  ),
-                ],
-                child: Positioned.fill(
+              Positioned.fill(
+                child: SoftEdgeBlur(
+                  edges: [
+                    EdgeBlur(
+                      type: EdgeType.bottomEdge,
+                      size: 160,
+                      sigma: 6,
+                      tileMode: TileMode.mirror,
+                      controlPoints: [
+                        ControlPoint(
+                          position: 0.8,
+                          type: ControlPointType.visible,
+                        ),
+                        ControlPoint(
+                          position: 1,
+                          type: ControlPointType.transparent,
+                        ),
+                      ],
+                    ),
+                  ],
                   child: ExtendedImage.network(
-                    event.imageUrl,
+                    event.mainPhoto ?? "",
                     fit: BoxFit.cover,
                     loadStateChanged: (state) {
                       switch (state.extendedImageLoadState) {
@@ -158,13 +164,13 @@ class _EventCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      event.title,
+                      event.title ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ).h3(color: context.appColors.static.white),
                     const SizedBox(height: 4),
                     Text(
-                      event.location,
+                      event.region ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ).bodySm(
@@ -174,11 +180,12 @@ class _EventCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Positioned(
-                left: 11,
-                top: 11,
-                child: _EventBadge(text: event.badgeText),
-              ),
+              if (badge.isNotEmpty)
+                Positioned(
+                  left: 11,
+                  top: 11,
+                  child: _EventBadge(text: badge),
+                ),
             ],
           ),
         ),
@@ -217,16 +224,16 @@ class _EventBadge extends StatelessWidget {
   }
 }
 
-class EventData {
-  final String imageUrl;
-  final String title;
-  final String location;
-  final String badgeText;
+/// "20 ноября • Концерт" — sana ilova tomonda locale'ga mos formatlanadi,
+/// `eventType` esa BE dan tayyor matn (so'ralgan tilda) keladi.
+String _eventBadge(BuildContext context, DateTime? date, String? type) {
+  final parts = <String>[];
+  if (date != null) parts.add(_formatEventDate(context, date));
+  if ((type ?? "").isNotEmpty) parts.add(type!);
+  return parts.join(" • ");
+}
 
-  const EventData({
-    required this.imageUrl,
-    required this.title,
-    required this.location,
-    required this.badgeText,
-  });
+String _formatEventDate(BuildContext context, DateTime date) {
+  final langCode = Localizations.localeOf(context).languageCode;
+  return DateFormat('d MMMM', langCode).format(date);
 }

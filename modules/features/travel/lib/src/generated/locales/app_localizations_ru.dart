@@ -263,6 +263,27 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   String get catalogMyEsim => 'My eSIM';
 
   @override
+  String get currency_som => 'сум';
+
+  @override
+  String get home_events => 'Мероприятия';
+
+  @override
+  String get home_cities => 'Города';
+
+  @override
+  String get home_cities_subtitle => 'Куда хотите сходить в выходные?';
+
+  @override
+  String get home_city_badge => 'Хотите посетить';
+
+  @override
+  String get home_search_hint => 'Куда хотите поехать?';
+
+  @override
+  String get home_currency_calculator => 'Калькулятор валют';
+
+  @override
   String get catalogTravelQuiz => 'Travel Quiz';
 
   @override
@@ -527,4 +548,124 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get premiumCancelDismiss => 'Нет';
+
+  @override
+  String get contractDetailsTitle => 'Детали договора';
+
+  @override
+  String contractTitle(Object number) {
+    return 'Номер договора №$number';
+  }
+
+  @override
+  String get contractInfoSection => 'Информация о договоре';
+
+  @override
+  String get contractDate => 'Дата договора';
+
+  @override
+  String get contractCurrency => 'Валюта';
+
+  @override
+  String get contractDiscussionEndDate => 'Дата окончания обсуждения';
+
+  @override
+  String get contractTotalAmount => 'Общая сумма';
+
+  @override
+  String get contractEndDate => 'Дата окончания';
+
+  @override
+  String get contractOqsAmount => 'Сумма ОКС';
+
+  @override
+  String get contractBasis => 'Основание';
+
+  @override
+  String get contractAdvanceAmount => 'Сумма аванса';
+
+  @override
+  String get contractRegion => 'Регион';
+
+  @override
+  String get contractPaymentTerms => 'Условия оплаты';
+
+  @override
+  String get contractAdvancePaymentDay => 'День оплаты аванса';
+
+  @override
+  String get contractPaymentPeriod => 'Срок оплаты';
+
+  @override
+  String get contractDeliveryPeriod => 'Срок поставки';
+
+  @override
+  String contractDaysValue(Object days) {
+    return '$days дн.';
+  }
+
+  @override
+  String get contractProducts => 'Продукты';
+
+  @override
+  String get contractProductName => 'Наименование продукта';
+
+  @override
+  String get contractCode => 'Код';
+
+  @override
+  String get contractQuantity => 'Количество';
+
+  @override
+  String get contractPrice => 'Цена';
+
+  @override
+  String get contractAdvance => 'Аванс';
+
+  @override
+  String get contractDescription => 'Описание';
+
+  @override
+  String get contractProductProperties => 'Характеристики продукта';
+
+  @override
+  String get contractUnitOfMeasure => 'Единица измерения';
+
+  @override
+  String get contractGoods => 'Товары';
+
+  @override
+  String get contractStartingPrice => 'Начальная цена за единицу';
+
+  @override
+  String get contractTotalPrice => 'Общая цена';
+
+  @override
+  String get contractGoodQuantity => 'Количество товара';
+
+  @override
+  String get contractGoodSpec => 'Спецификация товара';
+
+  @override
+  String get contractType => 'Тип';
+
+  @override
+  String get contractGoodDescription => 'Описание товара';
+
+  @override
+  String get contractPaymentInfo => 'Информация об оплате';
+
+  @override
+  String get contractPrepaymentPeriod => 'Срок предоплаты';
+
+  @override
+  String get contractAdvancePercent => 'Процент аванса';
+
+  @override
+  String contractWorkDaysValue(Object days) {
+    return '$days раб. дн.';
+  }
+
+  @override
+  String get contractCustomerAddress => 'Адрес заказчика';
 }

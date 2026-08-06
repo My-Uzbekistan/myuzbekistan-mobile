@@ -613,7 +613,7 @@ as String?,
 /// @nodoc
 mixin _$MainPageContentDto implements DiagnosticableTreeMixin {
 
- int get contentId; String? get title; String? get caption;@ImageArrayConvertor() List<String> get photos;@ImageConvertor() String? get photo; String? get region; String? get address; double? get distance; int? get reviewCount; List<FacilityItemDto>? get facilities; List<String>? get languages; double? get ratingAverage; int? get averageCheck; double? get price; double? get priceInDollar; bool? get isFavorite; int? get viewType;
+ int get contentId; String? get title; String? get caption;@ImageArrayConvertor() List<String> get photos;@ImageConvertor() String? get photo; String? get region; String? get address; double? get distance;@JsonKey(name: 'distanse') int? get distanse; int? get reviewCount; List<FacilityItemDto>? get facilities; List<String>? get languages; double? get ratingAverage; int? get averageCheck; double? get price; double? get priceInDollar; bool? get isFavorite; DateTime? get eventDate; String? get eventType; String? get priceUnit; int? get viewType;
 /// Create a copy of MainPageContentDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -627,21 +627,21 @@ $MainPageContentDtoCopyWith<MainPageContentDto> get copyWith => _$MainPageConten
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'MainPageContentDto'))
-    ..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('caption', caption))..add(DiagnosticsProperty('photos', photos))..add(DiagnosticsProperty('photo', photo))..add(DiagnosticsProperty('region', region))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('reviewCount', reviewCount))..add(DiagnosticsProperty('facilities', facilities))..add(DiagnosticsProperty('languages', languages))..add(DiagnosticsProperty('ratingAverage', ratingAverage))..add(DiagnosticsProperty('averageCheck', averageCheck))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('priceInDollar', priceInDollar))..add(DiagnosticsProperty('isFavorite', isFavorite))..add(DiagnosticsProperty('viewType', viewType));
+    ..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('caption', caption))..add(DiagnosticsProperty('photos', photos))..add(DiagnosticsProperty('photo', photo))..add(DiagnosticsProperty('region', region))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('distanse', distanse))..add(DiagnosticsProperty('reviewCount', reviewCount))..add(DiagnosticsProperty('facilities', facilities))..add(DiagnosticsProperty('languages', languages))..add(DiagnosticsProperty('ratingAverage', ratingAverage))..add(DiagnosticsProperty('averageCheck', averageCheck))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('priceInDollar', priceInDollar))..add(DiagnosticsProperty('isFavorite', isFavorite))..add(DiagnosticsProperty('eventDate', eventDate))..add(DiagnosticsProperty('eventType', eventType))..add(DiagnosticsProperty('priceUnit', priceUnit))..add(DiagnosticsProperty('viewType', viewType));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainPageContentDto&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.title, title) || other.title == title)&&(identical(other.caption, caption) || other.caption == caption)&&const DeepCollectionEquality().equals(other.photos, photos)&&(identical(other.photo, photo) || other.photo == photo)&&(identical(other.region, region) || other.region == region)&&(identical(other.address, address) || other.address == address)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&const DeepCollectionEquality().equals(other.facilities, facilities)&&const DeepCollectionEquality().equals(other.languages, languages)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.viewType, viewType) || other.viewType == viewType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MainPageContentDto&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.title, title) || other.title == title)&&(identical(other.caption, caption) || other.caption == caption)&&const DeepCollectionEquality().equals(other.photos, photos)&&(identical(other.photo, photo) || other.photo == photo)&&(identical(other.region, region) || other.region == region)&&(identical(other.address, address) || other.address == address)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.distanse, distanse) || other.distanse == distanse)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&const DeepCollectionEquality().equals(other.facilities, facilities)&&const DeepCollectionEquality().equals(other.languages, languages)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.eventDate, eventDate) || other.eventDate == eventDate)&&(identical(other.eventType, eventType) || other.eventType == eventType)&&(identical(other.priceUnit, priceUnit) || other.priceUnit == priceUnit)&&(identical(other.viewType, viewType) || other.viewType == viewType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,contentId,title,caption,const DeepCollectionEquality().hash(photos),photo,region,address,distance,reviewCount,const DeepCollectionEquality().hash(facilities),const DeepCollectionEquality().hash(languages),ratingAverage,averageCheck,price,priceInDollar,isFavorite,viewType);
+int get hashCode => Object.hashAll([runtimeType,contentId,title,caption,const DeepCollectionEquality().hash(photos),photo,region,address,distance,distanse,reviewCount,const DeepCollectionEquality().hash(facilities),const DeepCollectionEquality().hash(languages),ratingAverage,averageCheck,price,priceInDollar,isFavorite,eventDate,eventType,priceUnit,viewType]);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, distance: $distance, reviewCount: $reviewCount, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, viewType: $viewType)';
+  return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, distance: $distance, distanse: $distanse, reviewCount: $reviewCount, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, eventDate: $eventDate, eventType: $eventType, priceUnit: $priceUnit, viewType: $viewType)';
 }
 
 
@@ -652,7 +652,7 @@ abstract mixin class $MainPageContentDtoCopyWith<$Res>  {
   factory $MainPageContentDtoCopyWith(MainPageContentDto value, $Res Function(MainPageContentDto) _then) = _$MainPageContentDtoCopyWithImpl;
 @useResult
 $Res call({
- int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite, int? viewType
+ int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance,@JsonKey(name: 'distanse') int? distanse, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite, DateTime? eventDate, String? eventType, String? priceUnit, int? viewType
 });
 
 
@@ -669,7 +669,7 @@ class _$MainPageContentDtoCopyWithImpl<$Res>
 
 /// Create a copy of MainPageContentDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? viewType = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? distanse = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? eventDate = freezed,Object? eventType = freezed,Object? priceUnit = freezed,Object? viewType = freezed,}) {
   return _then(_self.copyWith(
 contentId: null == contentId ? _self.contentId : contentId // ignore: cast_nullable_to_non_nullable
 as int,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -679,7 +679,8 @@ as List<String>,photo: freezed == photo ? _self.photo : photo // ignore: cast_nu
 as String?,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
 as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,distance: freezed == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
-as double?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
+as double?,distanse: freezed == distanse ? _self.distanse : distanse // ignore: cast_nullable_to_non_nullable
+as int?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
 as int?,facilities: freezed == facilities ? _self.facilities : facilities // ignore: cast_nullable_to_non_nullable
 as List<FacilityItemDto>?,languages: freezed == languages ? _self.languages : languages // ignore: cast_nullable_to_non_nullable
 as List<String>?,ratingAverage: freezed == ratingAverage ? _self.ratingAverage : ratingAverage // ignore: cast_nullable_to_non_nullable
@@ -687,7 +688,10 @@ as double?,averageCheck: freezed == averageCheck ? _self.averageCheck : averageC
 as int?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double?,priceInDollar: freezed == priceInDollar ? _self.priceInDollar : priceInDollar // ignore: cast_nullable_to_non_nullable
 as double?,isFavorite: freezed == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
-as bool?,viewType: freezed == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
+as bool?,eventDate: freezed == eventDate ? _self.eventDate : eventDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,eventType: freezed == eventType ? _self.eventType : eventType // ignore: cast_nullable_to_non_nullable
+as String?,priceUnit: freezed == priceUnit ? _self.priceUnit : priceUnit // ignore: cast_nullable_to_non_nullable
+as String?,viewType: freezed == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
 as int?,
   ));
 }
@@ -773,10 +777,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  int? viewType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance, @JsonKey(name: 'distanse')  int? distanse,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  DateTime? eventDate,  String? eventType,  String? priceUnit,  int? viewType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MainPageContentDto() when $default != null:
-return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.viewType);case _:
+return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.distanse,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.eventDate,_that.eventType,_that.priceUnit,_that.viewType);case _:
   return orElse();
 
 }
@@ -794,10 +798,10 @@ return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.pho
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  int? viewType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance, @JsonKey(name: 'distanse')  int? distanse,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  DateTime? eventDate,  String? eventType,  String? priceUnit,  int? viewType)  $default,) {final _that = this;
 switch (_that) {
 case _MainPageContentDto():
-return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.viewType);case _:
+return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.distanse,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.eventDate,_that.eventType,_that.priceUnit,_that.viewType);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -814,10 +818,10 @@ return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.pho
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  int? viewType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int contentId,  String? title,  String? caption, @ImageArrayConvertor()  List<String> photos, @ImageConvertor()  String? photo,  String? region,  String? address,  double? distance, @JsonKey(name: 'distanse')  int? distanse,  int? reviewCount,  List<FacilityItemDto>? facilities,  List<String>? languages,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  bool? isFavorite,  DateTime? eventDate,  String? eventType,  String? priceUnit,  int? viewType)?  $default,) {final _that = this;
 switch (_that) {
 case _MainPageContentDto() when $default != null:
-return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.viewType);case _:
+return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.photo,_that.region,_that.address,_that.distance,_that.distanse,_that.reviewCount,_that.facilities,_that.languages,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.isFavorite,_that.eventDate,_that.eventType,_that.priceUnit,_that.viewType);case _:
   return null;
 
 }
@@ -829,7 +833,7 @@ return $default(_that.contentId,_that.title,_that.caption,_that.photos,_that.pho
 @JsonSerializable()
 
 class _MainPageContentDto extends MainPageContentDto with DiagnosticableTreeMixin {
-  const _MainPageContentDto({required this.contentId, this.title, this.caption, @ImageArrayConvertor() final  List<String> photos = const [], @ImageConvertor() this.photo, this.region, this.address, this.distance, this.reviewCount, final  List<FacilityItemDto>? facilities, final  List<String>? languages, this.ratingAverage, this.averageCheck, this.price, this.priceInDollar, this.isFavorite, this.viewType}): _photos = photos,_facilities = facilities,_languages = languages,super._();
+  const _MainPageContentDto({required this.contentId, this.title, this.caption, @ImageArrayConvertor() final  List<String> photos = const [], @ImageConvertor() this.photo, this.region, this.address, this.distance, @JsonKey(name: 'distanse') this.distanse, this.reviewCount, final  List<FacilityItemDto>? facilities, final  List<String>? languages, this.ratingAverage, this.averageCheck, this.price, this.priceInDollar, this.isFavorite, this.eventDate, this.eventType, this.priceUnit, this.viewType}): _photos = photos,_facilities = facilities,_languages = languages,super._();
   factory _MainPageContentDto.fromJson(Map<String, dynamic> json) => _$MainPageContentDtoFromJson(json);
 
 @override final  int contentId;
@@ -846,6 +850,7 @@ class _MainPageContentDto extends MainPageContentDto with DiagnosticableTreeMixi
 @override final  String? region;
 @override final  String? address;
 @override final  double? distance;
+@override@JsonKey(name: 'distanse') final  int? distanse;
 @override final  int? reviewCount;
  final  List<FacilityItemDto>? _facilities;
 @override List<FacilityItemDto>? get facilities {
@@ -870,6 +875,9 @@ class _MainPageContentDto extends MainPageContentDto with DiagnosticableTreeMixi
 @override final  double? price;
 @override final  double? priceInDollar;
 @override final  bool? isFavorite;
+@override final  DateTime? eventDate;
+@override final  String? eventType;
+@override final  String? priceUnit;
 @override final  int? viewType;
 
 /// Create a copy of MainPageContentDto
@@ -886,21 +894,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'MainPageContentDto'))
-    ..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('caption', caption))..add(DiagnosticsProperty('photos', photos))..add(DiagnosticsProperty('photo', photo))..add(DiagnosticsProperty('region', region))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('reviewCount', reviewCount))..add(DiagnosticsProperty('facilities', facilities))..add(DiagnosticsProperty('languages', languages))..add(DiagnosticsProperty('ratingAverage', ratingAverage))..add(DiagnosticsProperty('averageCheck', averageCheck))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('priceInDollar', priceInDollar))..add(DiagnosticsProperty('isFavorite', isFavorite))..add(DiagnosticsProperty('viewType', viewType));
+    ..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('title', title))..add(DiagnosticsProperty('caption', caption))..add(DiagnosticsProperty('photos', photos))..add(DiagnosticsProperty('photo', photo))..add(DiagnosticsProperty('region', region))..add(DiagnosticsProperty('address', address))..add(DiagnosticsProperty('distance', distance))..add(DiagnosticsProperty('distanse', distanse))..add(DiagnosticsProperty('reviewCount', reviewCount))..add(DiagnosticsProperty('facilities', facilities))..add(DiagnosticsProperty('languages', languages))..add(DiagnosticsProperty('ratingAverage', ratingAverage))..add(DiagnosticsProperty('averageCheck', averageCheck))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('priceInDollar', priceInDollar))..add(DiagnosticsProperty('isFavorite', isFavorite))..add(DiagnosticsProperty('eventDate', eventDate))..add(DiagnosticsProperty('eventType', eventType))..add(DiagnosticsProperty('priceUnit', priceUnit))..add(DiagnosticsProperty('viewType', viewType));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MainPageContentDto&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.title, title) || other.title == title)&&(identical(other.caption, caption) || other.caption == caption)&&const DeepCollectionEquality().equals(other._photos, _photos)&&(identical(other.photo, photo) || other.photo == photo)&&(identical(other.region, region) || other.region == region)&&(identical(other.address, address) || other.address == address)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&const DeepCollectionEquality().equals(other._facilities, _facilities)&&const DeepCollectionEquality().equals(other._languages, _languages)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.viewType, viewType) || other.viewType == viewType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MainPageContentDto&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.title, title) || other.title == title)&&(identical(other.caption, caption) || other.caption == caption)&&const DeepCollectionEquality().equals(other._photos, _photos)&&(identical(other.photo, photo) || other.photo == photo)&&(identical(other.region, region) || other.region == region)&&(identical(other.address, address) || other.address == address)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.distanse, distanse) || other.distanse == distanse)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&const DeepCollectionEquality().equals(other._facilities, _facilities)&&const DeepCollectionEquality().equals(other._languages, _languages)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.eventDate, eventDate) || other.eventDate == eventDate)&&(identical(other.eventType, eventType) || other.eventType == eventType)&&(identical(other.priceUnit, priceUnit) || other.priceUnit == priceUnit)&&(identical(other.viewType, viewType) || other.viewType == viewType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,contentId,title,caption,const DeepCollectionEquality().hash(_photos),photo,region,address,distance,reviewCount,const DeepCollectionEquality().hash(_facilities),const DeepCollectionEquality().hash(_languages),ratingAverage,averageCheck,price,priceInDollar,isFavorite,viewType);
+int get hashCode => Object.hashAll([runtimeType,contentId,title,caption,const DeepCollectionEquality().hash(_photos),photo,region,address,distance,distanse,reviewCount,const DeepCollectionEquality().hash(_facilities),const DeepCollectionEquality().hash(_languages),ratingAverage,averageCheck,price,priceInDollar,isFavorite,eventDate,eventType,priceUnit,viewType]);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, distance: $distance, reviewCount: $reviewCount, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, viewType: $viewType)';
+  return 'MainPageContentDto(contentId: $contentId, title: $title, caption: $caption, photos: $photos, photo: $photo, region: $region, address: $address, distance: $distance, distanse: $distanse, reviewCount: $reviewCount, facilities: $facilities, languages: $languages, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, isFavorite: $isFavorite, eventDate: $eventDate, eventType: $eventType, priceUnit: $priceUnit, viewType: $viewType)';
 }
 
 
@@ -911,7 +919,7 @@ abstract mixin class _$MainPageContentDtoCopyWith<$Res> implements $MainPageCont
   factory _$MainPageContentDtoCopyWith(_MainPageContentDto value, $Res Function(_MainPageContentDto) _then) = __$MainPageContentDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite, int? viewType
+ int contentId, String? title, String? caption,@ImageArrayConvertor() List<String> photos,@ImageConvertor() String? photo, String? region, String? address, double? distance,@JsonKey(name: 'distanse') int? distanse, int? reviewCount, List<FacilityItemDto>? facilities, List<String>? languages, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, bool? isFavorite, DateTime? eventDate, String? eventType, String? priceUnit, int? viewType
 });
 
 
@@ -928,7 +936,7 @@ class __$MainPageContentDtoCopyWithImpl<$Res>
 
 /// Create a copy of MainPageContentDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? viewType = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? contentId = null,Object? title = freezed,Object? caption = freezed,Object? photos = null,Object? photo = freezed,Object? region = freezed,Object? address = freezed,Object? distance = freezed,Object? distanse = freezed,Object? reviewCount = freezed,Object? facilities = freezed,Object? languages = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? isFavorite = freezed,Object? eventDate = freezed,Object? eventType = freezed,Object? priceUnit = freezed,Object? viewType = freezed,}) {
   return _then(_MainPageContentDto(
 contentId: null == contentId ? _self.contentId : contentId // ignore: cast_nullable_to_non_nullable
 as int,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
@@ -938,7 +946,8 @@ as List<String>,photo: freezed == photo ? _self.photo : photo // ignore: cast_nu
 as String?,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
 as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,distance: freezed == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
-as double?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
+as double?,distanse: freezed == distanse ? _self.distanse : distanse // ignore: cast_nullable_to_non_nullable
+as int?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
 as int?,facilities: freezed == facilities ? _self._facilities : facilities // ignore: cast_nullable_to_non_nullable
 as List<FacilityItemDto>?,languages: freezed == languages ? _self._languages : languages // ignore: cast_nullable_to_non_nullable
 as List<String>?,ratingAverage: freezed == ratingAverage ? _self.ratingAverage : ratingAverage // ignore: cast_nullable_to_non_nullable
@@ -946,7 +955,10 @@ as double?,averageCheck: freezed == averageCheck ? _self.averageCheck : averageC
 as int?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double?,priceInDollar: freezed == priceInDollar ? _self.priceInDollar : priceInDollar // ignore: cast_nullable_to_non_nullable
 as double?,isFavorite: freezed == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
-as bool?,viewType: freezed == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
+as bool?,eventDate: freezed == eventDate ? _self.eventDate : eventDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,eventType: freezed == eventType ? _self.eventType : eventType // ignore: cast_nullable_to_non_nullable
+as String?,priceUnit: freezed == priceUnit ? _self.priceUnit : priceUnit // ignore: cast_nullable_to_non_nullable
+as String?,viewType: freezed == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
 as int?,
   ));
 }

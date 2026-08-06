@@ -58,4 +58,4 @@ export 'src/components/text/utils.dart';
 export 'src/components/custom_infinite_carousel/custom_infinite_carousel.dart';
 export 'src/components/gradient_blur/soft_edge.dart';
 
-// export 'src/components/toast/toast.dart';
+export 'src/components/toast/toast.dart';

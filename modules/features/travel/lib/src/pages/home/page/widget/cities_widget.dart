@@ -1,11 +1,22 @@
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:travel/src/core/extension.dart';
 
+/// Bosh sahifadagi "Города" bo'limi — to'g'ridan-to'g'ri domain modeli [City]
+/// bilan ishlaydi (alohida UI-model yo'q). [weekend] — barcha shaharlar uchun
+/// umumiy dam olish kunlari matni.
 class CitiesWidget extends StatelessWidget {
-  final List<CityData> cities;
-  final ValueChanged<CityData>? onCityTap;
+  final List<City> cities;
+  final String? weekend;
+  final ValueChanged<City>? onCityTap;
 
-  const CitiesWidget({super.key, required this.cities, this.onCityTap});
+  const CitiesWidget({
+    super.key,
+    required this.cities,
+    this.weekend,
+    this.onCityTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +36,10 @@ class CitiesWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Города").h3(),
+                  Text(context.localization.home_cities).h3(),
                   const SizedBox(height: 4),
                   Text(
-                    "Куда хотите сходить в выходные?",
+                    context.localization.home_cities_subtitle,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ).bodyMd(color: context.appColors.textIconColor.secondary),
@@ -46,6 +57,7 @@ class CitiesWidget extends StatelessWidget {
                   final city = cities[index];
                   return _CityCard(
                     city: city,
+                    weekend: weekend ?? "",
                     onTap: onCityTap == null ? null : () => onCityTap!(city),
                   );
                 },
@@ -57,11 +69,13 @@ class CitiesWidget extends StatelessWidget {
     );
   }
 }
+
 class _CityCard extends StatelessWidget {
-  final CityData city;
+  final City city;
+  final String weekend;
   final VoidCallback? onTap;
 
-  const _CityCard({required this.city, this.onTap});
+  const _CityCard({required this.city, required this.weekend, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -75,28 +89,28 @@ class _CityCard extends StatelessWidget {
           height: 280,
           child: Stack(
             children: [
-              SoftEdgeBlur(
-                edges: [
-                  EdgeBlur(
-                    type: EdgeType.bottomEdge,
-                    size: 160,
-                    sigma: 6,
-                    tileMode: TileMode.mirror,
-                    controlPoints: [
-                      ControlPoint(
-                        position: 0.8,
-                        type: ControlPointType.visible,
-                      ),
-                      ControlPoint(
-                        position: 1,
-                        type: ControlPointType.transparent,
-                      ),
-                    ],
-                  ),
-                ],
-                child: Positioned.fill(
+              Positioned.fill(
+                child: SoftEdgeBlur(
+                  edges: [
+                    EdgeBlur(
+                      type: EdgeType.bottomEdge,
+                      size: 160,
+                      sigma: 6,
+                      tileMode: TileMode.mirror,
+                      controlPoints: [
+                        ControlPoint(
+                          position: 0.8,
+                          type: ControlPointType.visible,
+                        ),
+                        ControlPoint(
+                          position: 1,
+                          type: ControlPointType.transparent,
+                        ),
+                      ],
+                    ),
+                  ],
                   child: ExtendedImage.network(
-                    city.imageUrl,
+                    city.photo ?? "",
                     fit: BoxFit.cover,
                     loadStateChanged: (state) {
                       switch (state.extendedImageLoadState) {
@@ -142,14 +156,14 @@ class _CityCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      city.title,
+                      city.name,
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ).h3(color: context.appColors.static.white),
                     const SizedBox(height: 4),
                     Text(
-                      city.date,
+                      weekend,
                       textAlign: TextAlign.center,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -172,7 +186,7 @@ class _CityCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: Text(
-                    city.badgeText,
+                    context.localization.home_city_badge,
                     maxLines: 1,
                   ).labelSm(color: context.appColors.static.black),
                 ),
@@ -183,19 +197,4 @@ class _CityCard extends StatelessWidget {
       ),
     );
   }
-}
-
-
-class CityData {
-  final String imageUrl;
-  final String title;
-  final String date;
-  final String badgeText;
-
-  const CityData({
-    required this.imageUrl,
-    required this.title,
-    required this.date,
-    this.badgeText = "Хотите посетить",
-  });
 }

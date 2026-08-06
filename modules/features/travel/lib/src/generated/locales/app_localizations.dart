@@ -517,6 +517,48 @@ abstract class FeatureTravelLocalizations {
   /// **'My eSIM'**
   String get catalogMyEsim;
 
+  /// No description provided for @currency_som.
+  ///
+  /// In ru, this message translates to:
+  /// **'сум'**
+  String get currency_som;
+
+  /// No description provided for @home_events.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мероприятия'**
+  String get home_events;
+
+  /// No description provided for @home_cities.
+  ///
+  /// In ru, this message translates to:
+  /// **'Города'**
+  String get home_cities;
+
+  /// No description provided for @home_cities_subtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Куда хотите сходить в выходные?'**
+  String get home_cities_subtitle;
+
+  /// No description provided for @home_city_badge.
+  ///
+  /// In ru, this message translates to:
+  /// **'Хотите посетить'**
+  String get home_city_badge;
+
+  /// No description provided for @home_search_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Куда хотите поехать?'**
+  String get home_search_hint;
+
+  /// No description provided for @home_currency_calculator.
+  ///
+  /// In ru, this message translates to:
+  /// **'Калькулятор валют'**
+  String get home_currency_calculator;
+
   /// No description provided for @catalogTravelQuiz.
   ///
   /// In ru, this message translates to:
@@ -912,6 +954,234 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Нет'**
   String get premiumCancelDismiss;
+
+  /// No description provided for @contractDetailsTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Детали договора'**
+  String get contractDetailsTitle;
+
+  /// No description provided for @contractTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Номер договора №{number}'**
+  String contractTitle(Object number);
+
+  /// No description provided for @contractInfoSection.
+  ///
+  /// In ru, this message translates to:
+  /// **'Информация о договоре'**
+  String get contractInfoSection;
+
+  /// No description provided for @contractDate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дата договора'**
+  String get contractDate;
+
+  /// No description provided for @contractCurrency.
+  ///
+  /// In ru, this message translates to:
+  /// **'Валюта'**
+  String get contractCurrency;
+
+  /// No description provided for @contractDiscussionEndDate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дата окончания обсуждения'**
+  String get contractDiscussionEndDate;
+
+  /// No description provided for @contractTotalAmount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Общая сумма'**
+  String get contractTotalAmount;
+
+  /// No description provided for @contractEndDate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дата окончания'**
+  String get contractEndDate;
+
+  /// No description provided for @contractOqsAmount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сумма ОКС'**
+  String get contractOqsAmount;
+
+  /// No description provided for @contractBasis.
+  ///
+  /// In ru, this message translates to:
+  /// **'Основание'**
+  String get contractBasis;
+
+  /// No description provided for @contractAdvanceAmount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сумма аванса'**
+  String get contractAdvanceAmount;
+
+  /// No description provided for @contractRegion.
+  ///
+  /// In ru, this message translates to:
+  /// **'Регион'**
+  String get contractRegion;
+
+  /// No description provided for @contractPaymentTerms.
+  ///
+  /// In ru, this message translates to:
+  /// **'Условия оплаты'**
+  String get contractPaymentTerms;
+
+  /// No description provided for @contractAdvancePaymentDay.
+  ///
+  /// In ru, this message translates to:
+  /// **'День оплаты аванса'**
+  String get contractAdvancePaymentDay;
+
+  /// No description provided for @contractPaymentPeriod.
+  ///
+  /// In ru, this message translates to:
+  /// **'Срок оплаты'**
+  String get contractPaymentPeriod;
+
+  /// No description provided for @contractDeliveryPeriod.
+  ///
+  /// In ru, this message translates to:
+  /// **'Срок поставки'**
+  String get contractDeliveryPeriod;
+
+  /// No description provided for @contractDaysValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'{days} дн.'**
+  String contractDaysValue(Object days);
+
+  /// No description provided for @contractProducts.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продукты'**
+  String get contractProducts;
+
+  /// No description provided for @contractProductName.
+  ///
+  /// In ru, this message translates to:
+  /// **'Наименование продукта'**
+  String get contractProductName;
+
+  /// No description provided for @contractCode.
+  ///
+  /// In ru, this message translates to:
+  /// **'Код'**
+  String get contractCode;
+
+  /// No description provided for @contractQuantity.
+  ///
+  /// In ru, this message translates to:
+  /// **'Количество'**
+  String get contractQuantity;
+
+  /// No description provided for @contractPrice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Цена'**
+  String get contractPrice;
+
+  /// No description provided for @contractAdvance.
+  ///
+  /// In ru, this message translates to:
+  /// **'Аванс'**
+  String get contractAdvance;
+
+  /// No description provided for @contractDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Описание'**
+  String get contractDescription;
+
+  /// No description provided for @contractProductProperties.
+  ///
+  /// In ru, this message translates to:
+  /// **'Характеристики продукта'**
+  String get contractProductProperties;
+
+  /// No description provided for @contractUnitOfMeasure.
+  ///
+  /// In ru, this message translates to:
+  /// **'Единица измерения'**
+  String get contractUnitOfMeasure;
+
+  /// No description provided for @contractGoods.
+  ///
+  /// In ru, this message translates to:
+  /// **'Товары'**
+  String get contractGoods;
+
+  /// No description provided for @contractStartingPrice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Начальная цена за единицу'**
+  String get contractStartingPrice;
+
+  /// No description provided for @contractTotalPrice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Общая цена'**
+  String get contractTotalPrice;
+
+  /// No description provided for @contractGoodQuantity.
+  ///
+  /// In ru, this message translates to:
+  /// **'Количество товара'**
+  String get contractGoodQuantity;
+
+  /// No description provided for @contractGoodSpec.
+  ///
+  /// In ru, this message translates to:
+  /// **'Спецификация товара'**
+  String get contractGoodSpec;
+
+  /// No description provided for @contractType.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тип'**
+  String get contractType;
+
+  /// No description provided for @contractGoodDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Описание товара'**
+  String get contractGoodDescription;
+
+  /// No description provided for @contractPaymentInfo.
+  ///
+  /// In ru, this message translates to:
+  /// **'Информация об оплате'**
+  String get contractPaymentInfo;
+
+  /// No description provided for @contractPrepaymentPeriod.
+  ///
+  /// In ru, this message translates to:
+  /// **'Срок предоплаты'**
+  String get contractPrepaymentPeriod;
+
+  /// No description provided for @contractAdvancePercent.
+  ///
+  /// In ru, this message translates to:
+  /// **'Процент аванса'**
+  String get contractAdvancePercent;
+
+  /// No description provided for @contractWorkDaysValue.
+  ///
+  /// In ru, this message translates to:
+  /// **'{days} раб. дн.'**
+  String contractWorkDaysValue(Object days);
+
+  /// No description provided for @contractCustomerAddress.
+  ///
+  /// In ru, this message translates to:
+  /// **'Адрес заказчика'**
+  String get contractCustomerAddress;
 }
 
 class _FeatureTravelLocalizationsDelegate

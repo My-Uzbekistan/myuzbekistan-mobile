@@ -1,12 +1,17 @@
 import 'dart:ui';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:shared/shared.dart' hide Toast;
+import 'package:travel/src/core/extension.dart';
 
+/// Bosh sahifadagi "Отели" bo'limi — to'g'ridan-to'g'ri domain modeli
+/// [MainPageContent] bilan ishlaydi (alohida UI-model yo'q).
 class HotelsWidget extends StatelessWidget {
-  final List<HotelData> hotels;
+  final List<MainPageContent> hotels;
   final VoidCallback? onSeeAll;
-  final ValueChanged<HotelData>? onHotelTap;
+  final ValueChanged<MainPageContent>? onHotelTap;
 
   const HotelsWidget({
     super.key,
@@ -34,7 +39,7 @@ class HotelsWidget extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "Отели",
+                      context.localization.catalogHotels,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ).h3(),
@@ -43,7 +48,7 @@ class HotelsWidget extends StatelessWidget {
                   GestureDetector(
                     behavior: HitTestBehavior.opaque,
                     onTap: onSeeAll,
-                    child: Text("Все")
+                    child: Text(context.localization.action_all)
                         .bodyLg(color: context.appColors.brandSeaBlue),
                   ),
                 ],
@@ -73,13 +78,18 @@ class HotelsWidget extends StatelessWidget {
 }
 
 class _HotelCard extends StatelessWidget {
-  final HotelData hotel;
+  final MainPageContent hotel;
   final VoidCallback? onTap;
 
   const _HotelCard({required this.hotel, this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final location = hotel.region ?? "";
+    final distance = _distanceText(context, hotel.distanceKm);
+    final price = (hotel.price ?? 0) > 0 ? hotel.price!.amountFormatted() : "";
+    final period = hotel.priceUnit ?? "";
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -88,10 +98,10 @@ class _HotelCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _ImageCard(hotel: hotel),
+            _ImageCard(imageUrl: hotel.mainPhoto ?? "", rating: hotel.ratingAverage),
             const SizedBox(height: 8),
             Text(
-              hotel.name,
+              hotel.title ?? "",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ).bodyMd(color: context.appColors.textIconColor.primary),
@@ -100,42 +110,48 @@ class _HotelCard extends StatelessWidget {
               children: [
                 Flexible(
                   child: Text(
-                    hotel.location,
+                    location,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ).bodySm(color: context.appColors.textIconColor.secondary),
                 ),
-                const SizedBox(width: 6),
-                Text("•")
-                    .bodySm(color: context.appColors.textIconColor.secondary),
-                const SizedBox(width: 6),
+                if (distance.isNotEmpty) ...[
+                  const SizedBox(width: 6),
+                  Text("•")
+                      .bodySm(color: context.appColors.textIconColor.secondary),
+                  const SizedBox(width: 6),
+                  Text(
+                    distance,
+                    maxLines: 1,
+                  ).bodySm(color: context.appColors.textIconColor.secondary),
+                ],
+              ],
+            ),
+            if (price.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                children: [
+                  Text(
+                    price,
+                    maxLines: 1,
+                  ).labelMd(color: context.appColors.textIconColor.primary),
+                  const SizedBox(width: 2),
+                  Text(
+                    context.localization.currency_som,
+                    maxLines: 1,
+                  ).bodySm(color: context.appColors.textIconColor.tertiary),
+                ],
+              ),
+              if (period.isNotEmpty) ...[
+                const SizedBox(height: 2),
                 Text(
-                  hotel.distance,
+                  period,
                   maxLines: 1,
                 ).bodySm(color: context.appColors.textIconColor.secondary),
               ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.baseline,
-              textBaseline: TextBaseline.alphabetic,
-              children: [
-                Text(
-                  hotel.price,
-                  maxLines: 1,
-                ).labelMd(color: context.appColors.textIconColor.primary),
-                const SizedBox(width: 2),
-                Text(
-                  hotel.currency,
-                  maxLines: 1,
-                ).bodySm(color: context.appColors.textIconColor.tertiary),
-              ],
-            ),
-            const SizedBox(height: 2),
-            Text(
-              hotel.period,
-              maxLines: 1,
-            ).bodySm(color: context.appColors.textIconColor.secondary),
+            ],
           ],
         ),
       ),
@@ -143,13 +159,28 @@ class _HotelCard extends StatelessWidget {
   }
 }
 
-class _ImageCard extends StatelessWidget {
-  final HotelData hotel;
+/// `distanse` (metr) -> "10 км" yoki "300 м". `lat`/`lon` yuborilmasa `0` keladi.
+String _distanceText(BuildContext context, double? distanceKm) {
+  if (distanceKm == null || distanceKm == 0) return "";
+  if (distanceKm < 0.5) {
+    return "${(distanceKm * 100).floor()} ${context.localization.distanceM}";
+  }
+  return "${distanceKm.floor()} ${context.localization.distanceKm}";
+}
 
-  const _ImageCard({required this.hotel});
+class _ImageCard extends StatelessWidget {
+  final String imageUrl;
+  final double? rating;
+
+  const _ImageCard({required this.imageUrl, this.rating});
 
   @override
   Widget build(BuildContext context) {
+    final r = rating ?? 0;
+    final ratingText = r <= 0
+        ? ""
+        : (r % 1 == 0 ? r.toInt().toString() : r.toStringAsFixed(1));
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(24),
       child: Container(
@@ -165,7 +196,7 @@ class _ImageCard extends StatelessWidget {
           children: [
             Positioned.fill(
               child: ExtendedImage.network(
-                hotel.imageUrl,
+                imageUrl,
                 fit: BoxFit.cover,
                 loadStateChanged: (state) {
                   switch (state.extendedImageLoadState) {
@@ -188,11 +219,12 @@ class _ImageCard extends StatelessWidget {
                 color: const Color(0xFF14191A).withValues(alpha: 0.16),
               ),
             ),
-            Positioned(
-              left: 11,
-              top: 11,
-              child: _RatingBadge(rating: hotel.rating),
-            ),
+            if (ratingText.isNotEmpty)
+              Positioned(
+                left: 11,
+                top: 11,
+                child: _RatingBadge(rating: ratingText),
+              ),
           ],
         ),
       ),
@@ -234,26 +266,4 @@ class _RatingBadge extends StatelessWidget {
       ),
     );
   }
-}
-
-class HotelData {
-  final String imageUrl;
-  final String name;
-  final String location;
-  final String distance;
-  final String rating;
-  final String price;
-  final String currency;
-  final String period;
-
-  const HotelData({
-    required this.imageUrl,
-    required this.name,
-    required this.location,
-    required this.distance,
-    required this.rating,
-    required this.price,
-    this.currency = "сум",
-    this.period = "1 ночь",
-  });
 }

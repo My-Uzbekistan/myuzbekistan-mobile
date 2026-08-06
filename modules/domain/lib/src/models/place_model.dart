@@ -53,6 +53,16 @@ class MainPageContent extends Equatable {
   final ViewType viewType;
   final bool isFavorite;
 
+  /// Tadbir sanasi (categoryId=7 "События" uchun). ISO sana, boshqa
+  /// kategoriyalarda `null`. Formatlash — ilova ishi.
+  final DateTime? eventDate;
+
+  /// Tadbir turi, so'ralgan tilda tayyor matn ("Концерт"). `null` bo'lishi mumkin.
+  final String? eventType;
+
+  /// Narx birligi ("1 kecha"). Hozircha BE `null` qaytaradi — bo'lmasa chizilmaydi.
+  final String? priceUnit;
+
   const MainPageContent({
     required this.contentId,
     required this.photos,
@@ -71,6 +81,9 @@ class MainPageContent extends Equatable {
     this.isFavorite = false,
     this.distance,
     this.reviewCount,
+    this.eventDate,
+    this.eventType,
+    this.priceUnit,
   });
 
   ContentDetail toContentDetail({String? categoryName}) {

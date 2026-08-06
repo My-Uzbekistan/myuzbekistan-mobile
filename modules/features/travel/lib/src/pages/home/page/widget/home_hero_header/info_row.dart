@@ -6,8 +6,8 @@ class _InfoRow extends StatelessWidget {
     required this.regionName,
     required this.temperature,
     required this.airQuality,
-    required this.prayerLabel,
-    required this.prayerTime,
+    required this.airQualityLevel,
+    required this.nextPrayer,
     required this.onRegionTap,
     required this.onNotificationTap,
   });
@@ -15,8 +15,12 @@ class _InfoRow extends StatelessWidget {
   final String regionName;
   final String temperature;
   final String? airQuality;
-  final String prayerLabel;
-  final DateTime prayerTime;
+
+  /// IQAir `level` — rang darajasi: 0 yashil, 1 sariq, 2 qizil, 3 qora.
+  final int? airQualityLevel;
+
+  /// Keyingi namoz vaqti — `null` bo'lsa countdown pill ko'rsatilmaydi.
+  final PrayerTimesItemModel? nextPrayer;
   final VoidCallback? onRegionTap;
   final VoidCallback? onNotificationTap;
 
@@ -24,6 +28,7 @@ class _InfoRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 8,
       children: [
         Expanded(
           child: GlassFade(
@@ -70,7 +75,10 @@ class _InfoRow extends StatelessWidget {
                           color: Colors.white.withValues(alpha: 0.2),
                         ),
                         const SizedBox(width: 6),
-                        _AqiBadge(value: airQuality!),
+                        _AqiBadge(
+                          value: airQuality!,
+                          level: airQualityLevel ?? 0,
+                        ),
                       ],
                     ],
                   ),
@@ -79,9 +87,9 @@ class _InfoRow extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(width: 8),
-        _PrayerPill(label: prayerLabel, time: prayerTime),
-        const SizedBox(width: 8),
+
+        if (nextPrayer != null) _PrayerPill(prayer: nextPrayer!),
+
         GlassFade(child: _NotificationBell(onTap: onNotificationTap)),
       ],
     );
@@ -89,23 +97,34 @@ class _InfoRow extends StatelessWidget {
 }
 
 /// Havo sifati (AQI) belgisi.
+///
+/// Rang va emoji IQAir `level` bo'yicha tanlanadi (server faqat raqamni beradi):
+/// 0 yashil 🙂, 1 sariq 😐, 2 qizil 🙁, 3 (va undan yuqori) qora 😷.
 class _AqiBadge extends StatelessWidget {
-  const _AqiBadge({required this.value});
+  const _AqiBadge({required this.value, required this.level});
 
   final String value;
+  final int level;
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.appColors.colors;
+    final (Color color, String emoji) = switch (level) {
+      0 => (colors.green, "🙂"),
+      1 => (colors.yellow, "😐"),
+      2 => (colors.red, "🙁"),
+      _ => (const Color(0xFF3F3844), "😷"),
+    };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: context.appColors.colors.green,
+        color: color,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text("🙂", style: TextStyle(fontSize: 12)),
+          Text(emoji, style: const TextStyle(fontSize: 12)),
           const SizedBox(width: 4),
           Text(value).labelSm(color: Colors.white),
         ],
@@ -114,55 +133,24 @@ class _AqiBadge extends StatelessWidget {
   }
 }
 
-/// Namoz vaqtigacha qolgan jonli sanoq (countdown) ko'rsatuvchi pill.
-class _PrayerPill extends StatefulWidget {
-  const _PrayerPill({required this.label, required this.time});
+/// Keyingi namoz vaqtigacha qolgan jonli sanoq (countdown) ko'rsatuvchi pill.
+class _PrayerPill extends HookWidget {
+  const _PrayerPill({required this.prayer});
 
-  final String label;
-  final DateTime time;
-
-  @override
-  State<_PrayerPill> createState() => _PrayerPillState();
-}
-
-class _PrayerPillState extends State<_PrayerPill> {
-  Timer? _timer;
-  late Duration _left;
-
-  @override
-  void initState() {
-    super.initState();
-    _left = _remaining();
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (!mounted) return;
-      setState(() => _left = _remaining());
-    });
-  }
-
-  @override
-  void didUpdateWidget(covariant _PrayerPill old) {
-    super.didUpdateWidget(old);
-    if (old.time != widget.time) _left = _remaining();
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  Duration _remaining() {
-    final d = widget.time.difference(DateTime.now());
-    return d.isNegative ? Duration.zero : d;
-  }
-
-  String get _formatted {
-    String two(int n) => n.toString().padLeft(2, '0');
-    return "${two(_left.inHours)}:${two(_left.inMinutes % 60)}:${two(_left.inSeconds % 60)}";
-  }
+  final PrayerTimesItemModel prayer;
 
   @override
   Widget build(BuildContext context) {
+    final left = useState(_remaining(prayer.time));
+
+    useEffect(() {
+      left.value = _remaining(prayer.time);
+      final timer = Timer.periodic(const Duration(seconds: 1), (_) {
+        left.value = _remaining(prayer.time);
+      });
+      return timer.cancel;
+    }, [prayer.time]);
+
     return AdaptiveGlass(
       borderRadius: 20,
       blur: 2,
@@ -188,16 +176,26 @@ class _PrayerPillState extends State<_PrayerPill> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.label,
+                  context.localization.prayerTime(prayer.type.name),
                 ).bodyXXsm(color: Colors.white.withValues(alpha: 0.56)),
                 const SizedBox(height: 2),
-                Text(_formatted).labelSm(color: Colors.white),
+                Text(_format(left.value)).labelSm(color: Colors.white),
               ],
             ),
           ],
         ),
       ),
     );
+  }
+
+  Duration _remaining(DateTime time) {
+    final d = time.difference(DateTime.now());
+    return d.isNegative ? Duration.zero : d;
+  }
+
+  String _format(Duration left) {
+    String two(int n) => n.toString().padLeft(2, '0');
+    return "${two(left.inHours)}:${two(left.inMinutes % 60)}:${two(left.inSeconds % 60)}";
   }
 }
 

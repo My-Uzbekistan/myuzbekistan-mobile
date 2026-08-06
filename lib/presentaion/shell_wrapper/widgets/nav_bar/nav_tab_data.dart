@@ -33,12 +33,11 @@ List<NavTabData> navBarTabs(BuildContext context, {String? profilePhotoUrl}) {
   final l = context.localizations!;
   return [
     NavTabData(asset: Assets.svg.tabIconHome, label: l.nav_home), // 0 — Bosh sahifa (Travel)
-    NavTabData(asset: Assets.svg.tabIconHome, label: 'Home 2'), // 1 — Yangi Home UI (vaqtinchalik)
-    NavTabData(asset: Assets.svg.tabIconFinance, label: l.nav_payment), // 2 — To'lovlar (Finance)
-    NavTabData(asset: Assets.svg.tabIconCatalog, label: l.nav_services), // 3 — Xizmatlar (Catalog)
+    NavTabData(asset: Assets.svg.tabIconFinance, label: l.nav_payment), // 1 — To'lovlar (Finance)
+    NavTabData(asset: Assets.svg.tabIconCatalog, label: l.nav_services), // 2 — Xizmatlar (Catalog)
     NavTabData(
       asset: Assets.svg.tabIconMore,
-      label: l.nav_more, // 4 — Profil / Yana (More) — avatar bilan
+      label: l.nav_more, // 3 — Profil / Yana (More) — avatar bilan
       iconBuilder: (selected, color) => NavProfileAvatar(
         photoUrl: profilePhotoUrl,
         selected: selected,

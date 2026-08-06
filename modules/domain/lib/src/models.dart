@@ -1,5 +1,7 @@
 export 'models/about.dart';
 export 'models/categories.dart';
+export 'models/city.dart';
+export 'models/air_quality.dart';
 export 'models/currency.dart';
 export 'models/favorite.dart';
 export 'models/place_model.dart';
@@ -14,6 +16,7 @@ export 'models/notification_item.dart';
 export 'models/review.dart';
 export 'models/catalog_model.dart';
 export 'models/onboarding_item.dart';
+export 'models/banner_item.dart';
 
 export 'models/gift_history.dart';
 export 'models/service_action.dart';

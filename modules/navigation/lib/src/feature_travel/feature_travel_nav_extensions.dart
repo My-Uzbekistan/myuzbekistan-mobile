@@ -66,8 +66,8 @@ class FeatureTravelNavExtension {
     _context.pushType(AppNavPath.travel.imagePreview, extra: images);
   }
 
-  Future<T?> pushServices<T>(dynamic extra) {
-    return _context.pushType(AppNavPath.travel.travelServices, extra: extra);
+  Future<T?> pushServices<T>() {
+    return _context.pushType(AppNavPath.travel.travelServices);
   }
 
   void pushInvestments() {
@@ -84,5 +84,13 @@ class FeatureTravelNavExtension {
 
   void pushNotificationsDetail({required NotificationItem item}) {
     _context.pushType(AppNavPath.travel.notificationsDetail, extra: item);
+  }
+
+  /// Shartnoma detali sahifasini ochadi.
+  Future<T?> pushContractDetail<T>({required int contractId}) {
+    return _context.pushType(
+      AppNavPath.travel.travelContractDetail,
+      queryParameters: {"contractId": "$contractId"},
+    );
   }
 }

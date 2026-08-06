@@ -8,8 +8,6 @@ import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/di/injection.dart';
 
-import '../../detail/detail_bloc/detail_bloc.dart';
-import '../../detail/review/bloc/review_bloc.dart';
 import 'item_card_avatar.dart';
 import 'load_content_bloc/load_content_bloc.dart';
 
@@ -50,6 +48,14 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> with AutomaticKeepA
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    // "Выбор гостей" (recommended) kartasi ro'yxatda takrorlanmasligi uchun
+    // uni gorizontal ro'yxatdan `contentId` bo'yicha chiqarib tashlaymiz.
+    final recommendedId = widget.data.recommended?.contentId;
+    final items = recommendedId == null
+        ? widget.data.items
+        : widget.data.items
+            .where((e) => e.contentId != recommendedId)
+            .toList();
     return Column(
       children: [
         if (widget.data.recommended != null)
@@ -68,10 +74,10 @@ class _HomeGroupsWidgetState extends State<HomeGroupsWidget> with AutomaticKeepA
             ),
           ),
         // HomeAvatarListItem()
-        if (widget.data.items.isNotEmpty)
+        if (items.isNotEmpty)
           HomeListCell(
             categoryId: widget.data.categoryId,
-            items: widget.data.items,
+            items: items,
             categoryName: widget.data.title,
             openAll: widget.onOpenAll,
             onItemTap: widget.onContentItemTap,

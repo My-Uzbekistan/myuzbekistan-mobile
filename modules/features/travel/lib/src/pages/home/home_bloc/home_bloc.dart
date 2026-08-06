@@ -44,7 +44,16 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     on<_LoadPayerTimes>(_loadPrayerTimes);
     on<_LoadWeatherEvent>(_loadWeatherEvent);
     on<_LoadServicesEvent>(_loadServicesEvent);
+    on<_LoadCitiesEvent>(_loadCitiesEvent);
+    on<_LoadBannersEvent>(_loadBannersEvent);
+    on<_LoadHotelsEvent>(_loadHotelsEvent);
+    on<_LoadEventsEvent>(_loadEventsEvent);
+    on<_LoadAirQualityEvent>(_loadAirQualityEvent);
   }
+
+  /// Bosh sahifadagi maxsus bo'limlarning kategoriya id lari (BE docs).
+  static const int _hotelsCategoryId = 5; // Отели
+  static const int _eventsCategoryId = 7; // События
 
   void _initialListens() {
     _streamSubscription?.cancel();
@@ -106,6 +115,93 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     add(HomeBlocEvent.loadFavorites());
     add(HomeBlocEvent.loadPrayerTimes());
     add(HomeBlocEvent.loadServices());
+    add(HomeBlocEvent.loadCities());
+    add(HomeBlocEvent.loadBanners());
+    add(HomeBlocEvent.loadHotels());
+    add(HomeBlocEvent.loadEvents());
+    add(HomeBlocEvent.loadAirQuality());
+  }
+
+  Future<void> _loadCitiesEvent(
+    _LoadCitiesEvent event,
+    Emitter<HomeBlocState> emit,
+  ) async {
+    try {
+      final result = await _repository.loadCities();
+      dataState = dataState.copyWith(
+        cities: result.items,
+        citiesWeekend: result.weekend,
+      );
+      if (state is HomeBlocDataState) {
+        emit(dataState);
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _loadBannersEvent(
+    _LoadBannersEvent event,
+    Emitter<HomeBlocState> emit,
+  ) async {
+    try {
+      final banners = await _repository.loadBanners();
+      dataState = dataState.copyWith(banners: banners);
+      if (state is HomeBlocDataState) {
+        emit(dataState);
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _loadHotelsEvent(
+    _LoadHotelsEvent event,
+    Emitter<HomeBlocState> emit,
+  ) async {
+    try {
+      final hotels = await _repository.loadContentsByCategory(
+        categoryId: _hotelsCategoryId,
+        page: 1,
+        pageSize: 20,
+      );
+      dataState = dataState.copyWith(hotels: hotels);
+      if (state is HomeBlocDataState) {
+        emit(dataState);
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _loadEventsEvent(
+    _LoadEventsEvent event,
+    Emitter<HomeBlocState> emit,
+  ) async {
+    try {
+      final events = await _repository.loadContentsByCategory(
+        categoryId: _eventsCategoryId,
+        page: 1,
+        pageSize: 20,
+      );
+      dataState = dataState.copyWith(events: events);
+      if (state is HomeBlocDataState) {
+        emit(dataState);
+      }
+    } catch (_) {}
+  }
+
+  Future<void> _loadAirQualityEvent(
+    _LoadAirQualityEvent event,
+    Emitter<HomeBlocState> emit,
+  ) async {
+    try {
+      final position = LocationManager().getCurrentPosition();
+      // lat/lon birga yuborilishi shart — joylashuv bo'lmasa so'rov yubormaymiz.
+      if (position == null) return;
+      final airQuality = await _repository.loadAirQuality(
+        lat: position.latitude,
+        lon: position.longitude,
+      );
+      dataState = dataState.copyWith(airQuality: airQuality);
+      if (state is HomeBlocDataState) {
+        emit(dataState);
+      }
+    } catch (_) {}
   }
 
   Future<void> _loadServicesEvent(
@@ -113,9 +209,11 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     Emitter<HomeBlocState> emit,
   ) async {
     try {
+      // Bosh sahifada faqat dastlabki 6 ta xizmat ko'rsatiladi;
+      // to'liq ro'yxat "Все" bosilganda sheet ichida alohida yuklanadi.
       final catalogServices = await _repository.getCatalogV3(
         page: 1,
-        pageSize: 50,
+        pageSize: 6,
       );
       dataState = dataState.copyWith(catalogServices: catalogServices);
       if (state is HomeBlocDataState) {

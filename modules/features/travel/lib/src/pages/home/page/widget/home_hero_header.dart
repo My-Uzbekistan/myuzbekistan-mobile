@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/pages/home/widgets/prayers/prayers.dart';
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 part 'home_hero_header/collapsing_card.dart';
@@ -24,9 +26,9 @@ class HomeHeader extends StatelessWidget {
     required this.temperature,
     required this.hintText,
     required this.quickActions,
-    required this.prayerLabel,
-    required this.prayerTime,
+    this.nextPrayer,
     this.airQuality,
+    this.airQualityLevel,
     this.onRegionTap,
     this.onNotificationTap,
     this.onSearchTap,
@@ -37,8 +39,12 @@ class HomeHeader extends StatelessWidget {
   final String regionName;
   final String temperature;
   final String? airQuality;
-  final String prayerLabel;
-  final DateTime prayerTime;
+
+  /// IQAir `level` — havo sifati rang darajasi (0-3).
+  final int? airQualityLevel;
+
+  /// Keyingi (yaqinlashayotgan) namoz vaqti — `null` bo'lsa pill ko'rsatilmaydi.
+  final PrayerTimesItemModel? nextPrayer;
   final String hintText;
   final List<HomeQuickAction> quickActions;
 
@@ -58,8 +64,8 @@ class HomeHeader extends StatelessWidget {
       regionName: regionName,
       temperature: temperature,
       airQuality: airQuality,
-      prayerLabel: prayerLabel,
-      prayerTime: prayerTime,
+      airQualityLevel: airQualityLevel,
+      nextPrayer: nextPrayer,
       onRegionTap: onRegionTap,
       onNotificationTap: onNotificationTap,
     );

@@ -8,8 +8,11 @@ import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
 import '../../models/about_dto.dart';
+import '../../models/air_quality_dto.dart';
+import '../../models/banner_dto.dart';
 import '../../models/catalog/catalog_dto.dart';
 import '../../models/categories_dto.dart';
+import '../../models/cities_dto.dart';
 import '../../models/claim_dto.dart';
 import '../../models/currency_dto.dart';
 import '../../models/detail/content_dto.dart';
@@ -36,6 +39,18 @@ abstract class RestService {
 
   @GET("services")
   Future<List<ServiceActionDto>> getServices();
+
+  @GET("cities")
+  Future<CitiesResponseDto> loadCities();
+
+  @GET("banners")
+  Future<List<BannerDto>> loadBanners();
+
+  @GET("air-quality")
+  Future<AirQualityDto> loadAirQuality({
+    @Query("lat") required double lat,
+    @Query("lon") required double lon,
+  });
 
   @GET("v2/categories/{categoryId}/contents")
   Future<List<MainPageContentDto>> loadContentsByCategory({

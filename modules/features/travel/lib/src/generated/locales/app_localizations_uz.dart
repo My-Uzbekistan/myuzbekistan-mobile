@@ -260,6 +260,27 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   String get catalogMyEsim => 'My eSIM';
 
   @override
+  String get currency_som => 'so\'m';
+
+  @override
+  String get home_events => 'Tadbirlar';
+
+  @override
+  String get home_cities => 'Shaharlar';
+
+  @override
+  String get home_cities_subtitle => 'Dam olish kunlari qayerga bormoqchisiz?';
+
+  @override
+  String get home_city_badge => 'Bormoqchimisiz';
+
+  @override
+  String get home_search_hint => 'Qayerga sayohat qilmoqchisiz?';
+
+  @override
+  String get home_currency_calculator => 'Valyuta kalkulyatori';
+
+  @override
   String get catalogTravelQuiz => 'Travel Quiz';
 
   @override
@@ -504,4 +525,124 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get premiumCancelDismiss => 'Yo‘q';
+
+  @override
+  String get contractDetailsTitle => 'Shartnoma detali';
+
+  @override
+  String contractTitle(Object number) {
+    return 'Shartnoma raqami №$number';
+  }
+
+  @override
+  String get contractInfoSection => 'Shartnoma ma\'lumotlari';
+
+  @override
+  String get contractDate => 'Shartnoma sanasi';
+
+  @override
+  String get contractCurrency => 'Valyuta';
+
+  @override
+  String get contractDiscussionEndDate => 'Muhokama tugash sanasi';
+
+  @override
+  String get contractTotalAmount => 'Umumiy summa';
+
+  @override
+  String get contractEndDate => 'Tugash sanasi';
+
+  @override
+  String get contractOqsAmount => 'OQS summasi';
+
+  @override
+  String get contractBasis => 'Asos';
+
+  @override
+  String get contractAdvanceAmount => 'Avans summasi';
+
+  @override
+  String get contractRegion => 'Viloyat';
+
+  @override
+  String get contractPaymentTerms => 'To\'lov shartlari';
+
+  @override
+  String get contractAdvancePaymentDay => 'Avans to\'lov kuni';
+
+  @override
+  String get contractPaymentPeriod => 'To\'lov muddati';
+
+  @override
+  String get contractDeliveryPeriod => 'Yetkazib berish muddati';
+
+  @override
+  String contractDaysValue(Object days) {
+    return '$days kun';
+  }
+
+  @override
+  String get contractProducts => 'Mahsulotlar';
+
+  @override
+  String get contractProductName => 'Mahsulot nomi';
+
+  @override
+  String get contractCode => 'Kodi';
+
+  @override
+  String get contractQuantity => 'Miqdori';
+
+  @override
+  String get contractPrice => 'Narxi';
+
+  @override
+  String get contractAdvance => 'Avans';
+
+  @override
+  String get contractDescription => 'Tavsif';
+
+  @override
+  String get contractProductProperties => 'Mahsulot xususiyatlari';
+
+  @override
+  String get contractUnitOfMeasure => 'O\'lchov birligi';
+
+  @override
+  String get contractGoods => 'Tovarlar';
+
+  @override
+  String get contractStartingPrice => 'Birlik uchun boshlang\'ich narx';
+
+  @override
+  String get contractTotalPrice => 'Umumiy narx';
+
+  @override
+  String get contractGoodQuantity => 'Tovar miqdori';
+
+  @override
+  String get contractGoodSpec => 'Tovar spetsifikatsiyasi';
+
+  @override
+  String get contractType => 'Turi';
+
+  @override
+  String get contractGoodDescription => 'Tovar tavsifi';
+
+  @override
+  String get contractPaymentInfo => 'To\'lov haqida ma\'lumot';
+
+  @override
+  String get contractPrepaymentPeriod => 'Oldindan to\'lov muddati';
+
+  @override
+  String get contractAdvancePercent => 'Avans to\'lov foizi';
+
+  @override
+  String contractWorkDaysValue(Object days) {
+    return '$days ish kuni';
+  }
+
+  @override
+  String get contractCustomerAddress => 'Buyurtmachining manzili';
 }

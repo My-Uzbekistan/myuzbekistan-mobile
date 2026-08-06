@@ -17,11 +17,13 @@ mixin AppImageCard {
       int? star,
       double ratingAverage = 0,
       int averageCheck = 0,
+      bool blur = false,
       String? priceText}) {
     return _AppItemCardImage(
       imageUrl: imageUrl,
       ratingAverage: ratingAverage,
       averageCheck: averageCheck,
+      blur: blur,
       priceText: priceText,
     );
   }
@@ -47,6 +49,7 @@ class _AppItemCardImage extends StatefulWidget {
   final int averageCheck;
   final String? priceText;
   final Widget? topRightWidget;
+  final bool blur;
 
   const _AppItemCardImage(
       {super.key,
@@ -55,6 +58,7 @@ class _AppItemCardImage extends StatefulWidget {
       this.ratingAverage = 0,
       this.averageCheck = 0,
       this.topRightWidget,
+      this.blur = false,
 
       this.priceText});
 
@@ -84,7 +88,31 @@ class _AppItemCardImageState extends State<_AppItemCardImage>
         borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
-            _ImageContent(imageUrl: widget.imageUrl ?? ""),
+            widget.blur
+                ? Positioned.fill(
+                    child: SoftEdgeBlur(
+                      edges: [
+                        EdgeBlur(
+                          type: EdgeType.bottomEdge,
+                          size: 70,
+                          sigma: 6,
+                          tileMode: TileMode.mirror,
+                          controlPoints: [
+                            ControlPoint(
+                              position: 0.7,
+                              type: ControlPointType.visible,
+                            ),
+                            ControlPoint(
+                              position: 1,
+                              type: ControlPointType.transparent,
+                            ),
+                          ],
+                        ),
+                      ],
+                      child: _ImageContent(imageUrl: widget.imageUrl ?? ""),
+                    ),
+                  )
+                : _ImageContent(imageUrl: widget.imageUrl ?? ""),
             Positioned.fill(
                 child: Container(
               color: context.appColors.static.black.withValues(

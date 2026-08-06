@@ -6,6 +6,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i687;
 
+import 'package:data/src/contract/contract_service.dart' as _i930;
+import 'package:data/src/contract/repository/contract_repository_impl.dart'
+    as _i359;
 import 'package:data/src/di/module/locale_module.dart' as _i168;
 import 'package:data/src/di/module/network_module.dart' as _i236;
 import 'package:data/src/finance/src/network/api/finance_api_service.dart'
@@ -65,6 +68,8 @@ class DataPackageModule extends _i526.MicroPackageModule {
           gh<String>(instanceName: 'baseUrl'),
           gh<_i934.Alice>(),
         ));
+    gh.factory<_i930.ContractService>(
+        () => _i930.ContractService(gh<_i811.Dio>()));
     gh.factory<_i210.FinanceApiService>(
         () => _i210.FinanceApiService(gh<_i361.Dio>()));
     gh.factory<_i282.PremiumService>(
@@ -76,6 +81,8 @@ class DataPackageModule extends _i526.MicroPackageModule {
         ));
     gh.factory<_i494.FinanceRepository>(
         () => _i144.FinanceRepositoryImpl(gh<_i210.FinanceApiService>()));
+    gh.factory<_i494.ContractRepository>(
+        () => _i359.ContractRepositoryImpl(gh<_i930.ContractService>()));
     gh.factory<_i494.PremiumRepository>(
         () => _i872.PremiumRepositoryImpl(gh<_i282.PremiumService>()));
   }

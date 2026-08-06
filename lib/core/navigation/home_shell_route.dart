@@ -8,8 +8,6 @@ final _shellRoute = [
         child: ShellPageWrapper(navigationShell: navigationShell)),
     branches: [
       FeatureTravelRouter.shellTravel,
-      // Vaqtinchalik: yangi UI (HomeScreen) yonma-yon. UI tayyor bo'lgach o'chiriladi.
-      FeatureTravelRouter.shellHomeScreen,
       FeatureFinanceRouter.shellFinance,
       FeatureTravelRouter.shellCatalog,
       // StatefulShellBranch(

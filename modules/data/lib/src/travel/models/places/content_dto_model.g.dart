@@ -60,6 +60,7 @@ _MainPageContentDto _$MainPageContentDtoFromJson(Map<String, dynamic> json) =>
       region: json['region'] as String?,
       address: json['address'] as String?,
       distance: (json['distance'] as num?)?.toDouble(),
+      distanse: (json['distanse'] as num?)?.toInt(),
       reviewCount: (json['reviewCount'] as num?)?.toInt(),
       facilities: (json['facilities'] as List<dynamic>?)
           ?.map((e) => FacilityItemDto.fromJson(e as Map<String, dynamic>))
@@ -72,6 +73,11 @@ _MainPageContentDto _$MainPageContentDtoFromJson(Map<String, dynamic> json) =>
       price: (json['price'] as num?)?.toDouble(),
       priceInDollar: (json['priceInDollar'] as num?)?.toDouble(),
       isFavorite: json['isFavorite'] as bool?,
+      eventDate: json['eventDate'] == null
+          ? null
+          : DateTime.parse(json['eventDate'] as String),
+      eventType: json['eventType'] as String?,
+      priceUnit: json['priceUnit'] as String?,
       viewType: (json['viewType'] as num?)?.toInt(),
     );
 
@@ -85,6 +91,7 @@ Map<String, dynamic> _$MainPageContentDtoToJson(_MainPageContentDto instance) =>
       'region': instance.region,
       'address': instance.address,
       'distance': instance.distance,
+      'distanse': instance.distanse,
       'reviewCount': instance.reviewCount,
       'facilities': instance.facilities,
       'languages': instance.languages,
@@ -93,5 +100,8 @@ Map<String, dynamic> _$MainPageContentDtoToJson(_MainPageContentDto instance) =>
       'price': instance.price,
       'priceInDollar': instance.priceInDollar,
       'isFavorite': instance.isFavorite,
+      'eventDate': instance.eventDate?.toIso8601String(),
+      'eventType': instance.eventType,
+      'priceUnit': instance.priceUnit,
       'viewType': instance.viewType,
     };
