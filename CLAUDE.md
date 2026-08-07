@@ -324,13 +324,45 @@ class CardItemDto {
 
 Oddiy Dart klassi — annotatsiyasiz.
 
-### Enum (Status, Type va boshqalar)
+### Enum (Status, Type, Slug, State va boshqalar)
 
-`fromString` metodi yozilmaydi — DTO'ning `toDomain()`ida to'g'ridan-to'g'ri `.values.firstWhere` ishlatiladi (loyihada `catalog_dto.dart`, `premium_access_response.dart`da shu pattern bor):
+**BE'dan keladigan har qanday "ajratilgan qiymatli" string maydon — `status`, `type`, `slug`, `state`, `kind` va h.k. — domain modelda ENUM bo'lishi SHART.** Widget/logikada `e.type == "rating"` kabi **string literal bilan solishtirish TAQIQLANADI** — enum bilan solishtiriladi: `e.type == InfoType.rating`.
+
+Enum qiymatlari **BE docs'dan** (Bruno / Swagger) aynan olinadi. Agar docs'da yozilmagan bo'lsa — **o'zingdan to'qib chiqarma, foydalanuvchidan so'ra.**
+
+`fromString` metodi yozilmaydi — DTO'ning JSON maydoni `String` bo'lib qoladi, enumga faqat `toDomain()`da o'giriladi. Non-null uchun `.values.firstWhere(..., orElse:)`, nullable uchun `.values.firstOrNullWhere(...)`:
 
 ```dart
 status: CatalogStatus.values.firstWhere(
   (e) => e.name == status,
   orElse: () => CatalogStatus.active,
 ),
+// nullable (docs'da "bo'lmasligi mumkin" desa):
+slug: InfoSlug.values.firstOrNullWhere((e) => e.name == slug),
+```
+
+Har bir enum — o'z alohida faylida (SRP).
+
+---
+
+## Comment (Izoh) Qoidasi — Kodga izoh YOZILMAYDI
+
+Kodga **hech qanday izoh yozilmaydi** — na `//`, na `///`, na maydon/type tavsiflari (`/// text, dollarRating, distance ...` kabi). Kod o'zini o'zi tushuntirishi kerak: aniq nom, enum, kichik funksiya. Izoh o'rniga — yaxshi nomlash.
+
+Istisno: generatsiya qilingan fayllar (`*.g.dart`, `*.freezed.dart`) va `part`/`ignore_for_file` kabi kompilyatorga kerakli direktivalar.
+
+**Noto'g'ri:**
+```dart
+/// `text`, `dollarRating`, `distance` — BE type
+final String type;
+
+// masofani km ga o'giramiz
+final km = meters / 1000;
+```
+
+**To'g'ri** — izohsiz, enum va aniq nomlar bilan:
+```dart
+final InfoType type;
+
+final kilometers = meters / 1000;
 ```

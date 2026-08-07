@@ -254,6 +254,26 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   String get workingHours => 'Ish vaqti';
 
   @override
+  String get reviews => 'Sharhlar';
+
+  @override
+  String get showMore => 'Ko\'proq ko\'rsatish';
+
+  @override
+  String get open => 'Ochiq';
+
+  @override
+  String get closed => 'Yopiq';
+
+  @override
+  String distanceFromUs(Object distance) {
+    return 'Bu yerdan $distance masofadasiz';
+  }
+
+  @override
+  String get expand => 'Yoyish';
+
+  @override
   String get writeReviewInFewSentences => 'Bir necha jumlada fikr bildiring';
 
   @override

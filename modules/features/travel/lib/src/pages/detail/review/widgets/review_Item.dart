@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -60,9 +58,21 @@ class ReviewItem extends StatelessWidget {
                       ).labelMd(),
                       Row(
                         mainAxisSize: MainAxisSize.min,
-                        spacing: 4,
+                        spacing: 6,
                         children: [
-                          ReviewStars(stars: item.rating),
+                          ReviewStars(
+                            stars: item.rating,
+                            filled: true,
+                            selectedColor: context.appColors.colors.yellow,
+                          ),
+                          Container(
+                            width: 3,
+                            height: 3,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: context.appColors.textIconColor.secondary,
+                            ),
+                          ),
                           Flexible(
                             child: Text(
                               item.createdAt?.toFormatMMMY() ?? "".orEmpty(),
@@ -102,7 +112,7 @@ class ReviewItem extends StatelessWidget {
                     ).bodyMd(),
                     if (moreThan3 && isShort)
                       Text(
-                        context.localization.readMore,
+                        context.localization.expand,
                         style: CustomTypography.bodyMd.copyWith(
                           color: context.appColors.brand,
                           decoration: TextDecoration.underline,

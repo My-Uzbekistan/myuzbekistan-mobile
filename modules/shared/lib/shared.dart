@@ -1,6 +1,7 @@
 
 export 'src/extensions/num_extensions.dart';
 export 'src/extensions/date_time_extension.dart';
+export 'src/extensions/distance_extension.dart';
 export 'src/models/pair.dart';
 export 'package:get_it/get_it.dart';
 export 'package:injectable/injectable.dart';

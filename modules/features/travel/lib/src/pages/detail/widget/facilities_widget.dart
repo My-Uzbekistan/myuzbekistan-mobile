@@ -4,39 +4,42 @@ import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
-import 'package:travel/src/pages/detail/widget/underline_button.dart';
 
 import 'icon_text_cell.dart';
-import 'items_title.dart';
+import 'section_title.dart';
 
 class FacilitiesWidget extends StatelessWidget {
-  final List<Facility> facilities;
+  final ContentDetail content;
 
-  const FacilitiesWidget({super.key, required this.facilities});
+  const FacilitiesWidget({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
+    final facilities = content.facilities ?? [];
+    final hasMore = facilities.length > 4 || content.facilityGroupsAvailable;
     return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ItemsTitle(title: context.localization.whatAmenitiesAwait),
-            ...facilities
-                    .take(4)
-                    .map((e) => IconTextCell(title: e.name, iconUrl: e.icon))
-                    .toList() ??
-                [],
-            if (facilities.length > 4)
-              DetailUnderLineButton(
-                onTap: () {
-                  context.pushNamed(
-                    AppNavPath.travel.detailAllFacilities.name,
-                    extra: facilities,
-                  );
-                },
-                actionText: context.localization.viewAllAmenities,
-              ),
-          ],
-        );
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SectionTitle(context.localization.whatAmenitiesAwait),
+        ...facilities
+            .take(4)
+            .map((e) => IconTextCell(title: e.name, iconUrl: e.icon)),
+        if (hasMore)
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: AppActionButton(
+              type: ActionButtonType.secondary,
+              actionText: context.localization.showMore,
+              onPressed: () {
+                context.pushNamed(
+                  AppNavPath.travel.detailAllFacilities.name,
+                  extra: content,
+                );
+              },
+            ),
+          ),
+      ],
+    );
   }
 }
 
@@ -55,7 +58,7 @@ class LanguagesWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ItemsTitle(title: title),
+        SectionTitle(title),
         Wrap(
           spacing: 8,
           runSpacing: 8,

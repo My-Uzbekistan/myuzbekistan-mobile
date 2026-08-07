@@ -1,0 +1,1 @@
+enum InfoState { open, closed }

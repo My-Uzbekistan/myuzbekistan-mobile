@@ -505,6 +505,42 @@ abstract class FeatureTravelLocalizations {
   /// **'Рабочее время'**
   String get workingHours;
 
+  /// No description provided for @reviews.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзывы'**
+  String get reviews;
+
+  /// No description provided for @showMore.
+  ///
+  /// In ru, this message translates to:
+  /// **'Показать больше'**
+  String get showMore;
+
+  /// No description provided for @open.
+  ///
+  /// In ru, this message translates to:
+  /// **'Открыто'**
+  String get open;
+
+  /// No description provided for @closed.
+  ///
+  /// In ru, this message translates to:
+  /// **'Закрыто'**
+  String get closed;
+
+  /// No description provided for @distanceFromUs.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы находитесь в {distance} от нас'**
+  String distanceFromUs(Object distance);
+
+  /// No description provided for @expand.
+  ///
+  /// In ru, this message translates to:
+  /// **'Развернуть'**
+  String get expand;
+
   /// No description provided for @writeReviewInFewSentences.
   ///
   /// In ru, this message translates to:

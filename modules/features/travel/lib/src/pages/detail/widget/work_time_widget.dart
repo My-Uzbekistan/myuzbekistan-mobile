@@ -1,41 +1,36 @@
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:travel/src/core/extension.dart';
 
-import 'items_title.dart';
+import 'section_title.dart';
 
 class WorkTimeWidget extends StatelessWidget {
   final String? title;
-  final String? workingHours;
+  final List<WorkingScheduleDay> schedule;
 
-  const WorkTimeWidget({super.key, this.title, this.workingHours});
+  const WorkTimeWidget({super.key, this.title, this.schedule = const []});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ItemsTitle(title: title ?? ""),
-          Text(workingHours ?? "", style: CustomTypography.bodyLg),
-          // Row(
-          //   spacing: 4,
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   children: [
-          //     SizedBox(
-          //       child:
-          //       Assets.svgIconTime.toSvgImage(colorFilter: ColorFilter.mode(context.appColors.textIconColor.primary, BlendMode.srcIn),height: 16,width: 16,fit: BoxFit.contain),
-          //     ),
-          //     Flexible(
-          //         child: Text(
-          //       "workingHours" ?? "",
-          //       style: CustomTypography.bodyLg,
-          //     ))
-          //   ],
-          // )
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SectionTitle(title ?? ""),
+        ...schedule.map(
+          (day) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 6),
+            child: Text(_format(context, day), maxLines: 1).bodyLg(),
+          ),
+        ),
+      ],
     );
+  }
+
+  String _format(BuildContext context, WorkingScheduleDay day) {
+    if (day.isClosed || day.from == null || day.to == null) {
+      return "${day.name}, ${context.localization.closed}";
+    }
+    return "${day.name}, ${day.from} – ${day.to}";
   }
 }

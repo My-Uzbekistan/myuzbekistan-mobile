@@ -254,6 +254,26 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   String get workingHours => 'Working hours';
 
   @override
+  String get reviews => 'Reviews';
+
+  @override
+  String get showMore => 'Show more';
+
+  @override
+  String get open => 'Open';
+
+  @override
+  String get closed => 'Closed';
+
+  @override
+  String distanceFromUs(Object distance) {
+    return 'You are $distance away from us';
+  }
+
+  @override
+  String get expand => 'Expand';
+
+  @override
   String get writeReviewInFewSentences => 'Write a review in a few sentences';
 
   @override

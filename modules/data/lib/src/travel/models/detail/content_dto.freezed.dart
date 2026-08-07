@@ -15,7 +15,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ContentDto {
 
- int get id; String? get title; String? get description; int? get categoryId; String? get categoryName; bool? get isFavorite; String? get workingHours; List<double>? get location; List<FacilityItemDto>? get facilities; List<String>? get languages; List<AttachmentsItemDto>? get attachments;@ImageArrayConvertor() List<String>? get photos;@ImageConvertor() String? get photo; List<ContactsDto>? get contacts; double? get ratingAverage; int? get averageCheck; double? get price; double? get priceInDollar; String? get address; String? get region; double? get distance; int? get reviewCount; InfoDto? get info;@ViewTypeConvertor() ViewType get viewType;
+ int get id; String? get title; String? get shortDescription; String? get description; int? get categoryId; String? get categoryName; bool? get isFavorite; String? get workingHours; List<WorkingScheduleDto>? get workingSchedule; List<double>? get location; List<FacilityItemDto>? get facilities; List<FacilityGroupDto>? get facilityGroups; List<String>? get languages; List<AttachmentsItemDto>? get attachments;@ImageArrayConvertor() List<String>? get photos;@ImageConvertor() String? get photo; List<ContactsDto>? get contacts; double? get ratingAverage; int? get averageCheck; double? get price; double? get priceInDollar; String? get priceUnit; DateTime? get eventDate; String? get eventType; String? get address; String? get region; double? get distance;// BE `v2/contents/{id}` (details) `distanse` (metrda, int) qaytaradi.
+@JsonKey(name: 'distanse') int? get distanse; int? get reviewCount; InfoDto? get info;@ViewTypeConvertor() ViewType get viewType;
 /// Create a copy of ContentDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +29,16 @@ $ContentDtoCopyWith<ContentDto> get copyWith => _$ContentDtoCopyWithImpl<Content
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ContentDto&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.workingHours, workingHours) || other.workingHours == workingHours)&&const DeepCollectionEquality().equals(other.location, location)&&const DeepCollectionEquality().equals(other.facilities, facilities)&&const DeepCollectionEquality().equals(other.languages, languages)&&const DeepCollectionEquality().equals(other.attachments, attachments)&&const DeepCollectionEquality().equals(other.photos, photos)&&(identical(other.photo, photo) || other.photo == photo)&&const DeepCollectionEquality().equals(other.contacts, contacts)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.address, address) || other.address == address)&&(identical(other.region, region) || other.region == region)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.info, info) || other.info == info)&&(identical(other.viewType, viewType) || other.viewType == viewType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ContentDto&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.shortDescription, shortDescription) || other.shortDescription == shortDescription)&&(identical(other.description, description) || other.description == description)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.workingHours, workingHours) || other.workingHours == workingHours)&&const DeepCollectionEquality().equals(other.workingSchedule, workingSchedule)&&const DeepCollectionEquality().equals(other.location, location)&&const DeepCollectionEquality().equals(other.facilities, facilities)&&const DeepCollectionEquality().equals(other.facilityGroups, facilityGroups)&&const DeepCollectionEquality().equals(other.languages, languages)&&const DeepCollectionEquality().equals(other.attachments, attachments)&&const DeepCollectionEquality().equals(other.photos, photos)&&(identical(other.photo, photo) || other.photo == photo)&&const DeepCollectionEquality().equals(other.contacts, contacts)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.priceUnit, priceUnit) || other.priceUnit == priceUnit)&&(identical(other.eventDate, eventDate) || other.eventDate == eventDate)&&(identical(other.eventType, eventType) || other.eventType == eventType)&&(identical(other.address, address) || other.address == address)&&(identical(other.region, region) || other.region == region)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.distanse, distanse) || other.distanse == distanse)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.info, info) || other.info == info)&&(identical(other.viewType, viewType) || other.viewType == viewType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,title,description,categoryId,categoryName,isFavorite,workingHours,const DeepCollectionEquality().hash(location),const DeepCollectionEquality().hash(facilities),const DeepCollectionEquality().hash(languages),const DeepCollectionEquality().hash(attachments),const DeepCollectionEquality().hash(photos),photo,const DeepCollectionEquality().hash(contacts),ratingAverage,averageCheck,price,priceInDollar,address,region,distance,reviewCount,info,viewType]);
+int get hashCode => Object.hashAll([runtimeType,id,title,shortDescription,description,categoryId,categoryName,isFavorite,workingHours,const DeepCollectionEquality().hash(workingSchedule),const DeepCollectionEquality().hash(location),const DeepCollectionEquality().hash(facilities),const DeepCollectionEquality().hash(facilityGroups),const DeepCollectionEquality().hash(languages),const DeepCollectionEquality().hash(attachments),const DeepCollectionEquality().hash(photos),photo,const DeepCollectionEquality().hash(contacts),ratingAverage,averageCheck,price,priceInDollar,priceUnit,eventDate,eventType,address,region,distance,distanse,reviewCount,info,viewType]);
 
 @override
 String toString() {
-  return 'ContentDto(id: $id, title: $title, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, location: $location, facilities: $facilities, languages: $languages, attachments: $attachments, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, address: $address, region: $region, distance: $distance, reviewCount: $reviewCount, info: $info, viewType: $viewType)';
+  return 'ContentDto(id: $id, title: $title, shortDescription: $shortDescription, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, workingSchedule: $workingSchedule, location: $location, facilities: $facilities, facilityGroups: $facilityGroups, languages: $languages, attachments: $attachments, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, priceUnit: $priceUnit, eventDate: $eventDate, eventType: $eventType, address: $address, region: $region, distance: $distance, distanse: $distanse, reviewCount: $reviewCount, info: $info, viewType: $viewType)';
 }
 
 
@@ -48,7 +49,7 @@ abstract mixin class $ContentDtoCopyWith<$Res>  {
   factory $ContentDtoCopyWith(ContentDto value, $Res Function(ContentDto) _then) = _$ContentDtoCopyWithImpl;
 @useResult
 $Res call({
- int id, String? title, String? description, int? categoryId, String? categoryName, bool? isFavorite, String? workingHours, List<double>? location, List<FacilityItemDto>? facilities, List<String>? languages, List<AttachmentsItemDto>? attachments,@ImageArrayConvertor() List<String>? photos,@ImageConvertor() String? photo, List<ContactsDto>? contacts, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, String? address, String? region, double? distance, int? reviewCount, InfoDto? info,@ViewTypeConvertor() ViewType viewType
+ int id, String? title, String? shortDescription, String? description, int? categoryId, String? categoryName, bool? isFavorite, String? workingHours, List<WorkingScheduleDto>? workingSchedule, List<double>? location, List<FacilityItemDto>? facilities, List<FacilityGroupDto>? facilityGroups, List<String>? languages, List<AttachmentsItemDto>? attachments,@ImageArrayConvertor() List<String>? photos,@ImageConvertor() String? photo, List<ContactsDto>? contacts, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, String? priceUnit, DateTime? eventDate, String? eventType, String? address, String? region, double? distance,@JsonKey(name: 'distanse') int? distanse, int? reviewCount, InfoDto? info,@ViewTypeConvertor() ViewType viewType
 });
 
 
@@ -65,18 +66,21 @@ class _$ContentDtoCopyWithImpl<$Res>
 
 /// Create a copy of ContentDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = freezed,Object? description = freezed,Object? categoryId = freezed,Object? categoryName = freezed,Object? isFavorite = freezed,Object? workingHours = freezed,Object? location = freezed,Object? facilities = freezed,Object? languages = freezed,Object? attachments = freezed,Object? photos = freezed,Object? photo = freezed,Object? contacts = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? address = freezed,Object? region = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? info = freezed,Object? viewType = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? title = freezed,Object? shortDescription = freezed,Object? description = freezed,Object? categoryId = freezed,Object? categoryName = freezed,Object? isFavorite = freezed,Object? workingHours = freezed,Object? workingSchedule = freezed,Object? location = freezed,Object? facilities = freezed,Object? facilityGroups = freezed,Object? languages = freezed,Object? attachments = freezed,Object? photos = freezed,Object? photo = freezed,Object? contacts = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? priceUnit = freezed,Object? eventDate = freezed,Object? eventType = freezed,Object? address = freezed,Object? region = freezed,Object? distance = freezed,Object? distanse = freezed,Object? reviewCount = freezed,Object? info = freezed,Object? viewType = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String?,shortDescription: freezed == shortDescription ? _self.shortDescription : shortDescription // ignore: cast_nullable_to_non_nullable
 as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as int?,categoryName: freezed == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
 as String?,isFavorite: freezed == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
 as bool?,workingHours: freezed == workingHours ? _self.workingHours : workingHours // ignore: cast_nullable_to_non_nullable
-as String?,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
+as String?,workingSchedule: freezed == workingSchedule ? _self.workingSchedule : workingSchedule // ignore: cast_nullable_to_non_nullable
+as List<WorkingScheduleDto>?,location: freezed == location ? _self.location : location // ignore: cast_nullable_to_non_nullable
 as List<double>?,facilities: freezed == facilities ? _self.facilities : facilities // ignore: cast_nullable_to_non_nullable
-as List<FacilityItemDto>?,languages: freezed == languages ? _self.languages : languages // ignore: cast_nullable_to_non_nullable
+as List<FacilityItemDto>?,facilityGroups: freezed == facilityGroups ? _self.facilityGroups : facilityGroups // ignore: cast_nullable_to_non_nullable
+as List<FacilityGroupDto>?,languages: freezed == languages ? _self.languages : languages // ignore: cast_nullable_to_non_nullable
 as List<String>?,attachments: freezed == attachments ? _self.attachments : attachments // ignore: cast_nullable_to_non_nullable
 as List<AttachmentsItemDto>?,photos: freezed == photos ? _self.photos : photos // ignore: cast_nullable_to_non_nullable
 as List<String>?,photo: freezed == photo ? _self.photo : photo // ignore: cast_nullable_to_non_nullable
@@ -85,10 +89,14 @@ as List<ContactsDto>?,ratingAverage: freezed == ratingAverage ? _self.ratingAver
 as double?,averageCheck: freezed == averageCheck ? _self.averageCheck : averageCheck // ignore: cast_nullable_to_non_nullable
 as int?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double?,priceInDollar: freezed == priceInDollar ? _self.priceInDollar : priceInDollar // ignore: cast_nullable_to_non_nullable
-as double?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as double?,priceUnit: freezed == priceUnit ? _self.priceUnit : priceUnit // ignore: cast_nullable_to_non_nullable
+as String?,eventDate: freezed == eventDate ? _self.eventDate : eventDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,eventType: freezed == eventType ? _self.eventType : eventType // ignore: cast_nullable_to_non_nullable
+as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
 as String?,distance: freezed == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
-as double?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
+as double?,distanse: freezed == distanse ? _self.distanse : distanse // ignore: cast_nullable_to_non_nullable
+as int?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
 as int?,info: freezed == info ? _self.info : info // ignore: cast_nullable_to_non_nullable
 as InfoDto?,viewType: null == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
 as ViewType,
@@ -188,10 +196,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? title,  String? description,  int? categoryId,  String? categoryName,  bool? isFavorite,  String? workingHours,  List<double>? location,  List<FacilityItemDto>? facilities,  List<String>? languages,  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor()  List<String>? photos, @ImageConvertor()  String? photo,  List<ContactsDto>? contacts,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  String? address,  String? region,  double? distance,  int? reviewCount,  InfoDto? info, @ViewTypeConvertor()  ViewType viewType)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int id,  String? title,  String? shortDescription,  String? description,  int? categoryId,  String? categoryName,  bool? isFavorite,  String? workingHours,  List<WorkingScheduleDto>? workingSchedule,  List<double>? location,  List<FacilityItemDto>? facilities,  List<FacilityGroupDto>? facilityGroups,  List<String>? languages,  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor()  List<String>? photos, @ImageConvertor()  String? photo,  List<ContactsDto>? contacts,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  String? priceUnit,  DateTime? eventDate,  String? eventType,  String? address,  String? region,  double? distance, @JsonKey(name: 'distanse')  int? distanse,  int? reviewCount,  InfoDto? info, @ViewTypeConvertor()  ViewType viewType)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ContentDto() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.categoryId,_that.categoryName,_that.isFavorite,_that.workingHours,_that.location,_that.facilities,_that.languages,_that.attachments,_that.photos,_that.photo,_that.contacts,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.address,_that.region,_that.distance,_that.reviewCount,_that.info,_that.viewType);case _:
+return $default(_that.id,_that.title,_that.shortDescription,_that.description,_that.categoryId,_that.categoryName,_that.isFavorite,_that.workingHours,_that.workingSchedule,_that.location,_that.facilities,_that.facilityGroups,_that.languages,_that.attachments,_that.photos,_that.photo,_that.contacts,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.priceUnit,_that.eventDate,_that.eventType,_that.address,_that.region,_that.distance,_that.distanse,_that.reviewCount,_that.info,_that.viewType);case _:
   return orElse();
 
 }
@@ -209,10 +217,10 @@ return $default(_that.id,_that.title,_that.description,_that.categoryId,_that.ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? title,  String? description,  int? categoryId,  String? categoryName,  bool? isFavorite,  String? workingHours,  List<double>? location,  List<FacilityItemDto>? facilities,  List<String>? languages,  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor()  List<String>? photos, @ImageConvertor()  String? photo,  List<ContactsDto>? contacts,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  String? address,  String? region,  double? distance,  int? reviewCount,  InfoDto? info, @ViewTypeConvertor()  ViewType viewType)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int id,  String? title,  String? shortDescription,  String? description,  int? categoryId,  String? categoryName,  bool? isFavorite,  String? workingHours,  List<WorkingScheduleDto>? workingSchedule,  List<double>? location,  List<FacilityItemDto>? facilities,  List<FacilityGroupDto>? facilityGroups,  List<String>? languages,  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor()  List<String>? photos, @ImageConvertor()  String? photo,  List<ContactsDto>? contacts,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  String? priceUnit,  DateTime? eventDate,  String? eventType,  String? address,  String? region,  double? distance, @JsonKey(name: 'distanse')  int? distanse,  int? reviewCount,  InfoDto? info, @ViewTypeConvertor()  ViewType viewType)  $default,) {final _that = this;
 switch (_that) {
 case _ContentDto():
-return $default(_that.id,_that.title,_that.description,_that.categoryId,_that.categoryName,_that.isFavorite,_that.workingHours,_that.location,_that.facilities,_that.languages,_that.attachments,_that.photos,_that.photo,_that.contacts,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.address,_that.region,_that.distance,_that.reviewCount,_that.info,_that.viewType);case _:
+return $default(_that.id,_that.title,_that.shortDescription,_that.description,_that.categoryId,_that.categoryName,_that.isFavorite,_that.workingHours,_that.workingSchedule,_that.location,_that.facilities,_that.facilityGroups,_that.languages,_that.attachments,_that.photos,_that.photo,_that.contacts,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.priceUnit,_that.eventDate,_that.eventType,_that.address,_that.region,_that.distance,_that.distanse,_that.reviewCount,_that.info,_that.viewType);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -229,10 +237,10 @@ return $default(_that.id,_that.title,_that.description,_that.categoryId,_that.ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? title,  String? description,  int? categoryId,  String? categoryName,  bool? isFavorite,  String? workingHours,  List<double>? location,  List<FacilityItemDto>? facilities,  List<String>? languages,  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor()  List<String>? photos, @ImageConvertor()  String? photo,  List<ContactsDto>? contacts,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  String? address,  String? region,  double? distance,  int? reviewCount,  InfoDto? info, @ViewTypeConvertor()  ViewType viewType)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int id,  String? title,  String? shortDescription,  String? description,  int? categoryId,  String? categoryName,  bool? isFavorite,  String? workingHours,  List<WorkingScheduleDto>? workingSchedule,  List<double>? location,  List<FacilityItemDto>? facilities,  List<FacilityGroupDto>? facilityGroups,  List<String>? languages,  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor()  List<String>? photos, @ImageConvertor()  String? photo,  List<ContactsDto>? contacts,  double? ratingAverage,  int? averageCheck,  double? price,  double? priceInDollar,  String? priceUnit,  DateTime? eventDate,  String? eventType,  String? address,  String? region,  double? distance, @JsonKey(name: 'distanse')  int? distanse,  int? reviewCount,  InfoDto? info, @ViewTypeConvertor()  ViewType viewType)?  $default,) {final _that = this;
 switch (_that) {
 case _ContentDto() when $default != null:
-return $default(_that.id,_that.title,_that.description,_that.categoryId,_that.categoryName,_that.isFavorite,_that.workingHours,_that.location,_that.facilities,_that.languages,_that.attachments,_that.photos,_that.photo,_that.contacts,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.address,_that.region,_that.distance,_that.reviewCount,_that.info,_that.viewType);case _:
+return $default(_that.id,_that.title,_that.shortDescription,_that.description,_that.categoryId,_that.categoryName,_that.isFavorite,_that.workingHours,_that.workingSchedule,_that.location,_that.facilities,_that.facilityGroups,_that.languages,_that.attachments,_that.photos,_that.photo,_that.contacts,_that.ratingAverage,_that.averageCheck,_that.price,_that.priceInDollar,_that.priceUnit,_that.eventDate,_that.eventType,_that.address,_that.region,_that.distance,_that.distanse,_that.reviewCount,_that.info,_that.viewType);case _:
   return null;
 
 }
@@ -244,16 +252,26 @@ return $default(_that.id,_that.title,_that.description,_that.categoryId,_that.ca
 @JsonSerializable()
 
 class _ContentDto extends ContentDto {
-  const _ContentDto({required this.id, this.title, this.description, this.categoryId, this.categoryName, this.isFavorite, this.workingHours, final  List<double>? location, final  List<FacilityItemDto>? facilities, final  List<String>? languages, final  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor() final  List<String>? photos, @ImageConvertor() this.photo, final  List<ContactsDto>? contacts, this.ratingAverage, this.averageCheck, this.price, this.priceInDollar, this.address, this.region, this.distance, this.reviewCount, this.info, @ViewTypeConvertor() this.viewType = ViewType.places}): _location = location,_facilities = facilities,_languages = languages,_attachments = attachments,_photos = photos,_contacts = contacts,super._();
+  const _ContentDto({required this.id, this.title, this.shortDescription, this.description, this.categoryId, this.categoryName, this.isFavorite, this.workingHours, final  List<WorkingScheduleDto>? workingSchedule, final  List<double>? location, final  List<FacilityItemDto>? facilities, final  List<FacilityGroupDto>? facilityGroups, final  List<String>? languages, final  List<AttachmentsItemDto>? attachments, @ImageArrayConvertor() final  List<String>? photos, @ImageConvertor() this.photo, final  List<ContactsDto>? contacts, this.ratingAverage, this.averageCheck, this.price, this.priceInDollar, this.priceUnit, this.eventDate, this.eventType, this.address, this.region, this.distance, @JsonKey(name: 'distanse') this.distanse, this.reviewCount, this.info, @ViewTypeConvertor() this.viewType = ViewType.places}): _workingSchedule = workingSchedule,_location = location,_facilities = facilities,_facilityGroups = facilityGroups,_languages = languages,_attachments = attachments,_photos = photos,_contacts = contacts,super._();
   factory _ContentDto.fromJson(Map<String, dynamic> json) => _$ContentDtoFromJson(json);
 
 @override final  int id;
 @override final  String? title;
+@override final  String? shortDescription;
 @override final  String? description;
 @override final  int? categoryId;
 @override final  String? categoryName;
 @override final  bool? isFavorite;
 @override final  String? workingHours;
+ final  List<WorkingScheduleDto>? _workingSchedule;
+@override List<WorkingScheduleDto>? get workingSchedule {
+  final value = _workingSchedule;
+  if (value == null) return null;
+  if (_workingSchedule is EqualUnmodifiableListView) return _workingSchedule;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
  final  List<double>? _location;
 @override List<double>? get location {
   final value = _location;
@@ -268,6 +286,15 @@ class _ContentDto extends ContentDto {
   final value = _facilities;
   if (value == null) return null;
   if (_facilities is EqualUnmodifiableListView) return _facilities;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+ final  List<FacilityGroupDto>? _facilityGroups;
+@override List<FacilityGroupDto>? get facilityGroups {
+  final value = _facilityGroups;
+  if (value == null) return null;
+  if (_facilityGroups is EqualUnmodifiableListView) return _facilityGroups;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(value);
 }
@@ -313,9 +340,14 @@ class _ContentDto extends ContentDto {
 @override final  int? averageCheck;
 @override final  double? price;
 @override final  double? priceInDollar;
+@override final  String? priceUnit;
+@override final  DateTime? eventDate;
+@override final  String? eventType;
 @override final  String? address;
 @override final  String? region;
 @override final  double? distance;
+// BE `v2/contents/{id}` (details) `distanse` (metrda, int) qaytaradi.
+@override@JsonKey(name: 'distanse') final  int? distanse;
 @override final  int? reviewCount;
 @override final  InfoDto? info;
 @override@JsonKey()@ViewTypeConvertor() final  ViewType viewType;
@@ -333,16 +365,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ContentDto&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.description, description) || other.description == description)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.workingHours, workingHours) || other.workingHours == workingHours)&&const DeepCollectionEquality().equals(other._location, _location)&&const DeepCollectionEquality().equals(other._facilities, _facilities)&&const DeepCollectionEquality().equals(other._languages, _languages)&&const DeepCollectionEquality().equals(other._attachments, _attachments)&&const DeepCollectionEquality().equals(other._photos, _photos)&&(identical(other.photo, photo) || other.photo == photo)&&const DeepCollectionEquality().equals(other._contacts, _contacts)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.address, address) || other.address == address)&&(identical(other.region, region) || other.region == region)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.info, info) || other.info == info)&&(identical(other.viewType, viewType) || other.viewType == viewType));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ContentDto&&(identical(other.id, id) || other.id == id)&&(identical(other.title, title) || other.title == title)&&(identical(other.shortDescription, shortDescription) || other.shortDescription == shortDescription)&&(identical(other.description, description) || other.description == description)&&(identical(other.categoryId, categoryId) || other.categoryId == categoryId)&&(identical(other.categoryName, categoryName) || other.categoryName == categoryName)&&(identical(other.isFavorite, isFavorite) || other.isFavorite == isFavorite)&&(identical(other.workingHours, workingHours) || other.workingHours == workingHours)&&const DeepCollectionEquality().equals(other._workingSchedule, _workingSchedule)&&const DeepCollectionEquality().equals(other._location, _location)&&const DeepCollectionEquality().equals(other._facilities, _facilities)&&const DeepCollectionEquality().equals(other._facilityGroups, _facilityGroups)&&const DeepCollectionEquality().equals(other._languages, _languages)&&const DeepCollectionEquality().equals(other._attachments, _attachments)&&const DeepCollectionEquality().equals(other._photos, _photos)&&(identical(other.photo, photo) || other.photo == photo)&&const DeepCollectionEquality().equals(other._contacts, _contacts)&&(identical(other.ratingAverage, ratingAverage) || other.ratingAverage == ratingAverage)&&(identical(other.averageCheck, averageCheck) || other.averageCheck == averageCheck)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceInDollar, priceInDollar) || other.priceInDollar == priceInDollar)&&(identical(other.priceUnit, priceUnit) || other.priceUnit == priceUnit)&&(identical(other.eventDate, eventDate) || other.eventDate == eventDate)&&(identical(other.eventType, eventType) || other.eventType == eventType)&&(identical(other.address, address) || other.address == address)&&(identical(other.region, region) || other.region == region)&&(identical(other.distance, distance) || other.distance == distance)&&(identical(other.distanse, distanse) || other.distanse == distanse)&&(identical(other.reviewCount, reviewCount) || other.reviewCount == reviewCount)&&(identical(other.info, info) || other.info == info)&&(identical(other.viewType, viewType) || other.viewType == viewType));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,id,title,description,categoryId,categoryName,isFavorite,workingHours,const DeepCollectionEquality().hash(_location),const DeepCollectionEquality().hash(_facilities),const DeepCollectionEquality().hash(_languages),const DeepCollectionEquality().hash(_attachments),const DeepCollectionEquality().hash(_photos),photo,const DeepCollectionEquality().hash(_contacts),ratingAverage,averageCheck,price,priceInDollar,address,region,distance,reviewCount,info,viewType]);
+int get hashCode => Object.hashAll([runtimeType,id,title,shortDescription,description,categoryId,categoryName,isFavorite,workingHours,const DeepCollectionEquality().hash(_workingSchedule),const DeepCollectionEquality().hash(_location),const DeepCollectionEquality().hash(_facilities),const DeepCollectionEquality().hash(_facilityGroups),const DeepCollectionEquality().hash(_languages),const DeepCollectionEquality().hash(_attachments),const DeepCollectionEquality().hash(_photos),photo,const DeepCollectionEquality().hash(_contacts),ratingAverage,averageCheck,price,priceInDollar,priceUnit,eventDate,eventType,address,region,distance,distanse,reviewCount,info,viewType]);
 
 @override
 String toString() {
-  return 'ContentDto(id: $id, title: $title, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, location: $location, facilities: $facilities, languages: $languages, attachments: $attachments, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, address: $address, region: $region, distance: $distance, reviewCount: $reviewCount, info: $info, viewType: $viewType)';
+  return 'ContentDto(id: $id, title: $title, shortDescription: $shortDescription, description: $description, categoryId: $categoryId, categoryName: $categoryName, isFavorite: $isFavorite, workingHours: $workingHours, workingSchedule: $workingSchedule, location: $location, facilities: $facilities, facilityGroups: $facilityGroups, languages: $languages, attachments: $attachments, photos: $photos, photo: $photo, contacts: $contacts, ratingAverage: $ratingAverage, averageCheck: $averageCheck, price: $price, priceInDollar: $priceInDollar, priceUnit: $priceUnit, eventDate: $eventDate, eventType: $eventType, address: $address, region: $region, distance: $distance, distanse: $distanse, reviewCount: $reviewCount, info: $info, viewType: $viewType)';
 }
 
 
@@ -353,7 +385,7 @@ abstract mixin class _$ContentDtoCopyWith<$Res> implements $ContentDtoCopyWith<$
   factory _$ContentDtoCopyWith(_ContentDto value, $Res Function(_ContentDto) _then) = __$ContentDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String? title, String? description, int? categoryId, String? categoryName, bool? isFavorite, String? workingHours, List<double>? location, List<FacilityItemDto>? facilities, List<String>? languages, List<AttachmentsItemDto>? attachments,@ImageArrayConvertor() List<String>? photos,@ImageConvertor() String? photo, List<ContactsDto>? contacts, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, String? address, String? region, double? distance, int? reviewCount, InfoDto? info,@ViewTypeConvertor() ViewType viewType
+ int id, String? title, String? shortDescription, String? description, int? categoryId, String? categoryName, bool? isFavorite, String? workingHours, List<WorkingScheduleDto>? workingSchedule, List<double>? location, List<FacilityItemDto>? facilities, List<FacilityGroupDto>? facilityGroups, List<String>? languages, List<AttachmentsItemDto>? attachments,@ImageArrayConvertor() List<String>? photos,@ImageConvertor() String? photo, List<ContactsDto>? contacts, double? ratingAverage, int? averageCheck, double? price, double? priceInDollar, String? priceUnit, DateTime? eventDate, String? eventType, String? address, String? region, double? distance,@JsonKey(name: 'distanse') int? distanse, int? reviewCount, InfoDto? info,@ViewTypeConvertor() ViewType viewType
 });
 
 
@@ -370,18 +402,21 @@ class __$ContentDtoCopyWithImpl<$Res>
 
 /// Create a copy of ContentDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = freezed,Object? description = freezed,Object? categoryId = freezed,Object? categoryName = freezed,Object? isFavorite = freezed,Object? workingHours = freezed,Object? location = freezed,Object? facilities = freezed,Object? languages = freezed,Object? attachments = freezed,Object? photos = freezed,Object? photo = freezed,Object? contacts = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? address = freezed,Object? region = freezed,Object? distance = freezed,Object? reviewCount = freezed,Object? info = freezed,Object? viewType = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? title = freezed,Object? shortDescription = freezed,Object? description = freezed,Object? categoryId = freezed,Object? categoryName = freezed,Object? isFavorite = freezed,Object? workingHours = freezed,Object? workingSchedule = freezed,Object? location = freezed,Object? facilities = freezed,Object? facilityGroups = freezed,Object? languages = freezed,Object? attachments = freezed,Object? photos = freezed,Object? photo = freezed,Object? contacts = freezed,Object? ratingAverage = freezed,Object? averageCheck = freezed,Object? price = freezed,Object? priceInDollar = freezed,Object? priceUnit = freezed,Object? eventDate = freezed,Object? eventType = freezed,Object? address = freezed,Object? region = freezed,Object? distance = freezed,Object? distanse = freezed,Object? reviewCount = freezed,Object? info = freezed,Object? viewType = null,}) {
   return _then(_ContentDto(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
+as String?,shortDescription: freezed == shortDescription ? _self.shortDescription : shortDescription // ignore: cast_nullable_to_non_nullable
 as String?,description: freezed == description ? _self.description : description // ignore: cast_nullable_to_non_nullable
 as String?,categoryId: freezed == categoryId ? _self.categoryId : categoryId // ignore: cast_nullable_to_non_nullable
 as int?,categoryName: freezed == categoryName ? _self.categoryName : categoryName // ignore: cast_nullable_to_non_nullable
 as String?,isFavorite: freezed == isFavorite ? _self.isFavorite : isFavorite // ignore: cast_nullable_to_non_nullable
 as bool?,workingHours: freezed == workingHours ? _self.workingHours : workingHours // ignore: cast_nullable_to_non_nullable
-as String?,location: freezed == location ? _self._location : location // ignore: cast_nullable_to_non_nullable
+as String?,workingSchedule: freezed == workingSchedule ? _self._workingSchedule : workingSchedule // ignore: cast_nullable_to_non_nullable
+as List<WorkingScheduleDto>?,location: freezed == location ? _self._location : location // ignore: cast_nullable_to_non_nullable
 as List<double>?,facilities: freezed == facilities ? _self._facilities : facilities // ignore: cast_nullable_to_non_nullable
-as List<FacilityItemDto>?,languages: freezed == languages ? _self._languages : languages // ignore: cast_nullable_to_non_nullable
+as List<FacilityItemDto>?,facilityGroups: freezed == facilityGroups ? _self._facilityGroups : facilityGroups // ignore: cast_nullable_to_non_nullable
+as List<FacilityGroupDto>?,languages: freezed == languages ? _self._languages : languages // ignore: cast_nullable_to_non_nullable
 as List<String>?,attachments: freezed == attachments ? _self._attachments : attachments // ignore: cast_nullable_to_non_nullable
 as List<AttachmentsItemDto>?,photos: freezed == photos ? _self._photos : photos // ignore: cast_nullable_to_non_nullable
 as List<String>?,photo: freezed == photo ? _self.photo : photo // ignore: cast_nullable_to_non_nullable
@@ -390,10 +425,14 @@ as List<ContactsDto>?,ratingAverage: freezed == ratingAverage ? _self.ratingAver
 as double?,averageCheck: freezed == averageCheck ? _self.averageCheck : averageCheck // ignore: cast_nullable_to_non_nullable
 as int?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as double?,priceInDollar: freezed == priceInDollar ? _self.priceInDollar : priceInDollar // ignore: cast_nullable_to_non_nullable
-as double?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as double?,priceUnit: freezed == priceUnit ? _self.priceUnit : priceUnit // ignore: cast_nullable_to_non_nullable
+as String?,eventDate: freezed == eventDate ? _self.eventDate : eventDate // ignore: cast_nullable_to_non_nullable
+as DateTime?,eventType: freezed == eventType ? _self.eventType : eventType // ignore: cast_nullable_to_non_nullable
+as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
 as String?,distance: freezed == distance ? _self.distance : distance // ignore: cast_nullable_to_non_nullable
-as double?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
+as double?,distanse: freezed == distanse ? _self.distanse : distanse // ignore: cast_nullable_to_non_nullable
+as int?,reviewCount: freezed == reviewCount ? _self.reviewCount : reviewCount // ignore: cast_nullable_to_non_nullable
 as int?,info: freezed == info ? _self.info : info // ignore: cast_nullable_to_non_nullable
 as InfoDto?,viewType: null == viewType ? _self.viewType : viewType // ignore: cast_nullable_to_non_nullable
 as ViewType,
@@ -677,6 +716,553 @@ class __$FacilityItemDtoCopyWithImpl<$Res>
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String,icon: freezed == icon ? _self.icon : icon // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$FacilityGroupDto {
+
+ String? get name; List<FacilityItemDto> get facilities;
+/// Create a copy of FacilityGroupDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$FacilityGroupDtoCopyWith<FacilityGroupDto> get copyWith => _$FacilityGroupDtoCopyWithImpl<FacilityGroupDto>(this as FacilityGroupDto, _$identity);
+
+  /// Serializes this FacilityGroupDto to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is FacilityGroupDto&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other.facilities, facilities));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,const DeepCollectionEquality().hash(facilities));
+
+@override
+String toString() {
+  return 'FacilityGroupDto(name: $name, facilities: $facilities)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $FacilityGroupDtoCopyWith<$Res>  {
+  factory $FacilityGroupDtoCopyWith(FacilityGroupDto value, $Res Function(FacilityGroupDto) _then) = _$FacilityGroupDtoCopyWithImpl;
+@useResult
+$Res call({
+ String? name, List<FacilityItemDto> facilities
+});
+
+
+
+
+}
+/// @nodoc
+class _$FacilityGroupDtoCopyWithImpl<$Res>
+    implements $FacilityGroupDtoCopyWith<$Res> {
+  _$FacilityGroupDtoCopyWithImpl(this._self, this._then);
+
+  final FacilityGroupDto _self;
+  final $Res Function(FacilityGroupDto) _then;
+
+/// Create a copy of FacilityGroupDto
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? facilities = null,}) {
+  return _then(_self.copyWith(
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,facilities: null == facilities ? _self.facilities : facilities // ignore: cast_nullable_to_non_nullable
+as List<FacilityItemDto>,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [FacilityGroupDto].
+extension FacilityGroupDtoPatterns on FacilityGroupDto {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _FacilityGroupDto value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _FacilityGroupDto() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _FacilityGroupDto value)  $default,){
+final _that = this;
+switch (_that) {
+case _FacilityGroupDto():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _FacilityGroupDto value)?  $default,){
+final _that = this;
+switch (_that) {
+case _FacilityGroupDto() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  List<FacilityItemDto> facilities)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _FacilityGroupDto() when $default != null:
+return $default(_that.name,_that.facilities);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  List<FacilityItemDto> facilities)  $default,) {final _that = this;
+switch (_that) {
+case _FacilityGroupDto():
+return $default(_that.name,_that.facilities);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  List<FacilityItemDto> facilities)?  $default,) {final _that = this;
+switch (_that) {
+case _FacilityGroupDto() when $default != null:
+return $default(_that.name,_that.facilities);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _FacilityGroupDto extends FacilityGroupDto {
+  const _FacilityGroupDto({this.name, final  List<FacilityItemDto> facilities = const []}): _facilities = facilities,super._();
+  factory _FacilityGroupDto.fromJson(Map<String, dynamic> json) => _$FacilityGroupDtoFromJson(json);
+
+@override final  String? name;
+ final  List<FacilityItemDto> _facilities;
+@override@JsonKey() List<FacilityItemDto> get facilities {
+  if (_facilities is EqualUnmodifiableListView) return _facilities;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_facilities);
+}
+
+
+/// Create a copy of FacilityGroupDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FacilityGroupDtoCopyWith<_FacilityGroupDto> get copyWith => __$FacilityGroupDtoCopyWithImpl<_FacilityGroupDto>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$FacilityGroupDtoToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FacilityGroupDto&&(identical(other.name, name) || other.name == name)&&const DeepCollectionEquality().equals(other._facilities, _facilities));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,name,const DeepCollectionEquality().hash(_facilities));
+
+@override
+String toString() {
+  return 'FacilityGroupDto(name: $name, facilities: $facilities)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$FacilityGroupDtoCopyWith<$Res> implements $FacilityGroupDtoCopyWith<$Res> {
+  factory _$FacilityGroupDtoCopyWith(_FacilityGroupDto value, $Res Function(_FacilityGroupDto) _then) = __$FacilityGroupDtoCopyWithImpl;
+@override @useResult
+$Res call({
+ String? name, List<FacilityItemDto> facilities
+});
+
+
+
+
+}
+/// @nodoc
+class __$FacilityGroupDtoCopyWithImpl<$Res>
+    implements _$FacilityGroupDtoCopyWith<$Res> {
+  __$FacilityGroupDtoCopyWithImpl(this._self, this._then);
+
+  final _FacilityGroupDto _self;
+  final $Res Function(_FacilityGroupDto) _then;
+
+/// Create a copy of FacilityGroupDto
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? facilities = null,}) {
+  return _then(_FacilityGroupDto(
+name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,facilities: null == facilities ? _self._facilities : facilities // ignore: cast_nullable_to_non_nullable
+as List<FacilityItemDto>,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$WorkingScheduleDto {
+
+ int get day; String? get name; bool get isClosed; String? get from; String? get to;
+/// Create a copy of WorkingScheduleDto
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WorkingScheduleDtoCopyWith<WorkingScheduleDto> get copyWith => _$WorkingScheduleDtoCopyWithImpl<WorkingScheduleDto>(this as WorkingScheduleDto, _$identity);
+
+  /// Serializes this WorkingScheduleDto to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WorkingScheduleDto&&(identical(other.day, day) || other.day == day)&&(identical(other.name, name) || other.name == name)&&(identical(other.isClosed, isClosed) || other.isClosed == isClosed)&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,day,name,isClosed,from,to);
+
+@override
+String toString() {
+  return 'WorkingScheduleDto(day: $day, name: $name, isClosed: $isClosed, from: $from, to: $to)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $WorkingScheduleDtoCopyWith<$Res>  {
+  factory $WorkingScheduleDtoCopyWith(WorkingScheduleDto value, $Res Function(WorkingScheduleDto) _then) = _$WorkingScheduleDtoCopyWithImpl;
+@useResult
+$Res call({
+ int day, String? name, bool isClosed, String? from, String? to
+});
+
+
+
+
+}
+/// @nodoc
+class _$WorkingScheduleDtoCopyWithImpl<$Res>
+    implements $WorkingScheduleDtoCopyWith<$Res> {
+  _$WorkingScheduleDtoCopyWithImpl(this._self, this._then);
+
+  final WorkingScheduleDto _self;
+  final $Res Function(WorkingScheduleDto) _then;
+
+/// Create a copy of WorkingScheduleDto
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? day = null,Object? name = freezed,Object? isClosed = null,Object? from = freezed,Object? to = freezed,}) {
+  return _then(_self.copyWith(
+day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
+as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,isClosed: null == isClosed ? _self.isClosed : isClosed // ignore: cast_nullable_to_non_nullable
+as bool,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
+as String?,to: freezed == to ? _self.to : to // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [WorkingScheduleDto].
+extension WorkingScheduleDtoPatterns on WorkingScheduleDto {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _WorkingScheduleDto value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _WorkingScheduleDto() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _WorkingScheduleDto value)  $default,){
+final _that = this;
+switch (_that) {
+case _WorkingScheduleDto():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _WorkingScheduleDto value)?  $default,){
+final _that = this;
+switch (_that) {
+case _WorkingScheduleDto() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int day,  String? name,  bool isClosed,  String? from,  String? to)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _WorkingScheduleDto() when $default != null:
+return $default(_that.day,_that.name,_that.isClosed,_that.from,_that.to);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int day,  String? name,  bool isClosed,  String? from,  String? to)  $default,) {final _that = this;
+switch (_that) {
+case _WorkingScheduleDto():
+return $default(_that.day,_that.name,_that.isClosed,_that.from,_that.to);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int day,  String? name,  bool isClosed,  String? from,  String? to)?  $default,) {final _that = this;
+switch (_that) {
+case _WorkingScheduleDto() when $default != null:
+return $default(_that.day,_that.name,_that.isClosed,_that.from,_that.to);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _WorkingScheduleDto extends WorkingScheduleDto {
+  const _WorkingScheduleDto({this.day = 0, this.name, this.isClosed = false, this.from, this.to}): super._();
+  factory _WorkingScheduleDto.fromJson(Map<String, dynamic> json) => _$WorkingScheduleDtoFromJson(json);
+
+@override@JsonKey() final  int day;
+@override final  String? name;
+@override@JsonKey() final  bool isClosed;
+@override final  String? from;
+@override final  String? to;
+
+/// Create a copy of WorkingScheduleDto
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$WorkingScheduleDtoCopyWith<_WorkingScheduleDto> get copyWith => __$WorkingScheduleDtoCopyWithImpl<_WorkingScheduleDto>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$WorkingScheduleDtoToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _WorkingScheduleDto&&(identical(other.day, day) || other.day == day)&&(identical(other.name, name) || other.name == name)&&(identical(other.isClosed, isClosed) || other.isClosed == isClosed)&&(identical(other.from, from) || other.from == from)&&(identical(other.to, to) || other.to == to));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,day,name,isClosed,from,to);
+
+@override
+String toString() {
+  return 'WorkingScheduleDto(day: $day, name: $name, isClosed: $isClosed, from: $from, to: $to)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$WorkingScheduleDtoCopyWith<$Res> implements $WorkingScheduleDtoCopyWith<$Res> {
+  factory _$WorkingScheduleDtoCopyWith(_WorkingScheduleDto value, $Res Function(_WorkingScheduleDto) _then) = __$WorkingScheduleDtoCopyWithImpl;
+@override @useResult
+$Res call({
+ int day, String? name, bool isClosed, String? from, String? to
+});
+
+
+
+
+}
+/// @nodoc
+class __$WorkingScheduleDtoCopyWithImpl<$Res>
+    implements _$WorkingScheduleDtoCopyWith<$Res> {
+  __$WorkingScheduleDtoCopyWithImpl(this._self, this._then);
+
+  final _WorkingScheduleDto _self;
+  final $Res Function(_WorkingScheduleDto) _then;
+
+/// Create a copy of WorkingScheduleDto
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? day = null,Object? name = freezed,Object? isClosed = null,Object? from = freezed,Object? to = freezed,}) {
+  return _then(_WorkingScheduleDto(
+day: null == day ? _self.day : day // ignore: cast_nullable_to_non_nullable
+as int,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,isClosed: null == isClosed ? _self.isClosed : isClosed // ignore: cast_nullable_to_non_nullable
+as bool,from: freezed == from ? _self.from : from // ignore: cast_nullable_to_non_nullable
+as String?,to: freezed == to ? _self.to : to // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -1495,7 +2081,7 @@ as String?,
 /// @nodoc
 mixin _$InfoDto {
 
- InfoItemDto? get left; InfoItemDto? get right;
+ List<InfoItemDto> get items;
 /// Create a copy of InfoDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1508,16 +2094,16 @@ $InfoDtoCopyWith<InfoDto> get copyWith => _$InfoDtoCopyWithImpl<InfoDto>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InfoDto&&(identical(other.left, left) || other.left == left)&&(identical(other.right, right) || other.right == right));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InfoDto&&const DeepCollectionEquality().equals(other.items, items));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,left,right);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(items));
 
 @override
 String toString() {
-  return 'InfoDto(left: $left, right: $right)';
+  return 'InfoDto(items: $items)';
 }
 
 
@@ -1528,11 +2114,11 @@ abstract mixin class $InfoDtoCopyWith<$Res>  {
   factory $InfoDtoCopyWith(InfoDto value, $Res Function(InfoDto) _then) = _$InfoDtoCopyWithImpl;
 @useResult
 $Res call({
- InfoItemDto? left, InfoItemDto? right
+ List<InfoItemDto> items
 });
 
 
-$InfoItemDtoCopyWith<$Res>? get left;$InfoItemDtoCopyWith<$Res>? get right;
+
 
 }
 /// @nodoc
@@ -1545,38 +2131,13 @@ class _$InfoDtoCopyWithImpl<$Res>
 
 /// Create a copy of InfoDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? left = freezed,Object? right = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? items = null,}) {
   return _then(_self.copyWith(
-left: freezed == left ? _self.left : left // ignore: cast_nullable_to_non_nullable
-as InfoItemDto?,right: freezed == right ? _self.right : right // ignore: cast_nullable_to_non_nullable
-as InfoItemDto?,
+items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
+as List<InfoItemDto>,
   ));
 }
-/// Create a copy of InfoDto
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$InfoItemDtoCopyWith<$Res>? get left {
-    if (_self.left == null) {
-    return null;
-  }
 
-  return $InfoItemDtoCopyWith<$Res>(_self.left!, (value) {
-    return _then(_self.copyWith(left: value));
-  });
-}/// Create a copy of InfoDto
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$InfoItemDtoCopyWith<$Res>? get right {
-    if (_self.right == null) {
-    return null;
-  }
-
-  return $InfoItemDtoCopyWith<$Res>(_self.right!, (value) {
-    return _then(_self.copyWith(right: value));
-  });
-}
 }
 
 
@@ -1658,10 +2219,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( InfoItemDto? left,  InfoItemDto? right)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<InfoItemDto> items)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _InfoDto() when $default != null:
-return $default(_that.left,_that.right);case _:
+return $default(_that.items);case _:
   return orElse();
 
 }
@@ -1679,10 +2240,10 @@ return $default(_that.left,_that.right);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( InfoItemDto? left,  InfoItemDto? right)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<InfoItemDto> items)  $default,) {final _that = this;
 switch (_that) {
 case _InfoDto():
-return $default(_that.left,_that.right);case _:
+return $default(_that.items);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1699,10 +2260,10 @@ return $default(_that.left,_that.right);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( InfoItemDto? left,  InfoItemDto? right)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<InfoItemDto> items)?  $default,) {final _that = this;
 switch (_that) {
 case _InfoDto() when $default != null:
-return $default(_that.left,_that.right);case _:
+return $default(_that.items);case _:
   return null;
 
 }
@@ -1714,11 +2275,16 @@ return $default(_that.left,_that.right);case _:
 @JsonSerializable()
 
 class _InfoDto implements InfoDto {
-  const _InfoDto({this.left, this.right});
+  const _InfoDto({final  List<InfoItemDto> items = const []}): _items = items;
   factory _InfoDto.fromJson(Map<String, dynamic> json) => _$InfoDtoFromJson(json);
 
-@override final  InfoItemDto? left;
-@override final  InfoItemDto? right;
+ final  List<InfoItemDto> _items;
+@override@JsonKey() List<InfoItemDto> get items {
+  if (_items is EqualUnmodifiableListView) return _items;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_items);
+}
+
 
 /// Create a copy of InfoDto
 /// with the given fields replaced by the non-null parameter values.
@@ -1733,16 +2299,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InfoDto&&(identical(other.left, left) || other.left == left)&&(identical(other.right, right) || other.right == right));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InfoDto&&const DeepCollectionEquality().equals(other._items, _items));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,left,right);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_items));
 
 @override
 String toString() {
-  return 'InfoDto(left: $left, right: $right)';
+  return 'InfoDto(items: $items)';
 }
 
 
@@ -1753,11 +2319,11 @@ abstract mixin class _$InfoDtoCopyWith<$Res> implements $InfoDtoCopyWith<$Res> {
   factory _$InfoDtoCopyWith(_InfoDto value, $Res Function(_InfoDto) _then) = __$InfoDtoCopyWithImpl;
 @override @useResult
 $Res call({
- InfoItemDto? left, InfoItemDto? right
+ List<InfoItemDto> items
 });
 
 
-@override $InfoItemDtoCopyWith<$Res>? get left;@override $InfoItemDtoCopyWith<$Res>? get right;
+
 
 }
 /// @nodoc
@@ -1770,46 +2336,21 @@ class __$InfoDtoCopyWithImpl<$Res>
 
 /// Create a copy of InfoDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? left = freezed,Object? right = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? items = null,}) {
   return _then(_InfoDto(
-left: freezed == left ? _self.left : left // ignore: cast_nullable_to_non_nullable
-as InfoItemDto?,right: freezed == right ? _self.right : right // ignore: cast_nullable_to_non_nullable
-as InfoItemDto?,
+items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
+as List<InfoItemDto>,
   ));
 }
 
-/// Create a copy of InfoDto
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$InfoItemDtoCopyWith<$Res>? get left {
-    if (_self.left == null) {
-    return null;
-  }
 
-  return $InfoItemDtoCopyWith<$Res>(_self.left!, (value) {
-    return _then(_self.copyWith(left: value));
-  });
-}/// Create a copy of InfoDto
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$InfoItemDtoCopyWith<$Res>? get right {
-    if (_self.right == null) {
-    return null;
-  }
-
-  return $InfoItemDtoCopyWith<$Res>(_self.right!, (value) {
-    return _then(_self.copyWith(right: value));
-  });
-}
 }
 
 
 /// @nodoc
 mixin _$InfoItemDto {
 
- String get key; String? get value; String? get type;
+ String? get slug; String get key; String? get value; String? get type; String? get state;
 /// Create a copy of InfoItemDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1822,16 +2363,16 @@ $InfoItemDtoCopyWith<InfoItemDto> get copyWith => _$InfoItemDtoCopyWithImpl<Info
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InfoItemDto&&(identical(other.key, key) || other.key == key)&&(identical(other.value, value) || other.value == value)&&(identical(other.type, type) || other.type == type));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InfoItemDto&&(identical(other.slug, slug) || other.slug == slug)&&(identical(other.key, key) || other.key == key)&&(identical(other.value, value) || other.value == value)&&(identical(other.type, type) || other.type == type)&&(identical(other.state, state) || other.state == state));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,key,value,type);
+int get hashCode => Object.hash(runtimeType,slug,key,value,type,state);
 
 @override
 String toString() {
-  return 'InfoItemDto(key: $key, value: $value, type: $type)';
+  return 'InfoItemDto(slug: $slug, key: $key, value: $value, type: $type, state: $state)';
 }
 
 
@@ -1842,7 +2383,7 @@ abstract mixin class $InfoItemDtoCopyWith<$Res>  {
   factory $InfoItemDtoCopyWith(InfoItemDto value, $Res Function(InfoItemDto) _then) = _$InfoItemDtoCopyWithImpl;
 @useResult
 $Res call({
- String key, String? value, String? type
+ String? slug, String key, String? value, String? type, String? state
 });
 
 
@@ -1859,11 +2400,13 @@ class _$InfoItemDtoCopyWithImpl<$Res>
 
 /// Create a copy of InfoItemDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? key = null,Object? value = freezed,Object? type = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? slug = freezed,Object? key = null,Object? value = freezed,Object? type = freezed,Object? state = freezed,}) {
   return _then(_self.copyWith(
-key: null == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
+slug: freezed == slug ? _self.slug : slug // ignore: cast_nullable_to_non_nullable
+as String?,key: null == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
 as String,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,state: freezed == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -1949,10 +2492,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String key,  String? value,  String? type)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? slug,  String key,  String? value,  String? type,  String? state)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _InfoItemDto() when $default != null:
-return $default(_that.key,_that.value,_that.type);case _:
+return $default(_that.slug,_that.key,_that.value,_that.type,_that.state);case _:
   return orElse();
 
 }
@@ -1970,10 +2513,10 @@ return $default(_that.key,_that.value,_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String key,  String? value,  String? type)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? slug,  String key,  String? value,  String? type,  String? state)  $default,) {final _that = this;
 switch (_that) {
 case _InfoItemDto():
-return $default(_that.key,_that.value,_that.type);case _:
+return $default(_that.slug,_that.key,_that.value,_that.type,_that.state);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1990,10 +2533,10 @@ return $default(_that.key,_that.value,_that.type);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String key,  String? value,  String? type)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? slug,  String key,  String? value,  String? type,  String? state)?  $default,) {final _that = this;
 switch (_that) {
 case _InfoItemDto() when $default != null:
-return $default(_that.key,_that.value,_that.type);case _:
+return $default(_that.slug,_that.key,_that.value,_that.type,_that.state);case _:
   return null;
 
 }
@@ -2005,12 +2548,14 @@ return $default(_that.key,_that.value,_that.type);case _:
 @JsonSerializable()
 
 class _InfoItemDto implements InfoItemDto {
-  const _InfoItemDto({required this.key, this.value, this.type});
+  const _InfoItemDto({this.slug, this.key = "", this.value, this.type, this.state});
   factory _InfoItemDto.fromJson(Map<String, dynamic> json) => _$InfoItemDtoFromJson(json);
 
-@override final  String key;
+@override final  String? slug;
+@override@JsonKey() final  String key;
 @override final  String? value;
 @override final  String? type;
+@override final  String? state;
 
 /// Create a copy of InfoItemDto
 /// with the given fields replaced by the non-null parameter values.
@@ -2025,16 +2570,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InfoItemDto&&(identical(other.key, key) || other.key == key)&&(identical(other.value, value) || other.value == value)&&(identical(other.type, type) || other.type == type));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InfoItemDto&&(identical(other.slug, slug) || other.slug == slug)&&(identical(other.key, key) || other.key == key)&&(identical(other.value, value) || other.value == value)&&(identical(other.type, type) || other.type == type)&&(identical(other.state, state) || other.state == state));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,key,value,type);
+int get hashCode => Object.hash(runtimeType,slug,key,value,type,state);
 
 @override
 String toString() {
-  return 'InfoItemDto(key: $key, value: $value, type: $type)';
+  return 'InfoItemDto(slug: $slug, key: $key, value: $value, type: $type, state: $state)';
 }
 
 
@@ -2045,7 +2590,7 @@ abstract mixin class _$InfoItemDtoCopyWith<$Res> implements $InfoItemDtoCopyWith
   factory _$InfoItemDtoCopyWith(_InfoItemDto value, $Res Function(_InfoItemDto) _then) = __$InfoItemDtoCopyWithImpl;
 @override @useResult
 $Res call({
- String key, String? value, String? type
+ String? slug, String key, String? value, String? type, String? state
 });
 
 
@@ -2062,11 +2607,13 @@ class __$InfoItemDtoCopyWithImpl<$Res>
 
 /// Create a copy of InfoItemDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? key = null,Object? value = freezed,Object? type = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? slug = freezed,Object? key = null,Object? value = freezed,Object? type = freezed,Object? state = freezed,}) {
   return _then(_InfoItemDto(
-key: null == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
+slug: freezed == slug ? _self.slug : slug // ignore: cast_nullable_to_non_nullable
+as String?,key: null == key ? _self.key : key // ignore: cast_nullable_to_non_nullable
 as String,value: freezed == value ? _self.value : value // ignore: cast_nullable_to_non_nullable
 as String?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
+as String?,state: freezed == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

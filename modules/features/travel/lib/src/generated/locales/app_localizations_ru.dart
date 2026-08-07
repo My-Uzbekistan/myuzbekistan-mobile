@@ -256,6 +256,26 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   String get workingHours => 'Рабочее время';
 
   @override
+  String get reviews => 'Отзывы';
+
+  @override
+  String get showMore => 'Показать больше';
+
+  @override
+  String get open => 'Открыто';
+
+  @override
+  String get closed => 'Закрыто';
+
+  @override
+  String distanceFromUs(Object distance) {
+    return 'Вы находитесь в $distance от нас';
+  }
+
+  @override
+  String get expand => 'Развернуть';
+
+  @override
   String get writeReviewInFewSentences =>
       'Напиши отзыв в нескольких предложениях';
 

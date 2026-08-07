@@ -162,22 +162,19 @@ mixin FeatureTravelRouter {
               (context, state) => buildSlideTransitionPage(
                 context: context,
                 state: state,
-                child: AllFacilities(items: state.extra as List<Facility>),
+                child: AllFacilities(content: state.extra as ContentDetail),
               ),
         ),
 
         GoRoute(
           path: AppNavPath.travel.detailReadMore.path,
           name: AppNavPath.travel.detailReadMore.name,
-          pageBuilder:
-              (context, state) => buildSlideTransitionPage(
-                context: context,
-                state: state,
-                child: ReadMore(
-                  title: state.uri.queryParameters["title"].orEmpty(),
-                  content: state.uri.queryParameters["content"].orEmpty(),
-                ),
-              ),
+          pageBuilder: (context, state) => ModalSheetPage(
+            child: ReadMore(
+              title: state.uri.queryParameters["title"].orEmpty(),
+              content: state.uri.queryParameters["content"].orEmpty(),
+            ),
+          ),
         ),
         GoRoute(
           path: AppNavPath.travel.addReviewPage.path,
