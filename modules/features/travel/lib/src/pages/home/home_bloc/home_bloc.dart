@@ -1,11 +1,8 @@
 import 'dart:async';
 
-import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared/shared.dart';
-import 'package:travel/src/core/prayer_times.dart';
-import 'package:travel/src/pages/home/widgets/prayers/prayers.dart';
 
 part 'home_bloc.freezed.dart';
 
@@ -78,7 +75,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       if (value) {
         add(HomeBlocEvent.loadPrayerTimes());
       } else {
-        dataState = dataState.copyWith(prayers: []);
+        dataState = dataState.copyWith(prayerTimes: null);
         if (state is HomeBlocDataState) {
           emit(dataState);
         }
@@ -98,7 +95,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   }
 
     add(HomeBlocEvent.loadDataEvent());
-    add(HomeBlocEvent.loadPrayerTimes());
   }
 
   Future<void> _loadDataEvent(_LoadDataEvent event,
@@ -313,10 +309,13 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     } catch (_) {}
   }
 
-  void _loadPrayerTimes(_LoadPayerTimes event, Emitter<HomeBlocState> emit) {
+  Future<void> _loadPrayerTimes(
+    _LoadPayerTimes event,
+    Emitter<HomeBlocState> emit,
+  ) async {
     if (!_securityStorage.isShowPrayerTimes()) {
-      if (dataState.prayers.isNotEmpty) {
-        dataState = dataState.copyWith(prayers: []);
+      if (dataState.prayerTimes != null) {
+        dataState = dataState.copyWith(prayerTimes: null);
         if (state is HomeBlocDataState) {
           emit(dataState);
         }
@@ -324,39 +323,15 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       return;
     }
 
-    final currentLocation = LocationManager().getCurrentPosition();
-    final latLng = currentLocation != null
-        ? LatLng(currentLocation.latitude, currentLocation.longitude)
-        : null;
-
-    final now = DateTime.now();
-
-    // Har safar qayta hisoblaymiz — kun almashsa ham to'g'ri bo'lsin.
-    var prayers = PrayerTimesItemModel.fromPrayerTimes(
-      getPrayerTimes(latLng: latLng, date: now),
-    );
-
-    // Bugungi barcha vaqtlar o'tib bo'lgan bo'lsa (xufton o'tgan) —
-    // ertangi kun vaqtlarini qo'shamiz, keyingisi ertangi bomdod bo'ladi.
-    final hasNext = prayers.any((p) => p.time.isAfter(now));
-    if (!hasNext) {
-      prayers = [
-        ...prayers,
-        ...PrayerTimesItemModel.fromPrayerTimes(
-          getPrayerTimes(
-            latLng: latLng,
-            date: now.add(const Duration(days: 1)),
-          ),
-        ),
-      ];
-    }
-
-    dataState = dataState.copyWith(
-      prayers: PrayerTimesItemModel.markNext(prayers),
-    );
-    if (state is HomeBlocDataState) {
-      emit(dataState);
-    }
+    try {
+      final prayerTimes = await _repository.loadPrayerTimes(
+        locationId: _securityStorage.getPrayerLocationId(),
+      );
+      dataState = dataState.copyWith(prayerTimes: prayerTimes);
+      if (state is HomeBlocDataState) {
+        emit(dataState);
+      }
+    } catch (_) {}
   }
 
     @override

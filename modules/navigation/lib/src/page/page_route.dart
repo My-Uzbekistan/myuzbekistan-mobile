@@ -5,10 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class ModalPage<T> extends Page<T> {
-  const ModalPage({required this.child, this.showDragHandle = true});
+  const ModalPage({
+    required this.child,
+    this.showDragHandle = true,
+    this.useSafeArea = true,
+    this.backgroundColor,
+  });
 
   final Widget child;
   final bool showDragHandle;
+  final bool useSafeArea;
+  final Color? backgroundColor;
 
   @override
   Route<T> createRoute(BuildContext context) => ModalBottomSheetRoute<T>(
@@ -17,9 +24,10 @@ class ModalPage<T> extends Page<T> {
       return child;
     },
     isScrollControlled: true,
-    useSafeArea: true,
+    useSafeArea: useSafeArea,
     clipBehavior: Clip.antiAlias,
     showDragHandle: showDragHandle,
+    backgroundColor: backgroundColor,
   );
 }
 

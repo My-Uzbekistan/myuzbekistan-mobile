@@ -1,10 +1,9 @@
 import 'dart:async';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
-import 'package:travel/src/core/extension.dart';
-import 'package:travel/src/pages/home/widgets/prayers/prayers.dart';
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 part 'home_hero_header/collapsing_card.dart';
@@ -21,7 +20,7 @@ class HomeHeader extends StatelessWidget {
     required this.temperature,
     required this.hintText,
     required this.quickActions,
-    this.nextPrayer,
+    this.currentPrayer,
     this.airQuality,
     this.airQualityLevel,
     this.onRegionTap,
@@ -30,6 +29,7 @@ class HomeHeader extends StatelessWidget {
     this.onQrTap,
     this.onFavoriteTap,
     this.onPrayerExpired,
+    this.onPrayerTap,
   });
 
   final String regionName;
@@ -38,7 +38,7 @@ class HomeHeader extends StatelessWidget {
 
   final int? airQualityLevel;
 
-  final PrayerTimesItemModel? nextPrayer;
+  final PrayerCurrent? currentPrayer;
   final String hintText;
   final List<HomeQuickAction> quickActions;
 
@@ -48,6 +48,7 @@ class HomeHeader extends StatelessWidget {
   final VoidCallback? onQrTap;
   final VoidCallback? onFavoriteTap;
   final VoidCallback? onPrayerExpired;
+  final VoidCallback? onPrayerTap;
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +59,11 @@ class HomeHeader extends StatelessWidget {
       temperature: temperature,
       airQuality: airQuality,
       airQualityLevel: airQualityLevel,
-      nextPrayer: nextPrayer,
+      currentPrayer: currentPrayer,
       onRegionTap: onRegionTap,
       onNotificationTap: onNotificationTap,
       onPrayerExpired: onPrayerExpired,
+      onPrayerTap: onPrayerTap,
     );
     final quickRow = _QuickActions(actions: quickActions);
     final searchRow = _SearchRow(

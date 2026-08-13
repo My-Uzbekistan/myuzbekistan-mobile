@@ -27,6 +27,9 @@ import 'package:travel/src/pages/notifications/notification_main_page.dart';
 import 'package:travel/src/pages/notifications/page/notification_detail.dart';
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart';
 import 'package:travel/src/pages/onboarding/onboarding_page.dart';
+import 'package:travel/src/pages/prayer_times/bloc/prayer_times_bloc.dart';
+import 'package:travel/src/pages/prayer_times/pages/prayer_location_page.dart';
+import 'package:travel/src/pages/prayer_times/prayer_times_sheet.dart';
 import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart';
 import 'package:travel/src/premium/premium_cancel/premium_cancel_screen.dart';
 import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
@@ -68,6 +71,35 @@ mixin FeatureTravelRouter {
       pageBuilder: (context, state) {
         return ModalSheetPage(
           child: OnboardingPage(bloc: state.extra as OnboardingBloc),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.travelPrayerTimes.path,
+      name: AppNavPath.travel.travelPrayerTimes.name,
+      pageBuilder: (context, state) {
+        return ModalSheetPage(
+          child: BlocProvider(
+            create: (context) =>
+                getIt<PrayerTimesBloc>()..add(const PrayerTimesEvent.initial()),
+            child: const PrayerTimesSheet(),
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.travelPrayerLocation.path,
+      name: AppNavPath.travel.travelPrayerLocation.name,
+      pageBuilder: (context, state) {
+        return buildSlideTransitionPage(
+          context: context,
+          state: state,
+          child: PrayerLocationPage(
+            locations: state.extra as List<PrayerLocation>,
+            selectedLocationId: parseInt(
+              state.uri.queryParameters["prayerLocationId"],
+            ),
+          ),
         );
       },
     ),
@@ -390,7 +422,9 @@ mixin FeatureTravelRouter {
           child: BlocProvider(
             create:
                 (context) =>
-                    getIt.get<PremiumBloc>()..add(PremiumEvent.plans()),
+                    getIt.get<PremiumBloc>()
+                      ..add(PremiumEvent.plans())
+                      ..add(PremiumEvent.status()),
             child: PremiumOnboardingPage(),
           ),
           state: state,

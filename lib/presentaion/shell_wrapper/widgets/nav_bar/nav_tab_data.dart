@@ -29,7 +29,11 @@ class NavTabData {
 /// iOS (glass) va Android (telegram) versiyalari ikkisi ham shu ro'yxatdan
 /// o'qiydi. Tab qo'shish/o'chirish yoki label/ikon almashtirish — faqat shu
 /// yerda. Ro'yxat tartibi tab indeksini belgilaydi (0..n).
-List<NavTabData> navBarTabs(BuildContext context, {String? profilePhotoUrl}) {
+List<NavTabData> navBarTabs(
+  BuildContext context, {
+  String? profilePhotoUrl,
+  bool isPremium = false,
+}) {
   final l = context.localizations!;
   return [
     NavTabData(asset: Assets.svg.tabIconHome, label: l.nav_home), // 0 — Bosh sahifa (Travel)
@@ -42,6 +46,7 @@ List<NavTabData> navBarTabs(BuildContext context, {String? profilePhotoUrl}) {
         photoUrl: profilePhotoUrl,
         selected: selected,
         ringColor: color,
+        isPremium: isPremium,
       ),
     ),
   ];

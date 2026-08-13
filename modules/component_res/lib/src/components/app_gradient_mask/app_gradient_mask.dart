@@ -40,8 +40,9 @@ class AppGradientMask extends StatelessWidget {
 
 class BlurHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double height;
+  final Color? gradientColor;
 
-  BlurHeaderDelegate(this.height);
+  BlurHeaderDelegate(this.height, {this.gradientColor});
 
   @override
   double get minExtent => height;
@@ -55,9 +56,10 @@ class BlurHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return AppGradientMask();
+    return AppGradientMask(gradientColor: gradientColor);
   }
 
   @override
-  bool shouldRebuild(covariant BlurHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(covariant BlurHeaderDelegate oldDelegate) =>
+      oldDelegate.gradientColor != gradientColor;
 }

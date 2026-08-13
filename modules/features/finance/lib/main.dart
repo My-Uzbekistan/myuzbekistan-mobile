@@ -1,4 +1,4 @@
-import 'package:finance/src/presentation/home/FinanceHomePage.dart';
+import 'package:finance/src/presentation/home/finance_home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());

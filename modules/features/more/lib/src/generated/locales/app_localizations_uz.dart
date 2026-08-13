@@ -12,7 +12,7 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get language => 'Ilova tili';
 
   @override
-  String get theme => 'Dizayn mavzusi';
+  String get theme => 'Ilova mavzusi';
 
   @override
   String lanItem(String lang) {
@@ -327,4 +327,45 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   @override
   String get premiumRequiredForPhoto =>
       'Bu funksiya faqat Premium foydalanuvchilar uchun';
+
+  @override
+  String get upgrade => 'Yaxshilash';
+
+  @override
+  String get edit => 'Tahrirlash';
+
+  @override
+  String get security => 'Xavfsizlik';
+
+  @override
+  String get contactUs => 'Biz bilan bog\'lanish';
+
+  @override
+  String get save => 'Saqlash';
+
+  @override
+  String get firstName => 'Ism';
+
+  @override
+  String get lastName => 'Familiya';
+
+  @override
+  String get phoneNumber => 'Telefon raqami';
+
+  @override
+  String get registrationMethod => 'Ro\'yxatdan o\'tish usuli:';
+
+  @override
+  String get viaGoogle => 'Google orqali';
+
+  @override
+  String get scannerLogin => 'Skaner orqali kirish';
+
+  @override
+  String get scannerLoginPrompt =>
+      'Skaner orqali kirishni yoqish uchun tasdiqlang';
+
+  @override
+  String get biometricNotAvailable =>
+      'Qurilmangizda skaner orqali kirish mavjud emas';
 }

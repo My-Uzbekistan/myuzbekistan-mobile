@@ -4,6 +4,7 @@ part  of 'premium_bloc.dart';
 abstract class PremiumEvent with _$PremiumEvent{
 
   factory PremiumEvent.plans() = _Plans;
+  factory PremiumEvent.status() = _Status;
   factory PremiumEvent.selectPlan({required PremiumPlansModel item}) = _SelectPlan;
 
 }

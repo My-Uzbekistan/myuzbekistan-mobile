@@ -1,4 +1,4 @@
-import 'package:data/src/contract/models/contract_dto.dart';
+import 'package:data/src/contract/models/contract/contract_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 

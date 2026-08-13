@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
@@ -20,6 +18,7 @@ class IosGlassNavBar extends StatelessWidget {
     required this.selectedIndex,
     required this.onTabSelected,
     this.profilePhotoUrl,
+    this.isPremium = false,
   });
 
   final int selectedIndex;
@@ -27,6 +26,8 @@ class IosGlassNavBar extends StatelessWidget {
 
   /// Profil tab avatari uchun rasm URL (null bo'lsa default avatar).
   final String? profilePhotoUrl;
+
+  final bool isPremium;
 
   @override
   Widget build(BuildContext context) {
@@ -42,17 +43,21 @@ class IosGlassNavBar extends StatelessWidget {
       selectedLabelColor: selected,
       unselectedLabelColor: unselected,
       showIndicator: true,
-      indicatorColor: NavBarStyle.white.withValues(alpha: 0.6),
+      indicatorColor: NavBarStyle.tabFill,
       glowOpacity: 0,
       labelFontSize: 10,
       settings: LiquidGlassSettings(
-        glassColor: NavBarStyle.white.withValues(alpha: 0.8),
+        glassColor: NavBarStyle.barFill,
         thickness: 30,
         blur: 3,
         refractiveIndex: 1.59,
       ),
       tabs: [
-        for (final tab in navBarTabs(context, profilePhotoUrl: profilePhotoUrl))
+        for (final tab in navBarTabs(
+          context,
+          profilePhotoUrl: profilePhotoUrl,
+          isPremium: isPremium,
+        ))
           GlassTab(
             label: tab.label,
             icon: tab.iconBuilder?.call(false, unselected) ??

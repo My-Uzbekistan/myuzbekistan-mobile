@@ -92,7 +92,7 @@ class FinanceBloc extends Bloc<FinanceEvent, FinanceState> {
       final merchants = await
         _loadMerchantUseCase();
       add(FinanceEvent.setDataEvent(
-        merchants: merchants,
+        merchants: merchants.sortedByDistance(),
       ));
     } catch (e) {
       debugPrint("datatExaption ${e}");

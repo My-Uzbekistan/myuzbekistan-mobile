@@ -1,6 +1,6 @@
-import 'package:data/src/premium/models/access/premium_access_response.dart';
-import 'package:data/src/premium/models/plans/premium_plans_response.dart';
-import 'package:data/src/premium/models/status/premium_status_response.dart';
+import 'package:data/src/premium/models/premium_access/premium_access_response.dart';
+import 'package:data/src/premium/models/premium_plans/premium_plans_response.dart';
+import 'package:data/src/premium/models/premium_status/premium_status_response.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 

@@ -15,6 +15,7 @@ part 'profile_bloc.freezed.dart';
 class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
   final SecurityStorage _securityStorage;
   final AppStatusChangeListeners _appStatusChangeListeners;
+  final PremiumRepository _premiumRepository;
   StreamSubscription? _streamSubscription;
   StreamSubscription? _refreshProfileSubscription;
   final Repository repository;
@@ -23,8 +24,10 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
     SecurityStorage securityStorage,
     AppStatusChangeListeners appStatusChangeListeners,
     this.repository,
+    PremiumRepository premiumRepository,
   ) : _securityStorage = securityStorage,
       _appStatusChangeListeners = appStatusChangeListeners,
+      _premiumRepository = premiumRepository,
       super(ProfileBlocState.guestState()) {
     on<_ProfileBlocInitEvent>((event, emit) {
       _init();
@@ -41,6 +44,7 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
         );
         // Lokal kesh darhol ko'rsatildi; avatarni user-info bilan sinxronlaymiz.
         add(ProfileBlocEvent.syncAvatar());
+        add(ProfileBlocEvent.syncPremium());
       } else {
         emit(ProfileBlocState.guestState());
       }
@@ -58,24 +62,42 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
     });
     on<_ProfileBlocUploadAvatarEvent>(_onUploadAvatar);
     on<_ProfileBlocSyncAvatarEvent>(_onSyncAvatar);
+    on<_ProfileBlocSyncPremiumEvent>(_onSyncPremium);
   }
 
   Future<void> _onSyncAvatar(
     _ProfileBlocSyncAvatarEvent event,
     Emitter<ProfileBlocState> emit,
   ) async {
-    final current = state;
-    if (current is! ProfileBlocDataState) return;
+    if (state is! ProfileBlocDataState) return;
 
     try {
       // Avatar saqlanmaydi — har safar user-info dan jonli o'qiladi.
       // Premium tugaganda profilePictureUrl `null` keladi va avatar tozalanadi.
       final info = await repository.getUserInfo();
       final base = _securityStorage.getUserModel();
-      emit(current.copyWith(userModel: base?.withPhotoUrl(info.profilePictureUrl)));
+      final current = state;
+      if (current is! ProfileBlocDataState) return;
+      emit(
+        current.copyWith(userModel: base?.withPhotoUrl(info.profilePictureUrl)),
+      );
     } catch (_) {
       // Offline yoki xato — joriy holat o'zgarmaydi.
     }
+  }
+
+  Future<void> _onSyncPremium(
+    _ProfileBlocSyncPremiumEvent event,
+    Emitter<ProfileBlocState> emit,
+  ) async {
+    if (state is! ProfileBlocDataState) return;
+
+    try {
+      final status = await _premiumRepository.status();
+      final current = state;
+      if (current is! ProfileBlocDataState) return;
+      emit(current.copyWith(isPremium: status.isPremium));
+    } catch (_) {}
   }
 
   Future<void> _onUploadAvatar(

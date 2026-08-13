@@ -29,8 +29,6 @@ class $AssetsPngGen {
       const AssetGenImage('assets/png/ic_search.png');
   final AssetGenImage iconPremium =
       const AssetGenImage('assets/png/icon_premium.png');
-  final AssetGenImage iconPremiumText =
-      const AssetGenImage('assets/png/icon_premium_text.png');
   final AssetGenImage imageGift2 =
       const AssetGenImage('assets/png/image_gift_2.png');
   final AssetGenImage imgGiftBig =
@@ -38,8 +36,16 @@ class $AssetsPngGen {
   final AssetGenImage imgGiftSmall =
       const AssetGenImage('assets/png/img_gift_small.png');
   final AssetGenImage navMore = const AssetGenImage('assets/png/nav_more.png');
+  final AssetGenImage paymentStatusCancelled =
+      const AssetGenImage('assets/png/payment_status_cancelled.png');
+  final AssetGenImage paymentStatusPending =
+      const AssetGenImage('assets/png/payment_status_pending.png');
+  final AssetGenImage paymentStatusSuccess =
+      const AssetGenImage('assets/png/payment_status_success.png');
   final AssetGenImage personalDefaultBg =
       const AssetGenImage('assets/png/personal_default_bg.webp');
+  final AssetGenImage premiumBg =
+      const AssetGenImage('assets/png/premium_bg.jpg');
   final AssetGenImage premiumCellIconCpuFill =
       const AssetGenImage('assets/png/premium_cell_icon_cpu_fill.png');
   final AssetGenImage premiumCellIconDiscountPercentFill = const AssetGenImage(
@@ -81,6 +87,8 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/cross_case_fill.svg');
   final SvgGenImage defaultCreditCard =
       const SvgGenImage('assets/svg/default_credit_card.svg');
+  final SvgGenImage financeHeroGlow =
+      const SvgGenImage('assets/svg/finance_hero_glow.svg');
   final SvgGenImage filterConus =
       const SvgGenImage('assets/svg/filter_conus.svg');
   final SvgGenImage fiscalIcon =
@@ -96,6 +104,8 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/icon_arrow_right.svg');
   final SvgGenImage iconArrowRightLeft =
       const SvgGenImage('assets/svg/icon_arrow_right_left.svg');
+  final SvgGenImage iconArrowsCw =
+      const SvgGenImage('assets/svg/icon_arrows_cw.svg');
   final SvgGenImage iconCheck = const SvgGenImage('assets/svg/icon_check.svg');
   final SvgGenImage iconClock = const SvgGenImage('assets/svg/icon_clock.svg');
   final SvgGenImage iconClose = const SvgGenImage('assets/svg/icon_close.svg');
@@ -135,8 +145,14 @@ class $AssetsSvgGen {
   final SvgGenImage pinLocationLine =
       const SvgGenImage('assets/svg/pin_location_line.svg');
   final SvgGenImage pinSvg = const SvgGenImage('assets/svg/pin_svg.svg');
+  final SvgGenImage premiumBadge =
+      const SvgGenImage('assets/svg/premium_badge.svg');
   final SvgGenImage premiumCheck =
       const SvgGenImage('assets/svg/premium_check.svg');
+  final SvgGenImage premiumFeatureCheck =
+      const SvgGenImage('assets/svg/premium_feature_check.svg');
+  final SvgGenImage premiumPlanCheck =
+      const SvgGenImage('assets/svg/premium_plan_check.svg');
   final SvgGenImage roundedCloseIcon =
       const SvgGenImage('assets/svg/rounded_close_icon.svg');
   final SvgGenImage scanIdentification =
@@ -176,8 +192,11 @@ class $AssetsMoreGen {
       const SvgGenImage('assets/svg/more/broom_motion.svg');
   final SvgGenImage circleInfo =
       const SvgGenImage('assets/svg/more/circle_info.svg');
-  final SvgGenImage circlePlus =
-      const SvgGenImage('assets/svg/more/circle_plus.svg');
+  final SvgGenImage faceId = const SvgGenImage('assets/svg/more/face_id.svg');
+  final SvgGenImage fileChart =
+      const SvgGenImage('assets/svg/more/file_chart.svg');
+  final SvgGenImage fileShield =
+      const SvgGenImage('assets/svg/more/file_shield.svg');
   final SvgGenImage fingerprint =
       const SvgGenImage('assets/svg/more/fingerprint.svg');
   final SvgGenImage globe = const SvgGenImage('assets/svg/more/globe.svg');
@@ -186,6 +205,8 @@ class $AssetsMoreGen {
   final SvgGenImage palette = const SvgGenImage('assets/svg/more/palette.svg');
   final SvgGenImage paperPlane =
       const SvgGenImage('assets/svg/more/paper_plane.svg');
+  final SvgGenImage password =
+      const SvgGenImage('assets/svg/more/password.svg');
   final SvgGenImage wifi = const SvgGenImage('assets/svg/more/wifi.svg');
 }
 
@@ -193,10 +214,18 @@ class $AssetsPrayersGen {
   const $AssetsPrayersGen();
 
   final SvgGenImage asr = const SvgGenImage('assets/svg/prayers/asr.svg');
+  final SvgGenImage chevronLeft =
+      const SvgGenImage('assets/svg/prayers/chevron_left.svg');
+  final SvgGenImage chevronRight =
+      const SvgGenImage('assets/svg/prayers/chevron_right.svg');
   final SvgGenImage dhuhr = const SvgGenImage('assets/svg/prayers/dhuhr.svg');
   final SvgGenImage fajr = const SvgGenImage('assets/svg/prayers/fajr.svg');
   final SvgGenImage isha = const SvgGenImage('assets/svg/prayers/isha.svg');
   final SvgGenImage magrib = const SvgGenImage('assets/svg/prayers/magrib.svg');
+  final SvgGenImage notificationOff =
+      const SvgGenImage('assets/svg/prayers/notification_off.svg');
+  final SvgGenImage notificationOn =
+      const SvgGenImage('assets/svg/prayers/notification_on.svg');
   final SvgGenImage sunrise =
       const SvgGenImage('assets/svg/prayers/sunrise.svg');
 }

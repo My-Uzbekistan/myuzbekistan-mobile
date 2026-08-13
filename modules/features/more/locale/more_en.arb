@@ -98,5 +98,18 @@
   "chooseFromGallery": "Choose from gallery",
   "photoUpdated": "Profile photo updated",
   "photoUploadError": "Failed to upload photo. Please try again",
-  "premiumRequiredForPhoto": "This feature is for Premium users only"
+  "premiumRequiredForPhoto": "This feature is for Premium users only",
+  "upgrade": "Upgrade",
+  "edit": "Edit",
+  "security": "Security",
+  "contactUs": "Contact us",
+  "save": "Save",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "phoneNumber": "Phone number",
+  "registrationMethod": "Registration method:",
+  "viaGoogle": "Via Google",
+  "scannerLogin": "Scanner login",
+  "scannerLoginPrompt": "Confirm to enable scanner login",
+  "biometricNotAvailable": "Scanner login is not available on your device"
 }

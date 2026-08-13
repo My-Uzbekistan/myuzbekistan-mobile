@@ -45,10 +45,22 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
   String get card_number_label => 'Номер карты';
 
   @override
+  String get card_number_hint => 'Введите номер карты';
+
+  @override
   String get card_expiry_label => 'Срок действия';
 
   @override
+  String get card_expiry_full_label => 'Срок действия карты';
+
+  @override
   String get card_expiry_hint => 'ММ/ГГ';
+
+  @override
+  String get cvv_label => 'CVV / CVC';
+
+  @override
+  String get cvv_hint => '000';
 
   @override
   String get card_holder_label => 'Имя на карте';
@@ -86,6 +98,20 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
   String get nearest_places => 'Ближайшие места';
 
   @override
+  String get distanceM => 'м';
+
+  @override
+  String get distanceKm => 'км';
+
+  @override
+  String get action_all => 'Все';
+
+  @override
+  String rates_last_update(Object date) {
+    return 'Последнее обновление $date';
+  }
+
+  @override
   String get currency_calculator => 'Калькулятор валют';
 
   @override
@@ -119,4 +145,34 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
   String verification_page_code_send_phone(Object phone) {
     return 'Код подтверждения отправлен на $phone';
   }
+
+  @override
+  String get payment_title => 'Оплата';
+
+  @override
+  String get enter_amount => 'Введите сумму';
+
+  @override
+  String get action_change => 'Изменить';
+
+  @override
+  String get payment_details_title => 'Детали';
+
+  @override
+  String get payment_status_success => 'Успешно оплачено';
+
+  @override
+  String get payment_status_pending => 'В ожидании';
+
+  @override
+  String get payment_status_cancelled => 'Отменено';
+
+  @override
+  String get payment_status_refunded => 'Возврат';
+
+  @override
+  String get action_retry => 'Повторить';
+
+  @override
+  String get back_to_home => 'Вернуться на главную';
 }

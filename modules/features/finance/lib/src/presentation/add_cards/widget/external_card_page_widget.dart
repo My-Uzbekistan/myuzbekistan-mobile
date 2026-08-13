@@ -2,89 +2,57 @@ import 'package:component_res/component_res.dart';
 import 'package:finance/src/core/extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared/shared.dart';
 
 import '../../../utils/expire_formatter.dart';
 
-class ExternalCardPageWidget extends StatefulWidget {
-  final Function(String expire, String cvv, String holderName) updateCardData;
+class ExternalCardPageWidget extends HookWidget {
+  final void Function(String expire, String cvv) updateCardData;
 
   const ExternalCardPageWidget({super.key, required this.updateCardData});
 
   @override
-  State<ExternalCardPageWidget> createState() => _ExternalCardPageWidgetState();
-}
-
-class _ExternalCardPageWidgetState extends State<ExternalCardPageWidget> {
-  final TextEditingController _expireController = TextEditingController();
-  final TextEditingController _cvvController = TextEditingController();
-  final TextEditingController _holderNameController = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _expireController.addListener(listener);
-    _cvvController.addListener(listener);
-    _holderNameController.addListener(listener);
-  }
-
-  listener() {
-    widget.updateCardData.call(
-      _expireController.text,
-      _cvvController.text,
-      _holderNameController.text,
-    );
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _expireController.removeListener(listener);
-    _cvvController.removeListener(listener);
-    _holderNameController.removeListener(listener);
-    _expireController.dispose();
-    _cvvController.dispose();
-    _holderNameController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 16,
+    final expireController = useTextEditingController();
+    final cvvController = useTextEditingController();
+
+    useEffect(() {
+      void listener() {
+        updateCardData(expireController.text, cvvController.text);
+      }
+
+      expireController.addListener(listener);
+      cvvController.addListener(listener);
+      return () {
+        expireController.removeListener(listener);
+        cvvController.removeListener(listener);
+      };
+    }, const []);
+
+    return Row(
+      spacing: 12,
       children: [
-        Row(
-          spacing: 16,
-          children: [
-            Flexible(
-              child: AppInputField(
-                controller: _expireController,
-                label: context.localization.card_expiry_label,
-                hintText: context.localization.card_expiry_hint,
-                keyboardType: TextInputType.number,
-                formatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9/]')),
-                  ExpiryDateInputFormatter(),
-                ],
-              ),
-            ),
-            Flexible(
-              child: AppInputField(
-                controller: _cvvController,
-                label: "CVV / CVC",
-                hintText: "000",
-                keyboardType: TextInputType.number,
-                formatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                ],
-              ),
-            ),
-          ],
+        Expanded(
+          child: AppInputField(
+            controller: expireController,
+            label: context.localization.card_expiry_label,
+            hintText: context.localization.card_expiry_hint,
+            keyboardType: TextInputType.number,
+            formatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9/]')),
+              ExpiryDateInputFormatter(),
+            ],
+          ),
         ),
-        AppInputField(
-          controller: _holderNameController,
-          label: context.localization.card_holder_label,
-          hintText: context.localization.card_holder_hint,
+        Expanded(
+          child: AppInputField(
+            controller: cvvController,
+            label: context.localization.cvv_label,
+            hintText: context.localization.cvv_hint,
+            keyboardType: TextInputType.number,
+            maxLength: 3,
+            formatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9]'))],
+          ),
         ),
       ],
     );

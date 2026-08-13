@@ -3,6 +3,8 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/premium/premium_cancel/widgets/subscription_active_badge.dart';
+import 'package:travel/src/premium/premium_cancel/widgets/subscription_info_row.dart';
 
 class SubscriptionInfoCard extends StatelessWidget {
   final PremiumStatusModel? status;
@@ -13,15 +15,17 @@ class SubscriptionInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: context.appColors.background.elevation1,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 16,
         children: [
           Row(
+            spacing: 8,
             children: [
               Expanded(
                 child: Text(
@@ -30,30 +34,25 @@ class SubscriptionInfoCard extends StatelessWidget {
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                ).h3(),
+                ).h3(color: context.appColors.textIconColor.primary),
               ),
-              if (status?.isPremium ?? false) _ActiveBadge(),
+              if (status?.isPremium ?? false) const SubscriptionActiveBadge(),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Divider(
-              height: 1,
-              thickness: 1,
-              color: context.appColors.stroke.nonOpaque,
-            ),
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: context.appColors.stroke.nonOpaque,
           ),
-          _InfoRow(
+          SubscriptionInfoRow(
             label: context.localization.premiumStartDate,
             value: status?.startDate?.format() ?? "—",
           ),
-          const SizedBox(height: 12),
-          _InfoRow(
+          SubscriptionInfoRow(
             label: context.localization.premiumExpiryDate,
             value: status?.endDate?.format() ?? "—",
           ),
-          const SizedBox(height: 12),
-          _InfoRow(
+          SubscriptionInfoRow(
             label: context.localization.premiumDaysRemaining,
             value: context.localization.premiumDaysValue(
               status?.daysRemaining ?? 0,
@@ -61,48 +60,6 @@ class SubscriptionInfoCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-
-class _ActiveBadge extends StatelessWidget {
-  const _ActiveBadge();
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-      decoration: BoxDecoration(
-        color: context.appColors.nonOpaque.green,
-        borderRadius: BorderRadius.circular(40),
-      ),
-      child: Text(
-        context.localization.statusActive,
-      ).labelSm(color: context.appColors.colors.green),
-    );
-  }
-}
-
-
-
-class _InfoRow extends StatelessWidget {
-  final String label;
-  final String value;
-
-  const _InfoRow({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            label,
-          ).bodyMd(color: context.appColors.textIconColor.secondary),
-        ),
-        Text(value).labelLg(),
-      ],
     );
   }
 }

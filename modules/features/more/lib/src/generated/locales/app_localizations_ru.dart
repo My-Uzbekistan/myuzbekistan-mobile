@@ -12,7 +12,7 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get language => 'Язык приложения';
 
   @override
-  String get theme => 'Тема';
+  String get theme => 'Тема приложения';
 
   @override
   String lanItem(String lang) {
@@ -325,4 +325,45 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   @override
   String get premiumRequiredForPhoto =>
       'Эта функция доступна только для Premium';
+
+  @override
+  String get upgrade => 'Улучшить';
+
+  @override
+  String get edit => 'Редактировать';
+
+  @override
+  String get security => 'Безопасность';
+
+  @override
+  String get contactUs => 'Связаться с нами';
+
+  @override
+  String get save => 'Сохранить';
+
+  @override
+  String get firstName => 'Имя';
+
+  @override
+  String get lastName => 'Фамилия';
+
+  @override
+  String get phoneNumber => 'Номер телефона';
+
+  @override
+  String get registrationMethod => 'Способ регистрации:';
+
+  @override
+  String get viaGoogle => 'Через Google';
+
+  @override
+  String get scannerLogin => 'Вход со сканером';
+
+  @override
+  String get scannerLoginPrompt =>
+      'Подтвердите, чтобы включить вход со сканером';
+
+  @override
+  String get biometricNotAvailable =>
+      'Вход со сканером недоступен на вашем устройстве';
 }

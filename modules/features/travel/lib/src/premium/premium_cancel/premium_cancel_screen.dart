@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart';
+import 'package:travel/src/premium/premium_cancel/widgets/premium_features_card.dart';
 import 'package:travel/src/premium/premium_cancel/widgets/subscription_info_card.dart';
-import '../premium_onboarding/widgets/premium_item_cell.dart';
+import 'package:travel/src/premium/widgets/premium_sky_background.dart';
 
 class PremiumCancelScreen extends StatelessWidget {
   final PremiumStatusModel? status;
@@ -14,49 +15,54 @@ class PremiumCancelScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final features = status?.features ?? const <PremiumFeatureModel>[];
+    final topPadding = MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: GradientAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Column(
-            spacing: 16,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                spacing: 6,
-                children: [
-                  Flexible(child: Text("MyUzbekistan").h1()),
-                  Assets.png.iconPremiumText.image(height: 24),
-                ],
-              ),
-
-              SubscriptionInfoCard(status: status),
-
-              Padding(
-                padding: EdgeInsets.only(top: 6),
-                child: Column(
-                  spacing: 12,
-                  children: features
-                      .mapIndexed(
-                        (index, feature) => PremiumItemCell(
-                          iconUrl: feature.icon,
-                          title: feature.title ?? "",
-                          description: feature.description ?? "",
-                        ),
-                      )
-                      .toList(),
+      backgroundColor: context.appColors.background.underlayer,
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          const PremiumSkyBackground(fadeOut: true),
+          SingleChildScrollView(
+            padding: EdgeInsets.only(top: topPadding + 72, bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 16,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text(
+                    context.localization.premiumStatusTitle,
+                  ).h1(color: context.appColors.static.white),
                 ),
-              ),
-            ],
+                SubscriptionInfoCard(status: status),
+                PremiumFeaturesCard(
+                  features: status?.features ?? const <PremiumFeatureModel>[],
+                ),
+              ],
+            ),
           ),
-        ),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SizedBox(
+              height: topPadding,
+              child: const AppGradientMask(),
+            ),
+          ),
+          Positioned(
+            top: topPadding + 2,
+            left: 16,
+            child: RoundedButton.arrowLeft(
+              onPressed: () => Navigator.pop(context),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).padding.bottom + 8,
+          bottom: MediaQuery.of(context).padding.bottom.clamp(16, 34),
           left: 16,
           right: 16,
         ),

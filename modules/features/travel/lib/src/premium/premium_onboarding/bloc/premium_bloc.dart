@@ -13,7 +13,17 @@ class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
 
   PremiumBloc(this._repository) : super(PremiumState()) {
     on<_Plans>(_plans);
+    on<_Status>(_status);
     on<_SelectPlan>(_selectPlan);
+  }
+
+  void _status(_Status event, Emitter<PremiumState> emitter) async {
+    try {
+      final result = await _repository.status();
+      emitter(state.copyWith(status: result));
+    } catch (e) {
+      logger.e("Premium Status Error $e");
+    }
   }
 
   void _plans(_Plans event, Emitter<PremiumState> emitter) async {

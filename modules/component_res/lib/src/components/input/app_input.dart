@@ -42,7 +42,9 @@ class AppInputField extends HookWidget {
 
     final containerColor = errorText != null
         ? context.appColors.nonOpaque.red
-        : context.appColors.fill.quaternary;
+        : isFocused.value
+            ? context.appColors.fill.tertiary
+            : context.appColors.fill.quaternary;
 
     final supportTextColor = errorText != null
         ? context.appColors.colors.red
@@ -131,7 +133,7 @@ class AppInputField extends HookWidget {
                             color: context.appColors.textIconColor.primary,
                           ),
                           hintStyle: CustomTypography.bodyLg.copyWith(
-                            color: context.appColors.textIconColor.tertiary,
+                            color: context.appColors.textIconColor.secondary,
                           ),
                           contentPadding: EdgeInsets.symmetric(vertical: 0),
                         ),

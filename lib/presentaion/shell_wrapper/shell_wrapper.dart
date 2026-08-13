@@ -60,14 +60,12 @@ class _ShellPageWrapperState extends State<ShellPageWrapper> {
           create: (_) => getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
           child: BlocBuilder<ProfileBloc, ProfileBlocState>(
             builder: (context, state) {
-              // photoUrl faqat premium bo'lganda backend'dan keladi; null bo'lsa
-              // NavProfileAvatar default avatar ko'rsatadi.
-              final photoUrl =
-                  state is ProfileBlocDataState ? state.userModel?.photoUrl : null;
+              final dataState = state is ProfileBlocDataState ? state : null;
               return AppBottomNavBar(
                 selectedIndex: widget.navigationShell.currentIndex,
                 onTabSelected: _goBranch,
-                profilePhotoUrl: photoUrl,
+                profilePhotoUrl: dataState?.userModel?.photoUrl,
+                isPremium: dataState?.isPremium ?? false,
               );
             },
           ),

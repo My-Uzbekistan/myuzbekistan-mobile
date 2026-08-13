@@ -23,3 +23,10 @@ export 'models/banner_item.dart';
 
 export 'models/gift_history.dart';
 export 'models/service_action.dart';
+
+export 'models/prayer_key.dart';
+export 'models/prayer_time_item.dart';
+export 'models/prayer_current.dart';
+export 'models/prayer_times.dart';
+export 'models/prayer_location.dart';
+export 'models/prayer_reminders.dart';

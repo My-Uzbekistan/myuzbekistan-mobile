@@ -7,7 +7,8 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared/shared.dart';
 
 import '../constants.dart';
-import '../travel/models/token_dto.dart';
+import '../travel/models/token/token_dto.dart';
+import 'device_headers_interceptor.dart';
 
 // class TokenRefreshInterceptor extends Interceptor {
 //   SecurityStorage securityStorage;
@@ -169,6 +170,7 @@ class TokenRefreshInterceptor extends Interceptor {
   Completer<void>? _refreshCompleter;
 
   final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseApiUrl))
+    ..interceptors.add(DeviceHeadersInterceptor())
     ..interceptors.add(PrettyDioLogger(requestBody: true));
 
   @override
@@ -246,7 +248,7 @@ class TokenRefreshInterceptor extends Interceptor {
     try {
       final response = await _dio.post(
         "/auth/refresh",
-        data: {"RefreshToken": securityStorage.getRefreshToken()},
+        data: {"refreshToken": securityStorage.getRefreshToken()},
       );
       final tokenDto = TokenDto.fromJson(response.data);
       await securityStorage.setToken(token: tokenDto.toDomain());

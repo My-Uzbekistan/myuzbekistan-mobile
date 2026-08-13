@@ -45,10 +45,22 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get card_number_label => 'Card number';
 
   @override
+  String get card_number_hint => 'Enter card number';
+
+  @override
   String get card_expiry_label => 'Expiry date';
 
   @override
+  String get card_expiry_full_label => 'Card expiry date';
+
+  @override
   String get card_expiry_hint => 'MM/YY';
+
+  @override
+  String get cvv_label => 'CVV / CVC';
+
+  @override
+  String get cvv_hint => '000';
 
   @override
   String get card_holder_label => 'Name on card';
@@ -86,6 +98,20 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get nearest_places => 'Nearest places';
 
   @override
+  String get distanceM => 'm';
+
+  @override
+  String get distanceKm => 'km';
+
+  @override
+  String get action_all => 'All';
+
+  @override
+  String rates_last_update(Object date) {
+    return 'Last update $date';
+  }
+
+  @override
   String get currency_calculator => 'Currency calculator';
 
   @override
@@ -119,4 +145,34 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String verification_page_code_send_phone(Object phone) {
     return 'Verification code sent to $phone';
   }
+
+  @override
+  String get payment_title => 'Payment';
+
+  @override
+  String get enter_amount => 'Enter amount';
+
+  @override
+  String get action_change => 'Change';
+
+  @override
+  String get payment_details_title => 'Details';
+
+  @override
+  String get payment_status_success => 'Successfully paid';
+
+  @override
+  String get payment_status_pending => 'Pending';
+
+  @override
+  String get payment_status_cancelled => 'Cancelled';
+
+  @override
+  String get payment_status_refunded => 'Refund';
+
+  @override
+  String get action_retry => 'Retry';
+
+  @override
+  String get back_to_home => 'Back to home';
 }

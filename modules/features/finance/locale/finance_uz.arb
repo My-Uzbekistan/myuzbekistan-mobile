@@ -10,8 +10,12 @@
   "payment_history_title": "Tarix",
   "payment_qr_title": "QR To'lov",
   "card_number_label": "Karta raqami",
+  "card_number_hint": "Karta raqamini kiriting",
   "card_expiry_label": "Amal qilish muddati",
+  "card_expiry_full_label": "Kartaning amal qilish muddati",
   "card_expiry_hint": "OO/YY",
+  "cvv_label": "CVV / CVC",
+  "cvv_hint": "000",
   "card_holder_label": "Karta egasi nomi",
   "card_holder_hint": "Egasining ismi",
   "phone_number_label": "Telefon raqami",
@@ -23,6 +27,10 @@
   "action_delete": "O'chirish",
   "action_cancel": "Bekor qilish",
   "nearest_places": "Eng yaqin joylar",
+  "distanceM": "m",
+  "distanceKm": "km",
+  "action_all": "Barchasi",
+  "rates_last_update": "Oxirgi yangilanish {date}",
 
   "currency_calculator": "Valyuta kalkulyatori",
   "all_places": "Barcha joylar",
@@ -34,7 +42,17 @@
   "all_exchange_rates": "Barcha valyuta kurslari",
   "all_cards": "Barchasi",
   "fiscalReceipt": "Soliq cheki",
-  "verification_page_code_send_phone": "Tasdiqlash kodi {phone}  raqamga yuborildi"
+  "verification_page_code_send_phone": "Tasdiqlash kodi {phone}  raqamga yuborildi",
+  "payment_title": "To'lov",
+  "enter_amount": "Summani kiriting",
+  "action_change": "O'zgartirish",
+  "payment_details_title": "Tafsilotlar",
+  "payment_status_success": "Muvaffaqiyatli to'landi",
+  "payment_status_pending": "Kutilmoqda",
+  "payment_status_cancelled": "Bekor qilindi",
+  "payment_status_refunded": "Qaytarildi",
+  "action_retry": "Qayta urinish",
+  "back_to_home": "Bosh sahifaga qaytish"
 
 
 }

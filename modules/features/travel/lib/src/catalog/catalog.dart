@@ -7,7 +7,8 @@ import 'package:shared/shared.dart';
 import 'package:travel/src/catalog/bloc/catalog_bloc.dart';
 import 'package:travel/src/catalog/widget/catalog_item.dart';
 import 'package:travel/src/core/extension.dart';
-import 'package:travel/src/premium/widgets/premium_access_dialogs.dart';
+import 'package:travel/src/premium/widgets/limit_reached_dialog.dart';
+import 'package:travel/src/premium/widgets/premium_required_dialog.dart';
 
 import '../di/injection.dart';
 

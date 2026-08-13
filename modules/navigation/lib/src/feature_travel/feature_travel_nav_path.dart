@@ -39,6 +39,16 @@ class _FeatureTravelNavPath {
     path: '/onboarding',
   );
 
+  AppNavPath get travelPrayerTimes => _NavPathImpl(
+    name: 'feature_travel_prayer_times',
+    path: '/prayer_times',
+  );
+
+  AppNavPath get travelPrayerLocation => _NavPathImpl(
+    name: 'feature_travel_prayer_location',
+    path: '/prayer_location',
+  );
+
   AppNavPath get travelCatalogInvestments =>
       _NavPathImpl(name: 'feature_travel_investments', path: '/catalog/investments');
 

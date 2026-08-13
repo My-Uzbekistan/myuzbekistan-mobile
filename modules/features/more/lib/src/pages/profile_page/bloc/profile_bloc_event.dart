@@ -9,4 +9,5 @@ abstract class ProfileBlocEvent with _$ProfileBlocEvent {
   factory ProfileBlocEvent.uploadAvatar(File file) =
       _ProfileBlocUploadAvatarEvent;
   factory ProfileBlocEvent.syncAvatar() = _ProfileBlocSyncAvatarEvent;
+  factory ProfileBlocEvent.syncPremium() = _ProfileBlocSyncPremiumEvent;
 }

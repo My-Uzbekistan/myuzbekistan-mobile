@@ -7,10 +7,12 @@ class UserInfoModel {
   final String? name;
   final num? balance;
   final String? profilePictureUrl;
+  final bool? pushEnabled;
 
   const UserInfoModel({
     this.name,
     this.balance,
     this.profilePictureUrl,
+    this.pushEnabled,
   });
 }

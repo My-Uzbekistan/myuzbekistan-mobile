@@ -2,6 +2,7 @@
 
 import 'package:data/src/constants.dart';
 import 'package:data/src/interseptors/TokenRefreshInterceptor.dart';
+import 'package:data/src/interseptors/device_headers_interceptor.dart';
 import "package:dio/dio.dart" ;
 import 'package:domain/domain.dart';
 import 'package:flutter/foundation.dart';
@@ -45,6 +46,7 @@ abstract class NetworkModule {
     //     refreshToken: securityStorage.getRefreshToken(),
     //   ),
     // );
+    dio.interceptors.add(DeviceHeadersInterceptor());
     dio.interceptors.add(AppInterceptor(preference, securityStorage));
     dio.interceptors.add(
       TokenRefreshInterceptor(securityStorage: securityStorage,mainDio: dio),

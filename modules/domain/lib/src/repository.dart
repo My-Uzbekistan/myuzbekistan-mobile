@@ -41,6 +41,21 @@ abstract interface class Repository {
   /// Havo sifati ko'rsatkichi — `GET /api/air-quality?lat=&lon=`.
   Future<AirQuality> loadAirQuality({required double lat, required double lon});
 
+  /// Namoz vaqtlari — `GET /api/prayer-times?locationId=&date=`.
+  Future<PrayerTimes> loadPrayerTimes({int? locationId, DateTime? date});
+
+  /// Namoz vaqti hududlari — `GET /api/prayer-times/locations`.
+  Future<List<PrayerLocation>> loadPrayerLocations();
+
+  /// Yoqilgan namoz eslatmalari — `GET /api/prayer-times/reminders`.
+  Future<PrayerReminders> loadPrayerReminders();
+
+  /// Namoz eslatmalarini saqlash — `PUT /api/prayer-times/reminders`.
+  Future<dynamic> updatePrayerReminders({
+    required int locationId,
+    required List<PrayerKey> prayers,
+  });
+
   Future<void> createPin({required String pin, bool isChangePin});
 
   Future<void> removePin({required String pin});
@@ -56,16 +71,12 @@ abstract interface class Repository {
   });
 
   //AuthPhone sendCode
-  Future<dynamic> sendCode({
-    required String phoneNumber,
-  });
+  Future<dynamic> sendCode({required String phoneNumber});
 
   Future<Token> authConfirmCode({
     required String phoneNumber,
     required String code,
   });
-
-
 
   Future<Token> authApple({
     required String idToken,
@@ -91,6 +102,8 @@ abstract interface class Repository {
   Future<UserInfoModel> getUserInfo();
 
   Future<dynamic> setFirebaseToken({required String token});
+
+  Future<dynamic> updateNotificationSettings({required bool pushEnabled});
 
   Future<List<NotificationItem>> getNotifications();
 
@@ -125,11 +138,7 @@ abstract interface class Repository {
 
   Future<dynamic> onboardingTrackClick({required int id});
 
-
   Future<ClaimStatus?> giftActive();
   Future<List<ClaimHistory>> giftHistory();
   Future<ClaimHistory> giftActivate();
-
-
-
 }

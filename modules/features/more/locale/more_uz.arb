@@ -1,6 +1,6 @@
 {
   "language": "Ilova tili",
-  "theme": "Dizayn mavzusi",
+  "theme": "Ilova mavzusi",
   "lanItem": "{lang, select, en{Inglizcha} ru{Ruscha} uz{O'zbekcha} other{} }",
   "selectLanguageTitle": "Interfeys tilini tanlang",
   "welcomeTitle": "Xush kelibsiz",
@@ -94,5 +94,18 @@
   "chooseFromGallery": "Galereyadan tanlash",
   "photoUpdated": "Profil rasmi yangilandi",
   "photoUploadError": "Rasmni yuklab bo'lmadi. Qayta urinib ko'ring",
-  "premiumRequiredForPhoto": "Bu funksiya faqat Premium foydalanuvchilar uchun"
+  "premiumRequiredForPhoto": "Bu funksiya faqat Premium foydalanuvchilar uchun",
+  "upgrade": "Yaxshilash",
+  "edit": "Tahrirlash",
+  "security": "Xavfsizlik",
+  "contactUs": "Biz bilan bog'lanish",
+  "save": "Saqlash",
+  "firstName": "Ism",
+  "lastName": "Familiya",
+  "phoneNumber": "Telefon raqami",
+  "registrationMethod": "Ro'yxatdan o'tish usuli:",
+  "viaGoogle": "Google orqali",
+  "scannerLogin": "Skaner orqali kirish",
+  "scannerLoginPrompt": "Skaner orqali kirishni yoqish uchun tasdiqlang",
+  "biometricNotAvailable": "Qurilmangizda skaner orqali kirish mavjud emas"
 }

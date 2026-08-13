@@ -1,6 +1,6 @@
 {
   "language": "Язык приложения",
-  "theme": "Тема",
+  "theme": "Тема приложения",
   "lanItem": "{lang, select, en{Английский} ru{Русский} uz{Узбекский} other{} }",
   "langItemDefault": "{lang, select, en{English} ru{Русский} uz{O'zbekcha} other{} }",
   "selectLanguageTitle": "Выберите язык интерфейса",
@@ -95,5 +95,18 @@
   "chooseFromGallery": "Выбрать из галереи",
   "photoUpdated": "Фото профиля обновлено",
   "photoUploadError": "Не удалось загрузить фото. Повторите попытку",
-  "premiumRequiredForPhoto": "Эта функция доступна только для Premium"
+  "premiumRequiredForPhoto": "Эта функция доступна только для Premium",
+  "upgrade": "Улучшить",
+  "edit": "Редактировать",
+  "security": "Безопасность",
+  "contactUs": "Связаться с нами",
+  "save": "Сохранить",
+  "firstName": "Имя",
+  "lastName": "Фамилия",
+  "phoneNumber": "Номер телефона",
+  "registrationMethod": "Способ регистрации:",
+  "viaGoogle": "Через Google",
+  "scannerLogin": "Вход со сканером",
+  "scannerLoginPrompt": "Подтвердите, чтобы включить вход со сканером",
+  "biometricNotAvailable": "Вход со сканером недоступен на вашем устройстве"
 }

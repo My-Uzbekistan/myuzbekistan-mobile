@@ -102,4 +102,11 @@ class NotificationService {
     await _messaging.subscribeToTopic(currentTopic);
     await getIt<SecurityStorage>().setTopic(currentTopic);
   }
+
+  Future<void> unsubscribeFromTopic() async {
+    final topic = getIt<SecurityStorage>().getTopic();
+    if (topic == null) return;
+    debugPrint("unsubscribing from topic $topic");
+    await _messaging.unsubscribeFromTopic(topic);
+  }
 }

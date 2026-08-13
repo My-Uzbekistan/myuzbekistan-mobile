@@ -7,164 +7,158 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
-import 'package:travel/src/premium/premium_onboarding/widgets/premium_item_cell.dart';
-import 'package:travel/src/premium/widgets/premium_access_dialogs.dart';
+import 'package:travel/src/premium/premium_onboarding/widgets/premium_benefit_row.dart';
+import 'package:travel/src/premium/premium_onboarding/widgets/premium_plan_sheet.dart';
+import 'package:travel/src/premium/widgets/premium_success_dialog.dart';
+import 'package:travel/src/premium/widgets/premium_sky_background.dart';
 
-import 'widgets/discount_item.dart';
+class PremiumOnboardingPage extends HookWidget {
+  static const _merchantId = "50";
+  static const _contentTopSpacing = 72.0;
+  static const _contentBottomSpacing = 24.0;
 
-class PremiumOnboardingPage extends StatefulWidget {
   const PremiumOnboardingPage({super.key});
 
-  @override
-  State<PremiumOnboardingPage> createState() => _PremiumOnboardingPageState();
-}
+  Future<void> _subscribe(BuildContext context, PremiumState state) async {
+    final completer = Completer<bool>();
+    context.finance.pushMerchantPage(
+      id: _merchantId,
+      orderId: state.item?.id.toString(),
+      extra: completer,
+      amount: ((state.item?.price ?? 0) / 100).toInt().toString(),
+    );
+    final result = await completer.future;
+    if (!result) return;
 
-class _PremiumOnboardingPageState extends State<PremiumOnboardingPage> {
-  PremiumBloc? bloc;
-  static const merchantId = "50";
-
-  @override
-  void initState() {
-    super.initState();
-    bloc = context.read();
+    GlobalHandler().refreshListener?.call();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final rootContext = appRootNavigatorKey.currentContext;
+        if (rootContext != null) {
+          PremiumSuccessDialog.show(rootContext);
+        }
+      });
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PremiumBloc, PremiumState>(
+    final scrollController = useScrollController();
+
+    return BlocConsumer<PremiumBloc, PremiumState>(
+      listenWhen: (prev, curr) => prev.status != curr.status,
+      listener: (context, state) {
+        final status = state.status;
+        if (status != null && status.isPremium) {
+          context.travel.replaceWithPremiumCancel(status: status);
+        }
+      },
       builder: (context, state) {
+        final features = state.item?.features ?? const [];
+        final topInset = MediaQuery.of(context).padding.top;
+
         return Scaffold(
-          appBar: GradientAppBar(),
-          bottomNavigationBar: Container(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).padding.bottom + 8,
-              left: 16,
-              right: 16,
-            ),
-            width: double.maxFinite,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 16,
-              children: [
-                SingleChildScrollView(
-                  padding: const EdgeInsets.only(top: 36),
-                  scrollDirection: Axis.horizontal,
-                  clipBehavior: Clip.none,
-                  child: Row(
-                    children:
-                        state.plans
-                            .mapIndexed(
-                              (index, data) => DiscountItem(
-                                isSelect: state.item?.id == data.id,
-                                item: data,
-                                onTap:
-                                    () => bloc?.add(
-                                      PremiumEvent.selectPlan(item: data),
-                                    ), index: index,
-                              ),
-                            )
-                            .toList(),
-                  ),
-                ),
-                Column(
-                  spacing: 16,
-                  children: [
-                    AppActionButton(
-                      actionText: context.localization.premiumConnect,
-                      onPressed: () async {
-                        final completer = Completer<bool>();
-                        context.finance.pushMerchantPage(
-                          id: merchantId,
-                          orderId: state.item?.id.toString(),
-                          extra: completer,
-                          amount:
-                              ((state.item?.price ?? 0) / 100)
-                                  .toInt()
-                                  .toString(),
-                        );
-                        final result = await completer.future;
-                        if (result) {
-                          GlobalHandler().refreshListener?.call();
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              final rootContext =
-                                  appRootNavigatorKey.currentContext;
-                              if (rootContext != null) {
-                                PremiumSuccessDialog.show(rootContext);
-                              }
-                            });
-                          });
-                        }
-                      },
-                      disable: state.item == null,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: context.localization.premiumCancelAnytime,
-                            style: CustomTypography.bodyXsm.copyWith(
-                              color: context.appColors.textIconColor.secondary,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "\n${context.localization.premiumTerms}",
-                            style: CustomTypography.bodyXsm.copyWith(
-                              decoration: TextDecoration.underline,
-                              color: context.appColors.textIconColor.secondary,
-                            ),
-                          ),
-                        ],
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: Column(
-                spacing: 16,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+          body: Stack(
+            fit: StackFit.expand,
+            children: [
+              const PremiumSkyBackground(),
+              Column(
                 children: [
-                  Assets.png.iconPremium.image(height: 80),
-                  Row(
-                    spacing: 6,
-                    children: [
-                      Flexible(child: Text("MyUzbekistan").h1()),
-                      Assets.png.iconPremiumText.image(height: 24),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 6),
-                    child: Column(
-                      spacing: 12,
-                      children:
-                          state.item?.features
-                              .mapIndexed(
-                                (index, feature) => PremiumItemCell(
-                                  iconUrl: feature.icon,
-                                  title: feature.title ?? "",
-                                  description: feature.description ?? "",
+                  Expanded(
+                    child: RawScrollbar(
+                      controller: scrollController,
+                      thumbVisibility: true,
+                      thumbColor: context.appColors.static.white,
+                      thickness: 3,
+                      radius: const Radius.circular(999),
+                      padding: EdgeInsets.only(
+                        top: topInset + _contentTopSpacing,
+                        bottom: _contentBottomSpacing,
+                        right: 4,
+                      ),
+                      child: SingleChildScrollView(
+                        controller: scrollController,
+                        padding: EdgeInsets.only(
+                          top: topInset + _contentTopSpacing,
+                          bottom: _contentBottomSpacing,
+                        ),
+                        child: Column(
+                          spacing: 24,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: Column(
+                                spacing: 10,
+                                children: [
+                                  Text(
+                                    context.localization.premiumOnboardingTitle,
+                                    textAlign: TextAlign.center,
+                                  ).h1(color: context.appColors.static.white),
+                                  Text(
+                                    context
+                                        .localization
+                                        .premiumOnboardingSubtitle,
+                                    textAlign: TextAlign.center,
+                                  ).bodyMd(
+                                    color: context.appColors.static.black
+                                        .withValues(alpha: 0.4),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: AdaptiveGlass(
+                                borderRadius: 20,
+                                blur: 8.7,
+                                tint: const Color(0x1AFFFFFF),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: features
+                                        .map(
+                                          (feature) => PremiumBenefitRow(
+                                            title: feature.title ?? "",
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
                                 ),
-                              )
-                              .toList() ??
-                          [],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
+                  ),
+                  PremiumPlanSheet(
+                    plans: state.plans,
+                    selectedId: state.item?.id,
+                    onSelect: (plan) => context.read<PremiumBloc>().add(
+                      PremiumEvent.selectPlan(item: plan),
+                    ),
+                    onSubscribe: () => _subscribe(context, state),
                   ),
                 ],
               ),
-            ),
+              Positioned(
+                top: MediaQuery.of(context).padding.top + 8,
+                right: 16,
+                child: RoundedButton.closeButton(
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+            ],
           ),
         );
       },
     );
   }
 }
-
-

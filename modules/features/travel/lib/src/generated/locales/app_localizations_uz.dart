@@ -183,21 +183,10 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   String get distanceM => 'm';
 
   @override
-  String prayerTime(String time) {
-    String _temp0 = intl.Intl.selectLogic(time, {
-      'fajr': 'Bomdod',
-      'sunrise': 'Quyosh',
-      'dhuhr': 'Peshin',
-      'asr': 'Asr',
-      'maghrib': 'Shom',
-      'isha': 'Xufton',
-      'other': 'Namoz',
-    });
-    return '$_temp0';
-  }
+  String get prayerTimeTitle => 'Namoz vaqti';
 
   @override
-  String get prayerTimeTitle => 'Namoz vaqti';
+  String get prayerLocation => 'Joylashuv';
 
   @override
   String get notifications => 'Xabarnomalar';
@@ -441,6 +430,16 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   @override
   String get claim_warning_page_caption =>
       'Sovg‘ani olish uchun Uztelecom raqamiga ro‘yxatdan o‘tish kerak';
+
+  @override
+  String get premiumOnboardingTitle => 'MyUzbekistan Premiumni ulang';
+
+  @override
+  String get premiumOnboardingSubtitle =>
+      'Ilovaning to‘liq imkoniyatlaridan foydalanish uchun premium obunani faollashtiring';
+
+  @override
+  String get premiumStatusTitle => 'MyUzbekistan Premiumi';
 
   @override
   String get premiumConnect => 'Premiumni ulash';

@@ -1,81 +1,42 @@
-
-import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:more/src/core/extension.dart';
+import 'package:more/src/pages/profile_page/widgets/settings_options_sheet.dart';
+import 'package:more/src/pages/profile_page/widgets/settings_radio_option.dart';
 import 'package:shared/shared.dart';
 
 import '../../../core/settings_bloc/app_settings_bloc.dart';
 
-
-class ChangeThemePage extends StatefulWidget {
+class ChangeThemePage extends HookWidget {
   const ChangeThemePage({super.key});
 
-  @override
-  State<ChangeThemePage> createState() => _ChangeThemePageState();
-}
+  static const _modes = [ThemeMode.system, ThemeMode.light, ThemeMode.dark];
 
-class _ChangeThemePageState extends State<ChangeThemePage> {
   @override
   Widget build(BuildContext context) {
-    final localization=context.localization;
-    return SafeArea(
-      child: Wrap(
-        children: [
-          BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
-              builder: (context, state) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        localization.language,
-                        style: CustomTypography.H2,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    SettingsCell(
-                      text: localization.themeModes(ThemeMode.system.name),
-                      onTap: () {
-                        context
-                            .read<AppSettingsBloc>()
-                            .add(AppSettingsBlocEvent.setTheme(ThemeMode.system));
-                      },
-                      trailing: AppCheck(
-                        isChecked: state.mode == ThemeMode.system,
-                      ),
-                    ),
-                    SettingsCell(
-                      onTap: () {
-                        context
-                            .read<AppSettingsBloc>()
-                            .add(AppSettingsBlocEvent.setTheme(ThemeMode.light));
-                      },
-                      text:   localization.themeModes(ThemeMode.light.name),
+    final localization = context.localization;
+    final currentMode = context.select<AppSettingsBloc, ThemeMode>(
+      (bloc) => bloc.state.mode,
+    );
+    final selected = useState<ThemeMode>(currentMode);
 
-                      trailing: AppCheck(
-                        isChecked: state.mode == ThemeMode.light,
-                      ),
-                    ),
-                    SettingsCell(
-                      text:   localization.themeModes(ThemeMode.dark.name),
-                      onTap: () {
-                        context
-                            .read<AppSettingsBloc>()
-                            .add(AppSettingsBlocEvent.setTheme(ThemeMode.dark));
-                      },
-                      trailing: AppCheck(
-                        isChecked: state.mode == ThemeMode.dark,
-                      ),
-                    ),
-                  ],
-                );
-              })
-        ],
-      ),
+    return SettingsOptionsSheet(
+      title: localization.theme,
+      actionText: localization.save,
+      options: [
+        for (var i = 0; i < _modes.length; i++)
+          SettingsRadioOption(
+            text: localization.themeModes(_modes[i].name),
+            isSelected: selected.value == _modes[i],
+            showDivider: i != _modes.length - 1,
+            onTap: () => selected.value = _modes[i],
+          ),
+      ],
+      onSave: () {
+        context.read<AppSettingsBloc>().add(
+          AppSettingsBlocEvent.setTheme(selected.value),
+        );
+        context.pop();
+      },
     );
   }
 }

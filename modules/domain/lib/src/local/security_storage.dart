@@ -24,6 +24,14 @@ abstract class SecurityStorage {
 
   bool isShowPrayerTimes();
 
+  Future<void> setPrayerLocationId(int locationId);
+
+  int? getPrayerLocationId();
+
+  Future<void> changeNotificationsState(bool value);
+
+  bool isNotificationsEnabled();
+
   String? getRefreshToken();
 
   DateTime? getTokenExpire();
@@ -31,6 +39,10 @@ abstract class SecurityStorage {
   bool hasTokenExpire();
 
   bool hasPin();
+
+  bool isFaceIdEnabled();
+
+  Future<void> setFaceIdEnabled(bool enabled);
 
   bool isPinVerified();
 

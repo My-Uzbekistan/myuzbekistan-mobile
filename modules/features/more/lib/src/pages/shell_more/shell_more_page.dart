@@ -1,493 +1,332 @@
+import 'dart:async';
+
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
-import 'package:more/more.dart';
 import 'package:more/src/core/extension.dart';
-import 'package:more/src/pages/profile_page/pages/change_locale.dart';
-import 'package:more/src/pages/shell_more/widgets/about_widget.dart';
-import 'package:more/src/pages/shell_more/widgets/profile_app_bar_title.dart';
-import 'package:more/src/pages/shell_more/widgets/version.dart';
+import 'package:more/src/core/settings_bloc/app_settings_bloc.dart';
 import 'package:navigation/navigation.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/shared.dart' hide Toast;
 
 import '../../di/injection.dart';
 import '../profile_page/bloc/profile_bloc.dart';
 import 'bloc/more_bloc.dart';
+import 'widgets/profile/premium_active_banner.dart';
+import 'widgets/profile/premium_upgrade_banner.dart';
+import 'widgets/profile/profile_header.dart';
+import 'widgets/profile/profile_settings_cell.dart';
+import 'widgets/profile/profile_settings_group.dart';
 
-class ShellMorePage extends StatefulWidget {
+class ShellMorePage extends HookWidget {
   const ShellMorePage({super.key});
 
   @override
-  State<ShellMorePage> createState() => _ShellMorePageState();
-}
-
-class _ShellMorePageState extends State<ShellMorePage> {
-  late final MoreBloc moreBloc;
-  late final AppSettingsBloc appSettingsBloc;
-
-  @override
-  void initState() {
-    moreBloc = getIt<MoreBloc>();
-    appSettingsBloc = context.read<AppSettingsBloc>();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => moreBloc,
-      child: BlocBuilder<ProfileBloc, ProfileBlocState>(
-        builder: (context, profileState) {
-          return Scaffold(
-            extendBody: true,
-            extendBodyBehindAppBar: true,
-            appBar: AppBar(
-              surfaceTintColor: Colors.transparent,
-              centerTitle: false,
-              flexibleSpace: AppGradientMask(),
-              backgroundColor: Colors.transparent,
+    final moreBloc = useMemoized(() => getIt<MoreBloc>());
+    useEffect(() => moreBloc.close, [moreBloc]);
 
-              title: BlocBuilder<MoreBloc, MoreState>(
-                builder: (context, moreState) {
-                  return ProfileAppBarTitle(
-                    profileState: profileState,
-                    premiumStatus: moreState.premiumStatus,
-                    premiumLoaded: moreState.premiumLoaded,
-                  );
-                },
-              ),
+    final appVersion = useState<String?>(null);
+    useEffect(() {
+      Future.microtask(() async {
+        final info = await PackageInfo.fromPlatform();
+        appVersion.value = info.version;
+      });
+      return null;
+    }, const []);
 
-              actionsPadding: EdgeInsets.only(right: 16),
-              actions: [
-                Builder(
-                  builder: (context) {
-                    if (profileState is ProfileBlocDataState) {
-                      return SizedBox.shrink();
-                    }
-                    return GestureDetector(
-                      onTap: () {
-                        context.more.pushAuthPage();
-                        // getIt<AppStatusChangeListeners>().refresh();
+    final completerRef = useRef<Completer<void>?>(null);
 
-                        // GlobalHandler().refreshListener?.call();
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 7,
-                          horizontal: 12,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: context.appColors.brand,
-                        ),
-                        child: Text(
-                          context.localization.log_in,
-                        ).labelSm(color: Colors.white),
-                      ),
-                    );
-                  },
+    final profileState = context.watch<ProfileBloc>().state;
+    final appSettingsState = context.watch<AppSettingsBloc>().state;
+
+    final userState =
+        profileState is ProfileBlocDataState ? profileState : null;
+    final isLoggedIn = userState != null;
+    final localeName = appSettingsState.appLocale?.name;
+
+    return Scaffold(
+      extendBody: true,
+      backgroundColor: context.appColors.background.underlayer,
+      body: BlocListener<MoreBloc, MoreState>(
+        bloc: moreBloc,
+        listenWhen:
+            (previous, current) =>
+                current.errorMessage != null &&
+                previous.errorMessage != current.errorMessage,
+        listener: (context, moreState) {
+          Toast.showToast(moreState.errorMessage!);
+        },
+        child: BlocConsumer<MoreBloc, MoreState>(
+          bloc: moreBloc,
+          listenWhen:
+              (previous, current) => previous.isLoading != current.isLoading,
+          listener: (context, moreState) {
+            if (!moreState.isLoading) {
+              completerRef.value?.complete();
+              completerRef.value = null;
+            }
+          },
+          builder: (context, moreState) {
+            final isPremium =
+                moreState.premiumLoaded &&
+                (moreState.premiumStatus?.isPremium ?? false);
+            final showPremiumBanner = !isLoggedIn || moreState.premiumLoaded;
+
+            return RefreshIndicator.adaptive(
+              displacement: 100,
+              triggerMode: RefreshIndicatorTriggerMode.anywhere,
+              onRefresh: () async {
+                moreBloc.add(MoreEvent.fetch());
+                context.read<ProfileBloc>().add(ProfileBlocEvent.loadEvent());
+                completerRef.value = Completer();
+                await completerRef.value?.future;
+              },
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
                 ),
-              ],
-            ),
-            body: BlocBuilder<MoreBloc, MoreState>(
-              builder: (context, state) {
-                return SingleChildScrollView(
-                  padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).padding.top + 16,
-                    bottom: MediaQuery.of(context).padding.bottom + 16,
-                  ),
-                  child: Column(
-                    spacing: 24,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                slivers: [
+                  SliverStack(
                     children: [
-                      Builder(
-                        builder: (context) {
-                          if (state.isLoading) {
-                            return Shimmer.fromDefault(
-                              child: ShimmerDefaultContainer(
-                                height: 322,
-                                width: 311,
-                              ),
-                            );
-                          }
-                          return AboutWidget(avatars: state.abouts);
-                        },
+                      SliverAppBar(
+                        primary: false,
+                        stretch: true,
+                        toolbarHeight: 0,
+                        elevation: 0,
+                        scrolledUnderElevation: 0,
+                        automaticallyImplyLeading: false,
+                        backgroundColor: Colors.transparent,
+                        systemOverlayStyle: context.systemUiOverlyStyle,
+                        expandedHeight: ProfileHeader.heightOf(
+                          context,
+                          isGuest: !isLoggedIn,
+                          isPremium: isPremium,
+                        ),
+                        flexibleSpace: FlexibleSpaceBar(
+                          collapseMode: CollapseMode.pin,
+                          stretchModes: const [StretchMode.zoomBackground],
+                          background: ProfileHeader(
+                            isGuest: !isLoggedIn,
+                            name: userState?.userModel?.userName ?? "",
+                            photoUrl: userState?.userModel?.photoUrl,
+                            isLoading: userState?.isLoading ?? false,
+                            isPremium: isPremium,
+                          ),
+                        ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          spacing: 16,
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24),
-                                color: context.appColors.fill.quaternary,
-                              ),
-                              child: Column(
-                                children: [
-                                  //TODO Pincode and biometric
-                                  if (profileState is ProfileBlocDataState) ...[
-                                    _MoreCellItem(
-                                      icon: Assets.svg.more.circlePlus.svg(),
-                                      title:
-                                          profileState.hasPin
-                                              ? context
-                                                  .localization
-                                                  .changePinTitle
-                                              : context.localization.pin_code,
-                                      onTap: () {
-                                        if (profileState.hasPin) {
-                                          context.more.pushChangePinCodePage();
-                                        } else {
-                                          context.more.pushCreatePinCodePage();
-                                        }
-                                      },
-                                    ),
-                                  ],
-                                  _MoreCellItem(
-                                    icon: Assets.svg.more.globe.svg(),
-                                    title: context.localization.language,
-                                    onTap: () {
-                                      context.more.pushChangeLanguagePage();
-                                    },
-                                    trailing: TrailingIcon(
-                                      icon:
-                                          appSettingsBloc.state.appLocale?.flag
-                                              .toSvgImage(
-                                                fit: BoxFit.contain,
-                                              ) ??
-                                          SizedBox(),
-                                    ),
-                                  ),
-                                  _MoreCellItem(
-                                    icon: Assets.svg.more.palette.svg(),
-                                    title: context.localization.theme,
-                                    onTap: () {
-                                      context.more.pushChangeThemePage();
-                                    },
-                                    trailing: TrailingText(
-                                      text: context.localization.themeModes(
-                                        appSettingsBloc.state.mode.name,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24),
-                                color: context.appColors.fill.quaternary,
-                              ),
-                              child: Column(
-                                children: [
-                                  _MoreCellItem(
-                                    icon: Assets.svg.more.moon.svg(),
-                                    title:
-                                        context.localization.prayer_time_widget,
-                                    trailing: AppSwitch(
-                                      isSwitched: state.prayerWidgetChecked,
-                                      onChanged: (value) {
-                                        moreBloc.add(
-                                          MoreEvent.checkedPrayerWidget(),
-                                        );
-                                      },
-                                    ),
-
-                                    onTap: () {},
-                                  ),
-                                  Builder(
-                                    builder: (context) {
-                                      if (state.isLoading) {
-                                        return Shimmer.fromDefault(
-                                          child: ShimmerDefaultContainer(
-                                            width: double.maxFinite,
-                                            height: 100,
-                                          ),
-                                        );
-                                      }
-                                      return Column(
-                                        children:
-                                            state.useFull
-                                                .map(
-                                                  (e) => _MoreCellItem(
-                                                    onTap: () {
-                                                      final actionUrl =
-                                                          e.actionUrl ?? "";
-                                                      if (actionUrl
-                                                          .isNotEmpty) {
-                                                        if (actionUrl
-                                                                .startsWith(
-                                                                  "http://",
-                                                                ) ||
-                                                            actionUrl
-                                                                .startsWith(
-                                                                  "https://",
-                                                                )) {
-                                                          context.more
-                                                              .pushWebViewPage(
-                                                                title: e.title,
-                                                                actionUrl:
-                                                                    actionUrl,
-                                                              );
-                                                        } else {
-                                                          context.push(
-                                                            actionUrl,
-                                                          );
-                                                        }
-                                                      }
-                                                    },
-                                                    icon: ExtendedImage.network(
-                                                      e.photo ?? "",
-                                                      loadStateChanged: (
-                                                        ExtendedImageState
-                                                        state,
-                                                      ) {
-                                                        switch (state
-                                                            .extendedImageLoadState) {
-                                                          case LoadState
-                                                              .completed:
-                                                            return state
-                                                                .completedWidget;
-                                                          default:
-                                                            return SizedBox();
-                                                        }
-                                                      },
-                                                    ),
-                                                    title: e.title.toString(),
-                                                  ),
-                                                )
-                                                .toList(),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(24),
-                                color: context.appColors.fill.quaternary,
-                              ),
-
-                              child: Column(
-                                children: [
-                                  _MoreCellItem(
-                                    icon: Assets.svg.more.circlePlus.svg(),
-                                    title: context.localization.about_app,
-                                    onTap: () {
-                                      context.pushNamed(
-                                        AppNavPath.more.aboutApp.name,
-                                      );
-                                    },
-                                  ),
-
-                                  // _MoreCellItem(
-                                  //   icon: Assets.morePaperPlane.toSvgImage(),
-                                  //   title: "Связаться с нами",
-                                  // ),
-                                  if (profileState is ProfileBlocDataState) ...[
-                                    _MoreCellItem(
-                                      icon: Assets.svg.more.broomMotion.svg(),
-                                      title: context.localization.deleteAccount,
-                                      onTap: () {
-                                        showActionAlertDialog(
-                                          context,
-
-                                          title:
-                                              context
-                                                  .localization
-                                                  .delete_account_confirm_title,
-                                          message:
-                                              context
-                                                  .localization
-                                                  .deleteAccountConfirmation,
-                                          firstActionText:
-                                              context.localization.delete,
-                                          firstButtonTextColor:
-                                              context.appColors.colors.red,
-                                          secondActionText:
-                                              context.localization.cancel,
-                                          onFirstButtonClick: () {
-                                            context.read<ProfileBloc>().add(
-                                              ProfileBlocEvent.deleteAccount(),
-                                            );
-                                          },
-                                        );
-                                      },
-                                    ),
-                                    _MoreCellItem(
-                                      icon:
-                                          Assets.svg.more.arrowRightToSquare
-                                              .svg(),
-                                      title: context.localization.logout,
-                                      contentColor:
-                                          context.appColors.colors.red,
-                                      onTap: () {
-                                        showActionAlertDialog(
-                                          context,
-                                          title:
-                                              context
-                                                  .localization
-                                                  .logout_confirm_title,
-                                          message:
-                                              context
-                                                  .localization
-                                                  .logoutConfirmation,
-                                          firstActionText:
-                                              context.localization.exit,
-                                          firstButtonTextColor:
-                                              context.appColors.colors.red,
-                                          secondActionText:
-                                              context.localization.cancel,
-                                          onFirstButtonClick: () async {
-                                            context.read<ProfileBloc>().add(
-                                              ProfileBlocEvent.logOut(),
-                                            );
-                                            // context.travel.goMain();
-                                          },
-                                        );
-                                      },
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                            Version(),
-                          ],
+                      SliverPinnedHeader(
+                        child: SizedBox(
+                          height: MediaQuery.of(context).padding.top,
+                          child: const AppGradientMask(),
                         ),
                       ),
                     ],
                   ),
-                );
-              },
-            ),
-          );
-        },
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                      child: Column(
+                        spacing: 16,
+                        children: [
+                          if (showPremiumBanner)
+                            isPremium
+                                ? PremiumActiveBanner(
+                                  onTap:
+                                      () => context.pushType(
+                                        AppNavPath.travel.premiumCancelPage,
+                                        extra: moreState.premiumStatus,
+                                      ),
+                                )
+                                : const PremiumUpgradeBanner(),
+
+                          ProfileSettingsGroup(
+                            children: [
+                              if (userState != null)
+                                ProfileSettingsCell(
+                                  icon: Assets.svg.more.fingerprint.svg(),
+                                  title: context.localization.security,
+                                  onTap: () => context.more.pushSecurityPage(),
+                                ),
+                              ProfileSettingsCell(
+                                icon: Assets.svg.more.bell.svg(),
+                                title: context.localization.notification,
+                                trailing: AppSwitch(
+                                  isSwitched: moreState.notificationsEnabled,
+                                  onChanged: (_) {
+                                    moreBloc.add(
+                                      MoreEvent.checkedNotification(),
+                                    );
+                                  },
+                                ),
+                              ),
+                              ProfileSettingsCell(
+                                icon: Assets.svg.more.globe.svg(),
+                                title: context.localization.language,
+                                trailingText:
+                                    localeName == null
+                                        ? null
+                                        : context.localization.lanItem(
+                                          localeName,
+                                        ),
+                                onTap:
+                                    () => context.more.pushChangeLanguagePage(),
+                              ),
+                              ProfileSettingsCell(
+                                icon: Assets.svg.more.palette.svg(),
+                                title: context.localization.theme,
+                                trailingText: context.localization.themeModes(
+                                  appSettingsState.mode.name,
+                                ),
+                                onTap: () => context.more.pushChangeThemePage(),
+                              ),
+                            ],
+                          ),
+
+                          ProfileSettingsGroup(
+                            children: [
+                              ProfileSettingsCell(
+                                icon: Assets.svg.more.moon.svg(),
+                                title: context.localization.prayer_time_widget,
+                                trailing: AppSwitch(
+                                  isSwitched: moreState.prayerWidgetChecked,
+                                  onChanged: (_) {
+                                    moreBloc.add(
+                                      MoreEvent.checkedPrayerWidget(),
+                                    );
+                                  },
+                                ),
+                              ),
+                              ...moreState.useFull.map(
+                                (e) => ProfileSettingsCell(
+                                  icon: ExtendedImage.network(
+                                    e.photo ?? "",
+                                    loadStateChanged: (state) {
+                                      switch (state.extendedImageLoadState) {
+                                        case LoadState.completed:
+                                          return state.completedWidget;
+                                        default:
+                                          return const SizedBox();
+                                      }
+                                    },
+                                  ),
+                                  title: e.title.toString(),
+                                  onTap: () {
+                                    final actionUrl = e.actionUrl ?? "";
+                                    if (actionUrl.isEmpty) return;
+                                    if (actionUrl.startsWith("http://") ||
+                                        actionUrl.startsWith("https://")) {
+                                      context.more.pushWebViewPage(
+                                        title: e.title,
+                                        actionUrl: actionUrl,
+                                      );
+                                    } else {
+                                      context.push(actionUrl);
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          ProfileSettingsGroup(
+                            children: [
+                              ProfileSettingsCell(
+                                icon: Assets.svg.more.circleInfo.svg(),
+                                title: context.localization.about_app,
+                                onTap:
+                                    () => context.pushNamed(
+                                      AppNavPath.more.aboutApp.name,
+                                    ),
+                              ),
+                              ProfileSettingsCell(
+                                icon: Assets.svg.more.paperPlane.svg(),
+                                title: context.localization.contactUs,
+                                onTap:
+                                    () =>
+                                        context.more
+                                            .pushEmergencyContactsPage(),
+                              ),
+                            ],
+                          ),
+
+                          if (userState != null)
+                            ProfileSettingsGroup(
+                              children: [
+                                ProfileSettingsCell(
+                                  icon: Assets.svg.more.broomMotion.svg(),
+                                  title: context.localization.deleteAccount,
+                                  iconBackgroundColor: const Color(0xFFBBC0C4),
+                                  onTap: () => _confirmDeleteAccount(context),
+                                ),
+                                ProfileSettingsCell(
+                                  icon:
+                                      Assets.svg.more.arrowRightToSquare.svg(),
+                                  title: context.localization.logout,
+                                  iconBackgroundColor:
+                                      context.appColors.colors.red,
+                                  contentColor: context.appColors.colors.red,
+                                  showChevron: false,
+                                  onTap: () => _confirmLogout(context),
+                                ),
+                              ],
+                            ),
+
+                          _versionInfo(context, appVersion.value),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).padding.bottom + 16,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
-}
 
-class TrailingText extends StatelessWidget {
-  final String text;
-
-  const TrailingText({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      spacing: 12,
+  Widget _versionInfo(BuildContext context, String? version) {
+    final color = context.appColors.textIconColor.tertiary;
+    return Column(
+      spacing: 4,
       children: [
-        Text(text).bodyLg(color: context.appColors.textIconColor.secondary),
-        SizedBox(
-          height: 20,
-          width: 20,
-          child: Assets.svg.iconArrowRight.path.toSvgImage(
-            fit: BoxFit.contain,
-            colorFilter: ColorFilter.mode(
-              context.appColors.textIconColor.secondary,
-              BlendMode.srcIn,
-            ),
-          ),
-        ),
+        Text("MyUzbekistan").bodySm(color: color),
+        Text(
+          context.localization.version.plus(" ${version ?? ""}"),
+        ).bodySm(color: color),
       ],
     );
   }
-}
 
-class TrailingIcon extends StatelessWidget {
-  final Widget icon;
-
-  const TrailingIcon({super.key, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 20,
-      child: Row(
-        spacing: 8,
-        children: [
-          icon,
-          SizedBox(
-            height: 20,
-            width: 20,
-            child: Assets.svg.iconArrowRight.path.toSvgImage(
-              fit: BoxFit.contain,
-              colorFilter: ColorFilter.mode(
-                context.appColors.textIconColor.secondary,
-                BlendMode.srcIn,
-              ),
-            ),
-          ),
-        ],
-      ),
+  void _confirmDeleteAccount(BuildContext context) {
+    showActionAlertDialog(
+      context,
+      title: context.localization.delete_account_confirm_title,
+      message: context.localization.deleteAccountConfirmation,
+      firstActionText: context.localization.delete,
+      firstButtonTextColor: context.appColors.colors.red,
+      secondActionText: context.localization.cancel,
+      onFirstButtonClick: () {
+        context.read<ProfileBloc>().add(ProfileBlocEvent.deleteAccount());
+      },
     );
   }
-}
 
-class _MoreCellItem extends StatelessWidget {
-  final Widget icon;
-  final Widget? trailing;
-  final String title;
-
-  final Color? contentColor;
-  final GestureTapCallback? onTap;
-
-  const _MoreCellItem({
-    super.key,
-    required this.icon,
-    required this.title,
-    this.trailing,
-    this.contentColor,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.translucent,
-      onTap: onTap,
-      child: Container(
-        height: 64,
-        alignment: Alignment.centerLeft,
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Row(
-          spacing: 16,
-          children: [
-            SizedBox(
-              height: 20,
-              width: 20,
-              child: ColorFiltered(
-                colorFilter: ColorFilter.mode(
-                  contentColor ?? context.appColors.brand,
-                  BlendMode.srcIn,
-                ),
-                child: icon,
-              ),
-            ),
-            Expanded(
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ).bodyLg(color: contentColor),
-            ),
-            trailing ??
-                SizedBox(
-                  height: 20,
-                  width: 20,
-                  child: Assets.svg.iconArrowRight.path.toSvgImage(
-                    fit: BoxFit.contain,
-                    colorFilter: ColorFilter.mode(
-                      context.appColors.textIconColor.secondary,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                ),
-          ],
-        ),
-      ),
+  void _confirmLogout(BuildContext context) {
+    showActionAlertDialog(
+      context,
+      title: context.localization.logout_confirm_title,
+      message: context.localization.logoutConfirmation,
+      firstActionText: context.localization.exit,
+      firstButtonTextColor: context.appColors.colors.red,
+      secondActionText: context.localization.cancel,
+      onFirstButtonClick: () {
+        context.read<ProfileBloc>().add(ProfileBlocEvent.logOut());
+      },
     );
   }
 }

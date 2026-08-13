@@ -169,17 +169,41 @@ abstract class FeatureFinanceLocalizations {
   /// **'Номер карты'**
   String get card_number_label;
 
+  /// No description provided for @card_number_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите номер карты'**
+  String get card_number_hint;
+
   /// No description provided for @card_expiry_label.
   ///
   /// In ru, this message translates to:
   /// **'Срок действия'**
   String get card_expiry_label;
 
+  /// No description provided for @card_expiry_full_label.
+  ///
+  /// In ru, this message translates to:
+  /// **'Срок действия карты'**
+  String get card_expiry_full_label;
+
   /// No description provided for @card_expiry_hint.
   ///
   /// In ru, this message translates to:
   /// **'ММ/ГГ'**
   String get card_expiry_hint;
+
+  /// No description provided for @cvv_label.
+  ///
+  /// In ru, this message translates to:
+  /// **'CVV / CVC'**
+  String get cvv_label;
+
+  /// No description provided for @cvv_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'000'**
+  String get cvv_hint;
 
   /// No description provided for @card_holder_label.
   ///
@@ -247,6 +271,30 @@ abstract class FeatureFinanceLocalizations {
   /// **'Ближайшие места'**
   String get nearest_places;
 
+  /// No description provided for @distanceM.
+  ///
+  /// In ru, this message translates to:
+  /// **'м'**
+  String get distanceM;
+
+  /// No description provided for @distanceKm.
+  ///
+  /// In ru, this message translates to:
+  /// **'км'**
+  String get distanceKm;
+
+  /// No description provided for @action_all.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все'**
+  String get action_all;
+
+  /// No description provided for @rates_last_update.
+  ///
+  /// In ru, this message translates to:
+  /// **'Последнее обновление {date}'**
+  String rates_last_update(Object date);
+
   /// No description provided for @currency_calculator.
   ///
   /// In ru, this message translates to:
@@ -312,6 +360,66 @@ abstract class FeatureFinanceLocalizations {
   /// In ru, this message translates to:
   /// **'Код подтверждения отправлен на {phone}'**
   String verification_page_code_send_phone(Object phone);
+
+  /// No description provided for @payment_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата'**
+  String get payment_title;
+
+  /// No description provided for @enter_amount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите сумму'**
+  String get enter_amount;
+
+  /// No description provided for @action_change.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить'**
+  String get action_change;
+
+  /// No description provided for @payment_details_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Детали'**
+  String get payment_details_title;
+
+  /// No description provided for @payment_status_success.
+  ///
+  /// In ru, this message translates to:
+  /// **'Успешно оплачено'**
+  String get payment_status_success;
+
+  /// No description provided for @payment_status_pending.
+  ///
+  /// In ru, this message translates to:
+  /// **'В ожидании'**
+  String get payment_status_pending;
+
+  /// No description provided for @payment_status_cancelled.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменено'**
+  String get payment_status_cancelled;
+
+  /// No description provided for @payment_status_refunded.
+  ///
+  /// In ru, this message translates to:
+  /// **'Возврат'**
+  String get payment_status_refunded;
+
+  /// No description provided for @action_retry.
+  ///
+  /// In ru, this message translates to:
+  /// **'Повторить'**
+  String get action_retry;
+
+  /// No description provided for @back_to_home.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вернуться на главную'**
+  String get back_to_home;
 }
 
 class _FeatureFinanceLocalizationsDelegate

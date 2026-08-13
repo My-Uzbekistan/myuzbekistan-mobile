@@ -124,11 +124,13 @@ class HomeScreen extends HookWidget {
                       temperature: data.temperature?.temperature ?? "",
                       airQuality: data.airQuality?.aqi.toString(),
                       airQualityLevel: data.airQuality?.level,
-                      nextPrayer: data.prayers
-                          .where((p) => p.isNext)
-                          .firstOrNull,
+                      currentPrayer: data.prayerTimes?.current,
                       onPrayerExpired: () =>
                           bloc.add(HomeBlocEvent.loadPrayerTimes()),
+                      onPrayerTap: () async {
+                        await context.travel.pushPrayerTimes();
+                        bloc.add(HomeBlocEvent.loadPrayerTimes());
+                      },
                       hintText: context.localization.home_search_hint,
                       onRegionTap: data.selectedRegion == null
                           ? null

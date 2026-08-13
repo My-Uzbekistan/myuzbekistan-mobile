@@ -13,11 +13,6 @@ class Merchant {
   final double? distance;
 
 
-  String get distanceString {
-    if (distance == null || distance == 0.0) return '';
-    return distance.toString();
-  }
-
   Merchant({
     required this.id,
     this.logo,
@@ -29,6 +24,19 @@ class Merchant {
     this.type,
     this.distance,
   });
+}
+
+extension MerchantListExtension on List<Merchant> {
+  List<Merchant> sortedByDistance() {
+    return [...this]..sort((a, b) {
+      final left = a.distance;
+      final right = b.distance;
+      if (left == null && right == null) return 0;
+      if (left == null) return 1;
+      if (right == null) return -1;
+      return left.compareTo(right);
+    });
+  }
 }
 
 class PaymentHistoryItem {

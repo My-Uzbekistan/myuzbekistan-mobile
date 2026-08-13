@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:more/src/core/extension.dart';
@@ -8,50 +10,36 @@ import 'package:shared/shared.dart';
 
 import '../widgets/pin_keyboard.dart';
 
-class CheckPinCodePage extends StatefulWidget {
+class CheckPinCodePage extends HookWidget {
   const CheckPinCodePage({super.key});
 
   @override
-  State<CheckPinCodePage> createState() => _CheckPinCodePageState();
-}
-
-class _CheckPinCodePageState extends State<CheckPinCodePage> {
-  final mPinController = MPinController();
-
-  String? title;
-  CheckPinCodeBloc? pinCodeBloc;
-
-  @override
-  void initState() {
-    pinCodeBloc = context.read();
-
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((t) {
-      Future.delayed(const Duration(milliseconds: 200), () {
-        authBiometric();
-      });
-    });
-  }
-
-  void authBiometric() {
-    pinCodeBloc?.add(
-      CheckPinCodeEvent.openBiometricAuth(
-        localizedReason: context.localization.authPrompt,
-      ),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final localization = context.localization;
+    final pinCodeBloc = context.read<CheckPinCodeBloc>();
+    final mPinController = useMemoized(MPinController.new);
+    final enteredPin = useState("");
+
+    void authBiometric() {
+      pinCodeBloc.add(
+        CheckPinCodeEvent.openBiometricAuth(
+          localizedReason: localization.authPrompt,
+        ),
+      );
+    }
+
+    useEffect(() {
+      final timer = Timer(const Duration(milliseconds: 200), authBiometric);
+      return timer.cancel;
+    }, const []);
+
     return BlocConsumer<CheckPinCodeBloc, CheckPinCodeState>(
       listener: (context, state) {
         state.when(
           entryState: (pin, canBiometric) {},
           successState: () {
             context.travel.goMain();
-            pinCodeBloc?.add(CheckPinCodeEvent.clear());
-            // context.pop();
+            pinCodeBloc.add(CheckPinCodeEvent.clear());
           },
           loadingState: () {
             mPinController.loading();
@@ -66,10 +54,9 @@ class _CheckPinCodePageState extends State<CheckPinCodePage> {
       },
       builder: (context, state) {
         final errorMessage = state.whenOrNull(errorState: (message) => message);
-        final canBiometric = state.whenOrNull(
-          entryState: (pin, canBiometric) => canBiometric,
-        );
-        final pin = state.whenOrNull(entryState: (pin, canBiometric) => pin);
+        final showBiometricKey =
+            pinCodeBloc.canBiometric && enteredPin.value.isEmpty;
+
         return Scaffold(
           body: IgnorePointer(
             ignoring: state is CheckPinLoadingState,
@@ -81,10 +68,11 @@ class _CheckPinCodePageState extends State<CheckPinCodePage> {
                     mainAxisSize: MainAxisSize.min,
                     spacing: 24,
                     children: [
-                      Text(context.localization.enter_code).h2(),
+                      Text(localization.enter_code).h2(),
                       MPinWidget(
                         pinSize: 4,
                         controller: mPinController,
+                        onChange: (pin) => enteredPin.value = pin,
                         onCompleted: (pin) {},
                       ),
                       Text(
@@ -96,36 +84,34 @@ class _CheckPinCodePageState extends State<CheckPinCodePage> {
                   PinKeyboard(
                     onClear: () {
                       mPinController.delete();
-                      pinCodeBloc?.add(CheckPinCodeEvent.removeLast());
+                      pinCodeBloc.add(CheckPinCodeEvent.removeLast());
                     },
-                    rightButton:
-                        canBiometric == true && pin.orEmpty().isEmpty
-                            ? PinKeyItem(
-                              onTap: () {
-                                authBiometric();
-                              },
-                              child: Assets.svg.scanIdentification.path.toSvgImage(
-                                tintColor:
-                                    context.appColors.textIconColor.secondary,
-                              ),
-                            )
-                            : null,
+                    rightButton: showBiometricKey
+                        ? PinKeyItem(
+                            onTap: authBiometric,
+                            child: Assets.svg.scanIdentification.path
+                                .toSvgImage(
+                                  tintColor:
+                                      context.appColors.textIconColor.secondary,
+                                ),
+                          )
+                        : null,
                     leftButton: PinKeyItem(
                       onTap: () {
                         showActionAlertDialog(
                           context,
-                          title: context.localization.resetPinTitle,
-                          message: context.localization.resetPinMessage,
-                          firstActionText: context.localization.resetPinAction,
-                          secondActionText: context.localization.cancel,
+                          title: localization.resetPinTitle,
+                          message: localization.resetPinMessage,
+                          firstActionText: localization.resetPinAction,
+                          secondActionText: localization.cancel,
                           firstButtonTextColor: context.appColors.colors.red,
                           onFirstButtonClick: () {
-                            pinCodeBloc?.add(CheckPinCodeEvent.reset());
+                            pinCodeBloc.add(CheckPinCodeEvent.reset());
                           },
                         );
                       },
                       child: Text(
-                        context.localization.resetPinAction,
+                        localization.resetPinAction,
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -136,7 +122,7 @@ class _CheckPinCodePageState extends State<CheckPinCodePage> {
                     onChange: (pin) async {
                       mPinController.addInput.call(pin);
                       await Future.delayed(Duration(milliseconds: 50));
-                      pinCodeBloc?.add(
+                      pinCodeBloc.add(
                         CheckPinCodeEvent.setPinCode(pinCode: pin),
                       );
                     },

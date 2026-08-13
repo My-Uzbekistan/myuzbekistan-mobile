@@ -324,4 +324,44 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   @override
   String get premiumRequiredForPhoto =>
       'This feature is for Premium users only';
+
+  @override
+  String get upgrade => 'Upgrade';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get security => 'Security';
+
+  @override
+  String get contactUs => 'Contact us';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get firstName => 'First name';
+
+  @override
+  String get lastName => 'Last name';
+
+  @override
+  String get phoneNumber => 'Phone number';
+
+  @override
+  String get registrationMethod => 'Registration method:';
+
+  @override
+  String get viaGoogle => 'Via Google';
+
+  @override
+  String get scannerLogin => 'Scanner login';
+
+  @override
+  String get scannerLoginPrompt => 'Confirm to enable scanner login';
+
+  @override
+  String get biometricNotAvailable =>
+      'Scanner login is not available on your device';
 }

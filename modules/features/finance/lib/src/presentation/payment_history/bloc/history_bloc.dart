@@ -1,7 +1,7 @@
 import 'package:domain/domain.dart';
+import 'package:finance/src/presentation/payment_history/models/history_group.dart';
+import 'package:finance/src/presentation/payment_history/models/history_item_ui_model.dart';
 import 'package:shared/shared.dart';
-
-import '../widget/item.dart';
 
 part 'history_event.dart';
 
@@ -51,6 +51,8 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
               )
               .toList();
       emit(HistoryState.loaded(items: historyItems));
-    } catch (e) {}
+    } catch (e) {
+      emit(const HistoryState.errorState());
+    }
   }
 }

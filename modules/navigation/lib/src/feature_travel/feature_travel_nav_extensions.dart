@@ -55,6 +55,21 @@ class FeatureTravelNavExtension {
     );
   }
 
+  Future<T?> pushPrayerTimes<T>() {
+    return _context.pushType(AppNavPath.travel.travelPrayerTimes);
+  }
+
+  Future<T?> pushPrayerLocation<T>(
+    List<PrayerLocation> locations,
+    int? selectedLocationId,
+  ) {
+    return _context.pushNamed(
+      AppNavPath.travel.travelPrayerLocation.name,
+      extra: locations,
+      queryParameters: {"prayerLocationId": "$selectedLocationId"},
+    );
+  }
+
   Future<T?> pushOnboarding<T>(dynamic extra) {
     return _context.pushNamed(
       AppNavPath.travel.travelOnboarding.name,
@@ -84,6 +99,13 @@ class FeatureTravelNavExtension {
 
   void pushNotificationsDetail({required NotificationItem item}) {
     _context.pushType(AppNavPath.travel.notificationsDetail, extra: item);
+  }
+
+  void replaceWithPremiumCancel({PremiumStatusModel? status}) {
+    _context.pushReplacementType(
+      AppNavPath.travel.premiumCancelPage,
+      extra: status,
+    );
   }
 
   /// Shartnoma detali sahifasini ochadi.

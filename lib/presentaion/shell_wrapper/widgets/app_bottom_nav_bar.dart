@@ -19,6 +19,7 @@ class AppBottomNavBar extends StatelessWidget {
     required this.selectedIndex,
     required this.onTabSelected,
     this.profilePhotoUrl,
+    this.isPremium = false,
   });
 
   final int selectedIndex;
@@ -27,6 +28,8 @@ class AppBottomNavBar extends StatelessWidget {
   /// Profil tab avatari uchun rasm URL (null bo'lsa default avatar).
   final String? profilePhotoUrl;
 
+  final bool isPremium;
+
   @override
   Widget build(BuildContext context) {
     final nav = Platform.isIOS
@@ -34,11 +37,13 @@ class AppBottomNavBar extends StatelessWidget {
             selectedIndex: selectedIndex,
             onTabSelected: onTabSelected,
             profilePhotoUrl: profilePhotoUrl,
+            isPremium: isPremium,
           )
         : TelegramNavBar(
             selectedIndex: selectedIndex,
             onTabSelected: onTabSelected,
             profilePhotoUrl: profilePhotoUrl,
+            isPremium: isPremium,
           );
 
     return Stack(

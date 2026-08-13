@@ -7,7 +7,6 @@ abstract class FinanceRepository {
   Future<CardId> bindCard({
     required String pan,
     required String expiry,
-    String phoneNumber = "",
     String cardHolderName = "",
     String cvv = "",
     String? image,

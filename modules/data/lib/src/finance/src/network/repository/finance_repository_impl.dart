@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import 'package:data/src/finance/src/models/payment_check/transaction_item_dto.dart';
+import 'package:data/src/finance/src/models/transaction_item/transaction_item_dto.dart';
 import 'package:data/src/finance/src/models/payment_history/payment_history.dart'
     hide MerchantItemDto;
 import 'package:data/src/finance/src/network/api/finance_api_service.dart';
-import 'package:data/src/models/items_response.dart';
+import 'package:data/src/models/items/items_response.dart';
 import 'package:data/src/utils/generic/generics.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
-import '../../models/merchant_dto.dart';
+import '../../models/merchant/merchant_dto.dart';
 
 @Injectable(as: FinanceRepository)
 class FinanceRepositoryImpl extends FinanceRepository {
@@ -34,7 +34,6 @@ class FinanceRepositoryImpl extends FinanceRepository {
   Future<CardId> bindCard({
     required String pan,
     required String expiry,
-    String phoneNumber = "",
     String cardHolderName = "",
     String cvv = "",
     String? image,
@@ -47,8 +46,6 @@ class FinanceRepositoryImpl extends FinanceRepository {
           "pan": pan,
           "expiry": expiry,
           if (image != null) "image": image,
-          if (phoneNumber.isNotEmpty)
-            "smsNotificationNumber": "998$phoneNumber",
           if (cardHolderName.isNotEmpty) "cardHolderName": cardHolderName,
           if (cvv.isNotEmpty) "cvv": cvv,
         })

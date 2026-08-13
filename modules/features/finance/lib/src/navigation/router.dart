@@ -7,7 +7,7 @@ import 'package:finance/src/di/injection.dart';
 import 'package:finance/src/presentation/add_cards/add_cards_page.dart';
 import 'package:finance/src/presentation/cards/bloc/cards_bloc.dart';
 import 'package:finance/src/presentation/cards/cards_page.dart';
-import 'package:finance/src/presentation/home/FinanceHomePage.dart';
+import 'package:finance/src/presentation/home/finance_home_page.dart';
 import 'package:finance/src/presentation/home/bloc/finance_bloc.dart';
 import 'package:finance/src/presentation/merchants/bloc/merchants_bloc.dart';
 import 'package:finance/src/presentation/merchants/merchants_page.dart';

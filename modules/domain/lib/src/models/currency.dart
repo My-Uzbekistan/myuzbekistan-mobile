@@ -5,11 +5,20 @@ class Currency {
   final String? ccy;
   final String? rate;
   final String? title;
+  final DateTime? date;
+  final double? diff;
 
   String get flag =>
       "https://minio.uzdc.uz/myzubekistan/Rounded%20Flags/${kCurrencyRegions[ccy]}.png";
 
-  Currency({this.id, this.ccy, this.title, this.rate});
+  Currency({
+    this.id,
+    this.ccy,
+    this.title,
+    this.rate,
+    this.date,
+    this.diff,
+  });
 
   String rateFormatted() {
     try {
@@ -78,5 +87,11 @@ extension CurrencyExtensionArray on List<Currency> {
     return where((e) => allowCcy.contains(e.ccy)).toList()..sort(
       (a, b) => allowCcy.indexOf(a.ccy).compareTo(allowCcy.indexOf(b.ccy)),
     );
+  }
+
+  DateTime? lastUpdatedAt() {
+    final dates = map((e) => e.date).nonNulls.toList();
+    if (dates.isEmpty) return null;
+    return dates.reduce((a, b) => a.isAfter(b) ? a : b);
   }
 }

@@ -6,6 +6,7 @@ abstract class ProfileBlocState with _$ProfileBlocState {
     UserModel? userModel,
     @Default(false) bool hasPin,
     @Default(false) bool isLoading,
+    @Default(false) bool isPremium,
   }) = ProfileBlocDataState;
 
   factory ProfileBlocState.guestState() = ProfileBlocGuestState;

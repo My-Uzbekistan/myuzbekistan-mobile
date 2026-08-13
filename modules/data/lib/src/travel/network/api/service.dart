@@ -1,27 +1,30 @@
 import 'dart:io';
 
-import 'package:data/src/models/items_response.dart';
-import 'package:data/src/travel/models/notification/notification_item_dto.dart';
-import 'package:data/src/travel/models/onboarding_dto.dart';
-import 'package:data/src/travel/models/user_info_dto.dart';
+import 'package:data/src/models/items/items_response.dart';
+import 'package:data/src/travel/models/notification_item/notification_item_dto.dart';
+import 'package:data/src/travel/models/onboarding/onboarding_dto.dart';
+import 'package:data/src/travel/models/user_info/user_info_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
-import '../../models/about_dto.dart';
-import '../../models/air_quality_dto.dart';
-import '../../models/banner_dto.dart';
+import '../../models/about/about_dto.dart';
+import '../../models/air_quality/air_quality_dto.dart';
+import '../../models/banner/banner_dto.dart';
 import '../../models/catalog/catalog_dto.dart';
-import '../../models/categories_dto.dart';
-import '../../models/cities_dto.dart';
-import '../../models/claim_dto.dart';
-import '../../models/currency_dto.dart';
-import '../../models/detail/content_dto.dart';
-import '../../models/favorite_dto.dart';
-import '../../models/places/content_dto_model.dart';
-import '../../models/regions.dart';
+import '../../models/categories/categories_dto.dart';
+import '../../models/cities/cities_dto.dart';
+import '../../models/claim/claim_dto.dart';
+import '../../models/currency/currency_dto.dart';
+import '../../models/content/content_dto.dart';
+import '../../models/favorite/favorite_dto.dart';
+import '../../models/content_dto_model/content_dto_model.dart';
+import '../../models/prayer_location/prayer_location_dto.dart';
+import '../../models/prayer_reminders/prayer_reminders_dto.dart';
+import '../../models/prayer_times/prayer_times_dto.dart';
+import '../../models/regions/regions.dart';
 import '../../models/review/review_dto.dart';
-import '../../models/service_action_dto.dart';
-import '../../models/token_dto.dart';
+import '../../models/service_action/service_action_dto.dart';
+import '../../models/token/token_dto.dart';
 
 part 'service.g.dart';
 
@@ -127,6 +130,9 @@ abstract class RestService {
   @POST("notifications/firebase-token")
   Future<dynamic> setFirebaseToken(@Body() Map<String, dynamic> body);
 
+  @PUT("notifications/settings")
+  Future<dynamic> updateNotificationSettings(@Body() Map<String, dynamic> body);
+
   @GET("notifications")
   Future<ItemsResponse<NotificationItemDto>> getNotifications();
 
@@ -174,6 +180,23 @@ abstract class RestService {
 
   @POST("registration/confirm")
   Future<TokenDto> authPhoneConfirm(@Body() Map<String, dynamic> body);
+
+  @GET("prayer-times")
+  Future<PrayerTimesDto> loadPrayerTimes({
+    @Query("locationId") int? locationId,
+    @Query("date") String? date,
+  });
+
+  @GET("prayer-times/locations")
+  Future<List<PrayerLocationDto>> loadPrayerLocations();
+
+  @GET("prayer-times/reminders")
+  Future<PrayerRemindersDto> loadPrayerReminders({
+    @Query("firebaseToken") required String firebaseToken,
+  });
+
+  @PUT("prayer-times/reminders")
+  Future<dynamic> updatePrayerReminders(@Body() Map<String, dynamic> body);
 
   @GET("bonus/active")
   Future<ClaimStatusDto?> giftActive();

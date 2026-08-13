@@ -8,12 +8,15 @@ import '../button/rounded_button.dart';
 
 
 class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
+  static const double navbarHeight = 48;
+
   final String? title;
   final Widget? widget;
   final Widget? leading;
   final List<Widget>? actions;
   final bool? centerTitle;
   final bool automaticallyImplyLeading;
+  final double? toolbarHeight;
 
   const GradientAppBar(
       {super.key,
@@ -22,12 +25,16 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.leading,
       this.actions,
       this.centerTitle,
+      this.toolbarHeight,
       this.automaticallyImplyLeading = true});
+
+  double get _height => toolbarHeight ?? kToolbarHeight;
 
   @override
   Widget build(BuildContext context) {
+    final actionsTopPadding = toolbarHeight == null ? 10.0 : 0.0;
     final leadingWidget = Container(
-      padding: const EdgeInsets.only(top: 10),
+      padding: EdgeInsets.only(top: actionsTopPadding),
       alignment: Alignment.centerRight,
       child: leading ??
           (automaticallyImplyLeading
@@ -54,11 +61,12 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
 
       title: title != null ? Text(title!) : widget,
       flexibleSpace: const AppGradientMask(),
-      actionsPadding: const EdgeInsets.only(right: 16, top: 10),
+      toolbarHeight: toolbarHeight,
+      actionsPadding: EdgeInsets.only(right: 16, top: actionsTopPadding),
       actions: actions,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(_height);
 }

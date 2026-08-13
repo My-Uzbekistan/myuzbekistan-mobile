@@ -38,6 +38,12 @@ class _FeatureMoreNavPath {
   AppNavPath get aboutApp =>
       _NavPathImpl(name: "feature_more_about_app", path: "/aboutApp");
 
+  AppNavPath get editProfile =>
+      _NavPathImpl(name: "feature_more_edit_profile", path: "/editProfile");
+
+  AppNavPath get securityPage =>
+      _NavPathImpl(name: "feature_more_security_page", path: "/securityPage");
+
   AppNavPath get aboutUsInfoPage => _NavPathImpl(
     name: "feature_more_about_us_info_page",
     path: "/aboutUsInfoPage",

@@ -112,7 +112,7 @@ abstract class FeatureMoreLocalizations {
   /// No description provided for @theme.
   ///
   /// In ru, this message translates to:
-  /// **'Тема'**
+  /// **'Тема приложения'**
   String get theme;
 
   /// No description provided for @lanItem.
@@ -666,6 +666,84 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Эта функция доступна только для Premium'**
   String get premiumRequiredForPhoto;
+
+  /// No description provided for @upgrade.
+  ///
+  /// In ru, this message translates to:
+  /// **'Улучшить'**
+  String get upgrade;
+
+  /// No description provided for @edit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Редактировать'**
+  String get edit;
+
+  /// No description provided for @security.
+  ///
+  /// In ru, this message translates to:
+  /// **'Безопасность'**
+  String get security;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In ru, this message translates to:
+  /// **'Связаться с нами'**
+  String get contactUs;
+
+  /// No description provided for @save.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить'**
+  String get save;
+
+  /// No description provided for @firstName.
+  ///
+  /// In ru, this message translates to:
+  /// **'Имя'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фамилия'**
+  String get lastName;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In ru, this message translates to:
+  /// **'Номер телефона'**
+  String get phoneNumber;
+
+  /// No description provided for @registrationMethod.
+  ///
+  /// In ru, this message translates to:
+  /// **'Способ регистрации:'**
+  String get registrationMethod;
+
+  /// No description provided for @viaGoogle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Через Google'**
+  String get viaGoogle;
+
+  /// No description provided for @scannerLogin.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вход со сканером'**
+  String get scannerLogin;
+
+  /// No description provided for @scannerLoginPrompt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подтвердите, чтобы включить вход со сканером'**
+  String get scannerLoginPrompt;
+
+  /// No description provided for @biometricNotAvailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вход со сканером недоступен на вашем устройстве'**
+  String get biometricNotAvailable;
 }
 
 class _FeatureMoreLocalizationsDelegate

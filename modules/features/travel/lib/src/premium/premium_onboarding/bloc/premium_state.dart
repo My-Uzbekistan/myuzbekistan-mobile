@@ -6,5 +6,6 @@ abstract class PremiumState with _$PremiumState {
     @Default(true) bool isLoading,
     @Default([]) List<PremiumPlansModel> plans,
     PremiumPlansModel? item,
+    PremiumStatusModel? status,
   }) = _PremiumState;
 }

@@ -18,6 +18,14 @@ class FeatureMoreNavExtension {
     _context.pushType(AppNavPath.more.changeTheme);
   }
 
+  void pushEditProfilePage() {
+    _context.pushType(AppNavPath.more.editProfile);
+  }
+
+  void pushSecurityPage() {
+    _context.pushType(AppNavPath.more.securityPage);
+  }
+
   void pushAuthPage() {
     _context.pushType(
       AppNavPath.more.authPage,
@@ -29,15 +37,15 @@ class FeatureMoreNavExtension {
     _context.pushType(AppNavPath.more.emergencyContacts);
   }
 
-  void pushCreatePinCodePage() {
-    _context.pushType(
+  Future<T?> pushCreatePinCodePage<T>() {
+    return _context.pushType<T>(
       AppNavPath.more.pinCodePage,
       queryParameters: {"changePin": "false"},
     );
   }
 
-  void pushChangePinCodePage() {
-    _context.pushType(
+  Future<T?> pushChangePinCodePage<T>() {
+    return _context.pushType<T>(
       AppNavPath.more.pinCodePage,
       queryParameters: {"changePin": "true"},
     );

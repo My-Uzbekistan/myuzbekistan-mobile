@@ -1,70 +1,37 @@
 import 'package:component_res/component_res.dart';
 import 'package:finance/src/core/extension.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared/shared.dart';
 
 import '../../../utils/expire_formatter.dart';
 
-class OwnCardPageWidget extends StatefulWidget {
-  final Function(String expire, String phone) updateCardData;
+class OwnCardPageWidget extends HookWidget {
+  final void Function(String expire) updateCardData;
 
   const OwnCardPageWidget({super.key, required this.updateCardData});
 
   @override
-  State<OwnCardPageWidget> createState() => _OwnCardPageWidgetWidgetState();
-}
-
-class _OwnCardPageWidgetWidgetState extends State<OwnCardPageWidget> {
-  final TextEditingController _expireController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _expireController.addListener(listener);
-    _phoneController.addListener(listener);
-  }
-
-  listener() {
-    widget.updateCardData.call(
-      _expireController.text,
-      _phoneController.text.withOutSpace(),
-    );
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _expireController.removeListener(listener);
-    _phoneController.removeListener(listener);
-    _expireController.dispose();
-    _phoneController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: 16,
-      children: [
-        AppInputField(
-          controller: _expireController,
-          label: context.localization.card_expiry_label,
-          hintText: context.localization.card_expiry_hint,
-          keyboardType: TextInputType.number,
-          formatters: [
-            FilteringTextInputFormatter.allow(RegExp(r'[0-9/]')),
-            ExpiryDateInputFormatter(),
-          ],
-        ),
-        AppInputField(
-          controller: _phoneController,
-          label: context.localization.phone_number_label,
-          prefixText: "+998",
-          keyboardType: TextInputType.phone,
-          formatters: [PhoneInputFormatter()],
-        ),
+    final expireController = useTextEditingController();
+
+    useEffect(() {
+      void listener() {
+        updateCardData(expireController.text);
+      }
+
+      expireController.addListener(listener);
+      return () => expireController.removeListener(listener);
+    }, const []);
+
+    return AppInputField(
+      controller: expireController,
+      label: context.localization.card_expiry_full_label,
+      hintText: context.localization.card_expiry_hint,
+      keyboardType: TextInputType.number,
+      formatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[0-9/]')),
+        ExpiryDateInputFormatter(),
       ],
     );
   }

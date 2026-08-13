@@ -30,6 +30,8 @@ import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart'
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart'
     as _i45;
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart' as _i638;
+import 'package:travel/src/pages/prayer_times/bloc/prayer_times_bloc.dart'
+    as _i17;
 import 'package:travel/src/pages/services/bloc/services_cubit.dart' as _i29;
 import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart'
     as _i631;
@@ -74,6 +76,10 @@ class TravelPackageModule extends _i526.MicroPackageModule {
         ));
     gh.factory<_i404.CurrencyCalculatorCubit>(
         () => _i404.CurrencyCalculatorCubit(gh<_i494.CurrenciesUseCase>()));
+    gh.factory<_i17.PrayerTimesBloc>(() => _i17.PrayerTimesBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.SecurityStorage>(),
+        ));
     gh.factory<_i1065.InvestSearchBloc>(
         () => _i1065.InvestSearchBloc(gh<_i494.Repository>()));
     gh.lazySingleton<_i45.NotificationCountCubit>(

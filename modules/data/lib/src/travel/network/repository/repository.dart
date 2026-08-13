@@ -7,8 +7,8 @@ import 'package:domain/src/models/onboarding_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
-import '../../../models/items_response.dart';
-import '../../models/places/content_dto_model.dart';
+import '../../../models/items/items_response.dart';
+import '../../models/content_dto_model/content_dto_model.dart';
 import '../api/service.dart';
 
 @Injectable(as: Repository)
@@ -99,6 +99,44 @@ class RepositoryImp implements Repository {
     return _restService
         .loadAirQuality(lat: lat, lon: lon)
         .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<PrayerTimes> loadPrayerTimes({int? locationId, DateTime? date}) {
+    return _restService
+        .loadPrayerTimes(
+          locationId: locationId,
+          date: date == null ? null : DateFormat("yyyy-MM-dd").format(date),
+        )
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<List<PrayerLocation>> loadPrayerLocations() {
+    return _restService.loadPrayerLocations().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future<PrayerReminders> loadPrayerReminders() async {
+    final firebaseToken = await FirebaseMessaging.instance.getToken();
+    return _restService
+        .loadPrayerReminders(firebaseToken: firebaseToken.orEmpty())
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<dynamic> updatePrayerReminders({
+    required int locationId,
+    required List<PrayerKey> prayers,
+  }) async {
+    final firebaseToken = await FirebaseMessaging.instance.getToken();
+    return _restService.updatePrayerReminders({
+      "locationId": locationId,
+      "prayers": prayers.map((e) => e.name).toList(),
+      "firebaseToken": firebaseToken.orEmpty(),
+    }).call();
   }
 
   @override
@@ -237,6 +275,17 @@ class RepositoryImp implements Repository {
       "osVersion": osVersion,
       "model": model,
       "appVersion": info.version,
+    }).call();
+  }
+
+  @override
+  Future<dynamic> updateNotificationSettings({
+    required bool pushEnabled,
+  }) async {
+    final firebaseToken = await FirebaseMessaging.instance.getToken();
+    return _restService.updateNotificationSettings({
+      "pushEnabled": pushEnabled,
+      "token": firebaseToken.orEmpty(),
     }).call();
   }
 
@@ -390,7 +439,7 @@ class RepositoryImp implements Repository {
 
   @override
   Future<ClaimStatus?> giftActive() {
-    return _restService.giftActive().call((data)=>data?.toDomain());
+    return _restService.giftActive().call((data) => data?.toDomain());
   }
 
   @override
@@ -402,9 +451,7 @@ class RepositoryImp implements Repository {
 
   @override
   Future<ClaimHistory> giftActivate() {
-    return _restService.giftActivate().call(
-      (data) => data.toDomain(),
-    );
+    return _restService.giftActivate().call((data) => data.toDomain());
   }
 }
 

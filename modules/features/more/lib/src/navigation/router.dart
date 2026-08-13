@@ -13,6 +13,8 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 import '../pages/about_app/about_app.dart';
+import '../pages/edit_profile/edit_profile_page.dart';
+import '../pages/security/security_page.dart';
 import '../pages/auth/auth_page.dart';
 import '../pages/auth/bloc/auth_bloc.dart';
 import '../pages/pin/check_pin/check_pincode.dart';
@@ -208,16 +210,24 @@ mixin FeatureMoreRouter {
       path: AppNavPath.more.changeLang.path,
       name: AppNavPath.more.changeLang.name,
       pageBuilder:
-          (context, state) =>
-              ModalPage(child: ChangeLocalePage(), showDragHandle: true),
+          (context, state) => ModalPage(
+            child: ChangeLocalePage(),
+            showDragHandle: false,
+            useSafeArea: false,
+            backgroundColor: Color(0x00000000),
+          ),
     ),
 
     GoRoute(
       path: AppNavPath.more.changeTheme.path,
       name: AppNavPath.more.changeTheme.name,
       pageBuilder:
-          (context, state) =>
-              ModalPage(child: ChangeThemePage(), showDragHandle: true),
+          (context, state) => ModalPage(
+            child: ChangeThemePage(),
+            showDragHandle: false,
+            useSafeArea: false,
+            backgroundColor: Color(0x00000000),
+          ),
     ),
     GoRoute(
       path: AppNavPath.more.aboutApp.path,
@@ -225,6 +235,31 @@ mixin FeatureMoreRouter {
       pageBuilder:
           (context, state) => buildSlideTransitionPage(
             child: AboutApp(),
+            context: context,
+            state: state,
+          ),
+    ),
+    GoRoute(
+      path: AppNavPath.more.editProfile.path,
+      name: AppNavPath.more.editProfile.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: BlocProvider(
+              create:
+                  (ctx) =>
+                      getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
+              child: const EditProfilePage(),
+            ),
+            context: context,
+            state: state,
+          ),
+    ),
+    GoRoute(
+      path: AppNavPath.more.securityPage.path,
+      name: AppNavPath.more.securityPage.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: const SecurityPage(),
             context: context,
             state: state,
           ),

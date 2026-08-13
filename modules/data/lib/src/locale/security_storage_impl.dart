@@ -69,6 +69,7 @@ class SecurityStorageImpl implements SecurityStorage {
       "isPinVerified",
       "isUtcClient",
       "pin",
+      "faceId",
       "profilePictureUrl",
     ]);
   }
@@ -125,6 +126,26 @@ class SecurityStorageImpl implements SecurityStorage {
   }
 
   @override
+  Future<void> setPrayerLocationId(int locationId) async {
+    await _box.put("prayerLocationId", locationId);
+  }
+
+  @override
+  int? getPrayerLocationId() {
+    return _box.get("prayerLocationId");
+  }
+
+  @override
+  Future<void> changeNotificationsState(bool value) async {
+    await _box.put("notificationsEnabledState", value);
+  }
+
+  @override
+  bool isNotificationsEnabled() {
+    return _box.get("notificationsEnabledState") ?? true;
+  }
+
+  @override
   bool hasPin() {
     return _box.get("hasPin", defaultValue: false) ?? false;
   }
@@ -132,6 +153,16 @@ class SecurityStorageImpl implements SecurityStorage {
   @override
   Future<void> setHasPin(bool hasPin) async {
     await _box.put("hasPin", hasPin);
+  }
+
+  @override
+  bool isFaceIdEnabled() {
+    return _box.get("faceId", defaultValue: false) ?? false;
+  }
+
+  @override
+  Future<void> setFaceIdEnabled(bool enabled) async {
+    await _box.put("faceId", enabled);
   }
 
   @override
@@ -146,7 +177,7 @@ class SecurityStorageImpl implements SecurityStorage {
 
   @override
   Future<void> deletePin() async {
-    await _box.deleteAll(["pin", "isPinVerified", "hasPin"]);
+    await _box.deleteAll(["pin", "isPinVerified", "hasPin", "faceId"]);
   }
 
   @override

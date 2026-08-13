@@ -9,8 +9,10 @@ abstract class MoreState with _$MoreState {
     @Default([]) List<MoreItem> abouts,
     @Default([]) List<MoreItem> useFull,
     @Default(false) bool prayerWidgetChecked,
-   @Default(true) bool isLoading,
+    @Default(true) bool notificationsEnabled,
+    @Default(true) bool isLoading,
     @Default(false) bool premiumLoaded,
     PremiumStatusModel? premiumStatus,
+    String? errorMessage,
   }) = MoreDataState;
 }

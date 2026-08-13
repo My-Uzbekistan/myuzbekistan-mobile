@@ -86,7 +86,6 @@ dependencies:
   #  flutter_inappwebview: ^6.1.5
 #  webview_flutter: ^4.10.0
   syncfusion_flutter_pdfviewer: ^29.1.35
-#  adhan: ^2.0.0+1
   upgrader: 12.5.0
 
 
@@ -157,3 +156,15 @@ flutter_launcher_icons:
   ios: true
   image_path: "./modules/component_res/assets/logo/new_app_icon.png"
   remove_alpha_ios: true
+flutter_assets_generator:
+  output_dir: generated/
+  output_filename: assets
+  class_name: Assets
+  auto_detection: true
+  # Automatically add missing dependencies (rive, flutter_svg, lottie) default: true
+  auto_add_dependencies: true
+  # Options: robust (default), legacy (old style)
+  style: robust
+  package_parameter_enabled: false
+  named_with_parent: true
+  path_ignore: [ ]

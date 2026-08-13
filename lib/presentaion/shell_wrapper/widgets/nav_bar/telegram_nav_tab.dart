@@ -1,6 +1,7 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
+import 'nav_bar_style.dart';
 import 'nav_svg_icon.dart';
 
 /// Suzuvchi glass kapsula ichidagi bitta tab (Android / Telegram uslubi).
@@ -15,7 +16,6 @@ class TelegramNavTab extends StatelessWidget {
     required this.selected,
     required this.selectedColor,
     required this.unselectedColor,
-    required this.pillColor,
     required this.onTap,
     this.iconBuilder,
   });
@@ -29,7 +29,6 @@ class TelegramNavTab extends StatelessWidget {
   final bool selected;
   final Color selectedColor;
   final Color unselectedColor;
-  final Color pillColor;
   final VoidCallback onTap;
 
   /// Rang/pill o'tish davomiyligi.
@@ -37,48 +36,55 @@ class TelegramNavTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Center — pill kontentni o'rab hugsin (Expanded cheti teng qoladi).
-    return Center(
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(100),
-        child: TweenAnimationBuilder<double>(
-          duration: _animDuration,
-          curve: Curves.easeOutCubic,
-          tween: Tween(end: selected ? 1.0 : 0.0),
-          builder: (context, t, _) {
-            final color = Color.lerp(unselectedColor, selectedColor, t)!;
-            // Yengil, silliq kattalashish (siltanmaydi, overshoot yo'q) — faqat
-            // tanlangan tab ikoniga, qo'shni tab tinch so'nadi.
-            final iconScale = selected ? 0.9 + 0.1 * t : 1.0;
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-              decoration: BoxDecoration(
-                color: Color.lerp(const Color(0x00FFFFFF), pillColor, t),
-                // iOS glass indikatoridek to'liq kapsula (stadium).
-                borderRadius: BorderRadius.circular(100),
+    return TweenAnimationBuilder<double>(
+      duration: _animDuration,
+      curve: Curves.easeOutCubic,
+      tween: Tween(end: selected ? 1.0 : 0.0),
+      builder: (context, t, _) {
+        final color = Color.lerp(unselectedColor, selectedColor, t)!;
+        final iconScale = selected ? 0.9 + 0.1 * t : 1.0;
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            color: Color.lerp(
+              NavBarStyle.tabFillTransparent,
+              NavBarStyle.tabFill,
+              t,
+            ),
+            borderRadius: BorderRadius.circular(NavBarStyle.tabRadius),
+            boxShadow: [
+              BoxShadow(
+                color: NavBarStyle.tabShadowColor.withValues(
+                  alpha: NavBarStyle.tabShadowOpacity * t,
+                ),
+                blurRadius: NavBarStyle.tabShadowBlur,
+                offset: NavBarStyle.tabShadowOffset,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Transform.scale(
-                    scale: iconScale,
-                    child: iconBuilder?.call(selected, color) ??
-                        navSvgIcon(asset, color),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(fontSize: 11, height: 1.1, color: color),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
+            ],
+          ),
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(NavBarStyle.tabRadius),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Transform.scale(
+                  scale: iconScale,
+                  child: iconBuilder?.call(selected, color) ??
+                      navSvgIcon(asset, color, NavBarStyle.iconSize),
+                ),
+                const SizedBox(height: NavBarStyle.iconLabelSpacing),
+                Text(
+                  label,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: NavBarStyle.labelStyle.copyWith(color: color),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

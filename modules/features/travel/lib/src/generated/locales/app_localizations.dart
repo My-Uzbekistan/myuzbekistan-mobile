@@ -403,17 +403,17 @@ abstract class FeatureTravelLocalizations {
   /// **'м'**
   String get distanceM;
 
-  /// No description provided for @prayerTime.
-  ///
-  /// In ru, this message translates to:
-  /// **'{time, select, fajr{Фаджр} sunrise{Восход} dhuhr{Зухр} asr{Аср} maghrib{Магриб} isha{Иша} other{Намаз}}'**
-  String prayerTime(String time);
-
   /// No description provided for @prayerTimeTitle.
   ///
   /// In ru, this message translates to:
   /// **'Время намаза'**
   String get prayerTimeTitle;
+
+  /// No description provided for @prayerLocation.
+  ///
+  /// In ru, this message translates to:
+  /// **'Локация'**
+  String get prayerLocation;
 
   /// No description provided for @notifications.
   ///
@@ -810,6 +810,24 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Для получения подарка необходимо пройти регистрацию на номер Uztelecom'**
   String get claim_warning_page_caption;
+
+  /// No description provided for @premiumOnboardingTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подключите MyUzbekistan Premium'**
+  String get premiumOnboardingTitle;
+
+  /// No description provided for @premiumOnboardingSubtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Активируйте премиум-подписку, чтобы пользоваться всеми возможностями приложения'**
+  String get premiumOnboardingSubtitle;
+
+  /// No description provided for @premiumStatusTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'MyUzbekistan Premium'**
+  String get premiumStatusTitle;
 
   /// No description provided for @premiumConnect.
   ///

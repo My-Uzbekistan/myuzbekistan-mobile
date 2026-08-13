@@ -55,11 +55,12 @@ extension PremiumEventPatterns on PremiumEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Plans value)?  plans,TResult Function( _SelectPlan value)?  selectPlan,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Plans value)?  plans,TResult Function( _Status value)?  status,TResult Function( _SelectPlan value)?  selectPlan,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
-return plans(_that);case _SelectPlan() when selectPlan != null:
+return plans(_that);case _Status() when status != null:
+return status(_that);case _SelectPlan() when selectPlan != null:
 return selectPlan(_that);case _:
   return orElse();
 
@@ -78,11 +79,12 @@ return selectPlan(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Plans value)  plans,required TResult Function( _SelectPlan value)  selectPlan,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Plans value)  plans,required TResult Function( _Status value)  status,required TResult Function( _SelectPlan value)  selectPlan,}){
 final _that = this;
 switch (_that) {
 case _Plans():
-return plans(_that);case _SelectPlan():
+return plans(_that);case _Status():
+return status(_that);case _SelectPlan():
 return selectPlan(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -100,11 +102,12 @@ return selectPlan(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Plans value)?  plans,TResult? Function( _SelectPlan value)?  selectPlan,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Plans value)?  plans,TResult? Function( _Status value)?  status,TResult? Function( _SelectPlan value)?  selectPlan,}){
 final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
-return plans(_that);case _SelectPlan() when selectPlan != null:
+return plans(_that);case _Status() when status != null:
+return status(_that);case _SelectPlan() when selectPlan != null:
 return selectPlan(_that);case _:
   return null;
 
@@ -122,10 +125,11 @@ return selectPlan(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  plans,TResult Function( PremiumPlansModel item)?  selectPlan,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  plans,TResult Function()?  status,TResult Function( PremiumPlansModel item)?  selectPlan,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
-return plans();case _SelectPlan() when selectPlan != null:
+return plans();case _Status() when status != null:
+return status();case _SelectPlan() when selectPlan != null:
 return selectPlan(_that.item);case _:
   return orElse();
 
@@ -144,10 +148,11 @@ return selectPlan(_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  plans,required TResult Function( PremiumPlansModel item)  selectPlan,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  plans,required TResult Function()  status,required TResult Function( PremiumPlansModel item)  selectPlan,}) {final _that = this;
 switch (_that) {
 case _Plans():
-return plans();case _SelectPlan():
+return plans();case _Status():
+return status();case _SelectPlan():
 return selectPlan(_that.item);case _:
   throw StateError('Unexpected subclass');
 
@@ -165,10 +170,11 @@ return selectPlan(_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  plans,TResult? Function( PremiumPlansModel item)?  selectPlan,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  plans,TResult? Function()?  status,TResult? Function( PremiumPlansModel item)?  selectPlan,}) {final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
-return plans();case _SelectPlan() when selectPlan != null:
+return plans();case _Status() when status != null:
+return status();case _SelectPlan() when selectPlan != null:
 return selectPlan(_that.item);case _:
   return null;
 
@@ -201,6 +207,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'PremiumEvent.plans()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Status implements PremiumEvent {
+   _Status();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Status);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'PremiumEvent.status()';
 }
 
 
@@ -278,7 +316,7 @@ as PremiumPlansModel,
 /// @nodoc
 mixin _$PremiumState {
 
- bool get isLoading; List<PremiumPlansModel> get plans; PremiumPlansModel? get item;
+ bool get isLoading; List<PremiumPlansModel> get plans; PremiumPlansModel? get item; PremiumStatusModel? get status;
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -289,16 +327,16 @@ $PremiumStateCopyWith<PremiumState> get copyWith => _$PremiumStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.plans, plans)&&(identical(other.item, item) || other.item == item));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.plans, plans)&&(identical(other.item, item) || other.item == item)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(plans),item);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(plans),item,status);
 
 @override
 String toString() {
-  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item)';
+  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item, status: $status)';
 }
 
 
@@ -309,7 +347,7 @@ abstract mixin class $PremiumStateCopyWith<$Res>  {
   factory $PremiumStateCopyWith(PremiumState value, $Res Function(PremiumState) _then) = _$PremiumStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item
+ bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item, PremiumStatusModel? status
 });
 
 
@@ -326,12 +364,13 @@ class _$PremiumStateCopyWithImpl<$Res>
 
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,Object? status = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,plans: null == plans ? _self.plans : plans // ignore: cast_nullable_to_non_nullable
 as List<PremiumPlansModel>,item: freezed == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as PremiumPlansModel?,
+as PremiumPlansModel?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as PremiumStatusModel?,
   ));
 }
 
@@ -416,10 +455,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item,  PremiumStatusModel? status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PremiumState() when $default != null:
-return $default(_that.isLoading,_that.plans,_that.item);case _:
+return $default(_that.isLoading,_that.plans,_that.item,_that.status);case _:
   return orElse();
 
 }
@@ -437,10 +476,10 @@ return $default(_that.isLoading,_that.plans,_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item,  PremiumStatusModel? status)  $default,) {final _that = this;
 switch (_that) {
 case _PremiumState():
-return $default(_that.isLoading,_that.plans,_that.item);case _:
+return $default(_that.isLoading,_that.plans,_that.item,_that.status);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -457,10 +496,10 @@ return $default(_that.isLoading,_that.plans,_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  List<PremiumPlansModel> plans,  PremiumPlansModel? item,  PremiumStatusModel? status)?  $default,) {final _that = this;
 switch (_that) {
 case _PremiumState() when $default != null:
-return $default(_that.isLoading,_that.plans,_that.item);case _:
+return $default(_that.isLoading,_that.plans,_that.item,_that.status);case _:
   return null;
 
 }
@@ -472,7 +511,7 @@ return $default(_that.isLoading,_that.plans,_that.item);case _:
 
 
 class _PremiumState implements PremiumState {
-   _PremiumState({this.isLoading = true, final  List<PremiumPlansModel> plans = const [], this.item}): _plans = plans;
+   _PremiumState({this.isLoading = true, final  List<PremiumPlansModel> plans = const [], this.item, this.status}): _plans = plans;
   
 
 @override@JsonKey() final  bool isLoading;
@@ -484,6 +523,7 @@ class _PremiumState implements PremiumState {
 }
 
 @override final  PremiumPlansModel? item;
+@override final  PremiumStatusModel? status;
 
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
@@ -495,16 +535,16 @@ _$PremiumStateCopyWith<_PremiumState> get copyWith => __$PremiumStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._plans, _plans)&&(identical(other.item, item) || other.item == item));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PremiumState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other._plans, _plans)&&(identical(other.item, item) || other.item == item)&&(identical(other.status, status) || other.status == status));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_plans),item);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(_plans),item,status);
 
 @override
 String toString() {
-  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item)';
+  return 'PremiumState(isLoading: $isLoading, plans: $plans, item: $item, status: $status)';
 }
 
 
@@ -515,7 +555,7 @@ abstract mixin class _$PremiumStateCopyWith<$Res> implements $PremiumStateCopyWi
   factory _$PremiumStateCopyWith(_PremiumState value, $Res Function(_PremiumState) _then) = __$PremiumStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item
+ bool isLoading, List<PremiumPlansModel> plans, PremiumPlansModel? item, PremiumStatusModel? status
 });
 
 
@@ -532,12 +572,13 @@ class __$PremiumStateCopyWithImpl<$Res>
 
 /// Create a copy of PremiumState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? plans = null,Object? item = freezed,Object? status = freezed,}) {
   return _then(_PremiumState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,plans: null == plans ? _self._plans : plans // ignore: cast_nullable_to_non_nullable
 as List<PremiumPlansModel>,item: freezed == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as PremiumPlansModel?,
+as PremiumPlansModel?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as PremiumStatusModel?,
   ));
 }
 

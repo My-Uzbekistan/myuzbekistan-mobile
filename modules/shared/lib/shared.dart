@@ -16,6 +16,7 @@ export 'package:equatable/equatable.dart';
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:hive/hive.dart';
 export 'src/utils/LocationManager.dart';
+export 'src/utils/device_info_manager.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export  'package:dartx/dartx.dart';
 export 'src/utils/launcher_utils.dart';

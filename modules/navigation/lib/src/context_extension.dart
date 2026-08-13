@@ -37,6 +37,20 @@ extension BuildContextNavExtension on BuildContext {
     );
   }
 
+  void pushReplacementType(
+    AppNavPath type, {
+    Object? extra,
+    Map<String, String> pathParameters = const {},
+    Map<String, dynamic> queryParameters = const {},
+  }) {
+    pushReplacementNamed(
+      type.name,
+      pathParameters: pathParameters,
+      queryParameters: queryParameters,
+      extra: extra,
+    );
+  }
+
   void popUntil<T>(List<AppNavPath> types) async {
     final names = types.map((e) => e.name).toSet();
     return Navigator.of(this).popUntil(

@@ -45,10 +45,22 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get card_number_label => 'Karta raqami';
 
   @override
+  String get card_number_hint => 'Karta raqamini kiriting';
+
+  @override
   String get card_expiry_label => 'Amal qilish muddati';
 
   @override
+  String get card_expiry_full_label => 'Kartaning amal qilish muddati';
+
+  @override
   String get card_expiry_hint => 'OO/YY';
+
+  @override
+  String get cvv_label => 'CVV / CVC';
+
+  @override
+  String get cvv_hint => '000';
 
   @override
   String get card_holder_label => 'Karta egasi nomi';
@@ -86,6 +98,20 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get nearest_places => 'Eng yaqin joylar';
 
   @override
+  String get distanceM => 'm';
+
+  @override
+  String get distanceKm => 'km';
+
+  @override
+  String get action_all => 'Barchasi';
+
+  @override
+  String rates_last_update(Object date) {
+    return 'Oxirgi yangilanish $date';
+  }
+
+  @override
   String get currency_calculator => 'Valyuta kalkulyatori';
 
   @override
@@ -119,4 +145,34 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String verification_page_code_send_phone(Object phone) {
     return 'Tasdiqlash kodi $phone  raqamga yuborildi';
   }
+
+  @override
+  String get payment_title => 'To\'lov';
+
+  @override
+  String get enter_amount => 'Summani kiriting';
+
+  @override
+  String get action_change => 'O\'zgartirish';
+
+  @override
+  String get payment_details_title => 'Tafsilotlar';
+
+  @override
+  String get payment_status_success => 'Muvaffaqiyatli to\'landi';
+
+  @override
+  String get payment_status_pending => 'Kutilmoqda';
+
+  @override
+  String get payment_status_cancelled => 'Bekor qilindi';
+
+  @override
+  String get payment_status_refunded => 'Qaytarildi';
+
+  @override
+  String get action_retry => 'Qayta urinish';
+
+  @override
+  String get back_to_home => 'Bosh sahifaga qaytish';
 }

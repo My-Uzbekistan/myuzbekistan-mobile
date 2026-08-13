@@ -6,10 +6,11 @@ class _InfoRow extends StatelessWidget {
     required this.temperature,
     required this.airQuality,
     required this.airQualityLevel,
-    required this.nextPrayer,
+    required this.currentPrayer,
     required this.onRegionTap,
     required this.onNotificationTap,
     this.onPrayerExpired,
+    this.onPrayerTap,
   });
 
   final String regionName;
@@ -18,10 +19,11 @@ class _InfoRow extends StatelessWidget {
 
   final int? airQualityLevel;
 
-  final PrayerTimesItemModel? nextPrayer;
+  final PrayerCurrent? currentPrayer;
   final VoidCallback? onRegionTap;
   final VoidCallback? onNotificationTap;
   final VoidCallback? onPrayerExpired;
+  final VoidCallback? onPrayerTap;
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +89,12 @@ class _InfoRow extends StatelessWidget {
           ),
         ),
 
-        if (nextPrayer != null)
-          _PrayerPill(prayer: nextPrayer!, onExpired: onPrayerExpired),
+        if (currentPrayer?.hasNext == true)
+          _PrayerPill(
+            current: currentPrayer!,
+            onExpired: onPrayerExpired,
+            onTap: onPrayerTap,
+          ),
 
         GlassFade(child: _NotificationBell(onTap: onNotificationTap)),
       ],
@@ -130,69 +136,76 @@ class _AqiBadge extends StatelessWidget {
 }
 
 class _PrayerPill extends HookWidget {
-  const _PrayerPill({required this.prayer, this.onExpired});
+  const _PrayerPill({required this.current, this.onExpired, this.onTap});
 
-  final PrayerTimesItemModel prayer;
+  final PrayerCurrent current;
   final VoidCallback? onExpired;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    final left = useState(_remaining(prayer.time));
+    final left = useState(Duration(seconds: current.remainingSeconds ?? 0));
 
     useEffect(() {
-      left.value = _remaining(prayer.time);
+      final deadline = DateTime.now().add(
+        Duration(seconds: current.remainingSeconds ?? 0),
+      );
+      left.value = _remaining(deadline);
       var notified = false;
       final timer = Timer.periodic(const Duration(seconds: 1), (_) {
-        final remaining = _remaining(prayer.time);
+        final remaining = _remaining(deadline);
         left.value = remaining;
-        // Vaqt tugadi — keyingi nomozni qayta hisoblash uchun xabar beramiz.
         if (remaining == Duration.zero && !notified) {
           notified = true;
           onExpired?.call();
         }
       });
       return timer.cancel;
-    }, [prayer.time]);
+    }, [current.nextKey, current.remainingSeconds]);
 
     return AdaptiveGlass(
       borderRadius: 20,
       blur: 2,
       tint: const Color(0x14FFFFFF),
-      child: Container(
-        height: 44,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        alignment: Alignment.center,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              width: 24,
-              height: 24,
-              child: Assets.svg.namazIcon.path.toSvgImage(
-                fit: BoxFit.contain,
-                tintColor: Colors.white,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: Container(
+          height: 44,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          alignment: Alignment.center,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 24,
+                height: 24,
+                child: Assets.svg.namazIcon.path.toSvgImage(
+                  fit: BoxFit.contain,
+                  tintColor: Colors.white,
+                ),
               ),
-            ),
-            const SizedBox(width: 6),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  context.localization.prayerTime(prayer.type.name),
-                ).bodyXXsm(color: Colors.white.withValues(alpha: 0.56)),
-                const SizedBox(height: 2),
-                Text(_format(left.value)).labelSm(color: Colors.white),
-              ],
-            ),
-          ],
+              const SizedBox(width: 6),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    current.nextName ?? "",
+                  ).bodyXXsm(color: Colors.white.withValues(alpha: 0.56)),
+                  const SizedBox(height: 2),
+                  Text(_format(left.value)).labelSm(color: Colors.white),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Duration _remaining(DateTime time) {
-    final d = time.difference(DateTime.now());
+  Duration _remaining(DateTime deadline) {
+    final d = deadline.difference(DateTime.now());
     return d.isNegative ? Duration.zero : d;
   }
 

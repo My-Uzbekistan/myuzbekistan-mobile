@@ -2,89 +2,48 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:more/src/core/extension.dart';
+import 'package:more/src/pages/profile_page/widgets/settings_options_sheet.dart';
+import 'package:more/src/pages/profile_page/widgets/settings_radio_option.dart';
 import 'package:shared/shared.dart';
 
 import '../../../core/settings_bloc/app_settings_bloc.dart';
 
-class ChangeLocalePage extends StatefulWidget {
+class ChangeLocalePage extends HookWidget {
   const ChangeLocalePage({super.key});
 
-  @override
-  State<ChangeLocalePage> createState() => _ChangeLocalePageState();
-}
+  static const _locales = [AppLocale.uz, AppLocale.en, AppLocale.ru];
 
-class _ChangeLocalePageState extends State<ChangeLocalePage> {
   @override
   Widget build(BuildContext context) {
     final localization = context.localization;
-    return SafeArea(
-      child: Wrap(
-        children: [
-          BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
-            builder: (context, state) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      localization.language,
-                      style: CustomTypography.H2,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  SettingsCell(
-                    text: localization.lanItem(AppLocale.en.name),
-                    onTap: () {
-                      context.read<AppSettingsBloc>().add(
-                        AppSettingsBlocEvent.setLocale(AppLocale.en),
-                      );
-                      context.pop();
-                    },
-                    icon: AppLocale.en.flag.toSvgImage(),
-                    trailing: AppCheck(
-                      isChecked: state.appLocale == AppLocale.en,
-                    ),
-                  ),
-                  SettingsCell(
-                    onTap: () {
-                      context.read<AppSettingsBloc>().add(
-                        AppSettingsBlocEvent.setLocale(AppLocale.ru),
-                      );
-                      context.pop();
-                    },
-                    text: localization.lanItem(AppLocale.ru.name),
-                    icon: AppLocale.ru.flag.toSvgImage(),
-                    trailing: AppCheck(
-                      isChecked: state.appLocale == AppLocale.ru,
-                    ),
-                  ),
-                  SettingsCell(
-                    text: localization.lanItem(AppLocale.uz.name),
-                    onTap: () {
-                      context.read<AppSettingsBloc>().add(
-                        AppSettingsBlocEvent.setLocale(AppLocale.uz),
-                      );
-                      context.pop();
-                    },
-                    icon: AppLocale.uz.flag.toSvgImage(),
-                    trailing: AppCheck(
-                      isChecked: state.appLocale == AppLocale.uz,
-                    ),
-                  ),
-                ],
-              );
-            },
+    final currentLocale = context.select<AppSettingsBloc, AppLocale?>(
+      (bloc) => bloc.state.appLocale,
+    );
+    final selected = useState<AppLocale>(currentLocale ?? AppLocale.uz);
+
+    return SettingsOptionsSheet(
+      title: localization.language,
+      actionText: localization.save,
+      options: [
+        for (var i = 0; i < _locales.length; i++)
+          SettingsRadioOption(
+            text: localization.langItemDefault(_locales[i].name),
+            isSelected: selected.value == _locales[i],
+            showDivider: i != _locales.length - 1,
+            onTap: () => selected.value = _locales[i],
           ),
-        ],
-      ),
+      ],
+      onSave: () {
+        context.read<AppSettingsBloc>().add(
+          AppSettingsBlocEvent.setLocale(selected.value),
+        );
+        context.pop();
+      },
     );
   }
 }
 
-extension  AppLocaleX on AppLocale{
-
+extension AppLocaleX on AppLocale {
   String get flag {
     switch (this) {
       case AppLocale.en:
