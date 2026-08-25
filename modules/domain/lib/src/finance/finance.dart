@@ -7,3 +7,5 @@ export 'models/card_id.dart';
 export 'models/payment_result.dart';
 export 'models/check/transaction.dart';
 export 'models/check/payment_status.dart';
+export 'models/check/payment_action.dart';
+export 'models/check/payment_action_key.dart';

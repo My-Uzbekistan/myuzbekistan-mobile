@@ -42,6 +42,24 @@ class FeatureFinanceNavExtension {
     );
   }
 
+  Future<T?> pushMarketOrderPayment<T>({
+    required String merchantId,
+    required MarketCheckoutPayment payment,
+  }) {
+    return _context.pushType<T>(
+      AppNavPath.finance.financePayment,
+      pathParameters: {"id": merchantId},
+      extra: payment,
+    );
+  }
+
+  void pushPaymentTransactionDetail({required String paymentId}) {
+    _context.pushType(
+      AppNavPath.finance.paymentTransactionDetailPage,
+      pathParameters: {"paymentId": paymentId},
+    );
+  }
+
   void pushQrCoderReaderPage() {
     _context.pushType(AppNavPath.finance.qrReaderPage);
   }

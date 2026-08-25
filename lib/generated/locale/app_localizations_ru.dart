@@ -24,6 +24,21 @@ class AppLocalizationsRu extends AppLocalizations {
   String get nav_more => 'Еще';
 
   @override
+  String get nav_back => 'Назад';
+
+  @override
+  String get nav_market => 'Маркет';
+
+  @override
+  String get nav_favorites => 'Избранное';
+
+  @override
+  String get nav_basket => 'Корзина';
+
+  @override
+  String get nav_profile => 'Профиль';
+
+  @override
   String get catalogMyEsim => 'My eSIM';
 
   @override

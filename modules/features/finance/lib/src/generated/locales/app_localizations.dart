@@ -379,6 +379,48 @@ abstract class FeatureFinanceLocalizations {
   /// **'Изменить'**
   String get action_change;
 
+  /// No description provided for @payment_order_details.
+  ///
+  /// In ru, this message translates to:
+  /// **'Детали заказа'**
+  String get payment_order_details;
+
+  /// No description provided for @payment_summary_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Детали оплаты'**
+  String get payment_summary_title;
+
+  /// No description provided for @payment_summary_order.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заказ'**
+  String get payment_summary_order;
+
+  /// No description provided for @payment_summary_delivery.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доставка'**
+  String get payment_summary_delivery;
+
+  /// No description provided for @payment_summary_total.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итого:'**
+  String get payment_summary_total;
+
+  /// No description provided for @payment_free_cancellation_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Бесплатная отмена'**
+  String get payment_free_cancellation_title;
+
+  /// No description provided for @payment_free_cancellation_subtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отмените до {date} для полного возврата средств'**
+  String payment_free_cancellation_subtitle(Object date);
+
   /// No description provided for @payment_details_title.
   ///
   /// In ru, this message translates to:

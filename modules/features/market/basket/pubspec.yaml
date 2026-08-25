@@ -1,0 +1,53 @@
+name: basket
+description: "MyUzbekistan market feature module."
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_localizations:
+    sdk: flutter
+
+  shared:
+    path: ../../../../modules/shared
+  navigation:
+    path: ../../../../modules/navigation
+  component_res:
+    path: ../../../../modules/component_res
+  domain:
+    path: ../../../../modules/domain
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  freezed: ^3.0.6
+  build_runner:
+  injectable_generator:
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  module:
+    androidX: true
+    androidPackage: uz.myUzbekistan.market.basket
+    iosBundleIdentifier: uz.myUzbekistan.market.basket
+
+flutter_assets_generator:
+  output_dir: generated/
+  output_filename: assets
+  class_name: Assets
+  auto_detection: true
+  auto_add_dependencies: true
+  style: robust
+  package_parameter_enabled: false
+  named_with_parent: true
+  path_ignore: [ ]

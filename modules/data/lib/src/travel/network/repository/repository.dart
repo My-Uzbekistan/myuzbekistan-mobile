@@ -382,13 +382,6 @@ class RepositoryImp implements Repository {
   }
 
   @override
-  Future<List<CatalogItemModel>> getCatalog() {
-    return _restService.getCatalog().call(
-      (data) => data.map((e) => e.toDomain()).toList(),
-    );
-  }
-
-  @override
   Future<List<CatalogItemModel>> getCatalogV3({
     int page = 1,
     int pageSize = 50,

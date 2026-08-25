@@ -7,7 +7,11 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
-import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
+import 'package:basket/basket.dart';
+import 'package:favorites/favorites.dart';
+import 'package:market_home/market_home.dart';
+import 'package:uzbekistan_travel/core/navigation/shells/main_shell.dart';
+import 'package:uzbekistan_travel/core/navigation/shells/market_shell.dart';
 import 'package:uzbekistan_travel/presentaion/splash.dart';
 
 
@@ -42,6 +46,8 @@ final GoRouter routes = GoRouter(
       ...FeatureTravelRouter.routes,
       ...FeatureFinanceRouter.routes,
       ...FeatureMoreRouter.routes,
+      ...FeatureMarketHomeRouter.routes,
+      ...FeatureBasketRouter.routes,
       GoRoute(
         path: "/splash",
         name: "splash",

@@ -156,6 +156,29 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get action_change => 'Change';
 
   @override
+  String get payment_order_details => 'Order details';
+
+  @override
+  String get payment_summary_title => 'Payment details';
+
+  @override
+  String get payment_summary_order => 'Order';
+
+  @override
+  String get payment_summary_delivery => 'Delivery';
+
+  @override
+  String get payment_summary_total => 'Total:';
+
+  @override
+  String get payment_free_cancellation_title => 'Free cancellation';
+
+  @override
+  String payment_free_cancellation_subtitle(Object date) {
+    return 'Cancel before $date for a full refund';
+  }
+
+  @override
   String get payment_details_title => 'Details';
 
   @override

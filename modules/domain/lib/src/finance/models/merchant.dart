@@ -11,6 +11,9 @@ class Merchant {
   final String? phone;
   final String? type;
   final double? distance;
+  final int? minAmount;
+  final int? maxAmount;
+  final List<int> suggestedAmounts;
 
 
   Merchant({
@@ -23,6 +26,9 @@ class Merchant {
     this.phone,
     this.type,
     this.distance,
+    this.minAmount,
+    this.maxAmount,
+    this.suggestedAmounts = const [],
   });
 }
 

@@ -78,19 +78,22 @@ class $AssetsCatalogGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  final $AssetsMarketGen market = const $AssetsMarketGen();
   final $AssetsMoreGen more = const $AssetsMoreGen();
   final $AssetsPrayersGen prayers = const $AssetsPrayersGen();
   final SvgGenImage namazIcon = const SvgGenImage('assets/svg/Namaz icon.svg');
   final SvgGenImage appleLogo = const SvgGenImage('assets/svg/apple_logo.svg');
+  final SvgGenImage basketCross =
+      const SvgGenImage('assets/svg/basket_cross.svg');
   final SvgGenImage boltFill = const SvgGenImage('assets/svg/bolt_fill.svg');
   final SvgGenImage crossCaseFill =
       const SvgGenImage('assets/svg/cross_case_fill.svg');
   final SvgGenImage defaultCreditCard =
       const SvgGenImage('assets/svg/default_credit_card.svg');
-  final SvgGenImage financeHeroGlow =
-      const SvgGenImage('assets/svg/finance_hero_glow.svg');
   final SvgGenImage filterConus =
       const SvgGenImage('assets/svg/filter_conus.svg');
+  final SvgGenImage financeHeroGlow =
+      const SvgGenImage('assets/svg/finance_hero_glow.svg');
   final SvgGenImage fiscalIcon =
       const SvgGenImage('assets/svg/fiscal_icon.svg');
   final SvgGenImage flameFill = const SvgGenImage('assets/svg/flame_fill.svg');
@@ -107,6 +110,8 @@ class $AssetsSvgGen {
   final SvgGenImage iconArrowsCw =
       const SvgGenImage('assets/svg/icon_arrows_cw.svg');
   final SvgGenImage iconCheck = const SvgGenImage('assets/svg/icon_check.svg');
+  final SvgGenImage iconChevronDown =
+      const SvgGenImage('assets/svg/icon_chevron_down.svg');
   final SvgGenImage iconClock = const SvgGenImage('assets/svg/icon_clock.svg');
   final SvgGenImage iconClose = const SvgGenImage('assets/svg/icon_close.svg');
   final SvgGenImage iconCusine =
@@ -125,15 +130,23 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/icon_filled_heard.svg');
   final SvgGenImage iconGift = const SvgGenImage('assets/svg/icon_gift.svg');
   final SvgGenImage iconMenu = const SvgGenImage('assets/svg/icon_menu.svg');
+  final SvgGenImage iconPhoneFill =
+      const SvgGenImage('assets/svg/icon_phone_fill.svg');
+  final SvgGenImage iconPinLocationFill =
+      const SvgGenImage('assets/svg/icon_pin_location_fill.svg');
   final SvgGenImage iconPlus = const SvgGenImage('assets/svg/icon_plus.svg');
   final SvgGenImage iconQrCode =
       const SvgGenImage('assets/svg/icon_qr_code.svg');
   final SvgGenImage iconSearch =
       const SvgGenImage('assets/svg/icon_search.svg');
+  final SvgGenImage iconShare = const SvgGenImage('assets/svg/icon_share.svg');
+  final SvgGenImage iconShop = const SvgGenImage('assets/svg/icon_shop.svg');
   final SvgGenImage iconTheme = const SvgGenImage('assets/svg/icon_theme.svg');
   final SvgGenImage iconTime = const SvgGenImage('assets/svg/icon_time.svg');
   final SvgGenImage iconTrashCanLine =
       const SvgGenImage('assets/svg/icon_trash_can_line.svg');
+  final SvgGenImage iconWalkingMan =
+      const SvgGenImage('assets/svg/icon_walking_man.svg');
   final SvgGenImage iconWarning =
       const SvgGenImage('assets/svg/icon_warning.svg');
   final SvgGenImage locatorFill =
@@ -166,20 +179,53 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/star_outline.svg');
   final SvgGenImage staroflifeFill =
       const SvgGenImage('assets/svg/staroflife_fill.svg');
+  final SvgGenImage tabIconBack =
+      const SvgGenImage('assets/svg/tab_icon_back.svg');
+  final SvgGenImage tabIconBasket =
+      const SvgGenImage('assets/svg/tab_icon_basket.svg');
   final SvgGenImage tabIconCatalog =
       const SvgGenImage('assets/svg/tab_icon_catalog.svg');
+  final SvgGenImage tabIconFavorites =
+      const SvgGenImage('assets/svg/tab_icon_favorites.svg');
   final SvgGenImage tabIconFinance =
       const SvgGenImage('assets/svg/tab_icon_finance.svg');
   final SvgGenImage tabIconHome =
       const SvgGenImage('assets/svg/tab_icon_home.svg');
   final SvgGenImage tabIconMap =
       const SvgGenImage('assets/svg/tab_icon_map.svg');
+  final SvgGenImage tabIconMarket =
+      const SvgGenImage('assets/svg/tab_icon_market.svg');
   final SvgGenImage tabIconMore =
       const SvgGenImage('assets/svg/tab_icon_more.svg');
   final SvgGenImage tabIconPayment =
       const SvgGenImage('assets/svg/tab_icon_payment.svg');
+  final SvgGenImage tabIconProfile =
+      const SvgGenImage('assets/svg/tab_icon_profile.svg');
   final SvgGenImage tabIconTransfer =
       const SvgGenImage('assets/svg/tab_icon_transfer.svg');
+  final SvgGenImage worldMagnifier =
+      const SvgGenImage('assets/svg/world_magnifier.svg');
+}
+
+class $AssetsMarketGen {
+  const $AssetsMarketGen();
+
+  final SvgGenImage orderBag =
+      const SvgGenImage('assets/svg/market/order_bag.svg');
+  final SvgGenImage orderBox =
+      const SvgGenImage('assets/svg/market/order_box.svg');
+  final SvgGenImage orderReturn =
+      const SvgGenImage('assets/svg/market/order_return.svg');
+  final SvgGenImage orderStepCar =
+      const SvgGenImage('assets/svg/market/order_step_car.svg');
+  final SvgGenImage orderStepCard =
+      const SvgGenImage('assets/svg/market/order_step_card.svg');
+  final SvgGenImage orderStepCheck =
+      const SvgGenImage('assets/svg/market/order_step_check.svg');
+  final SvgGenImage orderStepClock =
+      const SvgGenImage('assets/svg/market/order_step_clock.svg');
+  final SvgGenImage orderStepFlag =
+      const SvgGenImage('assets/svg/market/order_step_flag.svg');
 }
 
 class $AssetsMoreGen {

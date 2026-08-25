@@ -1,14 +1,3 @@
-// {
-//   "logo": */uploads/a44486429e1341b9afaae 789
-// "name":"dsth"
-// "description": "sdthsfdh"
-// "address": "dsth"
-// "workTime": "sdf"
-// "phone": "sdth"
-// "type": "Service"
-// "distance": 0
-// }
-
 import 'package:data/src/utils/convertors/image_convertor.dart';
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
@@ -43,6 +32,9 @@ class MerchantDto {
   final String? phone;
   final String? type;
   final double? distance;
+  final int? minAmount;
+  final int? maxAmount;
+  final List<int>? suggestedAmounts;
 
   MerchantDto({
     required this.id,
@@ -54,6 +46,9 @@ class MerchantDto {
     this.phone,
     this.type,
     this.distance,
+    this.minAmount,
+    this.maxAmount,
+    this.suggestedAmounts,
   });
 
   factory MerchantDto.fromJson(Map<String, dynamic> json) =>
@@ -69,5 +64,8 @@ class MerchantDto {
     phone: phone,
     type: type?.trim(),
     distance: distance,
+    minAmount: minAmount,
+    maxAmount: maxAmount,
+    suggestedAmounts: suggestedAmounts ?? const [],
   );
 }

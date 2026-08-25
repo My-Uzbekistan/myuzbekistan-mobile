@@ -4,6 +4,11 @@
   "nav_services": "Сервисы",
   "nav_payment": "Финансы",
   "nav_more": "Еще",
+  "nav_back": "Назад",
+  "nav_market": "Маркет",
+  "nav_favorites": "Избранное",
+  "nav_basket": "Корзина",
+  "nav_profile": "Профиль",
 
 
   "catalogMyEsim": "My eSIM",

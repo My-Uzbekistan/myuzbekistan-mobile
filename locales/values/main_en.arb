@@ -4,6 +4,11 @@
   "nav_payment": "Finance",
   "nav_services": "Services",
   "nav_more": "More",
+  "nav_back": "Back",
+  "nav_market": "Market",
+  "nav_favorites": "Favorites",
+  "nav_basket": "Basket",
+  "nav_profile": "Profile",
 
   "catalogMyEsim": "My eSIM",
   "catalogTravelQuiz": "Travel Quiz",

@@ -5,6 +5,11 @@
   "nav_services": "Xizmatlar",
 
   "nav_more": "Ko‘proq",
+  "nav_back": "Ortga",
+  "nav_market": "Market",
+  "nav_favorites": "Saralangan",
+  "nav_basket": "Savat",
+  "nav_profile": "Profil",
 
   "catalogMyEsim": "My eSIM",
   "catalogTravelQuiz": "Travel Quiz",

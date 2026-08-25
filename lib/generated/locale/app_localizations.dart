@@ -130,6 +130,36 @@ abstract class AppLocalizations {
   /// **'More'**
   String get nav_more;
 
+  /// No description provided for @nav_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get nav_back;
+
+  /// No description provided for @nav_market.
+  ///
+  /// In en, this message translates to:
+  /// **'Market'**
+  String get nav_market;
+
+  /// No description provided for @nav_favorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get nav_favorites;
+
+  /// No description provided for @nav_basket.
+  ///
+  /// In en, this message translates to:
+  /// **'Basket'**
+  String get nav_basket;
+
+  /// No description provided for @nav_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get nav_profile;
+
   /// No description provided for @catalogMyEsim.
   ///
   /// In en, this message translates to:

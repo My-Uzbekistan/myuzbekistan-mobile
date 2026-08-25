@@ -55,7 +55,7 @@ extension PaymentEventPatterns on PaymentEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _PaymentPayEvent value)?  pay,TResult Function( _PaymentPayUpdateCardsEvent value)?  updateCards,TResult Function( _PaymentPayLoadCardsEvent value)?  loadCards,TResult Function( _CheckPayDetailEvent value)?  checkPayDetail,TResult Function( _PaymentSetMerchantEvent value)?  setMerchant,TResult Function( _PaymentSelecteCardEvent value)?  selectedCard,TResult Function( _PaymentMerchantEvent value)?  loadMerchantById,TResult Function( _PaymentSetAmountEvent value)?  setAmount,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _PaymentPayEvent value)?  pay,TResult Function( _PaymentPayUpdateCardsEvent value)?  updateCards,TResult Function( _PaymentPayLoadCardsEvent value)?  loadCards,TResult Function( _CheckPayDetailEvent value)?  checkPayDetail,TResult Function( _PaymentSetMerchantEvent value)?  setMerchant,TResult Function( _PaymentSelecteCardEvent value)?  selectedCard,TResult Function( _PaymentMerchantEvent value)?  loadMerchantById,TResult Function( _PaymentOrderDetailsEvent value)?  loadOrderDetails,TResult Function( _PaymentSetAmountEvent value)?  setAmount,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _PaymentPayEvent() when pay != null:
@@ -65,7 +65,8 @@ return loadCards(_that);case _CheckPayDetailEvent() when checkPayDetail != null:
 return checkPayDetail(_that);case _PaymentSetMerchantEvent() when setMerchant != null:
 return setMerchant(_that);case _PaymentSelecteCardEvent() when selectedCard != null:
 return selectedCard(_that);case _PaymentMerchantEvent() when loadMerchantById != null:
-return loadMerchantById(_that);case _PaymentSetAmountEvent() when setAmount != null:
+return loadMerchantById(_that);case _PaymentOrderDetailsEvent() when loadOrderDetails != null:
+return loadOrderDetails(_that);case _PaymentSetAmountEvent() when setAmount != null:
 return setAmount(_that);case _:
   return orElse();
 
@@ -84,7 +85,7 @@ return setAmount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _PaymentPayEvent value)  pay,required TResult Function( _PaymentPayUpdateCardsEvent value)  updateCards,required TResult Function( _PaymentPayLoadCardsEvent value)  loadCards,required TResult Function( _CheckPayDetailEvent value)  checkPayDetail,required TResult Function( _PaymentSetMerchantEvent value)  setMerchant,required TResult Function( _PaymentSelecteCardEvent value)  selectedCard,required TResult Function( _PaymentMerchantEvent value)  loadMerchantById,required TResult Function( _PaymentSetAmountEvent value)  setAmount,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _PaymentPayEvent value)  pay,required TResult Function( _PaymentPayUpdateCardsEvent value)  updateCards,required TResult Function( _PaymentPayLoadCardsEvent value)  loadCards,required TResult Function( _CheckPayDetailEvent value)  checkPayDetail,required TResult Function( _PaymentSetMerchantEvent value)  setMerchant,required TResult Function( _PaymentSelecteCardEvent value)  selectedCard,required TResult Function( _PaymentMerchantEvent value)  loadMerchantById,required TResult Function( _PaymentOrderDetailsEvent value)  loadOrderDetails,required TResult Function( _PaymentSetAmountEvent value)  setAmount,}){
 final _that = this;
 switch (_that) {
 case _PaymentPayEvent():
@@ -94,7 +95,8 @@ return loadCards(_that);case _CheckPayDetailEvent():
 return checkPayDetail(_that);case _PaymentSetMerchantEvent():
 return setMerchant(_that);case _PaymentSelecteCardEvent():
 return selectedCard(_that);case _PaymentMerchantEvent():
-return loadMerchantById(_that);case _PaymentSetAmountEvent():
+return loadMerchantById(_that);case _PaymentOrderDetailsEvent():
+return loadOrderDetails(_that);case _PaymentSetAmountEvent():
 return setAmount(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -112,7 +114,7 @@ return setAmount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _PaymentPayEvent value)?  pay,TResult? Function( _PaymentPayUpdateCardsEvent value)?  updateCards,TResult? Function( _PaymentPayLoadCardsEvent value)?  loadCards,TResult? Function( _CheckPayDetailEvent value)?  checkPayDetail,TResult? Function( _PaymentSetMerchantEvent value)?  setMerchant,TResult? Function( _PaymentSelecteCardEvent value)?  selectedCard,TResult? Function( _PaymentMerchantEvent value)?  loadMerchantById,TResult? Function( _PaymentSetAmountEvent value)?  setAmount,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _PaymentPayEvent value)?  pay,TResult? Function( _PaymentPayUpdateCardsEvent value)?  updateCards,TResult? Function( _PaymentPayLoadCardsEvent value)?  loadCards,TResult? Function( _CheckPayDetailEvent value)?  checkPayDetail,TResult? Function( _PaymentSetMerchantEvent value)?  setMerchant,TResult? Function( _PaymentSelecteCardEvent value)?  selectedCard,TResult? Function( _PaymentMerchantEvent value)?  loadMerchantById,TResult? Function( _PaymentOrderDetailsEvent value)?  loadOrderDetails,TResult? Function( _PaymentSetAmountEvent value)?  setAmount,}){
 final _that = this;
 switch (_that) {
 case _PaymentPayEvent() when pay != null:
@@ -122,7 +124,8 @@ return loadCards(_that);case _CheckPayDetailEvent() when checkPayDetail != null:
 return checkPayDetail(_that);case _PaymentSetMerchantEvent() when setMerchant != null:
 return setMerchant(_that);case _PaymentSelecteCardEvent() when selectedCard != null:
 return selectedCard(_that);case _PaymentMerchantEvent() when loadMerchantById != null:
-return loadMerchantById(_that);case _PaymentSetAmountEvent() when setAmount != null:
+return loadMerchantById(_that);case _PaymentOrderDetailsEvent() when loadOrderDetails != null:
+return loadOrderDetails(_that);case _PaymentSetAmountEvent() when setAmount != null:
 return setAmount(_that);case _:
   return null;
 
@@ -140,7 +143,7 @@ return setAmount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pay,TResult Function()?  updateCards,TResult Function()?  loadCards,TResult Function()?  checkPayDetail,TResult Function( Merchant merchant)?  setMerchant,TResult Function( CardItem item)?  selectedCard,TResult Function( String merchantId,  String? orderId)?  loadMerchantById,TResult Function( String amount)?  setAmount,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  pay,TResult Function()?  updateCards,TResult Function()?  loadCards,TResult Function()?  checkPayDetail,TResult Function( Merchant merchant)?  setMerchant,TResult Function( CardItem item)?  selectedCard,TResult Function( String merchantId,  String? orderId,  MarketCheckoutPayment? orderPayment)?  loadMerchantById,TResult Function()?  loadOrderDetails,TResult Function( String amount)?  setAmount,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _PaymentPayEvent() when pay != null:
 return pay();case _PaymentPayUpdateCardsEvent() when updateCards != null:
@@ -149,7 +152,8 @@ return loadCards();case _CheckPayDetailEvent() when checkPayDetail != null:
 return checkPayDetail();case _PaymentSetMerchantEvent() when setMerchant != null:
 return setMerchant(_that.merchant);case _PaymentSelecteCardEvent() when selectedCard != null:
 return selectedCard(_that.item);case _PaymentMerchantEvent() when loadMerchantById != null:
-return loadMerchantById(_that.merchantId,_that.orderId);case _PaymentSetAmountEvent() when setAmount != null:
+return loadMerchantById(_that.merchantId,_that.orderId,_that.orderPayment);case _PaymentOrderDetailsEvent() when loadOrderDetails != null:
+return loadOrderDetails();case _PaymentSetAmountEvent() when setAmount != null:
 return setAmount(_that.amount);case _:
   return orElse();
 
@@ -168,7 +172,7 @@ return setAmount(_that.amount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pay,required TResult Function()  updateCards,required TResult Function()  loadCards,required TResult Function()  checkPayDetail,required TResult Function( Merchant merchant)  setMerchant,required TResult Function( CardItem item)  selectedCard,required TResult Function( String merchantId,  String? orderId)  loadMerchantById,required TResult Function( String amount)  setAmount,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  pay,required TResult Function()  updateCards,required TResult Function()  loadCards,required TResult Function()  checkPayDetail,required TResult Function( Merchant merchant)  setMerchant,required TResult Function( CardItem item)  selectedCard,required TResult Function( String merchantId,  String? orderId,  MarketCheckoutPayment? orderPayment)  loadMerchantById,required TResult Function()  loadOrderDetails,required TResult Function( String amount)  setAmount,}) {final _that = this;
 switch (_that) {
 case _PaymentPayEvent():
 return pay();case _PaymentPayUpdateCardsEvent():
@@ -177,7 +181,8 @@ return loadCards();case _CheckPayDetailEvent():
 return checkPayDetail();case _PaymentSetMerchantEvent():
 return setMerchant(_that.merchant);case _PaymentSelecteCardEvent():
 return selectedCard(_that.item);case _PaymentMerchantEvent():
-return loadMerchantById(_that.merchantId,_that.orderId);case _PaymentSetAmountEvent():
+return loadMerchantById(_that.merchantId,_that.orderId,_that.orderPayment);case _PaymentOrderDetailsEvent():
+return loadOrderDetails();case _PaymentSetAmountEvent():
 return setAmount(_that.amount);case _:
   throw StateError('Unexpected subclass');
 
@@ -195,7 +200,7 @@ return setAmount(_that.amount);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pay,TResult? Function()?  updateCards,TResult? Function()?  loadCards,TResult? Function()?  checkPayDetail,TResult? Function( Merchant merchant)?  setMerchant,TResult? Function( CardItem item)?  selectedCard,TResult? Function( String merchantId,  String? orderId)?  loadMerchantById,TResult? Function( String amount)?  setAmount,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  pay,TResult? Function()?  updateCards,TResult? Function()?  loadCards,TResult? Function()?  checkPayDetail,TResult? Function( Merchant merchant)?  setMerchant,TResult? Function( CardItem item)?  selectedCard,TResult? Function( String merchantId,  String? orderId,  MarketCheckoutPayment? orderPayment)?  loadMerchantById,TResult? Function()?  loadOrderDetails,TResult? Function( String amount)?  setAmount,}) {final _that = this;
 switch (_that) {
 case _PaymentPayEvent() when pay != null:
 return pay();case _PaymentPayUpdateCardsEvent() when updateCards != null:
@@ -204,7 +209,8 @@ return loadCards();case _CheckPayDetailEvent() when checkPayDetail != null:
 return checkPayDetail();case _PaymentSetMerchantEvent() when setMerchant != null:
 return setMerchant(_that.merchant);case _PaymentSelecteCardEvent() when selectedCard != null:
 return selectedCard(_that.item);case _PaymentMerchantEvent() when loadMerchantById != null:
-return loadMerchantById(_that.merchantId,_that.orderId);case _PaymentSetAmountEvent() when setAmount != null:
+return loadMerchantById(_that.merchantId,_that.orderId,_that.orderPayment);case _PaymentOrderDetailsEvent() when loadOrderDetails != null:
+return loadOrderDetails();case _PaymentSetAmountEvent() when setAmount != null:
 return setAmount(_that.amount);case _:
   return null;
 
@@ -477,11 +483,12 @@ as CardItem,
 
 
 class _PaymentMerchantEvent implements PaymentEvent {
-  const _PaymentMerchantEvent({required this.merchantId, this.orderId});
+  const _PaymentMerchantEvent({required this.merchantId, this.orderId, this.orderPayment});
   
 
  final  String merchantId;
  final  String? orderId;
+ final  MarketCheckoutPayment? orderPayment;
 
 /// Create a copy of PaymentEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -493,16 +500,16 @@ _$PaymentMerchantEventCopyWith<_PaymentMerchantEvent> get copyWith => __$Payment
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentMerchantEvent&&(identical(other.merchantId, merchantId) || other.merchantId == merchantId)&&(identical(other.orderId, orderId) || other.orderId == orderId));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentMerchantEvent&&(identical(other.merchantId, merchantId) || other.merchantId == merchantId)&&(identical(other.orderId, orderId) || other.orderId == orderId)&&(identical(other.orderPayment, orderPayment) || other.orderPayment == orderPayment));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,merchantId,orderId);
+int get hashCode => Object.hash(runtimeType,merchantId,orderId,orderPayment);
 
 @override
 String toString() {
-  return 'PaymentEvent.loadMerchantById(merchantId: $merchantId, orderId: $orderId)';
+  return 'PaymentEvent.loadMerchantById(merchantId: $merchantId, orderId: $orderId, orderPayment: $orderPayment)';
 }
 
 
@@ -513,7 +520,7 @@ abstract mixin class _$PaymentMerchantEventCopyWith<$Res> implements $PaymentEve
   factory _$PaymentMerchantEventCopyWith(_PaymentMerchantEvent value, $Res Function(_PaymentMerchantEvent) _then) = __$PaymentMerchantEventCopyWithImpl;
 @useResult
 $Res call({
- String merchantId, String? orderId
+ String merchantId, String? orderId, MarketCheckoutPayment? orderPayment
 });
 
 
@@ -530,16 +537,49 @@ class __$PaymentMerchantEventCopyWithImpl<$Res>
 
 /// Create a copy of PaymentEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? merchantId = null,Object? orderId = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? merchantId = null,Object? orderId = freezed,Object? orderPayment = freezed,}) {
   return _then(_PaymentMerchantEvent(
 merchantId: null == merchantId ? _self.merchantId : merchantId // ignore: cast_nullable_to_non_nullable
 as String,orderId: freezed == orderId ? _self.orderId : orderId // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,orderPayment: freezed == orderPayment ? _self.orderPayment : orderPayment // ignore: cast_nullable_to_non_nullable
+as MarketCheckoutPayment?,
   ));
 }
 
 
 }
+
+/// @nodoc
+
+
+class _PaymentOrderDetailsEvent implements PaymentEvent {
+  const _PaymentOrderDetailsEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PaymentOrderDetailsEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'PaymentEvent.loadOrderDetails()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 
@@ -721,12 +761,12 @@ return dataState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadingState,TResult Function( String? message)?  errorState,TResult Function( Merchant merchant,  List<CardItem> cards,  CardItem? selectedCard,  double? amount,  bool isPayLoading,  PaymentNavState? navState)?  dataState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadingState,TResult Function( String? message)?  errorState,TResult Function( Merchant merchant,  List<CardItem> cards,  CardItem? selectedCard,  double? amount,  MarketCheckoutPayment? orderPayment,  List<CheckoutDetail> orderDetails,  bool isPayLoading,  PaymentNavState? navState)?  dataState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case PaymentLoadingState() when loadingState != null:
 return loadingState();case PaymentErrorState() when errorState != null:
 return errorState(_that.message);case PaymentDataState() when dataState != null:
-return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_that.isPayLoading,_that.navState);case _:
+return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_that.orderPayment,_that.orderDetails,_that.isPayLoading,_that.navState);case _:
   return orElse();
 
 }
@@ -744,12 +784,12 @@ return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadingState,required TResult Function( String? message)  errorState,required TResult Function( Merchant merchant,  List<CardItem> cards,  CardItem? selectedCard,  double? amount,  bool isPayLoading,  PaymentNavState? navState)  dataState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadingState,required TResult Function( String? message)  errorState,required TResult Function( Merchant merchant,  List<CardItem> cards,  CardItem? selectedCard,  double? amount,  MarketCheckoutPayment? orderPayment,  List<CheckoutDetail> orderDetails,  bool isPayLoading,  PaymentNavState? navState)  dataState,}) {final _that = this;
 switch (_that) {
 case PaymentLoadingState():
 return loadingState();case PaymentErrorState():
 return errorState(_that.message);case PaymentDataState():
-return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_that.isPayLoading,_that.navState);case _:
+return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_that.orderPayment,_that.orderDetails,_that.isPayLoading,_that.navState);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -766,12 +806,12 @@ return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadingState,TResult? Function( String? message)?  errorState,TResult? Function( Merchant merchant,  List<CardItem> cards,  CardItem? selectedCard,  double? amount,  bool isPayLoading,  PaymentNavState? navState)?  dataState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadingState,TResult? Function( String? message)?  errorState,TResult? Function( Merchant merchant,  List<CardItem> cards,  CardItem? selectedCard,  double? amount,  MarketCheckoutPayment? orderPayment,  List<CheckoutDetail> orderDetails,  bool isPayLoading,  PaymentNavState? navState)?  dataState,}) {final _that = this;
 switch (_that) {
 case PaymentLoadingState() when loadingState != null:
 return loadingState();case PaymentErrorState() when errorState != null:
 return errorState(_that.message);case PaymentDataState() when dataState != null:
-return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_that.isPayLoading,_that.navState);case _:
+return dataState(_that.merchant,_that.cards,_that.selectedCard,_that.amount,_that.orderPayment,_that.orderDetails,_that.isPayLoading,_that.navState);case _:
   return null;
 
 }
@@ -881,7 +921,7 @@ as String?,
 
 
 class PaymentDataState extends PaymentState {
-  const PaymentDataState({required this.merchant, final  List<CardItem> cards = const [], this.selectedCard, this.amount, this.isPayLoading = false, this.navState}): _cards = cards,super._();
+  const PaymentDataState({required this.merchant, final  List<CardItem> cards = const [], this.selectedCard, this.amount, this.orderPayment, final  List<CheckoutDetail> orderDetails = const [], this.isPayLoading = false, this.navState}): _cards = cards,_orderDetails = orderDetails,super._();
   
 
  final  Merchant merchant;
@@ -894,6 +934,14 @@ class PaymentDataState extends PaymentState {
 
  final  CardItem? selectedCard;
  final  double? amount;
+ final  MarketCheckoutPayment? orderPayment;
+ final  List<CheckoutDetail> _orderDetails;
+@JsonKey() List<CheckoutDetail> get orderDetails {
+  if (_orderDetails is EqualUnmodifiableListView) return _orderDetails;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_orderDetails);
+}
+
 @JsonKey() final  bool isPayLoading;
  final  PaymentNavState? navState;
 
@@ -907,16 +955,16 @@ $PaymentDataStateCopyWith<PaymentDataState> get copyWith => _$PaymentDataStateCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentDataState&&(identical(other.merchant, merchant) || other.merchant == merchant)&&const DeepCollectionEquality().equals(other._cards, _cards)&&(identical(other.selectedCard, selectedCard) || other.selectedCard == selectedCard)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.isPayLoading, isPayLoading) || other.isPayLoading == isPayLoading)&&(identical(other.navState, navState) || other.navState == navState));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentDataState&&(identical(other.merchant, merchant) || other.merchant == merchant)&&const DeepCollectionEquality().equals(other._cards, _cards)&&(identical(other.selectedCard, selectedCard) || other.selectedCard == selectedCard)&&(identical(other.amount, amount) || other.amount == amount)&&(identical(other.orderPayment, orderPayment) || other.orderPayment == orderPayment)&&const DeepCollectionEquality().equals(other._orderDetails, _orderDetails)&&(identical(other.isPayLoading, isPayLoading) || other.isPayLoading == isPayLoading)&&(identical(other.navState, navState) || other.navState == navState));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,merchant,const DeepCollectionEquality().hash(_cards),selectedCard,amount,isPayLoading,navState);
+int get hashCode => Object.hash(runtimeType,merchant,const DeepCollectionEquality().hash(_cards),selectedCard,amount,orderPayment,const DeepCollectionEquality().hash(_orderDetails),isPayLoading,navState);
 
 @override
 String toString() {
-  return 'PaymentState.dataState(merchant: $merchant, cards: $cards, selectedCard: $selectedCard, amount: $amount, isPayLoading: $isPayLoading, navState: $navState)';
+  return 'PaymentState.dataState(merchant: $merchant, cards: $cards, selectedCard: $selectedCard, amount: $amount, orderPayment: $orderPayment, orderDetails: $orderDetails, isPayLoading: $isPayLoading, navState: $navState)';
 }
 
 
@@ -927,7 +975,7 @@ abstract mixin class $PaymentDataStateCopyWith<$Res> implements $PaymentStateCop
   factory $PaymentDataStateCopyWith(PaymentDataState value, $Res Function(PaymentDataState) _then) = _$PaymentDataStateCopyWithImpl;
 @useResult
 $Res call({
- Merchant merchant, List<CardItem> cards, CardItem? selectedCard, double? amount, bool isPayLoading, PaymentNavState? navState
+ Merchant merchant, List<CardItem> cards, CardItem? selectedCard, double? amount, MarketCheckoutPayment? orderPayment, List<CheckoutDetail> orderDetails, bool isPayLoading, PaymentNavState? navState
 });
 
 
@@ -944,13 +992,15 @@ class _$PaymentDataStateCopyWithImpl<$Res>
 
 /// Create a copy of PaymentState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? merchant = null,Object? cards = null,Object? selectedCard = freezed,Object? amount = freezed,Object? isPayLoading = null,Object? navState = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? merchant = null,Object? cards = null,Object? selectedCard = freezed,Object? amount = freezed,Object? orderPayment = freezed,Object? orderDetails = null,Object? isPayLoading = null,Object? navState = freezed,}) {
   return _then(PaymentDataState(
 merchant: null == merchant ? _self.merchant : merchant // ignore: cast_nullable_to_non_nullable
 as Merchant,cards: null == cards ? _self._cards : cards // ignore: cast_nullable_to_non_nullable
 as List<CardItem>,selectedCard: freezed == selectedCard ? _self.selectedCard : selectedCard // ignore: cast_nullable_to_non_nullable
 as CardItem?,amount: freezed == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
-as double?,isPayLoading: null == isPayLoading ? _self.isPayLoading : isPayLoading // ignore: cast_nullable_to_non_nullable
+as double?,orderPayment: freezed == orderPayment ? _self.orderPayment : orderPayment // ignore: cast_nullable_to_non_nullable
+as MarketCheckoutPayment?,orderDetails: null == orderDetails ? _self._orderDetails : orderDetails // ignore: cast_nullable_to_non_nullable
+as List<CheckoutDetail>,isPayLoading: null == isPayLoading ? _self.isPayLoading : isPayLoading // ignore: cast_nullable_to_non_nullable
 as bool,navState: freezed == navState ? _self.navState : navState // ignore: cast_nullable_to_non_nullable
 as PaymentNavState?,
   ));
@@ -1015,11 +1065,12 @@ extension PaymentNavStatePatterns on PaymentNavState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PaymentNavStateSuccess value)?  paymentSuccess,TResult Function( PaymentNavStateConfirmWithWeb value)?  confirmWithWeb,TResult Function( PaymentNavStateExaception value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( PaymentNavStateSuccess value)?  paymentSuccess,TResult Function( PaymentNavStateOrderPaid value)?  orderPaid,TResult Function( PaymentNavStateConfirmWithWeb value)?  confirmWithWeb,TResult Function( PaymentNavStateExaception value)?  error,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case PaymentNavStateSuccess() when paymentSuccess != null:
-return paymentSuccess(_that);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
+return paymentSuccess(_that);case PaymentNavStateOrderPaid() when orderPaid != null:
+return orderPaid(_that);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
 return confirmWithWeb(_that);case PaymentNavStateExaception() when error != null:
 return error(_that);case _:
   return orElse();
@@ -1039,11 +1090,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PaymentNavStateSuccess value)  paymentSuccess,required TResult Function( PaymentNavStateConfirmWithWeb value)  confirmWithWeb,required TResult Function( PaymentNavStateExaception value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( PaymentNavStateSuccess value)  paymentSuccess,required TResult Function( PaymentNavStateOrderPaid value)  orderPaid,required TResult Function( PaymentNavStateConfirmWithWeb value)  confirmWithWeb,required TResult Function( PaymentNavStateExaception value)  error,}){
 final _that = this;
 switch (_that) {
 case PaymentNavStateSuccess():
-return paymentSuccess(_that);case PaymentNavStateConfirmWithWeb():
+return paymentSuccess(_that);case PaymentNavStateOrderPaid():
+return orderPaid(_that);case PaymentNavStateConfirmWithWeb():
 return confirmWithWeb(_that);case PaymentNavStateExaception():
 return error(_that);case _:
   throw StateError('Unexpected subclass');
@@ -1062,11 +1114,12 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PaymentNavStateSuccess value)?  paymentSuccess,TResult? Function( PaymentNavStateConfirmWithWeb value)?  confirmWithWeb,TResult? Function( PaymentNavStateExaception value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( PaymentNavStateSuccess value)?  paymentSuccess,TResult? Function( PaymentNavStateOrderPaid value)?  orderPaid,TResult? Function( PaymentNavStateConfirmWithWeb value)?  confirmWithWeb,TResult? Function( PaymentNavStateExaception value)?  error,}){
 final _that = this;
 switch (_that) {
 case PaymentNavStateSuccess() when paymentSuccess != null:
-return paymentSuccess(_that);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
+return paymentSuccess(_that);case PaymentNavStateOrderPaid() when orderPaid != null:
+return orderPaid(_that);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
 return confirmWithWeb(_that);case PaymentNavStateExaception() when error != null:
 return error(_that);case _:
   return null;
@@ -1085,10 +1138,11 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( MerchantItem merchant,  int amount,  String paymentId)?  paymentSuccess,TResult Function( String confirmUrl,  String paymentId)?  confirmWithWeb,TResult Function( String? message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( MerchantItem merchant,  int amount,  String paymentId)?  paymentSuccess,TResult Function( String paymentId)?  orderPaid,TResult Function( String confirmUrl,  String paymentId)?  confirmWithWeb,TResult Function( String? message)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case PaymentNavStateSuccess() when paymentSuccess != null:
-return paymentSuccess(_that.merchant,_that.amount,_that.paymentId);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
+return paymentSuccess(_that.merchant,_that.amount,_that.paymentId);case PaymentNavStateOrderPaid() when orderPaid != null:
+return orderPaid(_that.paymentId);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
 return confirmWithWeb(_that.confirmUrl,_that.paymentId);case PaymentNavStateExaception() when error != null:
 return error(_that.message);case _:
   return orElse();
@@ -1108,10 +1162,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( MerchantItem merchant,  int amount,  String paymentId)  paymentSuccess,required TResult Function( String confirmUrl,  String paymentId)  confirmWithWeb,required TResult Function( String? message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( MerchantItem merchant,  int amount,  String paymentId)  paymentSuccess,required TResult Function( String paymentId)  orderPaid,required TResult Function( String confirmUrl,  String paymentId)  confirmWithWeb,required TResult Function( String? message)  error,}) {final _that = this;
 switch (_that) {
 case PaymentNavStateSuccess():
-return paymentSuccess(_that.merchant,_that.amount,_that.paymentId);case PaymentNavStateConfirmWithWeb():
+return paymentSuccess(_that.merchant,_that.amount,_that.paymentId);case PaymentNavStateOrderPaid():
+return orderPaid(_that.paymentId);case PaymentNavStateConfirmWithWeb():
 return confirmWithWeb(_that.confirmUrl,_that.paymentId);case PaymentNavStateExaception():
 return error(_that.message);case _:
   throw StateError('Unexpected subclass');
@@ -1130,10 +1185,11 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( MerchantItem merchant,  int amount,  String paymentId)?  paymentSuccess,TResult? Function( String confirmUrl,  String paymentId)?  confirmWithWeb,TResult? Function( String? message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( MerchantItem merchant,  int amount,  String paymentId)?  paymentSuccess,TResult? Function( String paymentId)?  orderPaid,TResult? Function( String confirmUrl,  String paymentId)?  confirmWithWeb,TResult? Function( String? message)?  error,}) {final _that = this;
 switch (_that) {
 case PaymentNavStateSuccess() when paymentSuccess != null:
-return paymentSuccess(_that.merchant,_that.amount,_that.paymentId);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
+return paymentSuccess(_that.merchant,_that.amount,_that.paymentId);case PaymentNavStateOrderPaid() when orderPaid != null:
+return orderPaid(_that.paymentId);case PaymentNavStateConfirmWithWeb() when confirmWithWeb != null:
 return confirmWithWeb(_that.confirmUrl,_that.paymentId);case PaymentNavStateExaception() when error != null:
 return error(_that.message);case _:
   return null;
@@ -1206,6 +1262,72 @@ class _$PaymentNavStateSuccessCopyWithImpl<$Res>
 merchant: null == merchant ? _self.merchant : merchant // ignore: cast_nullable_to_non_nullable
 as MerchantItem,amount: null == amount ? _self.amount : amount // ignore: cast_nullable_to_non_nullable
 as int,paymentId: null == paymentId ? _self.paymentId : paymentId // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class PaymentNavStateOrderPaid implements PaymentNavState {
+  const PaymentNavStateOrderPaid({required this.paymentId});
+  
+
+ final  String paymentId;
+
+/// Create a copy of PaymentNavState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$PaymentNavStateOrderPaidCopyWith<PaymentNavStateOrderPaid> get copyWith => _$PaymentNavStateOrderPaidCopyWithImpl<PaymentNavStateOrderPaid>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is PaymentNavStateOrderPaid&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,paymentId);
+
+@override
+String toString() {
+  return 'PaymentNavState.orderPaid(paymentId: $paymentId)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $PaymentNavStateOrderPaidCopyWith<$Res> implements $PaymentNavStateCopyWith<$Res> {
+  factory $PaymentNavStateOrderPaidCopyWith(PaymentNavStateOrderPaid value, $Res Function(PaymentNavStateOrderPaid) _then) = _$PaymentNavStateOrderPaidCopyWithImpl;
+@useResult
+$Res call({
+ String paymentId
+});
+
+
+
+
+}
+/// @nodoc
+class _$PaymentNavStateOrderPaidCopyWithImpl<$Res>
+    implements $PaymentNavStateOrderPaidCopyWith<$Res> {
+  _$PaymentNavStateOrderPaidCopyWithImpl(this._self, this._then);
+
+  final PaymentNavStateOrderPaid _self;
+  final $Res Function(PaymentNavStateOrderPaid) _then;
+
+/// Create a copy of PaymentNavState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? paymentId = null,}) {
+  return _then(PaymentNavStateOrderPaid(
+paymentId: null == paymentId ? _self.paymentId : paymentId // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

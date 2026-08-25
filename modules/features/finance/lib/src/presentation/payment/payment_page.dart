@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:finance/src/core/extension.dart';
 import 'package:finance/src/navigation/navigation_extensions.dart';
 import 'package:finance/src/presentation/payment/amount_suffix_formatter.dart';
@@ -11,6 +12,8 @@ import 'package:finance/src/presentation/payment/widgets/payment_card_picker_she
 import 'package:finance/src/presentation/payment/widgets/payment_loading.dart';
 import 'package:finance/src/presentation/payment/widgets/payment_merchant_card.dart';
 import 'package:finance/src/presentation/payment/widgets/payment_method_card.dart';
+import 'package:finance/src/presentation/payment/widgets/payment_order_details_card.dart';
+import 'package:finance/src/presentation/payment/widgets/payment_summary_card.dart';
 import 'package:finance/src/presentation/payment_success/payment_success_page.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
@@ -20,6 +23,7 @@ class PaymentPage extends HookWidget {
   final String id;
   final String? amount;
   final String? orderId;
+  final MarketCheckoutPayment? orderPayment;
   final Completer<bool>? completer;
 
   const PaymentPage({
@@ -27,8 +31,11 @@ class PaymentPage extends HookWidget {
     required this.id,
     this.amount,
     this.orderId,
+    this.orderPayment,
     this.completer,
   });
+
+  bool get _isOrderPayment => orderPayment != null;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +44,16 @@ class PaymentPage extends HookWidget {
     final focusNode = useFocusNode();
 
     useEffect(() {
-      bloc.add(PaymentEvent.loadMerchantById(merchantId: id, orderId: orderId));
+      bloc.add(
+        PaymentEvent.loadMerchantById(
+          merchantId: id,
+          orderId: orderId,
+          orderPayment: orderPayment,
+        ),
+      );
 
       final initialAmount = amount;
-      if (initialAmount != null) {
+      if (initialAmount != null && !_isOrderPayment) {
         controller.value = _formattedAmount(initialAmount);
       }
 
@@ -52,6 +65,8 @@ class PaymentPage extends HookWidget {
     }, const []);
 
     useEffect(() {
+      if (_isOrderPayment) return null;
+
       void onAmountChanged() {
         bloc.add(PaymentEvent.setAmount(amount: controller.text));
       }
@@ -97,24 +112,13 @@ class PaymentPage extends HookWidget {
               onTap: () => FocusScope.of(context).unfocus(),
               child: ListView(
                 padding: contentPadding.copyWith(bottom: 16),
-                children: [
-                  PaymentMerchantCard(merchant: state.merchant),
-                  const SizedBox(height: 8),
-                  PaymentAmountCard(
-                    controller: controller,
-                    focusNode: focusNode,
-                    suggestions: paymentAmountSuggestions,
-                    onSuggestionTap: (suggestion) {
-                      controller.value = _formattedAmount("$suggestion");
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  PaymentMethodCard(
-                    selectedCard: state.selectedCard,
-                    onChangeCard: () => _changeCard(context, bloc, state),
-                    onAddCard: () => context.finance.pushAddCardPage(),
-                  ),
-                ],
+                children: _contentCards(
+                  context,
+                  bloc,
+                  state,
+                  controller,
+                  focusNode,
+                ),
               ),
             ),
           );
@@ -148,6 +152,55 @@ class PaymentPage extends HookWidget {
         },
       ),
     );
+  }
+
+  List<Widget> _contentCards(
+    BuildContext context,
+    PaymentBloc bloc,
+    PaymentDataState state,
+    TextEditingController controller,
+    FocusNode focusNode,
+  ) {
+    final methodCard = PaymentMethodCard(
+      selectedCard: state.selectedCard,
+      onChangeCard: () => _changeCard(context, bloc, state),
+      onAddCard: () => context.finance.pushAddCardPage(),
+    );
+    final payment = state.orderPayment;
+
+    if (payment != null) {
+      return [
+        if (state.orderDetails.isNotEmpty) ...[
+          PaymentOrderDetailsCard(details: state.orderDetails),
+          const SizedBox(height: 8),
+        ],
+        PaymentSummaryCard(
+          price: payment.price,
+          details: payment.priceDetails,
+          freeCancellationUntil: payment.freeCancellationUntil,
+        ),
+        const SizedBox(height: 8),
+        methodCard,
+      ];
+    }
+
+    return [
+      PaymentMerchantCard(merchant: state.merchant),
+      const SizedBox(height: 8),
+      PaymentAmountCard(
+        controller: controller,
+        focusNode: focusNode,
+        suggestions:
+            state.merchant.suggestedAmounts.isNotEmpty
+                ? state.merchant.suggestedAmounts
+                : paymentAmountSuggestions,
+        onSuggestionTap: (suggestion) {
+          controller.value = _formattedAmount("$suggestion");
+        },
+      ),
+      const SizedBox(height: 8),
+      methodCard,
+    ];
   }
 
   TextEditingValue _formattedAmount(String value) {
@@ -191,6 +244,10 @@ class PaymentPage extends HookWidget {
             paymentId: paymentId,
           ),
         );
+        break;
+      case PaymentNavStateOrderPaid(:final paymentId):
+        completer?.complete(true);
+        context.pop(paymentId);
         break;
       case PaymentNavStateConfirmWithWeb(:final confirmUrl):
         LauncherUtils.urlLauncher(confirmUrl);

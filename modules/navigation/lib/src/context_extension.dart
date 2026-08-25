@@ -15,6 +15,13 @@ extension BuildContextNavExtension on BuildContext {
     return _finance[this] ??= FeatureFinanceNavExtension(this);
   }
 
+  static final Expando<FeatureMarketNavExtension> _market =
+      Expando<FeatureMarketNavExtension>();
+
+  FeatureMarketNavExtension get market {
+    return _market[this] ??= FeatureMarketNavExtension(this);
+  }
+
   static final Expando<FeatureMoreNavExtension> _more =
       Expando<FeatureMoreNavExtension>();
 

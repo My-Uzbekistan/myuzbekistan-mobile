@@ -2,7 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
-import 'package:travel/src/pages/notifications/widgets/notification_detail_image_header.dart';
+import 'package:travel/src/pages/notifications/widgets/notification_image.dart';
 
 class NotificationDetail extends StatelessWidget {
   final NotificationItem item;
@@ -21,7 +21,7 @@ class NotificationDetail extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         slivers: [
           if (hasImage)
-            NotificationDetailImageHeader(image: item.image)
+            _imageHeader(context)
           else
             SliverToBoxAdapter(
               child: SizedBox(
@@ -79,5 +79,24 @@ class NotificationDetail extends StatelessWidget {
     } else {
       LauncherUtils.urlLauncher(actionLink);
     }
+  }
+
+  Widget _imageHeader(BuildContext context) {
+    return SliverAppBar(
+      primary: false,
+      automaticallyImplyLeading: false,
+      expandedHeight: MediaQuery.sizeOf(context).width / (375 / 360),
+      stretch: true,
+      stretchTriggerOffset: 0.9,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      backgroundColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.parallax,
+        stretchModes: const [StretchMode.zoomBackground],
+        background: NotificationImage(url: item.image),
+      ),
+    );
   }
 }

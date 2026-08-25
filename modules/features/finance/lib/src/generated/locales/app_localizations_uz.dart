@@ -156,6 +156,29 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get action_change => 'O\'zgartirish';
 
   @override
+  String get payment_order_details => 'Buyurtma tafsilotlari';
+
+  @override
+  String get payment_summary_title => 'To\'lov tafsilotlari';
+
+  @override
+  String get payment_summary_order => 'Buyurtma';
+
+  @override
+  String get payment_summary_delivery => 'Yetkazib berish';
+
+  @override
+  String get payment_summary_total => 'Jami:';
+
+  @override
+  String get payment_free_cancellation_title => 'Bepul bekor qilish';
+
+  @override
+  String payment_free_cancellation_subtitle(Object date) {
+    return 'Pulni to\'liq qaytarish uchun $date gacha bekor qiling';
+  }
+
+  @override
   String get payment_details_title => 'Tafsilotlar';
 
   @override

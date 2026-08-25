@@ -28,6 +28,11 @@ MerchantDto _$MerchantDtoFromJson(Map<String, dynamic> json) => MerchantDto(
   phone: json['phone'] as String?,
   type: json['type'] as String?,
   distance: (json['distance'] as num?)?.toDouble(),
+  minAmount: (json['minAmount'] as num?)?.toInt(),
+  maxAmount: (json['maxAmount'] as num?)?.toInt(),
+  suggestedAmounts: (json['suggestedAmounts'] as List<dynamic>?)
+      ?.map((e) => (e as num).toInt())
+      .toList(),
 );
 
 Map<String, dynamic> _$MerchantDtoToJson(MerchantDto instance) =>
@@ -41,4 +46,7 @@ Map<String, dynamic> _$MerchantDtoToJson(MerchantDto instance) =>
       'phone': instance.phone,
       'type': instance.type,
       'distance': instance.distance,
+      'minAmount': instance.minAmount,
+      'maxAmount': instance.maxAmount,
+      'suggestedAmounts': instance.suggestedAmounts,
     };

@@ -7,9 +7,8 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
-import 'package:travel/src/premium/premium_onboarding/widgets/premium_benefit_row.dart';
 import 'package:travel/src/premium/premium_onboarding/widgets/premium_plan_sheet.dart';
-import 'package:travel/src/premium/widgets/premium_success_dialog.dart';
+import 'package:travel/src/premium/widgets/premium_alert_dialog.dart';
 import 'package:travel/src/premium/widgets/premium_sky_background.dart';
 
 class PremiumOnboardingPage extends HookWidget {
@@ -35,7 +34,7 @@ class PremiumOnboardingPage extends HookWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         final rootContext = appRootNavigatorKey.currentContext;
         if (rootContext != null) {
-          PremiumSuccessDialog.show(rootContext);
+          PremiumAlertDialog.showSuccess(rootContext);
         }
       });
     });
@@ -122,13 +121,13 @@ class PremiumOnboardingPage extends HookWidget {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    children: features
-                                        .map(
-                                          (feature) => PremiumBenefitRow(
-                                            title: feature.title ?? "",
-                                          ),
-                                        )
-                                        .toList(),
+                                    children: [
+                                      for (final feature in features)
+                                        _benefitRow(
+                                          context,
+                                          feature.title ?? "",
+                                        ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -159,6 +158,25 @@ class PremiumOnboardingPage extends HookWidget {
           ),
         );
       },
+    );
+  }
+
+  Widget _benefitRow(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: Row(
+        spacing: 8,
+        children: [
+          Assets.svg.premiumFeatureCheck.svg(width: 24, height: 24),
+          Flexible(
+            child: Text(
+              title,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ).labelLg(color: context.appColors.static.white),
+          ),
+        ],
+      ),
     );
   }
 }

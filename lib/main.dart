@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
+import 'package:basket/basket.dart';
+import 'package:favorites/favorites.dart';
 import 'package:finance/finance.dart';
+import 'package:market_home/market_home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:more/more.dart';
@@ -118,6 +121,9 @@ class _MyAppState extends State<MyApp> {
                 ...FeatureTravelLocalizations.localizationsDelegates,
                 ...FeatureMoreLocalizations.localizationsDelegates,
                 ...FeatureFinanceLocalizations.localizationsDelegates,
+                ...FeatureMarketHomeLocalizations.localizationsDelegates,
+                ...FeatureFavoritesLocalizations.localizationsDelegates,
+                ...FeatureBasketLocalizations.localizationsDelegates,
                 ...CoreAppLocalizations.localizationsDelegates
               ],
               supportedLocales: AppLocalizations.supportedLocales,

@@ -18,3 +18,5 @@ export 'src/contract/contract.dart';
 
 
 
+
+export 'src/market/market.dart';

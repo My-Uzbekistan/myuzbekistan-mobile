@@ -154,9 +154,6 @@ abstract class RestService {
   @POST("reviews")
   Future<dynamic> addReview(@Body() Map<String, dynamic> body);
 
-  @GET("catalog-snapshots")
-  Future<List<CatalogDto>> getCatalog();
-
   @GET("catalog-v3")
   Future<List<CatalogDto>> getCatalogV3({
     @Query("page") required int page,

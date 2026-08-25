@@ -17,6 +17,10 @@ import 'package:data/src/finance/src/network/repository/finance_repository_impl.
     as _i144;
 import 'package:data/src/locale/AppPreferenceImpl.dart' as _i80;
 import 'package:data/src/locale/security_storage_impl.dart' as _i916;
+import 'package:data/src/market/src/network/api/market_api_service.dart'
+    as _i522;
+import 'package:data/src/market/src/network/repository/market_repository_impl.dart'
+    as _i1012;
 import 'package:data/src/premium/premium_service.dart' as _i282;
 import 'package:data/src/premium/repository/PremiumRepository.dart' as _i872;
 import 'package:data/src/travel/network/api/service.dart' as _i926;
@@ -72,12 +76,18 @@ class DataPackageModule extends _i526.MicroPackageModule {
         () => _i930.ContractService(gh<_i811.Dio>()));
     gh.factory<_i210.FinanceApiService>(
         () => _i210.FinanceApiService(gh<_i361.Dio>()));
+    gh.factory<_i522.MarketApiService>(
+        () => _i522.MarketApiService(gh<_i361.Dio>()));
     gh.factory<_i282.PremiumService>(
         () => _i282.PremiumService(gh<_i811.Dio>()));
     gh.factory<_i926.RestService>(() => _i926.RestService(gh<_i811.Dio>()));
     gh.factory<_i494.Repository>(() => _i305.RepositoryImp(
           gh<_i926.RestService>(),
           gh<_i494.SecurityStorage>(),
+        ));
+    gh.factory<_i494.MarketRepository>(() => _i1012.MarketRepositoryImpl(
+          gh<_i522.MarketApiService>(),
+          gh<_i494.AppPreference>(),
         ));
     gh.factory<_i494.FinanceRepository>(
         () => _i144.FinanceRepositoryImpl(gh<_i210.FinanceApiService>()));

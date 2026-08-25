@@ -25,6 +25,9 @@ TransactionItemDto _$TransactionItemDtoFromJson(Map<String, dynamic> json) =>
       ),
       status: json['status'] as String,
       taxQr: json['taxQr'] as String?,
+      action: json['action'] == null
+          ? null
+          : PaymentActionDto.fromJson(json['action'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TransactionItemDtoToJson(TransactionItemDto instance) =>
@@ -36,4 +39,5 @@ Map<String, dynamic> _$TransactionItemDtoToJson(TransactionItemDto instance) =>
       'taxQr': instance.taxQr,
       'merchant': instance.merchant,
       'status': instance.status,
+      'action': instance.action,
     };

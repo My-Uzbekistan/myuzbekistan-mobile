@@ -12,29 +12,21 @@ const _premiumSubtitleGradient = LinearGradient(
 );
 
 class ProfileHeader extends StatelessWidget {
-  static const double _verticalPadding = 16;
-  static const double _avatarSize = 120;
-  static const double _avatarSpacing = 16;
-  static const double _nameHeight = 28;
-  static const double _actionSpacing = 8;
-  static const double _actionHeight = 30;
-  static const double _premiumSubtitleHeight = 16;
-
   static double heightOf(
     BuildContext context, {
     required bool isGuest,
     required bool isPremium,
   }) {
     final premiumSubtitle =
-        !isGuest && isPremium ? _premiumSubtitleHeight + _actionSpacing : 0.0;
+        !isGuest && isPremium ? 16 + 8 : 0.0;
 
     return MediaQuery.of(context).padding.top +
-        _verticalPadding * 2 +
-        _avatarSize +
-        _avatarSpacing +
-        _nameHeight +
-        _actionSpacing +
-        _actionHeight +
+        16 * 2 +
+        120 +
+        16 +
+        28 +
+        8 +
+        30 +
         premiumSubtitle;
   }
 
@@ -58,8 +50,8 @@ class ProfileHeader extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top + _verticalPadding,
-        bottom: _verticalPadding,
+        top: MediaQuery.of(context).padding.top + 16,
+        bottom: 16,
       ),
       decoration: BoxDecoration(
         color: context.appColors.background.elevation1,
@@ -67,11 +59,11 @@ class ProfileHeader extends StatelessWidget {
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
-        spacing: _avatarSpacing,
+        spacing: 16,
         children: [
           ProfileAvatarLarge(photoUrl: photoUrl, isLoading: isLoading),
           Column(
-            spacing: _actionSpacing,
+            spacing: 8,
             children: [
               Row(
                 mainAxisSize: MainAxisSize.min,

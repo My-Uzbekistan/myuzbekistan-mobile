@@ -12,13 +12,19 @@ abstract class PaymentState with _$PaymentState {
     @Default([]) List<CardItem> cards,
     CardItem? selectedCard,
     double? amount,
+    MarketCheckoutPayment? orderPayment,
+    @Default([]) List<CheckoutDetail> orderDetails,
     @Default(false) bool isPayLoading,
     PaymentNavState? navState,
   }) = PaymentDataState;
 
   bool get hasDataSucceed => maybeMap(
     dataState: (data) {
-      return data.selectedCard != null && (data.amount ?? 0) >= 1000.0;
+      final amount = data.amount ?? 0;
+      final maxAmount = data.merchant.maxAmount;
+      return data.selectedCard != null &&
+          amount >= (data.merchant.minAmount ?? paymentDefaultMinAmount) &&
+          (maxAmount == null || amount <= maxAmount);
     },
     orElse: () => false,
   );
@@ -31,6 +37,9 @@ abstract class PaymentNavState with _$PaymentNavState {
     required int amount,
     required String paymentId,
   }) = PaymentNavStateSuccess;
+
+  const factory PaymentNavState.orderPaid({required String paymentId}) =
+      PaymentNavStateOrderPaid;
 
   const factory PaymentNavState.confirmWithWeb(
       {

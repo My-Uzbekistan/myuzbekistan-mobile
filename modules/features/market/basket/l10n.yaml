@@ -1,0 +1,6 @@
+arb-dir: locale
+template-arb-file: basket_ru.arb
+output-class: FeatureBasketLocalizations
+output-localization-file: app_localizations.dart
+output-dir: lib/src/generated/locales/
+required-resource-attributes: false

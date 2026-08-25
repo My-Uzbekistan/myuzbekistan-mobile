@@ -24,6 +24,21 @@ class AppLocalizationsUz extends AppLocalizations {
   String get nav_more => 'Ko‘proq';
 
   @override
+  String get nav_back => 'Ortga';
+
+  @override
+  String get nav_market => 'Market';
+
+  @override
+  String get nav_favorites => 'Saralangan';
+
+  @override
+  String get nav_basket => 'Savat';
+
+  @override
+  String get nav_profile => 'Profil';
+
+  @override
   String get catalogMyEsim => 'My eSIM';
 
   @override

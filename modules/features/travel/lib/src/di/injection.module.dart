@@ -8,7 +8,6 @@ import 'dart:async' as _i687;
 
 import 'package:domain/domain.dart' as _i494;
 import 'package:injectable/injectable.dart' as _i526;
-import 'package:travel/src/catalog/bloc/catalog_bloc.dart' as _i236;
 import 'package:travel/src/pages/catalog_investments/bloc/investments_bloc.dart'
     as _i369;
 import 'package:travel/src/pages/catalog_investments/pages/search_page/bloc/invest_search_bloc.dart'
@@ -46,11 +45,6 @@ class TravelPackageModule extends _i526.MicroPackageModule {
         () => _i917.PremiumBloc(gh<_i494.PremiumRepository>()));
     gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
           gh<_i494.Repository>(),
-          gh<_i494.AppStatusChangeListeners>(),
-        ));
-    gh.factory<_i236.CatalogBloc>(() => _i236.CatalogBloc(
-          gh<_i494.Repository>(),
-          gh<_i494.PremiumRepository>(),
           gh<_i494.AppStatusChangeListeners>(),
         ));
     gh.factory<_i335.LoadContentBloc>(

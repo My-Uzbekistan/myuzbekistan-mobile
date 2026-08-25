@@ -29,7 +29,7 @@ export 'package:mobile_scanner/mobile_scanner.dart';
 export 'src/permissions/camera_and_gallery/camera_storage.dart';
 export 'package:image_picker/image_picker.dart' show ImageSource, XFile;
 
-export 'package:intl/intl.dart' show DateFormat,Intl;
+export 'package:intl/intl.dart' show DateFormat, Intl, NumberFormat;
 export 'package:package_info_plus/package_info_plus.dart';
 
 export 'package:fluttertoast/fluttertoast.dart';
@@ -40,6 +40,9 @@ export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:firebase_analytics/firebase_analytics.dart';
 export 'package:device_info_plus/device_info_plus.dart';
 export 'package:map_launcher/map_launcher.dart';
+export 'package:share_plus/share_plus.dart'
+    show Share, ShareResult, ShareResultStatus;
+export 'src/constants/app_links.dart';
 export 'package:url_launcher/url_launcher.dart';
 export 'package:jwt_decoder/jwt_decoder.dart';
 export 'src/utils/notification_service.dart' ;

@@ -123,8 +123,6 @@ abstract interface class Repository {
     required int rating,
   });
 
-  Future<List<CatalogItemModel>> getCatalog();
-
   Future<List<CatalogItemModel>> getCatalogV3({
     int page = 1,
     int pageSize = 50,

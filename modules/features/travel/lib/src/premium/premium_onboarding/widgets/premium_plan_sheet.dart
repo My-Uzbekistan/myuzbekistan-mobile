@@ -2,8 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/src/core/extension.dart';
-import 'package:travel/src/premium/premium_onboarding/widgets/premium_plan_grid.dart';
-import 'package:travel/src/premium/premium_onboarding/widgets/premium_terms_text.dart';
+import 'package:travel/src/premium/premium_onboarding/widgets/premium_plan_card.dart';
 
 class PremiumPlanSheet extends StatelessWidget {
   final List<PremiumPlansModel> plans;
@@ -39,11 +38,7 @@ class PremiumPlanSheet extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 24),
-            child: PremiumPlanGrid(
-              plans: plans,
-              selectedId: selectedId,
-              onSelect: onSelect,
-            ),
+            child: _planGrid(context),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
@@ -53,13 +48,65 @@ class PremiumPlanSheet extends StatelessWidget {
               disable: selectedId == null,
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: PremiumTermsText(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: _terms(context),
           ),
           SizedBox(height: MediaQuery.of(context).padding.bottom + 16),
         ],
       ),
+    );
+  }
+
+  Widget _planGrid(BuildContext context) {
+    final cardWidth = (MediaQuery.sizeOf(context).width - 40) / 2;
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      clipBehavior: Clip.none,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: IntrinsicHeight(
+        child: Row(
+          spacing: 8,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (final plan in plans)
+              SizedBox(
+                width: cardWidth,
+                child: PremiumPlanCard(
+                  item: plan,
+                  isSelected: selectedId != null && plan.id == selectedId,
+                  onTap: () => onSelect?.call(plan),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _terms(BuildContext context) {
+    final style = CustomTypography.bodyXsm.copyWith(
+      color: context.appColors.textIconColor.secondary,
+    );
+
+    return Column(
+      spacing: 6,
+      children: [
+        Text(
+          context.localization.premiumCancelAnytime,
+          style: style,
+          textAlign: TextAlign.center,
+        ),
+        Text(
+          context.localization.premiumTerms,
+          style: style.copyWith(
+            decoration: TextDecoration.underline,
+            decorationColor: context.appColors.textIconColor.secondary,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

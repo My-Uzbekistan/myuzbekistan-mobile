@@ -3,7 +3,6 @@ import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
-import 'package:travel/src/catalog/bloc/catalog_bloc.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/catalog_investments/bloc/investments_bloc.dart';
 import 'package:travel/src/pages/catalog_investments/invest_currencs_type.dart';
@@ -35,7 +34,6 @@ import 'package:travel/src/premium/premium_cancel/premium_cancel_screen.dart';
 import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
 import 'package:travel/src/premium/premium_onboarding/premium_onboarding.dart';
 
-import '../catalog/catalog.dart';
 import '../di/injection.dart';
 import '../pages/catalog_investments/CatalogInvestmentsPage.dart';
 import '../pages/catalog_investments/pages/sort_main_page.dart';
@@ -506,21 +504,6 @@ mixin FeatureTravelRouter {
             slideAlign: SlideAlign.vertical,
           );
         },
-      ),
-    ],
-  );
-
-  static final shellCatalog = StatefulShellBranch(
-    routes: [
-      GoRoute(
-        path: "/catalog",
-        name: "catalog",
-
-        builder:
-            (context, state) => BlocProvider(
-              create: (context) => getIt<CatalogBloc>(),
-              child: CatalogScreen(),
-            ),
       ),
     ],
   );

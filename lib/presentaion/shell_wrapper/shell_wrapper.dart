@@ -1,76 +1,93 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
-import 'package:more/more.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
-import 'package:uzbekistan_travel/di/injection.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/app_bottom_nav_bar.dart';
+import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_tab_data.dart';
 import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
 
-class ShellPageWrapper extends StatefulWidget {
+const _deeplinkHost = "myuzb.uz";
+
+bool _listeningNotifications = false;
+
+class ShellPageWrapper extends HookWidget {
+  const ShellPageWrapper({
+    super.key,
+    required this.navigationShell,
+    required this.tabsBuilder,
+    this.navBarKind = NavBarKind.auto,
+    this.showNavBarFade = true,
+    this.extendBody = true,
+  });
+
   final StatefulNavigationShell navigationShell;
+  final NavTabsBuilder tabsBuilder;
+  final NavBarKind navBarKind;
+  final bool showNavBarFade;
+  final bool extendBody;
 
-  const ShellPageWrapper({super.key, required this.navigationShell});
-
-  @override
-  State<ShellPageWrapper> createState() => _ShellPageWrapperState();
-}
-
-class _ShellPageWrapperState extends State<ShellPageWrapper> {
   void _goBranch(int index) {
-    widget.navigationShell.goBranch(
+    navigationShell.goBranch(
       index,
-      initialLocation: index == widget.navigationShell.currentIndex,
+      initialLocation: index == navigationShell.currentIndex,
     );
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
-      NotificationService().listenNotification(
-          logRemoteMessage: (remoteMessage) {
-        openNotification(remoteMessage);
-      });
-    });
-    super.initState();
+  void _onTabSelected(List<NavTabData> tabs, int index) {
+    final tab = tabs[index];
+    final onTap = tab.onTap;
+    if (onTap != null) {
+      onTap();
+      return;
+    }
+    final branchIndex = tab.branchIndex;
+    if (branchIndex != null) _goBranch(branchIndex);
   }
-
-  void openNotification(RemoteMessage message) {
-    try {
-      final String? deeplink = message.data["deeplink"];
-      if (deeplink != null && deeplink.isNotEmpty) {
-        final uri = Uri.parse(deeplink);
-        if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty) {
-          appRootNavigatorKey.currentContext?.push(uri.toString());
-        }
-      }
-    } catch (_) {}
-  }
-
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      if (_listeningNotifications) return null;
+      _listeningNotifications = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        NotificationService().listenNotification(
+          logRemoteMessage: _openNotificationDeeplink,
+        );
+      });
+      return null;
+    }, const []);
+
     return MyUpgradeAlert(
       child: Scaffold(
         backgroundColor: context.appColors.background.underlayer,
-        extendBody: true,
-        body: widget.navigationShell,
-        bottomNavigationBar: BlocProvider(
-          create: (_) => getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
-          child: BlocBuilder<ProfileBloc, ProfileBlocState>(
-            builder: (context, state) {
-              final dataState = state is ProfileBlocDataState ? state : null;
-              return AppBottomNavBar(
-                selectedIndex: widget.navigationShell.currentIndex,
-                onTabSelected: _goBranch,
-                profilePhotoUrl: dataState?.userModel?.photoUrl,
-                isPremium: dataState?.isPremium ?? false,
-              );
-            },
-          ),
+        extendBody: extendBody,
+        body: navigationShell,
+        bottomNavigationBar: Builder(
+          builder: (context) {
+            final tabs = tabsBuilder(context);
+            return AppBottomNavBar(
+              tabs: tabs,
+              selectedIndex: tabs.indexWhere(
+                (tab) => tab.branchIndex == navigationShell.currentIndex,
+              ),
+              onTabSelected: (index) => _onTabSelected(tabs, index),
+              kind: navBarKind,
+              showFade: showNavBarFade,
+            );
+          },
         ),
       ),
     );
   }
+}
+
+void _openNotificationDeeplink(RemoteMessage message) {
+  try {
+    final deeplink = message.data["deeplink"];
+    if (deeplink is! String || deeplink.isEmpty) return;
+    final uri = Uri.parse(deeplink);
+    if (uri.host == _deeplinkHost && uri.pathSegments.isNotEmpty) {
+      appRootNavigatorKey.currentContext?.push(uri.toString());
+    }
+  } catch (_) {}
 }

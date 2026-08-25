@@ -71,16 +71,17 @@ class FinancePackageModule extends _i526.MicroPackageModule {
         ));
     gh.factory<_i1061.MerchantsBloc>(
         () => _i1061.MerchantsBloc(gh<_i754.LoadMerchantUseCase>()));
+    gh.factory<_i40.CardsBloc>(() => _i40.CardsBloc(
+          gh<_i799.LoadCardsUseCase>(),
+          gh<_i83.FinanceSharedService>(),
+        ));
     gh.factory<_i509.PaymentBloc>(() => _i509.PaymentBloc(
           gh<_i922.MerchantByIdUseCase>(),
           gh<_i799.LoadCardsUseCase>(),
           gh<_i83.FinanceSharedService>(),
           gh<_i494.FinanceRepository>(),
           gh<_i494.PremiumRepository>(),
-        ));
-    gh.factory<_i40.CardsBloc>(() => _i40.CardsBloc(
-          gh<_i799.LoadCardsUseCase>(),
-          gh<_i83.FinanceSharedService>(),
+          gh<_i494.MarketRepository>(),
         ));
   }
 }

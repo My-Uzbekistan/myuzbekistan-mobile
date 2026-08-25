@@ -63,6 +63,7 @@ flutter:
      - assets/png/
      - assets/catalog/
      - assets/svg/
+     - assets/svg/market/
      - assets/svg/more/
      - assets/svg/prayers/
      - assets/logo/

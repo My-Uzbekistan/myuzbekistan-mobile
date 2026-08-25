@@ -8,6 +8,7 @@ class TransactionItem {
   final int amount;
   final MerchantItem merchant;
   final PaymentStatus status;
+  final PaymentAction? action;
 
   TransactionItem({
     required this.items,
@@ -17,6 +18,7 @@ class TransactionItem {
     required this.merchant,
     required this.status,
     this.taxQr,
+    this.action,
   });
 }
 

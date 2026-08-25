@@ -156,6 +156,29 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
   String get action_change => 'Изменить';
 
   @override
+  String get payment_order_details => 'Детали заказа';
+
+  @override
+  String get payment_summary_title => 'Детали оплаты';
+
+  @override
+  String get payment_summary_order => 'Заказ';
+
+  @override
+  String get payment_summary_delivery => 'Доставка';
+
+  @override
+  String get payment_summary_total => 'Итого:';
+
+  @override
+  String get payment_free_cancellation_title => 'Бесплатная отмена';
+
+  @override
+  String payment_free_cancellation_subtitle(Object date) {
+    return 'Отмените до $date для полного возврата средств';
+  }
+
+  @override
   String get payment_details_title => 'Детали';
 
   @override

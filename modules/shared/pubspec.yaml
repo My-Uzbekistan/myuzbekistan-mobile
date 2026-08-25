@@ -54,6 +54,7 @@ dependencies:
   firebase_analytics: ^12.4.3
   firebase_messaging: ^16.4.0
   map_launcher: ^4.4.2
+  share_plus: ^10.1.1
   jwt_decoder: ^2.0.1
   animations: ^2.0.11
   firebase_remote_config: ^6.2.0

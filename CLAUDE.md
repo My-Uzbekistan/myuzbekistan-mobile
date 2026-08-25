@@ -25,6 +25,33 @@ Flutter asosida yozilgan mobil ilova. Modulli arxitektura ishlatiladi (`modules/
 
 ---
 
+## BE API Hujjatlari — Bruno Kolleksiyasi
+
+Loyihaning **barcha BE endpointlari** shu yerda (alohida git repo):
+
+```
+/Users/user/Documents/bruno/MyUzbekistan_Bruno
+```
+
+Har bir endpoint — alohida `.yml` fayl: `http:` blokida method/url/body, `docs:` blokida javob JSON'i, maydonlar jadvali va qoidalar.
+
+| Papka | Nima bor |
+|---|---|
+| `1. Kirish` | SMS kod, token |
+| `Market` | katalog, savat, rasmiylashtirish, buyurtmalar, qidiruv va sevimlilar (~30 endpoint) |
+| `Moliya` | kartalar, to'lov, tarix, merchantlar, valyuta |
+| `Bildirishnomalar` / `Qurilmalarim` / `Catalog V3` / `New Design APIs` | qolganlari |
+
+### Qoidalar
+
+- Yangi API ulashdan oldin **shu papkadagi tegishli `.yml` o'qiladi** — endpoint, model va enum qiymatlari o'ylab topilmaydi
+- Dio `baseUrl` = `https://myuz.uz/api/` — Retrofit path'ida `api/` yozilmaydi: `@GET("market/home")`
+- `Accept-Language` javob tilini belgilaydi (uz / ru / en)
+- Narxlar **so'mda, butun son** — tiyin ishlatilmaydi; rasmlar to'liq URL bo'lib keladi
+- `opencollection.yml` ichida haqiqiy JWT token bor — loyihaga ko'chirilmaydi
+
+---
+
 ## Xato (Error) Ko'rsatish Qoidasi
 
 API dan xato kelganda, xato matni to'g'ridan-to'g'ri UI ichiga (`Text(...)`) yozilmaydi — `Toast` orqali ko'rsatiladi:
@@ -108,28 +135,72 @@ Har bir `.arb` uch tilda bo'ladi: `_uz.arb`, `_ru.arb`, `_en.arb`.
 
 ---
 
-## Fayl Tuzilmasi Qoidasi — SOLID / 1 fayl = 1 mas'uliyat
+## Fayl Tuzilmasi Qoidasi
 
-**Har bir klass, widget, model, enum — o'z alohida faylida bo'ladi.** Bir faylga bir nechta public klass/widget yig'ish SRP (Single Responsibility Principle) ni buzadi.
+### Widget Qoidasi — YIRIK widget yoziladi, mayda-chuydaga BO'LINMAYDI
 
-### Widget Qoidasi
+Ekran **mazmunli, yirik** bloklarga bo'linadi — har biri o'z faylida. Blokning ichki bo'laklari (ikonka+matn qatori, chip, badge, narx qatori, sarlavha, counter, stepper, chevron, tile) **alohida faylga chiqarilmaydi** — shu widget ichida private metod (`Widget _row(...)`, `Widget _header(...)`) yoki private klass (`class _Step extends StatelessWidget`) bo'lib qoladi.
 
-Sahifa (page) fayli faqat asosiy `StatelessWidget`/`StatefulWidget` ni o'z ichiga oladi. Ichki (private) widgetlar **alohida fayllarda** yoziladi va import qilinadi.
-
-**Noto'g'ri** — hammasi bitta faylda:
+**Noto'g'ri** — bitta ekran 18 ta faylga bo'lingan:
 ```
-catalog_page.dart   # ichida CatalogPage, _CatalogCard, _FilterChip — XATO
+detail/widgets/
+  market_detail_breadcrumb.dart       # 45 satr
+  market_detail_price.dart            # 29 satr
+  market_detail_icon_row.dart         # 55 satr
+  market_detail_section_title.dart    # 23 satr
+  market_detail_route_button.dart     # 47 satr
+  market_detail_photo_counter.dart    # 75 satr
+  market_detail_delivery_tile.dart
+  market_detail_cart_stepper.dart
+  ...
 ```
 
-**To'g'ri**:
+**To'g'ri** — mazmunli bloklar, ichki bo'laklar shu fayl ichida:
 ```
-catalog/
-  pages/
-    catalog_page.dart      # faqat CatalogPage
-  widgets/
-    catalog_card.dart      # faqat CatalogCard
-    catalog_filter_chip.dart
+detail/widgets/
+  market_detail_gallery.dart      # karusel + foto counter
+  market_detail_summary.dart      # breadcrumb + nom + narx
+  market_detail_delivery.dart     # tile'lar + ikonka switch
+  market_detail_seller.dart       # qatorlar + karta + "yo'l qurish" tugmasi
+  market_detail_bottom_bar.dart   # tugmalar + savat stepperi
+  market_detail_section.dart      # karta konteyner + sarlavha
 ```
+
+Qo'shimcha qoidalar:
+- Faqat **bitta joyda** ishlatiladigan kichik blok (~60 satrgacha) — ota widget yoki page ichida private metod bo'ladi, alohida fayl EMAS
+- Bir necha joyda ishlatilsa va o'z ichida logikasi bo'lsa — o'shanda alohida fayl (masalan `market_order_status_chip.dart`, `market_order_item_tile.dart`)
+- Murakkab animatsiyali komponent 300–400 satr bo'lsa ham **bitta faylda** qoladi (masalan `market_order_wizard.dart` — ichida `_Step`, `_PulseRing`, `_Connector` private klasslar)
+- `switch` bilan ikonka/rang qaytaruvchi kichik `extension` alohida fayl bo'lmaydi — ishlatiladigan fayl ichida private funksiya (`String _glyphPath(...)`)
+- Konteyner/o'ram (wrapper) widget faqat mazmun qo'shsa yashaydi: quruq `Container` o'rami emas, balki sarlavhasi bilan birga (`MarketDetailSection(title:, child:)`)
+
+### O'lchov Konstantalari — NOMLANMAYDI
+
+Har bir padding/gap/o'lcham uchun `static const` yozilmaydi — raqam to'g'ridan-to'g'ri joyiga yoziladi.
+
+**Noto'g'ri:**
+```dart
+class MarketDetailDeliveryTile extends StatelessWidget {
+  static const double _iconSize = 24;
+  static const double _contentGap = 12;
+  static const double _textGap = 4;
+  static const double _dividerPadding = 12;
+  static const String _separator = " · ";
+  ...
+        spacing: _contentGap,
+```
+
+**To'g'ri:**
+```dart
+        spacing: 12,
+        ...
+        SizedBox.square(dimension: 24, child: ...),
+        ...
+    ].join(" · ");
+```
+
+`const` faqat shu hollarda:
+- qiymat **hisob-kitobda** ishlatilsa (masalan `market_order_wizard.dart` ichidagi `_iconDiameter` — konnektor geometriyasi shundan hisoblanadi)
+- bir faylning bir necha klassi o'rtasida bo'lishilsa — fayl darajasidagi `const`
 
 ### Model / Enum Qoidasi
 
@@ -153,7 +224,8 @@ models/
 
 | Nima | Fayl soni |
 |------|-----------|
-| 1 ta widget | 1 ta fayl |
+| 1 ta yirik ekran bloki | 1 ta fayl |
+| Blok ichidagi mayda bo'lak | fayl emas — private metod yoki private klass |
 | 1 ta model/DTO | 1 ta fayl |
 | 1 ta enum | 1 ta fayl |
 | 1 ta BLoC/Cubit | alohida papka (`*_bloc.dart`, `*_event.dart`, `*_state.dart`) |

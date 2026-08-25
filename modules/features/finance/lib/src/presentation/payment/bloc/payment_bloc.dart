@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:domain/domain.dart';
 import 'package:finance/src/presentation/cards/use_case/load_cards_use_case.dart';
+import 'package:finance/src/presentation/payment/payment_default_min_amount.dart';
 import 'package:finance/src/presentation/payment/use_case/merchant_by_id_use_case.dart';
 import 'package:finance/src/service/FinanceSharedService.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,6 +21,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
   final FinanceRepository _financeRepository;
   final FinanceSharedService _financeSharedService;
   final PremiumRepository _premiumRepository;
+  final MarketRepository _marketRepository;
 
   /// Premium obuna to'lovi shu merchant orqali amalga oshiriladi. Faqat shu
   /// merchant uchun to'lov muvaffaqiyatli bo'lganda `premium/subscribe` chaqiriladi.
@@ -37,12 +39,14 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     this._financeSharedService,
     this._financeRepository,
     this._premiumRepository,
+    this._marketRepository,
   ) : super(PaymentState.loadingState()) {
     on<_PaymentMerchantEvent>(_loadMerchantById);
     on<_PaymentPayUpdateCardsEvent>(_updatePaymentCards);
     on<_PaymentSetMerchantEvent>(_setMerchantEvent);
     on<_PaymentPayLoadCardsEvent>(_loadCards);
     on<_PaymentSelecteCardEvent>(_selectedCard);
+    on<_PaymentOrderDetailsEvent>(_loadOrderDetails);
     on<_PaymentSetAmountEvent>(_setAmount);
     on<_PaymentPayEvent>(_pay);
     on<_CheckPayDetailEvent>(_checkPayDetail);
@@ -81,11 +85,14 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         emit(
           (state as PaymentDataState).copyWith(
             isPayLoading: false,
-            navState: PaymentNavState.paymentSuccess(
-              merchant: result.merchant,
-              amount: result.amount,
-              paymentId: paymentId!,
-            ),
+            navState:
+                orderPayment != null
+                    ? PaymentNavState.orderPaid(paymentId: paymentId!)
+                    : PaymentNavState.paymentSuccess(
+                      merchant: result.merchant,
+                      amount: result.amount,
+                      paymentId: paymentId!,
+                    ),
           ),
         );
       } catch (e) {
@@ -113,6 +120,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
   double? amount;
   String? orderId;
+  MarketCheckoutPayment? orderPayment;
 
   Future<void> _subscribePremiumIfNeeded(PaymentDataState st) async {
     if (st.merchant.id.toString() != _premiumMerchantId) return;
@@ -162,9 +170,30 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         merchant: event.merchant,
         cards: cards,
         amount: amount,
+        orderPayment: orderPayment,
         selectedCard: cards.firstOrNull,
       ),
     );
+  }
+
+  Future<void> _loadOrderDetails(
+    _PaymentOrderDetailsEvent event,
+    Emitter<PaymentState> emit,
+  ) async {
+    final payment = orderPayment;
+    if (payment == null) return;
+    try {
+      final details = await _marketRepository.checkoutDetails(
+        deliveryMethodId: payment.deliveryMethodId,
+        addressId: payment.addressId,
+        phone: payment.recipientPhone,
+      );
+      if (state is PaymentDataState) {
+        emit((state as PaymentDataState).copyWith(orderDetails: details));
+      }
+    } catch (e) {
+      logger.e("Checkout details error $e");
+    }
   }
 
   void _updatePaymentCards(
@@ -187,13 +216,18 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     _PaymentMerchantEvent event,
     Emitter<PaymentState> emit,
   ) async {
-    orderId=event.orderId;
+    orderId = event.orderId;
+    orderPayment = event.orderPayment;
+    amount = event.orderPayment?.price.total.toDouble() ?? amount;
     if (!_financeSharedService.hasSetCards()) {
       add(PaymentEvent.loadCards());
     }
     try {
       final result = await _merchantByIdUseCase(event.merchantId);
       add(PaymentEvent.setMerchant(result));
+      if (event.orderPayment != null) {
+        add(PaymentEvent.loadOrderDetails());
+      }
     } catch (e) {
       if (e is DioException && e.error is AppException) {
         emit(
@@ -229,15 +263,18 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         emit(
           (state as PaymentDataState).copyWith(
             isPayLoading: false,
-            navState: PaymentNavState.paymentSuccess(
-              merchant: MerchantItem(
-                icon: st.merchant.logo,
-                name: st.merchant.name,
-                type: st.merchant.type,
-              ),
-              amount: st.amount!.toInt(),
-              paymentId: result.paymentId,
-            ),
+            navState:
+                st.orderPayment != null
+                    ? PaymentNavState.orderPaid(paymentId: result.paymentId)
+                    : PaymentNavState.paymentSuccess(
+                      merchant: MerchantItem(
+                        icon: st.merchant.logo,
+                        name: st.merchant.name,
+                        type: st.merchant.type,
+                      ),
+                      amount: st.amount!.toInt(),
+                      paymentId: result.paymentId,
+                    ),
           ),
         );
       }

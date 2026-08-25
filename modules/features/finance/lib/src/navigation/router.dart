@@ -74,20 +74,24 @@ mixin FeatureFinanceRouter {
     GoRoute(
       path: AppNavPath.finance.financePayment.path,
       name: AppNavPath.finance.financePayment.name,
-      pageBuilder:
-          (context, state) => buildSlideTransitionPage(
-            child: BlocProvider(
-              create: (context) => getIt<PaymentBloc>(),
-              child: PaymentPage(
-                id: state.pathParameters['id'].toString(),
-                amount: state.uri.queryParameters["amount"],
-                orderId: state.uri.queryParameters["orderId"],
-                completer: state.extra as Completer<bool>?,
-              ),
+      pageBuilder: (context, state) {
+        final extra = state.extra;
+
+        return buildSlideTransitionPage(
+          child: BlocProvider(
+            create: (context) => getIt<PaymentBloc>(),
+            child: PaymentPage(
+              id: state.pathParameters['id'].toString(),
+              amount: parseString(state.uri.queryParameters["amount"]),
+              orderId: parseString(state.uri.queryParameters["orderId"]),
+              orderPayment: extra is MarketCheckoutPayment ? extra : null,
+              completer: extra is Completer<bool> ? extra : null,
             ),
-            context: context,
-            state: state,
           ),
+          context: context,
+          state: state,
+        );
+      },
     ),
     GoRoute(
       path: AppNavPath.finance.verification.path,

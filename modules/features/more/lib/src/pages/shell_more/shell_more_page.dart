@@ -14,7 +14,6 @@ import 'widgets/profile/premium_active_banner.dart';
 import 'widgets/profile/premium_upgrade_banner.dart';
 import 'widgets/profile/profile_header.dart';
 import 'widgets/profile/profile_settings_cell.dart';
-import 'widgets/profile/profile_settings_group.dart';
 
 class ShellMorePage extends HookWidget {
   const ShellMorePage({super.key});
@@ -138,7 +137,8 @@ class ShellMorePage extends HookWidget {
                                 )
                                 : const PremiumUpgradeBanner(),
 
-                          ProfileSettingsGroup(
+                          _settingsGroup(
+                            context,
                             children: [
                               if (userState != null)
                                 ProfileSettingsCell(
@@ -181,7 +181,8 @@ class ShellMorePage extends HookWidget {
                             ],
                           ),
 
-                          ProfileSettingsGroup(
+                          _settingsGroup(
+                            context,
                             children: [
                               ProfileSettingsCell(
                                 icon: Assets.svg.more.moon.svg(),
@@ -227,7 +228,8 @@ class ShellMorePage extends HookWidget {
                             ],
                           ),
 
-                          ProfileSettingsGroup(
+                          _settingsGroup(
+                            context,
                             children: [
                               ProfileSettingsCell(
                                 icon: Assets.svg.more.circleInfo.svg(),
@@ -249,7 +251,8 @@ class ShellMorePage extends HookWidget {
                           ),
 
                           if (userState != null)
-                            ProfileSettingsGroup(
+                            _settingsGroup(
+                              context,
                               children: [
                                 ProfileSettingsCell(
                                   icon: Assets.svg.more.broomMotion.svg(),
@@ -327,6 +330,21 @@ class ShellMorePage extends HookWidget {
       onFirstButtonClick: () {
         context.read<ProfileBloc>().add(ProfileBlocEvent.logOut());
       },
+    );
+  }
+
+  Widget _settingsGroup(
+    BuildContext context, {
+    required List<Widget> children,
+  }) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: context.appColors.background.elevation2,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(children: children),
     );
   }
 }

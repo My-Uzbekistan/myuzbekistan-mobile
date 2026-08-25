@@ -13,9 +13,12 @@ class AppInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final locale = preference.getLocale() ?? AppLocale.en;
+
+    options.headers[HttpHeaders.acceptLanguageHeader] = locale.name;
 
     options.queryParameters.addAll({
-      "culture": preference.getLocale()?.culture??"en-US",
+      "culture": locale.culture,
       "platform": Platform.isIOS ? "ios" : "android"
     });
 

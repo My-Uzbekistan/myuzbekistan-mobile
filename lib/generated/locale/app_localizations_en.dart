@@ -24,6 +24,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nav_more => 'More';
 
   @override
+  String get nav_back => 'Back';
+
+  @override
+  String get nav_market => 'Market';
+
+  @override
+  String get nav_favorites => 'Favorites';
+
+  @override
+  String get nav_basket => 'Basket';
+
+  @override
+  String get nav_profile => 'Profile';
+
+  @override
   String get catalogMyEsim => 'My eSIM';
 
   @override

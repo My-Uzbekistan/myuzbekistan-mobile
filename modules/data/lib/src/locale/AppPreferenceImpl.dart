@@ -41,4 +41,12 @@ class AppPreferenceImpl extends AppPreference {
   Future<void> setTheme(ThemeMode mode) async {
     await _box.put("themeMode", mode.name);
   }
+
+  @override
+  Future<void> setMarketCityId(int cityId) async {
+    await _box.put("marketCityId", cityId);
+  }
+
+  @override
+  int? getMarketCityId() => _box.get("marketCityId");
 }

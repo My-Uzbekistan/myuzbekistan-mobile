@@ -1,5 +1,5 @@
-// dart format width=80
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// dart format width=80
 
 // **************************************************************************
 // InjectableConfigGenerator
@@ -9,11 +9,14 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:basket/basket.dart' as _i779;
 import 'package:data/data.dart' as _i437;
 import 'package:domain/domain.dart' as _i494;
+import 'package:favorites/favorites.dart' as _i782;
 import 'package:finance/finance.dart' as _i587;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:market_home/market_home.dart' as _i912;
 import 'package:more/more.dart' as _i707;
 import 'package:travel/travel.dart' as _i734;
 
@@ -33,6 +36,9 @@ extension GetItInjectableX on _i174.GetIt {
     await _i707.MorePackageModule().init(gh);
     await _i734.TravelPackageModule().init(gh);
     await _i587.FinancePackageModule().init(gh);
+    await _i912.MarketHomePackageModule().init(gh);
+    await _i782.FavoritesPackageModule().init(gh);
+    await _i779.BasketPackageModule().init(gh);
     return this;
   }
 }

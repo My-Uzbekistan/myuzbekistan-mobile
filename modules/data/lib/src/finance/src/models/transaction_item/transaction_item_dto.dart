@@ -1,4 +1,5 @@
 import 'package:data/src/finance/src/models/merchant/merchant_dto.dart';
+import 'package:data/src/finance/src/models/transaction_item/payment_action_dto.dart';
 import 'package:data/src/utils/convertors/date_time_converter.dart';
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
@@ -28,6 +29,7 @@ class TransactionItemDto {
   final String? taxQr;
   final MerchantItemDto merchant;
   final String status;
+  final PaymentActionDto? action;
 
   TransactionItemDto({
     required this.items,
@@ -37,6 +39,7 @@ class TransactionItemDto {
     required this.merchant,
     required this.status,
     this.taxQr,
+    this.action,
   });
 
   factory TransactionItemDto.fromJson(Map<String, dynamic> json) =>
@@ -53,5 +56,6 @@ class TransactionItemDto {
       (e) => e.name == status,
       orElse: () => PaymentStatus.success,
     ),
+    action: action?.toDomain(),
   );
 }

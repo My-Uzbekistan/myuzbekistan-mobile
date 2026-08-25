@@ -8,6 +8,10 @@ abstract class AppPreference {
   AppLocale? getLocale();
 
   ThemeMode getThemeMode();
+
+  Future<void> setMarketCityId(int cityId);
+
+  int? getMarketCityId();
 }
 
 enum AppLocale {
