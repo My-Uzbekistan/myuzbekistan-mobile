@@ -12,6 +12,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final OtherColors colors;
   final NonOpaque nonOpaque;
   final ServiceColors service;
+  final AccentColors accent;
   final RippleColor rippleColor;
 
   AppColorsExtension({
@@ -25,6 +26,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
     required this.colors,
     required this.nonOpaque,
     required this.service,
+    required this.accent,
     required this.rippleColor,
     required this.brandSeaBlue,
   });
@@ -47,6 +49,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       colors: _lerpOtherColors(colors, other.colors, t),
       nonOpaque: _lerpNonOpaque(nonOpaque, other.nonOpaque, t),
       service: _lerpServiceColors(service, other.service, t),
+      accent: _lerpAccentColors(accent, other.accent, t),
       rippleColor: _lerpRippleColor(rippleColor, other.rippleColor, t),
       brandSeaBlue: Color.lerp(brandSeaBlue, other.brandSeaBlue, t) ?? other.brandSeaBlue,
     );
@@ -116,6 +119,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       yellow: Color.lerp(a.yellow, b.yellow, t) ?? b.yellow,
       orange: Color.lerp(a.orange, b.orange, t) ?? b.orange,
       lime: Color.lerp(a.lime, b.lime, t) ?? b.lime,
+      purple: Color.lerp(a.purple, b.purple, t) ?? b.purple,
     );
   }
 
@@ -133,6 +137,33 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       ServiceColors a, ServiceColors b, double t) {
     return ServiceColors(
       overlay: Color.lerp(a.overlay, b.overlay, t) ?? b.overlay,
+      scrim: Color.lerp(a.scrim, b.scrim, t) ?? b.scrim,
+      glass: Color.lerp(a.glass, b.glass, t) ?? b.glass,
+      onMedia: Color.lerp(a.onMedia, b.onMedia, t) ?? b.onMedia,
+      shadow: Color.lerp(a.shadow, b.shadow, t) ?? b.shadow,
+      shimmerBase:
+          Color.lerp(a.shimmerBase, b.shimmerBase, t) ?? b.shimmerBase,
+      shimmerHighlight: Color.lerp(a.shimmerHighlight, b.shimmerHighlight, t) ??
+          b.shimmerHighlight,
+      heroSurface:
+          Color.lerp(a.heroSurface, b.heroSurface, t) ?? b.heroSurface,
+    );
+  }
+
+  static AccentColors _lerpAccentColors(
+      AccentColors a, AccentColors b, double t) {
+    return AccentColors(
+      premium: Color.lerp(a.premium, b.premium, t) ?? b.premium,
+      premiumLight:
+          Color.lerp(a.premiumLight, b.premiumLight, t) ?? b.premiumLight,
+      premiumDark:
+          Color.lerp(a.premiumDark, b.premiumDark, t) ?? b.premiumDark,
+      premiumPlan:
+          Color.lerp(a.premiumPlan, b.premiumPlan, t) ?? b.premiumPlan,
+      premiumPlanDark: Color.lerp(a.premiumPlanDark, b.premiumPlanDark, t) ??
+          b.premiumPlanDark,
+      gift: Color.lerp(a.gift, b.gift, t) ?? b.gift,
+      giftLime: Color.lerp(a.giftLime, b.giftLime, t) ?? b.giftLime,
     );
   }
 
@@ -155,6 +186,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       OtherColors? colors,
       NonOpaque? nonOpaque,
       ServiceColors? service,
+      AccentColors? accent,
       RippleColor? ripple}) {
     return AppColorsExtension(
       brand: brand ?? this.brand,
@@ -167,6 +199,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       colors: colors ?? this.colors,
       nonOpaque: nonOpaque ?? this.nonOpaque,
       service: service ?? this.service,
+      accent: accent ?? this.accent,
       rippleColor: ripple ?? rippleColor, brandSeaBlue:  brandSeaBlue ?? this.brandSeaBlue,
     );
   }

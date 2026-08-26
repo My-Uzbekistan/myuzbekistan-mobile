@@ -186,34 +186,24 @@ class _ImageCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: context.appColors.static.white.withValues(alpha: 0.12),
+            color: context.appColors.service.onMedia.withValues(alpha: 0.12),
           ),
         ),
         child: Stack(
           children: [
             Positioned.fill(
-              child: ExtendedImage.network(
+              child: AppNetworkImage(
                 imageUrl,
                 fit: BoxFit.cover,
-                loadStateChanged: (state) {
-                  switch (state.extendedImageLoadState) {
-                    case LoadState.completed:
-                      return AnimatedOpacity(
-                        opacity: 1.0,
-                        duration: const Duration(milliseconds: 200),
-                        child: state.completedWidget,
-                      );
-                    default:
-                      return Container(
-                        color: context.appColors.fill.quaternary,
-                      );
-                  }
-                },
+                placeholder: ColoredBox(
+                  color: context.appColors.fill.quaternary,
+                ),
               ),
             ),
             Positioned.fill(
               child: ColoredBox(
-                color: const Color(0xFF14191A).withValues(alpha: 0.16),
+                color: context.appColors.service.scrim
+                    .withValues(alpha: 0.16),
               ),
             ),
             if (ratingText.isNotEmpty)
@@ -244,9 +234,9 @@ class _RatingBadge extends StatelessWidget {
           height: 28,
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: context.appColors.static.white,
+            color: context.appColors.service.onMedia,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: context.appColors.static.white),
+            border: Border.all(color: context.appColors.service.onMedia),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -256,7 +246,7 @@ class _RatingBadge extends StatelessWidget {
               Text(
                 rating,
                 maxLines: 1,
-              ).labelSm(color: context.appColors.static.black),
+              ).labelSm(color: context.appColors.service.scrim),
             ],
           ),
         ),

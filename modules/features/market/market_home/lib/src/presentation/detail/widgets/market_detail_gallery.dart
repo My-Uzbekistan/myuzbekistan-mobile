@@ -35,24 +35,19 @@ class MarketDetailGallery extends HookWidget {
             itemCount: photos.length,
             physics: const ClampingScrollPhysics(),
             onPageChanged: (index) => currentPage.value = index,
-            itemBuilder: (context, index) => ExtendedImage.network(
+            itemBuilder: (context, index) => AppNetworkImage(
               photos[index],
-              cache: true,
               fit: BoxFit.cover,
-              loadStateChanged: (state) =>
-                  switch (state.extendedImageLoadState) {
-                    LoadState.completed => state.completedWidget,
-                    LoadState.loading => Shimmer.fromDefault(
-                      child: const ShimmerDefaultContainer(
-                        height: double.maxFinite,
-                        width: double.maxFinite,
-                        radius: 0,
-                      ),
-                    ),
-                    _ => Assets.png.defaultContentImage.image(
-                      fit: BoxFit.cover,
-                    ),
-                  },
+              loadingWidget: Shimmer.fromDefault(
+                child: const ShimmerDefaultContainer(
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  radius: 0,
+                ),
+              ),
+              placeholder: Assets.png.defaultContentImage.image(
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         Align(

@@ -115,6 +115,8 @@ class HomeScreen extends HookWidget {
                   await completerRef.value?.future;
                 },
                 child: CustomScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   physics: const BouncingScrollPhysics(
                     parent: AlwaysScrollableScrollPhysics(),
                   ),
@@ -191,47 +193,6 @@ class HomeScreen extends HookWidget {
                         padding: EdgeInsets.only(top: 12),
                         sliver: SliverToBoxAdapter(child: HomeBannerShimmer()),
                       ),
-                    if (data.favorites.isNotEmpty)
-                      SliverPadding(
-                        padding: const EdgeInsets.only(
-                          top: 16,
-                          left: 16,
-                          right: 16,
-                        ),
-                        sliver: SliverToBoxAdapter(
-                          child: GestureDetector(
-                            onTap: () => context.travel.pushFavoritesPage(),
-                            child: StackedCard(
-                              title: Row(
-                                spacing: 2,
-                                children: [
-                                  Flexible(
-                                    child: Text(
-                                      context.localization.favorites,
-                                      style: CustomTypography.H3,
-                                    ),
-                                  ),
-                                  Assets.svg.iconFilledHeard.path.toSvgImage(
-                                    width: 24,
-                                    colorFilter: ColorFilter.mode(
-                                      context.appColors.colors.red,
-                                      BlendMode.srcIn,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              caption: Text(
-                                context.localization.n_items(
-                                  data.totalFavoriteCount,
-                                ),
-                                style: CustomTypography.bodySm,
-                              ),
-                              avatars: data.favorites,
-                            ),
-                          ),
-                        ),
-                      ),
-
                     ServicesWidget(services: data.catalogServices),
                     CurrencyCalculator(),
                     if (data.cities.isNotEmpty)

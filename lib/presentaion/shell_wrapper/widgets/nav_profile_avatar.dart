@@ -29,19 +29,11 @@ class NavProfileAvatar extends StatelessWidget {
     final url = photoUrl ?? '';
     final Widget image = url.isEmpty
         ? Assets.png.avatar.image(fit: BoxFit.cover)
-        : ExtendedImage.network(
+        : AppNetworkImage(
             url,
             fit: BoxFit.cover,
-            cache: true,
             cacheMaxAge: const Duration(days: 10),
-            loadStateChanged: (state) {
-              switch (state.extendedImageLoadState) {
-                case LoadState.completed:
-                  return state.completedWidget;
-                default:
-                  return Assets.png.avatar.image(fit: BoxFit.cover);
-              }
-            },
+            placeholder: Assets.png.avatar.image(fit: BoxFit.cover),
           );
 
     final Color ring = isPremium

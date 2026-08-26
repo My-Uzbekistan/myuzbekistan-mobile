@@ -39,7 +39,7 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get payment_history_title => 'Tarix';
 
   @override
-  String get payment_qr_title => 'QR To\'lov';
+  String get payment_qr_title => 'QR-to\'lov';
 
   @override
   String get card_number_label => 'Karta raqami';

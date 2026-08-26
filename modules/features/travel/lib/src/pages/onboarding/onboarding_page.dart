@@ -107,20 +107,13 @@ class OnboardingPage extends HookWidget {
           children: [
             AspectRatio(
               aspectRatio: 375 / 280,
-              child: ExtendedImage.network(
+              child: AppNetworkImage(
                 item.bannerUrl,
                 fit: BoxFit.cover,
                 filterQuality: FilterQuality.none,
-                loadStateChanged: (state) {
-                  switch (state.extendedImageLoadState) {
-                    case LoadState.completed:
-                      return null;
-                    default:
-                      return Assets.png.defaultContentImage.image(
-                        fit: BoxFit.cover,
-                      );
-                  }
-                },
+                placeholder: Assets.png.defaultContentImage.image(
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Padding(

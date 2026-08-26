@@ -16,19 +16,12 @@ class NotificationImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: borderRadius,
-      child: ExtendedImage.network(
+      child: AppNetworkImage(
         url.orEmpty(),
         fit: BoxFit.cover,
         width: double.infinity,
         height: double.infinity,
-        loadStateChanged: (state) {
-          switch (state.extendedImageLoadState) {
-            case LoadState.completed:
-              return null;
-            default:
-              return Container(color: context.appColors.fill.quaternary);
-          }
-        },
+        placeholder: ColoredBox(color: context.appColors.fill.quaternary),
       ),
     );
   }

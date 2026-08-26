@@ -94,7 +94,14 @@ class _CustomInfiniteCarouselState extends State<CustomInfiniteCarousel> {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(24.0),
-                  child: _ImagePage(url: imageUrl),
+                  child: AppNetworkImage(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                    cacheMaxAge: Duration(days: 2),
+                    placeholder: Assets.png.defaultContentImage.path.toImage(
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             );
@@ -103,45 +110,4 @@ class _CustomInfiniteCarouselState extends State<CustomInfiniteCarousel> {
       ),
     );
   }
-}
-
-class _ImagePage extends StatefulWidget {
-  final String url;
-
-  const _ImagePage({super.key, required this.url});
-
-  @override
-  State<_ImagePage> createState() => _ImagePageState();
-}
-
-class _ImagePageState extends State<_ImagePage>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context); // MUHIM!
-
-    return ExtendedImage.network(
-      widget.url,
-      key: ValueKey(widget.url),
-      fit: BoxFit.cover,
-      cache: true,
-      cacheMaxAge: Duration(days: 2),
-      loadStateChanged: (ExtendedImageState state) {
-        switch (state.extendedImageLoadState) {
-          case LoadState.completed:
-            return AnimatedOpacity(
-              opacity: 1.0,
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeInToLinear,
-              child: state.completedWidget,
-            );
-          default:
-            return Assets.png.defaultContentImage.path.toImage(fit: BoxFit.cover);
-        }
-      },
-    );
-  }
-
-  @override
-  bool get wantKeepAlive => true;
 }

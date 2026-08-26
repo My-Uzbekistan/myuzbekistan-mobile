@@ -38,7 +38,10 @@ class AppAvatar extends StatelessWidget {
       decoration: showBorder
           ? BoxDecoration(
               borderRadius: BorderRadius.circular(radius),
-              border: Border.all(color: Colors.white, width: 2),
+              border: Border.all(
+                color: context.appColors.background.elevation1,
+                width: 2,
+              ),
             )
           : null,
       child: SizedBox(
@@ -47,20 +50,13 @@ class AppAvatar extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(radius),
           child: Container(
-            color: Color(0xffD9D9D9),
+            color: context.appColors.background.elevation2Alt,
 
-            child: ExtendedImage.network(
+            child: AppNetworkImage(
               imageUrl ?? "",
               fit: BoxFit.cover,
               filterQuality: FilterQuality.none,
-              loadStateChanged: (state) {
-                switch (state.extendedImageLoadState) {
-                  case LoadState.completed:
-                    return null;
-                  default:
-                    return Assets.png.avatar.image(fit: BoxFit.cover);
-                }
-              },
+              placeholder: Assets.png.avatar.image(fit: BoxFit.cover),
             ),
           ),
         ),

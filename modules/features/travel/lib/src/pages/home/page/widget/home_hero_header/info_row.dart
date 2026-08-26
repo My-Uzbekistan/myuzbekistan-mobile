@@ -27,6 +27,7 @@ class _InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final onMedia = context.appColors.service.onMedia;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       spacing: 8,
@@ -48,7 +49,7 @@ class _InfoRow extends StatelessWidget {
                         Assets.svg.locatorFill.path.toSvgImage(
                           width: 16,
                           height: 16,
-                          tintColor: Colors.white,
+                          tintColor: onMedia,
                         ),
                         const SizedBox(width: 4),
                         Flexible(
@@ -56,7 +57,7 @@ class _InfoRow extends StatelessWidget {
                             regionName,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                          ).bodySm(color: Colors.white),
+                          ).bodySm(color: onMedia),
                         ),
                       ],
                     ),
@@ -67,13 +68,13 @@ class _InfoRow extends StatelessWidget {
                     children: [
                       const Text("☀️", style: TextStyle(fontSize: 15)),
                       const SizedBox(width: 4),
-                      Text(temperature).labelMd(color: Colors.white),
+                      Text(temperature).labelMd(color: onMedia),
                       if (airQuality != null) ...[
                         const SizedBox(width: 6),
                         Container(
                           width: 1,
                           height: 20,
-                          color: Colors.white.withValues(alpha: 0.2),
+                          color: onMedia.withValues(alpha: 0.2),
                         ),
                         const SizedBox(width: 6),
                         _AqiBadge(
@@ -110,17 +111,17 @@ class _AqiBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.appColors.colors;
-    final (Color color, String emoji) = switch (level) {
-      0 => (colors.green, "🙂"),
-      1 => (colors.yellow, "😐"),
-      2 => (colors.red, "🙁"),
-      _ => (const Color(0xFF3F3844), "😷"),
+    final appColors = context.appColors;
+    final (Color background, Color foreground, String emoji) = switch (level) {
+      0 => (appColors.colors.green, appColors.static.white, "🙂"),
+      1 => (appColors.colors.yellow, appColors.static.black, "😐"),
+      2 => (appColors.colors.red, appColors.static.white, "🙁"),
+      _ => (appColors.colors.purple, appColors.static.white, "😷"),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
-        color: color,
+        color: background,
         borderRadius: BorderRadius.circular(50),
       ),
       child: Row(
@@ -128,7 +129,7 @@ class _AqiBadge extends StatelessWidget {
         children: [
           Text(emoji, style: const TextStyle(fontSize: 12)),
           const SizedBox(width: 4),
-          Text(value).labelSm(color: Colors.white),
+          Text(value).labelSm(color: foreground),
         ],
       ),
     );
@@ -163,10 +164,12 @@ class _PrayerPill extends HookWidget {
       return timer.cancel;
     }, [current.nextKey, current.remainingSeconds]);
 
+    final onMedia = context.appColors.service.onMedia;
+
     return AdaptiveGlass(
       borderRadius: 20,
       blur: 2,
-      tint: const Color(0x14FFFFFF),
+      tint: context.appColors.service.glass,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onTap,
@@ -182,7 +185,7 @@ class _PrayerPill extends HookWidget {
                 height: 24,
                 child: Assets.svg.namazIcon.path.toSvgImage(
                   fit: BoxFit.contain,
-                  tintColor: Colors.white,
+                  tintColor: onMedia,
                 ),
               ),
               const SizedBox(width: 6),
@@ -192,9 +195,9 @@ class _PrayerPill extends HookWidget {
                 children: [
                   Text(
                     current.nextName ?? "",
-                  ).bodyXXsm(color: Colors.white.withValues(alpha: 0.56)),
+                  ).bodyXXsm(color: onMedia.withValues(alpha: 0.56)),
                   const SizedBox(height: 2),
-                  Text(_format(left.value)).labelSm(color: Colors.white),
+                  Text(_format(left.value)).labelSm(color: onMedia),
                 ],
               ),
             ],
@@ -222,6 +225,8 @@ class _NotificationBell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final onMedia = context.appColors.service.onMedia;
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -231,7 +236,7 @@ class _NotificationBell extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+          border: Border.all(color: onMedia.withValues(alpha: 0.2)),
         ),
         child: Stack(
           clipBehavior: Clip.none,
@@ -241,7 +246,7 @@ class _NotificationBell extends StatelessWidget {
               height: 24,
               child: Assets.svg.notificationIcon.path.toSvgImage(
                 fit: BoxFit.contain,
-                tintColor: Colors.white,
+                tintColor: onMedia,
               ),
             ),
             Positioned(
@@ -264,7 +269,7 @@ class _NotificationBell extends StatelessWidget {
                     child: Text(
                       count.toString(),
                       overflow: TextOverflow.ellipsis,
-                    ).bodyXXsm(color: Colors.white),
+                    ).bodyXXsm(color: context.appColors.static.white),
                   );
                 },
               ),

@@ -70,17 +70,12 @@ class MarketOrderDetailFields extends StatelessWidget {
       spacing: 4,
       children: [
         if (payment.icon.isNotEmpty)
-          ExtendedImage.network(
+          AppNetworkImage(
             payment.icon,
             width: 20,
             height: 20,
             fit: BoxFit.contain,
-            cache: true,
-            loadStateChanged: (state) =>
-                switch (state.extendedImageLoadState) {
-                  LoadState.completed => state.completedWidget,
-                  _ => const SizedBox(width: 20, height: 20),
-                },
+            placeholder: const SizedBox(width: 20, height: 20),
           ),
         Flexible(
           child: Text(

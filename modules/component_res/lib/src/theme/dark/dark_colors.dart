@@ -51,7 +51,8 @@ class DarkColors extends _BaseColors {
         blue: const Color(0xff0099ff),
         yellow: const Color(0xffffdd2d),
     orange: const Color(0xfffb5d40),// updated
-      lime:  const Color(0xffC2ED72)
+      lime:  const Color(0xffC2ED72),
+      purple: const Color(0xffbf5af2),
       );
 
   @override
@@ -67,6 +68,24 @@ class DarkColors extends _BaseColors {
   @override
   ServiceColors get service => ServiceColors(
     overlay:  Colors.black.withValues(alpha: 0.6), // updated// updated
+        scrim: const Color(0xff0b0d0e),
+        glass: Colors.white.withValues(alpha: 0.08),
+        onMedia: Colors.white,
+        shadow: Colors.black.withValues(alpha: 0.4),
+        shimmerBase: const Color(0xff9090a2).withValues(alpha: 0.12),
+        shimmerHighlight: Colors.white.withValues(alpha: 0.2),
+        heroSurface: const Color(0xff0e0e10),
+      );
+
+  @override
+  AccentColors get accent => AccentColors(
+        premium: const Color(0xfff7ce5f),
+        premiumLight: const Color(0xfffeea7b),
+        premiumDark: const Color(0xffcb9030),
+        premiumPlan: const Color(0xff07c277),
+        premiumPlanDark: const Color(0xff006f42),
+        gift: const Color(0xff00b93f),
+        giftLime: const Color(0xffadee5c),
       );
 
   @override

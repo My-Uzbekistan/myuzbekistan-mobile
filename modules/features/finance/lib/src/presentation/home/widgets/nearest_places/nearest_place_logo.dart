@@ -15,23 +15,11 @@ class NearestPlaceLogo extends StatelessWidget {
         height: 40,
         width: 40,
         child: RepaintBoundary(
-          child: ExtendedImage.network(
+          child: AppNetworkImage(
             url.orEmpty(),
-            cache: true,
             cacheMaxAge: const Duration(days: 6),
             fit: BoxFit.cover,
-            loadStateChanged: (state) {
-              switch (state.extendedImageLoadState) {
-                case LoadState.completed:
-                  return AnimatedOpacity(
-                    opacity: 1.0,
-                    duration: const Duration(milliseconds: 200),
-                    child: state.completedWidget,
-                  );
-                default:
-                  return ColoredBox(color: context.appColors.fill.tertiary);
-              }
-            },
+            placeholder: ColoredBox(color: context.appColors.fill.tertiary),
           ),
         ),
       ),

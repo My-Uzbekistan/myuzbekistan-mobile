@@ -17,7 +17,7 @@ class AppSwitch extends StatelessWidget {
         ? CupertinoSwitch(
             value: isSwitched,
             onChanged: onChanged,
-            thumbColor: Colors.white,
+            thumbColor: context.appColors.static.white,
             thumbIcon: WidgetStateProperty.all(const Icon(null)),
             trackOutlineColor: WidgetStateProperty.resolveWith((state) {
               return Colors.transparent;
@@ -47,7 +47,7 @@ class AppSwitch extends StatelessWidget {
                 return null;
               }),
               thumbColor: WidgetStateProperty.resolveWith((state) {
-                return Colors.white;
+                return context.appColors.static.white;
               }),
               thumbIcon: WidgetStateProperty.all(const Icon(null)),
               trackOutlineColor: WidgetStateProperty.resolveWith((state) {

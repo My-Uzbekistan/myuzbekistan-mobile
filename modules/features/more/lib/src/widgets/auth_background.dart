@@ -34,7 +34,8 @@ class AuthBackground extends StatelessWidget {
               size: screenHeight * 0.5,
               sigma: 17,
               tileMode: TileMode.mirror,
-              tintColor: Colors.black.withValues(alpha: 0.48),
+              tintColor: context.appColors.service.scrim
+                  .withValues(alpha: 0.48),
               controlPoints: [
                 ControlPoint(
                   position: 0.75,
@@ -51,7 +52,10 @@ class AuthBackground extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               backgroundImage.image(fit: BoxFit.cover),
-              Container(color: Colors.black.withValues(alpha: 0.16)),
+              Container(
+                color: context.appColors.service.scrim
+                    .withValues(alpha: 0.16),
+              ),
             ],
           ),
         ),

@@ -14,22 +14,10 @@ class CurrencyFlag extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: ExtendedImage.network(
+        child: AppNetworkImage(
           currency.flag,
-          cache: true,
           fit: BoxFit.cover,
-          loadStateChanged: (state) {
-            switch (state.extendedImageLoadState) {
-              case LoadState.completed:
-                return AnimatedOpacity(
-                  opacity: 1.0,
-                  duration: const Duration(milliseconds: 200),
-                  child: state.completedWidget,
-                );
-              default:
-                return ColoredBox(color: context.appColors.fill.quaternary);
-            }
-          },
+          placeholder: ColoredBox(color: context.appColors.fill.quaternary),
         ),
       ),
     );

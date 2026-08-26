@@ -54,7 +54,7 @@ class _MainGiftPageState extends State<MainGiftPage> {
       child:
       Scaffold(
                 extendBody: true,
-                backgroundColor: Color(0xff00B93F),
+                backgroundColor: context.appColors.accent.gift,
                 bottomNavigationBar: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 16,
@@ -65,7 +65,7 @@ class _MainGiftPageState extends State<MainGiftPage> {
                     onPressed: () {
                       _giftBloc?.add(GiftBlocEvent.activeGift());
                     },
-                    containerColor: Colors.white,
+                    containerColor: context.appColors.static.white,
                     contentColor: context.appColors.brand,
                   ),
                 ),
@@ -90,7 +90,7 @@ class _MainGiftPageState extends State<MainGiftPage> {
                             clipBehavior: Clip.none,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: Color(0xffADEE5C),
+                              color: context.appColors.accent.giftLime,
                             ),
                             width: double.maxFinite,
                           ),
@@ -105,11 +105,11 @@ class _MainGiftPageState extends State<MainGiftPage> {
                           Text(
                             context.localization.gift_page_title,
                             textAlign: TextAlign.center,
-                          ).h1(color: Colors.white),
+                          ).h1(color: context.appColors.static.white),
                           Assets.png.imgGiftBig.image(),
                           Text(
                             context.localization.gift_page_subtitle,
-                          ).bodyMd(color: Colors.white),
+                          ).bodyMd(color: context.appColors.static.white),
                         ],
                       ),
                     ),

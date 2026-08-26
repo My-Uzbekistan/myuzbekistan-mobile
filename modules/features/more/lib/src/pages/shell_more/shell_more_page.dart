@@ -198,17 +198,7 @@ class ShellMorePage extends HookWidget {
                               ),
                               ...moreState.useFull.map(
                                 (e) => ProfileSettingsCell(
-                                  icon: ExtendedImage.network(
-                                    e.photo ?? "",
-                                    loadStateChanged: (state) {
-                                      switch (state.extendedImageLoadState) {
-                                        case LoadState.completed:
-                                          return state.completedWidget;
-                                        default:
-                                          return const SizedBox();
-                                      }
-                                    },
-                                  ),
+                                  icon: AppNetworkImage(e.photo ?? ""),
                                   title: e.title.toString(),
                                   onTap: () {
                                     final actionUrl = e.actionUrl ?? "";
@@ -257,7 +247,8 @@ class ShellMorePage extends HookWidget {
                                 ProfileSettingsCell(
                                   icon: Assets.svg.more.broomMotion.svg(),
                                   title: context.localization.deleteAccount,
-                                  iconBackgroundColor: const Color(0xFFBBC0C4),
+                                  iconBackgroundColor:
+                                      context.appColors.background.elevation3,
                                   onTap: () => _confirmDeleteAccount(context),
                                 ),
                                 ProfileSettingsCell(

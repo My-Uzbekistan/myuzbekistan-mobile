@@ -5,11 +5,14 @@ import 'package:navigation/navigation.dart';
 
 import 'profile_avatar_large.dart';
 
-const _premiumSubtitleGradient = LinearGradient(
-  colors: [Color(0xFFF7CE5F), Color(0xFFFEEA7B), Color(0xFFCB9030)],
-  begin: Alignment.topLeft,
-  end: Alignment.bottomRight,
-);
+LinearGradient _premiumSubtitleGradient(BuildContext context) {
+  final accent = context.appColors.accent;
+  return LinearGradient(
+    colors: [accent.premium, accent.premiumLight, accent.premiumDark],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
+}
 
 class ProfileHeader extends StatelessWidget {
   static double heightOf(
@@ -101,13 +104,14 @@ class ProfileHeader extends StatelessWidget {
               else ...[
                 if (isPremium)
                   ShaderMask(
-                    shaderCallback: _premiumSubtitleGradient.createShader,
+                    shaderCallback:
+                        _premiumSubtitleGradient(context).createShader,
                     blendMode: BlendMode.srcIn,
                     child: Text(
                       context.localization.premiumActiveSubtitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    ).labelSm(color: Colors.white),
+                    ).labelSm(color: context.appColors.static.white),
                   ),
                 GestureDetector(
                   onTap: () => context.more.pushEditProfilePage(),

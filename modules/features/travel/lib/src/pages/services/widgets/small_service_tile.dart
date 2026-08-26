@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 import '../service_item.dart';
 import 'service_icon.dart';
 
-/// Kichik xizmat plitkasi: katta 3D ikonka + ostida sarlavha.
+/// Kichik xizmat plitkasi: fon ustidagi 3D ikonka + ostida sarlavha.
 class SmallServiceTile extends StatelessWidget {
   final ServiceItem item;
-  final double iconSize;
 
-  const SmallServiceTile({super.key, required this.item, this.iconSize = 56});
+  const SmallServiceTile({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +17,30 @@ class SmallServiceTile extends StatelessWidget {
       onTap: item.onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        spacing: 8,
         children: [
-          ServiceIcon(item: item, size: iconSize),
-          const SizedBox(height: 6),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: SizedBox.square(
+              dimension: 56,
+              child: ColoredBox(
+                color: item.color,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned(
+                      left: -2,
+                      top: 8,
+                      child: ServiceIcon(item: item, size: 60),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           Text(
             item.title,
-            maxLines: 2,
+            maxLines: 1,
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
           ).bodyXXsm(color: context.appColors.textIconColor.primary),

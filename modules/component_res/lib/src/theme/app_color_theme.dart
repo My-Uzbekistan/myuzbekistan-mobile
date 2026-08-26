@@ -113,6 +113,7 @@ ThemeData _buildTheme(
             colors: colors.colors,
             nonOpaque: colors.nonOpaque,
             service: colors.service,
+            accent: colors.accent,
             rippleColor: colors.ripple,
             brandSeaBlue: colors.brandSeaBlue)
       ]);

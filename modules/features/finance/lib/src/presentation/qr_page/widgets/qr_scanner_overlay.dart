@@ -1,13 +1,18 @@
 
 import 'dart:math';
 
+import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
 class ScannerCornerPainter extends CustomPainter {
+  ScannerCornerPainter({required this.color});
+
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white
+      ..color = color
       ..strokeWidth = 8
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
@@ -103,7 +108,9 @@ class _ScannerCornerAnimationState extends State<ScannerCornerAnimation>
               width: 250,
               height: 250,
               child: CustomPaint(
-                painter: ScannerCornerPainter(),
+                painter: ScannerCornerPainter(
+                  color: context.appColors.service.onMedia,
+                ),
               ),
             ),
           ),

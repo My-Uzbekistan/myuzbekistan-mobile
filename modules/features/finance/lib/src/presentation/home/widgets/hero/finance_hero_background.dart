@@ -3,15 +3,6 @@ import 'dart:ui';
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
-const financeHeroBackgroundColor = Color(0xff0E0E10);
-
-const _glowWidth = 585.0;
-const _glowHeight = 668.0;
-const _glowLeft = -30.0;
-const _glowTop = -120.0;
-const _glowBlurSigma = 60.0;
-const _glowOpacity = 0.5;
-
 class FinanceHeroBackground extends StatelessWidget {
   const FinanceHeroBackground({super.key});
 
@@ -22,20 +13,17 @@ class FinanceHeroBackground extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            const ColoredBox(color: financeHeroBackgroundColor),
+            ColoredBox(color: context.appColors.service.heroSurface),
             Positioned(
-              left: _glowLeft,
-              top: _glowTop,
+              right: -180,
+              top: -120,
               child: Opacity(
-                opacity: _glowOpacity,
+                opacity: 0.5,
                 child: ImageFiltered(
-                  imageFilter: ImageFilter.blur(
-                    sigmaX: _glowBlurSigma,
-                    sigmaY: _glowBlurSigma,
-                  ),
+                  imageFilter: ImageFilter.blur(sigmaX: 60, sigmaY: 60),
                   child: Assets.svg.financeHeroGlow.path.toSvgImage(
-                    width: _glowWidth,
-                    height: _glowHeight,
+                    width: 585,
+                    height: 668,
                     fit: BoxFit.contain,
                   ),
                 ),

@@ -19,10 +19,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   final SecurityStorage _securityStorage;
   HomeBlocDataState dataState = HomeBlocState.dataState() as HomeBlocDataState;
   StreamSubscription? _streamSubscription;
-  StreamSubscription? _refreshFavoriteSubscription;
   StreamSubscription? _prayersSubscription;
-
-  Timer? refreshFavoriteTimer;
 
   HomeBloc(Repository rp, AppStatusChangeListeners chl,this._securityStorage)
       : _repository = rp,
@@ -38,7 +35,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     on<_ChangeRegion>(_changeRegion);
     on<_LoadContentsEvent>(_loadContentsEvent);
     on<_CheckPermissionEvent>(_checkPermissionEvent);
-    on<_LoadFavoritesEvent>(_loadFavourites);
     on<_LoadPayerTimes>(_loadPrayerTimes);
     on<_LoadWeatherEvent>(_loadWeatherEvent);
     on<_LoadServicesEvent>(_loadServicesEvent);
@@ -58,16 +54,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         _appLocaleChangeListener.refreshListener.listen((event,) {
           add(HomeBlocEvent.loadDataEvent());
         });
-    _refreshFavoriteSubscription?.cancel();
-    _refreshFavoriteSubscription = _appLocaleChangeListener
-        .refreshFavoriteListener
-        .listen((rf) {
-      refreshFavoriteTimer?.cancel();
-      refreshFavoriteTimer = Timer(
-        const Duration(milliseconds: 500),
-            () => add(HomeBlocEvent.loadFavorites()),
-      );
-    });
     _prayersSubscription?.cancel();
     _prayersSubscription = _appLocaleChangeListener
         .prayersToggleListenChangeListener
@@ -108,7 +94,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       emit(dataState);
     }
     await _loadCategoriesAndRegions(emit);
-    add(HomeBlocEvent.loadFavorites());
     add(HomeBlocEvent.loadPrayerTimes());
     add(HomeBlocEvent.loadServices());
     add(HomeBlocEvent.loadCities());
@@ -295,20 +280,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     }
   }
 
-  Future<void> _loadFavourites(_LoadFavoritesEvent event,
-      Emitter<HomeBlocState> emit,) async {
-    try {
-      final result = await _repository.loadFavourites(page: 1, pageSize: 3);
-      dataState = dataState.copyWith(
-        totalFavoriteCount: result.totalItems,
-        favorites: result.contents.map((e) => e.mainPhoto ?? "").toList(),
-      );
-      if (state is HomeBlocDataState) {
-        emit(dataState);
-      }
-    } catch (_) {}
-  }
-
   Future<void> _loadPrayerTimes(
     _LoadPayerTimes event,
     Emitter<HomeBlocState> emit,
@@ -337,8 +308,6 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     @override
     Future<void> close() {
       _streamSubscription?.cancel();
-      _refreshFavoriteSubscription?.cancel();
-      refreshFavoriteTimer?.cancel();
       _prayersSubscription?.cancel();
       debugPrint("homeBLocClose");
       return super.close();

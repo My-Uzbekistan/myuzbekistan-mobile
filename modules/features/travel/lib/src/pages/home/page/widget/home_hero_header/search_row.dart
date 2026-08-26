@@ -26,9 +26,9 @@ class _SearchRow extends StatelessWidget {
               height: 48,
               padding: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: colors.static.white,
+                color: colors.background.elevation2,
                 borderRadius: BorderRadius.circular(24),
-                boxShadow: _kSearchShadow,
+                boxShadow: _searchShadow(context),
               ),
               child: Row(
                 children: [
@@ -89,9 +89,9 @@ class _RoundButton extends StatelessWidget {
         height: 48,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: context.appColors.static.white,
+          color: context.appColors.background.elevation2,
           borderRadius: BorderRadius.circular(24),
-          boxShadow: _kSearchShadow,
+          boxShadow: _searchShadow(context),
         ),
         child: child,
       ),

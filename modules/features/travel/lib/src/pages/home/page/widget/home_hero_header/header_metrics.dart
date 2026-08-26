@@ -11,17 +11,27 @@ const double _kHPad = 16;
 
 const double _kOverhangMax = _kSearchH / 2 + _kSearchBottomPad;
 
-const LinearGradient _kImageOverlay = LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  stops: [0.0, 0.6, 1.0],
-  colors: [Color(0x1F14191A), Color(0x8014191A), Color(0xCC14191A)],
-);
+LinearGradient _imageOverlay(BuildContext context) {
+  final scrim = context.appColors.service.scrim;
+  return LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    stops: const [0.0, 0.6, 1.0],
+    colors: [
+      scrim.withValues(alpha: 0.12),
+      scrim.withValues(alpha: 0.5),
+      scrim.withValues(alpha: 0.8),
+    ],
+  );
+}
 
-const List<BoxShadow> _kSearchShadow = [
-  BoxShadow(color: Color(0x14000000), blurRadius: 40, offset: Offset(0, 16)),
-  BoxShadow(color: Color(0x14000000), blurRadius: 16, offset: Offset(0, 6)),
-];
+List<BoxShadow> _searchShadow(BuildContext context) {
+  final shadow = context.appColors.service.shadow;
+  return [
+    BoxShadow(color: shadow, blurRadius: 40, offset: const Offset(0, 16)),
+    BoxShadow(color: shadow, blurRadius: 16, offset: const Offset(0, 6)),
+  ];
+}
 
 class _HeaderMetrics {
   factory _HeaderMetrics({required double belowH, required double topInset}) {

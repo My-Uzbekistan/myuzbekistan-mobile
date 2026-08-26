@@ -78,13 +78,13 @@ class AppActionButton extends StatelessWidget {
 
     final foregroundColor = contentColor ??
         switch (type) {
-          ActionButtonType.primary => Colors.white,
+          ActionButtonType.primary => context.appColors.static.white,
           ActionButtonType.secondary => context.appColors.textIconColor.primary,
           ActionButtonType.text => context.appColors.brand,
         };
 
     final disableForegroundColor = switch (type) {
-      ActionButtonType.primary => Colors.white,
+      ActionButtonType.primary => context.appColors.static.white,
       ActionButtonType.secondary => context.appColors.textIconColor.tertiary,
       ActionButtonType.text => context.appColors.textIconColor.tertiary,
     };
@@ -113,7 +113,7 @@ class AppActionButton extends StatelessWidget {
       style: FilledButton.styleFrom(
           minimumSize: Size.fromHeight(sizeType.size),
           disabledForegroundColor: disableForegroundColor,
-          iconColor: Colors.red,
+          iconColor: foregroundColor,
           padding: EdgeInsets.zero,
           foregroundColor: foregroundColor,
           backgroundColor: backgroundColor,

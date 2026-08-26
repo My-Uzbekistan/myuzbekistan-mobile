@@ -29,25 +29,12 @@ class _AboutInfoPageState extends State<AboutInfoPage> {
               borderRadius: BorderRadius.circular(10),
               child: AspectRatio(
                 aspectRatio: 345 / 300,
-                child: ExtendedImage.network(
+                child: AppNetworkImage(
                   widget.moreItem.photo ?? "",
-                  cache: true,
                   fit: BoxFit.cover,
-                  loadStateChanged: (state) {
-                    switch (state.extendedImageLoadState) {
-                      case LoadState.completed:
-                        return AnimatedOpacity(
-                          opacity: 1.0,
-                          duration: Duration(milliseconds: 200),
-                          child: state.completedWidget,
-                        );
-
-                      default:
-                        return Assets.png.defaultContentImage.image(
-                          fit: BoxFit.cover,
-                        );
-                    }
-                  },
+                  placeholder: Assets.png.defaultContentImage.image(
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

@@ -14,6 +14,7 @@ class _CollapsingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final t = metrics.t;
+    final shadow = context.appColors.service.shadow;
     const radius = BorderRadius.vertical(bottom: Radius.circular(_kRadius));
 
     return Positioned(
@@ -23,16 +24,14 @@ class _CollapsingCard extends StatelessWidget {
       height: metrics.cardBottom,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: context.appColors.static.white,
+          color: context.appColors.background.elevation1,
           borderRadius: radius,
           boxShadow:
               t <= 0.02
                   ? null
                   : [
                     BoxShadow(
-                      color: const Color(
-                        0xff001024,
-                      ).withValues(alpha: 0.08 * t),
+                      color: shadow.withValues(alpha: shadow.a * t),
                       blurRadius: 24,
                       offset: const Offset(0, 10),
                     ),
@@ -86,12 +85,12 @@ class _HeaderBackground extends StatelessWidget {
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
             ),
-            const DecoratedBox(
-              decoration: BoxDecoration(gradient: _kImageOverlay),
+            DecoratedBox(
+              decoration: BoxDecoration(gradient: _imageOverlay(context)),
             ),
             if (opacity < 0.999)
               ColoredBox(
-                color: context.appColors.static.white.withValues(
+                color: context.appColors.background.elevation1.withValues(
                   alpha: 1 - opacity,
                 ),
               ),

@@ -28,19 +28,10 @@ class MarketCatalogTile extends StatelessWidget {
                   bottom: -2,
                   width: 120,
                   height: 84,
-                  child: ExtendedImage.network(
+                  child: AppNetworkImage(
                     photo,
                     fit: BoxFit.contain,
                     alignment: Alignment.bottomRight,
-                    cache: true,
-                    loadStateChanged: (state) {
-                      switch (state.extendedImageLoadState) {
-                        case LoadState.completed:
-                          return null;
-                        default:
-                          return const SizedBox.shrink();
-                      }
-                    },
                   ),
                 ),
               Positioned(

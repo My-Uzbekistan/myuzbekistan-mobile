@@ -21,10 +21,13 @@ class PremiumActiveBanner extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          gradient: const LinearGradient(
-            begin: Alignment(-0.65, -0.82),
-            end: Alignment(0.65, 0.82),
-            colors: [Color(0xFF07C277), Color(0xFF006F42)],
+          gradient: LinearGradient(
+            begin: const Alignment(-0.65, -0.82),
+            end: const Alignment(0.65, 0.82),
+            colors: [
+              context.appColors.accent.premiumPlan,
+              context.appColors.accent.premiumPlanDark,
+            ],
           ),
         ),
         child: Row(

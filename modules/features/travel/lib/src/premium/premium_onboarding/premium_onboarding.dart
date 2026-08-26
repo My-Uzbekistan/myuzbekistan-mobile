@@ -115,7 +115,7 @@ class PremiumOnboardingPage extends HookWidget {
                               child: AdaptiveGlass(
                                 borderRadius: 20,
                                 blur: 8.7,
-                                tint: const Color(0x1AFFFFFF),
+                                tint: context.appColors.service.glass,
                                 child: Padding(
                                   padding: const EdgeInsets.all(8),
                                   child: Column(

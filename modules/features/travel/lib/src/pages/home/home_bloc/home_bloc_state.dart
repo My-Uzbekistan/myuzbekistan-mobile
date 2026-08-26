@@ -17,9 +17,7 @@ abstract class HomeBlocState with _$HomeBlocState {
     AirQuality? airQuality,
     Temperature? temperature,
     @Default([]) List<Region> regions,
-    @Default([]) List<String> favorites,
     PrayerTimes? prayerTimes,
-    @Default(0) int totalFavoriteCount,
     Region? selectedRegion,
     @Default(true) bool loadingContents,
     @Default(false) bool isRefreshing

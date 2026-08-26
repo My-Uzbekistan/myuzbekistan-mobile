@@ -55,7 +55,7 @@ class _SmallTileShimmer extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [
         ShimmerDefaultContainer(height: 56, width: 56, radius: 16),
-        SizedBox(height: 6),
+        SizedBox(height: 8),
         ShimmerDefaultContainer(height: 10, width: 48, radius: 6),
         SizedBox(height: 4),
         ShimmerDefaultContainer(height: 10, width: 36, radius: 6),

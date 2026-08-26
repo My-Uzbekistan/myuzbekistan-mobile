@@ -31,22 +31,12 @@ class CellCardItem extends StatelessWidget {
               width: 36,
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(3),
-                  child: ExtendedImage.network(
+                  child: AppNetworkImage(
                     iconUrl ?? "",
-                    cache: true,
                     cacheMaxAge: Duration(days: 10),
-                    loadStateChanged: (ExtendedImageState state) {
-                      switch (state.extendedImageLoadState) {
-                        case LoadState.completed:
-                          return AnimatedOpacity(
-                            opacity: 1.0,
-                            duration: Duration(milliseconds: 200),
-                            child: state.completedWidget,
-                          ); // ✅ Default image o'zi ko'rsatiladi
-                        default:
-                          return Assets.svg.defaultCreditCard.svg(fit: BoxFit.cover);
-                      }
-                    },
+                    placeholder: Assets.svg.defaultCreditCard.svg(
+                      fit: BoxFit.cover,
+                    ),
                   )),
             ),
             Expanded(
@@ -101,61 +91,32 @@ class CellCardItemWithImage extends StatelessWidget {
           child: Stack(
             children: [
               Positioned.fill(
-                  child: SizedBox(
-                child: ExtendedImage.network(
+                child: AppNetworkImage(
                   photoUrl ?? "",
                   fit: BoxFit.cover,
-                  loadStateChanged: (state) {
-                    switch (state.extendedImageLoadState) {
-                      case LoadState.completed:
-                        return AnimatedOpacity(
-                          duration: Duration(milliseconds: 200),
-                          opacity: 1.0,
-                          child: Stack(
-                            children: [
-                              Positioned.fill(
-                                child: state.completedWidget,
-                              ),
-                              Positioned.fill(
-                                  child: Container(
-                                color: Colors.black.withValues(alpha: 0.2),
-                              ))
-                            ],
-                          ),
-                        );
-                      case LoadState.loading:
-                      case LoadState.failed:
-                        return Container(
-                          color: context.appColors.fill.tertiary,
-                        );
-                    }
-                  },
+                  placeholder: ColoredBox(
+                    color: context.appColors.fill.tertiary,
+                  ),
                 ),
-              )),
+              ),
+              Positioned.fill(
+                child: ColoredBox(
+                  color: context.appColors.service.scrim
+                      .withValues(alpha: 0.2),
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 16,
                 ).copyWith(top: 16),
-                child: ExtendedImage.network(
+                child: AppNetworkImage(
                   iconUrl ?? "",
-                  cache: true,
                   height: 32,
                   cacheMaxAge: Duration(days: 10),
                   fit: BoxFit.fill,
-                  loadStateChanged: (ExtendedImageState state) {
-                    switch (state.extendedImageLoadState) {
-                      case LoadState.completed:
-                        return AnimatedOpacity(
-                          opacity: 1.0,
-                          duration: Duration(milliseconds: 200),
-                          child: state.completedWidget,
-                        ); // ✅ Default image o'zi ko'rsatiladi
-                      default:
-                        return showDefaultImage
-                            ? Assets.svg.defaultCreditCard.svg()
-                            : SizedBox();
-                    }
-                  },
+                  placeholder: showDefaultImage
+                      ? Assets.svg.defaultCreditCard.svg()
+                      : SizedBox(),
                 ),
               ),
 
@@ -170,10 +131,11 @@ class CellCardItemWithImage extends StatelessWidget {
                         text,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                      ).bodyLg(color: Colors.white),
+                      ).bodyLg(color: context.appColors.service.onMedia),
                     ),
                     if (trailing != null)
-                      Text(trailing!).bodyLg(color: Colors.white),
+                      Text(trailing!)
+                          .bodyLg(color: context.appColors.service.onMedia),
                   ],
                 ),
               )

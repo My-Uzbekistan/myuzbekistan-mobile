@@ -23,7 +23,7 @@ class HomeCategoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      splashColor: Colors.grey.withValues(alpha: 0.05),
+      splashColor: context.appColors.rippleColor.ripple,
       borderRadius: BorderRadius.circular(10),
       child: Container(
         width: 80,
@@ -41,20 +41,14 @@ class HomeCategoryItem extends StatelessWidget {
               child: SizedBox(
                   height: 24,
                   width: 24,
-                  child: ExtendedImage.network(categoryItem.icon ?? "",
-                      height: 24,
-                      width: 24,
-                      color: context.appColors.brand,
-                      fit: BoxFit.contain,
-                      filterQuality: FilterQuality.none,
-                      loadStateChanged: (state) {
-                    switch (state.extendedImageLoadState) {
-                      case LoadState.completed:
-                        return null;
-                      default:
-                        return SizedBox();
-                    }
-                  })),
+                  child: AppNetworkImage(
+                    categoryItem.icon ?? "",
+                    height: 24,
+                    width: 24,
+                    color: context.appColors.brand,
+                    fit: BoxFit.contain,
+                    filterQuality: FilterQuality.none,
+                  )),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 4),

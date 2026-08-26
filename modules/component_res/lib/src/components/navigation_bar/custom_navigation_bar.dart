@@ -215,7 +215,8 @@ class CustomNavigationBar extends StatelessWidget {
                           backgroundColor: context.appColors.brand,
                           child: Assets.svg.iconQrCode.path.toSvgImage(
                               colorFilter: ColorFilter.mode(
-                                  Colors.white, BlendMode.srcIn)),
+                                  context.appColors.static.white,
+                                  BlendMode.srcIn)),
                         ),
                       ),
                     ),

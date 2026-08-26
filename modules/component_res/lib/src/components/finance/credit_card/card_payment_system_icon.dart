@@ -16,25 +16,13 @@ class CardPaymentSystemIcon extends StatelessWidget {
     return SizedBox(
       width: 32,
       height: 32,
-      child: ExtendedImage.network(
+      child: AppNetworkImage(
         iconUrl ?? "",
-        cache: true,
         cacheMaxAge: const Duration(days: 10),
         fit: BoxFit.contain,
-        loadStateChanged: (state) {
-          switch (state.extendedImageLoadState) {
-            case LoadState.completed:
-              return AnimatedOpacity(
-                opacity: 1.0,
-                duration: const Duration(milliseconds: 200),
-                child: state.completedWidget,
-              );
-            default:
-              return showDefaultIcon
-                  ? Assets.svg.defaultCreditCard.svg(fit: BoxFit.contain)
-                  : const SizedBox();
-          }
-        },
+        placeholder: showDefaultIcon
+            ? Assets.svg.defaultCreditCard.svg(fit: BoxFit.contain)
+            : const SizedBox(),
       ),
     );
   }

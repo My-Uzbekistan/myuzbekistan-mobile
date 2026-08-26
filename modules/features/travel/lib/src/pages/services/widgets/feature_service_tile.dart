@@ -23,21 +23,19 @@ class FeatureServiceTile extends StatelessWidget {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              // Katta ikonka — o'ng chekkadan chiqib turadi.
+              // Katta ikonka — o'ng-past chekkadan chiqib turadi.
               Positioned(
-                right: -20,
-                top: -14,
-                bottom: -14,
-                width: 104,
-                child: ServiceIcon(item: item, size: 104),
+                right: -28,
+                bottom: -23,
+                child: ServiceIcon(item: item, size: 120),
               ),
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: Text(
                   item.title,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                ).h3(color: context.appColors.textIconColor.primary),
+                ).labelMd(color: context.appColors.textIconColor.primary),
               ),
             ],
           ),

@@ -160,7 +160,7 @@ abstract class FeatureFinanceLocalizations {
   /// No description provided for @payment_qr_title.
   ///
   /// In ru, this message translates to:
-  /// **'QR Платёж'**
+  /// **'QR-оплата'**
   String get payment_qr_title;
 
   /// No description provided for @card_number_label.

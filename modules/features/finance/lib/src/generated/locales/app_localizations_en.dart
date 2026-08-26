@@ -39,7 +39,7 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get payment_history_title => 'History';
 
   @override
-  String get payment_qr_title => 'QR Pay';
+  String get payment_qr_title => 'QR-payment';
 
   @override
   String get card_number_label => 'Card number';

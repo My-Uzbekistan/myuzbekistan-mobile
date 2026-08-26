@@ -53,7 +53,9 @@ class DetailBody extends StatelessWidget {
                   automaticallyImplyLeading: false,
                   scrolledUnderElevation: 0,
                   elevation: 0,
-                  iconTheme: IconThemeData(color: Colors.white),
+                  iconTheme: IconThemeData(
+                    color: context.appColors.service.onMedia,
+                  ),
                   systemOverlayStyle: context.systemUiOverlyStyle.copyWith(
                     statusBarBrightness: Brightness.dark,
                   ),

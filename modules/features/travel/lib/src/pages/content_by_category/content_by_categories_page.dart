@@ -383,26 +383,13 @@ class ContentByCategoryItem extends StatelessWidget {
               child: Stack(
                 children: [
                   Positioned.fill(
-                    child: ExtendedImage.network(
+                    child: AppNetworkImage(
                       item.mainPhoto ?? "",
-                      cache: true,
                       fit: BoxFit.cover,
-
                       cacheMaxAge: Duration(days: 10),
-                      loadStateChanged: (ExtendedImageState state) {
-                        switch (state.extendedImageLoadState) {
-                          case LoadState.completed:
-                            return AnimatedOpacity(
-                              opacity: 1.0,
-                              duration: Duration(milliseconds: 200),
-                              child: state.completedWidget,
-                            ); // ✅ Default image o'zi ko'rsatiladi
-                          default:
-                            return Assets.png.defaultContentImage.image(
-                              fit: BoxFit.cover,
-                            );
-                        }
-                      },
+                      placeholder: Assets.png.defaultContentImage.image(
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                     Positioned(

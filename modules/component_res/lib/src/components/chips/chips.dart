@@ -81,7 +81,9 @@ class AppChipsLeftRightIcon extends StatelessWidget {
               child: Text(
                 text,
                 maxLines: 2,
-              ).labelSm(color: contentColor ?? Colors.white),
+              ).labelSm(
+                color: contentColor ?? context.appColors.static.white,
+              ),
             ),
             const SizedBox(
               width: 6,

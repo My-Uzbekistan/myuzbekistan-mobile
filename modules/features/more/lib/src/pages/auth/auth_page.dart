@@ -132,7 +132,8 @@ class _AuthPageState extends State<AuthPage>
                             child: Text(
                               context.localization.welcomeTitle,
                               style: CustomTypography.H1.copyWith(
-                                color: Colors.white.withValues(alpha: 0.6),
+                                color: context.appColors.service.onMedia
+                                    .withValues(alpha: 0.6),
                               ),
                             ),
                           ),
@@ -141,9 +142,10 @@ class _AuthPageState extends State<AuthPage>
                                 context.localization.auth_page_action_phone,
                             iconColorFiltered: false,
                             icon: Assets.svg.icPhone.svg(),
-                            containerColor: Colors.white,
-                            disableContainerColor: Colors.white,
-                            contentColor: Colors.black,
+                            containerColor: context.appColors.service.onMedia,
+                            disableContainerColor:
+                                context.appColors.service.onMedia,
+                            contentColor: context.appColors.service.scrim,
                             type: ActionButtonType.secondary,
                             onPressed: () {
                               listenPhoneAuthCompleter(context);
@@ -158,9 +160,10 @@ class _AuthPageState extends State<AuthPage>
                             iconColorFiltered: false,
                             icon: Assets.svg.googleLogo.svg(),
                             isLoading: state is AuthGoogleLoadingState,
-                            containerColor: Colors.white,
-                            disableContainerColor: Colors.white,
-                            contentColor: Colors.black,
+                            containerColor: context.appColors.service.onMedia,
+                            disableContainerColor:
+                                context.appColors.service.onMedia,
+                            contentColor: context.appColors.service.scrim,
                             type: ActionButtonType.secondary,
                             onPressed: () {
                               context.read<AuthBlock>().add(
@@ -174,9 +177,11 @@ class _AuthPageState extends State<AuthPage>
                                   context.localization.continueWithApple,
                               iconColorFiltered: false,
                               type: ActionButtonType.secondary,
-                              containerColor: Colors.white,
-                              disableContainerColor: Colors.white,
-                              contentColor: Colors.black,
+                              containerColor:
+                                  context.appColors.service.onMedia,
+                              disableContainerColor:
+                                  context.appColors.service.onMedia,
+                              contentColor: context.appColors.service.scrim,
                               icon: Assets.svg.appleLogo.svg(),
                               isLoading: state is AuthAppleLoadingState,
                               onPressed: () {
@@ -189,7 +194,7 @@ class _AuthPageState extends State<AuthPage>
                             actionText: context.localization.continueAsGuest,
                             iconColorFiltered: false,
                             type: ActionButtonType.text,
-                            contentColor: Colors.white,
+                            contentColor: context.appColors.service.onMedia,
                             onPressed: () {
                               if (context.canPop()) {
                                 context.pop();

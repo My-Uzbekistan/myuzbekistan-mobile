@@ -17,19 +17,11 @@ class PaymentAvatar extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: ExtendedImage.network(
+        child: AppNetworkImage(
           imageUrl.orEmpty(),
-          cache: true,
           cacheMaxAge: const Duration(days: 6),
           fit: BoxFit.cover,
-          loadStateChanged: (state) {
-            switch (state.extendedImageLoadState) {
-              case LoadState.completed:
-                return null;
-              default:
-                return ColoredBox(color: context.appColors.fill.quaternary);
-            }
-          },
+          placeholder: ColoredBox(color: context.appColors.fill.quaternary),
         ),
       ),
     );

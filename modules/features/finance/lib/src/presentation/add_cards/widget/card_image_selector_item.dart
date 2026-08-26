@@ -41,23 +41,10 @@ class CardImageSelectorItem extends StatelessWidget {
                 color: context.appColors.fill.quaternary,
               ),
               clipBehavior: Clip.antiAlias,
-              child: ExtendedImage.network(
+              child: AppNetworkImage(
                 imageUrl,
-                cache: true,
                 cacheMaxAge: const Duration(days: 10),
                 fit: BoxFit.cover,
-                loadStateChanged: (state) {
-                  switch (state.extendedImageLoadState) {
-                    case LoadState.completed:
-                      return AnimatedOpacity(
-                        opacity: 1.0,
-                        duration: const Duration(milliseconds: 300),
-                        child: state.completedWidget,
-                      );
-                    default:
-                      return const SizedBox();
-                  }
-                },
               ),
             ),
             if (isSelected)

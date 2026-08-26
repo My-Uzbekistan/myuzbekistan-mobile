@@ -14,7 +14,7 @@ class _QuickActions extends StatelessWidget {
       borderRadius: 20,
       blur: 2,
       spacing: 6,
-      tint: const Color(0x14FFFFFF),
+      tint: context.appColors.service.glass,
       items: [
         for (final action in actions)
           AdaptiveGlassRowItem(
@@ -62,21 +62,10 @@ class _QuickActionContent extends StatelessWidget {
           width: 24,
           height: 24,
           child: isNetworkIcon
-              ? ExtendedImage.network(
-                  action.iconPath,
-                  fit: BoxFit.contain,
-                  loadStateChanged: (state) {
-                    switch (state.extendedImageLoadState) {
-                      case LoadState.completed:
-                        return null;
-                      default:
-                        return const SizedBox();
-                    }
-                  },
-                )
+              ? AppNetworkImage(action.iconPath, fit: BoxFit.contain)
               : action.iconPath.toSvgImage(
                   fit: BoxFit.contain,
-                  tintColor: Colors.white,
+                  tintColor: context.appColors.service.onMedia,
                 ),
         ),
         const SizedBox(height: 8),
@@ -85,7 +74,7 @@ class _QuickActionContent extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.center,
-        ).bodyXXsm(color: Colors.white),
+        ).bodyXXsm(color: context.appColors.service.onMedia),
       ],
     );
   }

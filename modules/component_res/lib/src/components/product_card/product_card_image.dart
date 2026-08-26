@@ -8,26 +8,13 @@ class ProductCardImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExtendedImage.network(
+    return AppNetworkImage(
       imageUrl,
-      key: ValueKey(imageUrl),
       fit: BoxFit.cover,
       width: double.infinity,
       height: double.infinity,
-      cache: true,
       cacheMaxAge: const Duration(days: 2),
-      loadStateChanged: (state) {
-        switch (state.extendedImageLoadState) {
-          case LoadState.completed:
-            return AnimatedOpacity(
-              opacity: 1,
-              duration: const Duration(milliseconds: 200),
-              child: state.completedWidget,
-            );
-          default:
-            return Assets.png.defaultContentImage.image(fit: BoxFit.cover);
-        }
-      },
+      placeholder: Assets.png.defaultContentImage.image(fit: BoxFit.cover),
     );
   }
 }

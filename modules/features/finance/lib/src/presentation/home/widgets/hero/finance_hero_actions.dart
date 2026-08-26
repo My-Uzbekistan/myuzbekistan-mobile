@@ -11,7 +11,6 @@ import 'finance_hero_action_tile.dart';
 const _tileRadius = 20.0;
 const _tileBlur = 2.0;
 const _tileSpacing = 8.0;
-const _tileTint = Color(0x14FFFFFF);
 const _tilePadding = EdgeInsets.symmetric(horizontal: 16, vertical: 14);
 
 class FinanceHeroActions extends StatelessWidget {
@@ -28,7 +27,7 @@ class FinanceHeroActions extends StatelessWidget {
         borderRadius: _tileRadius,
         blur: _tileBlur,
         spacing: _tileSpacing,
-        tint: _tileTint,
+        tint: context.appColors.service.glass,
         padding: _tilePadding,
         items: [
           AdaptiveGlassRowItem(

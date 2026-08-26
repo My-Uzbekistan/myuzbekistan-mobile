@@ -221,21 +221,10 @@ class _CurrencyFlag extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: ExtendedImage.network(
+        child: AppNetworkImage(
           url,
           fit: BoxFit.cover,
-          loadStateChanged: (state) {
-            switch (state.extendedImageLoadState) {
-              case LoadState.completed:
-                return AnimatedOpacity(
-                  opacity: 1.0,
-                  duration: const Duration(milliseconds: 200),
-                  child: state.completedWidget,
-                );
-              default:
-                return Container(color: context.appColors.fill.quaternary);
-            }
-          },
+          placeholder: ColoredBox(color: context.appColors.fill.quaternary),
         ),
       ),
     );
@@ -269,8 +258,8 @@ class _ExchangeButton extends StatelessWidget {
           height: 20,
           child: Assets.svg.iconArrowRightLeft.path.toSvgImage(
             width: 20,
-            colorFilter: const ColorFilter.mode(
-              Colors.white,
+            colorFilter: ColorFilter.mode(
+              context.appColors.static.white,
               BlendMode.srcIn,
             ),
           ),

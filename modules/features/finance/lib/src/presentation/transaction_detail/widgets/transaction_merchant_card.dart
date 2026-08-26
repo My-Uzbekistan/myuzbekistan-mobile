@@ -27,21 +27,13 @@ class TransactionMerchantCard extends StatelessWidget {
               width: 56,
               height: 56,
               color: context.appColors.static.white,
-              child: ExtendedImage.network(
+              child: AppNetworkImage(
                 merchant.icon.orEmpty(),
-                cache: true,
                 cacheMaxAge: const Duration(days: 6),
                 fit: BoxFit.cover,
-                loadStateChanged: (state) {
-                  switch (state.extendedImageLoadState) {
-                    case LoadState.completed:
-                      return null;
-                    default:
-                      return ColoredBox(
-                        color: context.appColors.fill.quaternary,
-                      );
-                  }
-                },
+                placeholder: ColoredBox(
+                  color: context.appColors.fill.quaternary,
+                ),
               ),
             ),
           ),

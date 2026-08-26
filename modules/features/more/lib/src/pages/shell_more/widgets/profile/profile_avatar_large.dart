@@ -26,26 +26,16 @@ class ProfileAvatarLarge extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             Container(color: context.appColors.background.underlayer),
-            if (url.isNotEmpty)
-              ExtendedImage.network(
-                url,
-                fit: BoxFit.cover,
-                cache: true,
-                cacheMaxAge: const Duration(days: 10),
-                loadStateChanged: (state) {
-                  switch (state.extendedImageLoadState) {
-                    case LoadState.completed:
-                      return state.completedWidget;
-                    default:
-                      return placeholder;
-                  }
-                },
-              )
-            else
-              placeholder,
+            AppNetworkImage(
+              url,
+              fit: BoxFit.cover,
+              cacheMaxAge: const Duration(days: 10),
+              placeholder: placeholder,
+            ),
             if (isLoading)
               ColoredBox(
-                color: Colors.black.withValues(alpha: 0.4),
+                color: context.appColors.service.scrim
+                    .withValues(alpha: 0.4),
                 child: const Center(child: LoadingIndicator(size: 24)),
               ),
           ],
@@ -75,7 +65,11 @@ class ProfileAvatarLarge extends StatelessWidget {
                   width: 1.5,
                 ),
               ),
-              child: const Icon(Icons.edit, size: 12, color: Colors.white),
+              child: Icon(
+                Icons.edit,
+                size: 12,
+                color: context.appColors.service.onMedia,
+              ),
             ),
           ),
         ],

@@ -83,7 +83,7 @@ class _SecondGiftPageState extends State<SecondGiftPage> {
               onPressed: () {
                 context.pushNamed(AppNavPath.travel.travelHomeGiftHistory.name);
               },
-              containerColor: Colors.white,
+              containerColor: context.appColors.static.white,
               contentColor: context.appColors.brand,
             ),
           ),

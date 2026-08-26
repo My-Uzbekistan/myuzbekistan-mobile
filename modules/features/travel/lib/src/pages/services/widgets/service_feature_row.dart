@@ -16,12 +16,13 @@ class ServiceFeatureRow extends StatelessWidget {
     required this.feature,
     this.small1,
     this.small2,
-    this.spacing = 8,
+    this.spacing = 7,
   });
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
+    return SizedBox(
+      height: 77,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -30,13 +31,13 @@ class ServiceFeatureRow extends StatelessWidget {
           Expanded(
             child: small1 == null
                 ? const SizedBox()
-                : Center(child: SmallServiceTile(item: small1!)),
+                : SmallServiceTile(item: small1!),
           ),
           SizedBox(width: spacing),
           Expanded(
             child: small2 == null
                 ? const SizedBox()
-                : Center(child: SmallServiceTile(item: small2!)),
+                : SmallServiceTile(item: small2!),
           ),
         ],
       ),

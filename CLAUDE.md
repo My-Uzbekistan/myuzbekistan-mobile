@@ -52,6 +52,39 @@ Har bir endpoint — alohida `.yml` fayl: `http:` blokida method/url/body, `docs
 
 ---
 
+## Figma Dizayn Qoidasi — URL berilsa AYNAN moslashtiriladi
+
+Bu loyihada UI ishlari uchun **Figma URL beriladi**. URL kelgan zahoti:
+
+1. `figma-design-to-code` skill yuklanadi, keyin `get_design_context` chaqiriladi (`nodeId` + `fileKey` URL'dan olinadi) — **ekranni skrinshotdan chamalab yozish TAQIQLANADI**
+2. Natija **aynan** ko'chiriladi: o'lchamlar, padding/gap, radius, shrift (font-size / weight / line-height / letter-spacing), rasm o'lchami va joylashuvi, qatlamlar tartibi
+3. Figma o'zgaruvchilari (`var(--...)`) loyiha token'lariga map qilinadi — **hech qachon hex literal yozilmaydi**
+
+| Figma o'zgaruvchisi | Loyiha token'i |
+|---|---|
+| `background/elevation-1`, `-2`, `underlayer` | `context.appColors.background.elevation1` / `.elevation2` / `.underlayer` |
+| `fills/quaternary`, `fills/tertiary` | `context.appColors.fill.quaternary` / `.tertiary` |
+| `label/primary`, `secondary`, `tertiary` | `context.appColors.textIconColor.primary` / `.secondary` / `.tertiary` |
+| `separator/opaque`, `separator/non-opaque` | `context.appColors.stroke.opaque` / `.nonOpaque` |
+| `brand/sea-blue` | `context.appColors.brandSeaBlue` |
+| `color/green`, `red`, `yellow`, `purple` … | `context.appColors.colors.green` / `.red` / … |
+| `static/white`, `static/black` | `context.appColors.static.white` / `.black` |
+| rasm ustidagi qoraytirish / gradient | `context.appColors.service.scrim` |
+| rasm ustidagi oq matn va ikonka | `context.appColors.service.onMedia` |
+| rasm ustidagi shisha (glass) tint | `context.appColors.service.glass` |
+| soya (`drop-shadow`, `box-shadow`) | `context.appColors.service.shadow` |
+| doim qorong'i sirt (Moliya hero) | `context.appColors.service.heroSurface` |
+| shimmer (skelet) gradienti | `context.appColors.service.shimmerBase` / `.shimmerHighlight` |
+| premium oltin / yashil, sovg'a ranglari | `context.appColors.accent.premium*` / `.gift*` |
+
+Figma freymlari odatda **light** temada chizilgan. `rgba(255,255,255,…)` yoki `#14191a` kabi qiymatni ko'chirib yozish emas — mos token topiladi. **Token yo'q bo'lsa — `colors_model.dart` + `light_colors.dart` + `dark_colors.dart` + `app_color_extension.dart` (lerp) ga yangisi qo'shiladi**, keyin ishlatiladi.
+
+Shriftlar: `heading/h3` → `.h3()`, `body/lg` → `.bodyLg()`, `label/md` → `.labelMd()`, `label/sm` → `.labelSm()`, `body/sm` → `.bodySm()`, `body/xxsm` → `.bodyXXsm()` (`text_extension.dart`).
+
+Dizaynda mavjud, lekin loyihada boshqacha bo'lgan joy topilsa — **jimgina o'zgartirilmaydi ham, tashlab ketilmaydi ham**: Figma bo'yicha to'g'rilanadi va javobda aytiladi.
+
+---
+
 ## Xato (Error) Ko'rsatish Qoidasi
 
 API dan xato kelganda, xato matni to'g'ridan-to'g'ri UI ichiga (`Text(...)`) yozilmaydi — `Toast` orqali ko'rsatiladi:

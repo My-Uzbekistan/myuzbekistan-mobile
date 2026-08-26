@@ -20,6 +20,8 @@ abstract class _BaseColors {
 
   ServiceColors get service;
 
+  AccentColors get accent;
+
   RippleColor get ripple;
 }
 
@@ -96,6 +98,7 @@ class OtherColors {
   final Color yellow;
   final Color orange;
   final Color lime;
+  final Color purple;
 
   OtherColors({
     required this.red,
@@ -103,7 +106,8 @@ class OtherColors {
     required this.blue,
     required this.yellow,
     required this.orange,
-    required this.lime
+    required this.lime,
+    required this.purple,
   });
 }
 
@@ -127,9 +131,43 @@ class NonOpaque {
 
 class ServiceColors {
   final Color overlay;
+  final Color scrim;
+  final Color glass;
+  final Color onMedia;
+  final Color shadow;
+  final Color shimmerBase;
+  final Color shimmerHighlight;
+  final Color heroSurface;
 
   ServiceColors({
     required this.overlay,
+    required this.scrim,
+    required this.glass,
+    required this.onMedia,
+    required this.shadow,
+    required this.shimmerBase,
+    required this.shimmerHighlight,
+    required this.heroSurface,
+  });
+}
+
+class AccentColors {
+  final Color premium;
+  final Color premiumLight;
+  final Color premiumDark;
+  final Color premiumPlan;
+  final Color premiumPlanDark;
+  final Color gift;
+  final Color giftLime;
+
+  AccentColors({
+    required this.premium,
+    required this.premiumLight,
+    required this.premiumDark,
+    required this.premiumPlan,
+    required this.premiumPlanDark,
+    required this.gift,
+    required this.giftLime,
   });
 }
 

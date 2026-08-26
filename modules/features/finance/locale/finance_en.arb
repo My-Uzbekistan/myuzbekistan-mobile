@@ -8,7 +8,7 @@
   "payment_method_title": "Payment method",
   "my_cards_title": "My cards",
   "payment_history_title": "History",
-  "payment_qr_title": "QR Pay",
+  "payment_qr_title": "QR-payment",
   "card_number_label": "Card number",
   "card_number_hint": "Enter card number",
   "card_expiry_label": "Expiry date",

@@ -22,15 +22,11 @@ class ServiceIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (item.iconUrl != null) {
-      return ExtendedImage.network(
+      return AppNetworkImage(
         item.iconUrl!,
         width: size,
         height: size,
         fit: fit,
-        loadStateChanged: (state) =>
-            state.extendedImageLoadState == LoadState.completed
-                ? null
-                : const SizedBox.shrink(),
       );
     }
     return item.iconPath?.toSvgImage(

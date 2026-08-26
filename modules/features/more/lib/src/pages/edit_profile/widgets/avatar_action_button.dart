@@ -26,7 +26,7 @@ class AvatarActionButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(32),
           boxShadow: [
             BoxShadow(
-              color: const Color(0x1A001024),
+              color: context.appColors.service.shadow,
               blurRadius: 17,
               offset: const Offset(0, 6),
             ),

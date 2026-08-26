@@ -43,16 +43,11 @@ class FacilityGroupCard extends StatelessWidget {
                     width: 20,
                     child: facility.icon == null
                         ? null
-                        : ExtendedImage.network(
+                        : AppNetworkImage(
                             facility.icon!,
                             color: context.appColors.textIconColor.primary,
                             colorBlendMode: BlendMode.srcIn,
                             fit: BoxFit.contain,
-                            loadStateChanged: (state) =>
-                                state.extendedImageLoadState ==
-                                    LoadState.completed
-                                ? null
-                                : const SizedBox(),
                           ),
                   ),
                   const SizedBox(width: 12),

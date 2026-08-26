@@ -34,19 +34,11 @@ class MenuItem extends StatelessWidget {
                   color: iconBgColor ?? context.appColors.brand),
               child: SizedBox(
                   height: 24,
-                  child: ExtendedImage.network(imageUrl ?? "", cache: true,
+                  child: AppNetworkImage(
+                    imageUrl ?? "",
                     cacheMaxAge: Duration(days: 1),
-                  fit: BoxFit.cover,
-                  loadStateChanged: (state){
-                    switch(state.extendedImageLoadState){
-                      case LoadState.completed : return AnimatedOpacity(
-                        duration: Duration(milliseconds: 200),
-                        opacity: 1.0,
-                        child: state.completedWidget,
-                      );
-                      default: return Assets.png.defaultContentImage.image();
-                    }
-                  },
+                    fit: BoxFit.cover,
+                    placeholder: Assets.png.defaultContentImage.image(),
                   )
 
             // (svgAssets??Assets.svgIconMenu)

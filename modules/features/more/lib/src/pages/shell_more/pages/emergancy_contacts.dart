@@ -89,7 +89,8 @@ class _Item extends StatelessWidget {
               radius: 20,
               backgroundColor: context.appColors.colors.red,
               child: item.assets.toSvgImage(
-                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+                  colorFilter: ColorFilter.mode(
+                      context.appColors.static.white, BlendMode.srcIn)),
             ),
             Expanded(
                 child: Column(

@@ -7,24 +7,27 @@ import 'package:shared/shared.dart';
 
 import 'nav_tab_data.dart';
 
-const Color _white = Color(0xFFFFFFFF);
+LinearGradient _fadeGradient(BuildContext context) {
+  final base = context.appColors.background.base;
+  return LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      base.withValues(alpha: 0),
+      base.withValues(alpha: 0.08),
+      base.withValues(alpha: 0.28),
+      base.withValues(alpha: 0.36),
+      base.withValues(alpha: 0.52),
+    ],
+    stops: const [0.0, 0.1534, 0.35, 0.6, 1.0],
+  );
+}
 
-const LinearGradient _fadeGradient = LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  colors: [
-    Color(0x00FFFFFF),
-    Color(0x14FFFFFF),
-    Color(0x47FFFFFF),
-    Color(0x5CFFFFFF),
-    Color(0x85FFFFFF),
-  ],
-  stops: [0.0, 0.1534, 0.35, 0.6, 1.0],
-);
+Color _barFill(BuildContext context) =>
+    context.appColors.background.elevation1.withValues(alpha: 0.8);
 
-final Color _barFill = _white.withValues(alpha: 0.8);
-final Color _tabFill = _white.withValues(alpha: 0.6);
-final Color _tabFillTransparent = _white.withValues(alpha: 0);
+Color _tabFill(BuildContext context) =>
+    context.appColors.background.elevation2.withValues(alpha: 0.6);
 
 final TextStyle _labelStyle = CustomTypography.bodyXXsm.copyWith(
   fontSize: 10,
@@ -69,12 +72,12 @@ class AppBottomNavBar extends StatelessWidget {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        const IgnorePointer(
+        IgnorePointer(
           child: SizedBox(
             height: 122,
             width: double.infinity,
             child: DecoratedBox(
-              decoration: BoxDecoration(gradient: _fadeGradient),
+              decoration: BoxDecoration(gradient: _fadeGradient(context)),
             ),
           ),
         ),
@@ -95,11 +98,11 @@ class AppBottomNavBar extends StatelessWidget {
       selectedLabelColor: selected,
       unselectedLabelColor: unselected,
       showIndicator: true,
-      indicatorColor: _tabFill,
+      indicatorColor: _tabFill(context),
       glowOpacity: 0,
       labelFontSize: 10,
       settings: LiquidGlassSettings(
-        glassColor: _barFill,
+        glassColor: _barFill(context),
         thickness: 30,
         blur: 3,
         refractiveIndex: 1.59,
@@ -129,8 +132,11 @@ class AppBottomNavBar extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
-          boxShadow: const [
-            BoxShadow(color: Color(0x1F001024), blurRadius: 22),
+          boxShadow: [
+            BoxShadow(
+              color: context.appColors.service.shadow,
+              blurRadius: 22,
+            ),
           ],
         ),
         child: ClipRRect(
@@ -138,7 +144,7 @@ class AppBottomNavBar extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
             child: Material(
-              color: _barFill,
+              color: _barFill(context),
               child: SizedBox(
                 height: 60,
                 child: Padding(
@@ -190,16 +196,16 @@ class _CapsuleTab extends StatelessWidget {
       tween: Tween(end: selected ? 1.0 : 0.0),
       builder: (context, progress, _) {
         final color = Color.lerp(unselectedColor, selectedColor, progress)!;
+        final fill = _tabFill(context);
+        final shadow = context.appColors.service.shadow;
 
         return DecoratedBox(
           decoration: BoxDecoration(
-            color: Color.lerp(_tabFillTransparent, _tabFill, progress),
+            color: fill.withValues(alpha: fill.a * progress),
             borderRadius: BorderRadius.circular(26),
             boxShadow: [
               BoxShadow(
-                color: const Color(
-                  0xFF001024,
-                ).withValues(alpha: 0.1 * progress),
+                color: shadow.withValues(alpha: shadow.a * progress),
                 blurRadius: 34,
                 offset: const Offset(0, 6),
               ),

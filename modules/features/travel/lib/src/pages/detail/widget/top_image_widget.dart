@@ -32,26 +32,16 @@ class TopImageWidget extends HookWidget {
                     physics: ClampingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
-                      return ExtendedImage.network(
+                      return AppNetworkImage(
                         photos[index],
-                        cache: true,
                         fit: BoxFit.cover,
-                        loadStateChanged: (state) {
-                          return switch (state.extendedImageLoadState) {
-                            LoadState.completed => AnimatedOpacity(
-                              opacity: 1.0,
-                              duration: Duration(milliseconds: 300),
-                              child: state.completedWidget,
-                            ),
-                            LoadState.loading => Shimmer.fromDefault(
-                              child: ShimmerDefaultContainer(
-                                height: double.maxFinite,
-                                width: double.maxFinite,
-                              ),
-                            ),
-                            _ => Assets.png.defaultContentImage.image(),
-                          };
-                        },
+                        loadingWidget: Shimmer.fromDefault(
+                          child: ShimmerDefaultContainer(
+                            height: double.maxFinite,
+                            width: double.maxFinite,
+                          ),
+                        ),
+                        placeholder: Assets.png.defaultContentImage.image(),
                       );
                     },
                   ),
@@ -59,7 +49,9 @@ class TopImageWidget extends HookWidget {
         ),
         Positioned.fill(
           child: IgnorePointer(
-            child: Container(color: Colors.black.withValues(alpha: 0.16)),
+            child: Container(
+              color: context.appColors.service.scrim.withValues(alpha: 0.16),
+            ),
           ),
         ),
         if (photos.length > 1)
@@ -81,7 +73,8 @@ class TopImageWidget extends HookWidget {
                         bottom: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.black.withValues(alpha: 0.55),
+                        color: context.appColors.service.scrim
+                            .withValues(alpha: 0.55),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Row(
@@ -90,20 +83,21 @@ class TopImageWidget extends HookWidget {
                           Text(
                             "${currentPage.value + 1}",
                             style: CustomTypography.labelSm.copyWith(
-                              color: Colors.white,
+                              color: context.appColors.service.onMedia,
                             ),
                           ),
                           const SizedBox(width: 6),
                           Container(
                             width: 1,
                             height: 8,
-                            color: Colors.white.withValues(alpha: 0.4),
+                            color: context.appColors.service.onMedia
+                                .withValues(alpha: 0.4),
                           ),
                           const SizedBox(width: 6),
                           Text(
                             "${photos.length}",
                             style: CustomTypography.labelSm.copyWith(
-                              color: Colors.white,
+                              color: context.appColors.service.onMedia,
                             ),
                           ),
                           const SizedBox(width: 4),
@@ -115,7 +109,7 @@ class TopImageWidget extends HookWidget {
                               width: 16,
                               child: Assets.svg.icBackChevron.path.toSvgImage(
                                 fit: BoxFit.contain,
-                                tintColor: Colors.white,
+                                tintColor: context.appColors.service.onMedia,
                               ),
                             ),
                           ),

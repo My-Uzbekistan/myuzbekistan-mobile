@@ -39,7 +39,7 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
   String get payment_history_title => 'История';
 
   @override
-  String get payment_qr_title => 'QR Платёж';
+  String get payment_qr_title => 'QR-оплата';
 
   @override
   String get card_number_label => 'Номер карты';

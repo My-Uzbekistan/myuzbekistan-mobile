@@ -9,7 +9,7 @@
   "payment_method_title": "Способ оплаты",
   "my_cards_title": "Мои карты",
   "payment_history_title":"История",
-  "payment_qr_title": "QR Платёж",
+  "payment_qr_title": "QR-оплата",
 
   "card_number_label": "Номер карты",
   "card_number_hint": "Введите номер карты",

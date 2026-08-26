@@ -137,25 +137,12 @@ class _PagerItem extends StatelessWidget {
                     children: [
                       Positioned.fill(
                         child: RepaintBoundary(
-                          child: ExtendedImage.network(
+                          child: AppNetworkImage(
                             items[index].photo ?? "",
-                            cache: true,
                             fit: BoxFit.cover,
-                            loadStateChanged: (state) {
-                              switch (state.extendedImageLoadState) {
-                                case LoadState.completed:
-                                  return AnimatedOpacity(
-                                    opacity: 1.0,
-                                    duration: Duration(milliseconds: 200),
-                                    child: state.completedWidget,
-                                  );
-
-                                default:
-                                  return Assets.png.defaultContentImage.image(
-                                    fit: BoxFit.cover,
-                                  );
-                              }
-                            },
+                            placeholder: Assets.png.defaultContentImage.image(
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),
@@ -168,7 +155,7 @@ class _PagerItem extends StatelessWidget {
                             Text(
                               items[index].description ?? "",
                               style: CustomTypography.H3,
-                            ).labelMd(color: Colors.white),
+                            ).labelMd(color: context.appColors.service.onMedia),
                           ],
                         ),
                       ),
@@ -182,71 +169,5 @@ class _PagerItem extends StatelessWidget {
         itemCount: items.length,
       ),
     );
-
-    //   LayoutBuilder(
-    //   builder: (context, constraints) {
-    //     double screenWidth = constraints.maxWidth;
-    //     double viewportFraction =
-    //         screenWidth > 800
-    //             ? 0.3 // Katta ekran: 3 ta element ko'rinadi
-    //             : screenWidth > 400
-    //             ? 0.5 // O'rta ekran: 2 ta element ko'rinadi
-    //             : 0.8; // Kichik ekran: 1 ta element ko'rinadi
-    //
-    //     return CarouselSlider.builder(
-    //       itemCount: items.length,
-    //       carouselController: carouselController,
-    //       itemBuilder: (context, index, realIndex) {
-    //         return Padding(
-    //           padding: EdgeInsets.symmetric(horizontal: 8),
-    //           child: Container(
-    //             decoration: BoxDecoration(
-    //               borderRadius: BorderRadius.circular(16),
-    //             ),
-    //             child: ClipRRect(
-    //               borderRadius: BorderRadius.circular(16),
-    //               child: RepaintBoundary(
-    //                 child: ExtendedImage.network(
-    //                   items[index],
-    //                   cache: true,
-    //                   fit: BoxFit.fitWidth,
-    //                   loadStateChanged: (state) {
-    //                     switch (state.extendedImageLoadState) {
-    //                       case LoadState.completed:
-    //                         return AnimatedOpacity(
-    //                           opacity: 1.0,
-    //                           duration: Duration(milliseconds: 200),
-    //                           child: state.completedWidget,
-    //                         );
-    //
-    //                       default:
-    //                         return Assets.pngDefaultContentImage.toImage(
-    //                           fit: BoxFit.cover,
-    //                         );
-    //                     }
-    //                   },
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         );
-    //       },
-    //       options: CarouselOptions(
-    //         autoPlay: false,
-    //         height: 182,
-    //         enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-    //         aspectRatio: 262 / 182,
-    //
-    //         enlargeCenterPage: true,
-    //         enableInfiniteScroll: false,
-    //         viewportFraction: viewportFraction,
-    //         onPageChanged: (index, reason) {
-    //           onPageChange?.call(index);
-    //         },
-    //         initialPage: 0,
-    //       ),
-    //     );
-    //   },
-    // );
   }
 }

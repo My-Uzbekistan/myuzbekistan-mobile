@@ -363,7 +363,16 @@ class InvestItem extends StatelessWidget {
               height: imageHeight,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(16),
-                child: _ImageContent(imageUrl: content.mainPhoto.orEmpty()),
+                child: AppNetworkImage(
+                  content.mainPhoto.orEmpty(),
+                  fit: BoxFit.cover,
+                  height: double.maxFinite,
+                  width: double.maxFinite,
+                  cacheMaxAge: const Duration(days: 1),
+                  placeholder: Assets.png.defaultContentImage.image(
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ),
           ),
@@ -400,42 +409,6 @@ class InvestItem extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _ImageContent extends StatefulWidget {
-  final String imageUrl;
-
-  const _ImageContent({super.key, required this.imageUrl});
-
-  @override
-  State<_ImageContent> createState() => _ImageContentState();
-}
-
-class _ImageContentState extends State<_ImageContent> {
-  @override
-  Widget build(BuildContext context) {
-    return ExtendedImage.network(
-      widget.imageUrl,
-      key: ValueKey(widget.imageUrl),
-      fit: BoxFit.cover,
-      height: double.maxFinite,
-      width: double.maxFinite,
-      cache: true,
-      cacheMaxAge: const Duration(days: 1),
-      loadStateChanged: (ExtendedImageState state) {
-        switch (state.extendedImageLoadState) {
-          case LoadState.completed:
-            return AnimatedOpacity(
-              opacity: 1.0,
-              duration: Duration(milliseconds: 200),
-              child: state.completedWidget,
-            ); // ✅ Default image o'zi ko'rsatiladi
-          default:
-            return Assets.png.defaultContentImage.image(fit: BoxFit.fill);
-        }
-      },
     );
   }
 }

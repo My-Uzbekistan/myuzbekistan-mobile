@@ -79,7 +79,8 @@ class SelectLangPage extends HookWidget {
                       child: Text(
                         context.localization.selectLanguageTitle,
                         style: CustomTypography.H2.copyWith(
-                          color: Colors.white.withValues(alpha: 0.6),
+                          color: context.appColors.service.onMedia
+                              .withValues(alpha: 0.6),
                         ),
                       ),
                     ),
@@ -92,8 +93,8 @@ class SelectLangPage extends HookWidget {
                         type: ActionButtonType.secondary,
                         sizeType: ActionButtonSizeType.large,
                         iconColorFiltered: false,
-                        containerColor: Colors.white,
-                        contentColor: Colors.black,
+                        containerColor: context.appColors.service.onMedia,
+                        contentColor: context.appColors.service.scrim,
                         onPressed: () {
                           if (controller.isAnimating ||
                               pendingLocale.value != null) {

@@ -10,11 +10,9 @@ import 'package:flutter/rendering.dart';
 
 enum ShimmerDirection { ltr, rtl, ttb, btt }
 
-LinearGradient _default() {
-  Color baseColor = Colors.grey.withValues(
-    alpha: 0.1,
-  );
-  Color highlightColor = Colors.white.withValues(alpha: 0.2);
+LinearGradient _default(BuildContext context) {
+  final Color baseColor = context.appColors.service.shimmerBase;
+  final Color highlightColor = context.appColors.service.shimmerHighlight;
   return LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.centerRight,
@@ -43,7 +41,7 @@ class Shimmer extends StatefulWidget {
   final Widget child;
   final Duration period;
   final ShimmerDirection direction;
-  final Gradient gradient;
+  final Gradient? gradient;
   final int loop;
   final bool enabled;
 
@@ -88,14 +86,14 @@ class Shimmer extends StatefulWidget {
               1.0
             ]);
 
-  Shimmer.fromDefault({
+  const Shimmer.fromDefault({
     super.key,
     required this.child,
     this.period = const Duration(milliseconds: 1500),
     this.direction = ShimmerDirection.ltr,
     this.loop = 0,
     this.enabled = true,
-  }) : gradient = _default();
+  }) : gradient = null;
 
   @override
   _ShimmerState createState() => _ShimmerState();
@@ -156,7 +154,7 @@ class _ShimmerState extends State<Shimmer> with SingleTickerProviderStateMixin {
       builder: (BuildContext context, Widget? child) => _Shimmer(
         child: child,
         direction: widget.direction,
-        gradient: widget.gradient,
+        gradient: widget.gradient ?? _default(context),
         percent: _controller.value,
       ),
     );

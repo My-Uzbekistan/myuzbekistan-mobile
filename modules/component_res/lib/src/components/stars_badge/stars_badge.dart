@@ -22,7 +22,8 @@ class StarsBadge extends StatelessWidget {
               child: Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.64),
+                    color: context.appColors.service.scrim
+                        .withValues(alpha: 0.64),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   alignment: Alignment.center,
@@ -32,8 +33,9 @@ class StarsBadge extends StatelessWidget {
                     children: [
                       Text(
                         "$stars",
-                        style: CustomTypography.labelSm
-                            .copyWith(color: Colors.white),
+                        style: CustomTypography.labelSm.copyWith(
+                          color: context.appColors.service.onMedia,
+                        ),
                       ),
                       Assets.svg.starFill.svg()
                     ],

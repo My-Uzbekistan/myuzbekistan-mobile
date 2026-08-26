@@ -114,28 +114,20 @@ class _EventCard extends StatelessWidget {
                       ],
                     ),
                   ],
-                  child: ExtendedImage.network(
+                  child: AppNetworkImage(
                     event.mainPhoto ?? "",
                     fit: BoxFit.cover,
-                    loadStateChanged: (state) {
-                      switch (state.extendedImageLoadState) {
-                        case LoadState.completed:
-                          return AnimatedOpacity(
-                            opacity: 1.0,
-                            duration: const Duration(milliseconds: 200),
-                            child: state.completedWidget,
-                          );
-                        default:
-                          return Container(
-                            color: context.appColors.fill.quaternary,
-                          );
-                      }
-                    },
+                    placeholder: ColoredBox(
+                      color: context.appColors.fill.quaternary,
+                    ),
                   ),
                 ),
               ),
               Positioned.fill(
-                child: ColoredBox(color: Colors.black.withValues(alpha: 0.16)),
+                child: ColoredBox(
+                  color: context.appColors.service.scrim
+                      .withValues(alpha: 0.16),
+                ),
               ),
               Positioned.fill(
                 child: DecoratedBox(
@@ -145,9 +137,12 @@ class _EventCard extends StatelessWidget {
                       end: Alignment.bottomCenter,
                       stops: const [0.0, 0.596, 1.0],
                       colors: [
-                        const Color(0xFF14191A).withValues(alpha: 0),
-                        const Color(0xFF14191A).withValues(alpha: 0.48),
-                        const Color(0xFF14191A).withValues(alpha: 0.72),
+                        context.appColors.service.scrim
+                            .withValues(alpha: 0),
+                        context.appColors.service.scrim
+                            .withValues(alpha: 0.48),
+                        context.appColors.service.scrim
+                            .withValues(alpha: 0.72),
                       ],
                     ),
                   ),
@@ -165,14 +160,14 @@ class _EventCard extends StatelessWidget {
                       event.title ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    ).h3(color: context.appColors.static.white),
+                    ).h3(color: context.appColors.service.onMedia),
                     const SizedBox(height: 4),
                     Text(
                       event.region ?? "",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ).bodySm(
-                      color: context.appColors.static.white
+                      color: context.appColors.service.onMedia
                           .withValues(alpha: 0.56),
                     ),
                   ],
@@ -208,14 +203,14 @@ class _EventBadge extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: context.appColors.static.white,
+            color: context.appColors.service.onMedia,
             borderRadius: BorderRadius.circular(24),
-            border: Border.all(color: context.appColors.static.white),
+            border: Border.all(color: context.appColors.service.onMedia),
           ),
           child: Text(
             text,
             maxLines: 1,
-          ).labelSm(color: context.appColors.static.black),
+          ).labelSm(color: context.appColors.service.scrim),
         ),
       ),
     );

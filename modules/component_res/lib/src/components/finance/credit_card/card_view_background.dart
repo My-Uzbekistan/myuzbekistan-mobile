@@ -19,25 +19,11 @@ class CardViewBackground extends StatelessWidget {
             child: FractionallySizedBox(
               widthFactor: _imageWidthFactor,
               heightFactor: 1,
-              child: ExtendedImage.network(
+              child: AppNetworkImage(
                 imageUrl ?? "",
-                cache: true,
                 cacheMaxAge: const Duration(days: 10),
                 fit: BoxFit.cover,
                 filterQuality: FilterQuality.medium,
-                loadStateChanged: (state) {
-                  switch (state.extendedImageLoadState) {
-                    case LoadState.completed:
-                      return AnimatedOpacity(
-                        opacity: 1.0,
-                        duration: const Duration(milliseconds: 200),
-                        child: state.completedWidget,
-                      );
-                    case LoadState.loading:
-                    case LoadState.failed:
-                      return const SizedBox();
-                  }
-                },
               ),
             ),
           ),
