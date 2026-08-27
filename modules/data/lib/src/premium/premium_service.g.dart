@@ -52,25 +52,27 @@ class _PremiumService implements PremiumService {
   }
 
   @override
-  Future<PremiumAccessResponse> checkAccess(int catalogId) async {
+  Future<PremiumAccessResponse?> checkAccess(int catalogId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<PremiumAccessResponse>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
+    final _options = _setStreamType<PremiumAccessResponse?>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'premium/check-access/${catalogId}',
+            'catalog-v3/access/${catalogId}',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late PremiumAccessResponse _value;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late PremiumAccessResponse? _value;
     try {
-      _value = PremiumAccessResponse.fromJson(_result.data!);
+      _value = _result.data == null
+          ? null
+          : PremiumAccessResponse.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options, response: _result);
       rethrow;

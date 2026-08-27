@@ -18,7 +18,14 @@ class PremiumRepositoryImpl implements PremiumRepository {
 
   @override
   Future<PremiumAccessModel> checkAccess(int catalogId) {
-    return service.checkAccess(catalogId).call((data) => data.toDomain());
+    return service.checkAccess(catalogId).call(
+      (data) =>
+          data?.toDomain() ??
+          PremiumAccessModel(
+            canAccess: true,
+            reason: PremiumAccessReason.Free,
+          ),
+    );
   }
 
   @override

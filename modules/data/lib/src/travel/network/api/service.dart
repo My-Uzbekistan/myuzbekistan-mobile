@@ -13,10 +13,12 @@ import '../../models/banner/banner_dto.dart';
 import '../../models/catalog/catalog_dto.dart';
 import '../../models/categories/categories_dto.dart';
 import '../../models/cities/cities_dto.dart';
+import '../../models/city_detail/city_detail_dto.dart';
 import '../../models/claim/claim_dto.dart';
 import '../../models/currency/currency_dto.dart';
 import '../../models/content/content_dto.dart';
 import '../../models/favorite/favorite_dto.dart';
+import '../../models/home_background/home_background_dto.dart';
 import '../../models/content_dto_model/content_dto_model.dart';
 import '../../models/prayer_location/prayer_location_dto.dart';
 import '../../models/prayer_reminders/prayer_reminders_dto.dart';
@@ -46,8 +48,18 @@ abstract class RestService {
   @GET("cities")
   Future<CitiesResponseDto> loadCities();
 
+  @GET("cities/{cityId}")
+  Future<CityDetailDto> loadCityDetail({
+    @Path("cityId") required int cityId,
+    @Query("lat") double? lat,
+    @Query("lon") double? lon,
+  });
+
   @GET("banners")
   Future<List<BannerDto>> loadBanners();
+
+  @GET("home-background")
+  Future<HomeBackgroundDto> loadHomeBackground();
 
   @GET("air-quality")
   Future<AirQualityDto> loadAirQuality({

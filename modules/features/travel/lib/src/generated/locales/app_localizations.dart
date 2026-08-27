@@ -481,6 +481,12 @@ abstract class FeatureTravelLocalizations {
   /// **'Оставьте свой отзыв'**
   String get leaveFeedback;
 
+  /// No description provided for @leaveReview.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оставить отзыв'**
+  String get leaveReview;
+
   /// No description provided for @reviewsCount.
   ///
   /// In ru, this message translates to:
@@ -648,6 +654,12 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Новое'**
   String get catalogItemStatusNew;
+
+  /// No description provided for @catalogItemStatusPremium.
+  ///
+  /// In ru, this message translates to:
+  /// **'Premium'**
+  String get catalogItemStatusPremium;
 
   /// No description provided for @catalogItemStatusSoon.
   ///
@@ -1236,6 +1248,396 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Адрес заказчика'**
   String get contractCustomerAddress;
+
+  /// No description provided for @museum_home_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Билеты в самые интересные места'**
+  String get museum_home_title;
+
+  /// No description provided for @museum_search_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Куда хотите поехать?'**
+  String get museum_search_hint;
+
+  /// No description provided for @museum_section_popular.
+  ///
+  /// In ru, this message translates to:
+  /// **'Популярные'**
+  String get museum_section_popular;
+
+  /// No description provided for @museum_popular_badge.
+  ///
+  /// In ru, this message translates to:
+  /// **'Хотите посетить'**
+  String get museum_popular_badge;
+
+  /// No description provided for @museum_section_recommended.
+  ///
+  /// In ru, this message translates to:
+  /// **'Предложения для вас'**
+  String get museum_section_recommended;
+
+  /// No description provided for @museum_currency_som.
+  ///
+  /// In ru, this message translates to:
+  /// **'сум'**
+  String get museum_currency_som;
+
+  /// No description provided for @museum_price_from.
+  ///
+  /// In ru, this message translates to:
+  /// **'от {price}'**
+  String museum_price_from(Object price);
+
+  /// No description provided for @museum_reviews_count.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} отзывов'**
+  String museum_reviews_count(Object count);
+
+  /// No description provided for @museum_not_rated.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ещё не оценён'**
+  String get museum_not_rated;
+
+  /// No description provided for @museum_page_failed_to_load.
+  ///
+  /// In ru, this message translates to:
+  /// **'Страница не загрузилась'**
+  String get museum_page_failed_to_load;
+
+  /// No description provided for @museum_something_went_wrong.
+  ///
+  /// In ru, this message translates to:
+  /// **'Что-то пошло не так. Пожалуйста, попробуйте снова.'**
+  String get museum_something_went_wrong;
+
+  /// No description provided for @museum_refresh.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обновить'**
+  String get museum_refresh;
+
+  /// No description provided for @museum_search_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Билеты'**
+  String get museum_search_title;
+
+  /// No description provided for @museum_search_where.
+  ///
+  /// In ru, this message translates to:
+  /// **'Куда?'**
+  String get museum_search_where;
+
+  /// No description provided for @museum_search_where_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Город или музей'**
+  String get museum_search_where_hint;
+
+  /// No description provided for @museum_search_action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Найти'**
+  String get museum_search_action;
+
+  /// No description provided for @museum_search_history.
+  ///
+  /// In ru, this message translates to:
+  /// **'История поиска'**
+  String get museum_search_history;
+
+  /// No description provided for @museum_search_history_clear.
+  ///
+  /// In ru, this message translates to:
+  /// **'Очистить'**
+  String get museum_search_history_clear;
+
+  /// No description provided for @museum_list_count.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} варианта'**
+  String museum_list_count(Object count);
+
+  /// No description provided for @museum_list_count_in_city.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} варианта в городе {city}'**
+  String museum_list_count_in_city(Object city, Object count);
+
+  /// No description provided for @museum_sort_popular.
+  ///
+  /// In ru, this message translates to:
+  /// **'Популярные'**
+  String get museum_sort_popular;
+
+  /// No description provided for @museum_sort_price_asc.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сначала дешёвые'**
+  String get museum_sort_price_asc;
+
+  /// No description provided for @museum_sort_price_desc.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сначала дорогие'**
+  String get museum_sort_price_desc;
+
+  /// No description provided for @museum_sort_rating.
+  ///
+  /// In ru, this message translates to:
+  /// **'По рейтингу'**
+  String get museum_sort_rating;
+
+  /// No description provided for @museum_sort_newest.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новые'**
+  String get museum_sort_newest;
+
+  /// No description provided for @museum_not_found_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ничего не найдено'**
+  String get museum_not_found_title;
+
+  /// No description provided for @museum_not_found_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'По этому запросу ничего не найдено, попробуйте другие слова'**
+  String get museum_not_found_message;
+
+  /// No description provided for @museum_detail_about.
+  ///
+  /// In ru, this message translates to:
+  /// **'О месте'**
+  String get museum_detail_about;
+
+  /// No description provided for @museum_detail_contacts.
+  ///
+  /// In ru, this message translates to:
+  /// **'Контакты'**
+  String get museum_detail_contacts;
+
+  /// No description provided for @museum_detail_route.
+  ///
+  /// In ru, this message translates to:
+  /// **'Построить маршрут'**
+  String get museum_detail_route;
+
+  /// No description provided for @museum_detail_location.
+  ///
+  /// In ru, this message translates to:
+  /// **'Локация'**
+  String get museum_detail_location;
+
+  /// No description provided for @museum_detail_opening_hours.
+  ///
+  /// In ru, this message translates to:
+  /// **'Часы работы'**
+  String get museum_detail_opening_hours;
+
+  /// No description provided for @museum_detail_reviews.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отзывы'**
+  String get museum_detail_reviews;
+
+  /// No description provided for @museum_detail_distance.
+  ///
+  /// In ru, this message translates to:
+  /// **'Расстояние'**
+  String get museum_detail_distance;
+
+  /// No description provided for @museum_detail_buy.
+  ///
+  /// In ru, this message translates to:
+  /// **'Купить билет'**
+  String get museum_detail_buy;
+
+  /// No description provided for @museum_detail_show_more.
+  ///
+  /// In ru, this message translates to:
+  /// **'Показать больше'**
+  String get museum_detail_show_more;
+
+  /// No description provided for @museum_distance_km.
+  ///
+  /// In ru, this message translates to:
+  /// **'{distance} км'**
+  String museum_distance_km(Object distance);
+
+  /// No description provided for @museum_purchase_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Покупка билета'**
+  String get museum_purchase_title;
+
+  /// No description provided for @museum_purchase_total.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итого'**
+  String get museum_purchase_total;
+
+  /// No description provided for @museum_purchase_pay.
+  ///
+  /// In ru, this message translates to:
+  /// **'К оплате'**
+  String get museum_purchase_pay;
+
+  /// No description provided for @museum_purchase_valid_hours.
+  ///
+  /// In ru, this message translates to:
+  /// **'Действует {hours} ч'**
+  String museum_purchase_valid_hours(Object hours);
+
+  /// No description provided for @museum_purchase_select_card.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите карту'**
+  String get museum_purchase_select_card;
+
+  /// No description provided for @museum_purchase_no_cards.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет добавленных карт'**
+  String get museum_purchase_no_cards;
+
+  /// No description provided for @museum_purchase_add_card.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавить карту'**
+  String get museum_purchase_add_card;
+
+  /// No description provided for @museum_purchase_items_required.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите хотя бы один билет'**
+  String get museum_purchase_items_required;
+
+  /// No description provided for @museum_purchase_pending_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата прошла'**
+  String get museum_purchase_pending_title;
+
+  /// No description provided for @museum_purchase_pending_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Билеты оформляются, это займёт немного времени'**
+  String get museum_purchase_pending_message;
+
+  /// No description provided for @museum_purchase_no_tariffs.
+  ///
+  /// In ru, this message translates to:
+  /// **'Тарифы недоступны'**
+  String get museum_purchase_no_tariffs;
+
+  /// No description provided for @museum_tickets_title_active.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мои билеты'**
+  String get museum_tickets_title_active;
+
+  /// No description provided for @museum_tickets_title_used.
+  ///
+  /// In ru, this message translates to:
+  /// **'Использованные'**
+  String get museum_tickets_title_used;
+
+  /// No description provided for @museum_tickets_title_expired.
+  ///
+  /// In ru, this message translates to:
+  /// **'Просроченные'**
+  String get museum_tickets_title_expired;
+
+  /// No description provided for @museum_tickets_count.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} билета'**
+  String museum_tickets_count(Object count);
+
+  /// No description provided for @museum_ticket_location.
+  ///
+  /// In ru, this message translates to:
+  /// **'Локация'**
+  String get museum_ticket_location;
+
+  /// No description provided for @museum_ticket_opened.
+  ///
+  /// In ru, this message translates to:
+  /// **'Открыто'**
+  String get museum_ticket_opened;
+
+  /// No description provided for @museum_ticket_date.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дата'**
+  String get museum_ticket_date;
+
+  /// No description provided for @museum_ticket_number.
+  ///
+  /// In ru, this message translates to:
+  /// **'Номер заказа'**
+  String get museum_ticket_number;
+
+  /// No description provided for @museum_ticket_amount.
+  ///
+  /// In ru, this message translates to:
+  /// **'{count} билетов'**
+  String museum_ticket_amount(Object count);
+
+  /// No description provided for @museum_ticket_duration.
+  ///
+  /// In ru, this message translates to:
+  /// **'за {hours} часа'**
+  String museum_ticket_duration(Object hours);
+
+  /// No description provided for @museum_ticket_issuing.
+  ///
+  /// In ru, this message translates to:
+  /// **'Билеты оформляются'**
+  String get museum_ticket_issuing;
+
+  /// No description provided for @museum_tickets_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Билетов пока нет'**
+  String get museum_tickets_empty_title;
+
+  /// No description provided for @museum_tickets_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Купите билет, и он появится здесь'**
+  String get museum_tickets_empty_message;
+
+  /// No description provided for @museum_favorites_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Избранные'**
+  String get museum_favorites_title;
+
+  /// No description provided for @museum_favorites_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Избранных пока нет'**
+  String get museum_favorites_empty_title;
+
+  /// No description provided for @museum_favorites_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нажмите на сердечко, чтобы сохранить место'**
+  String get museum_favorites_empty_message;
+
+  /// No description provided for @museum_auth_required.
+  ///
+  /// In ru, this message translates to:
+  /// **'Войдите в аккаунт'**
+  String get museum_auth_required;
 }
 
 class _FeatureTravelLocalizationsDelegate

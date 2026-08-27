@@ -35,8 +35,16 @@ abstract interface class Repository {
   /// Bosh sahifadagi "Shaharlar" bo'limi — `GET /api/cities`.
   Future<CitiesResult> loadCities();
 
+  Future<CityDetail> loadCityDetail({
+    required int cityId,
+    double? lat,
+    double? lon,
+  });
+
   /// Bosh sahifa banner karuseli — `GET /api/banners`.
   Future<List<BannerItem>> loadBanners();
+
+  Future<String?> loadHomeBackground();
 
   /// Havo sifati ko'rsatkichi — `GET /api/air-quality?lat=&lon=`.
   Future<AirQuality> loadAirQuality({required double lat, required double lon});

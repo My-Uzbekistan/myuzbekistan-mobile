@@ -36,7 +36,7 @@ class ServicesWidget extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             if (services.isEmpty)
               const ServicesShimmer()
             else

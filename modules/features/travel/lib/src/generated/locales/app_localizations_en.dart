@@ -222,6 +222,9 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   String get leaveFeedback => 'Leave your feedback';
 
   @override
+  String get leaveReview => 'Leave a review';
+
+  @override
   String reviewsCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -315,6 +318,9 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get catalogItemStatusNew => 'New';
+
+  @override
+  String get catalogItemStatusPremium => 'Premium';
 
   @override
   String get catalogItemStatusSoon => 'Soon';
@@ -676,4 +682,221 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get contractCustomerAddress => 'Customer address';
+
+  @override
+  String get museum_home_title => 'Tickets to the most interesting places';
+
+  @override
+  String get museum_search_hint => 'Where do you want to go?';
+
+  @override
+  String get museum_section_popular => 'Popular';
+
+  @override
+  String get museum_popular_badge => 'Want to visit';
+
+  @override
+  String get museum_section_recommended => 'Offers for you';
+
+  @override
+  String get museum_currency_som => 'sum';
+
+  @override
+  String museum_price_from(Object price) {
+    return 'from $price';
+  }
+
+  @override
+  String museum_reviews_count(Object count) {
+    return '$count reviews';
+  }
+
+  @override
+  String get museum_not_rated => 'Not rated yet';
+
+  @override
+  String get museum_page_failed_to_load => 'The page failed to load';
+
+  @override
+  String get museum_something_went_wrong =>
+      'Something went wrong. Please try again.';
+
+  @override
+  String get museum_refresh => 'Refresh';
+
+  @override
+  String get museum_search_title => 'Tickets';
+
+  @override
+  String get museum_search_where => 'Where to?';
+
+  @override
+  String get museum_search_where_hint => 'City or museum';
+
+  @override
+  String get museum_search_action => 'Search';
+
+  @override
+  String get museum_search_history => 'Search history';
+
+  @override
+  String get museum_search_history_clear => 'Clear';
+
+  @override
+  String museum_list_count(Object count) {
+    return '$count options';
+  }
+
+  @override
+  String museum_list_count_in_city(Object city, Object count) {
+    return '$count options in $city';
+  }
+
+  @override
+  String get museum_sort_popular => 'Popular';
+
+  @override
+  String get museum_sort_price_asc => 'Cheapest first';
+
+  @override
+  String get museum_sort_price_desc => 'Most expensive first';
+
+  @override
+  String get museum_sort_rating => 'By rating';
+
+  @override
+  String get museum_sort_newest => 'Newest';
+
+  @override
+  String get museum_not_found_title => 'Nothing found';
+
+  @override
+  String get museum_not_found_message =>
+      'Nothing was found for this query, try other words';
+
+  @override
+  String get museum_detail_about => 'About the place';
+
+  @override
+  String get museum_detail_contacts => 'Contacts';
+
+  @override
+  String get museum_detail_route => 'Build a route';
+
+  @override
+  String get museum_detail_location => 'Location';
+
+  @override
+  String get museum_detail_opening_hours => 'Opening hours';
+
+  @override
+  String get museum_detail_reviews => 'Reviews';
+
+  @override
+  String get museum_detail_distance => 'Distance';
+
+  @override
+  String get museum_detail_buy => 'Buy a ticket';
+
+  @override
+  String get museum_detail_show_more => 'Show more';
+
+  @override
+  String museum_distance_km(Object distance) {
+    return '$distance km';
+  }
+
+  @override
+  String get museum_purchase_title => 'Ticket purchase';
+
+  @override
+  String get museum_purchase_total => 'Total';
+
+  @override
+  String get museum_purchase_pay => 'Proceed to payment';
+
+  @override
+  String museum_purchase_valid_hours(Object hours) {
+    return 'Valid for $hours h';
+  }
+
+  @override
+  String get museum_purchase_select_card => 'Select a card';
+
+  @override
+  String get museum_purchase_no_cards => 'No cards added';
+
+  @override
+  String get museum_purchase_add_card => 'Add a card';
+
+  @override
+  String get museum_purchase_items_required => 'Select at least one ticket';
+
+  @override
+  String get museum_purchase_pending_title => 'Payment completed';
+
+  @override
+  String get museum_purchase_pending_message =>
+      'Your tickets are being issued, it will take a moment';
+
+  @override
+  String get museum_purchase_no_tariffs => 'Tariffs are unavailable';
+
+  @override
+  String get museum_tickets_title_active => 'My tickets';
+
+  @override
+  String get museum_tickets_title_used => 'Used';
+
+  @override
+  String get museum_tickets_title_expired => 'Expired';
+
+  @override
+  String museum_tickets_count(Object count) {
+    return '$count tickets';
+  }
+
+  @override
+  String get museum_ticket_location => 'Location';
+
+  @override
+  String get museum_ticket_opened => 'Open';
+
+  @override
+  String get museum_ticket_date => 'Date';
+
+  @override
+  String get museum_ticket_number => 'Order number';
+
+  @override
+  String museum_ticket_amount(Object count) {
+    return '$count tickets';
+  }
+
+  @override
+  String museum_ticket_duration(Object hours) {
+    return 'for $hours hours';
+  }
+
+  @override
+  String get museum_ticket_issuing => 'Tickets are being issued';
+
+  @override
+  String get museum_tickets_empty_title => 'No tickets yet';
+
+  @override
+  String get museum_tickets_empty_message =>
+      'Buy a ticket and it will appear here';
+
+  @override
+  String get museum_favorites_title => 'Favorites';
+
+  @override
+  String get museum_favorites_empty_title => 'No favorites yet';
+
+  @override
+  String get museum_favorites_empty_message => 'Tap the heart to save a place';
+
+  @override
+  String get museum_auth_required => 'Sign in to your account';
 }

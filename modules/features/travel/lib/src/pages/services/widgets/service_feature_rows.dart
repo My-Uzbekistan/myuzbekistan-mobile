@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 import '../service_item_mapper.dart';
 import 'service_feature_row.dart';
 
-/// Dastlabki elementlardan featured qatorlar yasaydi
-/// (chapda katta plitka, o'ngda 2 ta kichik).
-///
-/// [maxRows] — nechta featured qator chiziladi (har qatorda 3 element).
 List<Widget> buildServiceFeatureRows(
   BuildContext context,
   List<CatalogItemModel> items, {

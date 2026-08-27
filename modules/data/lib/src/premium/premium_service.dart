@@ -17,8 +17,8 @@ abstract class PremiumService{
   @GET("premium/plans")
   Future<List<PremiumPlansResponse>> plans();
 
-  @GET("premium/check-access/{catalogId}")
-  Future<PremiumAccessResponse> checkAccess(@Path("catalogId") int catalogId);
+  @POST("catalog-v3/access/{catalogId}")
+  Future<PremiumAccessResponse?> checkAccess(@Path("catalogId") int catalogId);
 
   @GET("premium/status")
   Future<PremiumStatusResponse> status();

@@ -10,12 +10,14 @@ class ReviewsContainer extends HookWidget {
   final double? ratingAverage;
   final int? reviewCount;
   final VoidCallback? onShowMore;
+  final VoidCallback? onLeaveReview;
 
   const ReviewsContainer({
     super.key,
     this.ratingAverage,
     this.reviewCount,
     this.onShowMore,
+    this.onLeaveReview,
   });
 
   @override
@@ -39,7 +41,7 @@ class ReviewsContainer extends HookWidget {
           previous.isLoading != current.isLoading ||
           previous.reviews != current.reviews,
       builder: (context, state) {
-        if (state.isLoading || state.reviews.isEmpty) {
+        if (state.isLoading) {
           return const SizedBox.shrink();
         }
         final reviews = state.reviews;
@@ -72,36 +74,45 @@ class ReviewsContainer extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _header(context, avg, count),
-              SizedBox(
-                height: 166,
-                child: PageView.builder(
-                  controller: pageController,
-                  padEnds: false,
-                  itemCount: reviews.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        right: index == reviews.length - 1 ? 0 : 16,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: ReviewItem(item: reviews[index], onTap: onShowMore),
-                      ),
-                    );
-                  },
+              if (reviews.isNotEmpty) ...[
+                SizedBox(
+                  height: 166,
+                  child: PageView.builder(
+                    controller: pageController,
+                    padEnds: false,
+                    itemCount: reviews.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          right: index == reviews.length - 1 ? 0 : 16,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: ReviewItem(
+                            item: reviews[index],
+                            onTap: onShowMore,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              if (reviews.length > 1)
-                Padding(
-                  padding: const EdgeInsets.only(top: 12),
-                  child: _indicator(context, reviews.length, currentPage.value),
-                ),
+                if (reviews.length > 1)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: _indicator(
+                      context,
+                      reviews.length,
+                      currentPage.value,
+                    ),
+                  ),
+              ],
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: AppActionButton(
-                  type: ActionButtonType.secondary,
-                  actionText: context.localization.showMore,
-                  onPressed: onShowMore,
+                  actionText: context.localization.leaveReview,
+                  icon: Assets.svg.starFill.path.toSvgImage(),
+                  onPressed: onLeaveReview,
                 ),
               ),
             ],
@@ -122,33 +133,34 @@ class ReviewsContainer extends HookWidget {
             width: double.infinity,
             child: Text(context.localization.reviews).h2(),
           ),
-          Row(
-            children: [
-              SizedBox(
-                height: 16,
-                width: 16,
-                child: Assets.svg.starFill.path.toSvgImage(
-                  fit: BoxFit.contain,
-                  tintColor: context.appColors.textIconColor.primary,
+          if (count > 0)
+            Row(
+              children: [
+                SizedBox(
+                  height: 16,
+                  width: 16,
+                  child: Assets.svg.starFill.path.toSvgImage(
+                    fit: BoxFit.contain,
+                    tintColor: context.appColors.textIconColor.primary,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 8),
-              Text(avg.toStringAsFixed(1).replaceAll('.', ',')).h2(),
-              const SizedBox(width: 6),
-              Container(
-                width: 4,
-                height: 4,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: context.appColors.textIconColor.secondary,
+                const SizedBox(width: 8),
+                Text(avg.toStringAsFixed(1).replaceAll('.', ',')).h2(),
+                const SizedBox(width: 6),
+                Container(
+                  width: 4,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: context.appColors.textIconColor.secondary,
+                  ),
                 ),
-              ),
-              const SizedBox(width: 6),
-              Text(
-                context.localization.reviewsCount(count),
-              ).bodySm(color: context.appColors.textIconColor.secondary),
-            ],
-          ),
+                const SizedBox(width: 6),
+                Text(
+                  context.localization.reviewsCount(count),
+                ).bodySm(color: context.appColors.textIconColor.secondary),
+              ],
+            ),
         ],
       ),
     );

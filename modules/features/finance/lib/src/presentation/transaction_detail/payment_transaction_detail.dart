@@ -1,7 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:finance/src/core/extension.dart';
 import 'package:finance/src/presentation/transaction_detail/bloc/payment_check_bloc.dart';
-import 'package:finance/src/presentation/transaction_detail/widgets/sheet_grabber.dart';
 import 'package:finance/src/presentation/transaction_detail/widgets/sheet_nav_bar.dart';
 import 'package:finance/src/presentation/transaction_detail/widgets/transaction_detail_content.dart';
 import 'package:finance/src/presentation/transaction_detail/widgets/transaction_detail_loading.dart';

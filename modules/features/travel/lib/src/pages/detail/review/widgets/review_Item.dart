@@ -1,6 +1,7 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 
@@ -151,28 +152,39 @@ class ReviewStars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    final row = Row(
       spacing: spacing,
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,
       children: List.generate(
         5,
-        (e) => GestureDetector(
-          onTap:
-              onItemTab != null
-                  ? () {
-                    onItemTab!(e + 1);
-                  }
-                  : null,
-          behavior: HitTestBehavior.translucent,
-          child: SizedBox(
-            height: size,
-            width: size,
+        (e) => SizedBox(
+          height: size,
+          width: size,
+          child: AnimatedScale(
+            scale: onItemTab != null && e + 1 == stars ? 1.15 : 1,
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutBack,
             child: star(context, e + 1),
           ),
         ),
       ),
     );
+    if (onItemTab == null) return row;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTapDown: (details) => _select(details.localPosition.dx),
+      onHorizontalDragStart: (details) => _select(details.localPosition.dx),
+      onHorizontalDragUpdate: (details) => _select(details.localPosition.dx),
+      child: row,
+    );
+  }
+
+  void _select(double dx) {
+    final value = ((dx / (size + spacing)).floor() + 1).clamp(1, 5);
+    if (value == stars) return;
+    HapticFeedback.selectionClick();
+    onItemTab!(value);
   }
 
   Widget star(BuildContext context, int e) {

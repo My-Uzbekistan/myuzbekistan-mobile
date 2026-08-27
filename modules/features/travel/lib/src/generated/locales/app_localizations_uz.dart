@@ -222,6 +222,9 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   String get leaveFeedback => 'Fikringizni qoldiring';
 
   @override
+  String get leaveReview => 'Sharh qoldirish';
+
+  @override
   String reviewsCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -315,6 +318,9 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get catalogItemStatusNew => 'Yangi';
+
+  @override
+  String get catalogItemStatusPremium => 'Premium';
 
   @override
   String get catalogItemStatusSoon => 'Tez orada';
@@ -664,4 +670,222 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get contractCustomerAddress => 'Buyurtmachining manzili';
+
+  @override
+  String get museum_home_title => 'Eng qiziqarli joylarga chiptalar';
+
+  @override
+  String get museum_search_hint => 'Qayerga bormoqchisiz?';
+
+  @override
+  String get museum_section_popular => 'Ommabop';
+
+  @override
+  String get museum_popular_badge => 'Bormoqchimisiz';
+
+  @override
+  String get museum_section_recommended => 'Siz uchun takliflar';
+
+  @override
+  String get museum_currency_som => 'so\'m';
+
+  @override
+  String museum_price_from(Object price) {
+    return '$price dan';
+  }
+
+  @override
+  String museum_reviews_count(Object count) {
+    return '$count izoh';
+  }
+
+  @override
+  String get museum_not_rated => 'Hali baholanmagan';
+
+  @override
+  String get museum_page_failed_to_load => 'Sahifa yuklanmadi';
+
+  @override
+  String get museum_something_went_wrong =>
+      'Nimadir xato ketdi. Iltimos, qayta urinib ko\'ring.';
+
+  @override
+  String get museum_refresh => 'Yangilash';
+
+  @override
+  String get museum_search_title => 'Chiptalar';
+
+  @override
+  String get museum_search_where => 'Qayerga?';
+
+  @override
+  String get museum_search_where_hint => 'Shahar yoki muzey';
+
+  @override
+  String get museum_search_action => 'Topish';
+
+  @override
+  String get museum_search_history => 'Qidiruv tarixi';
+
+  @override
+  String get museum_search_history_clear => 'Tozalash';
+
+  @override
+  String museum_list_count(Object count) {
+    return '$count ta variant';
+  }
+
+  @override
+  String museum_list_count_in_city(Object city, Object count) {
+    return '$city shahrida $count ta variant';
+  }
+
+  @override
+  String get museum_sort_popular => 'Ommabop';
+
+  @override
+  String get museum_sort_price_asc => 'Avval arzoni';
+
+  @override
+  String get museum_sort_price_desc => 'Avval qimmati';
+
+  @override
+  String get museum_sort_rating => 'Reyting bo\'yicha';
+
+  @override
+  String get museum_sort_newest => 'Yangilari';
+
+  @override
+  String get museum_not_found_title => 'Hech narsa topilmadi';
+
+  @override
+  String get museum_not_found_message =>
+      'Bu so\'rov bo\'yicha hech narsa topilmadi, boshqa so\'zlar bilan urinib ko\'ring';
+
+  @override
+  String get museum_detail_about => 'Joy haqida';
+
+  @override
+  String get museum_detail_contacts => 'Kontaktlar';
+
+  @override
+  String get museum_detail_route => 'Yo\'l qurish';
+
+  @override
+  String get museum_detail_location => 'Lokatsiya';
+
+  @override
+  String get museum_detail_opening_hours => 'Ish vaqti';
+
+  @override
+  String get museum_detail_reviews => 'Izohlar';
+
+  @override
+  String get museum_detail_distance => 'Masofa';
+
+  @override
+  String get museum_detail_buy => 'Chipta olish';
+
+  @override
+  String get museum_detail_show_more => 'Ko\'proq ko\'rsatish';
+
+  @override
+  String museum_distance_km(Object distance) {
+    return '$distance km';
+  }
+
+  @override
+  String get museum_purchase_title => 'Chipta xarid qilish';
+
+  @override
+  String get museum_purchase_total => 'Jami';
+
+  @override
+  String get museum_purchase_pay => 'To\'lovga';
+
+  @override
+  String museum_purchase_valid_hours(Object hours) {
+    return '$hours soat amal qiladi';
+  }
+
+  @override
+  String get museum_purchase_select_card => 'Kartani tanlang';
+
+  @override
+  String get museum_purchase_no_cards => 'Qo\'shilgan karta yo\'q';
+
+  @override
+  String get museum_purchase_add_card => 'Karta qo\'shish';
+
+  @override
+  String get museum_purchase_items_required => 'Kamida bitta chiptani tanlang';
+
+  @override
+  String get museum_purchase_pending_title => 'To\'lov o\'tdi';
+
+  @override
+  String get museum_purchase_pending_message =>
+      'Chiptalar rasmiylashtirilmoqda, bu ko\'p vaqt olmaydi';
+
+  @override
+  String get museum_purchase_no_tariffs => 'Tariflar mavjud emas';
+
+  @override
+  String get museum_tickets_title_active => 'Mening chiptalarim';
+
+  @override
+  String get museum_tickets_title_used => 'Ishlatilganlar';
+
+  @override
+  String get museum_tickets_title_expired => 'Muddati o\'tganlar';
+
+  @override
+  String museum_tickets_count(Object count) {
+    return '$count ta chipta';
+  }
+
+  @override
+  String get museum_ticket_location => 'Lokatsiya';
+
+  @override
+  String get museum_ticket_opened => 'Ochiq';
+
+  @override
+  String get museum_ticket_date => 'Sana';
+
+  @override
+  String get museum_ticket_number => 'Buyurtma raqami';
+
+  @override
+  String museum_ticket_amount(Object count) {
+    return '$count ta chipta';
+  }
+
+  @override
+  String museum_ticket_duration(Object hours) {
+    return '$hours soatga';
+  }
+
+  @override
+  String get museum_ticket_issuing => 'Chiptalar rasmiylashtirilmoqda';
+
+  @override
+  String get museum_tickets_empty_title => 'Hozircha chipta yo\'q';
+
+  @override
+  String get museum_tickets_empty_message =>
+      'Chipta olsangiz, shu yerda ko\'rinadi';
+
+  @override
+  String get museum_favorites_title => 'Sevimlilar';
+
+  @override
+  String get museum_favorites_empty_title => 'Hozircha sevimlilar yo\'q';
+
+  @override
+  String get museum_favorites_empty_message =>
+      'Joyni saqlash uchun yurakchani bosing';
+
+  @override
+  String get museum_auth_required => 'Akkauntga kiring';
 }

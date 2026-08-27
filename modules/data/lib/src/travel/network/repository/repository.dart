@@ -85,10 +85,26 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<CityDetail> loadCityDetail({
+    required int cityId,
+    double? lat,
+    double? lon,
+  }) {
+    return _restService
+        .loadCityDetail(cityId: cityId, lat: lat, lon: lon)
+        .call((data) => data.toDomain());
+  }
+
+  @override
   Future<List<BannerItem>> loadBanners() {
     return _restService.loadBanners().call(
       (data) => data.map((e) => e.toDomain()).toList(),
     );
+  }
+
+  @override
+  Future<String?> loadHomeBackground() {
+    return _restService.loadHomeBackground().call((data) => data.toDomain());
   }
 
   @override

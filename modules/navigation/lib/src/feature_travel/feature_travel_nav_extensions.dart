@@ -37,6 +37,13 @@ class FeatureTravelNavExtension {
     );
   }
 
+  Future<T?> pushCityPage<T>({required int cityId}) {
+    return _context.pushType(
+      AppNavPath.travel.travelCity,
+      queryParameters: {"cityId": "$cityId"},
+    );
+  }
+
   void goMain() {
     Navigator.of(_context).popUntil((r) => r.isCurrent);
     GoRouter.of(
@@ -114,5 +121,67 @@ class FeatureTravelNavExtension {
       AppNavPath.travel.travelContractDetail,
       queryParameters: {"contractId": "$contractId"},
     );
+  }
+
+  Future<T?> pushMuseumHome<T>() {
+    return _context.pushType<T>(AppNavPath.travel.museumHome);
+  }
+
+  Future<MuseumSearchQuery?> pushMuseumSearch({String? query}) {
+    return _context.pushType<MuseumSearchQuery>(
+      AppNavPath.travel.museumSearch,
+      queryParameters: {if (query != null) "query": query},
+    );
+  }
+
+  Future<T?> pushMuseumList<T>({
+    String? search,
+    String? cityId,
+    String? cityName,
+  }) {
+    return _context.pushType<T>(
+      AppNavPath.travel.museumList,
+      queryParameters: {
+        if (search != null) "search": search,
+        if (cityId != null) "cityId": cityId,
+        if (cityName != null) "cityName": cityName,
+      },
+    );
+  }
+
+  Future<T?> pushMuseumDetail<T>({required String museumId}) {
+    return _context.pushType<T>(
+      AppNavPath.travel.museumDetail,
+      queryParameters: {"museumId": museumId},
+    );
+  }
+
+  Future<T?> pushMuseumPurchase<T>({required String museumId}) {
+    return _context.pushType<T>(
+      AppNavPath.travel.museumPurchase,
+      queryParameters: {"museumId": museumId},
+    );
+  }
+
+  Future<T?> pushMuseumTickets<T>({
+    MuseumOrderState state = MuseumOrderState.active,
+  }) {
+    return _context.pushType<T>(
+      AppNavPath.travel.museumTickets,
+      queryParameters: {"state": state.name},
+    );
+  }
+
+  void replaceWithMuseumTickets({
+    MuseumOrderState state = MuseumOrderState.active,
+  }) {
+    _context.pushReplacementType(
+      AppNavPath.travel.museumTickets,
+      queryParameters: {"state": state.name},
+    );
+  }
+
+  Future<T?> pushMuseumFavorites<T>() {
+    return _context.pushType<T>(AppNavPath.travel.museumFavorites);
   }
 }

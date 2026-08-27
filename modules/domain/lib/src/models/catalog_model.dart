@@ -1,14 +1,3 @@
-// {
-// "icon":
-// "color":"#37A8C7",
-// "title:"My eSIM",
-// "status":""// upcoming, newService, active,
-// "action":"link",
-// "actionType"://"redirect","inner"
-//
-//
-// }
-
 import 'dart:ui';
 
 class CatalogItemModel {
@@ -32,30 +21,8 @@ class CatalogItemModel {
     this.action,
     required this.actionType,
     this.authRequired = false,
-    this.isPremiumOnly, this.freeUsageLimit,
-  });
-}
-
-enum PremiumAccessReason {
-  Premium,
-  FreeLimit,
-  LimitReached,
-  PremiumRequired,
-  PlanNotAllowed,
-  PlanNotFound,
-}
-
-class PremiumAccessModel {
-  final bool canAccess;
-  final PremiumAccessReason reason;
-  final int? usageCount;
-  final int? limit;
-
-  PremiumAccessModel({
-    required this.canAccess,
-    required this.reason,
-    this.usageCount,
-    this.limit,
+    this.isPremiumOnly,
+    this.freeUsageLimit,
   });
 }
 

@@ -12,6 +12,8 @@ abstract class HomeBlocState with _$HomeBlocState {
     @Default([]) List<City> cities,
     String? citiesWeekend,
     @Default([]) List<BannerItem> banners,
+    String? backgroundImage,
+    @Default(true) bool loadingBackground,
     @Default([]) List<MainPageContent> hotels,
     @Default([]) List<MainPageContent> events,
     AirQuality? airQuality,

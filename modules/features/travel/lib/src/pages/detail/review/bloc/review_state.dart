@@ -10,6 +10,6 @@ abstract class ReviewState with _$ReviewState {
     final Map<int, int>? ratingCounts,
     @Default(false) bool reviewSending,
     @Default(false) bool sendingComplete,
-
+    String? errorMessage,
   }) = ReviewDataState;
 }

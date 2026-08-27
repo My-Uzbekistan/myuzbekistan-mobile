@@ -13,7 +13,9 @@ class AllReviewsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.appColors.background.underlayer,
       extendBodyBehindAppBar: true,
-      appBar: GradientAppBar(),
+      appBar: GradientAppBar(
+        gradientColor: context.appColors.background.underlayer,
+      ),
       body: BlocBuilder<ReviewBloc, ReviewState>(
         builder: (context, state) {
           return ListView.separated(

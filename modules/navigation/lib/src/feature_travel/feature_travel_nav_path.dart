@@ -12,6 +12,9 @@ class _FeatureTravelNavPath {
   AppNavPath get travelDetail =>
       _NavPathImpl(name: 'feature_travel_detail', path: '/detail');
 
+  AppNavPath get travelCity =>
+      _NavPathImpl(name: 'feature_travel_city', path: '/city');
+
   AppNavPath get travelContentByCategory => _NavPathImpl(
     name: 'feature_travel_content_by_category',
     path: '/content_by_category',
@@ -98,4 +101,25 @@ class _FeatureTravelNavPath {
     name: 'feature_travel_contract_detail',
     path: '/contract_detail',
   );
+
+  AppNavPath get museumHome =>
+      _NavPathImpl(name: 'feature_museum_home', path: '/museum');
+
+  AppNavPath get museumSearch =>
+      _NavPathImpl(name: 'feature_museum_search', path: '/museum/search');
+
+  AppNavPath get museumList =>
+      _NavPathImpl(name: 'feature_museum_list', path: '/museum/list');
+
+  AppNavPath get museumDetail =>
+      _NavPathImpl(name: 'feature_museum_detail', path: '/museum/detail');
+
+  AppNavPath get museumPurchase =>
+      _NavPathImpl(name: 'feature_museum_purchase', path: '/museum/purchase');
+
+  AppNavPath get museumTickets =>
+      _NavPathImpl(name: 'feature_museum_tickets', path: '/museum/tickets');
+
+  AppNavPath get museumFavorites =>
+      _NavPathImpl(name: 'feature_museum_favorites', path: '/museum/favorites');
 }

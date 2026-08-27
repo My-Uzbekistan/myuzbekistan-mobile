@@ -12,6 +12,8 @@ import 'package:travel/src/pages/catalog_investments/sort_cubit/sort_cubit.dart'
 import 'package:travel/src/pages/content_by_category/bloc/contents_by_category_bloc.dart';
 import 'package:travel/src/pages/contract/bloc/contract_detail_bloc.dart';
 import 'package:travel/src/pages/contract/contract_detail_page.dart';
+import 'package:travel/src/pages/city/bloc/city_bloc.dart';
+import 'package:travel/src/pages/city/city_page.dart';
 import 'package:travel/src/pages/detail/detail_page.dart';
 import 'package:travel/src/pages/detail/pages/all_facilities.dart';
 import 'package:travel/src/pages/detail/pages/read_more.dart';
@@ -21,6 +23,20 @@ import 'package:travel/src/pages/gift/bloc/gift_bloc.dart';
 import 'package:travel/src/pages/gift/history_page.dart';
 import 'package:travel/src/pages/gift/main/main_gift_page.dart';
 import 'package:travel/src/pages/home/home_bloc/home_bloc.dart';
+import 'package:travel/src/pages/museum/detail/bloc/museum_detail_bloc.dart';
+import 'package:travel/src/pages/museum/detail/museum_detail_page.dart';
+import 'package:travel/src/pages/museum/favorites/bloc/museum_favorites_bloc.dart';
+import 'package:travel/src/pages/museum/favorites/museum_favorites_page.dart';
+import 'package:travel/src/pages/museum/home/bloc/museum_home_bloc.dart';
+import 'package:travel/src/pages/museum/home/museum_home_page.dart';
+import 'package:travel/src/pages/museum/list/bloc/museum_list_bloc.dart';
+import 'package:travel/src/pages/museum/list/museum_list_page.dart';
+import 'package:travel/src/pages/museum/purchase/bloc/museum_purchase_bloc.dart';
+import 'package:travel/src/pages/museum/purchase/museum_purchase_page.dart';
+import 'package:travel/src/pages/museum/search/bloc/museum_search_bloc.dart';
+import 'package:travel/src/pages/museum/search/museum_search_page.dart';
+import 'package:travel/src/pages/museum/tickets/bloc/museum_tickets_bloc.dart';
+import 'package:travel/src/pages/museum/tickets/museum_tickets_page.dart';
 import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart';
 import 'package:travel/src/pages/notifications/notification_main_page.dart';
 import 'package:travel/src/pages/notifications/page/notification_detail.dart';
@@ -109,6 +125,22 @@ mixin FeatureTravelRouter {
           child: BlocProvider(
             create: (context) => getIt<ServicesCubit>()..load(),
             child: const ServicesSheet(),
+          ),
+        );
+      },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.travelCity.path,
+      name: AppNavPath.travel.travelCity.name,
+      pageBuilder: (context, state) {
+        final cityId = parseInt(state.uri.queryParameters["cityId"]) ?? 0;
+        return buildSlideTransitionPage(
+          context: context,
+          state: state,
+          child: BlocProvider(
+            create: (context) =>
+                getIt<CityBloc>()..add(CityEvent.load(cityId)),
+            child: const CityPage(),
           ),
         );
       },
@@ -209,20 +241,20 @@ mixin FeatureTravelRouter {
         GoRoute(
           path: AppNavPath.travel.addReviewPage.path,
           name: AppNavPath.travel.addReviewPage.name,
-          pageBuilder:
-              (context, state) => buildSlideTransitionPage(
-                context: context,
-                state: state,
-                slideAlign: SlideAlign.vertical,
-                child: BlocProvider.value(
-                  value: state.extra as ReviewBloc,
-                  child: AddReviewPage(
-                    contentTitle: state.uri.queryParameters["title"].orEmpty(),
-                    contentType: state.uri.queryParameters["type"].orEmpty(),
-                    rating: state.uri.queryParameters["rating"]?.toIntOrNull(),
-                  ),
-                ),
+          pageBuilder: (context, state) => ModalSheetPage(
+            child: BlocProvider.value(
+              value: state.extra as ReviewBloc,
+              child: AddReviewPage(
+                contentTitle: parseString(
+                  state.uri.queryParameters["title"],
+                ).orEmpty(),
+                contentDescription: parseString(
+                  state.uri.queryParameters["description"],
+                ).orEmpty(),
+                rating: parseInt(state.uri.queryParameters["rating"]),
               ),
+            ),
+          ),
         ),
         GoRoute(
           path: AppNavPath.travel.allReviews.path,
@@ -464,6 +496,127 @@ mixin FeatureTravelRouter {
           slideAlign: SlideAlign.vertical,
         );
       },
+    ),
+    GoRoute(
+      path: AppNavPath.travel.museumHome.path,
+      name: AppNavPath.travel.museumHome.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) =>
+              getIt<MuseumHomeBloc>()..add(MuseumHomeEvent.loadData()),
+          child: const MuseumHomePage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.travel.museumSearch.path,
+      name: AppNavPath.travel.museumSearch.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<MuseumSearchBloc>()
+            ..add(
+              MuseumSearchEvent.loadData(
+                query: parseString(state.uri.queryParameters["query"]),
+              ),
+            ),
+          child: const MuseumSearchPage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.travel.museumList.path,
+      name: AppNavPath.travel.museumList.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<MuseumListBloc>()
+            ..add(
+              MuseumListEvent.start(
+                search: parseString(state.uri.queryParameters["search"]),
+                cityId: parseString(state.uri.queryParameters["cityId"]),
+                cityName: parseString(state.uri.queryParameters["cityName"]),
+              ),
+            ),
+          child: const MuseumListPage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.travel.museumDetail.path,
+      name: AppNavPath.travel.museumDetail.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<MuseumDetailBloc>()
+            ..add(
+              MuseumDetailEvent.start(
+                museumId:
+                    parseString(state.uri.queryParameters["museumId"]) ?? "",
+              ),
+            ),
+          child: const MuseumDetailPage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.travel.museumPurchase.path,
+      name: AppNavPath.travel.museumPurchase.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<MuseumPurchaseBloc>()
+            ..add(
+              MuseumPurchaseEvent.start(
+                museumId:
+                    parseString(state.uri.queryParameters["museumId"]) ?? "",
+              ),
+            ),
+          child: const MuseumPurchasePage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.travel.museumTickets.path,
+      name: AppNavPath.travel.museumTickets.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<MuseumTicketsBloc>()
+            ..add(
+              MuseumTicketsEvent.start(
+                filter: MuseumOrderState.values.firstWhere(
+                  (item) =>
+                      item.name ==
+                      parseString(state.uri.queryParameters["state"]),
+                  orElse: () => MuseumOrderState.active,
+                ),
+              ),
+            ),
+          child: const MuseumTicketsPage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.travel.museumFavorites.path,
+      name: AppNavPath.travel.museumFavorites.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) =>
+              getIt<MuseumFavoritesBloc>()
+                ..add(MuseumFavoritesEvent.loadData()),
+          child: const MuseumFavoritesPage(),
+        ),
+        context: context,
+        state: state,
+      ),
     ),
   ];
 

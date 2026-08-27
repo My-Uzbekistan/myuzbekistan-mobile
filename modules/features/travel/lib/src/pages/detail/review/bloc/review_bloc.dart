@@ -23,10 +23,18 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
     SendReviewEvent event,
     Emitter<ReviewState> emit,
   ) async {
+    final contentId = state.contentId;
+    if (contentId == null) return;
+    emit(
+      state.copyWith(
+        reviewSending: true,
+        sendingComplete: false,
+        errorMessage: null,
+      ),
+    );
     try {
-      emit(state.copyWith(reviewSending: true, sendingComplete: false));
       await repository.addReview(
-        contentId: state.contentId!,
+        contentId: contentId,
         comment: event.comment,
         rating: event.rate,
       );
@@ -37,8 +45,11 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
           currentUserRate: event.rate,
         ),
       );
-    } catch (_) {
-      emit(state.copyWith(reviewSending: false));
+      add(ReviewEvent.loadReviewsByContentId(contentId: contentId));
+    } catch (e) {
+      emit(
+        state.copyWith(reviewSending: false, errorMessage: _errorMessage(e)),
+      );
     }
   }
 
@@ -76,5 +87,12 @@ class ReviewBloc extends Bloc<ReviewEvent, ReviewState> {
         ),
       );
     }
+  }
+
+  String? _errorMessage(Object error) {
+    if (error is DioException && error.error is AppException) {
+      return (error.error as AppException).message;
+    }
+    return null;
   }
 }

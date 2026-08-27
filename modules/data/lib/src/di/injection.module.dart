@@ -21,6 +21,10 @@ import 'package:data/src/market/src/network/api/market_api_service.dart'
     as _i522;
 import 'package:data/src/market/src/network/repository/market_repository_impl.dart'
     as _i1012;
+import 'package:data/src/museum/src/network/api/museum_api_service.dart'
+    as _i672;
+import 'package:data/src/museum/src/network/repository/museum_repository_impl.dart'
+    as _i47;
 import 'package:data/src/premium/premium_service.dart' as _i282;
 import 'package:data/src/premium/repository/PremiumRepository.dart' as _i872;
 import 'package:data/src/travel/network/api/service.dart' as _i926;
@@ -78,9 +82,13 @@ class DataPackageModule extends _i526.MicroPackageModule {
         () => _i210.FinanceApiService(gh<_i361.Dio>()));
     gh.factory<_i522.MarketApiService>(
         () => _i522.MarketApiService(gh<_i361.Dio>()));
+    gh.factory<_i672.MuseumApiService>(
+        () => _i672.MuseumApiService(gh<_i361.Dio>()));
     gh.factory<_i282.PremiumService>(
         () => _i282.PremiumService(gh<_i811.Dio>()));
     gh.factory<_i926.RestService>(() => _i926.RestService(gh<_i811.Dio>()));
+    gh.factory<_i494.MuseumRepository>(
+        () => _i47.MuseumRepositoryImpl(gh<_i672.MuseumApiService>()));
     gh.factory<_i494.Repository>(() => _i305.RepositoryImp(
           gh<_i926.RestService>(),
           gh<_i494.SecurityStorage>(),

@@ -17,6 +17,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? centerTitle;
   final bool automaticallyImplyLeading;
   final double? toolbarHeight;
+  final Color? gradientColor;
 
   const GradientAppBar(
       {super.key,
@@ -26,6 +27,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       this.actions,
       this.centerTitle,
       this.toolbarHeight,
+      this.gradientColor,
       this.automaticallyImplyLeading = true});
 
   double get _height => toolbarHeight ?? kToolbarHeight;
@@ -60,7 +62,7 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
 
       title: title != null ? Text(title!) : widget,
-      flexibleSpace: const AppGradientMask(),
+      flexibleSpace: AppGradientMask(gradientColor: gradientColor),
       toolbarHeight: toolbarHeight,
       actionsPadding: EdgeInsets.only(right: 16, top: actionsTopPadding),
       actions: actions,

@@ -20,6 +20,8 @@ class HomeHeader extends StatelessWidget {
     required this.temperature,
     required this.hintText,
     required this.quickActions,
+    this.backgroundImageUrl,
+    this.isBackgroundLoading = false,
     this.currentPrayer,
     this.airQuality,
     this.airQualityLevel,
@@ -41,6 +43,8 @@ class HomeHeader extends StatelessWidget {
   final PrayerCurrent? currentPrayer;
   final String hintText;
   final List<HomeQuickAction> quickActions;
+  final String? backgroundImageUrl;
+  final bool isBackgroundLoading;
 
   final VoidCallback? onRegionTap;
   final VoidCallback? onNotificationTap;
@@ -96,6 +100,8 @@ class HomeHeader extends StatelessWidget {
             children: [
               _CollapsingCard(
                 metrics: metrics,
+                backgroundImageUrl: backgroundImageUrl,
+                isBackgroundLoading: isBackgroundLoading,
                 infoRow: infoRow,
                 quickRow: quickRow,
               ),

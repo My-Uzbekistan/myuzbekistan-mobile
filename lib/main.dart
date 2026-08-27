@@ -13,6 +13,7 @@ import 'package:navigation/navigation.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
+import 'package:uzbekistan_travel/core/app_scroll_behavior.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
 import 'package:uzbekistan_travel/upgrader/mock_upgrader.dart';
 import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
@@ -113,6 +114,7 @@ class _MyAppState extends State<MyApp> {
           builder: (context, state) {
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
+              scrollBehavior: const AppScrollBehavior(),
               theme: AppColorTheme.lightTheme,
               darkTheme: AppColorTheme.darkTheme,
               themeMode: state.mode,
@@ -139,7 +141,13 @@ class _MyAppState extends State<MyApp> {
                         data: MediaQuery.of(context).copyWith(
                           textScaler: TextScaler.linear(1.0),
                         ),
-                        child: child!));
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          excludeFromSemantics: true,
+                          onTap: () =>
+                              FocusManager.instance.primaryFocus?.unfocus(),
+                          child: child!,
+                        )));
               },
               routerConfig: routes,
             );

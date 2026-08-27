@@ -1,6 +1,11 @@
 export 'models/about.dart';
 export 'models/categories.dart';
 export 'models/city.dart';
+export 'models/city_detail.dart';
+export 'models/city_location.dart';
+export 'models/city_block.dart';
+export 'models/city_tickets.dart';
+export 'models/city_ticket.dart';
 export 'models/air_quality.dart';
 export 'models/currency.dart';
 export 'models/favorite.dart';
@@ -18,6 +23,8 @@ export 'models/notification_item.dart';
 
 export 'models/review.dart';
 export 'models/catalog_model.dart';
+export 'models/premium_access_model.dart';
+export 'models/premium_access_reason.dart';
 export 'models/onboarding_item.dart';
 export 'models/banner_item.dart';
 

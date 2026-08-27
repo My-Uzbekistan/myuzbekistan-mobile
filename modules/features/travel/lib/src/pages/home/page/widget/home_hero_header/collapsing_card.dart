@@ -3,11 +3,15 @@ part of '../home_hero_header.dart';
 class _CollapsingCard extends StatelessWidget {
   const _CollapsingCard({
     required this.metrics,
+    required this.backgroundImageUrl,
+    required this.isBackgroundLoading,
     required this.infoRow,
     required this.quickRow,
   });
 
   final _HeaderMetrics metrics;
+  final String? backgroundImageUrl;
+  final bool isBackgroundLoading;
   final Widget infoRow;
   final Widget quickRow;
 
@@ -42,6 +46,8 @@ class _CollapsingCard extends StatelessWidget {
           child: Stack(
             children: [
               _HeaderBackground(
+                imageUrl: backgroundImageUrl,
+                isLoading: isBackgroundLoading,
                 opacity: metrics.imageOpacity,
                 zoom: metrics.zoom,
               ),
@@ -64,14 +70,38 @@ class _CollapsingCard extends StatelessWidget {
 }
 
 class _HeaderBackground extends StatelessWidget {
-  const _HeaderBackground({required this.opacity, required this.zoom});
+  const _HeaderBackground({
+    required this.imageUrl,
+    required this.isLoading,
+    required this.opacity,
+    required this.zoom,
+  });
 
+  final String? imageUrl;
+  final bool isLoading;
   final double opacity;
   final double zoom;
 
-  // App har ochilganda tasodifiy tanlanadi (splash/auth kabi). Bir seans
-  // davomida barqaror — scroll paytida rasm sakramasligi uchun static.
-  static final AssetGenImage _image = SplashBackground.random();
+  static final AssetGenImage _fallback = SplashBackground.random();
+
+  Widget _background() {
+    final url = imageUrl ?? "";
+    if (url.isEmpty) {
+      return isLoading
+          ? const _HeaderBackgroundShimmer()
+          : _fallback.image(fit: BoxFit.cover, alignment: Alignment.topCenter);
+    }
+    return AppNetworkImage(
+      url,
+      fit: BoxFit.cover,
+      alignment: Alignment.topCenter,
+      loadingWidget: const _HeaderBackgroundShimmer(),
+      placeholder: _fallback.image(
+        fit: BoxFit.cover,
+        alignment: Alignment.topCenter,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,10 +111,7 @@ class _HeaderBackground extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            _image.image(
-              fit: BoxFit.cover,
-              alignment: Alignment.topCenter,
-            ),
+            _background(),
             DecoratedBox(
               decoration: BoxDecoration(gradient: _imageOverlay(context)),
             ),
@@ -96,6 +123,20 @@ class _HeaderBackground extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _HeaderBackgroundShimmer extends StatelessWidget {
+  const _HeaderBackgroundShimmer();
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromDefault(
+      child: ColoredBox(
+        color: context.appColors.background.elevation2,
+        child: const SizedBox.expand(),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/di/injection.dart';
 import 'package:travel/src/navigation/navigation_extensions.dart';
 import 'package:travel/src/pages/detail/detail_bloc/detail_bloc.dart';
 import 'package:travel/src/pages/detail/review/bloc/review_bloc.dart';
@@ -31,6 +32,19 @@ class DetailBody extends StatelessWidget {
     required this.isCollapsed,
     required this.scrollController,
   });
+
+  void _leaveReview(BuildContext context) {
+    if (getIt<SecurityStorage>().getAccessToken() == null) {
+      context.more.pushAuthPage();
+      return;
+    }
+    context.pushAddReviewPage(
+      bloc: context.read<ReviewBloc>(),
+      contentTitle: content.title.orEmpty(),
+      contentDescription: content.shortDescription.orEmpty(),
+      rating: context.read<ReviewBloc>().state.currentUserRate,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,6 +176,7 @@ class DetailBody extends StatelessWidget {
                         bloc: context.read<ReviewBloc>(),
                       );
                     },
+                    onLeaveReview: () => _leaveReview(context),
                   ),
                 ]),
               ),

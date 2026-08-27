@@ -4,7 +4,6 @@ import '../service_item.dart';
 import 'feature_service_tile.dart';
 import 'small_service_tile.dart';
 
-/// Bitta qator: chapda katta plitka (flex 2), o'ngda 2 ta kichik plitka.
 class ServiceFeatureRow extends StatelessWidget {
   final ServiceItem feature;
   final ServiceItem? small1;

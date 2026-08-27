@@ -35,6 +35,8 @@ class $AssetsPngGen {
       const AssetGenImage('assets/png/img_gift_big.png');
   final AssetGenImage imgGiftSmall =
       const AssetGenImage('assets/png/img_gift_small.png');
+  final AssetGenImage museumHeaderBg =
+      const AssetGenImage('assets/png/museum_header_bg.webp');
   final AssetGenImage navMore = const AssetGenImage('assets/png/nav_more.png');
   final AssetGenImage paymentStatusCancelled =
       const AssetGenImage('assets/png/payment_status_cancelled.png');
@@ -113,6 +115,8 @@ class $AssetsSvgGen {
   final SvgGenImage iconChevronDown =
       const SvgGenImage('assets/svg/icon_chevron_down.svg');
   final SvgGenImage iconClock = const SvgGenImage('assets/svg/icon_clock.svg');
+  final SvgGenImage iconClockRepeat =
+      const SvgGenImage('assets/svg/icon_clock_repeat.svg');
   final SvgGenImage iconClose = const SvgGenImage('assets/svg/icon_close.svg');
   final SvgGenImage iconCusine =
       const SvgGenImage('assets/svg/icon_cusine.svg');
@@ -142,6 +146,8 @@ class $AssetsSvgGen {
   final SvgGenImage iconShare = const SvgGenImage('assets/svg/icon_share.svg');
   final SvgGenImage iconShop = const SvgGenImage('assets/svg/icon_shop.svg');
   final SvgGenImage iconTheme = const SvgGenImage('assets/svg/icon_theme.svg');
+  final SvgGenImage iconTicket =
+      const SvgGenImage('assets/svg/icon_ticket.svg');
   final SvgGenImage iconTime = const SvgGenImage('assets/svg/icon_time.svg');
   final SvgGenImage iconTrashCanLine =
       const SvgGenImage('assets/svg/icon_trash_can_line.svg');
@@ -151,6 +157,7 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/icon_warning.svg');
   final SvgGenImage locatorFill =
       const SvgGenImage('assets/svg/locator_fill.svg');
+  final SvgGenImage map02 = const SvgGenImage('assets/svg/map_02.svg');
   final SvgGenImage notificationIcon =
       const SvgGenImage('assets/svg/notification_icon.svg');
   final SvgGenImage outlineHeard =
@@ -175,6 +182,8 @@ class $AssetsSvgGen {
   final SvgGenImage shieldFill =
       const SvgGenImage('assets/svg/shield_fill.svg');
   final SvgGenImage starFill = const SvgGenImage('assets/svg/star_fill.svg');
+  final SvgGenImage starLeadingHalfFilled =
+      const SvgGenImage('assets/svg/star_leading_half_filled.svg');
   final SvgGenImage starOutline =
       const SvgGenImage('assets/svg/star_outline.svg');
   final SvgGenImage staroflifeFill =

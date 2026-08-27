@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../service_item.dart';
 
-/// [ServiceItem] ikonasini chizadi — backend rasmi ([ServiceItem.iconUrl])
-/// yoki SVG asset ([ServiceItem.iconPath]).
-///
-/// 3D ikonalar kesilib qolmasligi uchun standart `BoxFit.contain` ishlatiladi.
 class ServiceIcon extends StatelessWidget {
   final ServiceItem item;
   final double size;

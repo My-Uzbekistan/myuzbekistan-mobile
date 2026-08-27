@@ -3,18 +3,10 @@ import 'package:flutter/material.dart';
 import '../service_item.dart';
 import 'small_service_tile.dart';
 
-/// Kichik plitkalarni 4 ustunli grid ko'rinishida chizadi.
 class ServiceSmallGrid extends StatelessWidget {
   final List<ServiceItem> items;
-  final double crossSpacing;
-  final double mainSpacing;
 
-  const ServiceSmallGrid({
-    super.key,
-    required this.items,
-    this.crossSpacing = 8,
-    this.mainSpacing = 20,
-  });
+  const ServiceSmallGrid({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +19,17 @@ class ServiceSmallGrid extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             for (var c = 0; c < columns; c++) ...[
-              if (c > 0) SizedBox(width: crossSpacing),
+              if (c > 0) const SizedBox(width: 7),
               Expanded(
                 child: c < rowItems.length
-                    ? Center(child: SmallServiceTile(item: rowItems[c]))
+                    ? SmallServiceTile(item: rowItems[c], titleMaxLines: 2)
                     : const SizedBox(),
               ),
             ],
           ],
         ),
       );
-      if (i + columns < items.length) rows.add(SizedBox(height: mainSpacing));
+      if (i + columns < items.length) rows.add(const SizedBox(height: 12));
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

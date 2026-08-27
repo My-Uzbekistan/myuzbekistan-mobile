@@ -1,11 +1,7 @@
 import 'package:component_res/component_res.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:navigation/navigation.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
-import 'package:uzbekistan_travel/upgrader/mock_upgrader.dart' show MockUpgraderAppStore;
 
 
 
@@ -80,66 +76,88 @@ class MyUpgradeAlertState extends UpgradeAlertState {
   }
 }
 
-class ForceUpdatePage extends StatefulWidget {
+class ForceUpdatePage extends StatelessWidget {
   final VoidCallback update;
   final VoidCallback later;
 
   const ForceUpdatePage({super.key, required this.update, required this.later});
 
   @override
-  State<ForceUpdatePage> createState() => _ForceUpdatePageState();
-}
-
-class _ForceUpdatePageState extends State<ForceUpdatePage> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16.0,
-          ).copyWith(bottom: 8),
-          child: Column(
-            children: [
-              Expanded(child: SizedBox()),
-              Column(
-                spacing: 12,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Assets.png.forceUpdate.image(
-                    width: 120,
-                    height: 120,
-                    fit: BoxFit.cover,
-                  ),
-                  Text(context.localizations!.new_version_available).h2(),
-                  Text(
-                    context.localizations!.new_features_and_security,
-                    textAlign: TextAlign.center,
-                  ).bodyMd(
-                    color: context.appColors.textIconColor.secondary
-                  ),
+      backgroundColor: context.appColors.background.underlayer,
+      body: Stack(
+        children: [
+          Container(
+            height: 531,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  context.appColors.brandSeaBlue.withValues(alpha: 0.9),
+                  context.appColors.brandSeaBlue.withValues(alpha: 0),
                 ],
               ),
-              Expanded(
-                child: Column(
+            ),
+          ),
+          Positioned(
+            top: 248,
+            left: 16,
+            right: 16,
+            child: Column(
+              spacing: 20,
+              children: [
+                Assets.png.forceUpdate.image(
+                  width: 132,
+                  height: 132,
+                  fit: BoxFit.contain,
+                ),
+                Column(
                   spacing: 12,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      context.localizations!.new_version_available,
+                      textAlign: TextAlign.center,
+                    ).h1(color: context.appColors.textIconColor.primary),
+                    Text(
+                      context.localizations!.new_features_and_security,
+                      textAlign: TextAlign.center,
+                    ).bodyLg(color: context.appColors.textIconColor.secondary),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  spacing: 12,
                   children: [
                     AppActionButton(
-                      actionText:context.localizations!.update_app_now,
-                      onPressed: widget.update,
+                      actionText: context.localizations!.update_app_now,
+                      sizeType: ActionButtonSizeType.large,
+                      onPressed: update,
                     ),
                     AppActionButton(
                       actionText: context.localizations!.update_app_later,
                       type: ActionButtonType.text,
-                      onPressed: widget.later,
+                      sizeType: ActionButtonSizeType.large,
+                      onPressed: later,
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

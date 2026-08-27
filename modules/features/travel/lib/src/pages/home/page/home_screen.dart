@@ -122,6 +122,8 @@ class HomeScreen extends HookWidget {
                   ),
                   slivers: [
                     HomeHeader(
+                      backgroundImageUrl: data.backgroundImage,
+                      isBackgroundLoading: data.loadingBackground,
                       regionName: data.selectedRegion?.name ?? "",
                       temperature: data.temperature?.temperature ?? "",
                       airQuality: data.airQuality?.aqi.toString(),
@@ -159,14 +161,16 @@ class HomeScreen extends HookWidget {
                           ),
                       onFavoriteTap: () => context.travel.pushFavoritesPage(),
                       onQrTap: () => context.finance.pushQrCoderReaderPage(),
-                      quickActions: data.services.mapIndexed((index,data)=> HomeQuickAction(
-                        iconPath: data.icon ?? '',
-                        label: data.name ?? '',
-                        onTap:
-                        data.url == null
-                            ? null
-                            : () => LauncherUtils.urlLauncher(data.url??""),
-                      )).toList()
+                      quickActions: data.services
+                          .mapIndexed(
+                            (index, service) => HomeQuickAction(
+                              iconPath: service.icon ?? '',
+                              label: service.name ?? '',
+                              onTap: () =>
+                                  _openQuickAction(context, index, service.url),
+                            ),
+                          )
+                          .toList(),
                     ),
 
 
@@ -199,6 +203,8 @@ class HomeScreen extends HookWidget {
                       CitiesWidget(
                         cities: data.cities,
                         weekend: data.citiesWeekend,
+                        onCityTap: (city) =>
+                            context.travel.pushCityPage(cityId: city.id),
                       )
                     else if (data.loadingContents)
                       const SliverToBoxAdapter(
@@ -272,3 +278,16 @@ class HomeScreen extends HookWidget {
 
 String _categoryName(HomeBlocDataState data, int id) =>
     data.categories.where((c) => c.id == id).firstOrNull?.name ?? "";
+
+void _openQuickAction(BuildContext context, int index, String? url) {
+  if (index == 0) {
+    context.travel.pushMuseumHome();
+    return;
+  }
+  if (url == null || url.isEmpty) return;
+  if (url.startsWith("/")) {
+    context.push(url);
+    return;
+  }
+  LauncherUtils.urlLauncher(url);
+}

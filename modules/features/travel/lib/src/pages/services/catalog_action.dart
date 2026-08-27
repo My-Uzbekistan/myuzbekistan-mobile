@@ -2,17 +2,15 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/di/injection.dart';
+import 'package:travel/src/premium/widgets/premium_alert_dialog.dart';
 
-/// Katalog (catalog-v3) elementi bosilganda bajariladigan yagona harakat.
-///
-/// - `upcoming` bo'lsa — "tez orada" toast.
-/// - `action` bo'sh bo'lsa — hech narsa.
-/// - aks holda — havolani ochadi: ilova ichidagi route, webview yoki tashqi
-///   brauzer ([CatalogActionType]ga qarab).
-void openCatalogItem(BuildContext context, CatalogItemModel item) {
+Future<void> openCatalogItem(
+  BuildContext context,
+  CatalogItemModel item,
+) async {
   if (item.status == CatalogStatus.upcoming) {
     Fluttertoast.showToast(
       gravity: ToastGravity.BOTTOM,
@@ -23,6 +21,46 @@ void openCatalogItem(BuildContext context, CatalogItemModel item) {
     return;
   }
 
+  if (!await _hasAccess(context, item)) return;
+  if (!context.mounted) return;
+
+  _launch(context, item);
+}
+
+Future<bool> _hasAccess(BuildContext context, CatalogItemModel item) async {
+  final catalogId = item.id;
+  if (!(item.isPremiumOnly ?? false) || catalogId == null) return true;
+
+  if (getIt<SecurityStorage>().getAccessToken() == null) {
+    context.more.pushAuthPage();
+    return false;
+  }
+
+  try {
+    final access = await getIt<PremiumRepository>().checkAccess(catalogId);
+    if (!context.mounted) return false;
+    if (access.canAccess) return true;
+
+    if (access.reason == PremiumAccessReason.UserNotFound) {
+      context.more.pushAuthPage();
+      return false;
+    }
+
+    final limit = access.limit;
+    final usageCount = access.usageCount;
+    if (limit != null && usageCount != null && usageCount >= limit) {
+      PremiumAlertDialog.showLimitReached(context);
+    } else {
+      PremiumAlertDialog.showPremiumRequired(context);
+    }
+    return false;
+  } catch (e) {
+    if (context.mounted) Toast.showToast(e.toString());
+    return false;
+  }
+}
+
+void _launch(BuildContext context, CatalogItemModel item) {
   final action = item.action.orEmpty();
   if (action.isEmpty) return;
 
@@ -59,6 +97,6 @@ void openCatalogItem(BuildContext context, CatalogItemModel item) {
         },
       );
     }
-    LauncherUtils.urlLauncher(item.action!);
+    LauncherUtils.urlLauncher(uri.toString());
   }
 }

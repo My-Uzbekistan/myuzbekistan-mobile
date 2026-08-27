@@ -222,6 +222,9 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   String get leaveFeedback => 'Оставьте свой отзыв';
 
   @override
+  String get leaveReview => 'Оставить отзыв';
+
+  @override
   String reviewsCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -318,6 +321,9 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get catalogItemStatusNew => 'Новое';
+
+  @override
+  String get catalogItemStatusPremium => 'Premium';
 
   @override
   String get catalogItemStatusSoon => 'Скоро';
@@ -687,4 +693,222 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get contractCustomerAddress => 'Адрес заказчика';
+
+  @override
+  String get museum_home_title => 'Билеты в самые интересные места';
+
+  @override
+  String get museum_search_hint => 'Куда хотите поехать?';
+
+  @override
+  String get museum_section_popular => 'Популярные';
+
+  @override
+  String get museum_popular_badge => 'Хотите посетить';
+
+  @override
+  String get museum_section_recommended => 'Предложения для вас';
+
+  @override
+  String get museum_currency_som => 'сум';
+
+  @override
+  String museum_price_from(Object price) {
+    return 'от $price';
+  }
+
+  @override
+  String museum_reviews_count(Object count) {
+    return '$count отзывов';
+  }
+
+  @override
+  String get museum_not_rated => 'Ещё не оценён';
+
+  @override
+  String get museum_page_failed_to_load => 'Страница не загрузилась';
+
+  @override
+  String get museum_something_went_wrong =>
+      'Что-то пошло не так. Пожалуйста, попробуйте снова.';
+
+  @override
+  String get museum_refresh => 'Обновить';
+
+  @override
+  String get museum_search_title => 'Билеты';
+
+  @override
+  String get museum_search_where => 'Куда?';
+
+  @override
+  String get museum_search_where_hint => 'Город или музей';
+
+  @override
+  String get museum_search_action => 'Найти';
+
+  @override
+  String get museum_search_history => 'История поиска';
+
+  @override
+  String get museum_search_history_clear => 'Очистить';
+
+  @override
+  String museum_list_count(Object count) {
+    return '$count варианта';
+  }
+
+  @override
+  String museum_list_count_in_city(Object city, Object count) {
+    return '$count варианта в городе $city';
+  }
+
+  @override
+  String get museum_sort_popular => 'Популярные';
+
+  @override
+  String get museum_sort_price_asc => 'Сначала дешёвые';
+
+  @override
+  String get museum_sort_price_desc => 'Сначала дорогие';
+
+  @override
+  String get museum_sort_rating => 'По рейтингу';
+
+  @override
+  String get museum_sort_newest => 'Новые';
+
+  @override
+  String get museum_not_found_title => 'Ничего не найдено';
+
+  @override
+  String get museum_not_found_message =>
+      'По этому запросу ничего не найдено, попробуйте другие слова';
+
+  @override
+  String get museum_detail_about => 'О месте';
+
+  @override
+  String get museum_detail_contacts => 'Контакты';
+
+  @override
+  String get museum_detail_route => 'Построить маршрут';
+
+  @override
+  String get museum_detail_location => 'Локация';
+
+  @override
+  String get museum_detail_opening_hours => 'Часы работы';
+
+  @override
+  String get museum_detail_reviews => 'Отзывы';
+
+  @override
+  String get museum_detail_distance => 'Расстояние';
+
+  @override
+  String get museum_detail_buy => 'Купить билет';
+
+  @override
+  String get museum_detail_show_more => 'Показать больше';
+
+  @override
+  String museum_distance_km(Object distance) {
+    return '$distance км';
+  }
+
+  @override
+  String get museum_purchase_title => 'Покупка билета';
+
+  @override
+  String get museum_purchase_total => 'Итого';
+
+  @override
+  String get museum_purchase_pay => 'К оплате';
+
+  @override
+  String museum_purchase_valid_hours(Object hours) {
+    return 'Действует $hours ч';
+  }
+
+  @override
+  String get museum_purchase_select_card => 'Выберите карту';
+
+  @override
+  String get museum_purchase_no_cards => 'Нет добавленных карт';
+
+  @override
+  String get museum_purchase_add_card => 'Добавить карту';
+
+  @override
+  String get museum_purchase_items_required => 'Выберите хотя бы один билет';
+
+  @override
+  String get museum_purchase_pending_title => 'Оплата прошла';
+
+  @override
+  String get museum_purchase_pending_message =>
+      'Билеты оформляются, это займёт немного времени';
+
+  @override
+  String get museum_purchase_no_tariffs => 'Тарифы недоступны';
+
+  @override
+  String get museum_tickets_title_active => 'Мои билеты';
+
+  @override
+  String get museum_tickets_title_used => 'Использованные';
+
+  @override
+  String get museum_tickets_title_expired => 'Просроченные';
+
+  @override
+  String museum_tickets_count(Object count) {
+    return '$count билета';
+  }
+
+  @override
+  String get museum_ticket_location => 'Локация';
+
+  @override
+  String get museum_ticket_opened => 'Открыто';
+
+  @override
+  String get museum_ticket_date => 'Дата';
+
+  @override
+  String get museum_ticket_number => 'Номер заказа';
+
+  @override
+  String museum_ticket_amount(Object count) {
+    return '$count билетов';
+  }
+
+  @override
+  String museum_ticket_duration(Object hours) {
+    return 'за $hours часа';
+  }
+
+  @override
+  String get museum_ticket_issuing => 'Билеты оформляются';
+
+  @override
+  String get museum_tickets_empty_title => 'Билетов пока нет';
+
+  @override
+  String get museum_tickets_empty_message =>
+      'Купите билет, и он появится здесь';
+
+  @override
+  String get museum_favorites_title => 'Избранные';
+
+  @override
+  String get museum_favorites_empty_title => 'Избранных пока нет';
+
+  @override
+  String get museum_favorites_empty_message =>
+      'Нажмите на сердечко, чтобы сохранить место';
+
+  @override
+  String get museum_auth_required => 'Войдите в аккаунт';
 }

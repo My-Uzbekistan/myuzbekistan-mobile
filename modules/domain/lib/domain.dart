@@ -20,3 +20,5 @@ export 'src/contract/contract.dart';
 
 
 export 'src/market/market.dart';
+
+export 'src/museum/museum.dart';

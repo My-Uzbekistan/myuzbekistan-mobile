@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ReviewState implements DiagnosticableTreeMixin {
 
- List<ReviewModel> get reviews; bool get isLoading; int? get contentId; int? get currentUserRate; Map<int, int>? get ratingCounts; bool get reviewSending; bool get sendingComplete;
+ List<ReviewModel> get reviews; bool get isLoading; int? get contentId; int? get currentUserRate; Map<int, int>? get ratingCounts; bool get reviewSending; bool get sendingComplete; String? get errorMessage;
 /// Create a copy of ReviewState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,21 +26,21 @@ $ReviewStateCopyWith<ReviewState> get copyWith => _$ReviewStateCopyWithImpl<Revi
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ReviewState'))
-    ..add(DiagnosticsProperty('reviews', reviews))..add(DiagnosticsProperty('isLoading', isLoading))..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('currentUserRate', currentUserRate))..add(DiagnosticsProperty('ratingCounts', ratingCounts))..add(DiagnosticsProperty('reviewSending', reviewSending))..add(DiagnosticsProperty('sendingComplete', sendingComplete));
+    ..add(DiagnosticsProperty('reviews', reviews))..add(DiagnosticsProperty('isLoading', isLoading))..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('currentUserRate', currentUserRate))..add(DiagnosticsProperty('ratingCounts', ratingCounts))..add(DiagnosticsProperty('reviewSending', reviewSending))..add(DiagnosticsProperty('sendingComplete', sendingComplete))..add(DiagnosticsProperty('errorMessage', errorMessage));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewState&&const DeepCollectionEquality().equals(other.reviews, reviews)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.currentUserRate, currentUserRate) || other.currentUserRate == currentUserRate)&&const DeepCollectionEquality().equals(other.ratingCounts, ratingCounts)&&(identical(other.reviewSending, reviewSending) || other.reviewSending == reviewSending)&&(identical(other.sendingComplete, sendingComplete) || other.sendingComplete == sendingComplete));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewState&&const DeepCollectionEquality().equals(other.reviews, reviews)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.currentUserRate, currentUserRate) || other.currentUserRate == currentUserRate)&&const DeepCollectionEquality().equals(other.ratingCounts, ratingCounts)&&(identical(other.reviewSending, reviewSending) || other.reviewSending == reviewSending)&&(identical(other.sendingComplete, sendingComplete) || other.sendingComplete == sendingComplete)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(reviews),isLoading,contentId,currentUserRate,const DeepCollectionEquality().hash(ratingCounts),reviewSending,sendingComplete);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(reviews),isLoading,contentId,currentUserRate,const DeepCollectionEquality().hash(ratingCounts),reviewSending,sendingComplete,errorMessage);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ReviewState(reviews: $reviews, isLoading: $isLoading, contentId: $contentId, currentUserRate: $currentUserRate, ratingCounts: $ratingCounts, reviewSending: $reviewSending, sendingComplete: $sendingComplete)';
+  return 'ReviewState(reviews: $reviews, isLoading: $isLoading, contentId: $contentId, currentUserRate: $currentUserRate, ratingCounts: $ratingCounts, reviewSending: $reviewSending, sendingComplete: $sendingComplete, errorMessage: $errorMessage)';
 }
 
 
@@ -51,7 +51,7 @@ abstract mixin class $ReviewStateCopyWith<$Res>  {
   factory $ReviewStateCopyWith(ReviewState value, $Res Function(ReviewState) _then) = _$ReviewStateCopyWithImpl;
 @useResult
 $Res call({
- List<ReviewModel> reviews, bool isLoading, int? contentId, int? currentUserRate, Map<int, int>? ratingCounts, bool reviewSending, bool sendingComplete
+ List<ReviewModel> reviews, bool isLoading, int? contentId, int? currentUserRate, Map<int, int>? ratingCounts, bool reviewSending, bool sendingComplete, String? errorMessage
 });
 
 
@@ -68,7 +68,7 @@ class _$ReviewStateCopyWithImpl<$Res>
 
 /// Create a copy of ReviewState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? reviews = null,Object? isLoading = null,Object? contentId = freezed,Object? currentUserRate = freezed,Object? ratingCounts = freezed,Object? reviewSending = null,Object? sendingComplete = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? reviews = null,Object? isLoading = null,Object? contentId = freezed,Object? currentUserRate = freezed,Object? ratingCounts = freezed,Object? reviewSending = null,Object? sendingComplete = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 reviews: null == reviews ? _self.reviews : reviews // ignore: cast_nullable_to_non_nullable
 as List<ReviewModel>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
@@ -77,7 +77,8 @@ as int?,currentUserRate: freezed == currentUserRate ? _self.currentUserRate : cu
 as int?,ratingCounts: freezed == ratingCounts ? _self.ratingCounts : ratingCounts // ignore: cast_nullable_to_non_nullable
 as Map<int, int>?,reviewSending: null == reviewSending ? _self.reviewSending : reviewSending // ignore: cast_nullable_to_non_nullable
 as bool,sendingComplete: null == sendingComplete ? _self.sendingComplete : sendingComplete // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -162,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ReviewModel> reviews,  bool isLoading,  int? contentId,  int? currentUserRate,  Map<int, int>? ratingCounts,  bool reviewSending,  bool sendingComplete)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<ReviewModel> reviews,  bool isLoading,  int? contentId,  int? currentUserRate,  Map<int, int>? ratingCounts,  bool reviewSending,  bool sendingComplete,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ReviewDataState() when $default != null:
-return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserRate,_that.ratingCounts,_that.reviewSending,_that.sendingComplete);case _:
+return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserRate,_that.ratingCounts,_that.reviewSending,_that.sendingComplete,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -183,10 +184,10 @@ return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserR
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ReviewModel> reviews,  bool isLoading,  int? contentId,  int? currentUserRate,  Map<int, int>? ratingCounts,  bool reviewSending,  bool sendingComplete)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<ReviewModel> reviews,  bool isLoading,  int? contentId,  int? currentUserRate,  Map<int, int>? ratingCounts,  bool reviewSending,  bool sendingComplete,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case ReviewDataState():
-return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserRate,_that.ratingCounts,_that.reviewSending,_that.sendingComplete);case _:
+return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserRate,_that.ratingCounts,_that.reviewSending,_that.sendingComplete,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +204,10 @@ return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserR
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ReviewModel> reviews,  bool isLoading,  int? contentId,  int? currentUserRate,  Map<int, int>? ratingCounts,  bool reviewSending,  bool sendingComplete)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<ReviewModel> reviews,  bool isLoading,  int? contentId,  int? currentUserRate,  Map<int, int>? ratingCounts,  bool reviewSending,  bool sendingComplete,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case ReviewDataState() when $default != null:
-return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserRate,_that.ratingCounts,_that.reviewSending,_that.sendingComplete);case _:
+return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserRate,_that.ratingCounts,_that.reviewSending,_that.sendingComplete,_that.errorMessage);case _:
   return null;
 
 }
@@ -218,7 +219,7 @@ return $default(_that.reviews,_that.isLoading,_that.contentId,_that.currentUserR
 
 
 class ReviewDataState with DiagnosticableTreeMixin implements ReviewState {
-  const ReviewDataState({final  List<ReviewModel> reviews = const [], this.isLoading = true, this.contentId, this.currentUserRate, final  Map<int, int>? ratingCounts, this.reviewSending = false, this.sendingComplete = false}): _reviews = reviews,_ratingCounts = ratingCounts;
+  const ReviewDataState({final  List<ReviewModel> reviews = const [], this.isLoading = true, this.contentId, this.currentUserRate, final  Map<int, int>? ratingCounts, this.reviewSending = false, this.sendingComplete = false, this.errorMessage}): _reviews = reviews,_ratingCounts = ratingCounts;
   
 
  final  List<ReviewModel> _reviews;
@@ -242,6 +243,7 @@ class ReviewDataState with DiagnosticableTreeMixin implements ReviewState {
 
 @override@JsonKey() final  bool reviewSending;
 @override@JsonKey() final  bool sendingComplete;
+@override final  String? errorMessage;
 
 /// Create a copy of ReviewState
 /// with the given fields replaced by the non-null parameter values.
@@ -254,21 +256,21 @@ $ReviewDataStateCopyWith<ReviewDataState> get copyWith => _$ReviewDataStateCopyW
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ReviewState'))
-    ..add(DiagnosticsProperty('reviews', reviews))..add(DiagnosticsProperty('isLoading', isLoading))..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('currentUserRate', currentUserRate))..add(DiagnosticsProperty('ratingCounts', ratingCounts))..add(DiagnosticsProperty('reviewSending', reviewSending))..add(DiagnosticsProperty('sendingComplete', sendingComplete));
+    ..add(DiagnosticsProperty('reviews', reviews))..add(DiagnosticsProperty('isLoading', isLoading))..add(DiagnosticsProperty('contentId', contentId))..add(DiagnosticsProperty('currentUserRate', currentUserRate))..add(DiagnosticsProperty('ratingCounts', ratingCounts))..add(DiagnosticsProperty('reviewSending', reviewSending))..add(DiagnosticsProperty('sendingComplete', sendingComplete))..add(DiagnosticsProperty('errorMessage', errorMessage));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewDataState&&const DeepCollectionEquality().equals(other._reviews, _reviews)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.currentUserRate, currentUserRate) || other.currentUserRate == currentUserRate)&&const DeepCollectionEquality().equals(other._ratingCounts, _ratingCounts)&&(identical(other.reviewSending, reviewSending) || other.reviewSending == reviewSending)&&(identical(other.sendingComplete, sendingComplete) || other.sendingComplete == sendingComplete));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ReviewDataState&&const DeepCollectionEquality().equals(other._reviews, _reviews)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.contentId, contentId) || other.contentId == contentId)&&(identical(other.currentUserRate, currentUserRate) || other.currentUserRate == currentUserRate)&&const DeepCollectionEquality().equals(other._ratingCounts, _ratingCounts)&&(identical(other.reviewSending, reviewSending) || other.reviewSending == reviewSending)&&(identical(other.sendingComplete, sendingComplete) || other.sendingComplete == sendingComplete)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_reviews),isLoading,contentId,currentUserRate,const DeepCollectionEquality().hash(_ratingCounts),reviewSending,sendingComplete);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_reviews),isLoading,contentId,currentUserRate,const DeepCollectionEquality().hash(_ratingCounts),reviewSending,sendingComplete,errorMessage);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ReviewState(reviews: $reviews, isLoading: $isLoading, contentId: $contentId, currentUserRate: $currentUserRate, ratingCounts: $ratingCounts, reviewSending: $reviewSending, sendingComplete: $sendingComplete)';
+  return 'ReviewState(reviews: $reviews, isLoading: $isLoading, contentId: $contentId, currentUserRate: $currentUserRate, ratingCounts: $ratingCounts, reviewSending: $reviewSending, sendingComplete: $sendingComplete, errorMessage: $errorMessage)';
 }
 
 
@@ -279,7 +281,7 @@ abstract mixin class $ReviewDataStateCopyWith<$Res> implements $ReviewStateCopyW
   factory $ReviewDataStateCopyWith(ReviewDataState value, $Res Function(ReviewDataState) _then) = _$ReviewDataStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<ReviewModel> reviews, bool isLoading, int? contentId, int? currentUserRate, Map<int, int>? ratingCounts, bool reviewSending, bool sendingComplete
+ List<ReviewModel> reviews, bool isLoading, int? contentId, int? currentUserRate, Map<int, int>? ratingCounts, bool reviewSending, bool sendingComplete, String? errorMessage
 });
 
 
@@ -296,7 +298,7 @@ class _$ReviewDataStateCopyWithImpl<$Res>
 
 /// Create a copy of ReviewState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? reviews = null,Object? isLoading = null,Object? contentId = freezed,Object? currentUserRate = freezed,Object? ratingCounts = freezed,Object? reviewSending = null,Object? sendingComplete = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? reviews = null,Object? isLoading = null,Object? contentId = freezed,Object? currentUserRate = freezed,Object? ratingCounts = freezed,Object? reviewSending = null,Object? sendingComplete = null,Object? errorMessage = freezed,}) {
   return _then(ReviewDataState(
 reviews: null == reviews ? _self._reviews : reviews // ignore: cast_nullable_to_non_nullable
 as List<ReviewModel>,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
@@ -305,7 +307,8 @@ as int?,currentUserRate: freezed == currentUserRate ? _self.currentUserRate : cu
 as int?,ratingCounts: freezed == ratingCounts ? _self._ratingCounts : ratingCounts // ignore: cast_nullable_to_non_nullable
 as Map<int, int>?,reviewSending: null == reviewSending ? _self.reviewSending : reviewSending // ignore: cast_nullable_to_non_nullable
 as bool,sendingComplete: null == sendingComplete ? _self.sendingComplete : sendingComplete // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

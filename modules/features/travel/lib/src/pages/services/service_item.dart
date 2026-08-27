@@ -1,26 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// Bosh sahifadagi "Сервисы" bloki uchun bitta xizmat elementi (UI modeli).
-///
-/// Ma'lumot `catalog-v3` ([CatalogItemModel]) dan map qilinadi.
-/// [featured] — katta (kartochka) ko'rinishdagi element.
-/// Aks holda — kichik ikonka + sarlavha ko'rinishida chiziladi.
+import 'service_badge.dart';
+
 class ServiceItem {
   final String title;
-
-  /// SVG asset yo'li (oq rangda tint qilinadi). [iconUrl] berilsa e'tiborsiz.
   final String? iconPath;
-
-  /// Backend ikonasi (masalan catalog-v3). Berilsa network rasm sifatida
-  /// chiziladi, tint qilinmaydi.
   final String? iconUrl;
-
-  /// Kichik plitka foni / katta plitka aksenti.
   final Color color;
-
   final bool featured;
-
-  final VoidCallback? onTap;
+  final ServiceBadge? badge;
+  final AsyncCallback? onTap;
 
   const ServiceItem({
     required this.title,
@@ -28,15 +18,7 @@ class ServiceItem {
     this.iconUrl,
     required this.color,
     this.featured = false,
+    this.badge,
     this.onTap,
   });
-
-  ServiceItem copyWith({VoidCallback? onTap}) => ServiceItem(
-        title: title,
-        iconPath: iconPath,
-        iconUrl: iconUrl,
-        color: color,
-        featured: featured,
-        onTap: onTap ?? this.onTap,
-      );
 }

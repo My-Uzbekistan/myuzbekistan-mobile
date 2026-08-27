@@ -40,6 +40,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     on<_LoadServicesEvent>(_loadServicesEvent);
     on<_LoadCitiesEvent>(_loadCitiesEvent);
     on<_LoadBannersEvent>(_loadBannersEvent);
+    on<_LoadHomeBackgroundEvent>(_loadHomeBackgroundEvent);
     on<_LoadHotelsEvent>(_loadHotelsEvent);
     on<_LoadEventsEvent>(_loadEventsEvent);
     on<_LoadAirQualityEvent>(_loadAirQualityEvent);
@@ -98,6 +99,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     add(HomeBlocEvent.loadServices());
     add(HomeBlocEvent.loadCities());
     add(HomeBlocEvent.loadBanners());
+    add(HomeBlocEvent.loadHomeBackground());
     add(HomeBlocEvent.loadHotels());
     add(HomeBlocEvent.loadEvents());
     add(HomeBlocEvent.loadAirQuality());
@@ -130,6 +132,24 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         emit(dataState);
       }
     } catch (_) {}
+  }
+
+  Future<void> _loadHomeBackgroundEvent(
+    _LoadHomeBackgroundEvent event,
+    Emitter<HomeBlocState> emit,
+  ) async {
+    try {
+      final backgroundImage = await _repository.loadHomeBackground();
+      dataState = dataState.copyWith(
+        backgroundImage: backgroundImage,
+        loadingBackground: false,
+      );
+    } catch (_) {
+      dataState = dataState.copyWith(loadingBackground: false);
+    }
+    if (state is HomeBlocDataState) {
+      emit(dataState);
+    }
   }
 
   Future<void> _loadHotelsEvent(

@@ -7,15 +7,15 @@ extension NavExtension on BuildContext {
   pushAddReviewPage({
     required ReviewBloc bloc,
     required String contentTitle,
-    required String contentType,
-    required int rating,
+    required String contentDescription,
+    int? rating,
   }) {
     pushNamed(
       AppNavPath.travel.addReviewPage.name,
       extra: bloc,
       queryParameters: {
         "title": contentTitle,
-        "type": contentType,
+        "description": contentDescription,
         "rating": rating.toString(),
       },
     );

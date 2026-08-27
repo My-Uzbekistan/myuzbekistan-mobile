@@ -12,6 +12,7 @@ import 'package:travel/src/pages/catalog_investments/bloc/investments_bloc.dart'
     as _i369;
 import 'package:travel/src/pages/catalog_investments/pages/search_page/bloc/invest_search_bloc.dart'
     as _i1065;
+import 'package:travel/src/pages/city/bloc/city_bloc.dart' as _i972;
 import 'package:travel/src/pages/content_by_category/bloc/contents_by_category_bloc.dart'
     as _i514;
 import 'package:travel/src/pages/contract/bloc/contract_detail_bloc.dart'
@@ -24,6 +25,20 @@ import 'package:travel/src/pages/home/home_bloc/calculator_cubit/currency_calcul
 import 'package:travel/src/pages/home/home_bloc/home_bloc.dart' as _i359;
 import 'package:travel/src/pages/home/widgets/load_content_bloc/load_content_bloc.dart'
     as _i335;
+import 'package:travel/src/pages/museum/detail/bloc/museum_detail_bloc.dart'
+    as _i782;
+import 'package:travel/src/pages/museum/favorites/bloc/museum_favorites_bloc.dart'
+    as _i138;
+import 'package:travel/src/pages/museum/home/bloc/museum_home_bloc.dart'
+    as _i23;
+import 'package:travel/src/pages/museum/list/bloc/museum_list_bloc.dart'
+    as _i1039;
+import 'package:travel/src/pages/museum/purchase/bloc/museum_purchase_bloc.dart'
+    as _i629;
+import 'package:travel/src/pages/museum/search/bloc/museum_search_bloc.dart'
+    as _i783;
+import 'package:travel/src/pages/museum/tickets/bloc/museum_tickets_bloc.dart'
+    as _i157;
 import 'package:travel/src/pages/notifications/bloc/notification_bloc.dart'
     as _i69;
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart'
@@ -43,6 +58,18 @@ class TravelPackageModule extends _i526.MicroPackageModule {
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.factory<_i917.PremiumBloc>(
         () => _i917.PremiumBloc(gh<_i494.PremiumRepository>()));
+    gh.factory<_i782.MuseumDetailBloc>(
+        () => _i782.MuseumDetailBloc(gh<_i494.MuseumRepository>()));
+    gh.factory<_i138.MuseumFavoritesBloc>(
+        () => _i138.MuseumFavoritesBloc(gh<_i494.MuseumRepository>()));
+    gh.factory<_i23.MuseumHomeBloc>(
+        () => _i23.MuseumHomeBloc(gh<_i494.MuseumRepository>()));
+    gh.factory<_i1039.MuseumListBloc>(
+        () => _i1039.MuseumListBloc(gh<_i494.MuseumRepository>()));
+    gh.factory<_i783.MuseumSearchBloc>(
+        () => _i783.MuseumSearchBloc(gh<_i494.MuseumRepository>()));
+    gh.factory<_i157.MuseumTicketsBloc>(
+        () => _i157.MuseumTicketsBloc(gh<_i494.MuseumRepository>()));
     gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
@@ -80,6 +107,7 @@ class TravelPackageModule extends _i526.MicroPackageModule {
         () => _i45.NotificationCountCubit(gh<_i494.Repository>()));
     gh.factory<_i369.InvestmentsBloc>(
         () => _i369.InvestmentsBloc(gh<_i494.Repository>()));
+    gh.factory<_i972.CityBloc>(() => _i972.CityBloc(gh<_i494.Repository>()));
     gh.factory<_i669.GiftBloc>(() => _i669.GiftBloc(gh<_i494.Repository>()));
     gh.factory<_i69.NotificationBloc>(
         () => _i69.NotificationBloc(gh<_i494.Repository>()));
@@ -87,5 +115,9 @@ class TravelPackageModule extends _i526.MicroPackageModule {
         () => _i638.OnboardingBloc(gh<_i494.Repository>()));
     gh.factory<_i29.ServicesCubit>(
         () => _i29.ServicesCubit(gh<_i494.Repository>()));
+    gh.factory<_i629.MuseumPurchaseBloc>(() => _i629.MuseumPurchaseBloc(
+          gh<_i494.MuseumRepository>(),
+          gh<_i494.FinanceRepository>(),
+        ));
   }
 }
