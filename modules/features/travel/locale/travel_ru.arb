@@ -117,6 +117,7 @@
   "gift_second_page_title_day": "{count, plural, one{Возвращайтесь через {count} день} few{Возвращайтесь через {count} дня} many{Возвращайтесь через {count} дней} other{Возвращайтесь через {count} дней}}",
 
   "gift_second_page_subtitle": "Мы готовим ваш подарок",
+  "gift_empty_hint": "У вас еще нет подарков",
   "gift_history": "История призов",
   "mb": "МБ",
   "gb": "ГБ",

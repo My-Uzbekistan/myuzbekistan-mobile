@@ -25,6 +25,20 @@ class $AssetsPngGen {
   final AssetGenImage forceUpdate =
       const AssetGenImage('assets/png/force_update.png');
   final AssetGenImage gears = const AssetGenImage('assets/png/gears.webp');
+  final AssetGenImage giftOpenEmpty =
+      const AssetGenImage('assets/png/gift_open_empty.webp');
+  final AssetGenImage giftOpenUztelecom =
+      const AssetGenImage('assets/png/gift_open_uztelecom.webp');
+  final AssetGenImage giftGlowDialog =
+      const AssetGenImage('assets/png/gift_glow_dialog.webp');
+  final AssetGenImage giftMainBg =
+      const AssetGenImage('assets/png/gift_main_bg.webp');
+  final AssetGenImage giftGlowWait =
+      const AssetGenImage('assets/png/gift_glow_wait.webp');
+  final AssetGenImage giftBoxGold =
+      const AssetGenImage('assets/png/gift_box_gold.png');
+  final AssetGenImage giftBoxGreen =
+      const AssetGenImage('assets/png/gift_box_green.png');
   final AssetGenImage icSearch =
       const AssetGenImage('assets/png/ic_search.png');
   final AssetGenImage iconPremium =
@@ -57,6 +71,8 @@ class $AssetsPngGen {
   final AssetGenImage premiumCellIconInfinityLine =
       const AssetGenImage('assets/png/premium_cell_icon_infinity_line.png');
   final AssetGenImage sosok = const AssetGenImage('assets/png/sosok.png');
+  final AssetGenImage uztelecomLogo =
+      const AssetGenImage('assets/png/uztelecom_logo.webp');
 }
 
 class $AssetsCatalogGen {
@@ -85,6 +101,12 @@ class $AssetsSvgGen {
   final $AssetsPrayersGen prayers = const $AssetsPrayersGen();
   final SvgGenImage namazIcon = const SvgGenImage('assets/svg/Namaz icon.svg');
   final SvgGenImage appleLogo = const SvgGenImage('assets/svg/apple_logo.svg');
+  final SvgGenImage aqiBad = const SvgGenImage('assets/svg/aqi_bad.svg');
+  final SvgGenImage aqiGood = const SvgGenImage('assets/svg/aqi_good.svg');
+  final SvgGenImage aqiHazardous =
+      const SvgGenImage('assets/svg/aqi_hazardous.svg');
+  final SvgGenImage aqiModerate =
+      const SvgGenImage('assets/svg/aqi_moderate.svg');
   final SvgGenImage basketCross =
       const SvgGenImage('assets/svg/basket_cross.svg');
   final SvgGenImage boltFill = const SvgGenImage('assets/svg/bolt_fill.svg');
@@ -99,6 +121,12 @@ class $AssetsSvgGen {
   final SvgGenImage fiscalIcon =
       const SvgGenImage('assets/svg/fiscal_icon.svg');
   final SvgGenImage flameFill = const SvgGenImage('assets/svg/flame_fill.svg');
+  final SvgGenImage giftArrowDown =
+      const SvgGenImage('assets/svg/gift_arrow_down.svg');
+  final SvgGenImage giftEmptyBlobLg =
+      const SvgGenImage('assets/svg/gift_empty_blob_lg.svg');
+  final SvgGenImage giftEmptyBlobSm =
+      const SvgGenImage('assets/svg/gift_empty_blob_sm.svg');
   final SvgGenImage giftMask = const SvgGenImage('assets/svg/gift_mask.svg');
   final SvgGenImage googleLogo =
       const SvgGenImage('assets/svg/google_logo.svg');
@@ -132,6 +160,8 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/icon_filled_eye_off.svg');
   final SvgGenImage iconFilledHeard =
       const SvgGenImage('assets/svg/icon_filled_heard.svg');
+  final SvgGenImage infoCircleLine =
+      const SvgGenImage('assets/svg/info_circle_line.svg');
   final SvgGenImage iconGift = const SvgGenImage('assets/svg/icon_gift.svg');
   final SvgGenImage iconMenu = const SvgGenImage('assets/svg/icon_menu.svg');
   final SvgGenImage iconPhoneFill =
@@ -173,6 +203,8 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/premium_feature_check.svg');
   final SvgGenImage premiumPlanCheck =
       const SvgGenImage('assets/svg/premium_plan_check.svg');
+  final SvgGenImage premiumStar =
+      const SvgGenImage('assets/svg/premium_star.svg');
   final SvgGenImage roundedCloseIcon =
       const SvgGenImage('assets/svg/rounded_close_icon.svg');
   final SvgGenImage scanIdentification =
@@ -182,6 +214,7 @@ class $AssetsSvgGen {
   final SvgGenImage shieldFill =
       const SvgGenImage('assets/svg/shield_fill.svg');
   final SvgGenImage starFill = const SvgGenImage('assets/svg/star_fill.svg');
+  final SvgGenImage sunMax = const SvgGenImage('assets/svg/sun_max.svg');
   final SvgGenImage starLeadingHalfFilled =
       const SvgGenImage('assets/svg/star_leading_half_filled.svg');
   final SvgGenImage starOutline =
@@ -247,6 +280,7 @@ class $AssetsMoreGen {
       const SvgGenImage('assets/svg/more/broom_motion.svg');
   final SvgGenImage circleInfo =
       const SvgGenImage('assets/svg/more/circle_info.svg');
+  final SvgGenImage device = const SvgGenImage('assets/svg/more/device.svg');
   final SvgGenImage faceId = const SvgGenImage('assets/svg/more/face_id.svg');
   final SvgGenImage fileChart =
       const SvgGenImage('assets/svg/more/file_chart.svg');

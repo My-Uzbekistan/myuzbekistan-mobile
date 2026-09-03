@@ -6,6 +6,7 @@ class _CollapsingCard extends StatelessWidget {
     required this.backgroundImageUrl,
     required this.isBackgroundLoading,
     required this.infoRow,
+    required this.prayerRow,
     required this.quickRow,
   });
 
@@ -13,6 +14,7 @@ class _CollapsingCard extends StatelessWidget {
   final String? backgroundImageUrl;
   final bool isBackgroundLoading;
   final Widget infoRow;
+  final Widget prayerRow;
   final Widget quickRow;
 
   @override
@@ -55,6 +57,11 @@ class _CollapsingCard extends StatelessWidget {
                 top: _kInfoTop + metrics.topInset,
                 metrics: metrics,
                 child: infoRow,
+              ),
+              _FadingSlot(
+                top: _kPrayerTop + metrics.topInset,
+                metrics: metrics,
+                child: prayerRow,
               ),
               _FadingSlot(
                 top: _kQuickTop + metrics.topInset,

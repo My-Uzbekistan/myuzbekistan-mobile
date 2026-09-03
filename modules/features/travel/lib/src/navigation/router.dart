@@ -396,11 +396,13 @@ mixin FeatureTravelRouter {
       path: AppNavPath.travel.travelHomeGiftPage.path,
       name: AppNavPath.travel.travelHomeGiftPage.name,
       redirect: (context, state) {
-        final state = context.read<GiftBloc>().state;
-        if (!state.haveGift) {
-          final timeLeft = (state.claimStatus?.timeLeft ?? 0).toString();
-          final timeStatus =
-              (state.claimStatus?.timeStatusValue ?? 0).toString();
+        final giftState = context.read<GiftBloc>().state;
+        final isUtcClient =
+            getIt<SecurityStorage>().getUserModel()?.isUtcClient ?? false;
+        if (!isUtcClient || !giftState.haveGift) {
+          final timeLeft = (giftState.claimStatus?.timeLeft ?? 0).toString();
+          final timeStatus = (giftState.claimStatus?.timeStatusValue ?? 0)
+              .toString();
 
           return "${AppNavPath.travel.travelHomeGiftOnboardingPage.path}?timeLeft=$timeLeft&timeStatus=$timeStatus";
         }
@@ -423,8 +425,12 @@ mixin FeatureTravelRouter {
       pageBuilder: (context, state) {
         return buildSlideTransitionPage(
           child: SecondGiftPage(
-            timeLeft: state.uri.queryParameters["timeLeft"]?.toInt() ?? 0,
-            timeStatus: state.uri.queryParameters["timeStatus"]?.toInt() ?? 0,
+            timeLeft: parseInt(state.uri.queryParameters["timeLeft"]) ?? 0,
+            timeStatus:
+                TimeStatus.values.elementAtOrNull(
+                  parseInt(state.uri.queryParameters["timeStatus"]) ?? 0,
+                ) ??
+                TimeStatus.minutes,
           ),
           state: state,
           context: context,

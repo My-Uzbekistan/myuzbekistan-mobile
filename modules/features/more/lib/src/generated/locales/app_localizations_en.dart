@@ -364,4 +364,37 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   @override
   String get biometricNotAvailable =>
       'Scanner login is not available on your device';
+
+  @override
+  String get devices => 'Devices';
+
+  @override
+  String get thisDevice => 'This device';
+
+  @override
+  String get activeSessions => 'Active sessions';
+
+  @override
+  String get terminateOtherSessions => 'End all other sessions';
+
+  @override
+  String get terminateConfirmTitle => 'Are you sure you want to end this?';
+
+  @override
+  String get terminateOtherSessionsMessage => 'This action will end the session on all other devices';
+
+  @override
+  String get terminateSessionMessage => 'This device will be signed out of the app';
+
+  @override
+  String get terminate => 'End';
+
+  @override
+  String get deviceOnline => 'online';
+
+  @override
+  String get unknownDevice => 'Unknown device';
+
+  @override
+  String get noActiveSessions => 'No other active sessions';
 }

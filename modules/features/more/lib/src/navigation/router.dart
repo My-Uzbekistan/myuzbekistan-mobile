@@ -14,6 +14,8 @@ import 'package:shared/shared.dart';
 
 import '../pages/about_app/about_app.dart';
 import '../pages/edit_profile/edit_profile_page.dart';
+import '../pages/devices/bloc/devices_bloc.dart';
+import '../pages/devices/devices_page.dart';
 import '../pages/security/security_page.dart';
 import '../pages/auth/auth_page.dart';
 import '../pages/auth/bloc/auth_bloc.dart';
@@ -260,6 +262,20 @@ mixin FeatureMoreRouter {
       pageBuilder:
           (context, state) => buildSlideTransitionPage(
             child: const SecurityPage(),
+            context: context,
+            state: state,
+          ),
+    ),
+    GoRoute(
+      path: AppNavPath.more.devicesPage.path,
+      name: AppNavPath.more.devicesPage.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: BlocProvider(
+              create:
+                  (ctx) => getIt<DevicesBloc>()..add(DevicesEvent.fetch()),
+              child: const DevicesPage(),
+            ),
             context: context,
             state: state,
           ),

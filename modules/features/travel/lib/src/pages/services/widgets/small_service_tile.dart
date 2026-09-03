@@ -29,12 +29,13 @@ class SmallServiceTile extends HookWidget {
         await item.onTap?.call();
         if (context.mounted) isChecking.value = false;
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        spacing: 8,
+      child: Stack(
+        clipBehavior: Clip.none,
+        alignment: Alignment.topCenter,
         children: [
-          Stack(
-            clipBehavior: Clip.none,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 8,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(16),
@@ -64,20 +65,20 @@ class SmallServiceTile extends HookWidget {
                   ),
                 ),
               ),
-              if (badge != null)
-                Positioned(
-                  top: -4,
-                  right: 0,
-                  child: ServiceBadgePill(badge: badge),
-                ),
+              Text(
+                item.title,
+                maxLines: titleMaxLines,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+              ).bodyXXsm(color: context.appColors.textIconColor.primary),
             ],
           ),
-          Text(
-            item.title,
-            maxLines: titleMaxLines,
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-          ).bodyXXsm(color: context.appColors.textIconColor.primary),
+          if (badge != null)
+            Positioned(
+              top: -4,
+              right: 0,
+              child: ServiceBadgePill(badge: badge),
+            ),
         ],
       ),
     );

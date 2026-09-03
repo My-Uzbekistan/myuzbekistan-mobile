@@ -744,6 +744,72 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Вход со сканером недоступен на вашем устройстве'**
   String get biometricNotAvailable;
+
+  /// No description provided for @devices.
+  ///
+  /// In ru, this message translates to:
+  /// **'Устройства'**
+  String get devices;
+
+  /// No description provided for @thisDevice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это устройство'**
+  String get thisDevice;
+
+  /// No description provided for @activeSessions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Активные сеансы'**
+  String get activeSessions;
+
+  /// No description provided for @terminateOtherSessions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завершить все остальные сеансы'**
+  String get terminateOtherSessions;
+
+  /// No description provided for @terminateConfirmTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы уверены, что хотите это завершить?'**
+  String get terminateConfirmTitle;
+
+  /// No description provided for @terminateOtherSessionsMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это действие завершит работу всех остальных устройств'**
+  String get terminateOtherSessionsMessage;
+
+  /// No description provided for @terminateSessionMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это устройство выйдет из приложения'**
+  String get terminateSessionMessage;
+
+  /// No description provided for @terminate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завершить'**
+  String get terminate;
+
+  /// No description provided for @deviceOnline.
+  ///
+  /// In ru, this message translates to:
+  /// **'online'**
+  String get deviceOnline;
+
+  /// No description provided for @unknownDevice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неизвестное устройство'**
+  String get unknownDevice;
+
+  /// No description provided for @noActiveSessions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Других активных сеансов нет'**
+  String get noActiveSessions;
 }
 
 class _FeatureMoreLocalizationsDelegate

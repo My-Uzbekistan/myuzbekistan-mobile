@@ -37,7 +37,7 @@ class _QuickActionsShimmer extends StatelessWidget {
           for (var i = 0; i < 4; i++) ...[
             if (i > 0) const SizedBox(width: 6),
             const Expanded(
-              child: ShimmerDefaultContainer(height: 68, radius: 20),
+              child: ShimmerDefaultContainer(height: 69, radius: 20),
             ),
           ],
         ],

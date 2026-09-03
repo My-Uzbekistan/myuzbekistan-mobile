@@ -13,6 +13,7 @@ abstract class MoreState with _$MoreState {
     @Default(true) bool isLoading,
     @Default(false) bool premiumLoaded,
     PremiumStatusModel? premiumStatus,
+    int? devicesCount,
     String? errorMessage,
   }) = MoreDataState;
 }

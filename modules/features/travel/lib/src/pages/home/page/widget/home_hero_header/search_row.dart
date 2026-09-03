@@ -35,7 +35,7 @@ class _SearchRow extends StatelessWidget {
                   Assets.svg.searchLine.path.toSvgImage(
                     width: 20,
                     height: 20,
-                    tintColor: colors.colors.green,
+                    tintColor: colors.brandSeaBlue,
                   ),
                   const SizedBox(width: 8),
                   Expanded(
@@ -43,7 +43,7 @@ class _SearchRow extends StatelessWidget {
                       hintText,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                    ).bodyMd(color: colors.textIconColor.tertiary),
+                    ).bodyMd(color: colors.textIconColor.secondary),
                   ),
                 ],
               ),
@@ -56,7 +56,7 @@ class _SearchRow extends StatelessWidget {
           child: Assets.svg.iconQrCode.path.toSvgImage(
             width: 24,
             height: 24,
-            tintColor: colors.colors.green,
+            tintColor: colors.brandSeaBlue,
           ),
         ),
         const SizedBox(width: 6),

@@ -104,6 +104,14 @@ class FeatureTravelNavExtension {
     );
   }
 
+  void pushGiftPage() {
+    _context.pushType(AppNavPath.travel.travelHomeGiftPage);
+  }
+
+  void pushGiftHistory() {
+    _context.pushType(AppNavPath.travel.travelHomeGiftHistory);
+  }
+
   void pushNotificationsDetail({required NotificationItem item}) {
     _context.pushType(AppNavPath.travel.notificationsDetail, extra: item);
   }

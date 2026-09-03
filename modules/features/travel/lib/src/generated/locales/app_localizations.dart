@@ -787,6 +787,12 @@ abstract class FeatureTravelLocalizations {
   /// **'Мы готовим ваш подарок'**
   String get gift_second_page_subtitle;
 
+  /// No description provided for @gift_empty_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'У вас еще нет подарков'**
+  String get gift_empty_hint;
+
   /// No description provided for @gift_history.
   ///
   /// In ru, this message translates to:

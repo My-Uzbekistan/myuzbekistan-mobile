@@ -95,6 +95,9 @@ class LightColors extends _BaseColors {
         premiumPlanDark: const Color(0xff006f42),
         gift: const Color(0xff00b93f),
         giftLime: const Color(0xffadee5c),
+        giftSurface: const Color(0xff143327),
+        aqiModerateLabel: const Color(0xff4d3d0e),
+        aqiHazardous: const Color(0xff453442),
       );
 
   @override

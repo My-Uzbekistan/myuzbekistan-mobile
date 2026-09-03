@@ -178,6 +178,19 @@ class ShellMorePage extends HookWidget {
                                 ),
                                 onTap: () => context.more.pushChangeThemePage(),
                               ),
+                              if (userState != null)
+                                ProfileSettingsCell(
+                                  icon: Assets.svg.more.device.svg(),
+                                  title: context.localization.devices,
+                                  trailingText:
+                                      moreState.devicesCount?.toString(),
+                                  onTap: () async {
+                                    await context.more.pushDevicesPage();
+                                    moreBloc.add(
+                                      MoreEvent.fetchDevicesCount(),
+                                    );
+                                  },
+                                ),
                             ],
                           ),
 
@@ -330,10 +343,10 @@ class ShellMorePage extends HookWidget {
   }) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: context.appColors.background.elevation2,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(children: children),
     );

@@ -159,6 +159,9 @@ class AccentColors {
   final Color premiumPlanDark;
   final Color gift;
   final Color giftLime;
+  final Color giftSurface;
+  final Color aqiModerateLabel;
+  final Color aqiHazardous;
 
   AccentColors({
     required this.premium,
@@ -168,6 +171,9 @@ class AccentColors {
     required this.premiumPlanDark,
     required this.gift,
     required this.giftLime,
+    required this.giftSurface,
+    required this.aqiModerateLabel,
+    required this.aqiHazardous,
   });
 }
 

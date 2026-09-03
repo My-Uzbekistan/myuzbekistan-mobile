@@ -26,6 +26,10 @@ class FeatureMoreNavExtension {
     _context.pushType(AppNavPath.more.securityPage);
   }
 
+  Future<T?> pushDevicesPage<T>() {
+    return _context.pushType<T>(AppNavPath.more.devicesPage);
+  }
+
   void pushAuthPage() {
     _context.pushType(
       AppNavPath.more.authPage,

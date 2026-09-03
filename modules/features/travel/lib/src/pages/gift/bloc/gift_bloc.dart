@@ -28,6 +28,7 @@ class GiftBloc extends Bloc<GiftBlocEvent, GiftBlocState> {
         haveGift: false,
         claimStatus: null,
         activeClaim: null,
+        activeStatusCode: null,
       ),
     );
     try {
@@ -45,6 +46,7 @@ class GiftBloc extends Bloc<GiftBlocEvent, GiftBlocState> {
           isLoading: false,
           haveGift: false,
           claimStatus: ClaimStatus(timeLeft: 10, timeStatus: 2),
+          activeStatusCode: e is DioException ? e.response?.statusCode : null,
         ),
       );
     }

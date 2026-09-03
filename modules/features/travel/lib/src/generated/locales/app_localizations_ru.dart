@@ -426,6 +426,9 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   String get gift_second_page_subtitle => 'Мы готовим ваш подарок';
 
   @override
+  String get gift_empty_hint => 'У вас еще нет подарков';
+
+  @override
   String get gift_history => 'История призов';
 
   @override

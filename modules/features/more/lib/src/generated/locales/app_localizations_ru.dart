@@ -366,4 +366,37 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   @override
   String get biometricNotAvailable =>
       'Вход со сканером недоступен на вашем устройстве';
+
+  @override
+  String get devices => 'Устройства';
+
+  @override
+  String get thisDevice => 'Это устройство';
+
+  @override
+  String get activeSessions => 'Активные сеансы';
+
+  @override
+  String get terminateOtherSessions => 'Завершить все остальные сеансы';
+
+  @override
+  String get terminateConfirmTitle => 'Вы уверены, что хотите это завершить?';
+
+  @override
+  String get terminateOtherSessionsMessage => 'Это действие завершит работу всех остальных устройств';
+
+  @override
+  String get terminateSessionMessage => 'Это устройство выйдет из приложения';
+
+  @override
+  String get terminate => 'Завершить';
+
+  @override
+  String get deviceOnline => 'online';
+
+  @override
+  String get unknownDevice => 'Неизвестное устройство';
+
+  @override
+  String get noActiveSessions => 'Других активных сеансов нет';
 }

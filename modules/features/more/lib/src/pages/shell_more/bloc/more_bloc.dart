@@ -19,15 +19,18 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
   final AppStatusChangeListeners _appStatusChangeListeners;
   final SecurityStorage _securityStorage;
   final PremiumRepository _premiumRepository;
+  final DevicesRepository _devicesRepository;
 
   MoreBloc(
     this._securityStorage, {
     required Repository rp,
     required AppStatusChangeListeners appStatusChangeListeners,
     required PremiumRepository premiumRepository,
+    required DevicesRepository devicesRepository,
   }) : _repository = rp,
        _appStatusChangeListeners = appStatusChangeListeners,
        _premiumRepository = premiumRepository,
+       _devicesRepository = devicesRepository,
        super(
          MoreState(
            prayerWidgetChecked: _securityStorage.isShowPrayerTimes(),
@@ -37,6 +40,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     on<_MoreEventFetch>(_fetchData);
     on<_MoreCheckedPrayerWidget>(_checkedPrayerWidget);
     on<_MoreCheckedNotification>(_checkedNotification);
+    on<_MoreFetchDevicesCount>(_fetchDevicesCount);
     _init();
   }
 
@@ -114,6 +118,23 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     }
     await _loadPremiumStatus(emit);
     await _loadNotificationSettings(emit);
+    await _loadDevicesCount(emit);
+  }
+
+  Future<void> _fetchDevicesCount(
+    _MoreFetchDevicesCount event,
+    Emitter<MoreState> emit,
+  ) => _loadDevicesCount(emit);
+
+  Future<void> _loadDevicesCount(Emitter<MoreState> emit) async {
+    if (_securityStorage.getAccessToken() == null) {
+      emit(state.copyWith(devicesCount: null));
+      return;
+    }
+    try {
+      final sessions = await _devicesRepository.sessions();
+      emit(state.copyWith(devicesCount: sessions.length));
+    } catch (_) {}
   }
 
   Future<void> _loadNotificationSettings(Emitter<MoreState> emit) async {

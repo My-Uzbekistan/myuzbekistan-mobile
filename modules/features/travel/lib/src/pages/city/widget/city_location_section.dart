@@ -3,6 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/pages/city/widget/city_section.dart';
 
 class CityLocationSection extends StatelessWidget {
   final CityLocation location;
@@ -22,56 +23,39 @@ class CityLocationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: context.appColors.background.elevation1,
-        borderRadius: BorderRadius.circular(20),
-      ),
+    return CitySection(
+      title: location.title ?? context.localization.location,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: 12,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+          if ((location.regionName ?? "").isNotEmpty)
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 8,
               children: [
-                Text(
-                  location.title ?? context.localization.location,
-                ).h3(),
-                if ((location.regionName ?? "").isNotEmpty)
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 8,
+                SizedBox.square(
+                  dimension: 24,
+                  child: Assets.svg.pinLocationLine.path.toSvgImage(
+                    fit: BoxFit.contain,
+                    tintColor: context.appColors.textIconColor.primary,
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    spacing: 4,
                     children: [
-                      SizedBox.square(
-                        dimension: 24,
-                        child: Assets.svg.pinLocationLine.path.toSvgImage(
-                          fit: BoxFit.contain,
-                          tintColor: context.appColors.textIconColor.primary,
+                      Text(location.regionName!).bodyMd(),
+                      if ((location.distanceText ?? "").isNotEmpty)
+                        Text(location.distanceText!).bodyMd(
+                          color: context.appColors.textIconColor.tertiary,
                         ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 4,
-                          children: [
-                            Text(location.regionName!).bodyMd(),
-                            if ((location.distanceText ?? "").isNotEmpty)
-                              Text(location.distanceText!).bodyMd(
-                                color:
-                                    context.appColors.textIconColor.tertiary,
-                              ),
-                          ],
-                        ),
-                      ),
                     ],
                   ),
+                ),
               ],
             ),
-          ),
           if (location.hasCoordinates) _map(context),
         ],
       ),

@@ -1,7 +1,5 @@
 part of 'gift_bloc.dart';
 
-
-
 @freezed
 abstract class GiftBlocEvent with _$GiftBlocEvent {
   factory GiftBlocEvent.initial() = _InitialGiftBlocEvent;
@@ -9,4 +7,3 @@ abstract class GiftBlocEvent with _$GiftBlocEvent {
   factory GiftBlocEvent.loadGiftHistory() = _LoadGiftHistoryGiftBlocEvent;
   factory GiftBlocEvent.clearActiveGift() = _ClearActiveGiftBlocEvent;
 }
-

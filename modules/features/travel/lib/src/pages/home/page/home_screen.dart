@@ -154,6 +154,9 @@ class HomeScreen extends HookWidget {
                             },
                       onNotificationTap: () =>
                           context.travel.pushNotifications(),
+                      onGiftTap: Toggle.giftToggle
+                          ? () => context.travel.pushGiftPage()
+                          : null,
                       onSearchTap: () => context.travel
                           .pushContentByCategoryPage(
                             context.localization.search,

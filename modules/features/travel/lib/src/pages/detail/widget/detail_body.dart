@@ -105,17 +105,13 @@ class DetailBody extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(24),
-                            topLeft: Radius.circular(24),
-                          ),
-                          child: Container(
-                            height: 24,
-                            color: context.appColors.background.underlayer,
-                          ),
+                      ClipRRect(
+                        borderRadius: const BorderRadius.vertical(
+                          top: Radius.circular(20),
+                        ),
+                        child: Container(
+                          height: 20,
+                          color: context.appColors.background.elevation1,
                         ),
                       ),
                     ],
@@ -129,7 +125,10 @@ class DetailBody extends StatelessWidget {
               ),
               sliver: SliverList(
                 delegate: SliverChildListDelegate([
-                  DetailSectionCard(child: DetailHeader(content: content)),
+                  DetailSectionCard(
+                    squareTop: true,
+                    child: DetailHeader(content: content),
+                  ),
                   if (isLoading)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 24),

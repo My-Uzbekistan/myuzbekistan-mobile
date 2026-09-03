@@ -320,7 +320,7 @@ String toString() {
 /// @nodoc
 mixin _$GiftBlocState {
 
- bool get isLoading; dynamic get haveGift; ClaimStatus? get claimStatus; dynamic get giftActivated; ClaimHistory? get activeClaim; List<ClaimHistory> get items; String? get errorMessage;
+ bool get isLoading; dynamic get haveGift; ClaimStatus? get claimStatus; int? get activeStatusCode; dynamic get giftActivated; ClaimHistory? get activeClaim; List<ClaimHistory> get items; String? get errorMessage;
 /// Create a copy of GiftBlocState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -331,16 +331,16 @@ $GiftBlocStateCopyWith<GiftBlocState> get copyWith => _$GiftBlocStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GiftBlocState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.haveGift, haveGift)&&(identical(other.claimStatus, claimStatus) || other.claimStatus == claimStatus)&&const DeepCollectionEquality().equals(other.giftActivated, giftActivated)&&(identical(other.activeClaim, activeClaim) || other.activeClaim == activeClaim)&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GiftBlocState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.haveGift, haveGift)&&(identical(other.claimStatus, claimStatus) || other.claimStatus == claimStatus)&&(identical(other.activeStatusCode, activeStatusCode) || other.activeStatusCode == activeStatusCode)&&const DeepCollectionEquality().equals(other.giftActivated, giftActivated)&&(identical(other.activeClaim, activeClaim) || other.activeClaim == activeClaim)&&const DeepCollectionEquality().equals(other.items, items)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(haveGift),claimStatus,const DeepCollectionEquality().hash(giftActivated),activeClaim,const DeepCollectionEquality().hash(items),errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(haveGift),claimStatus,activeStatusCode,const DeepCollectionEquality().hash(giftActivated),activeClaim,const DeepCollectionEquality().hash(items),errorMessage);
 
 @override
 String toString() {
-  return 'GiftBlocState(isLoading: $isLoading, haveGift: $haveGift, claimStatus: $claimStatus, giftActivated: $giftActivated, activeClaim: $activeClaim, items: $items, errorMessage: $errorMessage)';
+  return 'GiftBlocState(isLoading: $isLoading, haveGift: $haveGift, claimStatus: $claimStatus, activeStatusCode: $activeStatusCode, giftActivated: $giftActivated, activeClaim: $activeClaim, items: $items, errorMessage: $errorMessage)';
 }
 
 
@@ -351,7 +351,7 @@ abstract mixin class $GiftBlocStateCopyWith<$Res>  {
   factory $GiftBlocStateCopyWith(GiftBlocState value, $Res Function(GiftBlocState) _then) = _$GiftBlocStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoading, dynamic haveGift, ClaimStatus? claimStatus, dynamic giftActivated, ClaimHistory? activeClaim, List<ClaimHistory> items, String? errorMessage
+ bool isLoading, dynamic haveGift, ClaimStatus? claimStatus, int? activeStatusCode, dynamic giftActivated, ClaimHistory? activeClaim, List<ClaimHistory> items, String? errorMessage
 });
 
 
@@ -368,12 +368,13 @@ class _$GiftBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of GiftBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? haveGift = freezed,Object? claimStatus = freezed,Object? giftActivated = freezed,Object? activeClaim = freezed,Object? items = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoading = null,Object? haveGift = freezed,Object? claimStatus = freezed,Object? activeStatusCode = freezed,Object? giftActivated = freezed,Object? activeClaim = freezed,Object? items = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,haveGift: freezed == haveGift ? _self.haveGift : haveGift // ignore: cast_nullable_to_non_nullable
 as dynamic,claimStatus: freezed == claimStatus ? _self.claimStatus : claimStatus // ignore: cast_nullable_to_non_nullable
-as ClaimStatus?,giftActivated: freezed == giftActivated ? _self.giftActivated : giftActivated // ignore: cast_nullable_to_non_nullable
+as ClaimStatus?,activeStatusCode: freezed == activeStatusCode ? _self.activeStatusCode : activeStatusCode // ignore: cast_nullable_to_non_nullable
+as int?,giftActivated: freezed == giftActivated ? _self.giftActivated : giftActivated // ignore: cast_nullable_to_non_nullable
 as dynamic,activeClaim: freezed == activeClaim ? _self.activeClaim : activeClaim // ignore: cast_nullable_to_non_nullable
 as ClaimHistory?,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
 as List<ClaimHistory>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -462,10 +463,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  dynamic haveGift,  ClaimStatus? claimStatus,  dynamic giftActivated,  ClaimHistory? activeClaim,  List<ClaimHistory> items,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoading,  dynamic haveGift,  ClaimStatus? claimStatus,  int? activeStatusCode,  dynamic giftActivated,  ClaimHistory? activeClaim,  List<ClaimHistory> items,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GiftBlocState() when $default != null:
-return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.giftActivated,_that.activeClaim,_that.items,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.activeStatusCode,_that.giftActivated,_that.activeClaim,_that.items,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -483,10 +484,10 @@ return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.giftActiv
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  dynamic haveGift,  ClaimStatus? claimStatus,  dynamic giftActivated,  ClaimHistory? activeClaim,  List<ClaimHistory> items,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoading,  dynamic haveGift,  ClaimStatus? claimStatus,  int? activeStatusCode,  dynamic giftActivated,  ClaimHistory? activeClaim,  List<ClaimHistory> items,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _GiftBlocState():
-return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.giftActivated,_that.activeClaim,_that.items,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.activeStatusCode,_that.giftActivated,_that.activeClaim,_that.items,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -503,10 +504,10 @@ return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.giftActiv
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  dynamic haveGift,  ClaimStatus? claimStatus,  dynamic giftActivated,  ClaimHistory? activeClaim,  List<ClaimHistory> items,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoading,  dynamic haveGift,  ClaimStatus? claimStatus,  int? activeStatusCode,  dynamic giftActivated,  ClaimHistory? activeClaim,  List<ClaimHistory> items,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _GiftBlocState() when $default != null:
-return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.giftActivated,_that.activeClaim,_that.items,_that.errorMessage);case _:
+return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.activeStatusCode,_that.giftActivated,_that.activeClaim,_that.items,_that.errorMessage);case _:
   return null;
 
 }
@@ -518,12 +519,13 @@ return $default(_that.isLoading,_that.haveGift,_that.claimStatus,_that.giftActiv
 
 
 class _GiftBlocState implements GiftBlocState {
-   _GiftBlocState({this.isLoading = true, this.haveGift = false, this.claimStatus, this.giftActivated = false, this.activeClaim, final  List<ClaimHistory> items = const [], this.errorMessage}): _items = items;
+   _GiftBlocState({this.isLoading = true, this.haveGift = false, this.claimStatus, this.activeStatusCode, this.giftActivated = false, this.activeClaim, final  List<ClaimHistory> items = const [], this.errorMessage}): _items = items;
   
 
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  dynamic haveGift;
 @override final  ClaimStatus? claimStatus;
+@override final  int? activeStatusCode;
 @override@JsonKey() final  dynamic giftActivated;
 @override final  ClaimHistory? activeClaim;
  final  List<ClaimHistory> _items;
@@ -545,16 +547,16 @@ _$GiftBlocStateCopyWith<_GiftBlocState> get copyWith => __$GiftBlocStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GiftBlocState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.haveGift, haveGift)&&(identical(other.claimStatus, claimStatus) || other.claimStatus == claimStatus)&&const DeepCollectionEquality().equals(other.giftActivated, giftActivated)&&(identical(other.activeClaim, activeClaim) || other.activeClaim == activeClaim)&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GiftBlocState&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&const DeepCollectionEquality().equals(other.haveGift, haveGift)&&(identical(other.claimStatus, claimStatus) || other.claimStatus == claimStatus)&&(identical(other.activeStatusCode, activeStatusCode) || other.activeStatusCode == activeStatusCode)&&const DeepCollectionEquality().equals(other.giftActivated, giftActivated)&&(identical(other.activeClaim, activeClaim) || other.activeClaim == activeClaim)&&const DeepCollectionEquality().equals(other._items, _items)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(haveGift),claimStatus,const DeepCollectionEquality().hash(giftActivated),activeClaim,const DeepCollectionEquality().hash(_items),errorMessage);
+int get hashCode => Object.hash(runtimeType,isLoading,const DeepCollectionEquality().hash(haveGift),claimStatus,activeStatusCode,const DeepCollectionEquality().hash(giftActivated),activeClaim,const DeepCollectionEquality().hash(_items),errorMessage);
 
 @override
 String toString() {
-  return 'GiftBlocState(isLoading: $isLoading, haveGift: $haveGift, claimStatus: $claimStatus, giftActivated: $giftActivated, activeClaim: $activeClaim, items: $items, errorMessage: $errorMessage)';
+  return 'GiftBlocState(isLoading: $isLoading, haveGift: $haveGift, claimStatus: $claimStatus, activeStatusCode: $activeStatusCode, giftActivated: $giftActivated, activeClaim: $activeClaim, items: $items, errorMessage: $errorMessage)';
 }
 
 
@@ -565,7 +567,7 @@ abstract mixin class _$GiftBlocStateCopyWith<$Res> implements $GiftBlocStateCopy
   factory _$GiftBlocStateCopyWith(_GiftBlocState value, $Res Function(_GiftBlocState) _then) = __$GiftBlocStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoading, dynamic haveGift, ClaimStatus? claimStatus, dynamic giftActivated, ClaimHistory? activeClaim, List<ClaimHistory> items, String? errorMessage
+ bool isLoading, dynamic haveGift, ClaimStatus? claimStatus, int? activeStatusCode, dynamic giftActivated, ClaimHistory? activeClaim, List<ClaimHistory> items, String? errorMessage
 });
 
 
@@ -582,12 +584,13 @@ class __$GiftBlocStateCopyWithImpl<$Res>
 
 /// Create a copy of GiftBlocState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? haveGift = freezed,Object? claimStatus = freezed,Object? giftActivated = freezed,Object? activeClaim = freezed,Object? items = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoading = null,Object? haveGift = freezed,Object? claimStatus = freezed,Object? activeStatusCode = freezed,Object? giftActivated = freezed,Object? activeClaim = freezed,Object? items = null,Object? errorMessage = freezed,}) {
   return _then(_GiftBlocState(
 isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,haveGift: freezed == haveGift ? _self.haveGift : haveGift // ignore: cast_nullable_to_non_nullable
 as dynamic,claimStatus: freezed == claimStatus ? _self.claimStatus : claimStatus // ignore: cast_nullable_to_non_nullable
-as ClaimStatus?,giftActivated: freezed == giftActivated ? _self.giftActivated : giftActivated // ignore: cast_nullable_to_non_nullable
+as ClaimStatus?,activeStatusCode: freezed == activeStatusCode ? _self.activeStatusCode : activeStatusCode // ignore: cast_nullable_to_non_nullable
+as int?,giftActivated: freezed == giftActivated ? _self.giftActivated : giftActivated // ignore: cast_nullable_to_non_nullable
 as dynamic,activeClaim: freezed == activeClaim ? _self.activeClaim : activeClaim // ignore: cast_nullable_to_non_nullable
 as ClaimHistory?,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
 as List<ClaimHistory>,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable

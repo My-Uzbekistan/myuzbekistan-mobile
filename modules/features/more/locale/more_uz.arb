@@ -107,5 +107,16 @@
   "viaGoogle": "Google orqali",
   "scannerLogin": "Skaner orqali kirish",
   "scannerLoginPrompt": "Skaner orqali kirishni yoqish uchun tasdiqlang",
-  "biometricNotAvailable": "Qurilmangizda skaner orqali kirish mavjud emas"
+  "biometricNotAvailable": "Qurilmangizda skaner orqali kirish mavjud emas",
+  "devices": "Qurilmalar",
+  "thisDevice": "Bu qurilma",
+  "activeSessions": "Faol seanslar",
+  "terminateOtherSessions": "Barcha boshqa seanslarni tugatish",
+  "terminateConfirmTitle": "Buni tugatmoqchimisiz?",
+  "terminateOtherSessionsMessage": "Bu amal barcha boshqa qurilmalarning ishini tugatadi",
+  "terminateSessionMessage": "Bu qurilma ilovadan chiqarib yuboriladi",
+  "terminate": "Tugatish",
+  "deviceOnline": "online",
+  "unknownDevice": "Noma'lum qurilma",
+  "noActiveSessions": "Boshqa faol seans yo'q"
 }

@@ -5,7 +5,8 @@ abstract class GiftBlocState with _$GiftBlocState {
   factory GiftBlocState({
     @Default(true) bool isLoading,
     @Default(false) haveGift,
-     ClaimStatus? claimStatus,
+    ClaimStatus? claimStatus,
+    int? activeStatusCode,
     @Default(false) giftActivated,
     ClaimHistory? activeClaim,
     @Default([]) List<ClaimHistory> items,

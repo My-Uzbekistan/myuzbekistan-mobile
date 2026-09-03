@@ -9,6 +9,10 @@ import 'dart:async' as _i687;
 import 'package:data/src/contract/contract_service.dart' as _i930;
 import 'package:data/src/contract/repository/contract_repository_impl.dart'
     as _i359;
+import 'package:data/src/devices/src/network/api/devices_api_service.dart'
+    as _i79;
+import 'package:data/src/devices/src/network/repository/devices_repository_impl.dart'
+    as _i507;
 import 'package:data/src/di/module/locale_module.dart' as _i168;
 import 'package:data/src/di/module/network_module.dart' as _i236;
 import 'package:data/src/finance/src/network/api/finance_api_service.dart'
@@ -78,6 +82,8 @@ class DataPackageModule extends _i526.MicroPackageModule {
         ));
     gh.factory<_i930.ContractService>(
         () => _i930.ContractService(gh<_i811.Dio>()));
+    gh.factory<_i79.DevicesApiService>(
+        () => _i79.DevicesApiService(gh<_i361.Dio>()));
     gh.factory<_i210.FinanceApiService>(
         () => _i210.FinanceApiService(gh<_i361.Dio>()));
     gh.factory<_i522.MarketApiService>(
@@ -89,6 +95,8 @@ class DataPackageModule extends _i526.MicroPackageModule {
     gh.factory<_i926.RestService>(() => _i926.RestService(gh<_i811.Dio>()));
     gh.factory<_i494.MuseumRepository>(
         () => _i47.MuseumRepositoryImpl(gh<_i672.MuseumApiService>()));
+    gh.factory<_i494.DevicesRepository>(
+        () => _i507.DevicesRepositoryImpl(gh<_i79.DevicesApiService>()));
     gh.factory<_i494.Repository>(() => _i305.RepositoryImp(
           gh<_i926.RestService>(),
           gh<_i494.SecurityStorage>(),

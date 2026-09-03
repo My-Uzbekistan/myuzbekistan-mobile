@@ -108,5 +108,16 @@
   "viaGoogle": "Через Google",
   "scannerLogin": "Вход со сканером",
   "scannerLoginPrompt": "Подтвердите, чтобы включить вход со сканером",
-  "biometricNotAvailable": "Вход со сканером недоступен на вашем устройстве"
+  "biometricNotAvailable": "Вход со сканером недоступен на вашем устройстве",
+  "devices": "Устройства",
+  "thisDevice": "Это устройство",
+  "activeSessions": "Активные сеансы",
+  "terminateOtherSessions": "Завершить все остальные сеансы",
+  "terminateConfirmTitle": "Вы уверены, что хотите это завершить?",
+  "terminateOtherSessionsMessage": "Это действие завершит работу всех остальных устройств",
+  "terminateSessionMessage": "Это устройство выйдет из приложения",
+  "terminate": "Завершить",
+  "deviceOnline": "online",
+  "unknownDevice": "Неизвестное устройство",
+  "noActiveSessions": "Других активных сеансов нет"
 }

@@ -164,6 +164,13 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
           b.premiumPlanDark,
       gift: Color.lerp(a.gift, b.gift, t) ?? b.gift,
       giftLime: Color.lerp(a.giftLime, b.giftLime, t) ?? b.giftLime,
+      giftSurface:
+          Color.lerp(a.giftSurface, b.giftSurface, t) ?? b.giftSurface,
+      aqiModerateLabel:
+          Color.lerp(a.aqiModerateLabel, b.aqiModerateLabel, t) ??
+              b.aqiModerateLabel,
+      aqiHazardous:
+          Color.lerp(a.aqiHazardous, b.aqiHazardous, t) ?? b.aqiHazardous,
     );
   }
 

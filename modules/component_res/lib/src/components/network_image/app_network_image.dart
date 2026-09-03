@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppNetworkImage extends StatefulWidget {
   final String url;
@@ -45,6 +46,23 @@ class _AppNetworkImageState extends State<AppNetworkImage>
 
     if (widget.url.isEmpty) {
       return widget.placeholder;
+    }
+
+    if (widget.url.toLowerCase().endsWith(".svg")) {
+      return SvgPicture.network(
+        widget.url,
+        width: widget.width,
+        height: widget.height,
+        fit: widget.fit ?? BoxFit.contain,
+        alignment: widget.alignment,
+        colorFilter: widget.color == null
+            ? null
+            : ColorFilter.mode(
+                widget.color!,
+                widget.colorBlendMode ?? BlendMode.srcIn,
+              ),
+        placeholderBuilder: (_) => widget.loadingWidget ?? widget.placeholder,
+      );
     }
 
     return ExtendedImage.network(

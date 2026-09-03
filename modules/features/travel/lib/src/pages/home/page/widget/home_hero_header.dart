@@ -10,6 +10,7 @@ part 'home_hero_header/collapsing_card.dart';
 part 'home_hero_header/header_metrics.dart';
 part 'home_hero_header/home_quick_action.dart';
 part 'home_hero_header/info_row.dart';
+part 'home_hero_header/prayer_pill.dart';
 part 'home_hero_header/quick_actions.dart';
 part 'home_hero_header/search_row.dart';
 
@@ -27,6 +28,7 @@ class HomeHeader extends StatelessWidget {
     this.airQualityLevel,
     this.onRegionTap,
     this.onNotificationTap,
+    this.onGiftTap,
     this.onSearchTap,
     this.onQrTap,
     this.onFavoriteTap,
@@ -48,6 +50,7 @@ class HomeHeader extends StatelessWidget {
 
   final VoidCallback? onRegionTap;
   final VoidCallback? onNotificationTap;
+  final VoidCallback? onGiftTap;
   final VoidCallback? onSearchTap;
   final VoidCallback? onQrTap;
   final VoidCallback? onFavoriteTap;
@@ -63,12 +66,20 @@ class HomeHeader extends StatelessWidget {
       temperature: temperature,
       airQuality: airQuality,
       airQualityLevel: airQualityLevel,
-      currentPrayer: currentPrayer,
       onRegionTap: onRegionTap,
       onNotificationTap: onNotificationTap,
-      onPrayerExpired: onPrayerExpired,
-      onPrayerTap: onPrayerTap,
+      onGiftTap: onGiftTap,
     );
+    final prayerRow = currentPrayer?.hasNext == true
+        ? Align(
+            alignment: Alignment.centerLeft,
+            child: _PrayerPill(
+              current: currentPrayer!,
+              onExpired: onPrayerExpired,
+              onTap: onPrayerTap,
+            ),
+          )
+        : const SizedBox.shrink();
     final quickRow = _QuickActions(actions: quickActions);
     final searchRow = _SearchRow(
       hintText: hintText,
@@ -103,6 +114,7 @@ class HomeHeader extends StatelessWidget {
                 backgroundImageUrl: backgroundImageUrl,
                 isBackgroundLoading: isBackgroundLoading,
                 infoRow: infoRow,
+                prayerRow: prayerRow,
                 quickRow: quickRow,
               ),
               Positioned(

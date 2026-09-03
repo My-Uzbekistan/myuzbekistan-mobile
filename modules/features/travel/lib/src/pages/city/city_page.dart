@@ -9,16 +9,35 @@ import 'package:travel/src/pages/city/widget/city_location_section.dart';
 import 'package:travel/src/pages/city/widget/city_summary.dart';
 import 'package:travel/src/pages/city/widget/city_tickets_section.dart';
 
-class CityPage extends StatelessWidget {
+class CityPage extends HookWidget {
   const CityPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final scrollController = useScrollController();
+    final isCollapsed = useState(false);
+
+    final topInset = MediaQuery.paddingOf(context).top;
+    final headerHeight = MediaQuery.sizeOf(context).width * 332 / 375;
+    final collapseOffset = headerHeight - kToolbarHeight - topInset;
+
+    useEffect(() {
+      void onScroll() {
+        if (!scrollController.hasClients) return;
+        isCollapsed.value = scrollController.offset > collapseOffset;
+      }
+
+      scrollController.addListener(onScroll);
+      return () => scrollController.removeListener(onScroll);
+    }, [scrollController, collapseOffset]);
+
     return Scaffold(
       backgroundColor: context.appColors.background.underlayer,
       body: BlocConsumer<CityBloc, CityState>(
-        listenWhen: (prev, cur) =>
-            cur.errorMessage != null && prev.errorMessage != cur.errorMessage,
+        listenWhen:
+            (prev, cur) =>
+                cur.errorMessage != null &&
+                prev.errorMessage != cur.errorMessage,
         listener: (context, state) {
           if (state.errorMessage != null) {
             Toast.showToast(state.errorMessage!);
@@ -28,80 +47,121 @@ class CityPage extends StatelessWidget {
           final city = state.city;
           return Stack(
             children: [
-              if (city != null)
-                _CityBody(city: city)
-              else if (state.isLoading)
-                Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: LoadingIndicator(),
-                  ),
+              CustomScrollView(
+                controller: scrollController,
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
                 ),
-              Positioned(
-                left: 16,
-                top: MediaQuery.paddingOf(context).top,
-                child: RoundedButton.arrowLeft(onPressed: () => context.pop()),
+                slivers: [
+                  SliverStack(
+                    children: [
+                      SliverAppBar(
+                        expandedHeight: headerHeight,
+                        stretch: true,
+                        stretchTriggerOffset: 0.9,
+                        automaticallyImplyLeading: false,
+                        scrolledUnderElevation: 0,
+                        elevation: 0,
+                        shadowColor: Colors.transparent,
+                        backgroundColor: Colors.transparent,
+                        systemOverlayStyle: context.systemUiOverlyStyle
+                            .copyWith(statusBarBrightness: Brightness.dark),
+                        flexibleSpace: FlexibleSpaceBar(
+                          collapseMode: CollapseMode.parallax,
+                          stretchModes: const [StretchMode.zoomBackground],
+                          background: _CityPhoto(photo: city?.photo),
+                        ),
+                      ),
+                      if (isCollapsed.value)
+                        SliverPinnedHeader(
+                          child: SizedBox(
+                            height: kToolbarHeight + topInset,
+                            child: AppGradientMask(
+                              gradientColor:
+                                  context.appColors.background.underlayer,
+                            ),
+                          ),
+                        ),
+                      SliverPositioned.fill(
+                        bottom: -1,
+                        top: 0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ClipRRect(
+                              borderRadius: const BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                              child: Container(
+                                height: 20,
+                                color: context.appColors.background.elevation1,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.only(
+                      bottom: MediaQuery.paddingOf(context).bottom + 16,
+                    ),
+                    sliver: SliverList(
+                      delegate: SliverChildListDelegate(
+                        city == null
+                            ? _placeholder(state.isLoading)
+                            : _sections(context, city),
+                      ),
+                    ),
+                  ),
+                ],
               ),
+              _actions(context),
             ],
           );
         },
       ),
     );
   }
-}
 
-class _CityBody extends StatelessWidget {
-  final CityDetail city;
-
-  const _CityBody({required this.city});
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          expandedHeight: 312,
-          stretch: true,
-          automaticallyImplyLeading: false,
-          scrolledUnderElevation: 0,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          systemOverlayStyle: context.systemUiOverlyStyle.copyWith(
-            statusBarBrightness: Brightness.dark,
-          ),
-          flexibleSpace: FlexibleSpaceBar(
-            collapseMode: CollapseMode.parallax,
-            stretchModes: const [StretchMode.zoomBackground],
-            background: _CityPhoto(photo: city.photo),
-          ),
-        ),
-        SliverList(delegate: SliverChildListDelegate(_sections(context))),
-      ],
+  Widget _actions(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 16,
+      ).copyWith(top: MediaQuery.paddingOf(context).top),
+      child: Row(
+        children: [RoundedButton.arrowLeft(onPressed: () => context.pop())],
+      ),
     );
   }
 
-  List<Widget> _sections(BuildContext context) {
+  List<Widget> _placeholder(bool isLoading) {
+    if (!isLoading) return const [];
+    return [
+      const Padding(
+        padding: EdgeInsets.symmetric(vertical: 24),
+        child: Center(child: LoadingIndicator()),
+      ),
+    ];
+  }
+
+  List<Widget> _sections(BuildContext context, CityDetail city) {
     final location = city.location;
     final tickets = city.tickets;
-    final sections = <Widget>[
-      CitySummary(name: city.name, subtitle: city.subtitle),
-      if (location != null) CityLocationSection(location: location),
-    ];
-
     final blocks = <Widget>[
       for (final block in city.blocks)
         CityBlockSection(
           block: block,
-          onSeeAll: () => context.travel.pushContentByCategoryPage(
-            block.title,
-            block.categoryId,
-          ),
-          onItemTap: (item) => context.travel.pushDetailPage(
-            contentId: item.contentId,
-            content: item.toContentDetail(categoryName: block.title),
-          ),
+          onSeeAll:
+              () => context.travel.pushContentByCategoryPage(
+                block.title,
+                block.categoryId,
+              ),
+          onItemTap:
+              (item) => context.travel.pushDetailPage(
+                contentId: item.contentId,
+                content: item.toContentDetail(categoryName: block.title),
+              ),
         ),
     ];
     if (tickets != null && tickets.items.isNotEmpty) {
@@ -112,9 +172,9 @@ class _CityBody extends StatelessWidget {
     }
 
     return [
-      ...sections,
+      CitySummary(name: city.name, subtitle: city.subtitle),
+      if (location != null) CityLocationSection(location: location),
       ...blocks,
-      SizedBox(height: MediaQuery.paddingOf(context).bottom + 16),
     ];
   }
 }
@@ -138,6 +198,7 @@ class _CityPhoto extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: SizedBox(
             height: 84,
+            width: double.infinity,
             child: DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -149,7 +210,6 @@ class _CityPhoto extends StatelessWidget {
                   ],
                 ),
               ),
-              child: const SizedBox(width: double.infinity),
             ),
           ),
         ),

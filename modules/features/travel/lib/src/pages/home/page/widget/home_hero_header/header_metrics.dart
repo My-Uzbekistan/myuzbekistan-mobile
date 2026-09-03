@@ -1,15 +1,15 @@
 part of '../home_hero_header.dart';
 
-const double _kExpanded = 305;
-const double _kCollapsed = 84;
-const double _kInfoTop = 24;
-const double _kQuickTop = 148;
+const double _kExpanded = 295;
+const double _kCollapsed = 72;
+const double _kInfoTop = 12;
+const double _kPrayerTop = 64;
+const double _kQuickTop = 154;
 const double _kSearchH = 48;
+const double _kOverhang = 24;
 const double _kSearchBottomPad = 16;
 const double _kRadius = 28;
 const double _kHPad = 16;
-
-const double _kOverhangMax = _kSearchH / 2 + _kSearchBottomPad;
 
 LinearGradient _imageOverlay(BuildContext context) {
   final scrim = context.appColors.service.scrim;
@@ -28,7 +28,7 @@ LinearGradient _imageOverlay(BuildContext context) {
 List<BoxShadow> _searchShadow(BuildContext context) {
   final shadow = context.appColors.service.shadow;
   return [
-    BoxShadow(color: shadow, blurRadius: 40, offset: const Offset(0, 16)),
+    BoxShadow(color: shadow, blurRadius: 124, offset: const Offset(0, 45)),
     BoxShadow(color: shadow, blurRadius: 16, offset: const Offset(0, 6)),
   ];
 }
@@ -45,10 +45,10 @@ class _HeaderMetrics {
       t: t,
       overscroll: overscroll,
       zoom: 1.0 + (overscroll / 260).clamp(0.0, 0.6),
-      contentOpacity: (1 - t * 2.2).clamp(0.0, 1.0),
+      contentOpacity: (1 - t * 2.8).clamp(0.0, 1.0),
       imageOpacity: 1 - Curves.easeIn.transform(t),
-      searchTop: topInset + belowH - _kSearchH - _kSearchBottomPad,
-      cardBottom: topInset + belowH - _kOverhangMax * (1 - t),
+      searchTop: topInset + belowH - _kSearchH - _kSearchBottomPad * t,
+      cardBottom: topInset + belowH - _kOverhang * (1 - t),
     );
   }
 

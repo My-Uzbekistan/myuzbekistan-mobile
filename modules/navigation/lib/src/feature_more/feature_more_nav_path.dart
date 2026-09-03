@@ -44,6 +44,9 @@ class _FeatureMoreNavPath {
   AppNavPath get securityPage =>
       _NavPathImpl(name: "feature_more_security_page", path: "/securityPage");
 
+  AppNavPath get devicesPage =>
+      _NavPathImpl(name: "feature_more_devices_page", path: "/devicesPage");
+
   AppNavPath get aboutUsInfoPage => _NavPathImpl(
     name: "feature_more_about_us_info_page",
     path: "/aboutUsInfoPage",

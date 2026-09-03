@@ -111,5 +111,16 @@
   "viaGoogle": "Via Google",
   "scannerLogin": "Scanner login",
   "scannerLoginPrompt": "Confirm to enable scanner login",
-  "biometricNotAvailable": "Scanner login is not available on your device"
+  "biometricNotAvailable": "Scanner login is not available on your device",
+  "devices": "Devices",
+  "thisDevice": "This device",
+  "activeSessions": "Active sessions",
+  "terminateOtherSessions": "End all other sessions",
+  "terminateConfirmTitle": "Are you sure you want to end this?",
+  "terminateOtherSessionsMessage": "This action will end the session on all other devices",
+  "terminateSessionMessage": "This device will be signed out of the app",
+  "terminate": "End",
+  "deviceOnline": "online",
+  "unknownDevice": "Unknown device",
+  "noActiveSessions": "No other active sessions"
 }

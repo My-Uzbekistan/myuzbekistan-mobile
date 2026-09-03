@@ -385,10 +385,8 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Возвращайтесь через $count минут',
-      many: 'Возвращайтесь через $count минут',
-      few: 'Возвращайтесь через $count минуты',
-      one: 'Возвращайтесь через $count минуту',
+      other: '$count minutda qayting',
+      one: '1 minutda qayting',
     );
     return '$_temp0';
   }
@@ -417,6 +415,9 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get gift_second_page_subtitle => 'Sovg‘angiz tayyorlanmoqda';
+
+  @override
+  String get gift_empty_hint => 'Sizda hali sovg\'alar yo\'q';
 
   @override
   String get gift_history => 'Sovg‘alar tarixi';

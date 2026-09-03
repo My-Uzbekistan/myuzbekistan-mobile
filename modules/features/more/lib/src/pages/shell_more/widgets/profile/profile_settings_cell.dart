@@ -49,7 +49,7 @@ class ProfileSettingsCell extends StatelessWidget {
         alignment: Alignment.centerLeft,
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(
-          spacing: 16,
+          spacing: 8,
           children: [
             Container(
               padding: const EdgeInsets.all(8),

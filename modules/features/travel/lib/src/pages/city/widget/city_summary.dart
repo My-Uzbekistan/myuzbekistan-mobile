@@ -1,5 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
+import 'package:travel/src/pages/city/widget/city_section.dart';
 
 class CitySummary extends StatelessWidget {
   final String name;
@@ -9,13 +10,8 @@ class CitySummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: context.appColors.background.elevation1,
-        borderRadius: BorderRadius.circular(20),
-      ),
+    return CitySection(
+      squareTop: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         spacing: 16,

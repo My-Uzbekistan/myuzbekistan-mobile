@@ -368,4 +368,37 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   @override
   String get biometricNotAvailable =>
       'Qurilmangizda skaner orqali kirish mavjud emas';
+
+  @override
+  String get devices => 'Qurilmalar';
+
+  @override
+  String get thisDevice => 'Bu qurilma';
+
+  @override
+  String get activeSessions => 'Faol seanslar';
+
+  @override
+  String get terminateOtherSessions => 'Barcha boshqa seanslarni tugatish';
+
+  @override
+  String get terminateConfirmTitle => 'Buni tugatmoqchimisiz?';
+
+  @override
+  String get terminateOtherSessionsMessage => 'Bu amal barcha boshqa qurilmalarning ishini tugatadi';
+
+  @override
+  String get terminateSessionMessage => 'Bu qurilma ilovadan chiqarib yuboriladi';
+
+  @override
+  String get terminate => 'Tugatish';
+
+  @override
+  String get deviceOnline => 'online';
+
+  @override
+  String get unknownDevice => 'Noma\'lum qurilma';
+
+  @override
+  String get noActiveSessions => 'Boshqa faol seans yo\'q';
 }
