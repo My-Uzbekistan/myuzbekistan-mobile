@@ -8,6 +8,7 @@ import 'dart:async' as _i687;
 
 import 'package:domain/domain.dart' as _i494;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:travel/src/pages/ai_guide/bloc/ai_guide_cubit.dart' as _i916;
 import 'package:travel/src/pages/catalog_investments/bloc/investments_bloc.dart'
     as _i369;
 import 'package:travel/src/pages/catalog_investments/pages/search_page/bloc/invest_search_bloc.dart'
@@ -71,6 +72,10 @@ class TravelPackageModule extends _i526.MicroPackageModule {
     gh.factory<_i157.MuseumTicketsBloc>(
         () => _i157.MuseumTicketsBloc(gh<_i494.MuseumRepository>()));
     gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.AppStatusChangeListeners>(),
+        ));
+    gh.lazySingleton<_i916.AiGuideCubit>(() => _i916.AiGuideCubit(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
         ));

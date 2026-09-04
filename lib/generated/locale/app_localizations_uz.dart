@@ -27,6 +27,9 @@ class AppLocalizationsUz extends AppLocalizations {
   String get nav_back => 'Ortga';
 
   @override
+  String get nav_ai_guide => 'GidAI';
+
+  @override
   String get nav_market => 'Market';
 
   @override

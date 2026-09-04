@@ -14,7 +14,9 @@ DeviceSessionDto _$DeviceSessionDtoFromJson(Map<String, dynamic> json) =>
       appVersion: json['appVersion'] as String?,
       osVersion: json['osVersion'] as String?,
       ipAddress: json['ipAddress'] as String?,
+      location: json['location'] as String?,
       lastActiveAt: json['lastActiveAt'] as String?,
+      isOnline: json['isOnline'] as bool?,
       isCurrent: json['isCurrent'] as bool?,
     );
 
@@ -26,6 +28,8 @@ Map<String, dynamic> _$DeviceSessionDtoToJson(DeviceSessionDto instance) =>
       'appVersion': instance.appVersion,
       'osVersion': instance.osVersion,
       'ipAddress': instance.ipAddress,
+      'location': instance.location,
       'lastActiveAt': instance.lastActiveAt,
+      'isOnline': instance.isOnline,
       'isCurrent': instance.isCurrent,
     };

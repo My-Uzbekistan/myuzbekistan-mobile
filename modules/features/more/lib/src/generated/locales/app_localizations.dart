@@ -805,6 +805,30 @@ abstract class FeatureMoreLocalizations {
   /// **'Неизвестное устройство'**
   String get unknownDevice;
 
+  /// No description provided for @deviceOffline.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не в сети'**
+  String get deviceOffline;
+
+  /// No description provided for @deviceIpAddress.
+  ///
+  /// In ru, this message translates to:
+  /// **'IP-адрес'**
+  String get deviceIpAddress;
+
+  /// No description provided for @deviceLocation.
+  ///
+  /// In ru, this message translates to:
+  /// **'Геопозиция'**
+  String get deviceLocation;
+
+  /// No description provided for @signOutFromDevice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выйти из устройства'**
+  String get signOutFromDevice;
+
   /// No description provided for @noActiveSessions.
   ///
   /// In ru, this message translates to:

@@ -81,6 +81,10 @@
 	<string>This app needs access to location to suggest nearby services</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Galereyadan fayl tanlash uchun ruxsat kerak</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Yuklab olingan fayllarni galereyaga saqlash uchun ruxsat kerak</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Ovozli xabar va qo'ng'iroqlar uchun mikrofonga ruxsat kerak</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

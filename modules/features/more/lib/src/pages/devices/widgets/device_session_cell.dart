@@ -2,8 +2,6 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:more/src/core/extension.dart';
-import 'package:more/src/generated/locales/app_localizations.dart';
-import 'package:shared/shared.dart';
 
 class DeviceSessionCell extends StatelessWidget {
   final DeviceSession session;
@@ -21,6 +19,7 @@ class DeviceSessionCell extends StatelessWidget {
   Widget build(BuildContext context) {
     final localization = context.localization;
     final tertiary = context.appColors.textIconColor.tertiary;
+    final location = session.location;
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -63,11 +62,31 @@ class DeviceSessionCell extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ).bodySm(color: tertiary),
-                  Text(
-                    _statusLine(localization),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ).bodySm(color: tertiary),
+                  Row(
+                    spacing: 4,
+                    children: [
+                      if (location != null && location.isNotEmpty) ...[
+                        Flexible(
+                          child: Text(
+                            location,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ).bodySm(color: tertiary),
+                        ),
+                        Text("•").bodySm(color: tertiary),
+                      ],
+                      Text(
+                        session.isOnline
+                            ? localization.deviceOnline
+                            : localization.deviceOffline,
+                      ).bodySm(
+                        color:
+                            session.isOnline
+                                ? context.appColors.brandSeaBlue
+                                : tertiary,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -96,28 +115,5 @@ class DeviceSessionCell extends StatelessWidget {
       DevicePlatform.web => "Web",
       DevicePlatform.unknown => null,
     };
-  }
-
-  String _statusLine(FeatureMoreLocalizations localization) {
-    final lastActiveAt = session.lastActiveAt;
-    final isOnline =
-        session.isCurrent ||
-        (lastActiveAt != null &&
-            DateTime.now().difference(lastActiveAt) <
-                const Duration(minutes: 5));
-
-    final String? activity;
-    if (isOnline) {
-      activity = localization.deviceOnline;
-    } else if (lastActiveAt != null) {
-      activity = lastActiveAt.yyyyMMddHHmm();
-    } else {
-      activity = null;
-    }
-
-    return [session.ipAddress, activity]
-        .whereType<String>()
-        .where((e) => e.isNotEmpty)
-        .join(" • ");
   }
 }

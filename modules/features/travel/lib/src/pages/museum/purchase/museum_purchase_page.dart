@@ -46,10 +46,7 @@ class MuseumPurchasePage extends HookWidget {
             final checkUrl = state.order?.checkUrl;
             if (checkUrl != null && !isCheckUrlOpened.value) {
               isCheckUrlOpened.value = true;
-              LauncherUtils.urlLauncher(
-                checkUrl,
-                mode: LaunchMode.externalApplication,
-              );
+              context.more.openUrl(checkUrl);
               return;
             }
 

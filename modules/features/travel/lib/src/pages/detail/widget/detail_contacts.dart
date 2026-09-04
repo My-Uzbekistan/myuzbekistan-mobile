@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 
@@ -24,10 +25,7 @@ class DetailContacts extends StatelessWidget {
                 showArrow: true,
                 onTap: () {
                   if (e.action != null) {
-                    LauncherUtils.urlLauncher(
-                      e.actionUrl!,
-                      mode: LaunchMode.externalApplication,
-                    );
+                    context.more.openUrl(e.actionUrl!);
                   }
                 },
               ),

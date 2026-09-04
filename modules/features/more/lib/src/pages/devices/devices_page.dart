@@ -1,8 +1,10 @@
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:more/src/core/extension.dart';
 import 'package:more/src/pages/devices/bloc/devices_bloc.dart';
 import 'package:more/src/pages/devices/widgets/device_session_cell.dart';
+import 'package:more/src/pages/devices/widgets/device_session_sheet.dart';
 import 'package:shared/shared.dart' hide Toast;
 
 class DevicesPage extends StatelessWidget {
@@ -65,8 +67,8 @@ class DevicesPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           spacing: 8,
           children: const [
-            ShimmerDefaultContainer(height: 128, radius: 20),
-            ShimmerDefaultContainer(height: 332, radius: 20),
+            ShimmerDefaultContainer(height: 184, radius: 20),
+            ShimmerDefaultContainer(height: 276, radius: 20),
           ],
         ),
       );
@@ -83,7 +85,16 @@ class DevicesPage extends StatelessWidget {
           _card(
             context,
             title: localization.thisDevice,
-            children: [DeviceSessionCell(session: currentSession)],
+            children: [
+              DeviceSessionCell(session: currentSession),
+              AppActionButton(
+                actionText: localization.terminateOtherSessions,
+                type: ActionButtonType.secondary,
+                contentColor: context.appColors.colors.red,
+                isLoading: state.isTerminatingOthers,
+                onPressed: () => _confirmTerminateOthers(context),
+              ),
+            ],
           ),
         _card(
           context,
@@ -93,26 +104,14 @@ class DevicesPage extends StatelessWidget {
               Text(
                 localization.noActiveSessions,
               ).bodyMd(color: context.appColors.textIconColor.tertiary)
-            else ...[
+            else
               ...otherSessions.map(
                 (session) => DeviceSessionCell(
                   session: session,
                   isTerminating: state.terminatingId == session.id,
-                  onTap:
-                      () => _confirmTerminateSession(
-                        context,
-                        sessionId: session.id,
-                      ),
+                  onTap: () => _openSession(context, session: session),
                 ),
               ),
-              AppActionButton(
-                actionText: localization.terminateOtherSessions,
-                type: ActionButtonType.secondary,
-                contentColor: context.appColors.colors.red,
-                isLoading: state.isTerminatingOthers,
-                onPressed: () => _confirmTerminateOthers(context),
-              ),
-            ],
           ],
         ),
       ],
@@ -142,22 +141,19 @@ class DevicesPage extends StatelessWidget {
     );
   }
 
-  void _confirmTerminateSession(
+  Future<void> _openSession(
     BuildContext context, {
-    required int sessionId,
-  }) {
+    required DeviceSession session,
+  }) async {
     final bloc = context.read<DevicesBloc>();
-    showActionAlertDialog(
+    final shouldTerminate = await showDeviceSessionSheet(
       context,
-      title: context.localization.terminateConfirmTitle,
-      message: context.localization.terminateSessionMessage,
-      firstActionText: context.localization.terminate,
-      firstButtonTextColor: context.appColors.colors.red,
-      secondActionText: context.localization.cancel,
-      onFirstButtonClick: () {
-        bloc.add(DevicesEvent.terminateSession(sessionId: sessionId));
-      },
+      session: session,
     );
+
+    if (shouldTerminate ?? false) {
+      bloc.add(DevicesEvent.terminateSession(sessionId: session.id));
+    }
   }
 
   void _confirmTerminateOthers(BuildContext context) {

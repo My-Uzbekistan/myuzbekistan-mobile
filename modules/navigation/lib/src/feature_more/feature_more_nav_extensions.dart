@@ -63,10 +63,35 @@ class FeatureMoreNavExtension {
     _context.pushType(
       AppNavPath.more.webViewPage,
       queryParameters: {
-        "title": title??"",
+        "title": title ?? "",
         "actionUrl": actionUrl,
         "authRequired": authRequired.toString(),
       },
+    );
+  }
+
+  Future<void> openUrl(
+    String url, {
+    String? title,
+    bool authRequired = false,
+  }) async {
+    final trimmed = url.trim();
+    if (trimmed.isEmpty) return;
+
+    final uri = Uri.tryParse(trimmed);
+    final isWebPage = uri != null && (uri.scheme == "http" || uri.scheme == "https");
+    if (!isWebPage) {
+      await LauncherUtils.urlLauncher(
+        trimmed,
+        mode: LaunchMode.externalApplication,
+      );
+      return;
+    }
+
+    pushWebViewPage(
+      title: title,
+      actionUrl: trimmed,
+      authRequired: authRequired,
     );
   }
 

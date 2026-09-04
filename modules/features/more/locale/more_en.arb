@@ -122,5 +122,9 @@
   "terminate": "End",
   "deviceOnline": "online",
   "unknownDevice": "Unknown device",
+  "deviceOffline": "Offline",
+  "deviceIpAddress": "IP address",
+  "deviceLocation": "Location",
+  "signOutFromDevice": "Sign out of device",
   "noActiveSessions": "No other active sessions"
 }

@@ -381,10 +381,12 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   String get terminateConfirmTitle => 'Are you sure you want to end this?';
 
   @override
-  String get terminateOtherSessionsMessage => 'This action will end the session on all other devices';
+  String get terminateOtherSessionsMessage =>
+      'This action will end the session on all other devices';
 
   @override
-  String get terminateSessionMessage => 'This device will be signed out of the app';
+  String get terminateSessionMessage =>
+      'This device will be signed out of the app';
 
   @override
   String get terminate => 'End';
@@ -394,6 +396,18 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get unknownDevice => 'Unknown device';
+
+  @override
+  String get deviceOffline => 'Offline';
+
+  @override
+  String get deviceIpAddress => 'IP address';
+
+  @override
+  String get deviceLocation => 'Location';
+
+  @override
+  String get signOutFromDevice => 'Sign out of device';
 
   @override
   String get noActiveSessions => 'No other active sessions';

@@ -383,7 +383,8 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get terminateConfirmTitle => 'Вы уверены, что хотите это завершить?';
 
   @override
-  String get terminateOtherSessionsMessage => 'Это действие завершит работу всех остальных устройств';
+  String get terminateOtherSessionsMessage =>
+      'Это действие завершит работу всех остальных устройств';
 
   @override
   String get terminateSessionMessage => 'Это устройство выйдет из приложения';
@@ -396,6 +397,18 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get unknownDevice => 'Неизвестное устройство';
+
+  @override
+  String get deviceOffline => 'Не в сети';
+
+  @override
+  String get deviceIpAddress => 'IP-адрес';
+
+  @override
+  String get deviceLocation => 'Геопозиция';
+
+  @override
+  String get signOutFromDevice => 'Выйти из устройства';
 
   @override
   String get noActiveSessions => 'Других активных сеансов нет';

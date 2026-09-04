@@ -46,6 +46,8 @@ abstract interface class Repository {
 
   Future<String?> loadHomeBackground();
 
+  Future<String?> loadAiGuideLink();
+
   /// Havo sifati ko'rsatkichi — `GET /api/air-quality?lat=&lon=`.
   Future<AirQuality> loadAirQuality({required double lat, required double lon});
 

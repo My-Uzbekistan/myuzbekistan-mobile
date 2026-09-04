@@ -84,6 +84,7 @@ void _launch(BuildContext context, CatalogItemModel item) {
         );
       }
       context.more.pushWebViewPage(
+        title: item.title,
         actionUrl: uri.toString(),
         authRequired: item.authRequired,
       );
@@ -97,6 +98,6 @@ void _launch(BuildContext context, CatalogItemModel item) {
         },
       );
     }
-    LauncherUtils.urlLauncher(uri.toString());
+    context.more.openUrl(uri.toString(), title: item.title);
   }
 }

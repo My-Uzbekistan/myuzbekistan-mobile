@@ -36,7 +36,7 @@ class TransactionDetailActions extends StatelessWidget {
               icon: Assets.svg.fiscalIcon.path.toSvgImage(
                 fit: BoxFit.contain,
               ),
-              onPressed: () => LauncherUtils.urlLauncher(taxQr),
+              onPressed: () => context.more.openUrl(taxQr),
             ),
           if (status == PaymentStatus.cancelled)
             AppActionButton(

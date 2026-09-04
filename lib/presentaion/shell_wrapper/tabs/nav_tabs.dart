@@ -1,6 +1,8 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/widgets.dart';
 import 'package:navigation/navigation.dart';
+import 'package:shared/shared.dart';
+import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/app_bottom_nav_bar.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_tab_data.dart';
@@ -8,6 +10,7 @@ import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_profile_
 
 List<NavTabData> mainNavTabs(BuildContext context) {
   final localizations = context.localizations!;
+  final aiGuideUrl = context.watch<AiGuideCubit>().state;
 
   return [
     NavTabData.branch(
@@ -20,6 +23,12 @@ List<NavTabData> mainNavTabs(BuildContext context) {
       label: localizations.nav_payment,
       branchIndex: 1,
     ),
+    if (aiGuideUrl != null)
+      NavTabData.action(
+        asset: Assets.svg.tabIconAiGuide,
+        label: localizations.nav_ai_guide,
+        onTap: () => context.push(aiGuideUrl),
+      ),
     NavTabData.action(
       asset: Assets.svg.tabIconMarket,
       label: localizations.nav_market,

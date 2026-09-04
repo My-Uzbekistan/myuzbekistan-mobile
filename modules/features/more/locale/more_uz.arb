@@ -118,5 +118,9 @@
   "terminate": "Tugatish",
   "deviceOnline": "online",
   "unknownDevice": "Noma'lum qurilma",
+  "deviceOffline": "Tarmoqda emas",
+  "deviceIpAddress": "IP-manzil",
+  "deviceLocation": "Joylashuv",
+  "signOutFromDevice": "Qurilmadan chiqish",
   "noActiveSessions": "Boshqa faol seans yo'q"
 }

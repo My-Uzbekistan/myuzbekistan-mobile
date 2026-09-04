@@ -8,6 +8,7 @@ import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
 import '../../models/about/about_dto.dart';
+import '../../models/ai_guide/ai_guide_dto.dart';
 import '../../models/air_quality/air_quality_dto.dart';
 import '../../models/banner/banner_dto.dart';
 import '../../models/catalog/catalog_dto.dart';
@@ -215,4 +216,7 @@ abstract class RestService {
 
   @POST("bonus/claim")
   Future<ClaimDto> giftActivate();
+
+  @GET("ai/guide")
+  Future<AiGuideDto> loadAiGuideLink();
 }

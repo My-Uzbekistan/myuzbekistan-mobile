@@ -2,6 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/app_bottom_nav_bar.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_tab_data.dart';
 import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
@@ -46,6 +47,12 @@ class ShellPageWrapper extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final aiGuideCubit = context.read<AiGuideCubit>();
+    useEffect(() {
+      aiGuideCubit.loadAiGuideLink();
+      return null;
+    }, [Localizations.localeOf(context)]);
+
     useEffect(() {
       if (_listeningNotifications) return null;
       _listeningNotifications = true;

@@ -4,7 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 class LauncherUtils {
   static urlLauncher(
     String url, {
-    LaunchMode mode = LaunchMode.inAppWebView,
+    LaunchMode mode = LaunchMode.externalApplication,
   }) async {
     try {
       var uri = Uri.parse(url);

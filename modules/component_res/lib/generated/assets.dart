@@ -101,6 +101,8 @@ class $AssetsSvgGen {
   final $AssetsPrayersGen prayers = const $AssetsPrayersGen();
   final SvgGenImage namazIcon = const SvgGenImage('assets/svg/Namaz icon.svg');
   final SvgGenImage appleLogo = const SvgGenImage('assets/svg/apple_logo.svg');
+  final SvgGenImage arrowRefresh =
+      const SvgGenImage('assets/svg/arrow_refresh.svg');
   final SvgGenImage aqiBad = const SvgGenImage('assets/svg/aqi_bad.svg');
   final SvgGenImage aqiGood = const SvgGenImage('assets/svg/aqi_good.svg');
   final SvgGenImage aqiHazardous =
@@ -221,6 +223,8 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/star_outline.svg');
   final SvgGenImage staroflifeFill =
       const SvgGenImage('assets/svg/staroflife_fill.svg');
+  final SvgGenImage tabIconAiGuide =
+      const SvgGenImage('assets/svg/tab_icon_ai_guide.svg');
   final SvgGenImage tabIconBack =
       const SvgGenImage('assets/svg/tab_icon_back.svg');
   final SvgGenImage tabIconBasket =

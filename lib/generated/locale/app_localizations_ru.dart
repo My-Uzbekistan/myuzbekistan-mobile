@@ -27,6 +27,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get nav_back => 'Назад';
 
   @override
+  String get nav_ai_guide => 'GidAI';
+
+  @override
   String get nav_market => 'Маркет';
 
   @override

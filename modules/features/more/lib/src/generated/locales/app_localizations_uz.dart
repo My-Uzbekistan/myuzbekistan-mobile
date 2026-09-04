@@ -385,10 +385,12 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get terminateConfirmTitle => 'Buni tugatmoqchimisiz?';
 
   @override
-  String get terminateOtherSessionsMessage => 'Bu amal barcha boshqa qurilmalarning ishini tugatadi';
+  String get terminateOtherSessionsMessage =>
+      'Bu amal barcha boshqa qurilmalarning ishini tugatadi';
 
   @override
-  String get terminateSessionMessage => 'Bu qurilma ilovadan chiqarib yuboriladi';
+  String get terminateSessionMessage =>
+      'Bu qurilma ilovadan chiqarib yuboriladi';
 
   @override
   String get terminate => 'Tugatish';
@@ -398,6 +400,18 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get unknownDevice => 'Noma\'lum qurilma';
+
+  @override
+  String get deviceOffline => 'Tarmoqda emas';
+
+  @override
+  String get deviceIpAddress => 'IP-manzil';
+
+  @override
+  String get deviceLocation => 'Joylashuv';
+
+  @override
+  String get signOutFromDevice => 'Qurilmadan chiqish';
 
   @override
   String get noActiveSessions => 'Boshqa faol seans yo\'q';

@@ -189,7 +189,7 @@ class HomeScreen extends HookWidget {
                             onItemTap: (index) {
                               final link = data.banners[index].url;
                               if (link != null && link.isNotEmpty) {
-                                LauncherUtils.urlLauncher(link);
+                                context.more.openUrl(link);
                               }
                             },
                           ),
@@ -292,5 +292,5 @@ void _openQuickAction(BuildContext context, int index, String? url) {
     context.push(url);
     return;
   }
-  LauncherUtils.urlLauncher(url);
+  context.more.openUrl(url);
 }

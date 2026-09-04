@@ -109,6 +109,9 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(
             create: (context) => getIt<GiftBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<AiGuideCubit>(),
+          ),
         ],
         child: BlocBuilder<AppSettingsBloc, AppSettingsBlocState>(
           builder: (context, state) {

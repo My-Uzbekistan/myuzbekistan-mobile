@@ -7,17 +7,21 @@ class DeviceSession {
   final String? appVersion;
   final String? osVersion;
   final String? ipAddress;
+  final String? location;
   final DateTime? lastActiveAt;
+  final bool isOnline;
   final bool isCurrent;
 
   DeviceSession({
     required this.id,
     required this.platform,
+    required this.isOnline,
     required this.isCurrent,
     this.deviceModel,
     this.appVersion,
     this.osVersion,
     this.ipAddress,
+    this.location,
     this.lastActiveAt,
   });
 }

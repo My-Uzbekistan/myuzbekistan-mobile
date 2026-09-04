@@ -1,6 +1,7 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/pages/notifications/widgets/notification_image.dart';
 
@@ -77,7 +78,7 @@ class NotificationDetail extends StatelessWidget {
         uri.host.isEmpty) {
       context.push(uri.toString());
     } else {
-      LauncherUtils.urlLauncher(actionLink);
+      context.more.openUrl(actionLink);
     }
   }
 

@@ -23,7 +23,7 @@ import '../pages/pin/check_pin/check_pincode.dart';
 import '../pages/profile_page/pages/change_locale.dart';
 import '../pages/profile_page/pages/change_theme_page.dart';
 import '../pages/shell_more/pages/emergancy_contacts.dart';
-import '../pages/shell_more/pages/web_view_page.dart';
+import '../pages/web_view/web_view_page.dart';
 import '../pages/shell_more/shell_more_page.dart';
 
 mixin FeatureMoreRouter {
@@ -67,7 +67,9 @@ mixin FeatureMoreRouter {
       path: AppNavPath.more.webViewPage.path,
       name: AppNavPath.more.webViewPage.name,
       redirect: (context, state) {
-        if (state.uri.queryParameters["authRequired"] == "true") {
+        final authRequired =
+            parseBool(state.uri.queryParameters["authRequired"]) ?? false;
+        if (authRequired) {
           final securityStorage = getIt<SecurityStorage>();
 
           if (securityStorage.getAccessToken() == null) {
@@ -79,10 +81,11 @@ mixin FeatureMoreRouter {
       },
       pageBuilder: (context, state) {
         final securityStorage = getIt<SecurityStorage>();
-        final url=state.uri.queryParameters["actionUrl"];
-        final authRequire= state.uri.queryParameters["authRequired"] == "true";
-        var uri = Uri.parse(url??"");
-        if(authRequire) {
+        final url = parseString(state.uri.queryParameters["actionUrl"]);
+        final authRequired =
+            parseBool(state.uri.queryParameters["authRequired"]) ?? false;
+        var uri = Uri.parse(url ?? "");
+        if (authRequired) {
           uri = uri.replace(
             queryParameters: {
               ...uri.queryParameters,
@@ -92,10 +95,9 @@ mixin FeatureMoreRouter {
         }
         return buildSlideTransitionPage(
           child: WebViewPage(
-            title: state.uri.queryParameters["title"],
+            title: parseString(state.uri.queryParameters["title"]),
             actionUrl: uri.toString(),
-            authRequired: state.uri.queryParameters["authRequired"] == "true",
-
+            authRequired: authRequired,
           ),
           context: context,
           state: state,
@@ -109,9 +111,8 @@ mixin FeatureMoreRouter {
       pageBuilder: (context, state) {
         return buildSlideTransitionPage(
           child: WebViewPage(
-            title: state.uri.queryParameters["title"],
-            actionUrl: state.uri.queryParameters["actionUrl"],
-
+            title: parseString(state.uri.queryParameters["title"]),
+            actionUrl: parseString(state.uri.queryParameters["pdfUrl"]),
           ),
           context: context,
           state: state,

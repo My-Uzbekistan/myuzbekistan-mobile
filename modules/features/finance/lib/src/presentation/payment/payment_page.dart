@@ -250,7 +250,7 @@ class PaymentPage extends HookWidget {
         context.pop(paymentId);
         break;
       case PaymentNavStateConfirmWithWeb(:final confirmUrl):
-        LauncherUtils.urlLauncher(confirmUrl);
+        context.more.openUrl(confirmUrl);
         break;
       case PaymentNavStateExaception():
         InfoAlertDialog.show(

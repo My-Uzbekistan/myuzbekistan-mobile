@@ -108,6 +108,11 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<String?> loadAiGuideLink() {
+    return _restService.loadAiGuideLink().call((data) => data.toDomain());
+  }
+
+  @override
   Future<AirQuality> loadAirQuality({
     required double lat,
     required double lon,

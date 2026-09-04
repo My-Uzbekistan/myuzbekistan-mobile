@@ -136,6 +136,12 @@ abstract class AppLocalizations {
   /// **'Back'**
   String get nav_back;
 
+  /// No description provided for @nav_ai_guide.
+  ///
+  /// In en, this message translates to:
+  /// **'GidAI'**
+  String get nav_ai_guide;
+
   /// No description provided for @nav_market.
   ///
   /// In en, this message translates to:

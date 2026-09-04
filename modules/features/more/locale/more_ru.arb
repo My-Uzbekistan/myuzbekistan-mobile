@@ -119,5 +119,9 @@
   "terminate": "Завершить",
   "deviceOnline": "online",
   "unknownDevice": "Неизвестное устройство",
+  "deviceOffline": "Не в сети",
+  "deviceIpAddress": "IP-адрес",
+  "deviceLocation": "Геопозиция",
+  "signOutFromDevice": "Выйти из устройства",
   "noActiveSessions": "Других активных сеансов нет"
 }

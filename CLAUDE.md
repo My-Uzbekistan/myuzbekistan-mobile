@@ -21,7 +21,7 @@ Flutter asosida yozilgan mobil ilova. Modulli arxitektura ishlatiladi (`modules/
 
 - Flutter SDK: `/Users/user/Documents/flutter_sdk/bin` — PATH'da yo'q, to'liq yo'l ishlatiladi
 - `*.g.dart` va `*.freezed.dart` fayllarni qo'lda o'zgartirma, **alohida fayl ham ochma** — `build_runner` o'zi yaratadi
-- **`build_runner` va DI generatsiyasini HECH QACHON ishga tushirma, so'rama ham** — foydalanuvchi o'zi yuguradi
+- **Kod generatsiyasini o'zing ishga tushirasan** — `*.g.dart`, `*.freezed.dart`, `injection.config.dart` / `injection.module.dart` kerak bo'lsa, o'zgargan paketda `build_runner` yugurtiriladi (barchasi uchun — `./build_all.sh`), so'rab turilmaydi
 
 ---
 
