@@ -55,14 +55,16 @@ extension MoreEventPatterns on MoreEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MoreEventFetch value)?  fetch,TResult Function( _MoreCheckedPrayerWidget value)?  checkedPrayerWidget,TResult Function( _MoreCheckedNotification value)?  checkedNotification,TResult Function( _MoreFetchDevicesCount value)?  fetchDevicesCount,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MoreEventFetch value)?  fetch,TResult Function( _MoreCheckedPrayerWidget value)?  checkedPrayerWidget,TResult Function( _MoreCheckedIqAirWidget value)?  checkedIqAirWidget,TResult Function( _MoreCheckedNotification value)?  checkedNotification,TResult Function( _MoreFetchDevicesCount value)?  fetchDevicesCount,TResult Function( _MoreFetchPremium value)?  fetchPremium,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _MoreEventFetch() when fetch != null:
 return fetch(_that);case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
-return checkedPrayerWidget(_that);case _MoreCheckedNotification() when checkedNotification != null:
+return checkedPrayerWidget(_that);case _MoreCheckedIqAirWidget() when checkedIqAirWidget != null:
+return checkedIqAirWidget(_that);case _MoreCheckedNotification() when checkedNotification != null:
 return checkedNotification(_that);case _MoreFetchDevicesCount() when fetchDevicesCount != null:
-return fetchDevicesCount(_that);case _:
+return fetchDevicesCount(_that);case _MoreFetchPremium() when fetchPremium != null:
+return fetchPremium(_that);case _:
   return orElse();
 
 }
@@ -80,14 +82,16 @@ return fetchDevicesCount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MoreEventFetch value)  fetch,required TResult Function( _MoreCheckedPrayerWidget value)  checkedPrayerWidget,required TResult Function( _MoreCheckedNotification value)  checkedNotification,required TResult Function( _MoreFetchDevicesCount value)  fetchDevicesCount,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MoreEventFetch value)  fetch,required TResult Function( _MoreCheckedPrayerWidget value)  checkedPrayerWidget,required TResult Function( _MoreCheckedIqAirWidget value)  checkedIqAirWidget,required TResult Function( _MoreCheckedNotification value)  checkedNotification,required TResult Function( _MoreFetchDevicesCount value)  fetchDevicesCount,required TResult Function( _MoreFetchPremium value)  fetchPremium,}){
 final _that = this;
 switch (_that) {
 case _MoreEventFetch():
 return fetch(_that);case _MoreCheckedPrayerWidget():
-return checkedPrayerWidget(_that);case _MoreCheckedNotification():
+return checkedPrayerWidget(_that);case _MoreCheckedIqAirWidget():
+return checkedIqAirWidget(_that);case _MoreCheckedNotification():
 return checkedNotification(_that);case _MoreFetchDevicesCount():
-return fetchDevicesCount(_that);case _:
+return fetchDevicesCount(_that);case _MoreFetchPremium():
+return fetchPremium(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +108,16 @@ return fetchDevicesCount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MoreEventFetch value)?  fetch,TResult? Function( _MoreCheckedPrayerWidget value)?  checkedPrayerWidget,TResult? Function( _MoreCheckedNotification value)?  checkedNotification,TResult? Function( _MoreFetchDevicesCount value)?  fetchDevicesCount,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MoreEventFetch value)?  fetch,TResult? Function( _MoreCheckedPrayerWidget value)?  checkedPrayerWidget,TResult? Function( _MoreCheckedIqAirWidget value)?  checkedIqAirWidget,TResult? Function( _MoreCheckedNotification value)?  checkedNotification,TResult? Function( _MoreFetchDevicesCount value)?  fetchDevicesCount,TResult? Function( _MoreFetchPremium value)?  fetchPremium,}){
 final _that = this;
 switch (_that) {
 case _MoreEventFetch() when fetch != null:
 return fetch(_that);case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
-return checkedPrayerWidget(_that);case _MoreCheckedNotification() when checkedNotification != null:
+return checkedPrayerWidget(_that);case _MoreCheckedIqAirWidget() when checkedIqAirWidget != null:
+return checkedIqAirWidget(_that);case _MoreCheckedNotification() when checkedNotification != null:
 return checkedNotification(_that);case _MoreFetchDevicesCount() when fetchDevicesCount != null:
-return fetchDevicesCount(_that);case _:
+return fetchDevicesCount(_that);case _MoreFetchPremium() when fetchPremium != null:
+return fetchPremium(_that);case _:
   return null;
 
 }
@@ -128,13 +134,15 @@ return fetchDevicesCount(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetch,TResult Function()?  checkedPrayerWidget,TResult Function()?  checkedNotification,TResult Function()?  fetchDevicesCount,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  fetch,TResult Function()?  checkedPrayerWidget,TResult Function()?  checkedIqAirWidget,TResult Function()?  checkedNotification,TResult Function()?  fetchDevicesCount,TResult Function()?  fetchPremium,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MoreEventFetch() when fetch != null:
 return fetch();case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
-return checkedPrayerWidget();case _MoreCheckedNotification() when checkedNotification != null:
+return checkedPrayerWidget();case _MoreCheckedIqAirWidget() when checkedIqAirWidget != null:
+return checkedIqAirWidget();case _MoreCheckedNotification() when checkedNotification != null:
 return checkedNotification();case _MoreFetchDevicesCount() when fetchDevicesCount != null:
-return fetchDevicesCount();case _:
+return fetchDevicesCount();case _MoreFetchPremium() when fetchPremium != null:
+return fetchPremium();case _:
   return orElse();
 
 }
@@ -152,13 +160,15 @@ return fetchDevicesCount();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetch,required TResult Function()  checkedPrayerWidget,required TResult Function()  checkedNotification,required TResult Function()  fetchDevicesCount,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  fetch,required TResult Function()  checkedPrayerWidget,required TResult Function()  checkedIqAirWidget,required TResult Function()  checkedNotification,required TResult Function()  fetchDevicesCount,required TResult Function()  fetchPremium,}) {final _that = this;
 switch (_that) {
 case _MoreEventFetch():
 return fetch();case _MoreCheckedPrayerWidget():
-return checkedPrayerWidget();case _MoreCheckedNotification():
+return checkedPrayerWidget();case _MoreCheckedIqAirWidget():
+return checkedIqAirWidget();case _MoreCheckedNotification():
 return checkedNotification();case _MoreFetchDevicesCount():
-return fetchDevicesCount();case _:
+return fetchDevicesCount();case _MoreFetchPremium():
+return fetchPremium();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +185,15 @@ return fetchDevicesCount();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetch,TResult? Function()?  checkedPrayerWidget,TResult? Function()?  checkedNotification,TResult? Function()?  fetchDevicesCount,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  fetch,TResult? Function()?  checkedPrayerWidget,TResult? Function()?  checkedIqAirWidget,TResult? Function()?  checkedNotification,TResult? Function()?  fetchDevicesCount,TResult? Function()?  fetchPremium,}) {final _that = this;
 switch (_that) {
 case _MoreEventFetch() when fetch != null:
 return fetch();case _MoreCheckedPrayerWidget() when checkedPrayerWidget != null:
-return checkedPrayerWidget();case _MoreCheckedNotification() when checkedNotification != null:
+return checkedPrayerWidget();case _MoreCheckedIqAirWidget() when checkedIqAirWidget != null:
+return checkedIqAirWidget();case _MoreCheckedNotification() when checkedNotification != null:
 return checkedNotification();case _MoreFetchDevicesCount() when fetchDevicesCount != null:
-return fetchDevicesCount();case _:
+return fetchDevicesCount();case _MoreFetchPremium() when fetchPremium != null:
+return fetchPremium();case _:
   return null;
 
 }
@@ -256,6 +268,38 @@ String toString() {
 /// @nodoc
 
 
+class _MoreCheckedIqAirWidget implements MoreEvent {
+   _MoreCheckedIqAirWidget();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MoreCheckedIqAirWidget);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MoreEvent.checkedIqAirWidget()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
 class _MoreCheckedNotification implements MoreEvent {
    _MoreCheckedNotification();
   
@@ -318,9 +362,41 @@ String toString() {
 
 
 /// @nodoc
+
+
+class _MoreFetchPremium implements MoreEvent {
+   _MoreFetchPremium();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MoreFetchPremium);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MoreEvent.fetchPremium()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
 mixin _$MoreState {
 
- List<MoreItem> get abouts; List<MoreItem> get useFull; bool get prayerWidgetChecked; bool get notificationsEnabled; bool get isLoading; bool get premiumLoaded; PremiumStatusModel? get premiumStatus; int? get devicesCount; String? get errorMessage;
+ List<MoreItem> get abouts; List<MoreItem> get useFull; bool get prayerWidgetChecked; bool get iqAirWidgetChecked; bool get notificationsEnabled; bool get isLoading; bool get premiumLoaded; PremiumStatusModel? get premiumStatus; int? get devicesCount; String? get errorMessage;
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -331,16 +407,16 @@ $MoreStateCopyWith<MoreState> get copyWith => _$MoreStateCopyWithImpl<MoreState>
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreState&&const DeepCollectionEquality().equals(other.abouts, abouts)&&const DeepCollectionEquality().equals(other.useFull, useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.premiumLoaded, premiumLoaded) || other.premiumLoaded == premiumLoaded)&&(identical(other.premiumStatus, premiumStatus) || other.premiumStatus == premiumStatus)&&(identical(other.devicesCount, devicesCount) || other.devicesCount == devicesCount)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreState&&const DeepCollectionEquality().equals(other.abouts, abouts)&&const DeepCollectionEquality().equals(other.useFull, useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.iqAirWidgetChecked, iqAirWidgetChecked) || other.iqAirWidgetChecked == iqAirWidgetChecked)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.premiumLoaded, premiumLoaded) || other.premiumLoaded == premiumLoaded)&&(identical(other.premiumStatus, premiumStatus) || other.premiumStatus == premiumStatus)&&(identical(other.devicesCount, devicesCount) || other.devicesCount == devicesCount)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(abouts),const DeepCollectionEquality().hash(useFull),prayerWidgetChecked,notificationsEnabled,isLoading,premiumLoaded,premiumStatus,devicesCount,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(abouts),const DeepCollectionEquality().hash(useFull),prayerWidgetChecked,iqAirWidgetChecked,notificationsEnabled,isLoading,premiumLoaded,premiumStatus,devicesCount,errorMessage);
 
 @override
 String toString() {
-  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, notificationsEnabled: $notificationsEnabled, isLoading: $isLoading, premiumLoaded: $premiumLoaded, premiumStatus: $premiumStatus, devicesCount: $devicesCount, errorMessage: $errorMessage)';
+  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, iqAirWidgetChecked: $iqAirWidgetChecked, notificationsEnabled: $notificationsEnabled, isLoading: $isLoading, premiumLoaded: $premiumLoaded, premiumStatus: $premiumStatus, devicesCount: $devicesCount, errorMessage: $errorMessage)';
 }
 
 
@@ -351,7 +427,7 @@ abstract mixin class $MoreStateCopyWith<$Res>  {
   factory $MoreStateCopyWith(MoreState value, $Res Function(MoreState) _then) = _$MoreStateCopyWithImpl;
 @useResult
 $Res call({
- List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool notificationsEnabled, bool isLoading, bool premiumLoaded, PremiumStatusModel? premiumStatus, int? devicesCount, String? errorMessage
+ List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool iqAirWidgetChecked, bool notificationsEnabled, bool isLoading, bool premiumLoaded, PremiumStatusModel? premiumStatus, int? devicesCount, String? errorMessage
 });
 
 
@@ -368,11 +444,12 @@ class _$MoreStateCopyWithImpl<$Res>
 
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? notificationsEnabled = null,Object? isLoading = null,Object? premiumLoaded = null,Object? premiumStatus = freezed,Object? devicesCount = freezed,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? iqAirWidgetChecked = null,Object? notificationsEnabled = null,Object? isLoading = null,Object? premiumLoaded = null,Object? premiumStatus = freezed,Object? devicesCount = freezed,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 abouts: null == abouts ? _self.abouts : abouts // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,useFull: null == useFull ? _self.useFull : useFull // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,prayerWidgetChecked: null == prayerWidgetChecked ? _self.prayerWidgetChecked : prayerWidgetChecked // ignore: cast_nullable_to_non_nullable
+as bool,iqAirWidgetChecked: null == iqAirWidgetChecked ? _self.iqAirWidgetChecked : iqAirWidgetChecked // ignore: cast_nullable_to_non_nullable
 as bool,notificationsEnabled: null == notificationsEnabled ? _self.notificationsEnabled : notificationsEnabled // ignore: cast_nullable_to_non_nullable
 as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,premiumLoaded: null == premiumLoaded ? _self.premiumLoaded : premiumLoaded // ignore: cast_nullable_to_non_nullable
@@ -464,10 +541,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool notificationsEnabled,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus,  int? devicesCount,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool iqAirWidgetChecked,  bool notificationsEnabled,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus,  int? devicesCount,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case MoreDataState() when $default != null:
-return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.notificationsEnabled,_that.isLoading,_that.premiumLoaded,_that.premiumStatus,_that.devicesCount,_that.errorMessage);case _:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.iqAirWidgetChecked,_that.notificationsEnabled,_that.isLoading,_that.premiumLoaded,_that.premiumStatus,_that.devicesCount,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -485,10 +562,10 @@ return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.notif
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool notificationsEnabled,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus,  int? devicesCount,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool iqAirWidgetChecked,  bool notificationsEnabled,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus,  int? devicesCount,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case MoreDataState():
-return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.notificationsEnabled,_that.isLoading,_that.premiumLoaded,_that.premiumStatus,_that.devicesCount,_that.errorMessage);case _:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.iqAirWidgetChecked,_that.notificationsEnabled,_that.isLoading,_that.premiumLoaded,_that.premiumStatus,_that.devicesCount,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -505,10 +582,10 @@ return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.notif
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool notificationsEnabled,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus,  int? devicesCount,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<MoreItem> abouts,  List<MoreItem> useFull,  bool prayerWidgetChecked,  bool iqAirWidgetChecked,  bool notificationsEnabled,  bool isLoading,  bool premiumLoaded,  PremiumStatusModel? premiumStatus,  int? devicesCount,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case MoreDataState() when $default != null:
-return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.notificationsEnabled,_that.isLoading,_that.premiumLoaded,_that.premiumStatus,_that.devicesCount,_that.errorMessage);case _:
+return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.iqAirWidgetChecked,_that.notificationsEnabled,_that.isLoading,_that.premiumLoaded,_that.premiumStatus,_that.devicesCount,_that.errorMessage);case _:
   return null;
 
 }
@@ -520,7 +597,7 @@ return $default(_that.abouts,_that.useFull,_that.prayerWidgetChecked,_that.notif
 
 
 class MoreDataState implements MoreState {
-   MoreDataState({final  List<MoreItem> abouts = const [], final  List<MoreItem> useFull = const [], this.prayerWidgetChecked = false, this.notificationsEnabled = true, this.isLoading = true, this.premiumLoaded = false, this.premiumStatus, this.devicesCount, this.errorMessage}): _abouts = abouts,_useFull = useFull;
+   MoreDataState({final  List<MoreItem> abouts = const [], final  List<MoreItem> useFull = const [], this.prayerWidgetChecked = false, this.iqAirWidgetChecked = true, this.notificationsEnabled = true, this.isLoading = true, this.premiumLoaded = false, this.premiumStatus, this.devicesCount, this.errorMessage}): _abouts = abouts,_useFull = useFull;
   
 
  final  List<MoreItem> _abouts;
@@ -538,6 +615,7 @@ class MoreDataState implements MoreState {
 }
 
 @override@JsonKey() final  bool prayerWidgetChecked;
+@override@JsonKey() final  bool iqAirWidgetChecked;
 @override@JsonKey() final  bool notificationsEnabled;
 @override@JsonKey() final  bool isLoading;
 @override@JsonKey() final  bool premiumLoaded;
@@ -555,16 +633,16 @@ $MoreDataStateCopyWith<MoreDataState> get copyWith => _$MoreDataStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreDataState&&const DeepCollectionEquality().equals(other._abouts, _abouts)&&const DeepCollectionEquality().equals(other._useFull, _useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.premiumLoaded, premiumLoaded) || other.premiumLoaded == premiumLoaded)&&(identical(other.premiumStatus, premiumStatus) || other.premiumStatus == premiumStatus)&&(identical(other.devicesCount, devicesCount) || other.devicesCount == devicesCount)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MoreDataState&&const DeepCollectionEquality().equals(other._abouts, _abouts)&&const DeepCollectionEquality().equals(other._useFull, _useFull)&&(identical(other.prayerWidgetChecked, prayerWidgetChecked) || other.prayerWidgetChecked == prayerWidgetChecked)&&(identical(other.iqAirWidgetChecked, iqAirWidgetChecked) || other.iqAirWidgetChecked == iqAirWidgetChecked)&&(identical(other.notificationsEnabled, notificationsEnabled) || other.notificationsEnabled == notificationsEnabled)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.premiumLoaded, premiumLoaded) || other.premiumLoaded == premiumLoaded)&&(identical(other.premiumStatus, premiumStatus) || other.premiumStatus == premiumStatus)&&(identical(other.devicesCount, devicesCount) || other.devicesCount == devicesCount)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_abouts),const DeepCollectionEquality().hash(_useFull),prayerWidgetChecked,notificationsEnabled,isLoading,premiumLoaded,premiumStatus,devicesCount,errorMessage);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_abouts),const DeepCollectionEquality().hash(_useFull),prayerWidgetChecked,iqAirWidgetChecked,notificationsEnabled,isLoading,premiumLoaded,premiumStatus,devicesCount,errorMessage);
 
 @override
 String toString() {
-  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, notificationsEnabled: $notificationsEnabled, isLoading: $isLoading, premiumLoaded: $premiumLoaded, premiumStatus: $premiumStatus, devicesCount: $devicesCount, errorMessage: $errorMessage)';
+  return 'MoreState(abouts: $abouts, useFull: $useFull, prayerWidgetChecked: $prayerWidgetChecked, iqAirWidgetChecked: $iqAirWidgetChecked, notificationsEnabled: $notificationsEnabled, isLoading: $isLoading, premiumLoaded: $premiumLoaded, premiumStatus: $premiumStatus, devicesCount: $devicesCount, errorMessage: $errorMessage)';
 }
 
 
@@ -575,7 +653,7 @@ abstract mixin class $MoreDataStateCopyWith<$Res> implements $MoreStateCopyWith<
   factory $MoreDataStateCopyWith(MoreDataState value, $Res Function(MoreDataState) _then) = _$MoreDataStateCopyWithImpl;
 @override @useResult
 $Res call({
- List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool notificationsEnabled, bool isLoading, bool premiumLoaded, PremiumStatusModel? premiumStatus, int? devicesCount, String? errorMessage
+ List<MoreItem> abouts, List<MoreItem> useFull, bool prayerWidgetChecked, bool iqAirWidgetChecked, bool notificationsEnabled, bool isLoading, bool premiumLoaded, PremiumStatusModel? premiumStatus, int? devicesCount, String? errorMessage
 });
 
 
@@ -592,11 +670,12 @@ class _$MoreDataStateCopyWithImpl<$Res>
 
 /// Create a copy of MoreState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? notificationsEnabled = null,Object? isLoading = null,Object? premiumLoaded = null,Object? premiumStatus = freezed,Object? devicesCount = freezed,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? abouts = null,Object? useFull = null,Object? prayerWidgetChecked = null,Object? iqAirWidgetChecked = null,Object? notificationsEnabled = null,Object? isLoading = null,Object? premiumLoaded = null,Object? premiumStatus = freezed,Object? devicesCount = freezed,Object? errorMessage = freezed,}) {
   return _then(MoreDataState(
 abouts: null == abouts ? _self._abouts : abouts // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,useFull: null == useFull ? _self._useFull : useFull // ignore: cast_nullable_to_non_nullable
 as List<MoreItem>,prayerWidgetChecked: null == prayerWidgetChecked ? _self.prayerWidgetChecked : prayerWidgetChecked // ignore: cast_nullable_to_non_nullable
+as bool,iqAirWidgetChecked: null == iqAirWidgetChecked ? _self.iqAirWidgetChecked : iqAirWidgetChecked // ignore: cast_nullable_to_non_nullable
 as bool,notificationsEnabled: null == notificationsEnabled ? _self.notificationsEnabled : notificationsEnabled // ignore: cast_nullable_to_non_nullable
 as bool,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as bool,premiumLoaded: null == premiumLoaded ? _self.premiumLoaded : premiumLoaded // ignore: cast_nullable_to_non_nullable

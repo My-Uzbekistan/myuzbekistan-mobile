@@ -51,6 +51,8 @@ abstract interface class Repository {
   /// Havo sifati ko'rsatkichi — `GET /api/air-quality?lat=&lon=`.
   Future<AirQuality> loadAirQuality({required double lat, required double lon});
 
+  Future<AirQuality> loadAirQualityByRegion({required int regionId});
+
   /// Namoz vaqtlari — `GET /api/prayer-times?locationId=&date=`.
   Future<PrayerTimes> loadPrayerTimes({int? locationId, DateTime? date});
 
@@ -105,11 +107,19 @@ abstract interface class Repository {
 
   Future<List<MoreItem>> loadMoreUseFull();
 
+  Future<dynamic> logout();
+
   Future<dynamic> deleteAccount();
 
   Future<String?> uploadProfilePicture({required File file});
 
+  Future<UserProfile> deleteProfilePicture();
+
   Future<UserInfoModel> getUserInfo();
+
+  Future<UserProfile> getProfile();
+
+  Future<UserProfile> saveProfile({String? firstName, String? lastName});
 
   Future<dynamic> setFirebaseToken({required String token});
 
@@ -122,6 +132,8 @@ abstract interface class Repository {
   Future<NotificationItem> getNotificationById({required int id});
 
   Future<dynamic> seenNotification({required int id});
+
+  Future<dynamic> seenAllNotifications();
 
   Future<List<ReviewModel>> getReviews({required int contentId});
 
@@ -147,6 +159,6 @@ abstract interface class Repository {
   Future<dynamic> onboardingTrackClick({required int id});
 
   Future<ClaimStatus?> giftActive();
-  Future<List<ClaimHistory>> giftHistory();
+  Future<List<ClaimHistory>> giftHistory({int page, int pageSize});
   Future<ClaimHistory> giftActivate();
 }

@@ -914,4 +914,48 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
 
   @override
   String get museum_auth_required => 'Войдите в аккаунт';
+
+  @override
+  String get aqi_good => 'Отлично';
+
+  @override
+  String get aqi_moderate => 'Средне';
+
+  @override
+  String get aqi_bad => 'Плохо';
+
+  @override
+  String get aqi_hazardous => 'Ядовито';
+
+  @override
+  String get global_search_hint => 'Город, регион или отель';
+
+  @override
+  String get global_search_history => 'История поисков';
+
+  @override
+  String get global_search_history_clear => 'Очистить';
+
+  @override
+  String get global_search_results => 'Результаты поисков';
+
+  @override
+  String get global_search_action => 'Найти';
+
+  @override
+  String get global_search_query_label => 'Поисковый запрос';
+
+  @override
+  String get global_search_clear_title => 'Очистить поиск';
+
+  @override
+  String get global_search_clear_message =>
+      'Вы точно хотите очистить историю поисков?';
+
+  @override
+  String get global_search_empty_title => 'Ничего не найдено';
+
+  @override
+  String get global_search_empty_message =>
+      'По этому запросу ничего не найдено, попробуйте другие слова';
 }

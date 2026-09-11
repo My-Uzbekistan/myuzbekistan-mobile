@@ -7,6 +7,9 @@ abstract class FavoritesEvent with _$FavoritesEvent {
   factory FavoritesEvent.toggleFavorite({required MarketProduct product}) =
       _FavoritesToggleFavoriteEvent;
 
+  factory FavoritesEvent.productChanged({required ItemChange change}) =
+      _FavoritesProductChangedEvent;
+
   factory FavoritesEvent.changeCartQuantity({
     required MarketProduct product,
     required int quantity,

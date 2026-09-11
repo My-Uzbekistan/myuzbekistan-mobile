@@ -6,7 +6,7 @@ import 'package:travel/src/pages/museum/purchase/widgets/museum_card_picker_shee
 import 'package:travel/src/pages/museum/purchase/widgets/museum_purchase_bottom_bar.dart';
 import 'package:travel/src/pages/museum/purchase/widgets/museum_purchase_museum_tile.dart';
 import 'package:travel/src/pages/museum/purchase/widgets/museum_purchase_tariffs.dart';
-import 'package:travel/src/pages/museum/widgets/museum_nav_bar.dart';
+import 'package:travel/src/widgets/travel_nav_bar.dart';
 import 'package:travel/src/pages/museum/widgets/museum_state_view.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart' hide Toast;
@@ -59,7 +59,7 @@ class MuseumPurchasePage extends HookWidget {
 
             return Column(
               children: [
-                MuseumNavBar(
+                TravelNavBar(
                   title: context.localization.museum_purchase_title,
                   onBack: () => context.pop(),
                 ),

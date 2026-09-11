@@ -9,6 +9,7 @@ class Assets {
   static const $AssetsCatalogGen catalog = $AssetsCatalogGen();
   static const $AssetsFlagsGen flags = $AssetsFlagsGen();
   static const $AssetsLogoGen logo = $AssetsLogoGen();
+  static const $AssetsMapStyleGen mapStyle = $AssetsMapStyleGen();
   static const $AssetsPngGen png = $AssetsPngGen();
   static const $AssetsSplashGen splash = $AssetsSplashGen();
   static const $AssetsSvgGen svg = $AssetsSvgGen();
@@ -75,6 +76,12 @@ class $AssetsPngGen {
       const AssetGenImage('assets/png/uztelecom_logo.webp');
 }
 
+class $AssetsMapStyleGen {
+  const $AssetsMapStyleGen();
+
+  final String nightTheme = 'assets/map_style/night_theme.json';
+}
+
 class $AssetsCatalogGen {
   const $AssetsCatalogGen();
 
@@ -112,6 +119,10 @@ class $AssetsSvgGen {
   final SvgGenImage basketCross =
       const SvgGenImage('assets/svg/basket_cross.svg');
   final SvgGenImage boltFill = const SvgGenImage('assets/svg/bolt_fill.svg');
+  final SvgGenImage calendarLine =
+      const SvgGenImage('assets/svg/calendar_line.svg');
+  final SvgGenImage carArmored =
+      const SvgGenImage('assets/svg/car_armored.svg');
   final SvgGenImage crossCaseFill =
       const SvgGenImage('assets/svg/cross_case_fill.svg');
   final SvgGenImage defaultCreditCard =
@@ -164,6 +175,7 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/icon_filled_heard.svg');
   final SvgGenImage infoCircleLine =
       const SvgGenImage('assets/svg/info_circle_line.svg');
+  final SvgGenImage iqAir = const SvgGenImage('assets/svg/iq_air.svg');
   final SvgGenImage iconGift = const SvgGenImage('assets/svg/icon_gift.svg');
   final SvgGenImage iconMenu = const SvgGenImage('assets/svg/icon_menu.svg');
   final SvgGenImage iconPhoneFill =
@@ -189,24 +201,41 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/icon_warning.svg');
   final SvgGenImage locatorFill =
       const SvgGenImage('assets/svg/locator_fill.svg');
+  final SvgGenImage locatorLine =
+      const SvgGenImage('assets/svg/locator_line.svg');
   final SvgGenImage map02 = const SvgGenImage('assets/svg/map_02.svg');
+  final SvgGenImage mapPin = const SvgGenImage('assets/svg/map_pin.svg');
+  final SvgGenImage mapPinShape =
+      const SvgGenImage('assets/svg/map_pin_shape.svg');
+  final SvgGenImage mapPinDot =
+      const SvgGenImage('assets/svg/map_pin_dot.svg');
+  final SvgGenImage minusMedium =
+      const SvgGenImage('assets/svg/minus_medium.svg');
   final SvgGenImage notificationIcon =
       const SvgGenImage('assets/svg/notification_icon.svg');
   final SvgGenImage outlineHeard =
       const SvgGenImage('assets/svg/outline_heard.svg');
+  final SvgGenImage pinLocation =
+      const SvgGenImage('assets/svg/pin_location.svg');
   final SvgGenImage pinLocationLine =
       const SvgGenImage('assets/svg/pin_location_line.svg');
   final SvgGenImage pinSvg = const SvgGenImage('assets/svg/pin_svg.svg');
+  final SvgGenImage plusMedium =
+      const SvgGenImage('assets/svg/plus_medium.svg');
   final SvgGenImage premiumBadge =
       const SvgGenImage('assets/svg/premium_badge.svg');
   final SvgGenImage premiumCheck =
       const SvgGenImage('assets/svg/premium_check.svg');
   final SvgGenImage premiumFeatureCheck =
       const SvgGenImage('assets/svg/premium_feature_check.svg');
+  final SvgGenImage premiumLogo =
+      const SvgGenImage('assets/svg/premium_logo.svg');
   final SvgGenImage premiumPlanCheck =
       const SvgGenImage('assets/svg/premium_plan_check.svg');
   final SvgGenImage premiumStar =
       const SvgGenImage('assets/svg/premium_star.svg');
+  final SvgGenImage premiumUpgradeArrow =
+      const SvgGenImage('assets/svg/premium_upgrade_arrow.svg');
   final SvgGenImage roundedCloseIcon =
       const SvgGenImage('assets/svg/rounded_close_icon.svg');
   final SvgGenImage scanIdentification =
@@ -249,6 +278,9 @@ class $AssetsSvgGen {
       const SvgGenImage('assets/svg/tab_icon_profile.svg');
   final SvgGenImage tabIconTransfer =
       const SvgGenImage('assets/svg/tab_icon_transfer.svg');
+  final SvgGenImage trash01 = const SvgGenImage('assets/svg/trash_01.svg');
+  final SvgGenImage walkingMan =
+      const SvgGenImage('assets/svg/walking_man.svg');
   final SvgGenImage worldMagnifier =
       const SvgGenImage('assets/svg/world_magnifier.svg');
 }

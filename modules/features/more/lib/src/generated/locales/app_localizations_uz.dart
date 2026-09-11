@@ -210,7 +210,10 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get biometric_auth => 'Biometrik kirish';
 
   @override
-  String get prayer_time_widget => 'Namoz vaqti vidjeti';
+  String get prayer_time_widget => 'Namoz vidjeti';
+
+  @override
+  String get iq_air_widget => 'IQAir vidjeti';
 
   @override
   String get about_app => 'Ilova haqida';
@@ -415,4 +418,22 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get noActiveSessions => 'Boshqa faol seans yo\'q';
+
+  @override
+  String premiumActiveUntil(String date) {
+    return '$date gacha faol';
+  }
+
+  @override
+  String get premiumBuySubscription => 'Obunani xarid qiling';
+
+  @override
+  String get webViewExitTitle => 'Rostdan ham chiqib ketmoqchimisiz?';
+
+  @override
+  String get webViewExitMessage =>
+      'Sahifa yopiladi, kiritilgan ma\'lumotlar saqlanmaydi.';
+
+  @override
+  String get yes => 'Ha';
 }

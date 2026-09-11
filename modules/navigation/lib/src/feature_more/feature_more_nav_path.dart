@@ -73,4 +73,25 @@ class _FeatureMoreNavPath {
 
   AppNavPath get forceUpdate =>
       _NavPathImpl(name: "feature_more_force_update", path: "/forceUpdate");
+
+  List<AppNavPath> get values => [
+    moreHome,
+    selectLangPage,
+    emergencyContacts,
+    webViewPage,
+    pdfPreViewPage,
+    changeLang,
+    changeTheme,
+    aboutApp,
+    editProfile,
+    securityPage,
+    devicesPage,
+    aboutUsInfoPage,
+    authPage,
+    authPhonePage,
+    authVerification,
+    pinCodePage,
+    checkPin,
+    forceUpdate,
+  ];
 }

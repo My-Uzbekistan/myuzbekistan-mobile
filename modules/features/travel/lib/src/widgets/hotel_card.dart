@@ -15,7 +15,10 @@ class HotelCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final location = hotel.region ?? "";
-    final distance = _distanceText(context, hotel.distanceKm);
+    final distance = hotel.distance.formatDistance(
+      meterLabel: context.localization.distanceM,
+      kmLabel: context.localization.distanceKm,
+    );
     final price = (hotel.price ?? 0) > 0 ? hotel.price!.amountFormatted() : "";
     final period = hotel.priceUnit ?? "";
 
@@ -44,7 +47,7 @@ class HotelCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ).bodySm(color: context.appColors.textIconColor.secondary),
                 ),
-                if (distance.isNotEmpty) ...[
+                if (distance != null) ...[
                   const SizedBox(width: 6),
                   Text("•")
                       .bodySm(color: context.appColors.textIconColor.secondary),
@@ -86,14 +89,6 @@ class HotelCard extends StatelessWidget {
       ),
     );
   }
-}
-
-String _distanceText(BuildContext context, double? distanceKm) {
-  if (distanceKm == null || distanceKm == 0) return "";
-  if (distanceKm < 0.5) {
-    return "${(distanceKm * 100).floor()} ${context.localization.distanceM}";
-  }
-  return "${distanceKm.floor()} ${context.localization.distanceKm}";
 }
 
 class _ImageCard extends StatelessWidget {

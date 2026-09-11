@@ -79,7 +79,8 @@ class _ClaimCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appColors = context.appColors;
-    final claimedAt = DateTime.tryParse(claim.claimedAt.orEmpty());
+    final claimedAt = claim.claimedAt;
+    final langCode = Localizations.localeOf(context).languageCode;
 
     return Container(
       height: 80,
@@ -136,9 +137,11 @@ class _ClaimCell extends StatelessWidget {
               ],
             ),
           ),
-          Text(
-            claimedAt?.format() ?? "",
-          ).bodyMd(color: appColors.textIconColor.secondary),
+          if (claimedAt != null)
+            Text(
+              claimedAt.toFormatDMMMY(langCode),
+              maxLines: 1,
+            ).bodySm(color: appColors.textIconColor.secondary),
         ],
       ),
     );

@@ -13,6 +13,7 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 import '../pages/about_app/about_app.dart';
+import '../pages/edit_profile/bloc/edit_profile_bloc.dart';
 import '../pages/edit_profile/edit_profile_page.dart';
 import '../pages/devices/bloc/devices_bloc.dart';
 import '../pages/devices/devices_page.dart';
@@ -66,19 +67,6 @@ mixin FeatureMoreRouter {
     GoRoute(
       path: AppNavPath.more.webViewPage.path,
       name: AppNavPath.more.webViewPage.name,
-      redirect: (context, state) {
-        final authRequired =
-            parseBool(state.uri.queryParameters["authRequired"]) ?? false;
-        if (authRequired) {
-          final securityStorage = getIt<SecurityStorage>();
-
-          if (securityStorage.getAccessToken() == null) {
-            return "${AppNavPath.more.authPage.path}?slideAlign=vertical";
-          }
-        }
-
-        return null;
-      },
       pageBuilder: (context, state) {
         final securityStorage = getIt<SecurityStorage>();
         final url = parseString(state.uri.queryParameters["actionUrl"]);
@@ -95,12 +83,12 @@ mixin FeatureMoreRouter {
         }
         return buildSlideTransitionPage(
           child: WebViewPage(
-            title: parseString(state.uri.queryParameters["title"]),
             actionUrl: uri.toString(),
             authRequired: authRequired,
           ),
           context: context,
           state: state,
+          slideAlign: SlideAlign.vertical,
         );
       },
     ),
@@ -111,11 +99,11 @@ mixin FeatureMoreRouter {
       pageBuilder: (context, state) {
         return buildSlideTransitionPage(
           child: WebViewPage(
-            title: parseString(state.uri.queryParameters["title"]),
             actionUrl: parseString(state.uri.queryParameters["pdfUrl"]),
           ),
           context: context,
           state: state,
+          slideAlign: SlideAlign.vertical,
         );
       },
     ),
@@ -250,7 +238,7 @@ mixin FeatureMoreRouter {
             child: BlocProvider(
               create:
                   (ctx) =>
-                      getIt<ProfileBloc>()..add(ProfileBlocEvent.initEvent()),
+                      getIt<EditProfileBloc>()..add(EditProfileEvent.fetch()),
               child: const EditProfilePage(),
             ),
             context: context,

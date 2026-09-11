@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -8,8 +10,10 @@ part 'basket_bloc.freezed.dart';
 @injectable
 class BasketBloc extends Bloc<BasketEvent, BasketState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
 
-  BasketBloc(this._repository) : super(BasketState()) {
+  BasketBloc(this._repository, this._refresh) : super(BasketState()) {
     on<_BasketLoadDataEvent>(_loadData);
     on<_BasketChangeQuantityEvent>(_changeQuantity);
     on<_BasketToggleItemEvent>(_toggleItem);
@@ -17,6 +21,16 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     on<_BasketToggleAllEvent>(_toggleAll);
     on<_BasketRemoveItemEvent>(_removeItem);
     on<_BasketRemoveSelectedEvent>(_removeSelected);
+
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.marketCart})
+        .listen((_) => add(BasketEvent.loadData()));
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    return super.close();
   }
 
   Future<void> _loadData(
@@ -58,13 +72,30 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     if (quantity > item.available) return;
 
     final previous = state.sellers;
-    emit(_recalculated(_replaceItem(previous, item.copyWith(quantity: quantity))));
+    emit(
+      _recalculated(_replaceItem(previous, item.copyWith(quantity: quantity))),
+    );
+    _refresh.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: item.productId.toString(),
+        cartQuantity: quantity,
+      ),
+    );
     try {
       await _repository.changeCartQuantity(
         productId: item.productId,
         quantity: quantity,
       );
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: item.productId.toString(),
+          cartQuantity: item.quantity,
+        ),
+      );
       emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
     }
   }
@@ -86,6 +117,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
         productId: item.productId,
         isSelected: isSelected,
       );
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
       emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
     }
@@ -97,9 +129,8 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   ) async {
     final seller = event.seller;
     final isSelected = !seller.isSelected;
-    final changed = seller.items
-        .where((item) => item.isSelected != isSelected)
-        .toList();
+    final changed =
+        seller.items.where((item) => item.isSelected != isSelected).toList();
     if (changed.isEmpty) return;
 
     final previous = state.sellers;
@@ -107,13 +138,17 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
       _recalculated(
         previous
             .map(
-              (item) => item.id == seller.id
-                  ? item.copyWith(
-                      items: item.items
-                          .map((it) => it.copyWith(isSelected: isSelected))
-                          .toList(),
-                    )
-                  : item,
+              (item) =>
+                  item.id == seller.id
+                      ? item.copyWith(
+                        items:
+                            item.items
+                                .map(
+                                  (it) => it.copyWith(isSelected: isSelected),
+                                )
+                                .toList(),
+                      )
+                      : item,
             )
             .toList(),
       ),
@@ -127,6 +162,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
           ),
         ),
       );
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
       emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
     }
@@ -143,9 +179,10 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
         previous
             .map(
               (seller) => seller.copyWith(
-                items: seller.items
-                    .map((item) => item.copyWith(isSelected: isSelected))
-                    .toList(),
+                items:
+                    seller.items
+                        .map((item) => item.copyWith(isSelected: isSelected))
+                        .toList(),
               ),
             )
             .toList(),
@@ -153,6 +190,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     );
     try {
       await _repository.selectAllCartItems(isSelected: isSelected);
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
       emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
     }
@@ -187,11 +225,44 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     Future<void> Function() request,
   ) async {
     final previous = state.sellers;
+    final removed = _productIds(previous).difference(_productIds(next));
     emit(_recalculated(next));
+    _notifyQuantities(removed, 0);
     try {
       await request();
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
+      for (final item in previous.expand((seller) => seller.items)) {
+        if (removed.contains(item.productId)) {
+          _refresh.notifyItem(
+            ItemChange(
+              entity: RefreshEntity.marketProduct,
+              id: item.productId.toString(),
+              cartQuantity: item.quantity,
+            ),
+          );
+        }
+      }
       emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
+    }
+  }
+
+  Set<int> _productIds(List<CartSeller> sellers) {
+    return sellers
+        .expand((seller) => seller.items)
+        .map((item) => item.productId)
+        .toSet();
+  }
+
+  void _notifyQuantities(Set<int> productIds, int quantity) {
+    for (final productId in productIds) {
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: productId.toString(),
+          cartQuantity: quantity,
+        ),
+      );
     }
   }
 
@@ -211,9 +282,10 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     return sellers
         .map(
           (seller) => seller.copyWith(
-            items: seller.items
-                .map((it) => it.productId == item.productId ? item : it)
-                .toList(),
+            items:
+                seller.items
+                    .map((it) => it.productId == item.productId ? item : it)
+                    .toList(),
           ),
         )
         .toList();
@@ -223,9 +295,10 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     return _withoutEmpty(
       sellers.map(
         (seller) => seller.copyWith(
-          items: seller.items
-              .where((it) => it.productId != item.productId)
-              .toList(),
+          items:
+              seller.items
+                  .where((it) => it.productId != item.productId)
+                  .toList(),
         ),
       ),
     );

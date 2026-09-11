@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -8,11 +10,24 @@ part 'market_orders_bloc.freezed.dart';
 @injectable
 class MarketOrdersBloc extends Bloc<MarketOrdersEvent, MarketOrdersState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
 
-  MarketOrdersBloc(this._repository) : super(MarketOrdersState()) {
+  MarketOrdersBloc(this._repository, this._refresh)
+    : super(MarketOrdersState()) {
     on<_MarketOrdersStartEvent>(_start);
     on<_MarketOrdersLoadDataEvent>(_loadData);
     on<_MarketOrdersToggleDetailsEvent>(_toggleDetails);
+
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.marketOrders})
+        .listen((_) => add(MarketOrdersEvent.loadData()));
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    return super.close();
   }
 
   void _start(_MarketOrdersStartEvent event, Emitter<MarketOrdersState> emit) {
@@ -27,9 +42,8 @@ class MarketOrdersBloc extends Bloc<MarketOrdersEvent, MarketOrdersState> {
     emit(state.copyWith(isLoading: true, errorMessage: null));
     try {
       final orders = await _repository.orders();
-      final visible = orders
-          .where((e) => state.group.contains(e.status))
-          .toList();
+      final visible =
+          orders.where((e) => state.group.contains(e.status)).toList();
       emit(
         state.copyWith(
           orders: visible,

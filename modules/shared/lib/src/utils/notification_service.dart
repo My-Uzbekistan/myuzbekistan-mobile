@@ -72,23 +72,18 @@ class NotificationService {
   }
 
   void listenNotification({
-    required void Function(RemoteMessage) logRemoteMessage,
+    required void Function(RemoteMessage) onOpened,
   }) {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-
-      debugPrint("Notification Message ${message.data} ");
+    void open(RemoteMessage message) {
       logRemoteMessage(message);
+      onOpened(message);
+    }
+
+    FirebaseMessaging.onMessage.listen(logRemoteMessage);
+    FirebaseMessaging.instance.getInitialMessage().then((message) {
+      if (message != null) open(message);
     });
-    FirebaseMessaging.instance
-        .getInitialMessage()
-        .then((RemoteMessage? message) {
-      if (message != null) {
-        logRemoteMessage.call(message);
-      }
-    });
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      logRemoteMessage.call(message);
-    });
+    FirebaseMessaging.onMessageOpenedApp.listen(open);
   }
   Future<void> init() async {
     requestPermission();

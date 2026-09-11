@@ -4,8 +4,6 @@ class _InfoRow extends StatelessWidget {
   const _InfoRow({
     required this.regionName,
     required this.temperature,
-    required this.airQuality,
-    required this.airQualityLevel,
     required this.onRegionTap,
     required this.onNotificationTap,
     this.onGiftTap,
@@ -13,9 +11,6 @@ class _InfoRow extends StatelessWidget {
 
   final String regionName;
   final String temperature;
-  final String? airQuality;
-
-  final int? airQualityLevel;
 
   final VoidCallback? onRegionTap;
   final VoidCallback? onNotificationTap;
@@ -69,19 +64,6 @@ class _InfoRow extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       Text(temperature).labelMd(color: onMedia),
-                      if (airQuality != null) ...[
-                        const SizedBox(width: 6),
-                        Container(
-                          width: 1,
-                          height: 20,
-                          color: onMedia.withValues(alpha: 0.2),
-                        ),
-                        const SizedBox(width: 6),
-                        _AqiBadge(
-                          value: airQuality!,
-                          level: airQualityLevel ?? 0,
-                        ),
-                      ],
                     ],
                   ),
                 ],
@@ -103,52 +85,6 @@ class _InfoRow extends StatelessWidget {
         const SizedBox(width: 8),
         GlassFade(child: _NotificationBell(onTap: onNotificationTap)),
       ],
-    );
-  }
-}
-
-class _AqiBadge extends StatelessWidget {
-  const _AqiBadge({required this.value, required this.level});
-
-  final String value;
-  final int level;
-
-  @override
-  Widget build(BuildContext context) {
-    final appColors = context.appColors;
-    final (Color background, Color foreground, SvgGenImage icon) =
-        switch (level) {
-          0 => (
-            appColors.colors.green,
-            appColors.static.white,
-            Assets.svg.aqiGood,
-          ),
-          1 => (
-            appColors.colors.yellow,
-            appColors.accent.aqiModerateLabel,
-            Assets.svg.aqiModerate,
-          ),
-          2 => (appColors.colors.red, appColors.static.white, Assets.svg.aqiBad),
-          _ => (
-            appColors.accent.aqiHazardous,
-            appColors.static.white,
-            Assets.svg.aqiHazardous,
-          ),
-        };
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(
-        color: background,
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          icon.path.toSvgImage(width: 14, height: 14, tintColor: foreground),
-          const SizedBox(width: 4),
-          Text(value).labelSm(color: foreground),
-        ],
-      ),
     );
   }
 }

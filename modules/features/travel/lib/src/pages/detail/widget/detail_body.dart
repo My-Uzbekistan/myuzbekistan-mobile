@@ -3,7 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/di/injection.dart';
 import 'package:travel/src/navigation/navigation_extensions.dart';
@@ -32,6 +32,19 @@ class DetailBody extends StatelessWidget {
     required this.isCollapsed,
     required this.scrollController,
   });
+
+  Future<void> _share(BuildContext context) async {
+    final failureText = context.coreLocalization.unexpected_error;
+    final shared = await AppShare.link(
+      context,
+      url: AppLinkRouter.shareLink(
+        AppNavPath.travel.travelDetail,
+        queryParameters: {"contentId": "${content.id}"},
+      ),
+      title: content.title,
+    );
+    if (!shared) Toast.showToast(failureText);
+  }
 
   void _leaveReview(BuildContext context) {
     if (getIt<SecurityStorage>().getAccessToken() == null) {
@@ -194,21 +207,30 @@ class DetailBody extends StatelessWidget {
                 duration: Duration(milliseconds: 200),
                 child: isLoading
                     ? SizedBox()
-                    : RoundedButton(
-                        onPressed: () {
-                          HapticFeedback.selectionClick();
-                          context.read<DetailBloc>().add(
-                            DetailBlocEvent.changeFavoriteState(
-                              isSetFavorite: !content.isFavorite,
-                            ),
-                          );
-                        },
-                        assetsSvgIcon: content.isFavorite
-                            ? Assets.svg.iconFilledHeard.path
-                            : Assets.svg.outlineHeard.path,
-                        iconColor: content.isFavorite
-                            ? context.appColors.colors.red
-                            : null,
+                    : Row(
+                        spacing: 8,
+                        children: [
+                          RoundedButton(
+                            onPressed: () => _share(context),
+                            assetsSvgIcon: Assets.svg.iconShare.path,
+                          ),
+                          RoundedButton(
+                            onPressed: () {
+                              HapticFeedback.selectionClick();
+                              context.read<DetailBloc>().add(
+                                DetailBlocEvent.changeFavoriteState(
+                                  isSetFavorite: !content.isFavorite,
+                                ),
+                              );
+                            },
+                            assetsSvgIcon: content.isFavorite
+                                ? Assets.svg.iconFilledHeard.path
+                                : Assets.svg.outlineHeard.path,
+                            iconColor: content.isFavorite
+                                ? context.appColors.colors.red
+                                : null,
+                          ),
+                        ],
                       ),
               ),
             ],

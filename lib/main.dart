@@ -30,13 +30,16 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  AppLinkRouter.init();
   await LiquidGlassWidgets.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
   await DeviceInfoManager().init();
+  await MapStyleService.load();
   await configureInjection();
+  getIt<SecurityStorage>().clearPinVerified();
   NotificationService().subscribeToTopic();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   // Edge-to-edge'ni GLOBAL yoqamiz: tizim nav paneli transparent bo'lib,
@@ -57,7 +60,9 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     GlobalHandler().setRefreshListener(() async {
-      appRootNavigatorKey.currentContext!.goNamed("invisiblePage");
+      appRootNavigatorKey.currentContext!.goNamed(
+        AppNavPath.root.invisiblePage.name,
+      );
     });
 
     GlobalHandler().setUnauthorizedListener(() async {

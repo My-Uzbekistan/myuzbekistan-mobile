@@ -55,14 +55,15 @@ extension MarketHomeEventPatterns on MarketHomeEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketHomeLoadDataEvent value)?  loadData,TResult Function( _MarketHomeLoadCartEvent value)?  loadCart,TResult Function( _MarketHomeSelectCityEvent value)?  selectCity,TResult Function( _MarketHomeToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketHomeChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketHomeLoadDataEvent value)?  loadData,TResult Function( _MarketHomeLoadCartEvent value)?  loadCart,TResult Function( _MarketHomeSelectCityEvent value)?  selectCity,TResult Function( _MarketHomeToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketHomeProductChangedEvent value)?  productChanged,TResult Function( _MarketHomeChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _MarketHomeLoadDataEvent() when loadData != null:
 return loadData(_that);case _MarketHomeLoadCartEvent() when loadCart != null:
 return loadCart(_that);case _MarketHomeSelectCityEvent() when selectCity != null:
 return selectCity(_that);case _MarketHomeToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that);case _MarketHomeProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that);case _:
   return orElse();
 
@@ -81,14 +82,15 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketHomeLoadDataEvent value)  loadData,required TResult Function( _MarketHomeLoadCartEvent value)  loadCart,required TResult Function( _MarketHomeSelectCityEvent value)  selectCity,required TResult Function( _MarketHomeToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketHomeChangeCartQuantityEvent value)  changeCartQuantity,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketHomeLoadDataEvent value)  loadData,required TResult Function( _MarketHomeLoadCartEvent value)  loadCart,required TResult Function( _MarketHomeSelectCityEvent value)  selectCity,required TResult Function( _MarketHomeToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketHomeProductChangedEvent value)  productChanged,required TResult Function( _MarketHomeChangeCartQuantityEvent value)  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _MarketHomeLoadDataEvent():
 return loadData(_that);case _MarketHomeLoadCartEvent():
 return loadCart(_that);case _MarketHomeSelectCityEvent():
 return selectCity(_that);case _MarketHomeToggleFavoriteEvent():
-return toggleFavorite(_that);case _MarketHomeChangeCartQuantityEvent():
+return toggleFavorite(_that);case _MarketHomeProductChangedEvent():
+return productChanged(_that);case _MarketHomeChangeCartQuantityEvent():
 return changeCartQuantity(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -106,14 +108,15 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketHomeLoadDataEvent value)?  loadData,TResult? Function( _MarketHomeLoadCartEvent value)?  loadCart,TResult? Function( _MarketHomeSelectCityEvent value)?  selectCity,TResult? Function( _MarketHomeToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketHomeChangeCartQuantityEvent value)?  changeCartQuantity,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketHomeLoadDataEvent value)?  loadData,TResult? Function( _MarketHomeLoadCartEvent value)?  loadCart,TResult? Function( _MarketHomeSelectCityEvent value)?  selectCity,TResult? Function( _MarketHomeToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketHomeProductChangedEvent value)?  productChanged,TResult? Function( _MarketHomeChangeCartQuantityEvent value)?  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _MarketHomeLoadDataEvent() when loadData != null:
 return loadData(_that);case _MarketHomeLoadCartEvent() when loadCart != null:
 return loadCart(_that);case _MarketHomeSelectCityEvent() when selectCity != null:
 return selectCity(_that);case _MarketHomeToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that);case _MarketHomeProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that);case _:
   return null;
 
@@ -131,13 +134,14 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadData,TResult Function()?  loadCart,TResult Function( MarketCity city)?  selectCity,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadData,TResult Function()?  loadCart,TResult Function( MarketCity city)?  selectCity,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( ItemChange change)?  productChanged,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketHomeLoadDataEvent() when loadData != null:
 return loadData();case _MarketHomeLoadCartEvent() when loadCart != null:
 return loadCart();case _MarketHomeSelectCityEvent() when selectCity != null:
 return selectCity(_that.city);case _MarketHomeToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that.product);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that.product);case _MarketHomeProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that.product,_that.quantity);case _:
   return orElse();
 
@@ -156,13 +160,14 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadData,required TResult Function()  loadCart,required TResult Function( MarketCity city)  selectCity,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadData,required TResult Function()  loadCart,required TResult Function( MarketCity city)  selectCity,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( ItemChange change)  productChanged,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _MarketHomeLoadDataEvent():
 return loadData();case _MarketHomeLoadCartEvent():
 return loadCart();case _MarketHomeSelectCityEvent():
 return selectCity(_that.city);case _MarketHomeToggleFavoriteEvent():
-return toggleFavorite(_that.product);case _MarketHomeChangeCartQuantityEvent():
+return toggleFavorite(_that.product);case _MarketHomeProductChangedEvent():
+return productChanged(_that.change);case _MarketHomeChangeCartQuantityEvent():
 return changeCartQuantity(_that.product,_that.quantity);case _:
   throw StateError('Unexpected subclass');
 
@@ -180,13 +185,14 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadData,TResult? Function()?  loadCart,TResult? Function( MarketCity city)?  selectCity,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadData,TResult? Function()?  loadCart,TResult? Function( MarketCity city)?  selectCity,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( ItemChange change)?  productChanged,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _MarketHomeLoadDataEvent() when loadData != null:
 return loadData();case _MarketHomeLoadCartEvent() when loadCart != null:
 return loadCart();case _MarketHomeSelectCityEvent() when selectCity != null:
 return selectCity(_that.city);case _MarketHomeToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that.product);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that.product);case _MarketHomeProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketHomeChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that.product,_that.quantity);case _:
   return null;
 
@@ -385,6 +391,72 @@ class __$MarketHomeToggleFavoriteEventCopyWithImpl<$Res>
   return _then(_MarketHomeToggleFavoriteEvent(
 product: null == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
 as MarketProduct,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _MarketHomeProductChangedEvent implements MarketHomeEvent {
+   _MarketHomeProductChangedEvent({required this.change});
+  
+
+ final  ItemChange change;
+
+/// Create a copy of MarketHomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MarketHomeProductChangedEventCopyWith<_MarketHomeProductChangedEvent> get copyWith => __$MarketHomeProductChangedEventCopyWithImpl<_MarketHomeProductChangedEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketHomeProductChangedEvent&&(identical(other.change, change) || other.change == change));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,change);
+
+@override
+String toString() {
+  return 'MarketHomeEvent.productChanged(change: $change)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MarketHomeProductChangedEventCopyWith<$Res> implements $MarketHomeEventCopyWith<$Res> {
+  factory _$MarketHomeProductChangedEventCopyWith(_MarketHomeProductChangedEvent value, $Res Function(_MarketHomeProductChangedEvent) _then) = __$MarketHomeProductChangedEventCopyWithImpl;
+@useResult
+$Res call({
+ ItemChange change
+});
+
+
+
+
+}
+/// @nodoc
+class __$MarketHomeProductChangedEventCopyWithImpl<$Res>
+    implements _$MarketHomeProductChangedEventCopyWith<$Res> {
+  __$MarketHomeProductChangedEventCopyWithImpl(this._self, this._then);
+
+  final _MarketHomeProductChangedEvent _self;
+  final $Res Function(_MarketHomeProductChangedEvent) _then;
+
+/// Create a copy of MarketHomeEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? change = null,}) {
+  return _then(_MarketHomeProductChangedEvent(
+change: null == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as ItemChange,
   ));
 }
 

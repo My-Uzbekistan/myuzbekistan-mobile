@@ -60,7 +60,8 @@
   "notification": "Notifications",
   "pin_code": "PIN code",
   "biometric_auth": "Biometric login",
-  "prayer_time_widget": "Prayer time widget",
+  "prayer_time_widget": "Prayer widget",
+  "iq_air_widget": "IQAir widget",
   "about_app": "About App",
   "log_in": "Sign in",
   "version": "Version",
@@ -126,5 +127,10 @@
   "deviceIpAddress": "IP address",
   "deviceLocation": "Location",
   "signOutFromDevice": "Sign out of device",
-  "noActiveSessions": "No other active sessions"
+  "noActiveSessions": "No other active sessions",
+  "premiumActiveUntil": "Active until {date}",
+  "premiumBuySubscription": "Get a subscription",
+  "webViewExitTitle": "Do you really want to leave?",
+  "webViewExitMessage": "The page will close and the entered data will not be saved.",
+  "yes": "Yes"
 }

@@ -71,7 +71,6 @@ class AboutApp extends HookWidget {
                     title: localization.privacy_policy,
                     onTap: () {
                       context.more.pushWebViewPage(
-                        title: localization.privacy_policy,
                         actionUrl:
                             "https://salomuzbekistan.uz/gallery/Privacy%20Policy-MyUzbekistan%20UZB-ENG-RUS.pdf",
                       );
@@ -82,7 +81,6 @@ class AboutApp extends HookWidget {
                     title: localization.licenses,
                     onTap: () {
                       context.more.pushWebViewPage(
-                        title: localization.privacy_policy,
                         actionUrl:
                             "https://salomuzbekistan.uz/gallery/TRAVEL%20ASISSTANT-LITSENZIYA.pdf",
                       );

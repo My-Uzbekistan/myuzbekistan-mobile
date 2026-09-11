@@ -9,6 +9,20 @@ class FeatureTravelNavExtension {
     return _context.pushType(AppNavPath.travel.travelHome);
   }
 
+  Future<T?> pushGlobalSearch<T>({String? query}) {
+    return _context.pushType<T>(
+      AppNavPath.travel.globalSearch,
+      queryParameters: {if (query != null) "query": query},
+    );
+  }
+
+  Future<T?> pushGlobalSearchResult<T>({required String query}) {
+    return _context.pushType<T>(
+      AppNavPath.travel.globalSearchResult,
+      queryParameters: {"query": query},
+    );
+  }
+
   void pushContentByCategoryPage(String categoryName, int categoryId) {
     _context.pushType(
       AppNavPath.travel.travelContentByCategory,

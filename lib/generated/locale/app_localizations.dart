@@ -255,6 +255,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update Later'**
   String get update_app_later;
+
+  /// No description provided for @page_not_found_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Page not found'**
+  String get page_not_found_title;
+
+  /// No description provided for @page_not_found_message.
+  ///
+  /// In en, this message translates to:
+  /// **'This link may be outdated or the page has been moved.'**
+  String get page_not_found_message;
+
+  /// No description provided for @page_not_found_go_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to home'**
+  String get page_not_found_go_home;
 }
 
 class _AppLocalizationsDelegate

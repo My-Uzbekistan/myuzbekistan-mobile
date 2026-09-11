@@ -57,7 +57,8 @@
   "notification": "Bildirishnomalar",
   "pin_code": "PIN-kod",
   "biometric_auth": "Biometrik kirish",
-  "prayer_time_widget": "Namoz vaqti vidjeti",
+  "prayer_time_widget": "Namoz vidjeti",
+  "iq_air_widget": "IQAir vidjeti",
   "about_app": "Ilova haqida",
   "log_in": "Kirish",
   "version": "Versiya",
@@ -122,5 +123,10 @@
   "deviceIpAddress": "IP-manzil",
   "deviceLocation": "Joylashuv",
   "signOutFromDevice": "Qurilmadan chiqish",
-  "noActiveSessions": "Boshqa faol seans yo'q"
+  "noActiveSessions": "Boshqa faol seans yo'q",
+  "premiumActiveUntil": "{date} gacha faol",
+  "premiumBuySubscription": "Obunani xarid qiling",
+  "webViewExitTitle": "Rostdan ham chiqib ketmoqchimisiz?",
+  "webViewExitMessage": "Sahifa yopiladi, kiritilgan ma'lumotlar saqlanmaydi.",
+  "yes": "Ha"
 }

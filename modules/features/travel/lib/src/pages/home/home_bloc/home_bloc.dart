@@ -20,6 +20,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   HomeBlocDataState dataState = HomeBlocState.dataState() as HomeBlocDataState;
   StreamSubscription? _streamSubscription;
   StreamSubscription? _prayersSubscription;
+  StreamSubscription? _iqAirSubscription;
 
   HomeBloc(Repository rp, AppStatusChangeListeners chl,this._securityStorage)
       : _repository = rp,
@@ -63,6 +64,20 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         add(HomeBlocEvent.loadPrayerTimes());
       } else {
         dataState = dataState.copyWith(prayerTimes: null);
+        if (state is HomeBlocDataState) {
+          emit(dataState);
+        }
+      }
+    });
+    _iqAirSubscription?.cancel();
+    _iqAirSubscription =
+        _appLocaleChangeListener.iqAirToggleListenChangeListener.listen((
+      value,
+    ) {
+      if (value) {
+        add(HomeBlocEvent.loadAirQuality());
+      } else {
+        dataState = dataState.copyWith(airQuality: null);
         if (state is HomeBlocDataState) {
           emit(dataState);
         }
@@ -190,18 +205,39 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     _LoadAirQualityEvent event,
     Emitter<HomeBlocState> emit,
   ) async {
+    if (!_securityStorage.isShowIqAirWidget()) {
+      if (dataState.airQuality != null) {
+        dataState = dataState.copyWith(airQuality: null);
+        if (state is HomeBlocDataState) {
+          emit(dataState);
+        }
+      }
+      return;
+    }
+
     try {
-      final position = LocationManager().getCurrentPosition();
-      if (position == null) return;
-      final airQuality = await _repository.loadAirQuality(
-        lat: position.latitude,
-        lon: position.longitude,
-      );
+      final airQuality = await _loadAirQualityForSelectedRegion();
+      if (airQuality == null) return;
       dataState = dataState.copyWith(airQuality: airQuality);
       if (state is HomeBlocDataState) {
         emit(dataState);
       }
     } catch (_) {}
+  }
+
+  Future<AirQuality?> _loadAirQualityForSelectedRegion() async {
+    final regionId = dataState.selectedRegion?.id;
+    if (regionId != null) {
+      try {
+        return await _repository.loadAirQualityByRegion(regionId: regionId);
+      } catch (_) {}
+    }
+    final position = LocationManager().getCurrentPosition();
+    if (position == null) return null;
+    return _repository.loadAirQuality(
+      lat: position.latitude,
+      lon: position.longitude,
+    );
   }
 
   Future<void> _loadServicesEvent(
@@ -213,11 +249,16 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
         page: 1,
         pageSize: 6,
       );
-      dataState = dataState.copyWith(catalogServices: catalogServices);
-      if (state is HomeBlocDataState) {
-        emit(dataState);
-      }
-    } catch (_) {}
+      dataState = dataState.copyWith(
+        catalogServices: catalogServices,
+        loadingServices: false,
+      );
+    } catch (_) {
+      dataState = dataState.copyWith(loadingServices: false);
+    }
+    if (state is HomeBlocDataState) {
+      emit(dataState);
+    }
   }
 
   Future<void> _loadContentsEvent(_LoadContentsEvent event,
@@ -245,7 +286,9 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
       Emitter<HomeBlocState> emit,) async {
 
     try{
-      final weatherFuture = await _repository.loadWeather(regionId: dataState.selectedRegion!.id);
+      final regionId = dataState.selectedRegion?.id;
+      if (regionId == null) return;
+      final weatherFuture = await _repository.loadWeather(regionId: regionId);
       dataState = dataState.copyWith(
         temperature: weatherFuture,
       );
@@ -268,6 +311,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     emit(dataState);
     add(HomeBlocEvent.loadContents());
     add(HomeBlocEvent.loadWeather());
+    add(HomeBlocEvent.loadAirQuality());
   }
 
   Future<void> _loadCategoriesAndRegions(Emitter<HomeBlocState> e) async {
@@ -329,6 +373,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     Future<void> close() {
       _streamSubscription?.cancel();
       _prayersSubscription?.cancel();
+      _iqAirSubscription?.cancel();
       debugPrint("homeBLocClose");
       return super.close();
     }

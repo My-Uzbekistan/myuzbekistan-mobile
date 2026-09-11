@@ -1644,6 +1644,90 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'Войдите в аккаунт'**
   String get museum_auth_required;
+
+  /// No description provided for @aqi_good.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отлично'**
+  String get aqi_good;
+
+  /// No description provided for @aqi_moderate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Средне'**
+  String get aqi_moderate;
+
+  /// No description provided for @aqi_bad.
+  ///
+  /// In ru, this message translates to:
+  /// **'Плохо'**
+  String get aqi_bad;
+
+  /// No description provided for @aqi_hazardous.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ядовито'**
+  String get aqi_hazardous;
+
+  /// No description provided for @global_search_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Город, регион или отель'**
+  String get global_search_hint;
+
+  /// No description provided for @global_search_history.
+  ///
+  /// In ru, this message translates to:
+  /// **'История поисков'**
+  String get global_search_history;
+
+  /// No description provided for @global_search_history_clear.
+  ///
+  /// In ru, this message translates to:
+  /// **'Очистить'**
+  String get global_search_history_clear;
+
+  /// No description provided for @global_search_results.
+  ///
+  /// In ru, this message translates to:
+  /// **'Результаты поисков'**
+  String get global_search_results;
+
+  /// No description provided for @global_search_action.
+  ///
+  /// In ru, this message translates to:
+  /// **'Найти'**
+  String get global_search_action;
+
+  /// No description provided for @global_search_query_label.
+  ///
+  /// In ru, this message translates to:
+  /// **'Поисковый запрос'**
+  String get global_search_query_label;
+
+  /// No description provided for @global_search_clear_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Очистить поиск'**
+  String get global_search_clear_title;
+
+  /// No description provided for @global_search_clear_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы точно хотите очистить историю поисков?'**
+  String get global_search_clear_message;
+
+  /// No description provided for @global_search_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Ничего не найдено'**
+  String get global_search_empty_title;
+
+  /// No description provided for @global_search_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'По этому запросу ничего не найдено, попробуйте другие слова'**
+  String get global_search_empty_message;
 }
 
 class _FeatureTravelLocalizationsDelegate

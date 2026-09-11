@@ -3,7 +3,7 @@ part of '../home_hero_header.dart';
 const double _kExpanded = 295;
 const double _kCollapsed = 72;
 const double _kInfoTop = 12;
-const double _kPrayerTop = 64;
+const double _kMetricsTop = 64;
 const double _kQuickTop = 154;
 const double _kSearchH = 48;
 const double _kOverhang = 24;

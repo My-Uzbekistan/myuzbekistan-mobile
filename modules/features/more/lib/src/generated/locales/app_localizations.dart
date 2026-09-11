@@ -442,8 +442,14 @@ abstract class FeatureMoreLocalizations {
   /// No description provided for @prayer_time_widget.
   ///
   /// In ru, this message translates to:
-  /// **'Виджет времени намаза'**
+  /// **'Виджет намаза'**
   String get prayer_time_widget;
+
+  /// No description provided for @iq_air_widget.
+  ///
+  /// In ru, this message translates to:
+  /// **'Виджет IQAir'**
+  String get iq_air_widget;
 
   /// No description provided for @about_app.
   ///
@@ -834,6 +840,36 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Других активных сеансов нет'**
   String get noActiveSessions;
+
+  /// No description provided for @premiumActiveUntil.
+  ///
+  /// In ru, this message translates to:
+  /// **'Активен до {date}'**
+  String premiumActiveUntil(String date);
+
+  /// No description provided for @premiumBuySubscription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Приобретите подписку'**
+  String get premiumBuySubscription;
+
+  /// No description provided for @webViewExitTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы действительно хотите выйти?'**
+  String get webViewExitTitle;
+
+  /// No description provided for @webViewExitMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Страница закроется, введённые данные не сохранятся.'**
+  String get webViewExitMessage;
+
+  /// No description provided for @yes.
+  ///
+  /// In ru, this message translates to:
+  /// **'Да'**
+  String get yes;
 }
 
 class _FeatureMoreLocalizationsDelegate

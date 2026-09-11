@@ -2,8 +2,8 @@ import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/museum/search/bloc/museum_search_bloc.dart';
-import 'package:travel/src/pages/museum/widgets/museum_chip.dart';
-import 'package:travel/src/pages/museum/widgets/museum_nav_bar.dart';
+import 'package:travel/src/widgets/travel_chip.dart';
+import 'package:travel/src/widgets/travel_nav_bar.dart';
 import 'package:shared/shared.dart' hide Toast;
 
 class MuseumSearchPage extends HookWidget {
@@ -34,7 +34,7 @@ class MuseumSearchPage extends HookWidget {
           builder:
               (context, state) => Column(
                 children: [
-                  MuseumNavBar(
+                  TravelNavBar(
                     title: context.localization.museum_search_title,
                     onBack: () => context.pop(),
                   ),
@@ -167,7 +167,7 @@ class MuseumSearchPage extends HookWidget {
                 spacing: 8,
                 children: [
                   for (final city in state.cities)
-                    MuseumChip(
+                    TravelChip(
                       title: city.name,
                       isSelected: city.id == state.city?.id,
                       onTap: () {
@@ -227,7 +227,7 @@ class MuseumSearchPage extends HookWidget {
             runSpacing: 8,
             children: [
               for (final query in state.history)
-                MuseumChip(
+                TravelChip(
                   title: query,
                   onTap: () {
                     controller.text = query;

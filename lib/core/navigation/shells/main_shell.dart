@@ -1,5 +1,4 @@
 import 'package:more/more.dart';
-import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/shell_wrapper.dart';
@@ -12,7 +11,6 @@ class MainShell {
     required List<StatefulShellBranch> branches,
   }) {
     return StatefulShellRoute.indexedStack(
-      parentNavigatorKey: appRootNavigatorKey,
       pageBuilder: (context, state, navigationShell) => NoTransitionPage(
         child: BlocProvider(
           create: (_) =>

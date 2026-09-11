@@ -67,6 +67,7 @@ flutter:
      - assets/svg/more/
      - assets/svg/prayers/
      - assets/logo/
+     - assets/map_style/
      - assets/flags/
      - assets/splash/
   #   - images/a_dot_ham.jpeg

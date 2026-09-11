@@ -20,6 +20,7 @@ export 'src/utils/device_info_manager.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export  'package:dartx/dartx.dart';
 export 'src/utils/launcher_utils.dart';
+export 'src/utils/app_share.dart';
 export 'package:flutter_alice/alice.dart';
 export 'package:dio/dio.dart';
 export 'package:pinput/pinput.dart';

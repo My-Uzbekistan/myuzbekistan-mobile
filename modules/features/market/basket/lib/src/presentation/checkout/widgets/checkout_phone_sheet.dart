@@ -1,4 +1,5 @@
 import 'package:basket/src/core/extension.dart';
+import 'package:basket/src/presentation/checkout/widgets/checkout_sheet.dart';
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,14 +11,8 @@ class CheckoutPhoneSheet extends HookWidget {
   final String? phone;
 
   static Future<String?> show(BuildContext context, {String? phone}) {
-    return showModalBottomSheet<String>(
-      context: context,
-      useSafeArea: true,
-      isScrollControlled: true,
-      backgroundColor: context.appColors.background.elevation1,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
+    return CheckoutSheet.show<String>(
+      context,
       builder: (context) => CheckoutPhoneSheet(phone: phone),
     );
   }
@@ -27,7 +22,7 @@ class CheckoutPhoneSheet extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController(
-      text: _digits(phone ?? "").takeLast(9),
+      text: _digits(phone ?? "").takeLast(9).phoneFormat(prefix: "").trim(),
     );
     final localPart = useState(_digits(controller.text));
 
@@ -39,40 +34,31 @@ class CheckoutPhoneSheet extends HookWidget {
 
     final isValid = localPart.value.length == 9;
 
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
-        top: 16,
-        bottom: MediaQuery.viewInsetsOf(context).bottom + 16,
+    return CheckoutSheet(
+      title: context.localization.basket_checkout_phone_add,
+      content: Padding(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 12,
+          bottom: 20,
+        ),
+        child: PhoneInputField(
+          controller: controller,
+          label: context.localization.basket_checkout_phone_label,
+          keyboardType: TextInputType.phone,
+          formatters: [
+            FilteringTextInputFormatter.allow(RegExp(r"[\d ]")),
+            PhoneInputFormatter(),
+          ],
+        ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 20,
-        children: [
-          Text(
-            context.localization.basket_checkout_phone,
-          ).h3(color: context.appColors.textIconColor.primary),
-          AppInputField(
-            controller: controller,
-            prefixText: "+998",
-            label: context.localization.basket_checkout_phone,
-            autoFocus: true,
-            keyboardType: TextInputType.phone,
-            formatters: [
-              FilteringTextInputFormatter.allow(RegExp(r"[\d ]")),
-              PhoneInputFormatter(),
-            ],
-          ),
-          AppActionButton(
-            actionText: context.coreLocalization.action_done,
-            sizeType: ActionButtonSizeType.large,
-            onPressed: isValid
-                ? () => Navigator.of(context).pop("998${localPart.value}")
-                : null,
-          ),
-        ],
+      footer: AppActionButton(
+        actionText: context.coreLocalization.action_add,
+        sizeType: ActionButtonSizeType.large,
+        onPressed: isValid
+            ? () => Navigator.of(context).pop("998${localPart.value}")
+            : null,
       ),
     );
   }

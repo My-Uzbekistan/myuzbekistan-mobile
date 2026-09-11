@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:travel/src/pages/museum/museum_error_extension.dart';
 import 'package:shared/shared.dart';
@@ -9,10 +11,23 @@ part 'museum_tickets_bloc.freezed.dart';
 @injectable
 class MuseumTicketsBloc extends Bloc<MuseumTicketsEvent, MuseumTicketsState> {
   final MuseumRepository _repository;
+  final AppRefreshListener _refreshListener;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
 
-  MuseumTicketsBloc(this._repository) : super(MuseumTicketsState()) {
+  MuseumTicketsBloc(this._repository, this._refreshListener)
+    : super(MuseumTicketsState()) {
     on<_MuseumTicketsStartEvent>(_start);
     on<_MuseumTicketsRefreshEvent>(_refresh);
+
+    _refreshSubscription = _refreshListener
+        .observe({AppRefreshTopic.museumTickets})
+        .listen((_) => add(MuseumTicketsEvent.refresh()));
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    return super.close();
   }
 
   Future<void> _start(

@@ -86,4 +86,14 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get update_app_later => 'Keyin yangilash';
+
+  @override
+  String get page_not_found_title => 'Sahifa topilmadi';
+
+  @override
+  String get page_not_found_message =>
+      'Bu havola eskirgan yoki sahifa ko‘chirilgan bo‘lishi mumkin.';
+
+  @override
+  String get page_not_found_go_home => 'Bosh sahifaga';
 }

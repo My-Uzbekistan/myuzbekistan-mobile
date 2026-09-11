@@ -11,6 +11,7 @@ class MarketDetailShimmer extends StatelessWidget {
       child: Column(
         children: [
           MarketDetailSection(
+            squareTop: true,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [

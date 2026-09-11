@@ -38,9 +38,8 @@ class OnboardingPage extends HookWidget {
                       actionText: context.localization.action_detail,
                       onPressed: () {
                         bloc.add(OnboardingEvent.trackClick(index: currentIndex.value));
-                        pushAction(
-                          context,
-                          action: items[currentIndex.value].actionLink,
+                        AppLinkRouter.open(
+                          items[currentIndex.value].actionLink,
                         );
                       },
                     ),
@@ -134,17 +133,5 @@ class OnboardingPage extends HookWidget {
       ),
     );
   }
-
-  void pushAction(BuildContext context, {String? action}) {
-    if (action == null) return;
-    var uri = Uri.parse(action.trim());
-    if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||
-        uri.host.isEmpty) {
-      context.push(uri.toString());
-    } else {
-      context.more.openUrl(action);
-    }
-  }
-
 
 }

@@ -7,8 +7,6 @@ import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/app_bottom_n
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_tab_data.dart';
 import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
 
-const _deeplinkHost = "myuzb.uz";
-
 bool _listeningNotifications = false;
 
 class ShellPageWrapper extends HookWidget {
@@ -58,7 +56,7 @@ class ShellPageWrapper extends HookWidget {
       _listeningNotifications = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         NotificationService().listenNotification(
-          logRemoteMessage: _openNotificationDeeplink,
+          onOpened: _openNotificationDeeplink,
         );
       });
       return null;
@@ -89,12 +87,7 @@ class ShellPageWrapper extends HookWidget {
 }
 
 void _openNotificationDeeplink(RemoteMessage message) {
-  try {
-    final deeplink = message.data["deeplink"];
-    if (deeplink is! String || deeplink.isEmpty) return;
-    final uri = Uri.parse(deeplink);
-    if (uri.host == _deeplinkHost && uri.pathSegments.isNotEmpty) {
-      appRootNavigatorKey.currentContext?.push(uri.toString());
-    }
-  } catch (_) {}
+  final deeplink = message.data["deeplink"];
+  if (deeplink is! String) return;
+  AppLinkRouter.open(deeplink);
 }

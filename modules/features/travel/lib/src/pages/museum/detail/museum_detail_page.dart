@@ -174,21 +174,43 @@ class MuseumDetailPage extends HookWidget {
           RoundedButton.arrowLeft(onPressed: () => context.pop()),
           const Spacer(),
           if (detail != null)
-            RoundedButton(
-              onPressed: () {
-                if (!museumRequireAuth(context)) return;
-                bloc.add(MuseumDetailEvent.toggleFavorite());
-              },
-              assetsSvgIcon:
-                  detail.isFavorite
-                      ? Assets.svg.iconFilledHeard.path
-                      : Assets.svg.outlineHeard.path,
-              iconColor:
-                  detail.isFavorite ? context.appColors.colors.red : null,
+            Row(
+              spacing: 8,
+              children: [
+                RoundedButton(
+                  onPressed: () => _share(context, detail),
+                  assetsSvgIcon: Assets.svg.iconShare.path,
+                ),
+                RoundedButton(
+                  onPressed: () {
+                    if (!museumRequireAuth(context)) return;
+                    bloc.add(MuseumDetailEvent.toggleFavorite());
+                  },
+                  assetsSvgIcon:
+                      detail.isFavorite
+                          ? Assets.svg.iconFilledHeard.path
+                          : Assets.svg.outlineHeard.path,
+                  iconColor:
+                      detail.isFavorite ? context.appColors.colors.red : null,
+                ),
+              ],
             ),
         ],
       ),
     );
+  }
+
+  Future<void> _share(BuildContext context, MuseumDetail detail) async {
+    final failureText = context.coreLocalization.unexpected_error;
+    final shared = await AppShare.link(
+      context,
+      url: AppLinkRouter.shareLink(
+        AppNavPath.travel.museumDetail,
+        queryParameters: {"museumId": detail.id},
+      ),
+      title: detail.title,
+    );
+    if (!shared) Toast.showToast(failureText);
   }
 
   Widget _sections(

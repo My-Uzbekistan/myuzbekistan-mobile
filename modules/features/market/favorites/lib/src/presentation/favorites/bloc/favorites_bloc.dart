@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -8,11 +10,37 @@ part 'favorites_bloc.freezed.dart';
 @injectable
 class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
+  StreamSubscription<ItemChange>? _productSubscription;
 
-  FavoritesBloc(this._repository) : super(FavoritesState()) {
+  FavoritesBloc(this._repository, this._refresh) : super(FavoritesState()) {
     on<_FavoritesLoadDataEvent>(_loadData);
     on<_FavoritesToggleFavoriteEvent>(_toggleFavorite);
     on<_FavoritesChangeCartQuantityEvent>(_changeCartQuantity);
+    on<_FavoritesProductChangedEvent>(_productChanged);
+
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.marketFavorites})
+        .listen((_) => add(FavoritesEvent.loadData()));
+    _productSubscription = _refresh
+        .observeItems(RefreshEntity.marketProduct)
+        .where((change) => change.cartQuantity != null)
+        .listen((change) => add(FavoritesEvent.productChanged(change: change)));
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    _productSubscription?.cancel();
+    return super.close();
+  }
+
+  void _productChanged(
+    _FavoritesProductChangedEvent event,
+    Emitter<FavoritesState> emit,
+  ) {
+    emit(state.copyWith(products: _applyChange(event.change)));
   }
 
   Future<void> _loadData(
@@ -41,13 +69,28 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         errorMessage: null,
       ),
     );
+    _refresh.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        isFavorite: isFavorite,
+      ),
+    );
     try {
       if (isFavorite) {
         await _repository.addFavorite(productId: product.id);
       } else {
         await _repository.removeFavorite(productId: product.id);
       }
+      _refresh.notify(AppRefreshTopic.marketFavorites);
     } catch (e) {
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          isFavorite: product.isFavorite,
+        ),
+      );
       emit(
         state.copyWith(
           products: _replaceProduct(product),
@@ -69,6 +112,13 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
         errorMessage: null,
       ),
     );
+    _refresh.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        cartQuantity: quantity,
+      ),
+    );
     try {
       if (product.cartQuantity == 0) {
         await _repository.addToCart(productId: product.id, quantity: quantity);
@@ -78,7 +128,15 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
           quantity: quantity,
         );
       }
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          cartQuantity: product.cartQuantity,
+        ),
+      );
       emit(
         state.copyWith(
           products: _replaceProduct(product),
@@ -91,6 +149,20 @@ class FavoritesBloc extends Bloc<FavoritesEvent, FavoritesState> {
   List<MarketProduct> _replaceProduct(MarketProduct product) {
     return state.products
         .map((item) => item.id == product.id ? product : item)
+        .toList();
+  }
+
+  List<MarketProduct> _applyChange(ItemChange change) {
+    return state.products
+        .map(
+          (item) =>
+              item.id.toString() == change.id
+                  ? item.copyWith(
+                    isFavorite: change.isFavorite,
+                    cartQuantity: change.cartQuantity,
+                  )
+                  : item,
+        )
         .toList();
   }
 

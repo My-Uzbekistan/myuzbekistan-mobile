@@ -15,7 +15,9 @@ class FavoritesPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i784.FavoritesBloc>(
-        () => _i784.FavoritesBloc(gh<_i494.MarketRepository>()));
+    gh.factory<_i784.FavoritesBloc>(() => _i784.FavoritesBloc(
+          gh<_i494.MarketRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
   }
 }

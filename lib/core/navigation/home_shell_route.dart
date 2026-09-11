@@ -1,19 +1,31 @@
 part of 'router.dart';
 
 final _shellRoute = [
-  MainShell.route(
+  RootShell.route(
     branches: [
-      FeatureTravelRouter.shellTravel,
-      FeatureFinanceRouter.shellFinance,
-      FeatureMoreRouter.shellMore,
-    ],
-  ),
-  MarketShell.route(
-    branches: [
-      FeatureMarketHomeRouter.shellMarketHome,
-      FeatureFavoritesRouter.shellFavorites,
-      FeatureBasketRouter.shellBasket,
-      FeatureMarketHomeRouter.shellMarketProfile,
+      StatefulShellBranch(
+        routes: [
+          MainShell.route(
+            branches: [
+              FeatureTravelRouter.shellTravel,
+              FeatureFinanceRouter.shellFinance,
+              FeatureMoreRouter.shellMore,
+            ],
+          ),
+        ],
+      ),
+      StatefulShellBranch(
+        routes: [
+          MarketShell.route(
+            branches: [
+              FeatureMarketHomeRouter.shellMarketHome,
+              FeatureFavoritesRouter.shellFavorites,
+              FeatureBasketRouter.shellBasket,
+              FeatureMarketHomeRouter.shellMarketProfile,
+            ],
+          ),
+        ],
+      ),
     ],
   ),
 ];

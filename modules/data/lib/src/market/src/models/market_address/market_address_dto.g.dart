@@ -14,6 +14,7 @@ MarketAddressDto _$MarketAddressDtoFromJson(Map<String, dynamic> json) =>
       lat: (json['lat'] as num?)?.toDouble(),
       lon: (json['lon'] as num?)?.toDouble(),
       isDefault: json['isDefault'] as bool?,
+      phone: json['phone'] as String?,
     );
 
 Map<String, dynamic> _$MarketAddressDtoToJson(MarketAddressDto instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$MarketAddressDtoToJson(MarketAddressDto instance) =>
       'lat': instance.lat,
       'lon': instance.lon,
       'isDefault': instance.isDefault,
+      'phone': instance.phone,
     };

@@ -26,8 +26,21 @@ class ClaimDto {
       name: name,
       description: description,
       packageSize: packageSize,
-      claimedAt: claimedAt,
+      claimedAt: _parseClaimedAt(claimedAt),
     );
+  }
+}
+
+DateTime? _parseClaimedAt(String? value) {
+  if (value == null || value.isEmpty) return null;
+
+  final isoDate = DateTime.tryParse(value);
+  if (isoDate != null) return isoDate.toLocal();
+
+  try {
+    return DateFormat("dd.MM.yyyy").parseStrict(value);
+  } catch (_) {
+    return null;
   }
 }
 

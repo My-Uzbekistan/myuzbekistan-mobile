@@ -34,12 +34,39 @@ class _FeatureMarketNavPath {
   AppNavPath get marketCheckout =>
       _NavPathImpl(name: 'feature_market_checkout', path: '/market/checkout');
 
-  AppNavPath get marketOrders =>
-      _NavPathImpl(name: 'feature_market_orders', path: '/market/orders');
+  AppNavPath get marketAddressMap => _NavPathImpl(
+    name: 'feature_market_address_map',
+    path: '/market/address-map',
+  );
 
-  AppNavPath get marketOrderDetail =>
-      _NavPathImpl(name: 'feature_market_order_detail', path: '/market/order');
+  AppNavPath get marketOrders => _NavPathImpl(
+    name: 'feature_market_orders',
+    path: '/market/orders',
+    authRequired: true,
+  );
+
+  AppNavPath get marketOrderDetail => _NavPathImpl(
+    name: 'feature_market_order_detail',
+    path: '/market/order',
+    authRequired: true,
+  );
 
   AppNavPath get marketProfile =>
       _NavPathImpl(name: 'feature_market_profile', path: '/market/profile');
+
+  List<AppNavPath> get values => [
+    marketHome,
+    marketCatalog,
+    marketCategory,
+    marketProductDetail,
+    marketSearch,
+    marketLocation,
+    marketFavorites,
+    marketBasket,
+    marketCheckout,
+    marketAddressMap,
+    marketOrders,
+    marketOrderDetail,
+    marketProfile,
+  ];
 }

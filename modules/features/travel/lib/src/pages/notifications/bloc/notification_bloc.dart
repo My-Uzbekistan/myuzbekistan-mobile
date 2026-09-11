@@ -18,6 +18,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
     : super(NotificationsState.loadingState()) {
     on<_LoadNotifications>(_loadNotifications);
     on<_NotificationSeenEvent>(_notificationSeen);
+    on<_AllNotificationsSeenEvent>(_allNotificationsSeen);
   }
 
   Future<void> _loadNotifications(
@@ -68,6 +69,27 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
         ),
       );
       await _repository.seenNotification(id: event.notId);
+      getIt<NotificationCountCubit>().loadNotificationCount();
+    } catch (e) {}
+  }
+
+  Future<void> _allNotificationsSeen(
+    _AllNotificationsSeenEvent event,
+    Emitter<NotificationsState> emit,
+  ) async {
+    try {
+      emit(
+        state.maybeMap(
+          successState: (st) => st.copyWith(
+            notifications: st.notifications
+                .map((n) => n.copyWith(isSeen: true))
+                .toList(),
+            initialNotification: null,
+          ),
+          orElse: () => state,
+        ),
+      );
+      await _repository.seenAllNotifications();
       getIt<NotificationCountCubit>().loadNotificationCount();
     } catch (e) {}
   }

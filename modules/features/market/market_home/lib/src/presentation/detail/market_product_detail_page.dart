@@ -133,14 +133,14 @@ class MarketProductDetailPage extends HookWidget {
                                   children: [
                                     ClipRRect(
                                       borderRadius: const BorderRadius.vertical(
-                                        top: Radius.circular(24),
+                                        top: Radius.circular(20),
                                       ),
                                       child: Container(
-                                        height: 24,
+                                        height: 20,
                                         color: context
                                             .appColors
                                             .background
-                                            .underlayer,
+                                            .elevation1,
                                       ),
                                     ),
                                   ],
@@ -186,13 +186,27 @@ class MarketProductDetailPage extends HookWidget {
     return MarketDetailActions(
       isFavorite: detail?.isFavorite ?? false,
       onBack: () => context.pop(),
-      onShareTap: detail == null
-          ? null
-          : () => Share.shareUri(Uri.parse(AppLinks.marketProduct(detail.id))),
+      onShareTap: detail == null ? null : () => _shareProduct(context, detail),
       onFavoriteTap: detail == null
           ? null
           : () => bloc.add(MarketProductDetailEvent.toggleFavorite()),
     );
+  }
+
+  Future<void> _shareProduct(
+    BuildContext context,
+    MarketProductDetail detail,
+  ) async {
+    final failureText = context.localization.market_something_went_wrong;
+    final shared = await AppShare.link(
+      context,
+      url: AppLinkRouter.shareLink(
+        AppNavPath.market.marketProductDetail,
+        queryParameters: {"productId": "${detail.id}"},
+      ),
+      title: detail.name,
+    );
+    if (!shared) Toast.showToast(failureText);
   }
 
   Widget _sections(
@@ -203,7 +217,10 @@ class MarketProductDetailPage extends HookWidget {
   ) {
     return Column(
       children: [
-        MarketDetailSection(child: MarketDetailSummary(detail: detail)),
+        MarketDetailSection(
+          squareTop: true,
+          child: MarketDetailSummary(detail: detail),
+        ),
         if (detail.description.isNotEmpty)
           MarketDetailSection(
             title: context.localization.market_detail_about,

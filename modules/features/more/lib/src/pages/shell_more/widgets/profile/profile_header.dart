@@ -5,30 +5,20 @@ import 'package:navigation/navigation.dart';
 
 import 'profile_avatar_large.dart';
 
-LinearGradient _premiumSubtitleGradient(BuildContext context) {
-  final accent = context.appColors.accent;
-  return LinearGradient(
-    colors: [accent.premium, accent.premiumLight, accent.premiumDark],
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-  );
-}
-
 class ProfileHeader extends StatelessWidget {
   static double heightOf(
     BuildContext context, {
     required bool isGuest,
     required bool isPremium,
   }) {
-    final premiumSubtitle =
-        !isGuest && isPremium ? 16 + 8 : 0.0;
+    final premiumSubtitle = !isGuest && isPremium ? 16 + 4 : 0.0;
 
     return MediaQuery.of(context).padding.top +
         16 * 2 +
         120 +
         16 +
         28 +
-        8 +
+        12 +
         30 +
         premiumSubtitle;
   }
@@ -55,6 +45,8 @@ class ProfileHeader extends StatelessWidget {
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top + 16,
         bottom: 16,
+        left: 16,
+        right: 16,
       ),
       decoration: BoxDecoration(
         color: context.appColors.background.elevation1,
@@ -66,22 +58,22 @@ class ProfileHeader extends StatelessWidget {
         children: [
           ProfileAvatarLarge(photoUrl: photoUrl, isLoading: isLoading),
           Column(
-            spacing: 8,
+            spacing: 12,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
+              Column(
                 spacing: 4,
                 children: [
-                  Flexible(
-                    child:
-                        Text(
-                          isGuest ? context.localization.guest : name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ).h2(),
-                  ),
-                  if (isPremium)
-                    Assets.svg.premiumCheck.svg(width: 22, height: 22),
+                  Text(
+                    isGuest ? context.localization.guest : name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ).h2(),
+                  if (!isGuest && isPremium)
+                    Text(
+                      context.localization.premiumActiveSubtitle,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ).labelSm(color: context.appColors.accent.premiumDark),
                 ],
               ),
               if (isGuest)
@@ -101,18 +93,7 @@ class ProfileHeader extends StatelessWidget {
                     ).labelSm(color: context.appColors.static.white),
                   ),
                 )
-              else ...[
-                if (isPremium)
-                  ShaderMask(
-                    shaderCallback:
-                        _premiumSubtitleGradient(context).createShader,
-                    blendMode: BlendMode.srcIn,
-                    child: Text(
-                      context.localization.premiumActiveSubtitle,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ).labelSm(color: context.appColors.static.white),
-                  ),
+              else
                 GestureDetector(
                   onTap: () => context.more.pushEditProfilePage(),
                   child: Container(
@@ -146,7 +127,6 @@ class ProfileHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-              ],
             ],
           ),
         ],

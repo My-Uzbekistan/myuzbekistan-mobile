@@ -114,11 +114,12 @@ class AddCardsPage extends HookWidget {
                         ),
                         if (state.params is AddCardExternalParams)
                           ExternalCardPageWidget(
-                            updateCardData: (expire, cvv) {
+                            updateCardData: (expire, cvv, cardHolderName) {
                               bloc.add(
                                 AddCardEvent.setExternalParams(
                                   expire: expire,
                                   cvv: cvv,
+                                  cardHolderName: cardHolderName,
                                 ),
                               );
                             },

@@ -6,8 +6,10 @@ import '../models/delivery_method.dart';
 import '../models/market_address.dart';
 import '../models/market_category.dart';
 import '../models/market_city.dart';
+import '../models/market_geo_address.dart';
 import '../models/market_home.dart';
 import '../models/market_order.dart';
+import '../models/market_pickup_point.dart';
 import '../models/market_product.dart';
 import '../models/market_product_detail.dart';
 import '../models/market_product_list.dart';
@@ -88,6 +90,8 @@ abstract class MarketRepository {
 
   Future<List<DeliveryMethod>> deliveryMethods({int? sellerId});
 
+  Future<List<MarketPickupPoint>> pickupPoints({int? deliveryMethodId});
+
   Future<List<MarketAddress>> addresses();
 
   Future<MarketAddress> addAddress({
@@ -96,6 +100,7 @@ abstract class MarketRepository {
     double? latitude,
     double? longitude,
     bool isDefault = false,
+    String? phone,
   });
 
   Future<MarketAddress> editAddress({
@@ -105,14 +110,21 @@ abstract class MarketRepository {
     double? latitude,
     double? longitude,
     bool isDefault = false,
+    String? phone,
   });
 
   Future<void> deleteAddress({required int addressId});
+
+  Future<MarketGeoAddress> geoAddress({
+    required double latitude,
+    required double longitude,
+  });
 
   Future<dynamic> createOrder({
     required int deliveryMethodId,
     required String recipientPhone,
     int? addressId,
+    int? pickupPointId,
     String? recipientName,
     String? comment,
   });

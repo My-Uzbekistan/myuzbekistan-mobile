@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:more/src/core/extension.dart';
 import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart';
-import 'package:more/src/pages/auth/auth_phone/widgets/phone_input_field.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 

@@ -29,21 +29,34 @@ class MarketHomePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
+    gh.factory<_i296.MarketHomeBloc>(() => _i296.MarketHomeBloc(
+          gh<_i494.MarketRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i541.MarketOrderDetailBloc>(() => _i541.MarketOrderDetailBloc(
+          gh<_i494.MarketRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i65.MarketOrdersBloc>(() => _i65.MarketOrdersBloc(
+          gh<_i494.MarketRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
     gh.factory<_i145.MarketCatalogBloc>(
         () => _i145.MarketCatalogBloc(gh<_i494.MarketRepository>()));
-    gh.factory<_i725.MarketCategoryBloc>(
-        () => _i725.MarketCategoryBloc(gh<_i494.MarketRepository>()));
-    gh.factory<_i219.MarketProductDetailBloc>(
-        () => _i219.MarketProductDetailBloc(gh<_i494.MarketRepository>()));
-    gh.factory<_i296.MarketHomeBloc>(
-        () => _i296.MarketHomeBloc(gh<_i494.MarketRepository>()));
     gh.factory<_i652.MarketLocationBloc>(
         () => _i652.MarketLocationBloc(gh<_i494.MarketRepository>()));
-    gh.factory<_i541.MarketOrderDetailBloc>(
-        () => _i541.MarketOrderDetailBloc(gh<_i494.MarketRepository>()));
-    gh.factory<_i65.MarketOrdersBloc>(
-        () => _i65.MarketOrdersBloc(gh<_i494.MarketRepository>()));
-    gh.factory<_i1049.MarketSearchBloc>(
-        () => _i1049.MarketSearchBloc(gh<_i494.MarketRepository>()));
+    gh.factory<_i725.MarketCategoryBloc>(() => _i725.MarketCategoryBloc(
+          gh<_i494.MarketRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i219.MarketProductDetailBloc>(
+        () => _i219.MarketProductDetailBloc(
+              gh<_i494.MarketRepository>(),
+              gh<_i494.AppRefreshListener>(),
+            ));
+    gh.factory<_i1049.MarketSearchBloc>(() => _i1049.MarketSearchBloc(
+          gh<_i494.MarketRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
   }
 }

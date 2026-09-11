@@ -1,13 +1,11 @@
 import 'dart:math';
 
 import 'package:component_res/component_res.dart';
-import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
-import 'package:uzbekistan_travel/di/injection.dart';
 
 class SplashScreen extends HookWidget {
   const SplashScreen({super.key});
@@ -24,14 +22,13 @@ class SplashScreen extends HookWidget {
     final imagePath = useState<String>("");
     final opacity = useState<double>(0);
     useEffect(() {
-      getIt<SecurityStorage>().clearPinVerified();
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       imagePath.value = images[Random().nextInt(images.length)];
       Future.delayed(const Duration(milliseconds: 100), () {
         opacity.value = 1;
       });
       Future.delayed(const Duration(milliseconds: 1500), () {
-        if(GoRouter.of(context).state.path=="/splash") {
+        if (GoRouter.of(context).state.path == AppNavPath.root.splash.path) {
           context.travel.goMain();
         }
       });

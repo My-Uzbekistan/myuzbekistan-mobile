@@ -7,7 +7,7 @@ import 'package:travel/src/pages/museum/list/bloc/museum_list_bloc.dart';
 import 'package:travel/src/pages/museum/list/museum_sort_label.dart';
 import 'package:travel/src/pages/museum/list/widgets/shimmer/museum_cards_shimmer.dart';
 import 'package:travel/src/pages/museum/widgets/museum_card_tile.dart';
-import 'package:travel/src/pages/museum/widgets/museum_chip.dart';
+import 'package:travel/src/widgets/travel_chip.dart';
 import 'package:travel/src/pages/museum/widgets/museum_state_view.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart' hide Toast;
@@ -193,7 +193,7 @@ class MuseumListPage extends HookWidget {
           spacing: 8,
           children: [
             for (final sort in MuseumSort.values)
-              MuseumChip(
+              TravelChip(
                 title: sort.label(context),
                 isSelected: sort == state.sort,
                 onTap: () => bloc.add(MuseumListEvent.changeSort(sort: sort)),

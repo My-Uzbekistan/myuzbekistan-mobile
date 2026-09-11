@@ -116,7 +116,7 @@ class CityPage extends HookWidget {
                   ),
                 ],
               ),
-              _actions(context),
+              _actions(context, city),
             ],
           );
         },
@@ -124,15 +124,36 @@ class CityPage extends HookWidget {
     );
   }
 
-  Widget _actions(BuildContext context) {
+  Widget _actions(BuildContext context, CityDetail? city) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
       ).copyWith(top: MediaQuery.paddingOf(context).top),
       child: Row(
-        children: [RoundedButton.arrowLeft(onPressed: () => context.pop())],
+        children: [
+          RoundedButton.arrowLeft(onPressed: () => context.pop()),
+          const Spacer(),
+          if (city != null)
+            RoundedButton(
+              onPressed: () => _share(context, city),
+              assetsSvgIcon: Assets.svg.iconShare.path,
+            ),
+        ],
       ),
     );
+  }
+
+  Future<void> _share(BuildContext context, CityDetail city) async {
+    final failureText = context.coreLocalization.unexpected_error;
+    final shared = await AppShare.link(
+      context,
+      url: AppLinkRouter.shareLink(
+        AppNavPath.travel.travelCity,
+        queryParameters: {"cityId": "${city.id}"},
+      ),
+      title: city.name,
+    );
+    if (!shared) Toast.showToast(failureText);
   }
 
   List<Widget> _placeholder(bool isLoading) {
@@ -149,7 +170,7 @@ class CityPage extends HookWidget {
     final location = city.location;
     final tickets = city.tickets;
     final blocks = <Widget>[
-      for (final block in city.blocks)
+      for (final block in city.blocks.where((e) => e.items.isNotEmpty))
         CityBlockSection(
           block: block,
           onSeeAll:

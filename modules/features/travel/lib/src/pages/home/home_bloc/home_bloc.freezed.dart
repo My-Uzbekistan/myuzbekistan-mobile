@@ -975,11 +975,11 @@ return errorState(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  String? backgroundImage,  bool loadingBackground,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  PrayerTimes? prayerTimes,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult Function()?  errorState,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  bool loadingServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  String? backgroundImage,  bool loadingBackground,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  PrayerTimes? prayerTimes,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult Function()?  errorState,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState() when loading != null:
 return loading();case HomeBlocDataState() when dataState != null:
-return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.backgroundImage,_that.loadingBackground,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.prayerTimes,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return dataState(_that.categories,_that.services,_that.catalogServices,_that.loadingServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.backgroundImage,_that.loadingBackground,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.prayerTimes,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
 return errorState();case _:
   return orElse();
 
@@ -998,11 +998,11 @@ return errorState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  String? backgroundImage,  bool loadingBackground,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  PrayerTimes? prayerTimes,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)  dataState,required TResult Function()  errorState,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  bool loadingServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  String? backgroundImage,  bool loadingBackground,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  PrayerTimes? prayerTimes,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)  dataState,required TResult Function()  errorState,}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState():
 return loading();case HomeBlocDataState():
-return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.backgroundImage,_that.loadingBackground,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.prayerTimes,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState():
+return dataState(_that.categories,_that.services,_that.catalogServices,_that.loadingServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.backgroundImage,_that.loadingBackground,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.prayerTimes,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState():
 return errorState();case _:
   throw StateError('Unexpected subclass');
 
@@ -1020,11 +1020,11 @@ return errorState();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  String? backgroundImage,  bool loadingBackground,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  PrayerTimes? prayerTimes,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult? Function()?  errorState,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<Categories> categories,  List<ServiceAction> services,  List<CatalogItemModel> catalogServices,  bool loadingServices,  List<ContentCategories> contents,  List<City> cities,  String? citiesWeekend,  List<BannerItem> banners,  String? backgroundImage,  bool loadingBackground,  List<MainPageContent> hotels,  List<MainPageContent> events,  AirQuality? airQuality,  Temperature? temperature,  List<Region> regions,  PrayerTimes? prayerTimes,  Region? selectedRegion,  bool loadingContents,  bool isRefreshing)?  dataState,TResult? Function()?  errorState,}) {final _that = this;
 switch (_that) {
 case HomeBlocLoadingState() when loading != null:
 return loading();case HomeBlocDataState() when dataState != null:
-return dataState(_that.categories,_that.services,_that.catalogServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.backgroundImage,_that.loadingBackground,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.prayerTimes,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
+return dataState(_that.categories,_that.services,_that.catalogServices,_that.loadingServices,_that.contents,_that.cities,_that.citiesWeekend,_that.banners,_that.backgroundImage,_that.loadingBackground,_that.hotels,_that.events,_that.airQuality,_that.temperature,_that.regions,_that.prayerTimes,_that.selectedRegion,_that.loadingContents,_that.isRefreshing);case HomeBlocErrorState() when errorState != null:
 return errorState();case _:
   return null;
 
@@ -1075,7 +1075,7 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 
 
 class HomeBlocDataState with DiagnosticableTreeMixin implements HomeBlocState {
-  const HomeBlocDataState({final  List<Categories> categories = const [], final  List<ServiceAction> services = const [], final  List<CatalogItemModel> catalogServices = const [], final  List<ContentCategories> contents = const [], final  List<City> cities = const [], this.citiesWeekend, final  List<BannerItem> banners = const [], this.backgroundImage, this.loadingBackground = true, final  List<MainPageContent> hotels = const [], final  List<MainPageContent> events = const [], this.airQuality, this.temperature, final  List<Region> regions = const [], this.prayerTimes, this.selectedRegion, this.loadingContents = true, this.isRefreshing = false}): _categories = categories,_services = services,_catalogServices = catalogServices,_contents = contents,_cities = cities,_banners = banners,_hotels = hotels,_events = events,_regions = regions;
+  const HomeBlocDataState({final  List<Categories> categories = const [], final  List<ServiceAction> services = const [], final  List<CatalogItemModel> catalogServices = const [], this.loadingServices = true, final  List<ContentCategories> contents = const [], final  List<City> cities = const [], this.citiesWeekend, final  List<BannerItem> banners = const [], this.backgroundImage, this.loadingBackground = true, final  List<MainPageContent> hotels = const [], final  List<MainPageContent> events = const [], this.airQuality, this.temperature, final  List<Region> regions = const [], this.prayerTimes, this.selectedRegion, this.loadingContents = true, this.isRefreshing = false}): _categories = categories,_services = services,_catalogServices = catalogServices,_contents = contents,_cities = cities,_banners = banners,_hotels = hotels,_events = events,_regions = regions;
   
 
  final  List<Categories> _categories;
@@ -1099,6 +1099,7 @@ class HomeBlocDataState with DiagnosticableTreeMixin implements HomeBlocState {
   return EqualUnmodifiableListView(_catalogServices);
 }
 
+@JsonKey() final  bool loadingServices;
  final  List<ContentCategories> _contents;
 @JsonKey() List<ContentCategories> get contents {
   if (_contents is EqualUnmodifiableListView) return _contents;
@@ -1162,21 +1163,21 @@ $HomeBlocDataStateCopyWith<HomeBlocDataState> get copyWith => _$HomeBlocDataStat
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'HomeBlocState.dataState'))
-    ..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('services', services))..add(DiagnosticsProperty('catalogServices', catalogServices))..add(DiagnosticsProperty('contents', contents))..add(DiagnosticsProperty('cities', cities))..add(DiagnosticsProperty('citiesWeekend', citiesWeekend))..add(DiagnosticsProperty('banners', banners))..add(DiagnosticsProperty('backgroundImage', backgroundImage))..add(DiagnosticsProperty('loadingBackground', loadingBackground))..add(DiagnosticsProperty('hotels', hotels))..add(DiagnosticsProperty('events', events))..add(DiagnosticsProperty('airQuality', airQuality))..add(DiagnosticsProperty('temperature', temperature))..add(DiagnosticsProperty('regions', regions))..add(DiagnosticsProperty('prayerTimes', prayerTimes))..add(DiagnosticsProperty('selectedRegion', selectedRegion))..add(DiagnosticsProperty('loadingContents', loadingContents))..add(DiagnosticsProperty('isRefreshing', isRefreshing));
+    ..add(DiagnosticsProperty('categories', categories))..add(DiagnosticsProperty('services', services))..add(DiagnosticsProperty('catalogServices', catalogServices))..add(DiagnosticsProperty('loadingServices', loadingServices))..add(DiagnosticsProperty('contents', contents))..add(DiagnosticsProperty('cities', cities))..add(DiagnosticsProperty('citiesWeekend', citiesWeekend))..add(DiagnosticsProperty('banners', banners))..add(DiagnosticsProperty('backgroundImage', backgroundImage))..add(DiagnosticsProperty('loadingBackground', loadingBackground))..add(DiagnosticsProperty('hotels', hotels))..add(DiagnosticsProperty('events', events))..add(DiagnosticsProperty('airQuality', airQuality))..add(DiagnosticsProperty('temperature', temperature))..add(DiagnosticsProperty('regions', regions))..add(DiagnosticsProperty('prayerTimes', prayerTimes))..add(DiagnosticsProperty('selectedRegion', selectedRegion))..add(DiagnosticsProperty('loadingContents', loadingContents))..add(DiagnosticsProperty('isRefreshing', isRefreshing));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBlocDataState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._services, _services)&&const DeepCollectionEquality().equals(other._catalogServices, _catalogServices)&&const DeepCollectionEquality().equals(other._contents, _contents)&&const DeepCollectionEquality().equals(other._cities, _cities)&&(identical(other.citiesWeekend, citiesWeekend) || other.citiesWeekend == citiesWeekend)&&const DeepCollectionEquality().equals(other._banners, _banners)&&(identical(other.backgroundImage, backgroundImage) || other.backgroundImage == backgroundImage)&&(identical(other.loadingBackground, loadingBackground) || other.loadingBackground == loadingBackground)&&const DeepCollectionEquality().equals(other._hotels, _hotels)&&const DeepCollectionEquality().equals(other._events, _events)&&(identical(other.airQuality, airQuality) || other.airQuality == airQuality)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&const DeepCollectionEquality().equals(other._regions, _regions)&&(identical(other.prayerTimes, prayerTimes) || other.prayerTimes == prayerTimes)&&(identical(other.selectedRegion, selectedRegion) || other.selectedRegion == selectedRegion)&&(identical(other.loadingContents, loadingContents) || other.loadingContents == loadingContents)&&(identical(other.isRefreshing, isRefreshing) || other.isRefreshing == isRefreshing));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeBlocDataState&&const DeepCollectionEquality().equals(other._categories, _categories)&&const DeepCollectionEquality().equals(other._services, _services)&&const DeepCollectionEquality().equals(other._catalogServices, _catalogServices)&&(identical(other.loadingServices, loadingServices) || other.loadingServices == loadingServices)&&const DeepCollectionEquality().equals(other._contents, _contents)&&const DeepCollectionEquality().equals(other._cities, _cities)&&(identical(other.citiesWeekend, citiesWeekend) || other.citiesWeekend == citiesWeekend)&&const DeepCollectionEquality().equals(other._banners, _banners)&&(identical(other.backgroundImage, backgroundImage) || other.backgroundImage == backgroundImage)&&(identical(other.loadingBackground, loadingBackground) || other.loadingBackground == loadingBackground)&&const DeepCollectionEquality().equals(other._hotels, _hotels)&&const DeepCollectionEquality().equals(other._events, _events)&&(identical(other.airQuality, airQuality) || other.airQuality == airQuality)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&const DeepCollectionEquality().equals(other._regions, _regions)&&(identical(other.prayerTimes, prayerTimes) || other.prayerTimes == prayerTimes)&&(identical(other.selectedRegion, selectedRegion) || other.selectedRegion == selectedRegion)&&(identical(other.loadingContents, loadingContents) || other.loadingContents == loadingContents)&&(identical(other.isRefreshing, isRefreshing) || other.isRefreshing == isRefreshing));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_services),const DeepCollectionEquality().hash(_catalogServices),const DeepCollectionEquality().hash(_contents),const DeepCollectionEquality().hash(_cities),citiesWeekend,const DeepCollectionEquality().hash(_banners),backgroundImage,loadingBackground,const DeepCollectionEquality().hash(_hotels),const DeepCollectionEquality().hash(_events),airQuality,temperature,const DeepCollectionEquality().hash(_regions),prayerTimes,selectedRegion,loadingContents,isRefreshing);
+int get hashCode => Object.hashAll([runtimeType,const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_services),const DeepCollectionEquality().hash(_catalogServices),loadingServices,const DeepCollectionEquality().hash(_contents),const DeepCollectionEquality().hash(_cities),citiesWeekend,const DeepCollectionEquality().hash(_banners),backgroundImage,loadingBackground,const DeepCollectionEquality().hash(_hotels),const DeepCollectionEquality().hash(_events),airQuality,temperature,const DeepCollectionEquality().hash(_regions),prayerTimes,selectedRegion,loadingContents,isRefreshing]);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'HomeBlocState.dataState(categories: $categories, services: $services, catalogServices: $catalogServices, contents: $contents, cities: $cities, citiesWeekend: $citiesWeekend, banners: $banners, backgroundImage: $backgroundImage, loadingBackground: $loadingBackground, hotels: $hotels, events: $events, airQuality: $airQuality, temperature: $temperature, regions: $regions, prayerTimes: $prayerTimes, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
+  return 'HomeBlocState.dataState(categories: $categories, services: $services, catalogServices: $catalogServices, loadingServices: $loadingServices, contents: $contents, cities: $cities, citiesWeekend: $citiesWeekend, banners: $banners, backgroundImage: $backgroundImage, loadingBackground: $loadingBackground, hotels: $hotels, events: $events, airQuality: $airQuality, temperature: $temperature, regions: $regions, prayerTimes: $prayerTimes, selectedRegion: $selectedRegion, loadingContents: $loadingContents, isRefreshing: $isRefreshing)';
 }
 
 
@@ -1187,7 +1188,7 @@ abstract mixin class $HomeBlocDataStateCopyWith<$Res> implements $HomeBlocStateC
   factory $HomeBlocDataStateCopyWith(HomeBlocDataState value, $Res Function(HomeBlocDataState) _then) = _$HomeBlocDataStateCopyWithImpl;
 @useResult
 $Res call({
- List<Categories> categories, List<ServiceAction> services, List<CatalogItemModel> catalogServices, List<ContentCategories> contents, List<City> cities, String? citiesWeekend, List<BannerItem> banners, String? backgroundImage, bool loadingBackground, List<MainPageContent> hotels, List<MainPageContent> events, AirQuality? airQuality, Temperature? temperature, List<Region> regions, PrayerTimes? prayerTimes, Region? selectedRegion, bool loadingContents, bool isRefreshing
+ List<Categories> categories, List<ServiceAction> services, List<CatalogItemModel> catalogServices, bool loadingServices, List<ContentCategories> contents, List<City> cities, String? citiesWeekend, List<BannerItem> banners, String? backgroundImage, bool loadingBackground, List<MainPageContent> hotels, List<MainPageContent> events, AirQuality? airQuality, Temperature? temperature, List<Region> regions, PrayerTimes? prayerTimes, Region? selectedRegion, bool loadingContents, bool isRefreshing
 });
 
 
@@ -1204,12 +1205,13 @@ class _$HomeBlocDataStateCopyWithImpl<$Res>
 
 /// Create a copy of HomeBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? services = null,Object? catalogServices = null,Object? contents = null,Object? cities = null,Object? citiesWeekend = freezed,Object? banners = null,Object? backgroundImage = freezed,Object? loadingBackground = null,Object? hotels = null,Object? events = null,Object? airQuality = freezed,Object? temperature = freezed,Object? regions = null,Object? prayerTimes = freezed,Object? selectedRegion = freezed,Object? loadingContents = null,Object? isRefreshing = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? categories = null,Object? services = null,Object? catalogServices = null,Object? loadingServices = null,Object? contents = null,Object? cities = null,Object? citiesWeekend = freezed,Object? banners = null,Object? backgroundImage = freezed,Object? loadingBackground = null,Object? hotels = null,Object? events = null,Object? airQuality = freezed,Object? temperature = freezed,Object? regions = null,Object? prayerTimes = freezed,Object? selectedRegion = freezed,Object? loadingContents = null,Object? isRefreshing = null,}) {
   return _then(HomeBlocDataState(
 categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
 as List<Categories>,services: null == services ? _self._services : services // ignore: cast_nullable_to_non_nullable
 as List<ServiceAction>,catalogServices: null == catalogServices ? _self._catalogServices : catalogServices // ignore: cast_nullable_to_non_nullable
-as List<CatalogItemModel>,contents: null == contents ? _self._contents : contents // ignore: cast_nullable_to_non_nullable
+as List<CatalogItemModel>,loadingServices: null == loadingServices ? _self.loadingServices : loadingServices // ignore: cast_nullable_to_non_nullable
+as bool,contents: null == contents ? _self._contents : contents // ignore: cast_nullable_to_non_nullable
 as List<ContentCategories>,cities: null == cities ? _self._cities : cities // ignore: cast_nullable_to_non_nullable
 as List<City>,citiesWeekend: freezed == citiesWeekend ? _self.citiesWeekend : citiesWeekend // ignore: cast_nullable_to_non_nullable
 as String?,banners: null == banners ? _self._banners : banners // ignore: cast_nullable_to_non_nullable

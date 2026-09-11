@@ -22,6 +22,7 @@ class GlobalHandler {
 abstract interface class AppStatusChangeListeners {
   late Stream<void> refreshListener;
   late Stream<bool> prayersToggleListenChangeListener;
+  late Stream<bool> iqAirToggleListenChangeListener;
   late Stream<bool> refreshFavoriteListener;
   late Stream<void> refreshProfileListener;
 
@@ -33,6 +34,8 @@ abstract interface class AppStatusChangeListeners {
 
   void prayersChange(bool isChange);
 
+  void iqAirChange(bool isChange);
+
   void dispose();
 }
 
@@ -43,6 +46,7 @@ class AppSettingsChangeListenerIml extends AppStatusChangeListeners {
   final PublishSubject<bool> _refreshFavoriteStream = PublishSubject();
 
   final BehaviorSubject<bool> _prayersToggleStream = BehaviorSubject();
+  final BehaviorSubject<bool> _iqAirToggleStream = BehaviorSubject();
 
   @override
   Stream<void> get refreshListener => _appRefreshStream.stream;
@@ -56,6 +60,9 @@ class AppSettingsChangeListenerIml extends AppStatusChangeListeners {
   @override
   Stream<bool> get prayersToggleListenChangeListener =>
       _prayersToggleStream.stream;
+
+  @override
+  Stream<bool> get iqAirToggleListenChangeListener => _iqAirToggleStream.stream;
 
   @override
   void refreshFavorite({bool require = false}) {
@@ -73,10 +80,16 @@ class AppSettingsChangeListenerIml extends AppStatusChangeListeners {
   }
 
   @override
+  void iqAirChange(bool isChange) {
+    _iqAirToggleStream.add(isChange);
+  }
+
+  @override
   void dispose() {
     _appRefreshStream.close();
     _refreshFavoriteStream.close();
     _prayersToggleStream.close();
+    _iqAirToggleStream.close();
   }
 
   @override

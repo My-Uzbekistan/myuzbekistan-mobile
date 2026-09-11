@@ -209,7 +209,10 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   String get biometric_auth => 'Biometric login';
 
   @override
-  String get prayer_time_widget => 'Prayer time widget';
+  String get prayer_time_widget => 'Prayer widget';
+
+  @override
+  String get iq_air_widget => 'IQAir widget';
 
   @override
   String get about_app => 'About App';
@@ -411,4 +414,22 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get noActiveSessions => 'No other active sessions';
+
+  @override
+  String premiumActiveUntil(String date) {
+    return 'Active until $date';
+  }
+
+  @override
+  String get premiumBuySubscription => 'Get a subscription';
+
+  @override
+  String get webViewExitTitle => 'Do you really want to leave?';
+
+  @override
+  String get webViewExitMessage =>
+      'The page will close and the entered data will not be saved.';
+
+  @override
+  String get yes => 'Yes';
 }

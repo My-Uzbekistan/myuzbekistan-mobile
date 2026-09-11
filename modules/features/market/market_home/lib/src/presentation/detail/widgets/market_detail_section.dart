@@ -2,9 +2,15 @@ import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
 class MarketDetailSection extends StatelessWidget {
-  const MarketDetailSection({super.key, this.title, required this.child});
+  const MarketDetailSection({
+    super.key,
+    this.title,
+    this.squareTop = false,
+    required this.child,
+  });
 
   final String? title;
+  final bool squareTop;
   final Widget child;
 
   @override
@@ -12,11 +18,17 @@ class MarketDetailSection extends StatelessWidget {
     final title = this.title;
 
     return Container(
-      margin: const EdgeInsets.only(left: 4, right: 4, bottom: 8),
+      margin: EdgeInsets.only(
+        left: squareTop ? 0 : 4,
+        right: squareTop ? 0 : 4,
+        bottom: 8,
+      ),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: context.appColors.background.elevation1,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: squareTop
+            ? const BorderRadius.vertical(bottom: Radius.circular(20))
+            : BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

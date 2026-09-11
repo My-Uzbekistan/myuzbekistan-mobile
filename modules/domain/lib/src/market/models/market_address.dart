@@ -5,6 +5,7 @@ class MarketAddress {
   final double? latitude;
   final double? longitude;
   final bool isDefault;
+  final String? phone;
 
   MarketAddress({
     required this.id,
@@ -13,6 +14,7 @@ class MarketAddress {
     this.district,
     this.latitude,
     this.longitude,
+    this.phone,
   });
 
   String get fullLine => district == null || district!.isEmpty

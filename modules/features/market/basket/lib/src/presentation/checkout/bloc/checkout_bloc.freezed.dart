@@ -55,20 +55,19 @@ extension CheckoutEventPatterns on CheckoutEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _CheckoutLoadDataEvent value)?  loadData,TResult Function( _CheckoutChangeQuantityEvent value)?  changeQuantity,TResult Function( _CheckoutRemoveItemEvent value)?  removeItem,TResult Function( _CheckoutReloadItemsEvent value)?  reloadItems,TResult Function( _CheckoutLoadDeliveryMethodsEvent value)?  loadDeliveryMethods,TResult Function( _CheckoutSelectDeliveryEvent value)?  selectDelivery,TResult Function( _CheckoutLoadAddressesEvent value)?  loadAddresses,TResult Function( _CheckoutSelectAddressEvent value)?  selectAddress,TResult Function( _CheckoutSaveAddressEvent value)?  saveAddress,TResult Function( _CheckoutDeleteAddressEvent value)?  deleteAddress,TResult Function( _CheckoutChangePhoneEvent value)?  changePhone,TResult Function( _CheckoutCreateOrderEvent value)?  createOrder,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _CheckoutLoadDataEvent value)?  loadData,TResult Function( _CheckoutChangeQuantityEvent value)?  changeQuantity,TResult Function( _CheckoutRemoveItemEvent value)?  removeItem,TResult Function( _CheckoutReloadItemsEvent value)?  reloadItems,TResult Function( _CheckoutSelectDeliveryEvent value)?  selectDelivery,TResult Function( _CheckoutLoadPickupPointsEvent value)?  loadPickupPoints,TResult Function( _CheckoutSelectPickupPointEvent value)?  selectPickupPoint,TResult Function( _CheckoutLoadAddressesEvent value)?  loadAddresses,TResult Function( _CheckoutSelectAddressEvent value)?  selectAddress,TResult Function( _CheckoutChangePhoneEvent value)?  changePhone,TResult Function( _CheckoutCreateOrderEvent value)?  createOrder,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _CheckoutLoadDataEvent() when loadData != null:
 return loadData(_that);case _CheckoutChangeQuantityEvent() when changeQuantity != null:
 return changeQuantity(_that);case _CheckoutRemoveItemEvent() when removeItem != null:
 return removeItem(_that);case _CheckoutReloadItemsEvent() when reloadItems != null:
-return reloadItems(_that);case _CheckoutLoadDeliveryMethodsEvent() when loadDeliveryMethods != null:
-return loadDeliveryMethods(_that);case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
-return selectDelivery(_that);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
+return reloadItems(_that);case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
+return selectDelivery(_that);case _CheckoutLoadPickupPointsEvent() when loadPickupPoints != null:
+return loadPickupPoints(_that);case _CheckoutSelectPickupPointEvent() when selectPickupPoint != null:
+return selectPickupPoint(_that);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
 return loadAddresses(_that);case _CheckoutSelectAddressEvent() when selectAddress != null:
-return selectAddress(_that);case _CheckoutSaveAddressEvent() when saveAddress != null:
-return saveAddress(_that);case _CheckoutDeleteAddressEvent() when deleteAddress != null:
-return deleteAddress(_that);case _CheckoutChangePhoneEvent() when changePhone != null:
+return selectAddress(_that);case _CheckoutChangePhoneEvent() when changePhone != null:
 return changePhone(_that);case _CheckoutCreateOrderEvent() when createOrder != null:
 return createOrder(_that);case _:
   return orElse();
@@ -88,20 +87,19 @@ return createOrder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _CheckoutLoadDataEvent value)  loadData,required TResult Function( _CheckoutChangeQuantityEvent value)  changeQuantity,required TResult Function( _CheckoutRemoveItemEvent value)  removeItem,required TResult Function( _CheckoutReloadItemsEvent value)  reloadItems,required TResult Function( _CheckoutLoadDeliveryMethodsEvent value)  loadDeliveryMethods,required TResult Function( _CheckoutSelectDeliveryEvent value)  selectDelivery,required TResult Function( _CheckoutLoadAddressesEvent value)  loadAddresses,required TResult Function( _CheckoutSelectAddressEvent value)  selectAddress,required TResult Function( _CheckoutSaveAddressEvent value)  saveAddress,required TResult Function( _CheckoutDeleteAddressEvent value)  deleteAddress,required TResult Function( _CheckoutChangePhoneEvent value)  changePhone,required TResult Function( _CheckoutCreateOrderEvent value)  createOrder,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _CheckoutLoadDataEvent value)  loadData,required TResult Function( _CheckoutChangeQuantityEvent value)  changeQuantity,required TResult Function( _CheckoutRemoveItemEvent value)  removeItem,required TResult Function( _CheckoutReloadItemsEvent value)  reloadItems,required TResult Function( _CheckoutSelectDeliveryEvent value)  selectDelivery,required TResult Function( _CheckoutLoadPickupPointsEvent value)  loadPickupPoints,required TResult Function( _CheckoutSelectPickupPointEvent value)  selectPickupPoint,required TResult Function( _CheckoutLoadAddressesEvent value)  loadAddresses,required TResult Function( _CheckoutSelectAddressEvent value)  selectAddress,required TResult Function( _CheckoutChangePhoneEvent value)  changePhone,required TResult Function( _CheckoutCreateOrderEvent value)  createOrder,}){
 final _that = this;
 switch (_that) {
 case _CheckoutLoadDataEvent():
 return loadData(_that);case _CheckoutChangeQuantityEvent():
 return changeQuantity(_that);case _CheckoutRemoveItemEvent():
 return removeItem(_that);case _CheckoutReloadItemsEvent():
-return reloadItems(_that);case _CheckoutLoadDeliveryMethodsEvent():
-return loadDeliveryMethods(_that);case _CheckoutSelectDeliveryEvent():
-return selectDelivery(_that);case _CheckoutLoadAddressesEvent():
+return reloadItems(_that);case _CheckoutSelectDeliveryEvent():
+return selectDelivery(_that);case _CheckoutLoadPickupPointsEvent():
+return loadPickupPoints(_that);case _CheckoutSelectPickupPointEvent():
+return selectPickupPoint(_that);case _CheckoutLoadAddressesEvent():
 return loadAddresses(_that);case _CheckoutSelectAddressEvent():
-return selectAddress(_that);case _CheckoutSaveAddressEvent():
-return saveAddress(_that);case _CheckoutDeleteAddressEvent():
-return deleteAddress(_that);case _CheckoutChangePhoneEvent():
+return selectAddress(_that);case _CheckoutChangePhoneEvent():
 return changePhone(_that);case _CheckoutCreateOrderEvent():
 return createOrder(_that);case _:
   throw StateError('Unexpected subclass');
@@ -120,20 +118,19 @@ return createOrder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _CheckoutLoadDataEvent value)?  loadData,TResult? Function( _CheckoutChangeQuantityEvent value)?  changeQuantity,TResult? Function( _CheckoutRemoveItemEvent value)?  removeItem,TResult? Function( _CheckoutReloadItemsEvent value)?  reloadItems,TResult? Function( _CheckoutLoadDeliveryMethodsEvent value)?  loadDeliveryMethods,TResult? Function( _CheckoutSelectDeliveryEvent value)?  selectDelivery,TResult? Function( _CheckoutLoadAddressesEvent value)?  loadAddresses,TResult? Function( _CheckoutSelectAddressEvent value)?  selectAddress,TResult? Function( _CheckoutSaveAddressEvent value)?  saveAddress,TResult? Function( _CheckoutDeleteAddressEvent value)?  deleteAddress,TResult? Function( _CheckoutChangePhoneEvent value)?  changePhone,TResult? Function( _CheckoutCreateOrderEvent value)?  createOrder,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _CheckoutLoadDataEvent value)?  loadData,TResult? Function( _CheckoutChangeQuantityEvent value)?  changeQuantity,TResult? Function( _CheckoutRemoveItemEvent value)?  removeItem,TResult? Function( _CheckoutReloadItemsEvent value)?  reloadItems,TResult? Function( _CheckoutSelectDeliveryEvent value)?  selectDelivery,TResult? Function( _CheckoutLoadPickupPointsEvent value)?  loadPickupPoints,TResult? Function( _CheckoutSelectPickupPointEvent value)?  selectPickupPoint,TResult? Function( _CheckoutLoadAddressesEvent value)?  loadAddresses,TResult? Function( _CheckoutSelectAddressEvent value)?  selectAddress,TResult? Function( _CheckoutChangePhoneEvent value)?  changePhone,TResult? Function( _CheckoutCreateOrderEvent value)?  createOrder,}){
 final _that = this;
 switch (_that) {
 case _CheckoutLoadDataEvent() when loadData != null:
 return loadData(_that);case _CheckoutChangeQuantityEvent() when changeQuantity != null:
 return changeQuantity(_that);case _CheckoutRemoveItemEvent() when removeItem != null:
 return removeItem(_that);case _CheckoutReloadItemsEvent() when reloadItems != null:
-return reloadItems(_that);case _CheckoutLoadDeliveryMethodsEvent() when loadDeliveryMethods != null:
-return loadDeliveryMethods(_that);case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
-return selectDelivery(_that);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
+return reloadItems(_that);case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
+return selectDelivery(_that);case _CheckoutLoadPickupPointsEvent() when loadPickupPoints != null:
+return loadPickupPoints(_that);case _CheckoutSelectPickupPointEvent() when selectPickupPoint != null:
+return selectPickupPoint(_that);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
 return loadAddresses(_that);case _CheckoutSelectAddressEvent() when selectAddress != null:
-return selectAddress(_that);case _CheckoutSaveAddressEvent() when saveAddress != null:
-return saveAddress(_that);case _CheckoutDeleteAddressEvent() when deleteAddress != null:
-return deleteAddress(_that);case _CheckoutChangePhoneEvent() when changePhone != null:
+return selectAddress(_that);case _CheckoutChangePhoneEvent() when changePhone != null:
 return changePhone(_that);case _CheckoutCreateOrderEvent() when createOrder != null:
 return createOrder(_that);case _:
   return null;
@@ -152,19 +149,18 @@ return createOrder(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadData,TResult Function( CartItem item,  int quantity)?  changeQuantity,TResult Function( CartItem item)?  removeItem,TResult Function()?  reloadItems,TResult Function()?  loadDeliveryMethods,TResult Function( DeliveryMethod delivery)?  selectDelivery,TResult Function()?  loadAddresses,TResult Function( MarketAddress address)?  selectAddress,TResult Function( int? addressId,  String line,  String? district)?  saveAddress,TResult Function( int addressId)?  deleteAddress,TResult Function( String phone)?  changePhone,TResult Function( String paymentId)?  createOrder,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadData,TResult Function( CartItem item,  int quantity)?  changeQuantity,TResult Function( CartItem item)?  removeItem,TResult Function()?  reloadItems,TResult Function( DeliveryMethod delivery)?  selectDelivery,TResult Function()?  loadPickupPoints,TResult Function( MarketPickupPoint point)?  selectPickupPoint,TResult Function()?  loadAddresses,TResult Function( MarketAddress address)?  selectAddress,TResult Function( String phone)?  changePhone,TResult Function( String paymentId)?  createOrder,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CheckoutLoadDataEvent() when loadData != null:
 return loadData();case _CheckoutChangeQuantityEvent() when changeQuantity != null:
 return changeQuantity(_that.item,_that.quantity);case _CheckoutRemoveItemEvent() when removeItem != null:
 return removeItem(_that.item);case _CheckoutReloadItemsEvent() when reloadItems != null:
-return reloadItems();case _CheckoutLoadDeliveryMethodsEvent() when loadDeliveryMethods != null:
-return loadDeliveryMethods();case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
-return selectDelivery(_that.delivery);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
+return reloadItems();case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
+return selectDelivery(_that.delivery);case _CheckoutLoadPickupPointsEvent() when loadPickupPoints != null:
+return loadPickupPoints();case _CheckoutSelectPickupPointEvent() when selectPickupPoint != null:
+return selectPickupPoint(_that.point);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
 return loadAddresses();case _CheckoutSelectAddressEvent() when selectAddress != null:
-return selectAddress(_that.address);case _CheckoutSaveAddressEvent() when saveAddress != null:
-return saveAddress(_that.addressId,_that.line,_that.district);case _CheckoutDeleteAddressEvent() when deleteAddress != null:
-return deleteAddress(_that.addressId);case _CheckoutChangePhoneEvent() when changePhone != null:
+return selectAddress(_that.address);case _CheckoutChangePhoneEvent() when changePhone != null:
 return changePhone(_that.phone);case _CheckoutCreateOrderEvent() when createOrder != null:
 return createOrder(_that.paymentId);case _:
   return orElse();
@@ -184,19 +180,18 @@ return createOrder(_that.paymentId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadData,required TResult Function( CartItem item,  int quantity)  changeQuantity,required TResult Function( CartItem item)  removeItem,required TResult Function()  reloadItems,required TResult Function()  loadDeliveryMethods,required TResult Function( DeliveryMethod delivery)  selectDelivery,required TResult Function()  loadAddresses,required TResult Function( MarketAddress address)  selectAddress,required TResult Function( int? addressId,  String line,  String? district)  saveAddress,required TResult Function( int addressId)  deleteAddress,required TResult Function( String phone)  changePhone,required TResult Function( String paymentId)  createOrder,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadData,required TResult Function( CartItem item,  int quantity)  changeQuantity,required TResult Function( CartItem item)  removeItem,required TResult Function()  reloadItems,required TResult Function( DeliveryMethod delivery)  selectDelivery,required TResult Function()  loadPickupPoints,required TResult Function( MarketPickupPoint point)  selectPickupPoint,required TResult Function()  loadAddresses,required TResult Function( MarketAddress address)  selectAddress,required TResult Function( String phone)  changePhone,required TResult Function( String paymentId)  createOrder,}) {final _that = this;
 switch (_that) {
 case _CheckoutLoadDataEvent():
 return loadData();case _CheckoutChangeQuantityEvent():
 return changeQuantity(_that.item,_that.quantity);case _CheckoutRemoveItemEvent():
 return removeItem(_that.item);case _CheckoutReloadItemsEvent():
-return reloadItems();case _CheckoutLoadDeliveryMethodsEvent():
-return loadDeliveryMethods();case _CheckoutSelectDeliveryEvent():
-return selectDelivery(_that.delivery);case _CheckoutLoadAddressesEvent():
+return reloadItems();case _CheckoutSelectDeliveryEvent():
+return selectDelivery(_that.delivery);case _CheckoutLoadPickupPointsEvent():
+return loadPickupPoints();case _CheckoutSelectPickupPointEvent():
+return selectPickupPoint(_that.point);case _CheckoutLoadAddressesEvent():
 return loadAddresses();case _CheckoutSelectAddressEvent():
-return selectAddress(_that.address);case _CheckoutSaveAddressEvent():
-return saveAddress(_that.addressId,_that.line,_that.district);case _CheckoutDeleteAddressEvent():
-return deleteAddress(_that.addressId);case _CheckoutChangePhoneEvent():
+return selectAddress(_that.address);case _CheckoutChangePhoneEvent():
 return changePhone(_that.phone);case _CheckoutCreateOrderEvent():
 return createOrder(_that.paymentId);case _:
   throw StateError('Unexpected subclass');
@@ -215,19 +210,18 @@ return createOrder(_that.paymentId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadData,TResult? Function( CartItem item,  int quantity)?  changeQuantity,TResult? Function( CartItem item)?  removeItem,TResult? Function()?  reloadItems,TResult? Function()?  loadDeliveryMethods,TResult? Function( DeliveryMethod delivery)?  selectDelivery,TResult? Function()?  loadAddresses,TResult? Function( MarketAddress address)?  selectAddress,TResult? Function( int? addressId,  String line,  String? district)?  saveAddress,TResult? Function( int addressId)?  deleteAddress,TResult? Function( String phone)?  changePhone,TResult? Function( String paymentId)?  createOrder,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadData,TResult? Function( CartItem item,  int quantity)?  changeQuantity,TResult? Function( CartItem item)?  removeItem,TResult? Function()?  reloadItems,TResult? Function( DeliveryMethod delivery)?  selectDelivery,TResult? Function()?  loadPickupPoints,TResult? Function( MarketPickupPoint point)?  selectPickupPoint,TResult? Function()?  loadAddresses,TResult? Function( MarketAddress address)?  selectAddress,TResult? Function( String phone)?  changePhone,TResult? Function( String paymentId)?  createOrder,}) {final _that = this;
 switch (_that) {
 case _CheckoutLoadDataEvent() when loadData != null:
 return loadData();case _CheckoutChangeQuantityEvent() when changeQuantity != null:
 return changeQuantity(_that.item,_that.quantity);case _CheckoutRemoveItemEvent() when removeItem != null:
 return removeItem(_that.item);case _CheckoutReloadItemsEvent() when reloadItems != null:
-return reloadItems();case _CheckoutLoadDeliveryMethodsEvent() when loadDeliveryMethods != null:
-return loadDeliveryMethods();case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
-return selectDelivery(_that.delivery);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
+return reloadItems();case _CheckoutSelectDeliveryEvent() when selectDelivery != null:
+return selectDelivery(_that.delivery);case _CheckoutLoadPickupPointsEvent() when loadPickupPoints != null:
+return loadPickupPoints();case _CheckoutSelectPickupPointEvent() when selectPickupPoint != null:
+return selectPickupPoint(_that.point);case _CheckoutLoadAddressesEvent() when loadAddresses != null:
 return loadAddresses();case _CheckoutSelectAddressEvent() when selectAddress != null:
-return selectAddress(_that.address);case _CheckoutSaveAddressEvent() when saveAddress != null:
-return saveAddress(_that.addressId,_that.line,_that.district);case _CheckoutDeleteAddressEvent() when deleteAddress != null:
-return deleteAddress(_that.addressId);case _CheckoutChangePhoneEvent() when changePhone != null:
+return selectAddress(_that.address);case _CheckoutChangePhoneEvent() when changePhone != null:
 return changePhone(_that.phone);case _CheckoutCreateOrderEvent() when createOrder != null:
 return createOrder(_that.paymentId);case _:
   return null;
@@ -438,38 +432,6 @@ String toString() {
 /// @nodoc
 
 
-class _CheckoutLoadDeliveryMethodsEvent implements CheckoutEvent {
-   _CheckoutLoadDeliveryMethodsEvent();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckoutLoadDeliveryMethodsEvent);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'CheckoutEvent.loadDeliveryMethods()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
 class _CheckoutSelectDeliveryEvent implements CheckoutEvent {
    _CheckoutSelectDeliveryEvent({required this.delivery});
   
@@ -527,6 +489,104 @@ class __$CheckoutSelectDeliveryEventCopyWithImpl<$Res>
   return _then(_CheckoutSelectDeliveryEvent(
 delivery: null == delivery ? _self.delivery : delivery // ignore: cast_nullable_to_non_nullable
 as DeliveryMethod,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _CheckoutLoadPickupPointsEvent implements CheckoutEvent {
+   _CheckoutLoadPickupPointsEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckoutLoadPickupPointsEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CheckoutEvent.loadPickupPoints()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _CheckoutSelectPickupPointEvent implements CheckoutEvent {
+   _CheckoutSelectPickupPointEvent({required this.point});
+  
+
+ final  MarketPickupPoint point;
+
+/// Create a copy of CheckoutEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CheckoutSelectPickupPointEventCopyWith<_CheckoutSelectPickupPointEvent> get copyWith => __$CheckoutSelectPickupPointEventCopyWithImpl<_CheckoutSelectPickupPointEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckoutSelectPickupPointEvent&&(identical(other.point, point) || other.point == point));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,point);
+
+@override
+String toString() {
+  return 'CheckoutEvent.selectPickupPoint(point: $point)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CheckoutSelectPickupPointEventCopyWith<$Res> implements $CheckoutEventCopyWith<$Res> {
+  factory _$CheckoutSelectPickupPointEventCopyWith(_CheckoutSelectPickupPointEvent value, $Res Function(_CheckoutSelectPickupPointEvent) _then) = __$CheckoutSelectPickupPointEventCopyWithImpl;
+@useResult
+$Res call({
+ MarketPickupPoint point
+});
+
+
+
+
+}
+/// @nodoc
+class __$CheckoutSelectPickupPointEventCopyWithImpl<$Res>
+    implements _$CheckoutSelectPickupPointEventCopyWith<$Res> {
+  __$CheckoutSelectPickupPointEventCopyWithImpl(this._self, this._then);
+
+  final _CheckoutSelectPickupPointEvent _self;
+  final $Res Function(_CheckoutSelectPickupPointEvent) _then;
+
+/// Create a copy of CheckoutEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? point = null,}) {
+  return _then(_CheckoutSelectPickupPointEvent(
+point: null == point ? _self.point : point // ignore: cast_nullable_to_non_nullable
+as MarketPickupPoint,
   ));
 }
 
@@ -625,142 +685,6 @@ class __$CheckoutSelectAddressEventCopyWithImpl<$Res>
   return _then(_CheckoutSelectAddressEvent(
 address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as MarketAddress,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class _CheckoutSaveAddressEvent implements CheckoutEvent {
-   _CheckoutSaveAddressEvent({this.addressId, required this.line, this.district});
-  
-
- final  int? addressId;
- final  String line;
- final  String? district;
-
-/// Create a copy of CheckoutEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$CheckoutSaveAddressEventCopyWith<_CheckoutSaveAddressEvent> get copyWith => __$CheckoutSaveAddressEventCopyWithImpl<_CheckoutSaveAddressEvent>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckoutSaveAddressEvent&&(identical(other.addressId, addressId) || other.addressId == addressId)&&(identical(other.line, line) || other.line == line)&&(identical(other.district, district) || other.district == district));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,addressId,line,district);
-
-@override
-String toString() {
-  return 'CheckoutEvent.saveAddress(addressId: $addressId, line: $line, district: $district)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$CheckoutSaveAddressEventCopyWith<$Res> implements $CheckoutEventCopyWith<$Res> {
-  factory _$CheckoutSaveAddressEventCopyWith(_CheckoutSaveAddressEvent value, $Res Function(_CheckoutSaveAddressEvent) _then) = __$CheckoutSaveAddressEventCopyWithImpl;
-@useResult
-$Res call({
- int? addressId, String line, String? district
-});
-
-
-
-
-}
-/// @nodoc
-class __$CheckoutSaveAddressEventCopyWithImpl<$Res>
-    implements _$CheckoutSaveAddressEventCopyWith<$Res> {
-  __$CheckoutSaveAddressEventCopyWithImpl(this._self, this._then);
-
-  final _CheckoutSaveAddressEvent _self;
-  final $Res Function(_CheckoutSaveAddressEvent) _then;
-
-/// Create a copy of CheckoutEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? addressId = freezed,Object? line = null,Object? district = freezed,}) {
-  return _then(_CheckoutSaveAddressEvent(
-addressId: freezed == addressId ? _self.addressId : addressId // ignore: cast_nullable_to_non_nullable
-as int?,line: null == line ? _self.line : line // ignore: cast_nullable_to_non_nullable
-as String,district: freezed == district ? _self.district : district // ignore: cast_nullable_to_non_nullable
-as String?,
-  ));
-}
-
-
-}
-
-/// @nodoc
-
-
-class _CheckoutDeleteAddressEvent implements CheckoutEvent {
-   _CheckoutDeleteAddressEvent({required this.addressId});
-  
-
- final  int addressId;
-
-/// Create a copy of CheckoutEvent
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-_$CheckoutDeleteAddressEventCopyWith<_CheckoutDeleteAddressEvent> get copyWith => __$CheckoutDeleteAddressEventCopyWithImpl<_CheckoutDeleteAddressEvent>(this, _$identity);
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckoutDeleteAddressEvent&&(identical(other.addressId, addressId) || other.addressId == addressId));
-}
-
-
-@override
-int get hashCode => Object.hash(runtimeType,addressId);
-
-@override
-String toString() {
-  return 'CheckoutEvent.deleteAddress(addressId: $addressId)';
-}
-
-
-}
-
-/// @nodoc
-abstract mixin class _$CheckoutDeleteAddressEventCopyWith<$Res> implements $CheckoutEventCopyWith<$Res> {
-  factory _$CheckoutDeleteAddressEventCopyWith(_CheckoutDeleteAddressEvent value, $Res Function(_CheckoutDeleteAddressEvent) _then) = __$CheckoutDeleteAddressEventCopyWithImpl;
-@useResult
-$Res call({
- int addressId
-});
-
-
-
-
-}
-/// @nodoc
-class __$CheckoutDeleteAddressEventCopyWithImpl<$Res>
-    implements _$CheckoutDeleteAddressEventCopyWith<$Res> {
-  __$CheckoutDeleteAddressEventCopyWithImpl(this._self, this._then);
-
-  final _CheckoutDeleteAddressEvent _self;
-  final $Res Function(_CheckoutDeleteAddressEvent) _then;
-
-/// Create a copy of CheckoutEvent
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? addressId = null,}) {
-  return _then(_CheckoutDeleteAddressEvent(
-addressId: null == addressId ? _self.addressId : addressId // ignore: cast_nullable_to_non_nullable
-as int,
   ));
 }
 
@@ -902,7 +826,7 @@ as String,
 /// @nodoc
 mixin _$CheckoutState {
 
- DeliveryMethod? get delivery; MarketAddress? get address; String? get phone; List<CartItem> get items; List<DeliveryMethod> get deliveryMethods; List<MarketAddress> get addresses; CheckoutPrice? get price; MarketPriceDetails? get priceDetails; DateTime? get freeCancellationUntil; String? get paymentId; bool get isLoading; bool get isDeliveryMethodsLoading; bool get isAddressesLoading; bool get isOrdering; bool get isOrderCreated; bool get loadFailed; String? get errorMessage;
+ DeliveryMethod? get delivery; MarketAddress? get address; MarketRegion? get region; MarketPickupPoint? get pickupPoint; String? get phone; List<CartItem> get items; List<DeliveryMethod> get deliveryMethods; List<MarketAddress> get addresses; List<MarketPickupPoint> get pickupPoints; CheckoutPrice? get price; MarketPriceDetails? get priceDetails; DateTime? get freeCancellationUntil; String? get paymentId; bool get isLoading; bool get isAddressesLoading; bool get isPickupPointsLoading; bool get isOrdering; bool get isOrderCreated; bool get loadFailed; String? get errorMessage;
 /// Create a copy of CheckoutState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -913,16 +837,16 @@ $CheckoutStateCopyWith<CheckoutState> get copyWith => _$CheckoutStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CheckoutState&&(identical(other.delivery, delivery) || other.delivery == delivery)&&(identical(other.address, address) || other.address == address)&&(identical(other.phone, phone) || other.phone == phone)&&const DeepCollectionEquality().equals(other.items, items)&&const DeepCollectionEquality().equals(other.deliveryMethods, deliveryMethods)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceDetails, priceDetails) || other.priceDetails == priceDetails)&&(identical(other.freeCancellationUntil, freeCancellationUntil) || other.freeCancellationUntil == freeCancellationUntil)&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isDeliveryMethodsLoading, isDeliveryMethodsLoading) || other.isDeliveryMethodsLoading == isDeliveryMethodsLoading)&&(identical(other.isAddressesLoading, isAddressesLoading) || other.isAddressesLoading == isAddressesLoading)&&(identical(other.isOrdering, isOrdering) || other.isOrdering == isOrdering)&&(identical(other.isOrderCreated, isOrderCreated) || other.isOrderCreated == isOrderCreated)&&(identical(other.loadFailed, loadFailed) || other.loadFailed == loadFailed)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CheckoutState&&(identical(other.delivery, delivery) || other.delivery == delivery)&&(identical(other.address, address) || other.address == address)&&(identical(other.region, region) || other.region == region)&&(identical(other.pickupPoint, pickupPoint) || other.pickupPoint == pickupPoint)&&(identical(other.phone, phone) || other.phone == phone)&&const DeepCollectionEquality().equals(other.items, items)&&const DeepCollectionEquality().equals(other.deliveryMethods, deliveryMethods)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&const DeepCollectionEquality().equals(other.pickupPoints, pickupPoints)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceDetails, priceDetails) || other.priceDetails == priceDetails)&&(identical(other.freeCancellationUntil, freeCancellationUntil) || other.freeCancellationUntil == freeCancellationUntil)&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isAddressesLoading, isAddressesLoading) || other.isAddressesLoading == isAddressesLoading)&&(identical(other.isPickupPointsLoading, isPickupPointsLoading) || other.isPickupPointsLoading == isPickupPointsLoading)&&(identical(other.isOrdering, isOrdering) || other.isOrdering == isOrdering)&&(identical(other.isOrderCreated, isOrderCreated) || other.isOrderCreated == isOrderCreated)&&(identical(other.loadFailed, loadFailed) || other.loadFailed == loadFailed)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,delivery,address,phone,const DeepCollectionEquality().hash(items),const DeepCollectionEquality().hash(deliveryMethods),const DeepCollectionEquality().hash(addresses),price,priceDetails,freeCancellationUntil,paymentId,isLoading,isDeliveryMethodsLoading,isAddressesLoading,isOrdering,isOrderCreated,loadFailed,errorMessage);
+int get hashCode => Object.hashAll([runtimeType,delivery,address,region,pickupPoint,phone,const DeepCollectionEquality().hash(items),const DeepCollectionEquality().hash(deliveryMethods),const DeepCollectionEquality().hash(addresses),const DeepCollectionEquality().hash(pickupPoints),price,priceDetails,freeCancellationUntil,paymentId,isLoading,isAddressesLoading,isPickupPointsLoading,isOrdering,isOrderCreated,loadFailed,errorMessage]);
 
 @override
 String toString() {
-  return 'CheckoutState(delivery: $delivery, address: $address, phone: $phone, items: $items, deliveryMethods: $deliveryMethods, addresses: $addresses, price: $price, priceDetails: $priceDetails, freeCancellationUntil: $freeCancellationUntil, paymentId: $paymentId, isLoading: $isLoading, isDeliveryMethodsLoading: $isDeliveryMethodsLoading, isAddressesLoading: $isAddressesLoading, isOrdering: $isOrdering, isOrderCreated: $isOrderCreated, loadFailed: $loadFailed, errorMessage: $errorMessage)';
+  return 'CheckoutState(delivery: $delivery, address: $address, region: $region, pickupPoint: $pickupPoint, phone: $phone, items: $items, deliveryMethods: $deliveryMethods, addresses: $addresses, pickupPoints: $pickupPoints, price: $price, priceDetails: $priceDetails, freeCancellationUntil: $freeCancellationUntil, paymentId: $paymentId, isLoading: $isLoading, isAddressesLoading: $isAddressesLoading, isPickupPointsLoading: $isPickupPointsLoading, isOrdering: $isOrdering, isOrderCreated: $isOrderCreated, loadFailed: $loadFailed, errorMessage: $errorMessage)';
 }
 
 
@@ -933,7 +857,7 @@ abstract mixin class $CheckoutStateCopyWith<$Res>  {
   factory $CheckoutStateCopyWith(CheckoutState value, $Res Function(CheckoutState) _then) = _$CheckoutStateCopyWithImpl;
 @useResult
 $Res call({
- DeliveryMethod? delivery, MarketAddress? address, String? phone, List<CartItem> items, List<DeliveryMethod> deliveryMethods, List<MarketAddress> addresses, CheckoutPrice? price, MarketPriceDetails? priceDetails, DateTime? freeCancellationUntil, String? paymentId, bool isLoading, bool isDeliveryMethodsLoading, bool isAddressesLoading, bool isOrdering, bool isOrderCreated, bool loadFailed, String? errorMessage
+ DeliveryMethod? delivery, MarketAddress? address, MarketRegion? region, MarketPickupPoint? pickupPoint, String? phone, List<CartItem> items, List<DeliveryMethod> deliveryMethods, List<MarketAddress> addresses, List<MarketPickupPoint> pickupPoints, CheckoutPrice? price, MarketPriceDetails? priceDetails, DateTime? freeCancellationUntil, String? paymentId, bool isLoading, bool isAddressesLoading, bool isPickupPointsLoading, bool isOrdering, bool isOrderCreated, bool loadFailed, String? errorMessage
 });
 
 
@@ -950,21 +874,24 @@ class _$CheckoutStateCopyWithImpl<$Res>
 
 /// Create a copy of CheckoutState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? delivery = freezed,Object? address = freezed,Object? phone = freezed,Object? items = null,Object? deliveryMethods = null,Object? addresses = null,Object? price = freezed,Object? priceDetails = freezed,Object? freeCancellationUntil = freezed,Object? paymentId = freezed,Object? isLoading = null,Object? isDeliveryMethodsLoading = null,Object? isAddressesLoading = null,Object? isOrdering = null,Object? isOrderCreated = null,Object? loadFailed = null,Object? errorMessage = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? delivery = freezed,Object? address = freezed,Object? region = freezed,Object? pickupPoint = freezed,Object? phone = freezed,Object? items = null,Object? deliveryMethods = null,Object? addresses = null,Object? pickupPoints = null,Object? price = freezed,Object? priceDetails = freezed,Object? freeCancellationUntil = freezed,Object? paymentId = freezed,Object? isLoading = null,Object? isAddressesLoading = null,Object? isPickupPointsLoading = null,Object? isOrdering = null,Object? isOrderCreated = null,Object? loadFailed = null,Object? errorMessage = freezed,}) {
   return _then(_self.copyWith(
 delivery: freezed == delivery ? _self.delivery : delivery // ignore: cast_nullable_to_non_nullable
 as DeliveryMethod?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as MarketAddress?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as MarketAddress?,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
+as MarketRegion?,pickupPoint: freezed == pickupPoint ? _self.pickupPoint : pickupPoint // ignore: cast_nullable_to_non_nullable
+as MarketPickupPoint?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
 as List<CartItem>,deliveryMethods: null == deliveryMethods ? _self.deliveryMethods : deliveryMethods // ignore: cast_nullable_to_non_nullable
 as List<DeliveryMethod>,addresses: null == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
-as List<MarketAddress>,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as List<MarketAddress>,pickupPoints: null == pickupPoints ? _self.pickupPoints : pickupPoints // ignore: cast_nullable_to_non_nullable
+as List<MarketPickupPoint>,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as CheckoutPrice?,priceDetails: freezed == priceDetails ? _self.priceDetails : priceDetails // ignore: cast_nullable_to_non_nullable
 as MarketPriceDetails?,freeCancellationUntil: freezed == freeCancellationUntil ? _self.freeCancellationUntil : freeCancellationUntil // ignore: cast_nullable_to_non_nullable
 as DateTime?,paymentId: freezed == paymentId ? _self.paymentId : paymentId // ignore: cast_nullable_to_non_nullable
 as String?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isDeliveryMethodsLoading: null == isDeliveryMethodsLoading ? _self.isDeliveryMethodsLoading : isDeliveryMethodsLoading // ignore: cast_nullable_to_non_nullable
 as bool,isAddressesLoading: null == isAddressesLoading ? _self.isAddressesLoading : isAddressesLoading // ignore: cast_nullable_to_non_nullable
+as bool,isPickupPointsLoading: null == isPickupPointsLoading ? _self.isPickupPointsLoading : isPickupPointsLoading // ignore: cast_nullable_to_non_nullable
 as bool,isOrdering: null == isOrdering ? _self.isOrdering : isOrdering // ignore: cast_nullable_to_non_nullable
 as bool,isOrderCreated: null == isOrderCreated ? _self.isOrderCreated : isOrderCreated // ignore: cast_nullable_to_non_nullable
 as bool,loadFailed: null == loadFailed ? _self.loadFailed : loadFailed // ignore: cast_nullable_to_non_nullable
@@ -1054,10 +981,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DeliveryMethod? delivery,  MarketAddress? address,  String? phone,  List<CartItem> items,  List<DeliveryMethod> deliveryMethods,  List<MarketAddress> addresses,  CheckoutPrice? price,  MarketPriceDetails? priceDetails,  DateTime? freeCancellationUntil,  String? paymentId,  bool isLoading,  bool isDeliveryMethodsLoading,  bool isAddressesLoading,  bool isOrdering,  bool isOrderCreated,  bool loadFailed,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DeliveryMethod? delivery,  MarketAddress? address,  MarketRegion? region,  MarketPickupPoint? pickupPoint,  String? phone,  List<CartItem> items,  List<DeliveryMethod> deliveryMethods,  List<MarketAddress> addresses,  List<MarketPickupPoint> pickupPoints,  CheckoutPrice? price,  MarketPriceDetails? priceDetails,  DateTime? freeCancellationUntil,  String? paymentId,  bool isLoading,  bool isAddressesLoading,  bool isPickupPointsLoading,  bool isOrdering,  bool isOrderCreated,  bool loadFailed,  String? errorMessage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CheckoutState() when $default != null:
-return $default(_that.delivery,_that.address,_that.phone,_that.items,_that.deliveryMethods,_that.addresses,_that.price,_that.priceDetails,_that.freeCancellationUntil,_that.paymentId,_that.isLoading,_that.isDeliveryMethodsLoading,_that.isAddressesLoading,_that.isOrdering,_that.isOrderCreated,_that.loadFailed,_that.errorMessage);case _:
+return $default(_that.delivery,_that.address,_that.region,_that.pickupPoint,_that.phone,_that.items,_that.deliveryMethods,_that.addresses,_that.pickupPoints,_that.price,_that.priceDetails,_that.freeCancellationUntil,_that.paymentId,_that.isLoading,_that.isAddressesLoading,_that.isPickupPointsLoading,_that.isOrdering,_that.isOrderCreated,_that.loadFailed,_that.errorMessage);case _:
   return orElse();
 
 }
@@ -1075,10 +1002,10 @@ return $default(_that.delivery,_that.address,_that.phone,_that.items,_that.deliv
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DeliveryMethod? delivery,  MarketAddress? address,  String? phone,  List<CartItem> items,  List<DeliveryMethod> deliveryMethods,  List<MarketAddress> addresses,  CheckoutPrice? price,  MarketPriceDetails? priceDetails,  DateTime? freeCancellationUntil,  String? paymentId,  bool isLoading,  bool isDeliveryMethodsLoading,  bool isAddressesLoading,  bool isOrdering,  bool isOrderCreated,  bool loadFailed,  String? errorMessage)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DeliveryMethod? delivery,  MarketAddress? address,  MarketRegion? region,  MarketPickupPoint? pickupPoint,  String? phone,  List<CartItem> items,  List<DeliveryMethod> deliveryMethods,  List<MarketAddress> addresses,  List<MarketPickupPoint> pickupPoints,  CheckoutPrice? price,  MarketPriceDetails? priceDetails,  DateTime? freeCancellationUntil,  String? paymentId,  bool isLoading,  bool isAddressesLoading,  bool isPickupPointsLoading,  bool isOrdering,  bool isOrderCreated,  bool loadFailed,  String? errorMessage)  $default,) {final _that = this;
 switch (_that) {
 case _CheckoutState():
-return $default(_that.delivery,_that.address,_that.phone,_that.items,_that.deliveryMethods,_that.addresses,_that.price,_that.priceDetails,_that.freeCancellationUntil,_that.paymentId,_that.isLoading,_that.isDeliveryMethodsLoading,_that.isAddressesLoading,_that.isOrdering,_that.isOrderCreated,_that.loadFailed,_that.errorMessage);case _:
+return $default(_that.delivery,_that.address,_that.region,_that.pickupPoint,_that.phone,_that.items,_that.deliveryMethods,_that.addresses,_that.pickupPoints,_that.price,_that.priceDetails,_that.freeCancellationUntil,_that.paymentId,_that.isLoading,_that.isAddressesLoading,_that.isPickupPointsLoading,_that.isOrdering,_that.isOrderCreated,_that.loadFailed,_that.errorMessage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1095,10 +1022,10 @@ return $default(_that.delivery,_that.address,_that.phone,_that.items,_that.deliv
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DeliveryMethod? delivery,  MarketAddress? address,  String? phone,  List<CartItem> items,  List<DeliveryMethod> deliveryMethods,  List<MarketAddress> addresses,  CheckoutPrice? price,  MarketPriceDetails? priceDetails,  DateTime? freeCancellationUntil,  String? paymentId,  bool isLoading,  bool isDeliveryMethodsLoading,  bool isAddressesLoading,  bool isOrdering,  bool isOrderCreated,  bool loadFailed,  String? errorMessage)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DeliveryMethod? delivery,  MarketAddress? address,  MarketRegion? region,  MarketPickupPoint? pickupPoint,  String? phone,  List<CartItem> items,  List<DeliveryMethod> deliveryMethods,  List<MarketAddress> addresses,  List<MarketPickupPoint> pickupPoints,  CheckoutPrice? price,  MarketPriceDetails? priceDetails,  DateTime? freeCancellationUntil,  String? paymentId,  bool isLoading,  bool isAddressesLoading,  bool isPickupPointsLoading,  bool isOrdering,  bool isOrderCreated,  bool loadFailed,  String? errorMessage)?  $default,) {final _that = this;
 switch (_that) {
 case _CheckoutState() when $default != null:
-return $default(_that.delivery,_that.address,_that.phone,_that.items,_that.deliveryMethods,_that.addresses,_that.price,_that.priceDetails,_that.freeCancellationUntil,_that.paymentId,_that.isLoading,_that.isDeliveryMethodsLoading,_that.isAddressesLoading,_that.isOrdering,_that.isOrderCreated,_that.loadFailed,_that.errorMessage);case _:
+return $default(_that.delivery,_that.address,_that.region,_that.pickupPoint,_that.phone,_that.items,_that.deliveryMethods,_that.addresses,_that.pickupPoints,_that.price,_that.priceDetails,_that.freeCancellationUntil,_that.paymentId,_that.isLoading,_that.isAddressesLoading,_that.isPickupPointsLoading,_that.isOrdering,_that.isOrderCreated,_that.loadFailed,_that.errorMessage);case _:
   return null;
 
 }
@@ -1110,11 +1037,13 @@ return $default(_that.delivery,_that.address,_that.phone,_that.items,_that.deliv
 
 
 class _CheckoutState extends CheckoutState {
-   _CheckoutState({this.delivery, this.address, this.phone, final  List<CartItem> items = const [], final  List<DeliveryMethod> deliveryMethods = const [], final  List<MarketAddress> addresses = const [], this.price, this.priceDetails, this.freeCancellationUntil, this.paymentId, this.isLoading = false, this.isDeliveryMethodsLoading = false, this.isAddressesLoading = false, this.isOrdering = false, this.isOrderCreated = false, this.loadFailed = false, this.errorMessage}): _items = items,_deliveryMethods = deliveryMethods,_addresses = addresses,super._();
+   _CheckoutState({this.delivery, this.address, this.region, this.pickupPoint, this.phone, final  List<CartItem> items = const [], final  List<DeliveryMethod> deliveryMethods = const [], final  List<MarketAddress> addresses = const [], final  List<MarketPickupPoint> pickupPoints = const [], this.price, this.priceDetails, this.freeCancellationUntil, this.paymentId, this.isLoading = false, this.isAddressesLoading = false, this.isPickupPointsLoading = false, this.isOrdering = false, this.isOrderCreated = false, this.loadFailed = false, this.errorMessage}): _items = items,_deliveryMethods = deliveryMethods,_addresses = addresses,_pickupPoints = pickupPoints,super._();
   
 
 @override final  DeliveryMethod? delivery;
 @override final  MarketAddress? address;
+@override final  MarketRegion? region;
+@override final  MarketPickupPoint? pickupPoint;
 @override final  String? phone;
  final  List<CartItem> _items;
 @override@JsonKey() List<CartItem> get items {
@@ -1137,13 +1066,20 @@ class _CheckoutState extends CheckoutState {
   return EqualUnmodifiableListView(_addresses);
 }
 
+ final  List<MarketPickupPoint> _pickupPoints;
+@override@JsonKey() List<MarketPickupPoint> get pickupPoints {
+  if (_pickupPoints is EqualUnmodifiableListView) return _pickupPoints;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_pickupPoints);
+}
+
 @override final  CheckoutPrice? price;
 @override final  MarketPriceDetails? priceDetails;
 @override final  DateTime? freeCancellationUntil;
 @override final  String? paymentId;
 @override@JsonKey() final  bool isLoading;
-@override@JsonKey() final  bool isDeliveryMethodsLoading;
 @override@JsonKey() final  bool isAddressesLoading;
+@override@JsonKey() final  bool isPickupPointsLoading;
 @override@JsonKey() final  bool isOrdering;
 @override@JsonKey() final  bool isOrderCreated;
 @override@JsonKey() final  bool loadFailed;
@@ -1159,16 +1095,16 @@ _$CheckoutStateCopyWith<_CheckoutState> get copyWith => __$CheckoutStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckoutState&&(identical(other.delivery, delivery) || other.delivery == delivery)&&(identical(other.address, address) || other.address == address)&&(identical(other.phone, phone) || other.phone == phone)&&const DeepCollectionEquality().equals(other._items, _items)&&const DeepCollectionEquality().equals(other._deliveryMethods, _deliveryMethods)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceDetails, priceDetails) || other.priceDetails == priceDetails)&&(identical(other.freeCancellationUntil, freeCancellationUntil) || other.freeCancellationUntil == freeCancellationUntil)&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isDeliveryMethodsLoading, isDeliveryMethodsLoading) || other.isDeliveryMethodsLoading == isDeliveryMethodsLoading)&&(identical(other.isAddressesLoading, isAddressesLoading) || other.isAddressesLoading == isAddressesLoading)&&(identical(other.isOrdering, isOrdering) || other.isOrdering == isOrdering)&&(identical(other.isOrderCreated, isOrderCreated) || other.isOrderCreated == isOrderCreated)&&(identical(other.loadFailed, loadFailed) || other.loadFailed == loadFailed)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CheckoutState&&(identical(other.delivery, delivery) || other.delivery == delivery)&&(identical(other.address, address) || other.address == address)&&(identical(other.region, region) || other.region == region)&&(identical(other.pickupPoint, pickupPoint) || other.pickupPoint == pickupPoint)&&(identical(other.phone, phone) || other.phone == phone)&&const DeepCollectionEquality().equals(other._items, _items)&&const DeepCollectionEquality().equals(other._deliveryMethods, _deliveryMethods)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&const DeepCollectionEquality().equals(other._pickupPoints, _pickupPoints)&&(identical(other.price, price) || other.price == price)&&(identical(other.priceDetails, priceDetails) || other.priceDetails == priceDetails)&&(identical(other.freeCancellationUntil, freeCancellationUntil) || other.freeCancellationUntil == freeCancellationUntil)&&(identical(other.paymentId, paymentId) || other.paymentId == paymentId)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.isAddressesLoading, isAddressesLoading) || other.isAddressesLoading == isAddressesLoading)&&(identical(other.isPickupPointsLoading, isPickupPointsLoading) || other.isPickupPointsLoading == isPickupPointsLoading)&&(identical(other.isOrdering, isOrdering) || other.isOrdering == isOrdering)&&(identical(other.isOrderCreated, isOrderCreated) || other.isOrderCreated == isOrderCreated)&&(identical(other.loadFailed, loadFailed) || other.loadFailed == loadFailed)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,delivery,address,phone,const DeepCollectionEquality().hash(_items),const DeepCollectionEquality().hash(_deliveryMethods),const DeepCollectionEquality().hash(_addresses),price,priceDetails,freeCancellationUntil,paymentId,isLoading,isDeliveryMethodsLoading,isAddressesLoading,isOrdering,isOrderCreated,loadFailed,errorMessage);
+int get hashCode => Object.hashAll([runtimeType,delivery,address,region,pickupPoint,phone,const DeepCollectionEquality().hash(_items),const DeepCollectionEquality().hash(_deliveryMethods),const DeepCollectionEquality().hash(_addresses),const DeepCollectionEquality().hash(_pickupPoints),price,priceDetails,freeCancellationUntil,paymentId,isLoading,isAddressesLoading,isPickupPointsLoading,isOrdering,isOrderCreated,loadFailed,errorMessage]);
 
 @override
 String toString() {
-  return 'CheckoutState(delivery: $delivery, address: $address, phone: $phone, items: $items, deliveryMethods: $deliveryMethods, addresses: $addresses, price: $price, priceDetails: $priceDetails, freeCancellationUntil: $freeCancellationUntil, paymentId: $paymentId, isLoading: $isLoading, isDeliveryMethodsLoading: $isDeliveryMethodsLoading, isAddressesLoading: $isAddressesLoading, isOrdering: $isOrdering, isOrderCreated: $isOrderCreated, loadFailed: $loadFailed, errorMessage: $errorMessage)';
+  return 'CheckoutState(delivery: $delivery, address: $address, region: $region, pickupPoint: $pickupPoint, phone: $phone, items: $items, deliveryMethods: $deliveryMethods, addresses: $addresses, pickupPoints: $pickupPoints, price: $price, priceDetails: $priceDetails, freeCancellationUntil: $freeCancellationUntil, paymentId: $paymentId, isLoading: $isLoading, isAddressesLoading: $isAddressesLoading, isPickupPointsLoading: $isPickupPointsLoading, isOrdering: $isOrdering, isOrderCreated: $isOrderCreated, loadFailed: $loadFailed, errorMessage: $errorMessage)';
 }
 
 
@@ -1179,7 +1115,7 @@ abstract mixin class _$CheckoutStateCopyWith<$Res> implements $CheckoutStateCopy
   factory _$CheckoutStateCopyWith(_CheckoutState value, $Res Function(_CheckoutState) _then) = __$CheckoutStateCopyWithImpl;
 @override @useResult
 $Res call({
- DeliveryMethod? delivery, MarketAddress? address, String? phone, List<CartItem> items, List<DeliveryMethod> deliveryMethods, List<MarketAddress> addresses, CheckoutPrice? price, MarketPriceDetails? priceDetails, DateTime? freeCancellationUntil, String? paymentId, bool isLoading, bool isDeliveryMethodsLoading, bool isAddressesLoading, bool isOrdering, bool isOrderCreated, bool loadFailed, String? errorMessage
+ DeliveryMethod? delivery, MarketAddress? address, MarketRegion? region, MarketPickupPoint? pickupPoint, String? phone, List<CartItem> items, List<DeliveryMethod> deliveryMethods, List<MarketAddress> addresses, List<MarketPickupPoint> pickupPoints, CheckoutPrice? price, MarketPriceDetails? priceDetails, DateTime? freeCancellationUntil, String? paymentId, bool isLoading, bool isAddressesLoading, bool isPickupPointsLoading, bool isOrdering, bool isOrderCreated, bool loadFailed, String? errorMessage
 });
 
 
@@ -1196,21 +1132,24 @@ class __$CheckoutStateCopyWithImpl<$Res>
 
 /// Create a copy of CheckoutState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? delivery = freezed,Object? address = freezed,Object? phone = freezed,Object? items = null,Object? deliveryMethods = null,Object? addresses = null,Object? price = freezed,Object? priceDetails = freezed,Object? freeCancellationUntil = freezed,Object? paymentId = freezed,Object? isLoading = null,Object? isDeliveryMethodsLoading = null,Object? isAddressesLoading = null,Object? isOrdering = null,Object? isOrderCreated = null,Object? loadFailed = null,Object? errorMessage = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? delivery = freezed,Object? address = freezed,Object? region = freezed,Object? pickupPoint = freezed,Object? phone = freezed,Object? items = null,Object? deliveryMethods = null,Object? addresses = null,Object? pickupPoints = null,Object? price = freezed,Object? priceDetails = freezed,Object? freeCancellationUntil = freezed,Object? paymentId = freezed,Object? isLoading = null,Object? isAddressesLoading = null,Object? isPickupPointsLoading = null,Object? isOrdering = null,Object? isOrderCreated = null,Object? loadFailed = null,Object? errorMessage = freezed,}) {
   return _then(_CheckoutState(
 delivery: freezed == delivery ? _self.delivery : delivery // ignore: cast_nullable_to_non_nullable
 as DeliveryMethod?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as MarketAddress?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as MarketAddress?,region: freezed == region ? _self.region : region // ignore: cast_nullable_to_non_nullable
+as MarketRegion?,pickupPoint: freezed == pickupPoint ? _self.pickupPoint : pickupPoint // ignore: cast_nullable_to_non_nullable
+as MarketPickupPoint?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,items: null == items ? _self._items : items // ignore: cast_nullable_to_non_nullable
 as List<CartItem>,deliveryMethods: null == deliveryMethods ? _self._deliveryMethods : deliveryMethods // ignore: cast_nullable_to_non_nullable
 as List<DeliveryMethod>,addresses: null == addresses ? _self._addresses : addresses // ignore: cast_nullable_to_non_nullable
-as List<MarketAddress>,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as List<MarketAddress>,pickupPoints: null == pickupPoints ? _self._pickupPoints : pickupPoints // ignore: cast_nullable_to_non_nullable
+as List<MarketPickupPoint>,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as CheckoutPrice?,priceDetails: freezed == priceDetails ? _self.priceDetails : priceDetails // ignore: cast_nullable_to_non_nullable
 as MarketPriceDetails?,freeCancellationUntil: freezed == freeCancellationUntil ? _self.freeCancellationUntil : freeCancellationUntil // ignore: cast_nullable_to_non_nullable
 as DateTime?,paymentId: freezed == paymentId ? _self.paymentId : paymentId // ignore: cast_nullable_to_non_nullable
 as String?,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
-as bool,isDeliveryMethodsLoading: null == isDeliveryMethodsLoading ? _self.isDeliveryMethodsLoading : isDeliveryMethodsLoading // ignore: cast_nullable_to_non_nullable
 as bool,isAddressesLoading: null == isAddressesLoading ? _self.isAddressesLoading : isAddressesLoading // ignore: cast_nullable_to_non_nullable
+as bool,isPickupPointsLoading: null == isPickupPointsLoading ? _self.isPickupPointsLoading : isPickupPointsLoading // ignore: cast_nullable_to_non_nullable
 as bool,isOrdering: null == isOrdering ? _self.isOrdering : isOrdering // ignore: cast_nullable_to_non_nullable
 as bool,isOrderCreated: null == isOrderCreated ? _self.isOrderCreated : isOrderCreated // ignore: cast_nullable_to_non_nullable
 as bool,loadFailed: null == loadFailed ? _self.loadFailed : loadFailed // ignore: cast_nullable_to_non_nullable

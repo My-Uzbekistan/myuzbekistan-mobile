@@ -1,0 +1,12 @@
+export 'models/search_cities_block.dart';
+export 'models/search_city.dart';
+export 'models/search_group.dart';
+export 'models/search_history_item.dart';
+export 'models/search_merchant.dart';
+export 'models/search_merchants_block.dart';
+export 'models/search_result.dart';
+export 'models/search_service.dart';
+export 'models/search_services_block.dart';
+export 'models/search_suggestion.dart';
+export 'models/search_suggestion_type.dart';
+export 'repository/search_repository.dart';

@@ -2,6 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/widgets/city_card.dart';
 
 class CitiesWidget extends StatelessWidget {
   final List<City> cities;
@@ -52,139 +53,16 @@ class CitiesWidget extends StatelessWidget {
                 separatorBuilder: (_, __) => const SizedBox(width: 16),
                 itemBuilder: (context, index) {
                   final city = cities[index];
-                  return _CityCard(
-                    city: city,
-                    weekend: weekend ?? "",
+                  return CityCard(
+                    name: city.name,
+                    photo: city.photo,
+                    subtitle: weekend,
                     onTap: onCityTap == null ? null : () => onCityTap!(city),
                   );
                 },
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class _CityCard extends StatelessWidget {
-  final City city;
-  final String weekend;
-  final VoidCallback? onTap;
-
-  const _CityCard({required this.city, required this.weekend, this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
-        child: SizedBox(
-          width: 220,
-          height: 280,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: SoftEdgeBlur(
-                  edges: [
-                    EdgeBlur(
-                      type: EdgeType.bottomEdge,
-                      size: 160,
-                      sigma: 6,
-                      tileMode: TileMode.mirror,
-                      controlPoints: [
-                        ControlPoint(
-                          position: 0.8,
-                          type: ControlPointType.visible,
-                        ),
-                        ControlPoint(
-                          position: 1,
-                          type: ControlPointType.transparent,
-                        ),
-                      ],
-                    ),
-                  ],
-                  child: AppNetworkImage(
-                    city.photo ?? "",
-                    fit: BoxFit.cover,
-                    placeholder: ColoredBox(
-                      color: context.appColors.fill.quaternary,
-                    ),
-                  ),
-                ),
-              ),
-              Positioned.fill(
-                child: ColoredBox(
-                  color: context.appColors.service.scrim
-                      .withValues(alpha: 0.16),
-                ),
-              ),
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      stops: const [0.0, 0.596, 1.0],
-                      colors: [
-                        context.appColors.service.scrim
-                            .withValues(alpha: 0),
-                        context.appColors.service.scrim
-                            .withValues(alpha: 0.48),
-                        context.appColors.service.scrim
-                            .withValues(alpha: 0.72),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Positioned(
-                left: 16,
-                right: 16,
-                bottom: 16,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      city.name,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ).h3(color: context.appColors.service.onMedia),
-                    const SizedBox(height: 4),
-                    Text(
-                      weekend,
-                      textAlign: TextAlign.center,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ).bodySm(
-                      color: context.appColors.service.onMedia
-                          .withValues(alpha: 0.56),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                left: 12,
-                top: 12,
-                child: Container(
-                  height: 28,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: context.appColors.service.onMedia,
-                    borderRadius: BorderRadius.circular(24),
-                  ),
-                  child: Text(
-                    context.localization.home_city_badge,
-                    maxLines: 1,
-                  ).labelSm(color: context.appColors.service.scrim),
-                ),
-              ),
-            ],
-          ),
         ),
       ),
     );

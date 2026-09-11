@@ -13,6 +13,8 @@ import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart'
     as _i396;
 import 'package:more/src/pages/auth/bloc/auth_bloc.dart' as _i221;
 import 'package:more/src/pages/devices/bloc/devices_bloc.dart' as _i286;
+import 'package:more/src/pages/edit_profile/bloc/edit_profile_bloc.dart'
+    as _i782;
 import 'package:more/src/pages/pin/check_pin/bloc/check_pin_bloc.dart' as _i578;
 import 'package:more/src/pages/pin/pin_code_bloc/pincode_bloc.dart' as _i977;
 import 'package:more/src/pages/pin/utils.dart' as _i201;
@@ -23,24 +25,32 @@ class MorePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
+    gh.factory<_i201.BiometricUtils>(() => _i201.BiometricUtilsProvider());
     gh.factory<_i507.MoreBloc>(() => _i507.MoreBloc(
           gh<_i494.SecurityStorage>(),
           rp: gh<_i494.Repository>(),
           appStatusChangeListeners: gh<_i494.AppStatusChangeListeners>(),
           premiumRepository: gh<_i494.PremiumRepository>(),
           devicesRepository: gh<_i494.DevicesRepository>(),
+          refresh: gh<_i494.AppRefreshListener>(),
         ));
-    gh.factory<_i201.BiometricUtils>(() => _i201.BiometricUtilsProvider());
+    gh.factory<_i286.DevicesBloc>(() => _i286.DevicesBloc(
+          gh<_i494.DevicesRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i782.EditProfileBloc>(() => _i782.EditProfileBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.AppStatusChangeListeners>(),
+        ));
+    gh.factory<_i830.AppSettingsBloc>(
+        () => _i830.AppSettingsBloc(gh<_i494.AppPreference>()));
     gh.factory<_i119.ProfileBloc>(() => _i119.ProfileBloc(
           gh<_i494.SecurityStorage>(),
           gh<_i494.AppStatusChangeListeners>(),
           gh<_i494.Repository>(),
           gh<_i494.PremiumRepository>(),
+          gh<_i494.AppRefreshListener>(),
         ));
-    gh.factory<_i830.AppSettingsBloc>(
-        () => _i830.AppSettingsBloc(gh<_i494.AppPreference>()));
-    gh.factory<_i286.DevicesBloc>(
-        () => _i286.DevicesBloc(gh<_i494.DevicesRepository>()));
     gh.factory<_i977.PinCodeBloc>(() => _i977.PinCodeBloc(
           gh<_i494.Repository>(),
           gh<_i494.SecurityStorage>(),

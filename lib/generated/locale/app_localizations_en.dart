@@ -86,4 +86,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get update_app_later => 'Update Later';
+
+  @override
+  String get page_not_found_title => 'Page not found';
+
+  @override
+  String get page_not_found_message =>
+      'This link may be outdated or the page has been moved.';
+
+  @override
+  String get page_not_found_go_home => 'Go to home';
 }

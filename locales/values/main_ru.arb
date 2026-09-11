@@ -26,5 +26,8 @@
   "new_version_available": "Доступна новая версия",
   "new_features_and_security": "Доступны новые функции и усилена безопасность. Рекомендуем обновить приложение",
   "update_app_now": "Обновить приложение",
-  "update_app_later": "Обновить позже"
+  "update_app_later": "Обновить позже",
+  "page_not_found_title": "Страница не найдена",
+  "page_not_found_message": "Возможно, ссылка устарела или страница была перемещена.",
+  "page_not_found_go_home": "На главную"
 }

@@ -123,6 +123,13 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<AirQuality> loadAirQualityByRegion({required int regionId}) {
+    return _restService
+        .loadAirQualityByRegion(regionId: regionId)
+        .call((data) => data.toDomain());
+  }
+
+  @override
   Future<PrayerTimes> loadPrayerTimes({int? locationId, DateTime? date}) {
     return _restService
         .loadPrayerTimes(
@@ -247,6 +254,11 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future logout() {
+    return _restService.logout().call();
+  }
+
+  @override
   Future deleteAccount() {
     return _restService.deleteAccount().call();
   }
@@ -264,8 +276,25 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<UserProfile> deleteProfilePicture() {
+    return _restService.deleteProfilePicture().call((data) => data.toDomain());
+  }
+
+  @override
   Future<UserInfoModel> getUserInfo() {
     return _restService.getUserInfo().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<UserProfile> getProfile() {
+    return _restService.getProfile().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<UserProfile> saveProfile({String? firstName, String? lastName}) {
+    return _restService
+        .saveProfile({"firstName": firstName, "lastName": lastName})
+        .call((data) => data.toDomain());
   }
 
   // {
@@ -354,6 +383,11 @@ class RepositoryImp implements Repository {
   @override
   Future<dynamic> seenNotification({required int id}) {
     return _restService.seenNotification(id).call();
+  }
+
+  @override
+  Future<dynamic> seenAllNotifications() {
+    return _restService.seenAllNotifications().call();
   }
 
   @override
@@ -457,8 +491,8 @@ class RepositoryImp implements Repository {
   }
 
   @override
-  Future<List<ClaimHistory>> giftHistory() {
-    return _restService.giftHistory().call(
+  Future<List<ClaimHistory>> giftHistory({int page = 1, int pageSize = 100}) {
+    return _restService.giftHistory(page: page, pageSize: pageSize).call(
       (data) => data.items.map((e) => e.toDomain()).toList(),
     );
   }

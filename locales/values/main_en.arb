@@ -26,5 +26,8 @@
   "new_version_available": "A new version is available",
   "new_features_and_security": "New features are available and security has been improved. We recommend updating the app.",
   "update_app_now": "Update App",
-  "update_app_later": "Update Later"
+  "update_app_later": "Update Later",
+  "page_not_found_title": "Page not found",
+  "page_not_found_message": "This link may be outdated or the page has been moved.",
+  "page_not_found_go_home": "Go to home"
 }

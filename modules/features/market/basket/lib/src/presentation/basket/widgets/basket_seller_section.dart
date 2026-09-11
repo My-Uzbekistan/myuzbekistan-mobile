@@ -11,12 +11,14 @@ class BasketSellerSection extends StatelessWidget {
     required this.onToggleSeller,
     required this.onQuantityChanged,
     required this.onRemoveItem,
+    required this.onItemTap,
   });
 
   final CartSeller seller;
   final VoidCallback onToggleSeller;
   final void Function(CartItem item, int quantity) onQuantityChanged;
   final ValueChanged<CartItem> onRemoveItem;
+  final ValueChanged<CartItem> onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +43,7 @@ class BasketSellerSection extends StatelessWidget {
               onQuantityChanged: (quantity) =>
                   onQuantityChanged(seller.items[index], quantity),
               onRemove: () => onRemoveItem(seller.items[index]),
+              onTap: () => onItemTap(seller.items[index]),
             ),
           ],
         ],

@@ -24,6 +24,10 @@ abstract class SecurityStorage {
 
   bool isShowPrayerTimes();
 
+  Future<void> changeIqAirWidgetState(bool value);
+
+  bool isShowIqAirWidget();
+
   Future<void> setPrayerLocationId(int locationId);
 
   int? getPrayerLocationId();

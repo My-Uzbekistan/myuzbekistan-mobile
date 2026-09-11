@@ -15,8 +15,9 @@ class MuseumPurchaseBloc
     extends Bloc<MuseumPurchaseEvent, MuseumPurchaseState> {
   final MuseumRepository _repository;
   final FinanceRepository _financeRepository;
+  final AppRefreshListener _refresh;
 
-  MuseumPurchaseBloc(this._repository, this._financeRepository)
+  MuseumPurchaseBloc(this._repository, this._financeRepository, this._refresh)
     : super(MuseumPurchaseState()) {
     on<_MuseumPurchaseStartEvent>(_start);
     on<_MuseumPurchaseChangeQuantityEvent>(_changeQuantity);
@@ -101,6 +102,9 @@ class MuseumPurchaseBloc
           isPaying: false,
         ),
       );
+      if (order.tickets.isNotEmpty) {
+        _refresh.notify(AppRefreshTopic.museumTickets);
+      }
       if (order.checkUrl == null && order.tickets.isEmpty) {
         add(MuseumPurchaseEvent.pollOrder());
       }
@@ -126,6 +130,9 @@ class MuseumPurchaseBloc
           isPaying: false,
         ),
       );
+      if (issued.tickets.isNotEmpty) {
+        _refresh.notify(AppRefreshTopic.museumTickets);
+      }
     } catch (e) {
       emit(state.copyWith(isPaying: false, errorMessage: e.errorMessage()));
     }
@@ -150,7 +157,10 @@ class MuseumPurchaseBloc
             isSuccess: refreshed.tickets.isNotEmpty,
           ),
         );
-        if (refreshed.tickets.isNotEmpty) return;
+        if (refreshed.tickets.isNotEmpty) {
+          _refresh.notify(AppRefreshTopic.museumTickets);
+          return;
+        }
       } catch (_) {
         continue;
       }

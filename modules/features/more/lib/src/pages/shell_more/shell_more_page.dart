@@ -10,8 +10,7 @@ import 'package:shared/shared.dart' hide Toast;
 import '../../di/injection.dart';
 import '../profile_page/bloc/profile_bloc.dart';
 import 'bloc/more_bloc.dart';
-import 'widgets/profile/premium_active_banner.dart';
-import 'widgets/profile/premium_upgrade_banner.dart';
+import 'widgets/profile/premium_section.dart';
 import 'widgets/profile/profile_header.dart';
 import 'widgets/profile/profile_settings_cell.dart';
 
@@ -122,162 +121,185 @@ class ShellMorePage extends HookWidget {
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                      padding: const EdgeInsets.only(top: 16),
                       child: Column(
                         spacing: 16,
                         children: [
                           if (showPremiumBanner)
-                            isPremium
-                                ? PremiumActiveBanner(
-                                  onTap:
-                                      () => context.pushType(
-                                        AppNavPath.travel.premiumCancelPage,
-                                        extra: moreState.premiumStatus,
-                                      ),
-                                )
-                                : const PremiumUpgradeBanner(),
-
-                          _settingsGroup(
-                            context,
-                            children: [
-                              if (userState != null)
-                                ProfileSettingsCell(
-                                  icon: Assets.svg.more.fingerprint.svg(),
-                                  title: context.localization.security,
-                                  onTap: () => context.more.pushSecurityPage(),
-                                ),
-                              ProfileSettingsCell(
-                                icon: Assets.svg.more.bell.svg(),
-                                title: context.localization.notification,
-                                trailing: AppSwitch(
-                                  isSwitched: moreState.notificationsEnabled,
-                                  onChanged: (_) {
-                                    moreBloc.add(
-                                      MoreEvent.checkedNotification(),
-                                    );
-                                  },
-                                ),
-                              ),
-                              ProfileSettingsCell(
-                                icon: Assets.svg.more.globe.svg(),
-                                title: context.localization.language,
-                                trailingText:
-                                    localeName == null
-                                        ? null
-                                        : context.localization.lanItem(
-                                          localeName,
-                                        ),
-                                onTap:
-                                    () => context.more.pushChangeLanguagePage(),
-                              ),
-                              ProfileSettingsCell(
-                                icon: Assets.svg.more.palette.svg(),
-                                title: context.localization.theme,
-                                trailingText: context.localization.themeModes(
-                                  appSettingsState.mode.name,
-                                ),
-                                onTap: () => context.more.pushChangeThemePage(),
-                              ),
-                              if (userState != null)
-                                ProfileSettingsCell(
-                                  icon: Assets.svg.more.device.svg(),
-                                  title: context.localization.devices,
-                                  trailingText:
-                                      moreState.devicesCount?.toString(),
-                                  onTap: () async {
-                                    await context.more.pushDevicesPage();
-                                    moreBloc.add(
-                                      MoreEvent.fetchDevicesCount(),
-                                    );
-                                  },
-                                ),
-                            ],
-                          ),
-
-                          _settingsGroup(
-                            context,
-                            children: [
-                              ProfileSettingsCell(
-                                icon: Assets.svg.more.moon.svg(),
-                                title: context.localization.prayer_time_widget,
-                                trailing: AppSwitch(
-                                  isSwitched: moreState.prayerWidgetChecked,
-                                  onChanged: (_) {
-                                    moreBloc.add(
-                                      MoreEvent.checkedPrayerWidget(),
-                                    );
-                                  },
-                                ),
-                              ),
-                              ...moreState.useFull.map(
-                                (e) => ProfileSettingsCell(
-                                  icon: AppNetworkImage(e.photo ?? ""),
-                                  title: e.title.toString(),
-                                  onTap: () {
-                                    final actionUrl = e.actionUrl ?? "";
-                                    if (actionUrl.isEmpty) return;
-                                    if (actionUrl.startsWith("http://") ||
-                                        actionUrl.startsWith("https://")) {
-                                      context.more.pushWebViewPage(
-                                        title: e.title,
-                                        actionUrl: actionUrl,
-                                      );
-                                    } else {
-                                      context.push(actionUrl);
-                                    }
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          _settingsGroup(
-                            context,
-                            children: [
-                              ProfileSettingsCell(
-                                icon: Assets.svg.more.circleInfo.svg(),
-                                title: context.localization.about_app,
-                                onTap:
-                                    () => context.pushNamed(
-                                      AppNavPath.more.aboutApp.name,
-                                    ),
-                              ),
-                              ProfileSettingsCell(
-                                icon: Assets.svg.more.paperPlane.svg(),
-                                title: context.localization.contactUs,
-                                onTap:
-                                    () =>
-                                        context.more
-                                            .pushEmergencyContactsPage(),
-                              ),
-                            ],
-                          ),
-
-                          if (userState != null)
-                            _settingsGroup(
-                              context,
-                              children: [
-                                ProfileSettingsCell(
-                                  icon: Assets.svg.more.broomMotion.svg(),
-                                  title: context.localization.deleteAccount,
-                                  iconBackgroundColor:
-                                      context.appColors.background.elevation3,
-                                  onTap: () => _confirmDeleteAccount(context),
-                                ),
-                                ProfileSettingsCell(
-                                  icon:
-                                      Assets.svg.more.arrowRightToSquare.svg(),
-                                  title: context.localization.logout,
-                                  iconBackgroundColor:
-                                      context.appColors.colors.red,
-                                  contentColor: context.appColors.colors.red,
-                                  showChevron: false,
-                                  onTap: () => _confirmLogout(context),
-                                ),
-                              ],
+                            PremiumSection(
+                              isPremium: isPremium,
+                              activeUntil: moreState.premiumStatus?.endDate,
+                              onTap:
+                                  () => context.pushType(
+                                    isPremium
+                                        ? AppNavPath.travel.premiumCancelPage
+                                        : AppNavPath
+                                            .travel
+                                            .premiumOnboardingPage,
+                                    extra:
+                                        isPremium
+                                            ? moreState.premiumStatus
+                                            : null,
+                                  ),
                             ),
 
-                          _versionInfo(context, appVersion.value),
+                          Column(
+                            spacing: 12,
+                            children: [
+                              _settingsGroup(
+                                context,
+                                children: [
+                                  if (userState != null)
+                                    ProfileSettingsCell(
+                                      icon: Assets.svg.more.fingerprint.svg(),
+                                      title: context.localization.security,
+                                      onTap: () => context.more.pushSecurityPage(),
+                                    ),
+                                  ProfileSettingsCell(
+                                    icon: Assets.svg.more.bell.svg(),
+                                    title: context.localization.notification,
+                                    trailing: AppSwitch(
+                                      isSwitched: moreState.notificationsEnabled,
+                                      onChanged: (_) {
+                                        moreBloc.add(
+                                          MoreEvent.checkedNotification(),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  ProfileSettingsCell(
+                                    icon: Assets.svg.more.globe.svg(),
+                                    title: context.localization.language,
+                                    trailingText:
+                                        localeName == null
+                                            ? null
+                                            : context.localization.lanItem(
+                                              localeName,
+                                            ),
+                                    onTap:
+                                        () => context.more.pushChangeLanguagePage(),
+                                  ),
+                                  ProfileSettingsCell(
+                                    icon: Assets.svg.more.palette.svg(),
+                                    title: context.localization.theme,
+                                    trailingText: context.localization.themeModes(
+                                      appSettingsState.mode.name,
+                                    ),
+                                    onTap: () => context.more.pushChangeThemePage(),
+                                  ),
+                                  if (userState != null)
+                                    ProfileSettingsCell(
+                                      icon: Assets.svg.more.device.svg(),
+                                      title: context.localization.devices,
+                                      trailingText:
+                                          moreState.devicesCount?.toString(),
+                                      onTap: () async {
+                                        await context.more.pushDevicesPage();
+                                        moreBloc.add(
+                                          MoreEvent.fetchDevicesCount(),
+                                        );
+                                      },
+                                    ),
+                                ],
+                              ),
+
+                              _settingsGroup(
+                                context,
+                                children: [
+                                  ProfileSettingsCell(
+                                    icon: Assets.svg.more.moon.svg(),
+                                    title: context.localization.prayer_time_widget,
+                                    trailing: AppSwitch(
+                                      isSwitched: moreState.prayerWidgetChecked,
+                                      onChanged: (_) {
+                                        moreBloc.add(
+                                          MoreEvent.checkedPrayerWidget(),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  ProfileSettingsCell(
+                                    icon: Assets.svg.iqAir.svg(),
+                                    title: context.localization.iq_air_widget,
+                                    trailing: AppSwitch(
+                                      isSwitched: moreState.iqAirWidgetChecked,
+                                      onChanged: (_) {
+                                        moreBloc.add(
+                                          MoreEvent.checkedIqAirWidget(),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  ...moreState.useFull.map(
+                                    (e) => ProfileSettingsCell(
+                                      icon: AppNetworkImage(e.photo ?? ""),
+                                      title: e.title.toString(),
+                                      onTap: () {
+                                        final actionUrl = e.actionUrl ?? "";
+                                        if (actionUrl.isEmpty) return;
+                                        if (actionUrl.startsWith("http://") ||
+                                            actionUrl.startsWith("https://")) {
+                                          context.more.pushWebViewPage(
+                                            actionUrl: actionUrl,
+                                          );
+                                        } else {
+                                          context.push(actionUrl);
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              _settingsGroup(
+                                context,
+                                children: [
+                                  ProfileSettingsCell(
+                                    icon: Assets.svg.more.circleInfo.svg(),
+                                    title: context.localization.about_app,
+                                    onTap:
+                                        () => context.pushNamed(
+                                          AppNavPath.more.aboutApp.name,
+                                        ),
+                                  ),
+                                  ProfileSettingsCell(
+                                    icon: Assets.svg.more.paperPlane.svg(),
+                                    title: context.localization.contactUs,
+                                    onTap:
+                                        () =>
+                                            context.more
+                                                .pushEmergencyContactsPage(),
+                                  ),
+                                ],
+                              ),
+
+                              if (userState != null)
+                                _settingsGroup(
+                                  context,
+                                  children: [
+                                    ProfileSettingsCell(
+                                      icon: Assets.svg.trash01.svg(),
+                                      title: context.localization.deleteAccount,
+                                      iconBackgroundColor:
+                                          context.appColors.service.iconNeutral,
+                                      onTap: () => _confirmDeleteAccount(context),
+                                    ),
+                                    ProfileSettingsCell(
+                                      icon:
+                                          Assets.svg.more.arrowRightToSquare.svg(),
+                                      title: context.localization.logout,
+                                      iconBackgroundColor:
+                                          context.appColors.colors.red,
+                                      contentColor: context.appColors.colors.red,
+                                      showChevron: false,
+                                      onTap: () => _confirmLogout(context),
+                                    ),
+                                  ],
+                                ),
+
+                              _versionInfo(context, appVersion.value),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -298,14 +320,17 @@ class ShellMorePage extends HookWidget {
 
   Widget _versionInfo(BuildContext context, String? version) {
     final color = context.appColors.textIconColor.tertiary;
-    return Column(
-      spacing: 4,
-      children: [
-        Text("MyUzbekistan").bodySm(color: color),
-        Text(
-          context.localization.version.plus(" ${version ?? ""}"),
-        ).bodySm(color: color),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Column(
+        spacing: 4,
+        children: [
+          Text("MyUzbekistan").bodySm(color: color),
+          Text(
+            context.localization.version.plus(" ${version ?? ""}"),
+          ).bodySm(color: color),
+        ],
+      ),
     );
   }
 

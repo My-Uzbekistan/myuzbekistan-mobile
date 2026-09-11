@@ -4,12 +4,14 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 part 'home_hero_header/collapsing_card.dart';
 part 'home_hero_header/header_metrics.dart';
 part 'home_hero_header/home_quick_action.dart';
 part 'home_hero_header/info_row.dart';
+part 'home_hero_header/iq_air_card.dart';
 part 'home_hero_header/prayer_pill.dart';
 part 'home_hero_header/quick_actions.dart';
 part 'home_hero_header/search_row.dart';
@@ -64,22 +66,28 @@ class HomeHeader extends StatelessWidget {
     final infoRow = _InfoRow(
       regionName: regionName,
       temperature: temperature,
-      airQuality: airQuality,
-      airQualityLevel: airQualityLevel,
       onRegionTap: onRegionTap,
       onNotificationTap: onNotificationTap,
       onGiftTap: onGiftTap,
     );
-    final prayerRow = currentPrayer?.hasNext == true
-        ? Align(
-            alignment: Alignment.centerLeft,
-            child: _PrayerPill(
-              current: currentPrayer!,
-              onExpired: onPrayerExpired,
-              onTap: onPrayerTap,
+    final metricsRow = Row(
+      children: [
+        if (airQuality != null)
+          GlassFade(
+            child: _IqAirCard(
+              value: airQuality!,
+              level: airQualityLevel ?? 0,
             ),
-          )
-        : const SizedBox.shrink();
+          ),
+        const Spacer(),
+        if (currentPrayer?.hasNext == true)
+          _PrayerPill(
+            current: currentPrayer!,
+            onExpired: onPrayerExpired,
+            onTap: onPrayerTap,
+          ),
+      ],
+    );
     final quickRow = _QuickActions(actions: quickActions);
     final searchRow = _SearchRow(
       hintText: hintText,
@@ -114,7 +122,7 @@ class HomeHeader extends StatelessWidget {
                 backgroundImageUrl: backgroundImageUrl,
                 isBackgroundLoading: isBackgroundLoading,
                 infoRow: infoRow,
-                prayerRow: prayerRow,
+                metricsRow: metricsRow,
                 quickRow: quickRow,
               ),
               Positioned(

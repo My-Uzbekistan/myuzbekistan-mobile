@@ -16,6 +16,9 @@ abstract class MuseumListEvent with _$MuseumListEvent {
 
   factory MuseumListEvent.loadMore() = _MuseumListLoadMoreEvent;
 
+  factory MuseumListEvent.favoriteChanged({required ItemChange change}) =
+      _MuseumListFavoriteChangedEvent;
+
   factory MuseumListEvent.toggleFavorite({required MuseumCard museum}) =
       _MuseumListToggleFavoriteEvent;
 }

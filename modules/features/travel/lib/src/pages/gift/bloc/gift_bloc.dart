@@ -56,14 +56,19 @@ class GiftBloc extends Bloc<GiftBlocEvent, GiftBlocState> {
     _LoadGiftHistoryGiftBlocEvent event,
     Emitter<GiftBlocState> emit,
   ) async {
-    if (state.items.isEmpty) {
-      emit(state.copyWith(isLoading: true));
-      try {
-        final result = await _repository.giftHistory();
-        emit(state.copyWith(isLoading: false, items: result));
-      } catch (e) {
-        emit(state.copyWith(isLoading: false, haveGift: false));
-      }
+    emit(state.copyWith(isLoading: true, errorMessage: null));
+    try {
+      final result = await _repository.giftHistory();
+      emit(state.copyWith(isLoading: false, items: result));
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage: e is DioException && e.error is AppException
+              ? (e.error as AppException).message
+              : null,
+        ),
+      );
     }
   }
 
@@ -80,6 +85,7 @@ class GiftBloc extends Bloc<GiftBlocEvent, GiftBlocState> {
         state.copyWith(isLoading: false, haveGift: false, activeClaim: result),
       );
       add(GiftBlocEvent.initial());
+      add(GiftBlocEvent.loadGiftHistory());
     } catch (e) {
       if (e is DioException && e.error is AppException) {
         emit(

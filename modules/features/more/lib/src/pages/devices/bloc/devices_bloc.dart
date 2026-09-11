@@ -8,8 +8,9 @@ part 'devices_bloc.freezed.dart';
 @injectable
 class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
   final DevicesRepository _repository;
+  final AppRefreshListener _refresh;
 
-  DevicesBloc(this._repository) : super(const DevicesState()) {
+  DevicesBloc(this._repository, this._refresh) : super(const DevicesState()) {
     on<_DevicesFetch>(_fetch);
     on<_DevicesTerminateSession>(_terminateSession);
     on<_DevicesTerminateOthers>(_terminateOthers);
@@ -39,6 +40,7 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
               state.sessions.where((e) => e.id != event.sessionId).toList(),
         ),
       );
+      _refresh.notify(AppRefreshTopic.devices);
     } catch (e) {
       emit(state.copyWith(errorMessage: e.toString()));
     }
@@ -53,8 +55,11 @@ class DevicesBloc extends Bloc<DevicesEvent, DevicesState> {
     try {
       await _repository.terminateOtherSessions();
       emit(
-        state.copyWith(sessions: state.sessions.where((e) => e.isCurrent).toList()),
+        state.copyWith(
+          sessions: state.sessions.where((e) => e.isCurrent).toList(),
+        ),
       );
+      _refresh.notify(AppRefreshTopic.devices);
     } catch (e) {
       emit(state.copyWith(errorMessage: e.toString()));
     }

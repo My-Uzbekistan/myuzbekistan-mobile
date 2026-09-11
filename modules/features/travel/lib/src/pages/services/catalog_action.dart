@@ -68,12 +68,15 @@ void _launch(BuildContext context, CatalogItemModel item) {
   var uri = Uri.parse(action.trim());
 
   if (item.actionType == CatalogActionType.inner) {
-    if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||
-        uri.host.isEmpty) {
+    if (AppLinkRouter.locationOf(uri) != null) {
       uri = uri.replace(
-        queryParameters: {...uri.queryParameters, "title": item.title},
+        queryParameters: {
+          ...uri.queryParameters,
+          "title": item.title,
+          "authRequired": "${item.authRequired}",
+        },
       );
-      context.push(uri.toString());
+      AppLinkRouter.open(uri.toString());
     } else {
       if (item.authRequired) {
         uri = uri.replace(
@@ -84,7 +87,6 @@ void _launch(BuildContext context, CatalogItemModel item) {
         );
       }
       context.more.pushWebViewPage(
-        title: item.title,
         actionUrl: uri.toString(),
         authRequired: item.authRequired,
       );
@@ -98,6 +100,6 @@ void _launch(BuildContext context, CatalogItemModel item) {
         },
       );
     }
-    context.more.openUrl(uri.toString(), title: item.title);
+    context.more.openUrl(uri.toString());
   }
 }

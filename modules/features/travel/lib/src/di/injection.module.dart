@@ -47,6 +47,9 @@ import 'package:travel/src/pages/notifications/notification_count_bloc/notificat
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart' as _i638;
 import 'package:travel/src/pages/prayer_times/bloc/prayer_times_bloc.dart'
     as _i17;
+import 'package:travel/src/pages/search/bloc/global_search_bloc.dart' as _i947;
+import 'package:travel/src/pages/search/result/bloc/global_search_result_bloc.dart'
+    as _i269;
 import 'package:travel/src/pages/services/bloc/services_cubit.dart' as _i29;
 import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart'
     as _i631;
@@ -57,24 +60,8 @@ class TravelPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i917.PremiumBloc>(
-        () => _i917.PremiumBloc(gh<_i494.PremiumRepository>()));
-    gh.factory<_i782.MuseumDetailBloc>(
-        () => _i782.MuseumDetailBloc(gh<_i494.MuseumRepository>()));
-    gh.factory<_i138.MuseumFavoritesBloc>(
-        () => _i138.MuseumFavoritesBloc(gh<_i494.MuseumRepository>()));
-    gh.factory<_i23.MuseumHomeBloc>(
-        () => _i23.MuseumHomeBloc(gh<_i494.MuseumRepository>()));
-    gh.factory<_i1039.MuseumListBloc>(
-        () => _i1039.MuseumListBloc(gh<_i494.MuseumRepository>()));
     gh.factory<_i783.MuseumSearchBloc>(
         () => _i783.MuseumSearchBloc(gh<_i494.MuseumRepository>()));
-    gh.factory<_i157.MuseumTicketsBloc>(
-        () => _i157.MuseumTicketsBloc(gh<_i494.MuseumRepository>()));
-    gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
-          gh<_i494.Repository>(),
-          gh<_i494.AppStatusChangeListeners>(),
-        ));
     gh.lazySingleton<_i916.AiGuideCubit>(() => _i916.AiGuideCubit(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
@@ -85,20 +72,49 @@ class TravelPackageModule extends _i526.MicroPackageModule {
           gh<_i494.Repository>(),
           gh<_i494.SecurityStorage>(),
         ));
+    gh.factory<_i782.MuseumDetailBloc>(() => _i782.MuseumDetailBloc(
+          gh<_i494.MuseumRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i157.MuseumTicketsBloc>(() => _i157.MuseumTicketsBloc(
+          gh<_i494.MuseumRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
     gh.factory<_i161.ContractDetailBloc>(
         () => _i161.ContractDetailBloc(gh<_i494.ContractRepository>()));
-    gh.factory<_i514.ContentByCategoryBloc>(() => _i514.ContentByCategoryBloc(
-          gh<_i494.Repository>(),
-          gh<_i494.AppStatusChangeListeners>(),
-        ));
     gh.factory<_i359.HomeBloc>(() => _i359.HomeBloc(
           gh<_i494.Repository>(),
           gh<_i494.AppStatusChangeListeners>(),
           gh<_i494.SecurityStorage>(),
         ));
+    gh.factory<_i138.MuseumFavoritesBloc>(() => _i138.MuseumFavoritesBloc(
+          gh<_i494.MuseumRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i23.MuseumHomeBloc>(() => _i23.MuseumHomeBloc(
+          gh<_i494.MuseumRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i1039.MuseumListBloc>(() => _i1039.MuseumListBloc(
+          gh<_i494.MuseumRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i514.ContentByCategoryBloc>(() => _i514.ContentByCategoryBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i629.MuseumPurchaseBloc>(() => _i629.MuseumPurchaseBloc(
+          gh<_i494.MuseumRepository>(),
+          gh<_i494.FinanceRepository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
     gh.factory<_i631.PremiumCancelBloc>(() => _i631.PremiumCancelBloc(
           gh<_i494.PremiumRepository>(),
-          gh<_i494.AppStatusChangeListeners>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
+    gh.factory<_i917.PremiumBloc>(() => _i917.PremiumBloc(
+          gh<_i494.PremiumRepository>(),
+          gh<_i494.AppRefreshListener>(),
         ));
     gh.factory<_i404.CurrencyCalculatorCubit>(
         () => _i404.CurrencyCalculatorCubit(gh<_i494.CurrenciesUseCase>()));
@@ -106,8 +122,16 @@ class TravelPackageModule extends _i526.MicroPackageModule {
           gh<_i494.Repository>(),
           gh<_i494.SecurityStorage>(),
         ));
+    gh.factory<_i947.GlobalSearchBloc>(
+        () => _i947.GlobalSearchBloc(gh<_i494.SearchRepository>()));
+    gh.factory<_i269.GlobalSearchResultBloc>(
+        () => _i269.GlobalSearchResultBloc(gh<_i494.SearchRepository>()));
     gh.factory<_i1065.InvestSearchBloc>(
         () => _i1065.InvestSearchBloc(gh<_i494.Repository>()));
+    gh.factory<_i776.DetailBloc>(() => _i776.DetailBloc(
+          gh<_i494.Repository>(),
+          gh<_i494.AppRefreshListener>(),
+        ));
     gh.lazySingleton<_i45.NotificationCountCubit>(
         () => _i45.NotificationCountCubit(gh<_i494.Repository>()));
     gh.factory<_i369.InvestmentsBloc>(
@@ -120,9 +144,5 @@ class TravelPackageModule extends _i526.MicroPackageModule {
         () => _i638.OnboardingBloc(gh<_i494.Repository>()));
     gh.factory<_i29.ServicesCubit>(
         () => _i29.ServicesCubit(gh<_i494.Repository>()));
-    gh.factory<_i629.MuseumPurchaseBloc>(() => _i629.MuseumPurchaseBloc(
-          gh<_i494.MuseumRepository>(),
-          gh<_i494.FinanceRepository>(),
-        ));
   }
 }

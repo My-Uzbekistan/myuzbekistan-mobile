@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -9,8 +11,10 @@ part 'market_product_detail_bloc.freezed.dart';
 class MarketProductDetailBloc
     extends Bloc<MarketProductDetailEvent, MarketProductDetailState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refreshListener;
+  StreamSubscription<ItemChange>? _productSubscription;
 
-  MarketProductDetailBloc(this._repository)
+  MarketProductDetailBloc(this._repository, this._refreshListener)
     : super(MarketProductDetailState()) {
     on<_MarketProductDetailStartEvent>(_start);
     on<_MarketProductDetailRefreshEvent>(_refresh);
@@ -18,6 +22,38 @@ class MarketProductDetailBloc
     on<_MarketProductDetailChangeCartQuantityEvent>(_changeCartQuantity);
     on<_MarketProductDetailSelectDeliveryEvent>(_selectDelivery);
     on<_MarketProductDetailBuyNowEvent>(_buyNow);
+    on<_MarketProductDetailProductChangedEvent>(_productChanged);
+
+    _productSubscription = _refreshListener
+        .observeItems(RefreshEntity.marketProduct)
+        .listen(
+          (change) =>
+              add(MarketProductDetailEvent.productChanged(change: change)),
+        );
+  }
+
+  @override
+  Future<void> close() {
+    _productSubscription?.cancel();
+    return super.close();
+  }
+
+  void _productChanged(
+    _MarketProductDetailProductChangedEvent event,
+    Emitter<MarketProductDetailState> emit,
+  ) {
+    final detail = state.detail;
+    final change = event.change;
+    if (detail == null || detail.id.toString() != change.id) return;
+
+    emit(
+      state.copyWith(
+        detail: detail.copyWith(
+          isFavorite: change.isFavorite,
+          cartQuantity: change.cartQuantity,
+        ),
+      ),
+    );
   }
 
   Future<void> _start(
@@ -38,12 +74,7 @@ class MarketProductDetailBloc
   }
 
   Future<void> _load(Emitter<MarketProductDetailState> emit) async {
-    emit(
-      state.copyWith(
-        isLoading: state.detail == null,
-        errorMessage: null,
-      ),
-    );
+    emit(state.copyWith(isLoading: state.detail == null, errorMessage: null));
     try {
       final position = LocationManager().getCurrentPosition();
       final detail = await _repository.productDetail(
@@ -80,12 +111,20 @@ class MarketProductDetailBloc
         errorMessage: null,
       ),
     );
+    _refreshListener.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: detail.id.toString(),
+        isFavorite: isFavorite,
+      ),
+    );
     try {
       if (isFavorite) {
         await _repository.addFavorite(productId: detail.id);
       } else {
         await _repository.removeFavorite(productId: detail.id);
       }
+      _refreshListener.notify(AppRefreshTopic.marketFavorites);
     } catch (e) {
       emit(state.copyWith(detail: detail, errorMessage: _errorMessage(e)));
     }
@@ -105,6 +144,13 @@ class MarketProductDetailBloc
         errorMessage: null,
       ),
     );
+    _refreshListener.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: detail.id.toString(),
+        cartQuantity: quantity,
+      ),
+    );
     try {
       if (detail.cartQuantity == 0) {
         await _repository.addToCart(productId: detail.id, quantity: quantity);
@@ -116,6 +162,7 @@ class MarketProductDetailBloc
           quantity: quantity,
         );
       }
+      _refreshListener.notify(AppRefreshTopic.marketCart);
     } catch (e) {
       emit(state.copyWith(detail: detail, errorMessage: _errorMessage(e)));
     }
@@ -144,6 +191,14 @@ class MarketProductDetailBloc
       );
       try {
         await _repository.addToCart(productId: detail.id, quantity: 1);
+        _refreshListener.notifyItem(
+          ItemChange(
+            entity: RefreshEntity.marketProduct,
+            id: detail.id.toString(),
+            cartQuantity: 1,
+          ),
+        );
+        _refreshListener.notify(AppRefreshTopic.marketCart);
       } catch (e) {
         emit(state.copyWith(detail: detail, errorMessage: _errorMessage(e)));
         return;

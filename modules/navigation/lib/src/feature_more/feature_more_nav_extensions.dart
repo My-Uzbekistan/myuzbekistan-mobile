@@ -56,14 +56,12 @@ class FeatureMoreNavExtension {
   }
 
   void pushWebViewPage({
-    String? title,
     required String actionUrl,
     bool? authRequired = false,
   }) {
     _context.pushType(
       AppNavPath.more.webViewPage,
       queryParameters: {
-        "title": title ?? "",
         "actionUrl": actionUrl,
         "authRequired": authRequired.toString(),
       },
@@ -72,7 +70,6 @@ class FeatureMoreNavExtension {
 
   Future<void> openUrl(
     String url, {
-    String? title,
     bool authRequired = false,
   }) async {
     final trimmed = url.trim();
@@ -89,16 +86,15 @@ class FeatureMoreNavExtension {
     }
 
     pushWebViewPage(
-      title: title,
       actionUrl: trimmed,
       authRequired: authRequired,
     );
   }
 
-  void pushPdfViewPage({String? title, String? pdfUrl}) {
+  void pushPdfViewPage({String? pdfUrl}) {
     _context.pushType(
       AppNavPath.more.pdfPreViewPage,
-      queryParameters: {"title": title, "pdfUrl": pdfUrl},
+      queryParameters: {"pdfUrl": pdfUrl},
     );
   }
 }

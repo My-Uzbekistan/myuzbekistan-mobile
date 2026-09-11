@@ -31,7 +31,7 @@ class _PrayerPill extends HookWidget {
     final onMedia = context.appColors.service.onMedia;
 
     return AdaptiveGlass(
-      borderRadius: 16,
+      borderRadius: 14,
       blur: 2,
       tint: context.appColors.service.glass,
       child: GestureDetector(

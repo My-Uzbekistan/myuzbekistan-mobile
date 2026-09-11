@@ -1,5 +1,13 @@
 mixin AppLinks {
-  static const String base = "https://myuz.uz";
+  static const String scheme = "myuz";
+  static const String host = "myuz.uz";
+  static const String altHost = "myuzb.uz";
+  static const String base = "https://$host";
 
-  static String marketProduct(int productId) => "$base/market/product/$productId";
+  static bool isInternalHost(String uriHost) =>
+      uriHost.isEmpty ||
+      uriHost == host ||
+      uriHost == "www.$host" ||
+      uriHost == altHost ||
+      uriHost == "www.$altHost";
 }

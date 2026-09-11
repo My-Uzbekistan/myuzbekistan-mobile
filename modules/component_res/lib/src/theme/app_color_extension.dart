@@ -89,6 +89,7 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
       secondary: Color.lerp(a.secondary, b.secondary, t) ?? b.secondary,
       tertiary: Color.lerp(a.tertiary, b.tertiary, t) ?? b.tertiary,
       quaternary: Color.lerp(a.quaternary, b.quaternary, t) ?? b.quaternary,
+      opaque: Color.lerp(a.opaque, b.opaque, t) ?? b.opaque,
     );
   }
 
@@ -147,6 +148,8 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
           b.shimmerHighlight,
       heroSurface:
           Color.lerp(a.heroSurface, b.heroSurface, t) ?? b.heroSurface,
+      iconNeutral:
+          Color.lerp(a.iconNeutral, b.iconNeutral, t) ?? b.iconNeutral,
     );
   }
 
@@ -162,6 +165,9 @@ class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
           Color.lerp(a.premiumPlan, b.premiumPlan, t) ?? b.premiumPlan,
       premiumPlanDark: Color.lerp(a.premiumPlanDark, b.premiumPlanDark, t) ??
           b.premiumPlanDark,
+      premiumSurface:
+          Color.lerp(a.premiumSurface, b.premiumSurface, t) ?? b.premiumSurface,
+      premiumGlow: Color.lerp(a.premiumGlow, b.premiumGlow, t) ?? b.premiumGlow,
       gift: Color.lerp(a.gift, b.gift, t) ?? b.gift,
       giftLime: Color.lerp(a.giftLime, b.giftLime, t) ?? b.giftLime,
       giftSurface:

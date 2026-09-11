@@ -212,6 +212,13 @@ class MarketRepositoryImpl extends MarketRepository {
   }
 
   @override
+  Future<List<MarketPickupPoint>> pickupPoints({int? deliveryMethodId}) {
+    return service
+        .pickupPoints(deliveryMethodId: deliveryMethodId)
+        .call((items) => items.map((e) => e.toDomain()).toList());
+  }
+
+  @override
   Future<List<MarketAddress>> addresses() {
     return service.addresses().call(
       (items) => items.map((e) => e.toDomain()).toList(),
@@ -225,6 +232,7 @@ class MarketRepositoryImpl extends MarketRepository {
     double? latitude,
     double? longitude,
     bool isDefault = false,
+    String? phone,
   }) {
     return service
         .addAddress(
@@ -234,6 +242,7 @@ class MarketRepositoryImpl extends MarketRepository {
             latitude: latitude,
             longitude: longitude,
             isDefault: isDefault,
+            phone: phone,
           ),
         )
         .call((data) => data.toDomain());
@@ -247,6 +256,7 @@ class MarketRepositoryImpl extends MarketRepository {
     double? latitude,
     double? longitude,
     bool isDefault = false,
+    String? phone,
   }) {
     return service
         .editAddress(
@@ -257,6 +267,7 @@ class MarketRepositoryImpl extends MarketRepository {
             latitude: latitude,
             longitude: longitude,
             isDefault: isDefault,
+            phone: phone,
           ),
         )
         .call((data) => data.toDomain());
@@ -268,10 +279,21 @@ class MarketRepositoryImpl extends MarketRepository {
   }
 
   @override
+  Future<MarketGeoAddress> geoAddress({
+    required double latitude,
+    required double longitude,
+  }) {
+    return service
+        .geoAddress(latitude: latitude, longitude: longitude)
+        .call((data) => data.toDomain());
+  }
+
+  @override
   Future<dynamic> createOrder({
     required int deliveryMethodId,
     required String recipientPhone,
     int? addressId,
+    int? pickupPointId,
     String? recipientName,
     String? comment,
   }) {
@@ -279,6 +301,7 @@ class MarketRepositoryImpl extends MarketRepository {
       "deliveryMethodId": deliveryMethodId,
       "recipientPhone": recipientPhone,
       "addressId": addressId,
+      "pickupPointId": pickupPointId,
       "recipientName": recipientName,
       "comment": comment,
     }).call();
@@ -290,6 +313,7 @@ class MarketRepositoryImpl extends MarketRepository {
     required double? latitude,
     required double? longitude,
     required bool isDefault,
+    required String? phone,
   }) {
     return {
       "line": line,
@@ -297,6 +321,7 @@ class MarketRepositoryImpl extends MarketRepository {
       "latitude": latitude,
       "longitude": longitude,
       "isDefault": isDefault,
+      "phone": phone,
     };
   }
 

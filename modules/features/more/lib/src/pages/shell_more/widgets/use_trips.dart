@@ -37,8 +37,7 @@ class UseTripsWidget extends StatelessWidget {
                       if (actionUrl.startsWith("http://") ||
                           actionUrl.startsWith("https://")) {
                         //TODO WEbVIewPage
-                        context.more.pushWebViewPage(
-                            title: use.title, actionUrl: actionUrl);
+                        context.more.pushWebViewPage(actionUrl: actionUrl);
                       } else {
                         context.push(actionUrl);
                       }

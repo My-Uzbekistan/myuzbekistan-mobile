@@ -74,7 +74,7 @@ class _Item extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: () {
-        LauncherUtils.urlLauncher("tel://${item.contact.replaceAll(" ", "")}");
+        LauncherUtils.urlLauncher("tel:${item.contact}");
       },
       child: Ink(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),

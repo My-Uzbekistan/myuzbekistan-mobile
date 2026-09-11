@@ -26,5 +26,8 @@
   "new_version_available": "Yangi versiya mavjud",
   "new_features_and_security": "Yangi funksiyalar mavjud va xavfsizlik kuchaytirildi. Ilovani yangilashni tavsiya qilamiz.",
   "update_app_now": "Ilovani yangilash",
-  "update_app_later": "Keyin yangilash"
+  "update_app_later": "Keyin yangilash",
+  "page_not_found_title": "Sahifa topilmadi",
+  "page_not_found_message": "Bu havola eskirgan yoki sahifa ko‘chirilgan bo‘lishi mumkin.",
+  "page_not_found_go_home": "Bosh sahifaga"
 }

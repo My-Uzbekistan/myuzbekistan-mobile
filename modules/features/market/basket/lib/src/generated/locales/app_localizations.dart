@@ -229,6 +229,18 @@ abstract class FeatureBasketLocalizations {
   /// **'Телефон получателя'**
   String get basket_checkout_phone;
 
+  /// No description provided for @basket_checkout_phone_add.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавить номер телефона'**
+  String get basket_checkout_phone_add;
+
+  /// No description provided for @basket_checkout_phone_label.
+  ///
+  /// In ru, this message translates to:
+  /// **'Номер телефона'**
+  String get basket_checkout_phone_label;
+
   /// No description provided for @basket_checkout_products.
   ///
   /// In ru, this message translates to:
@@ -306,6 +318,108 @@ abstract class FeatureBasketLocalizations {
   /// In ru, this message translates to:
   /// **'Изменить'**
   String get basket_action_edit;
+
+  /// No description provided for @basket_checkout_store_address.
+  ///
+  /// In ru, this message translates to:
+  /// **'Адрес магазина'**
+  String get basket_checkout_store_address;
+
+  /// No description provided for @basket_checkout_delivery_address.
+  ///
+  /// In ru, this message translates to:
+  /// **'Адрес доставки'**
+  String get basket_checkout_delivery_address;
+
+  /// No description provided for @basket_checkout_my_addresses.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мои адреса'**
+  String get basket_checkout_my_addresses;
+
+  /// No description provided for @basket_checkout_address_new.
+  ///
+  /// In ru, this message translates to:
+  /// **'Новый адрес'**
+  String get basket_checkout_address_new;
+
+  /// No description provided for @basket_checkout_pickup_closest.
+  ///
+  /// In ru, this message translates to:
+  /// **'Самый близкий'**
+  String get basket_checkout_pickup_closest;
+
+  /// No description provided for @basket_checkout_pickup_distance.
+  ///
+  /// In ru, this message translates to:
+  /// **'{distance} км'**
+  String basket_checkout_pickup_distance(Object distance);
+
+  /// No description provided for @basket_checkout_pickup_empty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Пока нет доступных магазинов'**
+  String get basket_checkout_pickup_empty;
+
+  /// No description provided for @basket_checkout_delivery_empty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Способ получения недоступен'**
+  String get basket_checkout_delivery_empty;
+
+  /// No description provided for @basket_checkout_delivery_unavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Для этого региона нет доступных способов получения. Попробуйте позже'**
+  String get basket_checkout_delivery_unavailable;
+
+  /// No description provided for @basket_checkout_delivery_no_region.
+  ///
+  /// In ru, this message translates to:
+  /// **'Адрес не отмечен на карте — регион доставки не определён. Измените адрес и выберите точку на карте'**
+  String get basket_checkout_delivery_no_region;
+
+  /// No description provided for @basket_checkout_delivery_select.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите способ получения'**
+  String get basket_checkout_delivery_select;
+
+  /// No description provided for @basket_map_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите адресс доставки'**
+  String get basket_map_title;
+
+  /// No description provided for @basket_map_add.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавить'**
+  String get basket_map_add;
+
+  /// No description provided for @basket_map_save.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить'**
+  String get basket_map_save;
+
+  /// No description provided for @basket_map_address_empty.
+  ///
+  /// In ru, this message translates to:
+  /// **'Точка не определена'**
+  String get basket_map_address_empty;
+
+  /// No description provided for @basket_map_delete_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Удалить локацию?'**
+  String get basket_map_delete_title;
+
+  /// No description provided for @basket_map_delete_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы уверены что хотите удалить эту локацию?'**
+  String get basket_map_delete_message;
 }
 
 class _FeatureBasketLocalizationsDelegate

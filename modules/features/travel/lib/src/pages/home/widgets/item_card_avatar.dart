@@ -33,7 +33,8 @@ class ItemCardAvatar extends StatelessWidget {
               ),
               Text(
                 name??"",
-                maxLines: 1,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: CustomTypography.bodySm,
               )

@@ -889,4 +889,48 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
 
   @override
   String get museum_auth_required => 'Akkauntga kiring';
+
+  @override
+  String get aqi_good => 'Zo‘r';
+
+  @override
+  String get aqi_moderate => 'O‘rtacha';
+
+  @override
+  String get aqi_bad => 'Yomon';
+
+  @override
+  String get aqi_hazardous => 'Zaharli';
+
+  @override
+  String get global_search_hint => 'Shahar, hudud yoki mehmonxona';
+
+  @override
+  String get global_search_history => 'Qidiruv tarixi';
+
+  @override
+  String get global_search_history_clear => 'Tozalash';
+
+  @override
+  String get global_search_results => 'Qidiruv natijalari';
+
+  @override
+  String get global_search_action => 'Topish';
+
+  @override
+  String get global_search_query_label => 'Qidiruv so\'rovi';
+
+  @override
+  String get global_search_clear_title => 'Qidiruvni tozalash';
+
+  @override
+  String get global_search_clear_message =>
+      'Qidiruv tarixini tozalashni xohlaysizmi?';
+
+  @override
+  String get global_search_empty_title => 'Hech narsa topilmadi';
+
+  @override
+  String get global_search_empty_message =>
+      'Bu so\'rov bo\'yicha hech narsa topilmadi, boshqa so\'zlar bilan urinib ko\'ring';
 }

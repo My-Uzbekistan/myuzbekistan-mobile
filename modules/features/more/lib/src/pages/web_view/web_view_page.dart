@@ -3,17 +3,16 @@ import 'dart:async';
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:more/src/core/extension.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 class WebViewPage extends HookWidget {
-  final String? title;
   final String? actionUrl;
   final bool authRequired;
 
   const WebViewPage({
     super.key,
-    this.title,
     this.actionUrl,
     this.authRequired = false,
   });
@@ -21,7 +20,6 @@ class WebViewPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = useRef<InAppWebViewController?>(null);
-    final navbarTitle = useState(title.orEmpty());
     final progress = useState(0.0);
 
     Future<void> goBack() async {
@@ -30,6 +28,20 @@ class WebViewPage extends HookWidget {
         return;
       }
       if (context.mounted && context.canPop()) context.pop();
+    }
+
+    void confirmClose() {
+      showActionAlertDialog(
+        context,
+        title: context.localization.webViewExitTitle,
+        message: context.localization.webViewExitMessage,
+        firstActionText: context.localization.yes,
+        firstButtonTextColor: context.appColors.colors.red,
+        secondActionText: context.localization.cancel,
+        onFirstButtonClick: () {
+          if (context.canPop()) context.pop();
+        },
+      );
     }
 
     useEffect(() {
@@ -56,12 +68,9 @@ class WebViewPage extends HookWidget {
                 bottom: false,
                 child: _navbar(
                   context,
-                  title: navbarTitle.value,
                   onBack: goBack,
                   onReload: () => controller.value?.reload(),
-                  onClose: () {
-                    if (context.canPop()) context.pop();
-                  },
+                  onClose: confirmClose,
                 ),
               ),
               Expanded(
@@ -86,10 +95,6 @@ class WebViewPage extends HookWidget {
                                 callback: (data) =>
                                     _openMerchant(context, data),
                               );
-                            },
-                            onTitleChanged: (webViewController, pageTitle) {
-                              if (title.orEmpty().isNotEmpty) return;
-                              navbarTitle.value = pageTitle.orEmpty();
                             },
                             onProgressChanged: (webViewController, value) {
                               progress.value = value / 100.0;
@@ -162,7 +167,6 @@ class WebViewPage extends HookWidget {
 
   Widget _navbar(
     BuildContext context, {
-    required String title,
     required VoidCallback onBack,
     required VoidCallback onReload,
     required VoidCallback onClose,
@@ -178,13 +182,7 @@ class WebViewPage extends HookWidget {
               icon: Assets.svg.prayers.chevronLeft.path,
               onTap: onBack,
             ),
-            Expanded(
-              child: Text(
-                title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ).h3(color: context.appColors.service.onMedia),
-            ),
+            const Spacer(),
             _NavbarButton(
               icon: Assets.svg.arrowRefresh.path,
               onTap: onReload,

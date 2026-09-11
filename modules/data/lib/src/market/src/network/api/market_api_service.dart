@@ -2,6 +2,8 @@ import 'package:data/src/market/src/models/checkout/checkout_dto.dart';
 import 'package:data/src/market/src/models/checkout_detail/checkout_detail_dto.dart';
 import 'package:data/src/market/src/models/delivery_method/delivery_method_dto.dart';
 import 'package:data/src/market/src/models/market_address/market_address_dto.dart';
+import 'package:data/src/market/src/models/market_geo_address/market_geo_address_dto.dart';
+import 'package:data/src/market/src/models/market_pickup_point/market_pickup_point_dto.dart';
 import 'package:data/src/market/src/models/cart/cart_dto.dart';
 import 'package:data/src/market/src/models/cart_count/cart_count_dto.dart';
 import 'package:data/src/market/src/models/market_category/market_category_dto.dart';
@@ -121,6 +123,11 @@ abstract class MarketApiService {
     @Query("sellerId") int? sellerId,
   });
 
+  @GET("market/pickup-points")
+  Future<List<MarketPickupPointDto>> pickupPoints({
+    @Query("deliveryMethodId") int? deliveryMethodId,
+  });
+
   @GET("market/addresses")
   Future<List<MarketAddressDto>> addresses();
 
@@ -135,6 +142,12 @@ abstract class MarketApiService {
 
   @DELETE("market/addresses/{addressId}")
   Future<void> deleteAddress(@Path("addressId") int addressId);
+
+  @GET("market/geocode")
+  Future<MarketGeoAddressDto> geoAddress({
+    @Query("lat") required double latitude,
+    @Query("lon") required double longitude,
+  });
 
   @POST("market/orders")
   Future<dynamic> createOrder(@Body() Map<String, dynamic> body);

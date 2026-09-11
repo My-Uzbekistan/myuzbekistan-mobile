@@ -36,6 +36,7 @@ class LightColors extends _BaseColors {
       FillColors(
         quaternary: const Color(0xff143661).withValues(alpha: 0.04), // ~4%
         tertiary: const Color(0xff143661).withValues(alpha: 0.06), // ~6%
+        opaque: const Color(0xfff1f3f6),
 
 
         secondary: const Color(0xff001024).withAlpha(0x1F), // ~12%
@@ -83,6 +84,7 @@ class LightColors extends _BaseColors {
         shimmerBase: const Color(0xff143661).withValues(alpha: 0.06),
         shimmerHighlight: Colors.white.withValues(alpha: 0.6),
         heroSurface: const Color(0xff0e0e10),
+        iconNeutral: const Color(0xffbbc0c4),
       );
 
   @override
@@ -93,6 +95,8 @@ class LightColors extends _BaseColors {
         premiumDark: const Color(0xffcb9030),
         premiumPlan: const Color(0xff07c277),
         premiumPlanDark: const Color(0xff006f42),
+        premiumSurface: const Color(0xff664c00),
+        premiumGlow: const Color(0xffffca2d),
         gift: const Color(0xff00b93f),
         giftLime: const Color(0xffadee5c),
         giftSurface: const Color(0xff143327),

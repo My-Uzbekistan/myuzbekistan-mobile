@@ -4,6 +4,7 @@ import 'package:data/src/models/items/items_response.dart';
 import 'package:data/src/travel/models/notification_item/notification_item_dto.dart';
 import 'package:data/src/travel/models/onboarding/onboarding_dto.dart';
 import 'package:data/src/travel/models/user_info/user_info_dto.dart';
+import 'package:data/src/travel/models/user_profile/user_profile_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
@@ -68,6 +69,11 @@ abstract class RestService {
     @Query("lon") required double lon,
   });
 
+  @GET("air-quality/region")
+  Future<AirQualityDto> loadAirQualityByRegion({
+    @Query("regionId") required int regionId,
+  });
+
   @GET("v2/categories/{categoryId}/contents")
   Future<List<MainPageContentDto>> loadContentsByCategory({
     @Path("categoryId") required int categoryId,
@@ -109,6 +115,9 @@ abstract class RestService {
   @DELETE("favorites")
   Future<dynamic> deleteFavorite({@Query("contentId") required int contentId});
 
+  @POST("auth/logout")
+  Future<dynamic> logout();
+
   @DELETE("auth/delete")
   Future<dynamic> deleteAccount();
 
@@ -116,8 +125,17 @@ abstract class RestService {
   @MultiPart()
   Future<dynamic> uploadProfilePicture(@Part(name: 'file') MultipartFile file);
 
+  @DELETE("auth/profile-picture")
+  Future<UserProfileDto> deleteProfilePicture();
+
   @GET("auth/user-info")
   Future<UserInfoDto> getUserInfo();
+
+  @GET("auth/profile")
+  Future<UserProfileDto> getProfile();
+
+  @PUT("auth/profile")
+  Future<UserProfileDto> saveProfile(@Body() Map<String, dynamic> body);
 
   @GET("more/currency")
   Future<List<CurrencyDto>> getCurrency();
@@ -157,6 +175,9 @@ abstract class RestService {
 
   @POST("notifications/mark-seen/{id}")
   Future<dynamic> seenNotification(@Path("id") int id);
+
+  @POST("notifications/mark-all-seen")
+  Future<dynamic> seenAllNotifications();
 
   @GET("reviews/content/{contentId}")
   Future<ItemsResponse<ReviewDto>> getReviews(@Path("contentId") int contentId);
@@ -212,7 +233,10 @@ abstract class RestService {
   Future<ClaimStatusDto?> giftActive();
 
   @GET("bonus/history")
-  Future<ItemsResponse<ClaimDto>> giftHistory();
+  Future<ItemsResponse<ClaimDto>> giftHistory({
+    @Query("page") required int page,
+    @Query("pageSize") required int pageSize,
+  });
 
   @POST("bonus/claim")
   Future<ClaimDto> giftActivate();

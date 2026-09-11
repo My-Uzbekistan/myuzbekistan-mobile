@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -8,20 +10,31 @@ part 'checkout_bloc.freezed.dart';
 @injectable
 class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
 
-  CheckoutBloc(this._repository) : super(CheckoutState()) {
+  CheckoutBloc(this._repository, this._refresh) : super(CheckoutState()) {
     on<_CheckoutLoadDataEvent>(_loadData);
     on<_CheckoutChangeQuantityEvent>(_changeQuantity);
     on<_CheckoutRemoveItemEvent>(_removeItem);
     on<_CheckoutReloadItemsEvent>(_reloadItems);
-    on<_CheckoutLoadDeliveryMethodsEvent>(_loadDeliveryMethods);
     on<_CheckoutSelectDeliveryEvent>(_selectDelivery);
+    on<_CheckoutLoadPickupPointsEvent>(_loadPickupPoints);
+    on<_CheckoutSelectPickupPointEvent>(_selectPickupPoint);
     on<_CheckoutLoadAddressesEvent>(_loadAddresses);
     on<_CheckoutSelectAddressEvent>(_selectAddress);
-    on<_CheckoutSaveAddressEvent>(_saveAddress);
-    on<_CheckoutDeleteAddressEvent>(_deleteAddress);
     on<_CheckoutChangePhoneEvent>(_changePhone);
     on<_CheckoutCreateOrderEvent>(_createOrder);
+
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.marketCart, AppRefreshTopic.marketAddresses})
+        .listen((_) => add(CheckoutEvent.loadData()));
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    return super.close();
   }
 
   Future<void> _loadData(
@@ -29,13 +42,29 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     Emitter<CheckoutState> emit,
   ) async {
     emit(state.copyWith(isLoading: true, errorMessage: null));
+    await _fetch(emit);
+    emit(state.copyWith(isLoading: false));
+  }
+
+  Future<void> _fetch(Emitter<CheckoutState> emit) async {
     try {
-      final checkout = await _repository.checkout();
+      final results = await Future.wait([
+        _repository.checkout(),
+        _repository.deliveryMethods(),
+      ]);
+      final checkout = results.first as Checkout;
+      final methods = results.last as List<DeliveryMethod>;
       emit(
         state.copyWith(
-          delivery: checkout.delivery,
+          delivery:
+              methods.firstOrNullWhere((e) => e.id == state.delivery?.id) ??
+              checkout.delivery ??
+              methods.firstOrNullWhere((e) => e.isSelected),
+          deliveryMethods: methods,
           address: checkout.address,
-          phone: checkout.phone,
+          region: checkout.region,
+          pickupPoint: state.pickupPoint ?? checkout.pickupPoint,
+          phone: state.phone ?? checkout.phone,
           items: checkout.items,
           price: checkout.price,
           priceDetails: checkout.priceDetails,
@@ -46,7 +75,6 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     } catch (e) {
       emit(state.copyWith(loadFailed: true, errorMessage: _errorMessage(e)));
     }
-    emit(state.copyWith(isLoading: false));
   }
 
   Future<void> _changeQuantity(
@@ -66,9 +94,10 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       _recalculated(
         previous
             .map(
-              (it) => it.productId == item.productId
-                  ? it.copyWith(quantity: quantity)
-                  : it,
+              (it) =>
+                  it.productId == item.productId
+                      ? it.copyWith(quantity: quantity)
+                      : it,
             )
             .toList(),
       ),
@@ -78,6 +107,15 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         productId: item.productId,
         quantity: quantity,
       );
+      await _applyCheckout(emit);
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: item.productId.toString(),
+          cartQuantity: quantity,
+        ),
+      );
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
       emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
     }
@@ -95,8 +133,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     Emitter<CheckoutState> emit,
   ) async {
     try {
-      final checkout = await _repository.checkout();
-      emit(_recalculated(checkout.items));
+      await _applyCheckout(emit);
     } catch (e) {
       emit(state.copyWith(errorMessage: _errorMessage(e)));
     }
@@ -111,35 +148,73 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     );
     try {
       await _repository.removeCartItem(productId: item.productId);
+      await _applyCheckout(emit);
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: item.productId.toString(),
+          cartQuantity: 0,
+        ),
+      );
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
       emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
     }
   }
 
-  Future<void> _loadDeliveryMethods(
-    _CheckoutLoadDeliveryMethodsEvent event,
-    Emitter<CheckoutState> emit,
-  ) async {
-    emit(state.copyWith(isDeliveryMethodsLoading: true, errorMessage: null));
-    try {
-      final methods = await _repository.deliveryMethods();
-      emit(state.copyWith(deliveryMethods: methods));
-    } catch (e) {
-      emit(state.copyWith(errorMessage: _errorMessage(e)));
-    }
-    emit(state.copyWith(isDeliveryMethodsLoading: false));
+  Future<void> _applyCheckout(Emitter<CheckoutState> emit) async {
+    final checkout = await _repository.checkout();
+    emit(
+      state.copyWith(
+        items: checkout.items,
+        price: checkout.price,
+        priceDetails: checkout.priceDetails,
+        freeCancellationUntil: checkout.freeCancellationUntil,
+      ),
+    );
   }
 
   void _selectDelivery(
     _CheckoutSelectDeliveryEvent event,
     Emitter<CheckoutState> emit,
   ) {
+    if (state.delivery?.id == event.delivery.id) return;
     emit(
       _recalculated(
         state.items,
         deliveryPrice: event.delivery.price,
-      ).copyWith(delivery: event.delivery),
+      ).copyWith(delivery: event.delivery, pickupPoints: []),
     );
+  }
+
+  Future<void> _loadPickupPoints(
+    _CheckoutLoadPickupPointsEvent event,
+    Emitter<CheckoutState> emit,
+  ) async {
+    emit(state.copyWith(isPickupPointsLoading: true, errorMessage: null));
+    try {
+      final points = await _repository.pickupPoints(
+        deliveryMethodId: state.delivery?.id,
+      );
+      emit(
+        state.copyWith(
+          pickupPoints: points,
+          pickupPoint:
+              points.firstOrNullWhere((e) => e.id == state.pickupPoint?.id) ??
+              points.firstOrNullWhere((e) => e.isClosest),
+        ),
+      );
+    } catch (e) {
+      emit(state.copyWith(errorMessage: _errorMessage(e)));
+    }
+    emit(state.copyWith(isPickupPointsLoading: false));
+  }
+
+  void _selectPickupPoint(
+    _CheckoutSelectPickupPointEvent event,
+    Emitter<CheckoutState> emit,
+  ) {
+    emit(state.copyWith(pickupPoint: event.point, errorMessage: null));
   }
 
   Future<void> _loadAddresses(
@@ -149,59 +224,12 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     emit(state.copyWith(isAddressesLoading: true, errorMessage: null));
     try {
       final addresses = await _repository.addresses();
-      emit(state.copyWith(addresses: addresses));
-    } catch (e) {
-      emit(state.copyWith(errorMessage: _errorMessage(e)));
-    }
-    emit(state.copyWith(isAddressesLoading: false));
-  }
-
-  void _selectAddress(
-    _CheckoutSelectAddressEvent event,
-    Emitter<CheckoutState> emit,
-  ) {
-    emit(state.copyWith(address: event.address, errorMessage: null));
-  }
-
-  Future<void> _saveAddress(
-    _CheckoutSaveAddressEvent event,
-    Emitter<CheckoutState> emit,
-  ) async {
-    emit(state.copyWith(isAddressesLoading: true, errorMessage: null));
-    try {
-      final addressId = event.addressId;
-      final address = addressId == null
-          ? await _repository.addAddress(
-              line: event.line,
-              district: event.district,
-            )
-          : await _repository.editAddress(
-              addressId: addressId,
-              line: event.line,
-              district: event.district,
-            );
-      final addresses = await _repository.addresses();
-      emit(state.copyWith(address: address, addresses: addresses));
-    } catch (e) {
-      emit(state.copyWith(errorMessage: _errorMessage(e)));
-    }
-    emit(state.copyWith(isAddressesLoading: false));
-  }
-
-  Future<void> _deleteAddress(
-    _CheckoutDeleteAddressEvent event,
-    Emitter<CheckoutState> emit,
-  ) async {
-    emit(state.copyWith(isAddressesLoading: true, errorMessage: null));
-    try {
-      await _repository.deleteAddress(addressId: event.addressId);
-      final addresses = await _repository.addresses();
       emit(
         state.copyWith(
           addresses: addresses,
-          address: state.address?.id == event.addressId
-              ? null
-              : state.address,
+          address:
+              addresses.firstOrNullWhere((e) => e.id == state.address?.id) ??
+              addresses.firstOrNullWhere((e) => e.isDefault),
         ),
       );
     } catch (e) {
@@ -210,11 +238,61 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     emit(state.copyWith(isAddressesLoading: false));
   }
 
-  void _changePhone(
+  Future<void> _selectAddress(
+    _CheckoutSelectAddressEvent event,
+    Emitter<CheckoutState> emit,
+  ) async {
+    final address = event.address;
+    if (state.address?.id == address.id && address.isDefault) return;
+
+    emit(
+      state.copyWith(
+        address: address,
+        phone: null,
+        isLoading: true,
+        errorMessage: null,
+      ),
+    );
+    try {
+      await _repository.editAddress(
+        addressId: address.id,
+        line: address.line,
+        district: address.district,
+        latitude: address.latitude,
+        longitude: address.longitude,
+        isDefault: true,
+        phone: address.phone,
+      );
+      emit(state.copyWith(addresses: await _repository.addresses()));
+      await _fetch(emit);
+      _refresh.notify(AppRefreshTopic.marketAddresses);
+    } catch (e) {
+      emit(state.copyWith(errorMessage: _errorMessage(e)));
+    }
+    emit(state.copyWith(isLoading: false));
+  }
+
+  Future<void> _changePhone(
     _CheckoutChangePhoneEvent event,
     Emitter<CheckoutState> emit,
-  ) {
+  ) async {
     emit(state.copyWith(phone: event.phone, errorMessage: null));
+
+    final address = state.address;
+    if (address == null) return;
+    try {
+      await _repository.editAddress(
+        addressId: address.id,
+        line: address.line,
+        district: address.district,
+        latitude: address.latitude,
+        longitude: address.longitude,
+        isDefault: address.isDefault,
+        phone: state.phoneDigits,
+      );
+    } catch (e) {
+      emit(state.copyWith(errorMessage: _errorMessage(e)));
+    }
   }
 
   Future<void> _createOrder(
@@ -222,17 +300,32 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     Emitter<CheckoutState> emit,
   ) async {
     final delivery = state.delivery;
-    final phone = state.phone;
-    if (delivery == null || phone == null || phone.isEmpty) return;
+    final phone = state.phoneDigits;
+    if (delivery == null || phone.isEmpty) return;
 
+    final ordered = state.items;
     emit(state.copyWith(isOrdering: true, errorMessage: null));
     try {
       await _repository.createOrder(
         deliveryMethodId: delivery.id,
-        recipientPhone: phone.replaceAll(RegExp(r"\D"), ""),
-        addressId: state.address?.id,
+        recipientPhone: phone,
+        addressId: state.isPickup ? null : state.address?.id,
+        pickupPointId: state.isPickup ? state.pickupPoint?.id : null,
       );
       emit(state.copyWith(isOrderCreated: true, paymentId: event.paymentId));
+      for (final item in ordered) {
+        _refresh.notifyItem(
+          ItemChange(
+            entity: RefreshEntity.marketProduct,
+            id: item.productId.toString(),
+            cartQuantity: 0,
+          ),
+        );
+      }
+      _refresh.notifyAll({
+        AppRefreshTopic.marketCart,
+        AppRefreshTopic.marketOrders,
+      });
     } catch (e) {
       emit(state.copyWith(errorMessage: _errorMessage(e)));
     }

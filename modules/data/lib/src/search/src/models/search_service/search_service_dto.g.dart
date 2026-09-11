@@ -1,0 +1,49 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'search_service_dto.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+SearchServiceDto _$SearchServiceDtoFromJson(Map<String, dynamic> json) =>
+    SearchServiceDto(
+      id: (json['id'] as num).toInt(),
+      title: json['title'] as String?,
+      icon: json['icon'] as String?,
+      color: _$JsonConverterFromJson<String, Color>(
+        json['color'],
+        const HexColorConverter().fromJson,
+      ),
+      authRequired: json['authRequired'] as bool?,
+      actionType: (json['actionType'] as num?)?.toInt(),
+      isPremiumOnly: json['isPremiumOnly'] as bool?,
+      freeUsageLimit: (json['freeUsageLimit'] as num?)?.toInt(),
+      deeplink: json['deeplink'] as String?,
+    );
+
+Map<String, dynamic> _$SearchServiceDtoToJson(SearchServiceDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'icon': instance.icon,
+      'color': _$JsonConverterToJson<String, Color>(
+        instance.color,
+        const HexColorConverter().toJson,
+      ),
+      'authRequired': instance.authRequired,
+      'actionType': instance.actionType,
+      'isPremiumOnly': instance.isPremiumOnly,
+      'freeUsageLimit': instance.freeUsageLimit,
+      'deeplink': instance.deeplink,
+    };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

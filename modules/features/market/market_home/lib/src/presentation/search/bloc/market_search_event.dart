@@ -13,6 +13,9 @@ abstract class MarketSearchEvent with _$MarketSearchEvent {
 
   factory MarketSearchEvent.loadMore() = _MarketSearchLoadMoreEvent;
 
+  factory MarketSearchEvent.productChanged({required ItemChange change}) =
+      _MarketSearchProductChangedEvent;
+
   factory MarketSearchEvent.changeSort(MarketProductSort sort) =
       _MarketSearchChangeSortEvent;
 

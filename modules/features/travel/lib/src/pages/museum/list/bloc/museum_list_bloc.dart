@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:travel/src/pages/museum/museum_error_extension.dart';
 import 'package:shared/shared.dart';
@@ -11,13 +13,51 @@ const int _pageSize = 20;
 @injectable
 class MuseumListBloc extends Bloc<MuseumListEvent, MuseumListState> {
   final MuseumRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<ItemChange>? _itemSubscription;
 
-  MuseumListBloc(this._repository) : super(MuseumListState()) {
+  MuseumListBloc(this._repository, this._refresh) : super(MuseumListState()) {
     on<_MuseumListStartEvent>(_start);
     on<_MuseumListApplyQueryEvent>(_applyQuery);
     on<_MuseumListChangeSortEvent>(_changeSort);
     on<_MuseumListLoadMoreEvent>(_loadMore);
     on<_MuseumListToggleFavoriteEvent>(_toggleFavorite);
+    on<_MuseumListFavoriteChangedEvent>(_favoriteChanged);
+
+    _itemSubscription = _refresh
+        .observeItems(RefreshEntity.museum)
+        .listen(
+          (change) => add(MuseumListEvent.favoriteChanged(change: change)),
+        );
+  }
+
+  @override
+  Future<void> close() {
+    _itemSubscription?.cancel();
+    return super.close();
+  }
+
+  void _favoriteChanged(
+    _MuseumListFavoriteChangedEvent event,
+    Emitter<MuseumListState> emit,
+  ) {
+    final change = event.change;
+    final isFavorite = change.isFavorite;
+    if (isFavorite == null) return;
+
+    emit(
+      state.copyWith(
+        items:
+            state.items
+                .map(
+                  (item) =>
+                      item.id == change.id
+                          ? item.copyWith(isFavorite: isFavorite)
+                          : item,
+                )
+                .toList(),
+      ),
+    );
   }
 
   Future<void> _start(
@@ -130,13 +170,28 @@ class MuseumListBloc extends Bloc<MuseumListEvent, MuseumListState> {
     final museum = event.museum;
     final isFavorite = !museum.isFavorite;
     emit(_replace(museum.copyWith(isFavorite: isFavorite)));
+    _refresh.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.museum,
+        id: museum.id,
+        isFavorite: isFavorite,
+      ),
+    );
     try {
       if (isFavorite) {
         await _repository.addFavorite(museumId: museum.id);
       } else {
         await _repository.removeFavorite(museumId: museum.id);
       }
+      _refresh.notify(AppRefreshTopic.museumFavorites);
     } catch (e) {
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.museum,
+          id: museum.id,
+          isFavorite: museum.isFavorite,
+        ),
+      );
       emit(_replace(museum).copyWith(errorMessage: e.errorMessage()));
     }
   }

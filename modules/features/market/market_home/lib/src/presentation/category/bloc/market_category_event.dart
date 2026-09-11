@@ -11,6 +11,12 @@ abstract class MarketCategoryEvent with _$MarketCategoryEvent {
 
   factory MarketCategoryEvent.refresh() = _MarketCategoryRefreshEvent;
 
+  factory MarketCategoryEvent.productChanged({required ItemChange change}) =
+      _MarketCategoryProductChangedEvent;
+
+  factory MarketCategoryEvent.loadCartSummary() =
+      _MarketCategoryLoadCartSummaryEvent;
+
   factory MarketCategoryEvent.loadMore() = _MarketCategoryLoadMoreEvent;
 
   factory MarketCategoryEvent.changeSort(MarketProductSort sort) =

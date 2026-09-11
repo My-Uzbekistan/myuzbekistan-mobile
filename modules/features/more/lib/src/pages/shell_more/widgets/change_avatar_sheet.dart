@@ -5,20 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:more/src/core/extension.dart';
 import 'package:shared/shared.dart';
 
-import '../../profile_page/bloc/profile_bloc.dart';
-
-Future<void> changeProfileAvatar(BuildContext context) async {
+Future<File?> pickProfileAvatar(BuildContext context) async {
   final source = await showModalBottomSheet<ImageSource>(
     context: context,
     backgroundColor: Colors.transparent,
     builder: (_) => const _ChangeAvatarSheet(),
   );
-  if (source == null || !context.mounted) return;
+  if (source == null || !context.mounted) return null;
 
-  final file = await _pickImage(source);
-  if (file == null || !context.mounted) return;
-
-  context.read<ProfileBloc>().add(ProfileBlocEvent.uploadAvatar(file));
+  return _pickImage(source);
 }
 
 Future<File?> _pickImage(ImageSource source) async {

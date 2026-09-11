@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -17,17 +19,40 @@ EventTransformer<E> _debounce<E>() {
 @injectable
 class MarketSearchBloc extends Bloc<MarketSearchEvent, MarketSearchState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refreshListener;
+  StreamSubscription<ItemChange>? _productSubscription;
 
-  MarketSearchBloc(this._repository) : super(MarketSearchState()) {
+  MarketSearchBloc(this._repository, this._refreshListener)
+    : super(MarketSearchState()) {
     on<_MarketSearchLoadInitialEvent>(_loadInitial);
     on<_MarketSearchQueryChangedEvent>(_queryChanged);
     on<_MarketSearchSearchEvent>(_search, transformer: _debounce());
     on<_MarketSearchSubmitEvent>(_submit);
     on<_MarketSearchLoadMoreEvent>(_loadMore);
+    on<_MarketSearchProductChangedEvent>(_productChanged);
     on<_MarketSearchChangeSortEvent>(_changeSort);
     on<_MarketSearchRemoveHistoryEvent>(_removeHistory);
     on<_MarketSearchToggleFavoriteEvent>(_toggleFavorite);
     on<_MarketSearchChangeCartQuantityEvent>(_changeCartQuantity);
+
+    _productSubscription = _refreshListener
+        .observeItems(RefreshEntity.marketProduct)
+        .listen(
+          (change) => add(MarketSearchEvent.productChanged(change: change)),
+        );
+  }
+
+  @override
+  Future<void> close() {
+    _productSubscription?.cancel();
+    return super.close();
+  }
+
+  void _productChanged(
+    _MarketSearchProductChangedEvent event,
+    Emitter<MarketSearchState> emit,
+  ) {
+    emit(state.copyWith(products: _applyChange(event.change)));
   }
 
   Future<void> _loadInitial(
@@ -178,18 +203,14 @@ class MarketSearchBloc extends Bloc<MarketSearchEvent, MarketSearchState> {
     final previous = state.history;
     emit(
       state.copyWith(
-        history: previous
-            .where((item) => item.id != event.searchId)
-            .toList(),
+        history: previous.where((item) => item.id != event.searchId).toList(),
         errorMessage: null,
       ),
     );
     try {
       await _repository.deleteSearchHistory(searchId: event.searchId);
     } catch (e) {
-      emit(
-        state.copyWith(history: previous, errorMessage: _errorMessage(e)),
-      );
+      emit(state.copyWith(history: previous, errorMessage: _errorMessage(e)));
     }
   }
 
@@ -205,13 +226,28 @@ class MarketSearchBloc extends Bloc<MarketSearchEvent, MarketSearchState> {
         errorMessage: null,
       ),
     );
+    _refreshListener.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        isFavorite: isFavorite,
+      ),
+    );
     try {
       if (isFavorite) {
         await _repository.addFavorite(productId: product.id);
       } else {
         await _repository.removeFavorite(productId: product.id);
       }
+      _refreshListener.notify(AppRefreshTopic.marketFavorites);
     } catch (e) {
+      _refreshListener.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          isFavorite: product.isFavorite,
+        ),
+      );
       emit(
         state.copyWith(
           products: _replaceProduct(product),
@@ -233,6 +269,13 @@ class MarketSearchBloc extends Bloc<MarketSearchEvent, MarketSearchState> {
         errorMessage: null,
       ),
     );
+    _refreshListener.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        cartQuantity: quantity,
+      ),
+    );
     try {
       if (product.cartQuantity == 0) {
         await _repository.addToCart(productId: product.id, quantity: quantity);
@@ -242,7 +285,15 @@ class MarketSearchBloc extends Bloc<MarketSearchEvent, MarketSearchState> {
           quantity: quantity,
         );
       }
+      _refreshListener.notify(AppRefreshTopic.marketCart);
     } catch (e) {
+      _refreshListener.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          cartQuantity: product.cartQuantity,
+        ),
+      );
       emit(
         state.copyWith(
           products: _replaceProduct(product),
@@ -271,6 +322,20 @@ class MarketSearchBloc extends Bloc<MarketSearchEvent, MarketSearchState> {
   List<MarketProduct> _replaceProduct(MarketProduct product) {
     return state.products
         .map((item) => item.id == product.id ? product : item)
+        .toList();
+  }
+
+  List<MarketProduct> _applyChange(ItemChange change) {
+    return state.products
+        .map(
+          (item) =>
+              item.id.toString() == change.id
+                  ? item.copyWith(
+                    isFavorite: change.isFavorite,
+                    cartQuantity: change.cartQuantity,
+                  )
+                  : item,
+        )
         .toList();
   }
 

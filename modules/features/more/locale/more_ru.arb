@@ -58,7 +58,8 @@
   "notification": "Уведомления",
   "pin_code": "PIN-код",
   "biometric_auth": "Вход со сканером",
-  "prayer_time_widget": "Виджет времени намаза",
+  "prayer_time_widget": "Виджет намаза",
+  "iq_air_widget": "Виджет IQAir",
   "about_app": "О приложении",
   "log_in": "Авторизоваться",
   "version": "Версия",
@@ -123,5 +124,17 @@
   "deviceIpAddress": "IP-адрес",
   "deviceLocation": "Геопозиция",
   "signOutFromDevice": "Выйти из устройства",
-  "noActiveSessions": "Других активных сеансов нет"
+  "noActiveSessions": "Других активных сеансов нет",
+  "premiumActiveUntil": "Активен до {date}",
+  "premiumBuySubscription": "Приобретите подписку",
+  "@premiumActiveUntil": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "webViewExitTitle": "Вы действительно хотите выйти?",
+  "webViewExitMessage": "Страница закроется, введённые данные не сохранятся.",
+  "yes": "Да"
 }

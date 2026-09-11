@@ -28,6 +28,7 @@ class PremiumOnboardingPage extends HookWidget {
     );
     final result = await completer.future;
     if (!result) return;
+    if (context.mounted) context.read<PremiumBloc>().add(PremiumEvent.subscribed());
 
     GlobalHandler().refreshListener?.call();
     WidgetsBinding.instance.addPostFrameCallback((_) {

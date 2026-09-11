@@ -84,6 +84,12 @@ class FeatureBasketLocalizationsEn extends FeatureBasketLocalizations {
   String get basket_checkout_phone => 'Recipient phone';
 
   @override
+  String get basket_checkout_phone_add => 'Add phone number';
+
+  @override
+  String get basket_checkout_phone_label => 'Phone number';
+
+  @override
   String get basket_checkout_products => 'Products';
 
   @override
@@ -123,4 +129,60 @@ class FeatureBasketLocalizationsEn extends FeatureBasketLocalizations {
 
   @override
   String get basket_action_edit => 'Edit';
+
+  @override
+  String get basket_checkout_store_address => 'Store address';
+
+  @override
+  String get basket_checkout_delivery_address => 'Delivery address';
+
+  @override
+  String get basket_checkout_my_addresses => 'My addresses';
+
+  @override
+  String get basket_checkout_address_new => 'New address';
+
+  @override
+  String get basket_checkout_pickup_closest => 'Closest';
+
+  @override
+  String basket_checkout_pickup_distance(Object distance) {
+    return '$distance km';
+  }
+
+  @override
+  String get basket_checkout_pickup_empty => 'No stores available yet';
+
+  @override
+  String get basket_checkout_delivery_empty => 'No pickup method available';
+
+  @override
+  String get basket_checkout_delivery_unavailable =>
+      'No delivery method is available for this region. Try again later';
+
+  @override
+  String get basket_checkout_delivery_no_region =>
+      'The address is not marked on the map — the delivery region could not be determined. Edit the address and pick a point on the map';
+
+  @override
+  String get basket_checkout_delivery_select => 'Choose a delivery method';
+
+  @override
+  String get basket_map_title => 'Select a delivery address';
+
+  @override
+  String get basket_map_add => 'Add';
+
+  @override
+  String get basket_map_save => 'Save';
+
+  @override
+  String get basket_map_address_empty => 'Point not detected';
+
+  @override
+  String get basket_map_delete_title => 'Delete location?';
+
+  @override
+  String get basket_map_delete_message =>
+      'Are you sure you want to delete this location?';
 }

@@ -45,6 +45,10 @@ import 'package:travel/src/pages/onboarding/onboarding_page.dart';
 import 'package:travel/src/pages/prayer_times/bloc/prayer_times_bloc.dart';
 import 'package:travel/src/pages/prayer_times/pages/prayer_location_page.dart';
 import 'package:travel/src/pages/prayer_times/prayer_times_sheet.dart';
+import 'package:travel/src/pages/search/bloc/global_search_bloc.dart';
+import 'package:travel/src/pages/search/global_search_page.dart';
+import 'package:travel/src/pages/search/result/bloc/global_search_result_bloc.dart';
+import 'package:travel/src/pages/search/result/global_search_result_page.dart';
 import 'package:travel/src/premium/premium_cancel/bloc/premium_cancel_bloc.dart';
 import 'package:travel/src/premium/premium_cancel/premium_cancel_screen.dart';
 import 'package:travel/src/premium/premium_onboarding/bloc/premium_bloc.dart';
@@ -67,6 +71,40 @@ mixin FeatureTravelRouter {
   static final _investNavigatorKey = GlobalKey<NavigatorState>();
 
   static final routes = [
+    GoRoute(
+      path: AppNavPath.travel.globalSearch.path,
+      name: AppNavPath.travel.globalSearch.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<GlobalSearchBloc>()
+            ..add(
+              GlobalSearchEvent.loadData(
+                query: parseString(state.uri.queryParameters["query"]),
+              ),
+            ),
+          child: const GlobalSearchPage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.travel.globalSearchResult.path,
+      name: AppNavPath.travel.globalSearchResult.name,
+      pageBuilder: (context, state) => buildSlideTransitionPage(
+        child: BlocProvider(
+          create: (context) => getIt<GlobalSearchResultBloc>()
+            ..add(
+              GlobalSearchResultEvent.loadData(
+                query: parseString(state.uri.queryParameters["query"]) ?? "",
+              ),
+            ),
+          child: const GlobalSearchResultPage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
     GoRoute(
       path: AppNavPath.travel.travelSelectRegion.path,
       name: AppNavPath.travel.travelSelectRegion.name,

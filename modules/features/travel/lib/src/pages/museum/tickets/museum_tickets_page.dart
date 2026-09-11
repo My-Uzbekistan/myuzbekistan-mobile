@@ -5,7 +5,7 @@ import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/museum/tickets/bloc/museum_tickets_bloc.dart';
 import 'package:travel/src/pages/museum/tickets/widgets/museum_ticket_card.dart';
 import 'package:travel/src/pages/museum/widgets/museum_circle_button.dart';
-import 'package:travel/src/pages/museum/widgets/museum_nav_bar.dart';
+import 'package:travel/src/widgets/travel_nav_bar.dart';
 import 'package:travel/src/pages/museum/widgets/museum_state_view.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart' hide Toast;
@@ -43,7 +43,7 @@ class MuseumTicketsPage extends HookWidget {
           builder:
               (context, state) => Column(
                 children: [
-                  MuseumNavBar(
+                  TravelNavBar(
                     title: _title(context, state.filter),
                     subtitle:
                         state.count > 0

@@ -1,16 +1,17 @@
-/// Bosh sahifa banner karuseli elementi — `GET /api/banners`.
+import 'banner_action_type.dart';
+
 class BannerItem {
   final int id;
-
-  /// Banner rasmi (`photo`) — bo'sh joyli URL'lar `%20` ga encode qilingan.
   final String imageUrl;
-
-  /// Bosilganda ochiladigan havola (`url`).
   final String? url;
+  final BannerActionType actionType;
+  final bool authRequired;
 
   const BannerItem({
     required this.id,
     required this.imageUrl,
     this.url,
+    this.actionType = BannerActionType.redirect,
+    this.authRequired = false,
   });
 }

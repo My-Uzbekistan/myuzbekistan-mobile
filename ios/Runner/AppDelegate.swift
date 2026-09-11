@@ -10,7 +10,7 @@ import FirebaseMessaging
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
 
-   GMSServices.provideAPIKey("AIzaSyAY4fqJiqLrYu7oHWfbM5m28xZh--XWSC4")
+   GMSServices.provideAPIKey("AIzaSyAmD7zWRcB1xu4__tUdhRYWuVrg4JfNAl0")
        FirebaseApp.configure()
        UNUserNotificationCenter.current().delegate = self
        application.registerForRemoteNotifications()

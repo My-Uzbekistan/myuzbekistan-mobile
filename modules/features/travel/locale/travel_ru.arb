@@ -115,7 +115,6 @@
   "gift_second_page_title_minute": "{count, plural, one{Возвращайтесь через {count} минуту} few{Возвращайтесь через {count} минуты} many{Возвращайтесь через {count} минут} other{Возвращайтесь через {count} минут}}",
   "gift_second_page_title_hour": "{count, plural, one{Возвращайтесь через {count} час} few{Возвращайтесь через {count} часа} many{Возвращайтесь через {count} часов} other{Возвращайтесь через {count} часов}}",
   "gift_second_page_title_day": "{count, plural, one{Возвращайтесь через {count} день} few{Возвращайтесь через {count} дня} many{Возвращайтесь через {count} дней} other{Возвращайтесь через {count} дней}}",
-
   "gift_second_page_subtitle": "Мы готовим ваш подарок",
   "gift_empty_hint": "У вас еще нет подарков",
   "gift_history": "История призов",
@@ -123,7 +122,7 @@
   "gb": "ГБ",
   "claim_dialog_caption": "Вы получили бонус на свой мобильный номер",
   "claim_warning_page_title": "Только для абонентов Uztelecom",
-  "claim_warning_page_caption":"Для получения подарка необходимо пройти регистрацию на номер Uztelecom",
+  "claim_warning_page_caption": "Для получения подарка необходимо пройти регистрацию на номер Uztelecom",
   "premiumOnboardingTitle": "Подключите MyUzbekistan Premium",
   "premiumOnboardingSubtitle": "Активируйте премиум-подписку, чтобы пользоваться всеми возможностями приложения",
   "premiumStatusTitle": "MyUzbekistan Premium",
@@ -259,5 +258,19 @@
   "museum_favorites_title": "Избранные",
   "museum_favorites_empty_title": "Избранных пока нет",
   "museum_favorites_empty_message": "Нажмите на сердечко, чтобы сохранить место",
-  "museum_auth_required": "Войдите в аккаунт"
+  "museum_auth_required": "Войдите в аккаунт",
+  "aqi_good": "Отлично",
+  "aqi_moderate": "Средне",
+  "aqi_bad": "Плохо",
+  "aqi_hazardous": "Ядовито",
+  "global_search_hint": "Город, регион или отель",
+  "global_search_history": "История поисков",
+  "global_search_history_clear": "Очистить",
+  "global_search_results": "Результаты поисков",
+  "global_search_action": "Найти",
+  "global_search_query_label": "Поисковый запрос",
+  "global_search_clear_title": "Очистить поиск",
+  "global_search_clear_message": "Вы точно хотите очистить историю поисков?",
+  "global_search_empty_title": "Ничего не найдено",
+  "global_search_empty_message": "По этому запросу ничего не найдено, попробуйте другие слова"
 }

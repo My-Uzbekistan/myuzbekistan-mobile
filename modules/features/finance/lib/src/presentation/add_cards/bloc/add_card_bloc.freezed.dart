@@ -134,10 +134,10 @@ return loadCardImages(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String expire,  String cvv,  String? cardBrand)?  setExternalParams,TResult Function( String expire,  String? cardBrand)?  setOwnParams,TResult Function( String cardNumber)?  setCardNumber,TResult Function()?  add,TResult Function( String colors)?  selectColor,TResult Function()?  loadCardImages,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String expire,  String cvv,  String cardHolderName,  String? cardBrand)?  setExternalParams,TResult Function( String expire,  String? cardBrand)?  setOwnParams,TResult Function( String cardNumber)?  setCardNumber,TResult Function()?  add,TResult Function( String colors)?  selectColor,TResult Function()?  loadCardImages,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent() when setExternalParams != null:
-return setExternalParams(_that.expire,_that.cvv,_that.cardBrand);case _SetOwnParamsEvent() when setOwnParams != null:
+return setExternalParams(_that.expire,_that.cvv,_that.cardHolderName,_that.cardBrand);case _SetOwnParamsEvent() when setOwnParams != null:
 return setOwnParams(_that.expire,_that.cardBrand);case _SetCardNumberEvent() when setCardNumber != null:
 return setCardNumber(_that.cardNumber);case _AddEvent() when add != null:
 return add();case _SelectColorEvent() when selectColor != null:
@@ -160,10 +160,10 @@ return loadCardImages();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String expire,  String cvv,  String? cardBrand)  setExternalParams,required TResult Function( String expire,  String? cardBrand)  setOwnParams,required TResult Function( String cardNumber)  setCardNumber,required TResult Function()  add,required TResult Function( String colors)  selectColor,required TResult Function()  loadCardImages,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String expire,  String cvv,  String cardHolderName,  String? cardBrand)  setExternalParams,required TResult Function( String expire,  String? cardBrand)  setOwnParams,required TResult Function( String cardNumber)  setCardNumber,required TResult Function()  add,required TResult Function( String colors)  selectColor,required TResult Function()  loadCardImages,}) {final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent():
-return setExternalParams(_that.expire,_that.cvv,_that.cardBrand);case _SetOwnParamsEvent():
+return setExternalParams(_that.expire,_that.cvv,_that.cardHolderName,_that.cardBrand);case _SetOwnParamsEvent():
 return setOwnParams(_that.expire,_that.cardBrand);case _SetCardNumberEvent():
 return setCardNumber(_that.cardNumber);case _AddEvent():
 return add();case _SelectColorEvent():
@@ -185,10 +185,10 @@ return loadCardImages();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String expire,  String cvv,  String? cardBrand)?  setExternalParams,TResult? Function( String expire,  String? cardBrand)?  setOwnParams,TResult? Function( String cardNumber)?  setCardNumber,TResult? Function()?  add,TResult? Function( String colors)?  selectColor,TResult? Function()?  loadCardImages,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String expire,  String cvv,  String cardHolderName,  String? cardBrand)?  setExternalParams,TResult? Function( String expire,  String? cardBrand)?  setOwnParams,TResult? Function( String cardNumber)?  setCardNumber,TResult? Function()?  add,TResult? Function( String colors)?  selectColor,TResult? Function()?  loadCardImages,}) {final _that = this;
 switch (_that) {
 case _SetExtermalParamsEvent() when setExternalParams != null:
-return setExternalParams(_that.expire,_that.cvv,_that.cardBrand);case _SetOwnParamsEvent() when setOwnParams != null:
+return setExternalParams(_that.expire,_that.cvv,_that.cardHolderName,_that.cardBrand);case _SetOwnParamsEvent() when setOwnParams != null:
 return setOwnParams(_that.expire,_that.cardBrand);case _SetCardNumberEvent() when setCardNumber != null:
 return setCardNumber(_that.cardNumber);case _AddEvent() when add != null:
 return add();case _SelectColorEvent() when selectColor != null:
@@ -205,11 +205,12 @@ return loadCardImages();case _:
 
 
 class _SetExtermalParamsEvent implements AddCardEvent {
-   _SetExtermalParamsEvent({required this.expire, required this.cvv, this.cardBrand});
+   _SetExtermalParamsEvent({required this.expire, required this.cvv, required this.cardHolderName, this.cardBrand});
   
 
  final  String expire;
  final  String cvv;
+ final  String cardHolderName;
  final  String? cardBrand;
 
 /// Create a copy of AddCardEvent
@@ -222,16 +223,16 @@ _$SetExtermalParamsEventCopyWith<_SetExtermalParamsEvent> get copyWith => __$Set
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetExtermalParamsEvent&&(identical(other.expire, expire) || other.expire == expire)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.cardBrand, cardBrand) || other.cardBrand == cardBrand));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetExtermalParamsEvent&&(identical(other.expire, expire) || other.expire == expire)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.cardHolderName, cardHolderName) || other.cardHolderName == cardHolderName)&&(identical(other.cardBrand, cardBrand) || other.cardBrand == cardBrand));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,expire,cvv,cardBrand);
+int get hashCode => Object.hash(runtimeType,expire,cvv,cardHolderName,cardBrand);
 
 @override
 String toString() {
-  return 'AddCardEvent.setExternalParams(expire: $expire, cvv: $cvv, cardBrand: $cardBrand)';
+  return 'AddCardEvent.setExternalParams(expire: $expire, cvv: $cvv, cardHolderName: $cardHolderName, cardBrand: $cardBrand)';
 }
 
 
@@ -242,7 +243,7 @@ abstract mixin class _$SetExtermalParamsEventCopyWith<$Res> implements $AddCardE
   factory _$SetExtermalParamsEventCopyWith(_SetExtermalParamsEvent value, $Res Function(_SetExtermalParamsEvent) _then) = __$SetExtermalParamsEventCopyWithImpl;
 @useResult
 $Res call({
- String expire, String cvv, String? cardBrand
+ String expire, String cvv, String cardHolderName, String? cardBrand
 });
 
 
@@ -259,10 +260,11 @@ class __$SetExtermalParamsEventCopyWithImpl<$Res>
 
 /// Create a copy of AddCardEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? expire = null,Object? cvv = null,Object? cardBrand = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? expire = null,Object? cvv = null,Object? cardHolderName = null,Object? cardBrand = freezed,}) {
   return _then(_SetExtermalParamsEvent(
 expire: null == expire ? _self.expire : expire // ignore: cast_nullable_to_non_nullable
 as String,cvv: null == cvv ? _self.cvv : cvv // ignore: cast_nullable_to_non_nullable
+as String,cardHolderName: null == cardHolderName ? _self.cardHolderName : cardHolderName // ignore: cast_nullable_to_non_nullable
 as String,cardBrand: freezed == cardBrand ? _self.cardBrand : cardBrand // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -1006,10 +1008,10 @@ return ownParams(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String expiry,  String cvv)?  externalParams,TResult Function( String expiry)?  ownParams,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String expiry,  String cvv,  String cardHolderName)?  externalParams,TResult Function( String expiry)?  ownParams,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case AddCardExternalParams() when externalParams != null:
-return externalParams(_that.expiry,_that.cvv);case AddCardOwnParams() when ownParams != null:
+return externalParams(_that.expiry,_that.cvv,_that.cardHolderName);case AddCardOwnParams() when ownParams != null:
 return ownParams(_that.expiry);case _:
   return orElse();
 
@@ -1028,10 +1030,10 @@ return ownParams(_that.expiry);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String expiry,  String cvv)  externalParams,required TResult Function( String expiry)  ownParams,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String expiry,  String cvv,  String cardHolderName)  externalParams,required TResult Function( String expiry)  ownParams,}) {final _that = this;
 switch (_that) {
 case AddCardExternalParams():
-return externalParams(_that.expiry,_that.cvv);case AddCardOwnParams():
+return externalParams(_that.expiry,_that.cvv,_that.cardHolderName);case AddCardOwnParams():
 return ownParams(_that.expiry);case _:
   throw StateError('Unexpected subclass');
 
@@ -1049,10 +1051,10 @@ return ownParams(_that.expiry);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String expiry,  String cvv)?  externalParams,TResult? Function( String expiry)?  ownParams,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String expiry,  String cvv,  String cardHolderName)?  externalParams,TResult? Function( String expiry)?  ownParams,}) {final _that = this;
 switch (_that) {
 case AddCardExternalParams() when externalParams != null:
-return externalParams(_that.expiry,_that.cvv);case AddCardOwnParams() when ownParams != null:
+return externalParams(_that.expiry,_that.cvv,_that.cardHolderName);case AddCardOwnParams() when ownParams != null:
 return ownParams(_that.expiry);case _:
   return null;
 
@@ -1065,11 +1067,12 @@ return ownParams(_that.expiry);case _:
 
 
 class AddCardExternalParams extends AddCardParams {
-  const AddCardExternalParams({this.expiry = "", this.cvv = ""}): super._();
+  const AddCardExternalParams({this.expiry = "", this.cvv = "", this.cardHolderName = ""}): super._();
   
 
 @override@JsonKey() final  String expiry;
 @JsonKey() final  String cvv;
+@JsonKey() final  String cardHolderName;
 
 /// Create a copy of AddCardParams
 /// with the given fields replaced by the non-null parameter values.
@@ -1081,16 +1084,16 @@ $AddCardExternalParamsCopyWith<AddCardExternalParams> get copyWith => _$AddCardE
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddCardExternalParams&&(identical(other.expiry, expiry) || other.expiry == expiry)&&(identical(other.cvv, cvv) || other.cvv == cvv));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddCardExternalParams&&(identical(other.expiry, expiry) || other.expiry == expiry)&&(identical(other.cvv, cvv) || other.cvv == cvv)&&(identical(other.cardHolderName, cardHolderName) || other.cardHolderName == cardHolderName));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,expiry,cvv);
+int get hashCode => Object.hash(runtimeType,expiry,cvv,cardHolderName);
 
 @override
 String toString() {
-  return 'AddCardParams.externalParams(expiry: $expiry, cvv: $cvv)';
+  return 'AddCardParams.externalParams(expiry: $expiry, cvv: $cvv, cardHolderName: $cardHolderName)';
 }
 
 
@@ -1101,7 +1104,7 @@ abstract mixin class $AddCardExternalParamsCopyWith<$Res> implements $AddCardPar
   factory $AddCardExternalParamsCopyWith(AddCardExternalParams value, $Res Function(AddCardExternalParams) _then) = _$AddCardExternalParamsCopyWithImpl;
 @override @useResult
 $Res call({
- String expiry, String cvv
+ String expiry, String cvv, String cardHolderName
 });
 
 
@@ -1118,10 +1121,11 @@ class _$AddCardExternalParamsCopyWithImpl<$Res>
 
 /// Create a copy of AddCardParams
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? expiry = null,Object? cvv = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? expiry = null,Object? cvv = null,Object? cardHolderName = null,}) {
   return _then(AddCardExternalParams(
 expiry: null == expiry ? _self.expiry : expiry // ignore: cast_nullable_to_non_nullable
 as String,cvv: null == cvv ? _self.cvv : cvv // ignore: cast_nullable_to_non_nullable
+as String,cardHolderName: null == cardHolderName ? _self.cardHolderName : cardHolderName // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

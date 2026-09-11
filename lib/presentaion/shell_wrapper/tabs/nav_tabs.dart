@@ -1,16 +1,16 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/widgets.dart';
-import 'package:navigation/navigation.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
+import 'package:uzbekistan_travel/core/navigation/shells/root_shell.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/app_bottom_nav_bar.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_tab_data.dart';
 import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_profile_avatar.dart';
 
 List<NavTabData> mainNavTabs(BuildContext context) {
   final localizations = context.localizations!;
-  final aiGuideUrl = context.watch<AiGuideCubit>().state;
+  final aiGuide = context.watch<AiGuideCubit>().state;
 
   return [
     NavTabData.branch(
@@ -23,16 +23,19 @@ List<NavTabData> mainNavTabs(BuildContext context) {
       label: localizations.nav_payment,
       branchIndex: 1,
     ),
-    if (aiGuideUrl != null)
-      NavTabData.action(
-        asset: Assets.svg.tabIconAiGuide,
-        label: localizations.nav_ai_guide,
-        onTap: () => context.push(aiGuideUrl),
-      ),
+    NavTabData.action(
+      asset: Assets.svg.tabIconAiGuide,
+      label: localizations.nav_ai_guide,
+      iconBuilder: aiGuide.isLoading
+          ? (selected, color) =>
+                const SizedBox.square(dimension: 24, child: LoadingIndicator())
+          : null,
+      onTap: () => _openAiGuide(context),
+    ),
     NavTabData.action(
       asset: Assets.svg.tabIconMarket,
       label: localizations.nav_market,
-      onTap: context.market.goMarketHome,
+      onTap: () => RootShellScope.goMarketShell(context),
     ),
     NavTabData.branch(
       asset: Assets.svg.tabIconMore,
@@ -53,7 +56,7 @@ List<NavTabData> marketNavTabs(BuildContext context) {
     NavTabData.action(
       asset: Assets.svg.tabIconBack,
       label: localizations.nav_back,
-      onTap: context.travel.goMain,
+      onTap: () => RootShellScope.goMainShell(context),
     ),
     NavTabData.branch(
       asset: Assets.svg.tabIconMarket,
@@ -76,4 +79,19 @@ List<NavTabData> marketNavTabs(BuildContext context) {
       branchIndex: 3,
     ),
   ];
+}
+
+Future<void> _openAiGuide(BuildContext context) async {
+  final cubit = context.read<AiGuideCubit>();
+  if (cubit.state.url == null) await cubit.loadAiGuideLink();
+  if (!context.mounted) return;
+
+  final url = cubit.state.url;
+  if (url == null) {
+    Toast.showToast(
+      cubit.state.errorMessage ?? context.coreLocalization.unexpected_error,
+    );
+    return;
+  }
+  context.push(url);
 }

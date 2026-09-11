@@ -29,7 +29,7 @@ class EventCard extends StatelessWidget {
                   edges: [
                     EdgeBlur(
                       type: EdgeType.bottomEdge,
-                      size: 160,
+                      size: 88,
                       sigma: 6,
                       tileMode: TileMode.mirror,
                       controlPoints: [
@@ -65,7 +65,7 @@ class EventCard extends StatelessWidget {
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      stops: const [0.0, 0.596, 1.0],
+                      stops: const [0.6, 0.84, 1.0],
                       colors: [
                         context.appColors.service.scrim
                             .withValues(alpha: 0),

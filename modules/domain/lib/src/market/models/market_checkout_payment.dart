@@ -5,6 +5,7 @@ class MarketCheckoutPayment {
   final int deliveryMethodId;
   final String recipientPhone;
   final int? addressId;
+  final int? pickupPointId;
   final CheckoutPrice price;
   final MarketPriceDetails? priceDetails;
   final DateTime? freeCancellationUntil;
@@ -14,6 +15,7 @@ class MarketCheckoutPayment {
     required this.recipientPhone,
     required this.price,
     this.addressId,
+    this.pickupPointId,
     this.priceDetails,
     this.freeCancellationUntil,
   });

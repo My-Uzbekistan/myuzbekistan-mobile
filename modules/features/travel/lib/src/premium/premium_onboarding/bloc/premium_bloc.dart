@@ -10,11 +10,18 @@ part 'premium_bloc.freezed.dart';
 @injectable
 class PremiumBloc extends Bloc<PremiumEvent, PremiumState> {
   final PremiumRepository _repository;
+  final AppRefreshListener _refresh;
 
-  PremiumBloc(this._repository) : super(PremiumState()) {
+  PremiumBloc(this._repository, this._refresh) : super(PremiumState()) {
     on<_Plans>(_plans);
     on<_Status>(_status);
     on<_SelectPlan>(_selectPlan);
+    on<_Subscribed>(_subscribed);
+  }
+
+  void _subscribed(_Subscribed event, Emitter<PremiumState> emitter) {
+    _refresh.notify(AppRefreshTopic.premium);
+    add(PremiumEvent.status());
   }
 
   void _status(_Status event, Emitter<PremiumState> emitter) async {

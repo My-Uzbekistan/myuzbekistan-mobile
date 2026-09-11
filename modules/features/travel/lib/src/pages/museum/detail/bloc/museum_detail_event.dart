@@ -7,5 +7,8 @@ abstract class MuseumDetailEvent with _$MuseumDetailEvent {
 
   factory MuseumDetailEvent.refresh() = _MuseumDetailRefreshEvent;
 
+  factory MuseumDetailEvent.favoriteChanged({required ItemChange change}) =
+      _MuseumDetailFavoriteChangedEvent;
+
   factory MuseumDetailEvent.toggleFavorite() = _MuseumDetailToggleFavoriteEvent;
 }

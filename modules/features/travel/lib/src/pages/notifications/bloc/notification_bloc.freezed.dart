@@ -55,12 +55,13 @@ extension NotificationEventPatterns on NotificationEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadNotifications value)?  loadNotifications,TResult Function( _NotificationSeenEvent value)?  notificationSeen,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _LoadNotifications value)?  loadNotifications,TResult Function( _NotificationSeenEvent value)?  notificationSeen,TResult Function( _AllNotificationsSeenEvent value)?  allNotificationsSeen,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _LoadNotifications() when loadNotifications != null:
 return loadNotifications(_that);case _NotificationSeenEvent() when notificationSeen != null:
-return notificationSeen(_that);case _:
+return notificationSeen(_that);case _AllNotificationsSeenEvent() when allNotificationsSeen != null:
+return allNotificationsSeen(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return notificationSeen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadNotifications value)  loadNotifications,required TResult Function( _NotificationSeenEvent value)  notificationSeen,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _LoadNotifications value)  loadNotifications,required TResult Function( _NotificationSeenEvent value)  notificationSeen,required TResult Function( _AllNotificationsSeenEvent value)  allNotificationsSeen,}){
 final _that = this;
 switch (_that) {
 case _LoadNotifications():
 return loadNotifications(_that);case _NotificationSeenEvent():
-return notificationSeen(_that);case _:
+return notificationSeen(_that);case _AllNotificationsSeenEvent():
+return allNotificationsSeen(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +102,13 @@ return notificationSeen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadNotifications value)?  loadNotifications,TResult? Function( _NotificationSeenEvent value)?  notificationSeen,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _LoadNotifications value)?  loadNotifications,TResult? Function( _NotificationSeenEvent value)?  notificationSeen,TResult? Function( _AllNotificationsSeenEvent value)?  allNotificationsSeen,}){
 final _that = this;
 switch (_that) {
 case _LoadNotifications() when loadNotifications != null:
 return loadNotifications(_that);case _NotificationSeenEvent() when notificationSeen != null:
-return notificationSeen(_that);case _:
+return notificationSeen(_that);case _AllNotificationsSeenEvent() when allNotificationsSeen != null:
+return allNotificationsSeen(_that);case _:
   return null;
 
 }
@@ -122,11 +125,12 @@ return notificationSeen(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? initialNotId)?  loadNotifications,TResult Function( int notId)?  notificationSeen,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? initialNotId)?  loadNotifications,TResult Function( int notId)?  notificationSeen,TResult Function()?  allNotificationsSeen,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoadNotifications() when loadNotifications != null:
 return loadNotifications(_that.initialNotId);case _NotificationSeenEvent() when notificationSeen != null:
-return notificationSeen(_that.notId);case _:
+return notificationSeen(_that.notId);case _AllNotificationsSeenEvent() when allNotificationsSeen != null:
+return allNotificationsSeen();case _:
   return orElse();
 
 }
@@ -144,11 +148,12 @@ return notificationSeen(_that.notId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? initialNotId)  loadNotifications,required TResult Function( int notId)  notificationSeen,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? initialNotId)  loadNotifications,required TResult Function( int notId)  notificationSeen,required TResult Function()  allNotificationsSeen,}) {final _that = this;
 switch (_that) {
 case _LoadNotifications():
 return loadNotifications(_that.initialNotId);case _NotificationSeenEvent():
-return notificationSeen(_that.notId);case _:
+return notificationSeen(_that.notId);case _AllNotificationsSeenEvent():
+return allNotificationsSeen();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +170,12 @@ return notificationSeen(_that.notId);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? initialNotId)?  loadNotifications,TResult? Function( int notId)?  notificationSeen,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? initialNotId)?  loadNotifications,TResult? Function( int notId)?  notificationSeen,TResult? Function()?  allNotificationsSeen,}) {final _that = this;
 switch (_that) {
 case _LoadNotifications() when loadNotifications != null:
 return loadNotifications(_that.initialNotId);case _NotificationSeenEvent() when notificationSeen != null:
-return notificationSeen(_that.notId);case _:
+return notificationSeen(_that.notId);case _AllNotificationsSeenEvent() when allNotificationsSeen != null:
+return allNotificationsSeen();case _:
   return null;
 
 }
@@ -308,6 +314,38 @@ as int,
 
 
 }
+
+/// @nodoc
+
+
+class _AllNotificationsSeenEvent implements NotificationEvent {
+   _AllNotificationsSeenEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AllNotificationsSeenEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'NotificationEvent.allNotificationsSeen()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$NotificationsState {

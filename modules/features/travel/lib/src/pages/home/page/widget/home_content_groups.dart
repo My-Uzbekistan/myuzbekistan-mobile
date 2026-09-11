@@ -12,10 +12,14 @@ class HomeContentGroups extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final groups = contents
+        .where((e) => e.recommended != null || e.contents.isNotEmpty)
+        .toList();
+
     return SliverList(
       key: const PageStorageKey('imageList'),
       delegate: SliverChildBuilderDelegate((context, index) {
-        final e = contents[index];
+        final e = groups[index];
         return Container(
           margin: const EdgeInsets.only(top: 12),
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -45,7 +49,7 @@ class HomeContentGroups extends StatelessWidget {
             ),
           ),
         );
-      }, childCount: contents.length),
+      }, childCount: groups.length),
     );
   }
 }

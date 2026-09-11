@@ -86,4 +86,14 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get update_app_later => 'Обновить позже';
+
+  @override
+  String get page_not_found_title => 'Страница не найдена';
+
+  @override
+  String get page_not_found_message =>
+      'Возможно, ссылка устарела или страница была перемещена.';
+
+  @override
+  String get page_not_found_go_home => 'На главную';
 }

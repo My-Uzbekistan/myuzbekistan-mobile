@@ -55,13 +55,14 @@ extension PremiumEventPatterns on PremiumEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Plans value)?  plans,TResult Function( _Status value)?  status,TResult Function( _SelectPlan value)?  selectPlan,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Plans value)?  plans,TResult Function( _Status value)?  status,TResult Function( _SelectPlan value)?  selectPlan,TResult Function( _Subscribed value)?  subscribed,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans(_that);case _Status() when status != null:
 return status(_that);case _SelectPlan() when selectPlan != null:
-return selectPlan(_that);case _:
+return selectPlan(_that);case _Subscribed() when subscribed != null:
+return subscribed(_that);case _:
   return orElse();
 
 }
@@ -79,13 +80,14 @@ return selectPlan(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Plans value)  plans,required TResult Function( _Status value)  status,required TResult Function( _SelectPlan value)  selectPlan,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Plans value)  plans,required TResult Function( _Status value)  status,required TResult Function( _SelectPlan value)  selectPlan,required TResult Function( _Subscribed value)  subscribed,}){
 final _that = this;
 switch (_that) {
 case _Plans():
 return plans(_that);case _Status():
 return status(_that);case _SelectPlan():
-return selectPlan(_that);case _:
+return selectPlan(_that);case _Subscribed():
+return subscribed(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -102,13 +104,14 @@ return selectPlan(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Plans value)?  plans,TResult? Function( _Status value)?  status,TResult? Function( _SelectPlan value)?  selectPlan,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Plans value)?  plans,TResult? Function( _Status value)?  status,TResult? Function( _SelectPlan value)?  selectPlan,TResult? Function( _Subscribed value)?  subscribed,}){
 final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans(_that);case _Status() when status != null:
 return status(_that);case _SelectPlan() when selectPlan != null:
-return selectPlan(_that);case _:
+return selectPlan(_that);case _Subscribed() when subscribed != null:
+return subscribed(_that);case _:
   return null;
 
 }
@@ -125,12 +128,13 @@ return selectPlan(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  plans,TResult Function()?  status,TResult Function( PremiumPlansModel item)?  selectPlan,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  plans,TResult Function()?  status,TResult Function( PremiumPlansModel item)?  selectPlan,TResult Function()?  subscribed,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans();case _Status() when status != null:
 return status();case _SelectPlan() when selectPlan != null:
-return selectPlan(_that.item);case _:
+return selectPlan(_that.item);case _Subscribed() when subscribed != null:
+return subscribed();case _:
   return orElse();
 
 }
@@ -148,12 +152,13 @@ return selectPlan(_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  plans,required TResult Function()  status,required TResult Function( PremiumPlansModel item)  selectPlan,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  plans,required TResult Function()  status,required TResult Function( PremiumPlansModel item)  selectPlan,required TResult Function()  subscribed,}) {final _that = this;
 switch (_that) {
 case _Plans():
 return plans();case _Status():
 return status();case _SelectPlan():
-return selectPlan(_that.item);case _:
+return selectPlan(_that.item);case _Subscribed():
+return subscribed();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -170,12 +175,13 @@ return selectPlan(_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  plans,TResult? Function()?  status,TResult? Function( PremiumPlansModel item)?  selectPlan,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  plans,TResult? Function()?  status,TResult? Function( PremiumPlansModel item)?  selectPlan,TResult? Function()?  subscribed,}) {final _that = this;
 switch (_that) {
 case _Plans() when plans != null:
 return plans();case _Status() when status != null:
 return status();case _SelectPlan() when selectPlan != null:
-return selectPlan(_that.item);case _:
+return selectPlan(_that.item);case _Subscribed() when subscribed != null:
+return subscribed();case _:
   return null;
 
 }
@@ -312,6 +318,38 @@ as PremiumPlansModel,
 
 
 }
+
+/// @nodoc
+
+
+class _Subscribed implements PremiumEvent {
+   _Subscribed();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Subscribed);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'PremiumEvent.subscribed()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$PremiumState {

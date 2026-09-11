@@ -11,6 +11,7 @@ class MarketAddressDto {
   final double? lat;
   final double? lon;
   final bool? isDefault;
+  final String? phone;
 
   MarketAddressDto({
     required this.id,
@@ -19,6 +20,7 @@ class MarketAddressDto {
     this.lat,
     this.lon,
     this.isDefault,
+    this.phone,
   });
 
   factory MarketAddressDto.fromJson(Map<String, dynamic> json) =>
@@ -31,5 +33,6 @@ class MarketAddressDto {
     latitude: lat,
     longitude: lon,
     isDefault: isDefault ?? false,
+    phone: phone,
   );
 }

@@ -16,7 +16,8 @@ import '../../interseptors/AppInterceptor.dart';
 abstract class NetworkModule {
   @lazySingleton
   Alice getAlice() {
-    return Alice(showInspectorOnShake: true);
+    return Alice(
+        showNotification: true, showInspectorOnShake: true, darkTheme: true);
   }
 
   @Named('baseUrl')
@@ -54,9 +55,10 @@ abstract class NetworkModule {
     // dio.transformer = BackgroundTransformer()..jsonDecodeCallback = (text) {
     //   return json.decode(utf8.decode(text.codeUnits,allowMalformed: true));
     // };
-    if (kDebugMode) {
+    if (AppConstants.httpInspectorEnabled) {
       dio.interceptors.add(alice.getDioInterceptor());
-
+    }
+    if (kDebugMode) {
       dio.interceptors.add(PrettyDioLogger(requestBody: true));
     }
     dio.interceptors.add(ErrorInterceptor());

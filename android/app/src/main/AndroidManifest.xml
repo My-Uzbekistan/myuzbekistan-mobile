@@ -47,17 +47,34 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <meta-data
+                android:name="flutter_deeplinking_enabled"
+                android:value="true" />
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" android:host="myuz.uz" />
+                <data android:scheme="https" android:host="www.myuz.uz" />
+            </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" android:host="myuzb.uz" />
+                <data android:scheme="https" android:host="www.myuzb.uz" />
+            </intent-filter>
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-
-                <data
-                    android:scheme="https"
-                    android:host="myuzb.uz"
-                    android:pathPrefix="/" />
-
+                <data android:scheme="myuz" />
             </intent-filter>
 
 
@@ -70,7 +87,7 @@
             android:value="2" />
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAY4fqJiqLrYu7oHWfbM5m28xZh--XWSC4"/>
+            android:value="AIzaSyAmD7zWRcB1xu4__tUdhRYWuVrg4JfNAl0"/>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

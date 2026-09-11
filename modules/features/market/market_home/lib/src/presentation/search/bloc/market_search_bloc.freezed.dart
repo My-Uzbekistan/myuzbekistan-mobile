@@ -55,7 +55,7 @@ extension MarketSearchEventPatterns on MarketSearchEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketSearchLoadInitialEvent value)?  loadInitial,TResult Function( _MarketSearchQueryChangedEvent value)?  queryChanged,TResult Function( _MarketSearchSearchEvent value)?  search,TResult Function( _MarketSearchSubmitEvent value)?  submit,TResult Function( _MarketSearchLoadMoreEvent value)?  loadMore,TResult Function( _MarketSearchChangeSortEvent value)?  changeSort,TResult Function( _MarketSearchRemoveHistoryEvent value)?  removeHistory,TResult Function( _MarketSearchToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketSearchChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketSearchLoadInitialEvent value)?  loadInitial,TResult Function( _MarketSearchQueryChangedEvent value)?  queryChanged,TResult Function( _MarketSearchSearchEvent value)?  search,TResult Function( _MarketSearchSubmitEvent value)?  submit,TResult Function( _MarketSearchLoadMoreEvent value)?  loadMore,TResult Function( _MarketSearchProductChangedEvent value)?  productChanged,TResult Function( _MarketSearchChangeSortEvent value)?  changeSort,TResult Function( _MarketSearchRemoveHistoryEvent value)?  removeHistory,TResult Function( _MarketSearchToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketSearchChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _MarketSearchLoadInitialEvent() when loadInitial != null:
@@ -63,7 +63,8 @@ return loadInitial(_that);case _MarketSearchQueryChangedEvent() when queryChange
 return queryChanged(_that);case _MarketSearchSearchEvent() when search != null:
 return search(_that);case _MarketSearchSubmitEvent() when submit != null:
 return submit(_that);case _MarketSearchLoadMoreEvent() when loadMore != null:
-return loadMore(_that);case _MarketSearchChangeSortEvent() when changeSort != null:
+return loadMore(_that);case _MarketSearchProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketSearchChangeSortEvent() when changeSort != null:
 return changeSort(_that);case _MarketSearchRemoveHistoryEvent() when removeHistory != null:
 return removeHistory(_that);case _MarketSearchToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _MarketSearchChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -85,7 +86,7 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketSearchLoadInitialEvent value)  loadInitial,required TResult Function( _MarketSearchQueryChangedEvent value)  queryChanged,required TResult Function( _MarketSearchSearchEvent value)  search,required TResult Function( _MarketSearchSubmitEvent value)  submit,required TResult Function( _MarketSearchLoadMoreEvent value)  loadMore,required TResult Function( _MarketSearchChangeSortEvent value)  changeSort,required TResult Function( _MarketSearchRemoveHistoryEvent value)  removeHistory,required TResult Function( _MarketSearchToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketSearchChangeCartQuantityEvent value)  changeCartQuantity,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketSearchLoadInitialEvent value)  loadInitial,required TResult Function( _MarketSearchQueryChangedEvent value)  queryChanged,required TResult Function( _MarketSearchSearchEvent value)  search,required TResult Function( _MarketSearchSubmitEvent value)  submit,required TResult Function( _MarketSearchLoadMoreEvent value)  loadMore,required TResult Function( _MarketSearchProductChangedEvent value)  productChanged,required TResult Function( _MarketSearchChangeSortEvent value)  changeSort,required TResult Function( _MarketSearchRemoveHistoryEvent value)  removeHistory,required TResult Function( _MarketSearchToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketSearchChangeCartQuantityEvent value)  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _MarketSearchLoadInitialEvent():
@@ -93,7 +94,8 @@ return loadInitial(_that);case _MarketSearchQueryChangedEvent():
 return queryChanged(_that);case _MarketSearchSearchEvent():
 return search(_that);case _MarketSearchSubmitEvent():
 return submit(_that);case _MarketSearchLoadMoreEvent():
-return loadMore(_that);case _MarketSearchChangeSortEvent():
+return loadMore(_that);case _MarketSearchProductChangedEvent():
+return productChanged(_that);case _MarketSearchChangeSortEvent():
 return changeSort(_that);case _MarketSearchRemoveHistoryEvent():
 return removeHistory(_that);case _MarketSearchToggleFavoriteEvent():
 return toggleFavorite(_that);case _MarketSearchChangeCartQuantityEvent():
@@ -114,7 +116,7 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketSearchLoadInitialEvent value)?  loadInitial,TResult? Function( _MarketSearchQueryChangedEvent value)?  queryChanged,TResult? Function( _MarketSearchSearchEvent value)?  search,TResult? Function( _MarketSearchSubmitEvent value)?  submit,TResult? Function( _MarketSearchLoadMoreEvent value)?  loadMore,TResult? Function( _MarketSearchChangeSortEvent value)?  changeSort,TResult? Function( _MarketSearchRemoveHistoryEvent value)?  removeHistory,TResult? Function( _MarketSearchToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketSearchChangeCartQuantityEvent value)?  changeCartQuantity,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketSearchLoadInitialEvent value)?  loadInitial,TResult? Function( _MarketSearchQueryChangedEvent value)?  queryChanged,TResult? Function( _MarketSearchSearchEvent value)?  search,TResult? Function( _MarketSearchSubmitEvent value)?  submit,TResult? Function( _MarketSearchLoadMoreEvent value)?  loadMore,TResult? Function( _MarketSearchProductChangedEvent value)?  productChanged,TResult? Function( _MarketSearchChangeSortEvent value)?  changeSort,TResult? Function( _MarketSearchRemoveHistoryEvent value)?  removeHistory,TResult? Function( _MarketSearchToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketSearchChangeCartQuantityEvent value)?  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _MarketSearchLoadInitialEvent() when loadInitial != null:
@@ -122,7 +124,8 @@ return loadInitial(_that);case _MarketSearchQueryChangedEvent() when queryChange
 return queryChanged(_that);case _MarketSearchSearchEvent() when search != null:
 return search(_that);case _MarketSearchSubmitEvent() when submit != null:
 return submit(_that);case _MarketSearchLoadMoreEvent() when loadMore != null:
-return loadMore(_that);case _MarketSearchChangeSortEvent() when changeSort != null:
+return loadMore(_that);case _MarketSearchProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketSearchChangeSortEvent() when changeSort != null:
 return changeSort(_that);case _MarketSearchRemoveHistoryEvent() when removeHistory != null:
 return removeHistory(_that);case _MarketSearchToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _MarketSearchChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -143,14 +146,15 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadInitial,TResult Function( String query)?  queryChanged,TResult Function()?  search,TResult Function( String query)?  submit,TResult Function()?  loadMore,TResult Function( MarketProductSort sort)?  changeSort,TResult Function( int searchId)?  removeHistory,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadInitial,TResult Function( String query)?  queryChanged,TResult Function()?  search,TResult Function( String query)?  submit,TResult Function()?  loadMore,TResult Function( ItemChange change)?  productChanged,TResult Function( MarketProductSort sort)?  changeSort,TResult Function( int searchId)?  removeHistory,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketSearchLoadInitialEvent() when loadInitial != null:
 return loadInitial();case _MarketSearchQueryChangedEvent() when queryChanged != null:
 return queryChanged(_that.query);case _MarketSearchSearchEvent() when search != null:
 return search();case _MarketSearchSubmitEvent() when submit != null:
 return submit(_that.query);case _MarketSearchLoadMoreEvent() when loadMore != null:
-return loadMore();case _MarketSearchChangeSortEvent() when changeSort != null:
+return loadMore();case _MarketSearchProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketSearchChangeSortEvent() when changeSort != null:
 return changeSort(_that.sort);case _MarketSearchRemoveHistoryEvent() when removeHistory != null:
 return removeHistory(_that.searchId);case _MarketSearchToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that.product);case _MarketSearchChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -172,14 +176,15 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadInitial,required TResult Function( String query)  queryChanged,required TResult Function()  search,required TResult Function( String query)  submit,required TResult Function()  loadMore,required TResult Function( MarketProductSort sort)  changeSort,required TResult Function( int searchId)  removeHistory,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadInitial,required TResult Function( String query)  queryChanged,required TResult Function()  search,required TResult Function( String query)  submit,required TResult Function()  loadMore,required TResult Function( ItemChange change)  productChanged,required TResult Function( MarketProductSort sort)  changeSort,required TResult Function( int searchId)  removeHistory,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _MarketSearchLoadInitialEvent():
 return loadInitial();case _MarketSearchQueryChangedEvent():
 return queryChanged(_that.query);case _MarketSearchSearchEvent():
 return search();case _MarketSearchSubmitEvent():
 return submit(_that.query);case _MarketSearchLoadMoreEvent():
-return loadMore();case _MarketSearchChangeSortEvent():
+return loadMore();case _MarketSearchProductChangedEvent():
+return productChanged(_that.change);case _MarketSearchChangeSortEvent():
 return changeSort(_that.sort);case _MarketSearchRemoveHistoryEvent():
 return removeHistory(_that.searchId);case _MarketSearchToggleFavoriteEvent():
 return toggleFavorite(_that.product);case _MarketSearchChangeCartQuantityEvent():
@@ -200,14 +205,15 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadInitial,TResult? Function( String query)?  queryChanged,TResult? Function()?  search,TResult? Function( String query)?  submit,TResult? Function()?  loadMore,TResult? Function( MarketProductSort sort)?  changeSort,TResult? Function( int searchId)?  removeHistory,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadInitial,TResult? Function( String query)?  queryChanged,TResult? Function()?  search,TResult? Function( String query)?  submit,TResult? Function()?  loadMore,TResult? Function( ItemChange change)?  productChanged,TResult? Function( MarketProductSort sort)?  changeSort,TResult? Function( int searchId)?  removeHistory,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _MarketSearchLoadInitialEvent() when loadInitial != null:
 return loadInitial();case _MarketSearchQueryChangedEvent() when queryChanged != null:
 return queryChanged(_that.query);case _MarketSearchSearchEvent() when search != null:
 return search();case _MarketSearchSubmitEvent() when submit != null:
 return submit(_that.query);case _MarketSearchLoadMoreEvent() when loadMore != null:
-return loadMore();case _MarketSearchChangeSortEvent() when changeSort != null:
+return loadMore();case _MarketSearchProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketSearchChangeSortEvent() when changeSort != null:
 return changeSort(_that.sort);case _MarketSearchRemoveHistoryEvent() when removeHistory != null:
 return removeHistory(_that.searchId);case _MarketSearchToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that.product);case _MarketSearchChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -446,6 +452,72 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _MarketSearchProductChangedEvent implements MarketSearchEvent {
+   _MarketSearchProductChangedEvent({required this.change});
+  
+
+ final  ItemChange change;
+
+/// Create a copy of MarketSearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MarketSearchProductChangedEventCopyWith<_MarketSearchProductChangedEvent> get copyWith => __$MarketSearchProductChangedEventCopyWithImpl<_MarketSearchProductChangedEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketSearchProductChangedEvent&&(identical(other.change, change) || other.change == change));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,change);
+
+@override
+String toString() {
+  return 'MarketSearchEvent.productChanged(change: $change)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MarketSearchProductChangedEventCopyWith<$Res> implements $MarketSearchEventCopyWith<$Res> {
+  factory _$MarketSearchProductChangedEventCopyWith(_MarketSearchProductChangedEvent value, $Res Function(_MarketSearchProductChangedEvent) _then) = __$MarketSearchProductChangedEventCopyWithImpl;
+@useResult
+$Res call({
+ ItemChange change
+});
+
+
+
+
+}
+/// @nodoc
+class __$MarketSearchProductChangedEventCopyWithImpl<$Res>
+    implements _$MarketSearchProductChangedEventCopyWith<$Res> {
+  __$MarketSearchProductChangedEventCopyWithImpl(this._self, this._then);
+
+  final _MarketSearchProductChangedEvent _self;
+  final $Res Function(_MarketSearchProductChangedEvent) _then;
+
+/// Create a copy of MarketSearchEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? change = null,}) {
+  return _then(_MarketSearchProductChangedEvent(
+change: null == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as ItemChange,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

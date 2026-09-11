@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:travel/src/pages/museum/museum_error_extension.dart';
 import 'package:shared/shared.dart';
@@ -10,10 +12,23 @@ part 'museum_favorites_bloc.freezed.dart';
 class MuseumFavoritesBloc
     extends Bloc<MuseumFavoritesEvent, MuseumFavoritesState> {
   final MuseumRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
 
-  MuseumFavoritesBloc(this._repository) : super(MuseumFavoritesState()) {
+  MuseumFavoritesBloc(this._repository, this._refresh)
+    : super(MuseumFavoritesState()) {
     on<_MuseumFavoritesLoadDataEvent>(_loadData);
     on<_MuseumFavoritesRemoveEvent>(_remove);
+
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.museumFavorites})
+        .listen((_) => add(MuseumFavoritesEvent.loadData()));
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    return super.close();
   }
 
   Future<void> _loadData(
@@ -42,9 +57,23 @@ class MuseumFavoritesBloc
         errorMessage: null,
       ),
     );
+    _refresh.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.museum,
+        id: museum.id,
+        isFavorite: false,
+      ),
+    );
     try {
       await _repository.removeFavorite(museumId: museum.id);
     } catch (e) {
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.museum,
+          id: museum.id,
+          isFavorite: true,
+        ),
+      );
       emit(state.copyWith(museums: previous, errorMessage: e.errorMessage()));
     }
   }

@@ -3,11 +3,11 @@ import 'package:basket/src/presentation/basket/widgets/basket_error_view.dart';
 import 'package:basket/src/presentation/checkout/bloc/checkout_bloc.dart';
 import 'package:basket/src/presentation/checkout/widgets/checkout_address_sheet.dart';
 import 'package:basket/src/presentation/checkout/widgets/checkout_bottom_bar.dart';
-import 'package:basket/src/presentation/checkout/widgets/checkout_delivery_sheet.dart';
 import 'package:basket/src/presentation/checkout/widgets/checkout_details_card.dart';
 import 'package:basket/src/presentation/checkout/widgets/checkout_items_card.dart';
 import 'package:basket/src/presentation/checkout/widgets/checkout_phone_sheet.dart';
 import 'package:basket/src/presentation/checkout/widgets/checkout_price_card.dart';
+import 'package:basket/src/presentation/checkout/widgets/checkout_store_address_sheet.dart';
 import 'package:basket/src/presentation/checkout/widgets/shimmer/checkout_shimmer.dart';
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
@@ -41,18 +41,37 @@ class CheckoutPage extends StatelessWidget {
       }
     }
 
+    void reportBlocker(CheckoutState state) {
+      if (state.isDeliveryUnavailable) {
+        Toast.showToast(
+          state.hasMappedAddress
+              ? context.localization.basket_checkout_delivery_unavailable
+              : context.localization.basket_checkout_delivery_no_region,
+        );
+        return;
+      }
+      if (state.delivery == null) {
+        Toast.showToast(
+          context.localization.basket_checkout_delivery_select,
+        );
+        return;
+      }
+      if (!state.hasPhone) editPhone(state.phone);
+    }
+
     Future<void> payAndOrder(CheckoutState state) async {
       final delivery = state.delivery;
       final price = state.price;
-      final phone = state.phone;
-      if (delivery == null || price == null || phone == null) return;
+      final phone = state.phoneDigits;
+      if (delivery == null || price == null || phone.isEmpty) return;
 
       final paymentId = await context.finance.pushMarketOrderPayment<String>(
         merchantId: _marketMerchantId,
         payment: MarketCheckoutPayment(
           deliveryMethodId: delivery.id,
-          recipientPhone: phone.replaceAll(RegExp(r"\D"), ""),
-          addressId: state.address?.id,
+          recipientPhone: phone,
+          addressId: state.isPickup ? null : state.address?.id,
+          pickupPointId: state.isPickup ? state.pickupPoint?.id : null,
           price: price,
           priceDetails: state.priceDetails,
           freeCancellationUntil: state.freeCancellationUntil,
@@ -77,7 +96,10 @@ class CheckoutPage extends StatelessWidget {
             (current.errorMessage != null &&
                 previous.errorMessage != current.errorMessage) ||
             (!previous.isOrderCreated && current.isOrderCreated) ||
-            (previous.items.isNotEmpty && current.items.isEmpty),
+            (previous.items.isNotEmpty && current.items.isEmpty) ||
+            (previous.isLoading &&
+                !current.isLoading &&
+                current.isDeliveryUnavailable),
         listener: (context, state) {
           final paymentId = state.paymentId;
           if (state.isOrderCreated && paymentId != null) {
@@ -90,6 +112,14 @@ class CheckoutPage extends StatelessWidget {
           }
           if (state.errorMessage != null) {
             Toast.showToast(state.errorMessage!);
+            return;
+          }
+          if (state.isDeliveryUnavailable) {
+            Toast.showToast(
+              state.hasMappedAddress
+                  ? context.localization.basket_checkout_delivery_unavailable
+                  : context.localization.basket_checkout_delivery_no_region,
+            );
           }
         },
         buildWhen: (previous, current) => previous != current,
@@ -136,13 +166,19 @@ class CheckoutPage extends StatelessWidget {
                 spacing: 8,
                 children: [
                   CheckoutDetailsCard(
+                    deliveryMethods: state.deliveryMethods,
                     delivery: state.delivery,
-                    address: state.address,
+                    addressLine: state.addressLine,
+                    addressLabel: state.isPickup
+                        ? context.localization.basket_checkout_store_address
+                        : context.localization.basket_checkout_delivery_address,
                     phone: state.phone,
-                    onDeliveryTap: () =>
-                        CheckoutDeliverySheet.show(context, bloc),
-                    onAddressTap: () =>
-                        CheckoutAddressSheet.show(context, bloc),
+                    onDeliverySelected: (method) => bloc.add(
+                      CheckoutEvent.selectDelivery(delivery: method),
+                    ),
+                    onAddressTap: () => state.isPickup
+                        ? CheckoutStoreAddressSheet.show(context, bloc)
+                        : CheckoutAddressSheet.show(context, bloc),
                     onPhoneTap: () => editPhone(state.phone),
                   ),
                   CheckoutItemsCard(
@@ -178,6 +214,7 @@ class CheckoutPage extends StatelessWidget {
             total: state.total,
             isLoading: state.isOrdering,
             onOrder: state.canOrder ? () => payAndOrder(state) : null,
+            onBlocked: () => reportBlocker(state),
           );
         },
       ),

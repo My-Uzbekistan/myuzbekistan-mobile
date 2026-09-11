@@ -68,6 +68,14 @@ class FeatureMarketNavExtension {
     return _context.pushType<T>(AppNavPath.market.marketCheckout);
   }
 
+  Future<MarketAddress?> pushMarketAddressMap({MarketAddress? address}) {
+    return _context.pushType<MarketAddress>(
+      AppNavPath.market.marketAddressMap,
+      extra: address,
+      queryParameters: {"addressId": "${address?.id}"},
+    );
+  }
+
   Future<T?> pushMarketOrders<T>({required MarketOrderGroup group}) {
     return _context.pushType<T>(
       AppNavPath.market.marketOrders,

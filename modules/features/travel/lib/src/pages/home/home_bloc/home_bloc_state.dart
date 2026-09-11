@@ -8,6 +8,7 @@ abstract class HomeBlocState with _$HomeBlocState {
     @Default([]) List<Categories> categories,
     @Default([]) List<ServiceAction> services,
     @Default([]) List<CatalogItemModel> catalogServices,
+    @Default(true) bool loadingServices,
     @Default([]) List<ContentCategories> contents,
     @Default([]) List<City> cities,
     String? citiesWeekend,

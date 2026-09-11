@@ -11,8 +11,16 @@ class BannerDto {
   @ImageConvertor()
   final String? photo;
   final String? url;
+  final String? actionType;
+  final bool? authRequired;
 
-  BannerDto({required this.id, this.photo, this.url});
+  BannerDto({
+    required this.id,
+    this.photo,
+    this.url,
+    this.actionType,
+    this.authRequired,
+  });
 
   factory BannerDto.fromJson(Map<String, dynamic> json) =>
       _$BannerDtoFromJson(json);
@@ -21,9 +29,12 @@ class BannerDto {
 
   BannerItem toDomain() => BannerItem(
         id: id,
-        // Rasm URL'ida bo'sh joy bo'lishi mumkin (`images (2).webp`) —
-        // ExtendedImage yuklashi uchun `%20` ga encode qilamiz.
         imageUrl: (photo ?? "").isEmpty ? "" : Uri.encodeFull(photo!),
         url: url,
+        actionType: BannerActionType.values.firstWhere(
+          (e) => e.name == actionType,
+          orElse: () => BannerActionType.redirect,
+        ),
+        authRequired: authRequired ?? false,
       );
 }

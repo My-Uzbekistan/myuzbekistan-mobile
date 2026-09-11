@@ -127,9 +127,9 @@ class _HomeListCellState extends State<HomeListCell>
                           )
                           : ItemCard(
                             content: item,
-                            distanceText: distanceText(
-                              context,
-                              item.distanceKm,
+                            distanceText: item.distance.formatDistance(
+                              meterLabel: context.localization.distanceM,
+                              kmLabel: context.localization.distanceKm,
                             ),
                             onTap: () => widget.onItemTap?.call(item),
                           );
@@ -142,14 +142,6 @@ class _HomeListCellState extends State<HomeListCell>
         },
       ),
     );
-  }
-
-  String? distanceText(BuildContext context, double? distance) {
-    if (distance == null) return null;
-    if (distance < 0.5) {
-      return "${(distance * 100).floor()} ${context.localization.distanceM}";
-    }
-    return "${distance.floor()} ${context.localization.distanceKm}";
   }
 
 }

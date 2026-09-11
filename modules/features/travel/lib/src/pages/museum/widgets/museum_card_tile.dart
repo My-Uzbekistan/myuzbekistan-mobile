@@ -49,7 +49,9 @@ class MuseumCardTile extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
+                    stops: const [0, 0.5, 1],
                     colors: [
+                      context.appColors.service.scrim.withValues(alpha: 0.16),
                       context.appColors.service.scrim.withValues(alpha: 0.16),
                       context.appColors.service.scrim,
                     ],

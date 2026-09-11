@@ -4,7 +4,7 @@ import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/museum/favorites/bloc/museum_favorites_bloc.dart';
 import 'package:travel/src/pages/museum/list/widgets/shimmer/museum_cards_shimmer.dart';
 import 'package:travel/src/pages/museum/widgets/museum_card_tile.dart';
-import 'package:travel/src/pages/museum/widgets/museum_nav_bar.dart';
+import 'package:travel/src/widgets/travel_nav_bar.dart';
 import 'package:travel/src/pages/museum/widgets/museum_state_view.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart' hide Toast;
@@ -30,7 +30,7 @@ class MuseumFavoritesPage extends StatelessWidget {
           builder:
               (context, state) => Column(
                 children: [
-                  MuseumNavBar(
+                  TravelNavBar(
                     title: context.localization.museum_favorites_title,
                     onBack: () => context.pop(),
                   ),

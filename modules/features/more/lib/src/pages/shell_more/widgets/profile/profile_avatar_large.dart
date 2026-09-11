@@ -18,7 +18,7 @@ class ProfileAvatarLarge extends StatelessWidget {
     final url = photoUrl ?? "";
     final placeholder = Assets.png.avatar.image(fit: BoxFit.cover);
     final avatar = ClipRRect(
-      borderRadius: BorderRadius.circular(30),
+      borderRadius: BorderRadius.circular(36),
       child: SizedBox(
         width: 120,
         height: 120,

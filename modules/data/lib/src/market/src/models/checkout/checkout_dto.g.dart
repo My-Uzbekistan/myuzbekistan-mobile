@@ -13,6 +13,14 @@ CheckoutDto _$CheckoutDtoFromJson(Map<String, dynamic> json) => CheckoutDto(
   address: json['address'] == null
       ? null
       : MarketAddressDto.fromJson(json['address'] as Map<String, dynamic>),
+  pickupPoint: json['pickupPoint'] == null
+      ? null
+      : MarketPickupPointDto.fromJson(
+          json['pickupPoint'] as Map<String, dynamic>,
+        ),
+  region: json['region'] == null
+      ? null
+      : MarketRegionDto.fromJson(json['region'] as Map<String, dynamic>),
   phone: json['phone'] as String?,
   items: (json['items'] as List<dynamic>?)
       ?.map((e) => CartItemDto.fromJson(e as Map<String, dynamic>))
@@ -32,6 +40,8 @@ Map<String, dynamic> _$CheckoutDtoToJson(CheckoutDto instance) =>
     <String, dynamic>{
       'delivery': instance.delivery,
       'address': instance.address,
+      'pickupPoint': instance.pickupPoint,
+      'region': instance.region,
       'phone': instance.phone,
       'items': instance.items,
       'price': instance.price,

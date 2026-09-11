@@ -55,12 +55,13 @@ extension MuseumDetailEventPatterns on MuseumDetailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MuseumDetailStartEvent value)?  start,TResult Function( _MuseumDetailRefreshEvent value)?  refresh,TResult Function( _MuseumDetailToggleFavoriteEvent value)?  toggleFavorite,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MuseumDetailStartEvent value)?  start,TResult Function( _MuseumDetailRefreshEvent value)?  refresh,TResult Function( _MuseumDetailFavoriteChangedEvent value)?  favoriteChanged,TResult Function( _MuseumDetailToggleFavoriteEvent value)?  toggleFavorite,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _MuseumDetailStartEvent() when start != null:
 return start(_that);case _MuseumDetailRefreshEvent() when refresh != null:
-return refresh(_that);case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh(_that);case _MuseumDetailFavoriteChangedEvent() when favoriteChanged != null:
+return favoriteChanged(_that);case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _:
   return orElse();
 
@@ -79,12 +80,13 @@ return toggleFavorite(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MuseumDetailStartEvent value)  start,required TResult Function( _MuseumDetailRefreshEvent value)  refresh,required TResult Function( _MuseumDetailToggleFavoriteEvent value)  toggleFavorite,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MuseumDetailStartEvent value)  start,required TResult Function( _MuseumDetailRefreshEvent value)  refresh,required TResult Function( _MuseumDetailFavoriteChangedEvent value)  favoriteChanged,required TResult Function( _MuseumDetailToggleFavoriteEvent value)  toggleFavorite,}){
 final _that = this;
 switch (_that) {
 case _MuseumDetailStartEvent():
 return start(_that);case _MuseumDetailRefreshEvent():
-return refresh(_that);case _MuseumDetailToggleFavoriteEvent():
+return refresh(_that);case _MuseumDetailFavoriteChangedEvent():
+return favoriteChanged(_that);case _MuseumDetailToggleFavoriteEvent():
 return toggleFavorite(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -102,12 +104,13 @@ return toggleFavorite(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MuseumDetailStartEvent value)?  start,TResult? Function( _MuseumDetailRefreshEvent value)?  refresh,TResult? Function( _MuseumDetailToggleFavoriteEvent value)?  toggleFavorite,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MuseumDetailStartEvent value)?  start,TResult? Function( _MuseumDetailRefreshEvent value)?  refresh,TResult? Function( _MuseumDetailFavoriteChangedEvent value)?  favoriteChanged,TResult? Function( _MuseumDetailToggleFavoriteEvent value)?  toggleFavorite,}){
 final _that = this;
 switch (_that) {
 case _MuseumDetailStartEvent() when start != null:
 return start(_that);case _MuseumDetailRefreshEvent() when refresh != null:
-return refresh(_that);case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh(_that);case _MuseumDetailFavoriteChangedEvent() when favoriteChanged != null:
+return favoriteChanged(_that);case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _:
   return null;
 
@@ -125,11 +128,12 @@ return toggleFavorite(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String museumId)?  start,TResult Function()?  refresh,TResult Function()?  toggleFavorite,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String museumId)?  start,TResult Function()?  refresh,TResult Function( ItemChange change)?  favoriteChanged,TResult Function()?  toggleFavorite,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MuseumDetailStartEvent() when start != null:
 return start(_that.museumId);case _MuseumDetailRefreshEvent() when refresh != null:
-return refresh();case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh();case _MuseumDetailFavoriteChangedEvent() when favoriteChanged != null:
+return favoriteChanged(_that.change);case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite();case _:
   return orElse();
 
@@ -148,11 +152,12 @@ return toggleFavorite();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String museumId)  start,required TResult Function()  refresh,required TResult Function()  toggleFavorite,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String museumId)  start,required TResult Function()  refresh,required TResult Function( ItemChange change)  favoriteChanged,required TResult Function()  toggleFavorite,}) {final _that = this;
 switch (_that) {
 case _MuseumDetailStartEvent():
 return start(_that.museumId);case _MuseumDetailRefreshEvent():
-return refresh();case _MuseumDetailToggleFavoriteEvent():
+return refresh();case _MuseumDetailFavoriteChangedEvent():
+return favoriteChanged(_that.change);case _MuseumDetailToggleFavoriteEvent():
 return toggleFavorite();case _:
   throw StateError('Unexpected subclass');
 
@@ -170,11 +175,12 @@ return toggleFavorite();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String museumId)?  start,TResult? Function()?  refresh,TResult? Function()?  toggleFavorite,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String museumId)?  start,TResult? Function()?  refresh,TResult? Function( ItemChange change)?  favoriteChanged,TResult? Function()?  toggleFavorite,}) {final _that = this;
 switch (_that) {
 case _MuseumDetailStartEvent() when start != null:
 return start(_that.museumId);case _MuseumDetailRefreshEvent() when refresh != null:
-return refresh();case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh();case _MuseumDetailFavoriteChangedEvent() when favoriteChanged != null:
+return favoriteChanged(_that.change);case _MuseumDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite();case _:
   return null;
 
@@ -280,6 +286,72 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _MuseumDetailFavoriteChangedEvent implements MuseumDetailEvent {
+   _MuseumDetailFavoriteChangedEvent({required this.change});
+  
+
+ final  ItemChange change;
+
+/// Create a copy of MuseumDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MuseumDetailFavoriteChangedEventCopyWith<_MuseumDetailFavoriteChangedEvent> get copyWith => __$MuseumDetailFavoriteChangedEventCopyWithImpl<_MuseumDetailFavoriteChangedEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MuseumDetailFavoriteChangedEvent&&(identical(other.change, change) || other.change == change));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,change);
+
+@override
+String toString() {
+  return 'MuseumDetailEvent.favoriteChanged(change: $change)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MuseumDetailFavoriteChangedEventCopyWith<$Res> implements $MuseumDetailEventCopyWith<$Res> {
+  factory _$MuseumDetailFavoriteChangedEventCopyWith(_MuseumDetailFavoriteChangedEvent value, $Res Function(_MuseumDetailFavoriteChangedEvent) _then) = __$MuseumDetailFavoriteChangedEventCopyWithImpl;
+@useResult
+$Res call({
+ ItemChange change
+});
+
+
+
+
+}
+/// @nodoc
+class __$MuseumDetailFavoriteChangedEventCopyWithImpl<$Res>
+    implements _$MuseumDetailFavoriteChangedEventCopyWith<$Res> {
+  __$MuseumDetailFavoriteChangedEventCopyWithImpl(this._self, this._then);
+
+  final _MuseumDetailFavoriteChangedEvent _self;
+  final $Res Function(_MuseumDetailFavoriteChangedEvent) _then;
+
+/// Create a copy of MuseumDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? change = null,}) {
+  return _then(_MuseumDetailFavoriteChangedEvent(
+change: null == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as ItemChange,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -11,14 +13,43 @@ const int _pageSize = 20;
 class MarketCategoryBloc
     extends Bloc<MarketCategoryEvent, MarketCategoryState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refreshListener;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
+  StreamSubscription<ItemChange>? _productSubscription;
 
-  MarketCategoryBloc(this._repository) : super(MarketCategoryState()) {
+  MarketCategoryBloc(this._repository, this._refreshListener)
+    : super(MarketCategoryState()) {
     on<_MarketCategoryStartEvent>(_start);
     on<_MarketCategoryRefreshEvent>(_refresh);
+    on<_MarketCategoryProductChangedEvent>(_productChanged);
+    on<_MarketCategoryLoadCartSummaryEvent>(_loadCartSummaryEvent);
     on<_MarketCategoryLoadMoreEvent>(_loadMore);
     on<_MarketCategoryChangeSortEvent>(_changeSort);
     on<_MarketCategoryToggleFavoriteEvent>(_toggleFavorite);
     on<_MarketCategoryChangeCartQuantityEvent>(_changeCartQuantity);
+
+    _refreshSubscription = _refreshListener
+        .observe({AppRefreshTopic.marketCart})
+        .listen((_) => add(MarketCategoryEvent.loadCartSummary()));
+    _productSubscription = _refreshListener
+        .observeItems(RefreshEntity.marketProduct)
+        .listen(
+          (change) => add(MarketCategoryEvent.productChanged(change: change)),
+        );
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    _productSubscription?.cancel();
+    return super.close();
+  }
+
+  void _productChanged(
+    _MarketCategoryProductChangedEvent event,
+    Emitter<MarketCategoryState> emit,
+  ) {
+    emit(state.copyWith(products: _applyChange(event.change)));
   }
 
   Future<void> _start(
@@ -55,6 +86,11 @@ class MarketCategoryBloc
     emit(state.copyWith(sort: event.sort, products: const []));
     await _loadFirstPage(emit);
   }
+
+  Future<void> _loadCartSummaryEvent(
+    _MarketCategoryLoadCartSummaryEvent event,
+    Emitter<MarketCategoryState> emit,
+  ) => _loadCartSummary(emit);
 
   Future<void> _loadFirstPage(Emitter<MarketCategoryState> emit) async {
     emit(
@@ -129,13 +165,28 @@ class MarketCategoryBloc
         errorMessage: null,
       ),
     );
+    _refreshListener.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        isFavorite: isFavorite,
+      ),
+    );
     try {
       if (isFavorite) {
         await _repository.addFavorite(productId: product.id);
       } else {
         await _repository.removeFavorite(productId: product.id);
       }
+      _refreshListener.notify(AppRefreshTopic.marketFavorites);
     } catch (e) {
+      _refreshListener.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          isFavorite: product.isFavorite,
+        ),
+      );
       emit(
         state.copyWith(
           products: _replaceProduct(product),
@@ -157,6 +208,13 @@ class MarketCategoryBloc
         errorMessage: null,
       ),
     );
+    _refreshListener.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        cartQuantity: quantity,
+      ),
+    );
     try {
       if (product.cartQuantity == 0) {
         await _repository.addToCart(productId: product.id, quantity: quantity);
@@ -166,8 +224,15 @@ class MarketCategoryBloc
           quantity: quantity,
         );
       }
-      await _loadCartSummary(emit);
+      _refreshListener.notify(AppRefreshTopic.marketCart);
     } catch (e) {
+      _refreshListener.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          cartQuantity: product.cartQuantity,
+        ),
+      );
       emit(
         state.copyWith(
           products: _replaceProduct(product),
@@ -194,6 +259,20 @@ class MarketCategoryBloc
   List<MarketProduct> _replaceProduct(MarketProduct product) {
     return state.products
         .map((item) => item.id == product.id ? product : item)
+        .toList();
+  }
+
+  List<MarketProduct> _applyChange(ItemChange change) {
+    return state.products
+        .map(
+          (item) =>
+              item.id.toString() == change.id
+                  ? item.copyWith(
+                    isFavorite: change.isFavorite,
+                    cartQuantity: change.cartQuantity,
+                  )
+                  : item,
+        )
         .toList();
   }
 

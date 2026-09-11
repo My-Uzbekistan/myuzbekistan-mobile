@@ -55,12 +55,13 @@ extension FavoritesEventPatterns on FavoritesEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FavoritesLoadDataEvent value)?  loadData,TResult Function( _FavoritesToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _FavoritesChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _FavoritesLoadDataEvent value)?  loadData,TResult Function( _FavoritesToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _FavoritesProductChangedEvent value)?  productChanged,TResult Function( _FavoritesChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _FavoritesLoadDataEvent() when loadData != null:
 return loadData(_that);case _FavoritesToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that);case _FavoritesProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that);case _:
   return orElse();
 
@@ -79,12 +80,13 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FavoritesLoadDataEvent value)  loadData,required TResult Function( _FavoritesToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _FavoritesChangeCartQuantityEvent value)  changeCartQuantity,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _FavoritesLoadDataEvent value)  loadData,required TResult Function( _FavoritesToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _FavoritesProductChangedEvent value)  productChanged,required TResult Function( _FavoritesChangeCartQuantityEvent value)  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _FavoritesLoadDataEvent():
 return loadData(_that);case _FavoritesToggleFavoriteEvent():
-return toggleFavorite(_that);case _FavoritesChangeCartQuantityEvent():
+return toggleFavorite(_that);case _FavoritesProductChangedEvent():
+return productChanged(_that);case _FavoritesChangeCartQuantityEvent():
 return changeCartQuantity(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -102,12 +104,13 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FavoritesLoadDataEvent value)?  loadData,TResult? Function( _FavoritesToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _FavoritesChangeCartQuantityEvent value)?  changeCartQuantity,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _FavoritesLoadDataEvent value)?  loadData,TResult? Function( _FavoritesToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _FavoritesProductChangedEvent value)?  productChanged,TResult? Function( _FavoritesChangeCartQuantityEvent value)?  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _FavoritesLoadDataEvent() when loadData != null:
 return loadData(_that);case _FavoritesToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that);case _FavoritesProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that);case _:
   return null;
 
@@ -125,11 +128,12 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadData,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loadData,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( ItemChange change)?  productChanged,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _FavoritesLoadDataEvent() when loadData != null:
 return loadData();case _FavoritesToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that.product);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that.product);case _FavoritesProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that.product,_that.quantity);case _:
   return orElse();
 
@@ -148,11 +152,12 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadData,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loadData,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( ItemChange change)  productChanged,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _FavoritesLoadDataEvent():
 return loadData();case _FavoritesToggleFavoriteEvent():
-return toggleFavorite(_that.product);case _FavoritesChangeCartQuantityEvent():
+return toggleFavorite(_that.product);case _FavoritesProductChangedEvent():
+return productChanged(_that.change);case _FavoritesChangeCartQuantityEvent():
 return changeCartQuantity(_that.product,_that.quantity);case _:
   throw StateError('Unexpected subclass');
 
@@ -170,11 +175,12 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadData,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loadData,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( ItemChange change)?  productChanged,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _FavoritesLoadDataEvent() when loadData != null:
 return loadData();case _FavoritesToggleFavoriteEvent() when toggleFavorite != null:
-return toggleFavorite(_that.product);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
+return toggleFavorite(_that.product);case _FavoritesProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _FavoritesChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that.product,_that.quantity);case _:
   return null;
 
@@ -275,6 +281,72 @@ class __$FavoritesToggleFavoriteEventCopyWithImpl<$Res>
   return _then(_FavoritesToggleFavoriteEvent(
 product: null == product ? _self.product : product // ignore: cast_nullable_to_non_nullable
 as MarketProduct,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _FavoritesProductChangedEvent implements FavoritesEvent {
+   _FavoritesProductChangedEvent({required this.change});
+  
+
+ final  ItemChange change;
+
+/// Create a copy of FavoritesEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FavoritesProductChangedEventCopyWith<_FavoritesProductChangedEvent> get copyWith => __$FavoritesProductChangedEventCopyWithImpl<_FavoritesProductChangedEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FavoritesProductChangedEvent&&(identical(other.change, change) || other.change == change));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,change);
+
+@override
+String toString() {
+  return 'FavoritesEvent.productChanged(change: $change)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$FavoritesProductChangedEventCopyWith<$Res> implements $FavoritesEventCopyWith<$Res> {
+  factory _$FavoritesProductChangedEventCopyWith(_FavoritesProductChangedEvent value, $Res Function(_FavoritesProductChangedEvent) _then) = __$FavoritesProductChangedEventCopyWithImpl;
+@useResult
+$Res call({
+ ItemChange change
+});
+
+
+
+
+}
+/// @nodoc
+class __$FavoritesProductChangedEventCopyWithImpl<$Res>
+    implements _$FavoritesProductChangedEventCopyWith<$Res> {
+  __$FavoritesProductChangedEventCopyWithImpl(this._self, this._then);
+
+  final _FavoritesProductChangedEvent _self;
+  final $Res Function(_FavoritesProductChangedEvent) _then;
+
+/// Create a copy of FavoritesEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? change = null,}) {
+  return _then(_FavoritesProductChangedEvent(
+change: null == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as ItemChange,
   ));
 }
 

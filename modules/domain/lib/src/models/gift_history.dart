@@ -1,15 +1,8 @@
-// {
-// "name": "Uzb",
-// "description": "Uz Description",
-// "packageSize": 100,
-// "claimedAt": "2026-03-14T10:44:46.626016Z"
-// }
-
 class ClaimHistory {
   String? name;
   String? description;
   int? packageSize;
-  String? claimedAt;
+  DateTime? claimedAt;
 
   ClaimHistory({this.name, this.description, this.packageSize, this.claimedAt});
 

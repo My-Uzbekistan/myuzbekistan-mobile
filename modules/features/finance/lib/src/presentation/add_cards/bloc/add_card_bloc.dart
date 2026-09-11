@@ -49,6 +49,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
         params: AddCardParams.externalParams(
           expiry: event.expire,
           cvv: event.cvv,
+          cardHolderName: event.cardHolderName,
         ),
       ),
     );
@@ -109,6 +110,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
             AddCardEvent.setExternalParams(
               expire: "",
               cvv: "",
+              cardHolderName: "",
               cardBrand: result.cardBrand,
             ),
           )
@@ -135,14 +137,17 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
       final expParts = state.params!.expiry.split("/");
       final formattedExpiry = "${expParts.last}${expParts.first}";
       String cvv = "";
+      String cardHolderName = "";
       if (state.params case AddCardExternalParams params) {
         cvv = params.cvv;
+        cardHolderName = params.cardHolderName.trim();
       }
 
       final result = await _financeRepository.bindCard(
         pan: state.pan,
         expiry: formattedExpiry,
         cvv: cvv,
+        cardHolderName: cardHolderName,
         image: state.selectedImage,
       );
       if (state.isExternal == true) {

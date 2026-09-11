@@ -6,6 +6,14 @@ class _FeatureTravelNavPath {
   AppNavPath get travelHome =>
       _NavPathImpl(name: 'feature_travel_home', path: '/home');
 
+  AppNavPath get globalSearch =>
+      _NavPathImpl(name: 'feature_travel_global_search', path: '/search');
+
+  AppNavPath get globalSearchResult => _NavPathImpl(
+    name: 'feature_travel_global_search_result',
+    path: '/search_result',
+  );
+
   AppNavPath get travelServices =>
       _NavPathImpl(name: 'feature_travel_services', path: '/services');
 
@@ -81,8 +89,11 @@ class _FeatureTravelNavPath {
   AppNavPath get detailReadMore =>
       _NavPathImpl(name: 'detailReadMore', path: 'detailReadMore');
 
-  AppNavPath get addReviewPage =>
-      _NavPathImpl(name: 'addReviewPage', path: 'addReviewPage');
+  AppNavPath get addReviewPage => _NavPathImpl(
+    name: 'addReviewPage',
+    path: 'addReviewPage',
+    authRequired: true,
+  );
   AppNavPath get allReviews =>
       _NavPathImpl(name: 'allReviews', path: 'allReviews');
 
@@ -122,4 +133,43 @@ class _FeatureTravelNavPath {
 
   AppNavPath get museumFavorites =>
       _NavPathImpl(name: 'feature_museum_favorites', path: '/museum/favorites');
+
+  List<AppNavPath> get values => [
+    travelHome,
+    globalSearch,
+    globalSearchResult,
+    travelServices,
+    travelDetail,
+    travelCity,
+    travelContentByCategory,
+    travelHomeGiftPage,
+    travelHomeGiftOnboardingPage,
+    travelHomeGiftHistory,
+    travelSelectRegion,
+    travelOnboarding,
+    travelPrayerTimes,
+    travelPrayerLocation,
+    travelCatalogInvestments,
+    travelCatalogInvestmentsSearch,
+    travelCatalogInvestmentsSort,
+    travelCatalogInvestmentsPriceSort,
+    travelCatalogInvestmentsSortType,
+    notifications,
+    notificationsDetail,
+    imagePreview,
+    detailAllFacilities,
+    detailReadMore,
+    addReviewPage,
+    allReviews,
+    premiumOnboardingPage,
+    premiumCancelPage,
+    travelContractDetail,
+    museumHome,
+    museumSearch,
+    museumList,
+    museumDetail,
+    museumPurchase,
+    museumTickets,
+    museumFavorites,
+  ];
 }

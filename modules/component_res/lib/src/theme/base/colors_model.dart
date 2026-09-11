@@ -68,12 +68,14 @@ class FillColors {
   final Color secondary;
   final Color tertiary;
   final Color quaternary;
+  final Color opaque;
 
   FillColors({
     required this.primary,
     required this.secondary,
     required this.tertiary,
     required this.quaternary,
+    required this.opaque,
   });
 }
 
@@ -138,6 +140,7 @@ class ServiceColors {
   final Color shimmerBase;
   final Color shimmerHighlight;
   final Color heroSurface;
+  final Color iconNeutral;
 
   ServiceColors({
     required this.overlay,
@@ -148,6 +151,7 @@ class ServiceColors {
     required this.shimmerBase,
     required this.shimmerHighlight,
     required this.heroSurface,
+    required this.iconNeutral,
   });
 }
 
@@ -157,6 +161,8 @@ class AccentColors {
   final Color premiumDark;
   final Color premiumPlan;
   final Color premiumPlanDark;
+  final Color premiumSurface;
+  final Color premiumGlow;
   final Color gift;
   final Color giftLime;
   final Color giftSurface;
@@ -169,6 +175,8 @@ class AccentColors {
     required this.premiumDark,
     required this.premiumPlan,
     required this.premiumPlanDark,
+    required this.premiumSurface,
+    required this.premiumGlow,
     required this.gift,
     required this.giftLime,
     required this.giftSurface,

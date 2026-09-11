@@ -19,13 +19,17 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
   StreamSubscription? _streamSubscription;
   StreamSubscription? _refreshProfileSubscription;
   final Repository repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _premiumSubscription;
 
   ProfileBloc(
     SecurityStorage securityStorage,
     AppStatusChangeListeners appStatusChangeListeners,
     this.repository,
     PremiumRepository premiumRepository,
+    AppRefreshListener refresh,
   ) : _securityStorage = securityStorage,
+      _refresh = refresh,
       _appStatusChangeListeners = appStatusChangeListeners,
       _premiumRepository = premiumRepository,
       super(ProfileBlocState.guestState()) {
@@ -50,6 +54,7 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
       }
     });
     on<_ProfileBlocLogOutEvent>((event, emit) async {
+      await _endServerSession();
       await _securityStorage.clearData();
       GlobalHandler().refreshListener?.call();
     });
@@ -63,6 +68,12 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
     on<_ProfileBlocUploadAvatarEvent>(_onUploadAvatar);
     on<_ProfileBlocSyncAvatarEvent>(_onSyncAvatar);
     on<_ProfileBlocSyncPremiumEvent>(_onSyncPremium);
+  }
+
+  Future<void> _endServerSession() async {
+    try {
+      await repository.logout().timeout(const Duration(seconds: 3));
+    } catch (_) {}
   }
 
   Future<void> _onSyncAvatar(
@@ -147,12 +158,17 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
         .listen((event) {
           add(ProfileBlocEvent.loadEvent());
         });
+    _premiumSubscription?.cancel();
+    _premiumSubscription = _refresh
+        .observe({AppRefreshTopic.premium})
+        .listen((_) => add(ProfileBlocEvent.syncPremium()));
   }
 
   @override
   Future<void> close() {
     _streamSubscription?.cancel();
     _refreshProfileSubscription?.cancel();
+    _premiumSubscription?.cancel();
     return super.close();
   }
 }

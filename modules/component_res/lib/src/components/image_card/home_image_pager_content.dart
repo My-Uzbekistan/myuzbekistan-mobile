@@ -189,7 +189,7 @@ class _ImagePage extends StatelessWidget {
       edges: [
         EdgeBlur(
           type: EdgeType.bottomEdge,
-          size: 160,
+          size: 88,
           sigma: 6,
           tileMode: TileMode.mirror,
           controlPoints: [

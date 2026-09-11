@@ -55,12 +55,14 @@ extension MarketCategoryEventPatterns on MarketCategoryEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketCategoryStartEvent value)?  start,TResult Function( _MarketCategoryRefreshEvent value)?  refresh,TResult Function( _MarketCategoryLoadMoreEvent value)?  loadMore,TResult Function( _MarketCategoryChangeSortEvent value)?  changeSort,TResult Function( _MarketCategoryToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketCategoryChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketCategoryStartEvent value)?  start,TResult Function( _MarketCategoryRefreshEvent value)?  refresh,TResult Function( _MarketCategoryProductChangedEvent value)?  productChanged,TResult Function( _MarketCategoryLoadCartSummaryEvent value)?  loadCartSummary,TResult Function( _MarketCategoryLoadMoreEvent value)?  loadMore,TResult Function( _MarketCategoryChangeSortEvent value)?  changeSort,TResult Function( _MarketCategoryToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketCategoryChangeCartQuantityEvent value)?  changeCartQuantity,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _MarketCategoryStartEvent() when start != null:
 return start(_that);case _MarketCategoryRefreshEvent() when refresh != null:
-return refresh(_that);case _MarketCategoryLoadMoreEvent() when loadMore != null:
+return refresh(_that);case _MarketCategoryProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketCategoryLoadCartSummaryEvent() when loadCartSummary != null:
+return loadCartSummary(_that);case _MarketCategoryLoadMoreEvent() when loadMore != null:
 return loadMore(_that);case _MarketCategoryChangeSortEvent() when changeSort != null:
 return changeSort(_that);case _MarketCategoryToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _MarketCategoryChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -82,12 +84,14 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketCategoryStartEvent value)  start,required TResult Function( _MarketCategoryRefreshEvent value)  refresh,required TResult Function( _MarketCategoryLoadMoreEvent value)  loadMore,required TResult Function( _MarketCategoryChangeSortEvent value)  changeSort,required TResult Function( _MarketCategoryToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketCategoryChangeCartQuantityEvent value)  changeCartQuantity,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketCategoryStartEvent value)  start,required TResult Function( _MarketCategoryRefreshEvent value)  refresh,required TResult Function( _MarketCategoryProductChangedEvent value)  productChanged,required TResult Function( _MarketCategoryLoadCartSummaryEvent value)  loadCartSummary,required TResult Function( _MarketCategoryLoadMoreEvent value)  loadMore,required TResult Function( _MarketCategoryChangeSortEvent value)  changeSort,required TResult Function( _MarketCategoryToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketCategoryChangeCartQuantityEvent value)  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _MarketCategoryStartEvent():
 return start(_that);case _MarketCategoryRefreshEvent():
-return refresh(_that);case _MarketCategoryLoadMoreEvent():
+return refresh(_that);case _MarketCategoryProductChangedEvent():
+return productChanged(_that);case _MarketCategoryLoadCartSummaryEvent():
+return loadCartSummary(_that);case _MarketCategoryLoadMoreEvent():
 return loadMore(_that);case _MarketCategoryChangeSortEvent():
 return changeSort(_that);case _MarketCategoryToggleFavoriteEvent():
 return toggleFavorite(_that);case _MarketCategoryChangeCartQuantityEvent():
@@ -108,12 +112,14 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketCategoryStartEvent value)?  start,TResult? Function( _MarketCategoryRefreshEvent value)?  refresh,TResult? Function( _MarketCategoryLoadMoreEvent value)?  loadMore,TResult? Function( _MarketCategoryChangeSortEvent value)?  changeSort,TResult? Function( _MarketCategoryToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketCategoryChangeCartQuantityEvent value)?  changeCartQuantity,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketCategoryStartEvent value)?  start,TResult? Function( _MarketCategoryRefreshEvent value)?  refresh,TResult? Function( _MarketCategoryProductChangedEvent value)?  productChanged,TResult? Function( _MarketCategoryLoadCartSummaryEvent value)?  loadCartSummary,TResult? Function( _MarketCategoryLoadMoreEvent value)?  loadMore,TResult? Function( _MarketCategoryChangeSortEvent value)?  changeSort,TResult? Function( _MarketCategoryToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketCategoryChangeCartQuantityEvent value)?  changeCartQuantity,}){
 final _that = this;
 switch (_that) {
 case _MarketCategoryStartEvent() when start != null:
 return start(_that);case _MarketCategoryRefreshEvent() when refresh != null:
-return refresh(_that);case _MarketCategoryLoadMoreEvent() when loadMore != null:
+return refresh(_that);case _MarketCategoryProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketCategoryLoadCartSummaryEvent() when loadCartSummary != null:
+return loadCartSummary(_that);case _MarketCategoryLoadMoreEvent() when loadMore != null:
 return loadMore(_that);case _MarketCategoryChangeSortEvent() when changeSort != null:
 return changeSort(_that);case _MarketCategoryToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _MarketCategoryChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -134,11 +140,13 @@ return changeCartQuantity(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? categoryId,  String? block,  String categoryName,  int productCount)?  start,TResult Function()?  refresh,TResult Function()?  loadMore,TResult Function( MarketProductSort sort)?  changeSort,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int? categoryId,  String? block,  String categoryName,  int productCount)?  start,TResult Function()?  refresh,TResult Function( ItemChange change)?  productChanged,TResult Function()?  loadCartSummary,TResult Function()?  loadMore,TResult Function( MarketProductSort sort)?  changeSort,TResult Function( MarketProduct product)?  toggleFavorite,TResult Function( MarketProduct product,  int quantity)?  changeCartQuantity,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketCategoryStartEvent() when start != null:
 return start(_that.categoryId,_that.block,_that.categoryName,_that.productCount);case _MarketCategoryRefreshEvent() when refresh != null:
-return refresh();case _MarketCategoryLoadMoreEvent() when loadMore != null:
+return refresh();case _MarketCategoryProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketCategoryLoadCartSummaryEvent() when loadCartSummary != null:
+return loadCartSummary();case _MarketCategoryLoadMoreEvent() when loadMore != null:
 return loadMore();case _MarketCategoryChangeSortEvent() when changeSort != null:
 return changeSort(_that.sort);case _MarketCategoryToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that.product);case _MarketCategoryChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -160,11 +168,13 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? categoryId,  String? block,  String categoryName,  int productCount)  start,required TResult Function()  refresh,required TResult Function()  loadMore,required TResult Function( MarketProductSort sort)  changeSort,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int? categoryId,  String? block,  String categoryName,  int productCount)  start,required TResult Function()  refresh,required TResult Function( ItemChange change)  productChanged,required TResult Function()  loadCartSummary,required TResult Function()  loadMore,required TResult Function( MarketProductSort sort)  changeSort,required TResult Function( MarketProduct product)  toggleFavorite,required TResult Function( MarketProduct product,  int quantity)  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _MarketCategoryStartEvent():
 return start(_that.categoryId,_that.block,_that.categoryName,_that.productCount);case _MarketCategoryRefreshEvent():
-return refresh();case _MarketCategoryLoadMoreEvent():
+return refresh();case _MarketCategoryProductChangedEvent():
+return productChanged(_that.change);case _MarketCategoryLoadCartSummaryEvent():
+return loadCartSummary();case _MarketCategoryLoadMoreEvent():
 return loadMore();case _MarketCategoryChangeSortEvent():
 return changeSort(_that.sort);case _MarketCategoryToggleFavoriteEvent():
 return toggleFavorite(_that.product);case _MarketCategoryChangeCartQuantityEvent():
@@ -185,11 +195,13 @@ return changeCartQuantity(_that.product,_that.quantity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? categoryId,  String? block,  String categoryName,  int productCount)?  start,TResult? Function()?  refresh,TResult? Function()?  loadMore,TResult? Function( MarketProductSort sort)?  changeSort,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int? categoryId,  String? block,  String categoryName,  int productCount)?  start,TResult? Function()?  refresh,TResult? Function( ItemChange change)?  productChanged,TResult? Function()?  loadCartSummary,TResult? Function()?  loadMore,TResult? Function( MarketProductSort sort)?  changeSort,TResult? Function( MarketProduct product)?  toggleFavorite,TResult? Function( MarketProduct product,  int quantity)?  changeCartQuantity,}) {final _that = this;
 switch (_that) {
 case _MarketCategoryStartEvent() when start != null:
 return start(_that.categoryId,_that.block,_that.categoryName,_that.productCount);case _MarketCategoryRefreshEvent() when refresh != null:
-return refresh();case _MarketCategoryLoadMoreEvent() when loadMore != null:
+return refresh();case _MarketCategoryProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketCategoryLoadCartSummaryEvent() when loadCartSummary != null:
+return loadCartSummary();case _MarketCategoryLoadMoreEvent() when loadMore != null:
 return loadMore();case _MarketCategoryChangeSortEvent() when changeSort != null:
 return changeSort(_that.sort);case _MarketCategoryToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that.product);case _MarketCategoryChangeCartQuantityEvent() when changeCartQuantity != null:
@@ -297,6 +309,104 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'MarketCategoryEvent.refresh()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _MarketCategoryProductChangedEvent implements MarketCategoryEvent {
+   _MarketCategoryProductChangedEvent({required this.change});
+  
+
+ final  ItemChange change;
+
+/// Create a copy of MarketCategoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MarketCategoryProductChangedEventCopyWith<_MarketCategoryProductChangedEvent> get copyWith => __$MarketCategoryProductChangedEventCopyWithImpl<_MarketCategoryProductChangedEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketCategoryProductChangedEvent&&(identical(other.change, change) || other.change == change));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,change);
+
+@override
+String toString() {
+  return 'MarketCategoryEvent.productChanged(change: $change)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MarketCategoryProductChangedEventCopyWith<$Res> implements $MarketCategoryEventCopyWith<$Res> {
+  factory _$MarketCategoryProductChangedEventCopyWith(_MarketCategoryProductChangedEvent value, $Res Function(_MarketCategoryProductChangedEvent) _then) = __$MarketCategoryProductChangedEventCopyWithImpl;
+@useResult
+$Res call({
+ ItemChange change
+});
+
+
+
+
+}
+/// @nodoc
+class __$MarketCategoryProductChangedEventCopyWithImpl<$Res>
+    implements _$MarketCategoryProductChangedEventCopyWith<$Res> {
+  __$MarketCategoryProductChangedEventCopyWithImpl(this._self, this._then);
+
+  final _MarketCategoryProductChangedEvent _self;
+  final $Res Function(_MarketCategoryProductChangedEvent) _then;
+
+/// Create a copy of MarketCategoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? change = null,}) {
+  return _then(_MarketCategoryProductChangedEvent(
+change: null == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as ItemChange,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _MarketCategoryLoadCartSummaryEvent implements MarketCategoryEvent {
+   _MarketCategoryLoadCartSummaryEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketCategoryLoadCartSummaryEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'MarketCategoryEvent.loadCartSummary()';
 }
 
 

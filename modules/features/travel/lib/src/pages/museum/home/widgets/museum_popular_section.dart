@@ -79,7 +79,7 @@ class _PopularCard extends StatelessWidget {
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    stops: const [0, 0.596, 1],
+                    stops: const [0.6, 0.84, 1],
                     colors: [
                       colors.service.scrim.withValues(alpha: 0),
                       colors.service.scrim.withValues(alpha: 0.48),

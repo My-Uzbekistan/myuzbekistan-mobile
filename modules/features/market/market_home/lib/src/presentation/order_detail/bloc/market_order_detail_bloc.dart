@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -9,12 +11,25 @@ part 'market_order_detail_bloc.freezed.dart';
 class MarketOrderDetailBloc
     extends Bloc<MarketOrderDetailEvent, MarketOrderDetailState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
 
-  MarketOrderDetailBloc(this._repository) : super(MarketOrderDetailState()) {
+  MarketOrderDetailBloc(this._repository, this._refresh)
+    : super(MarketOrderDetailState()) {
     on<_MarketOrderDetailStartEvent>(_start);
     on<_MarketOrderDetailLoadDataEvent>(_loadData);
     on<_MarketOrderDetailToggleDetailsEvent>(_toggleDetails);
     on<_MarketOrderDetailCancelOrderEvent>(_cancelOrder);
+
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.marketOrders})
+        .listen((_) => add(MarketOrderDetailEvent.loadData()));
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    return super.close();
   }
 
   void _start(
@@ -55,6 +70,7 @@ class MarketOrderDetailBloc
       await _repository.cancelOrder(id: state.orderId);
       final order = await _repository.order(id: state.orderId);
       emit(state.copyWith(order: order));
+      _refresh.notify(AppRefreshTopic.marketOrders);
     } catch (e) {
       emit(state.copyWith(errorMessage: _errorMessage(e)));
     }

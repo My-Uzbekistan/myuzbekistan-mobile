@@ -12,6 +12,9 @@ abstract class MarketHomeEvent with _$MarketHomeEvent {
   factory MarketHomeEvent.toggleFavorite({required MarketProduct product}) =
       _MarketHomeToggleFavoriteEvent;
 
+  factory MarketHomeEvent.productChanged({required ItemChange change}) =
+      _MarketHomeProductChangedEvent;
+
   factory MarketHomeEvent.changeCartQuantity({
     required MarketProduct product,
     required int quantity,

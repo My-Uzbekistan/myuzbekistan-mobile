@@ -7,8 +7,10 @@ import 'package:basket/src/presentation/basket/widgets/basket_round_chip.dart';
 import 'package:basket/src/presentation/basket/widgets/basket_seller_section.dart';
 import 'package:basket/src/presentation/basket/widgets/shimmer/basket_shimmer.dart';
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart' hide Toast;
 
 class BasketPage extends HookWidget {
@@ -23,6 +25,12 @@ class BasketPage extends HookWidget {
     final bloc = context.read<BasketBloc>();
     final topInset = MediaQuery.paddingOf(context).top;
     final bottomInset = MediaQuery.paddingOf(context).bottom + 16;
+
+    void openProductDetail(CartItem item) {
+      context.market
+          .pushMarketProductDetail(productId: item.productId)
+          .whenComplete(() => bloc.add(BasketEvent.loadData()));
+    }
 
     void confirmRemoveSelected() {
       showActionAlertDialog(
@@ -95,7 +103,13 @@ class BasketPage extends HookWidget {
                   const SliverToBoxAdapter(
                     child: SizedBox(height: 8),
                   ),
-                  ..._body(context, bloc, state, confirmRemoveSelected),
+                  ..._body(
+                    context,
+                    bloc,
+                    state,
+                    confirmRemoveSelected,
+                    openProductDetail,
+                  ),
                   SliverToBoxAdapter(child: SizedBox(height: bottomInset)),
                 ],
               ),
@@ -111,6 +125,7 @@ class BasketPage extends HookWidget {
     BasketBloc bloc,
     BasketState state,
     VoidCallback onRemoveSelected,
+    ValueChanged<CartItem> onItemTap,
   ) {
     if (state.isEmpty && state.isLoading) {
       return const [SliverToBoxAdapter(child: BasketShimmer())];
@@ -173,6 +188,7 @@ class BasketPage extends HookWidget {
             ),
             onRemoveItem: (item) =>
                 bloc.add(BasketEvent.removeItem(item: item)),
+            onItemTap: onItemTap,
           ),
         ),
       ],

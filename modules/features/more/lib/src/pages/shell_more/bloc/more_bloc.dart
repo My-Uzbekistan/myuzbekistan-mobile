@@ -20,6 +20,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
   final SecurityStorage _securityStorage;
   final PremiumRepository _premiumRepository;
   final DevicesRepository _devicesRepository;
+  final AppRefreshListener _refresh;
 
   MoreBloc(
     this._securityStorage, {
@@ -27,24 +28,30 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     required AppStatusChangeListeners appStatusChangeListeners,
     required PremiumRepository premiumRepository,
     required DevicesRepository devicesRepository,
+    required AppRefreshListener refresh,
   }) : _repository = rp,
+       _refresh = refresh,
        _appStatusChangeListeners = appStatusChangeListeners,
        _premiumRepository = premiumRepository,
        _devicesRepository = devicesRepository,
        super(
          MoreState(
            prayerWidgetChecked: _securityStorage.isShowPrayerTimes(),
+           iqAirWidgetChecked: _securityStorage.isShowIqAirWidget(),
            notificationsEnabled: _securityStorage.isNotificationsEnabled(),
          ),
        ) {
     on<_MoreEventFetch>(_fetchData);
     on<_MoreCheckedPrayerWidget>(_checkedPrayerWidget);
+    on<_MoreCheckedIqAirWidget>(_checkedIqAirWidget);
     on<_MoreCheckedNotification>(_checkedNotification);
     on<_MoreFetchDevicesCount>(_fetchDevicesCount);
+    on<_MoreFetchPremium>(_fetchPremium);
     _init();
   }
 
   StreamSubscription? _streamSubscription;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
 
   Future<void> _checkedPrayerWidget(
     _MoreCheckedPrayerWidget event,
@@ -54,6 +61,16 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     emit(state.copyWith(prayerWidgetChecked: !previousChecked));
     await _securityStorage.changePrayerTimesState(!previousChecked);
     _appStatusChangeListeners.prayersChange(!previousChecked);
+  }
+
+  Future<void> _checkedIqAirWidget(
+    _MoreCheckedIqAirWidget event,
+    Emitter<MoreState> emit,
+  ) async {
+    final previousChecked = state.iqAirWidgetChecked;
+    emit(state.copyWith(iqAirWidgetChecked: !previousChecked));
+    await _securityStorage.changeIqAirWidgetState(!previousChecked);
+    _appStatusChangeListeners.iqAirChange(!previousChecked);
   }
 
   Future<void> _checkedNotification(
@@ -98,6 +115,17 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     ) {
       add(MoreEvent.fetch());
     });
+
+    _refreshSubscription?.cancel();
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.devices, AppRefreshTopic.premium})
+        .listen(
+          (topic) => add(
+            topic == AppRefreshTopic.devices
+                ? MoreEvent.fetchDevicesCount()
+                : MoreEvent.fetchPremium(),
+          ),
+        );
   }
 
   Future<void> _fetchData(
@@ -125,6 +153,11 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     _MoreFetchDevicesCount event,
     Emitter<MoreState> emit,
   ) => _loadDevicesCount(emit);
+
+  Future<void> _fetchPremium(
+    _MoreFetchPremium event,
+    Emitter<MoreState> emit,
+  ) => _loadPremiumStatus(emit);
 
   Future<void> _loadDevicesCount(Emitter<MoreState> emit) async {
     if (_securityStorage.getAccessToken() == null) {
@@ -167,6 +200,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
   @override
   Future<void> close() {
     _streamSubscription?.cancel();
+    _refreshSubscription?.cancel();
     return super.close();
   }
 }

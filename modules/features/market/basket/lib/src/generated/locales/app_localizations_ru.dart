@@ -84,6 +84,12 @@ class FeatureBasketLocalizationsRu extends FeatureBasketLocalizations {
   String get basket_checkout_phone => 'Телефон получателя';
 
   @override
+  String get basket_checkout_phone_add => 'Добавить номер телефона';
+
+  @override
+  String get basket_checkout_phone_label => 'Номер телефона';
+
+  @override
   String get basket_checkout_products => 'Товары';
 
   @override
@@ -124,4 +130,60 @@ class FeatureBasketLocalizationsRu extends FeatureBasketLocalizations {
 
   @override
   String get basket_action_edit => 'Изменить';
+
+  @override
+  String get basket_checkout_store_address => 'Адрес магазина';
+
+  @override
+  String get basket_checkout_delivery_address => 'Адрес доставки';
+
+  @override
+  String get basket_checkout_my_addresses => 'Мои адреса';
+
+  @override
+  String get basket_checkout_address_new => 'Новый адрес';
+
+  @override
+  String get basket_checkout_pickup_closest => 'Самый близкий';
+
+  @override
+  String basket_checkout_pickup_distance(Object distance) {
+    return '$distance км';
+  }
+
+  @override
+  String get basket_checkout_pickup_empty => 'Пока нет доступных магазинов';
+
+  @override
+  String get basket_checkout_delivery_empty => 'Способ получения недоступен';
+
+  @override
+  String get basket_checkout_delivery_unavailable =>
+      'Для этого региона нет доступных способов получения. Попробуйте позже';
+
+  @override
+  String get basket_checkout_delivery_no_region =>
+      'Адрес не отмечен на карте — регион доставки не определён. Измените адрес и выберите точку на карте';
+
+  @override
+  String get basket_checkout_delivery_select => 'Выберите способ получения';
+
+  @override
+  String get basket_map_title => 'Выберите адресс доставки';
+
+  @override
+  String get basket_map_add => 'Добавить';
+
+  @override
+  String get basket_map_save => 'Сохранить';
+
+  @override
+  String get basket_map_address_empty => 'Точка не определена';
+
+  @override
+  String get basket_map_delete_title => 'Удалить локацию?';
+
+  @override
+  String get basket_map_delete_message =>
+      'Вы уверены что хотите удалить эту локацию?';
 }

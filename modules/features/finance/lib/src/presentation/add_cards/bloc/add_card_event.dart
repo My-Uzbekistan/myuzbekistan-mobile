@@ -5,6 +5,7 @@ abstract class AddCardEvent with _$AddCardEvent {
   factory AddCardEvent.setExternalParams({
     required String expire,
     required String cvv,
+    required String cardHolderName,
     String? cardBrand,
   }) = _SetExtermalParamsEvent;
 

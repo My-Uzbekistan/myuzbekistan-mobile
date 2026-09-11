@@ -38,7 +38,9 @@ abstract class AddCardParams with _$AddCardParams {
   bool hasDataSuccess() {
     if (this is AddCardExternalParams) {
       final param = this as AddCardExternalParams;
-      return param.expiry.length >= 5 && param.cvv.length >= 3;
+      return param.expiry.length >= 5 &&
+          param.cvv.length >= 3 &&
+          param.cardHolderName.trim().isNotEmpty;
     } else if (this is AddCardOwnParams) {
       final param = this as AddCardOwnParams;
       return param.expiry.length >= 5;
@@ -49,6 +51,7 @@ abstract class AddCardParams with _$AddCardParams {
   const factory AddCardParams.externalParams({
     @Default("") String expiry,
     @Default("") String cvv,
+    @Default("") String cardHolderName,
   }) = AddCardExternalParams;
 
   const factory AddCardParams.ownParams({@Default("") String expiry}) =

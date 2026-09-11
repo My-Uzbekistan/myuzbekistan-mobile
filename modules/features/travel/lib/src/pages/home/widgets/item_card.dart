@@ -79,7 +79,7 @@ class _ItemCardState extends State<ItemCard>
                                     context.appColors.textIconColor.secondary,
                               ),
                             ),
-                            if (widget.content.distanceKm != null)
+                            if (widget.distanceText != null)
                               Text(
                                 " • ${widget.distanceText}",
                                 maxLines: 1,

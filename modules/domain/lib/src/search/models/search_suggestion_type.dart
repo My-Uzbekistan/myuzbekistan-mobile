@@ -1,0 +1,1 @@
+enum SearchSuggestionType { city, content }

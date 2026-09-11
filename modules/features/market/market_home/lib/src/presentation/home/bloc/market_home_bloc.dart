@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
@@ -8,13 +10,40 @@ part 'market_home_bloc.freezed.dart';
 @injectable
 class MarketHomeBloc extends Bloc<MarketHomeEvent, MarketHomeState> {
   final MarketRepository _repository;
+  final AppRefreshListener _refresh;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
+  StreamSubscription<ItemChange>? _productSubscription;
 
-  MarketHomeBloc(this._repository) : super(MarketHomeState()) {
+  MarketHomeBloc(this._repository, this._refresh) : super(MarketHomeState()) {
     on<_MarketHomeLoadDataEvent>(_loadData);
     on<_MarketHomeLoadCartEvent>(_loadCart);
     on<_MarketHomeSelectCityEvent>(_selectCity);
     on<_MarketHomeToggleFavoriteEvent>(_toggleFavorite);
     on<_MarketHomeChangeCartQuantityEvent>(_changeCartQuantity);
+    on<_MarketHomeProductChangedEvent>(_productChanged);
+
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.marketCart})
+        .listen((_) => add(MarketHomeEvent.loadCart()));
+    _productSubscription = _refresh
+        .observeItems(RefreshEntity.marketProduct)
+        .listen(
+          (change) => add(MarketHomeEvent.productChanged(change: change)),
+        );
+  }
+
+  @override
+  Future<void> close() {
+    _refreshSubscription?.cancel();
+    _productSubscription?.cancel();
+    return super.close();
+  }
+
+  void _productChanged(
+    _MarketHomeProductChangedEvent event,
+    Emitter<MarketHomeState> emit,
+  ) {
+    emit(state.copyWith(blocks: _applyChange(event.change)));
   }
 
   Future<void> _loadData(
@@ -30,7 +59,8 @@ class MarketHomeBloc extends Bloc<MarketHomeEvent, MarketHomeState> {
         state.copyWith(
           city: home.city,
           categories: home.categories,
-          blocks: home.blocks,
+          blocks:
+              home.blocks.where((block) => block.products.isNotEmpty).toList(),
           loadFailed: false,
         ),
       );
@@ -71,10 +101,12 @@ class MarketHomeBloc extends Bloc<MarketHomeEvent, MarketHomeState> {
   ) async {
     final product = event.product;
     final isFavorite = !product.isFavorite;
-    emit(
-      state.copyWith(
-        blocks: _replaceProduct(product.copyWith(isFavorite: isFavorite)),
-        errorMessage: null,
+    emit(state.copyWith(errorMessage: null));
+    _refresh.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        isFavorite: isFavorite,
       ),
     );
     try {
@@ -83,13 +115,16 @@ class MarketHomeBloc extends Bloc<MarketHomeEvent, MarketHomeState> {
       } else {
         await _repository.removeFavorite(productId: product.id);
       }
+      _refresh.notify(AppRefreshTopic.marketFavorites);
     } catch (e) {
-      emit(
-        state.copyWith(
-          blocks: _replaceProduct(product),
-          errorMessage: _errorMessage(e),
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          isFavorite: product.isFavorite,
         ),
       );
+      emit(state.copyWith(errorMessage: _errorMessage(e)));
     }
   }
 
@@ -99,42 +134,52 @@ class MarketHomeBloc extends Bloc<MarketHomeEvent, MarketHomeState> {
   ) async {
     final product = event.product;
     final quantity = event.quantity;
-    emit(
-      state.copyWith(
-        blocks: _replaceProduct(product.copyWith(cartQuantity: quantity)),
-        errorMessage: null,
+    emit(state.copyWith(errorMessage: null));
+    _refresh.notifyItem(
+      ItemChange(
+        entity: RefreshEntity.marketProduct,
+        id: product.id.toString(),
+        cartQuantity: quantity,
       ),
     );
     try {
       if (product.cartQuantity == 0) {
-        await _repository.addToCart(
-          productId: product.id,
-          quantity: quantity,
-        );
+        await _repository.addToCart(productId: product.id, quantity: quantity);
       } else {
         await _repository.changeCartQuantity(
           productId: product.id,
           quantity: quantity,
         );
       }
-      await _fetchCart(emit);
+      _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
-      emit(
-        state.copyWith(
-          blocks: _replaceProduct(product),
-          errorMessage: _errorMessage(e),
+      _refresh.notifyItem(
+        ItemChange(
+          entity: RefreshEntity.marketProduct,
+          id: product.id.toString(),
+          cartQuantity: product.cartQuantity,
         ),
       );
+      emit(state.copyWith(errorMessage: _errorMessage(e)));
     }
   }
 
-  List<MarketBlock> _replaceProduct(MarketProduct product) {
+  List<MarketBlock> _applyChange(ItemChange change) {
     return state.blocks
         .map(
           (block) => block.copyWith(
-            products: block.products
-                .map((item) => item.id == product.id ? product : item)
-                .toList(),
+            products:
+                block.products
+                    .map(
+                      (item) =>
+                          item.id.toString() == change.id
+                              ? item.copyWith(
+                                isFavorite: change.isFavorite,
+                                cartQuantity: change.cartQuantity,
+                              )
+                              : item,
+                    )
+                    .toList(),
           ),
         )
         .toList();

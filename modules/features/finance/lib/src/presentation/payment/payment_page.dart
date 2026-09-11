@@ -55,6 +55,7 @@ class PaymentPage extends HookWidget {
       final initialAmount = amount;
       if (initialAmount != null && !_isOrderPayment) {
         controller.value = _formattedAmount(initialAmount);
+        bloc.add(PaymentEvent.setAmount(amount: controller.text));
       }
 
       return () {

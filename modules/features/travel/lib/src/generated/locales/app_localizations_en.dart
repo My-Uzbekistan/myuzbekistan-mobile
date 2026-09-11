@@ -900,4 +900,48 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
 
   @override
   String get museum_auth_required => 'Sign in to your account';
+
+  @override
+  String get aqi_good => 'Good';
+
+  @override
+  String get aqi_moderate => 'Moderate';
+
+  @override
+  String get aqi_bad => 'Poor';
+
+  @override
+  String get aqi_hazardous => 'Hazardous';
+
+  @override
+  String get global_search_hint => 'City, region or hotel';
+
+  @override
+  String get global_search_history => 'Search history';
+
+  @override
+  String get global_search_history_clear => 'Clear';
+
+  @override
+  String get global_search_results => 'Search results';
+
+  @override
+  String get global_search_action => 'Search';
+
+  @override
+  String get global_search_query_label => 'Search query';
+
+  @override
+  String get global_search_clear_title => 'Clear search';
+
+  @override
+  String get global_search_clear_message =>
+      'Are you sure you want to clear your search history?';
+
+  @override
+  String get global_search_empty_title => 'Nothing found';
+
+  @override
+  String get global_search_empty_message =>
+      'Nothing was found for this query, try other words';
 }

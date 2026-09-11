@@ -55,12 +55,13 @@ extension MarketProductDetailEventPatterns on MarketProductDetailEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketProductDetailStartEvent value)?  start,TResult Function( _MarketProductDetailRefreshEvent value)?  refresh,TResult Function( _MarketProductDetailToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketProductDetailChangeCartQuantityEvent value)?  changeCartQuantity,TResult Function( _MarketProductDetailSelectDeliveryEvent value)?  selectDelivery,TResult Function( _MarketProductDetailBuyNowEvent value)?  buyNow,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _MarketProductDetailStartEvent value)?  start,TResult Function( _MarketProductDetailRefreshEvent value)?  refresh,TResult Function( _MarketProductDetailProductChangedEvent value)?  productChanged,TResult Function( _MarketProductDetailToggleFavoriteEvent value)?  toggleFavorite,TResult Function( _MarketProductDetailChangeCartQuantityEvent value)?  changeCartQuantity,TResult Function( _MarketProductDetailSelectDeliveryEvent value)?  selectDelivery,TResult Function( _MarketProductDetailBuyNowEvent value)?  buyNow,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _MarketProductDetailStartEvent() when start != null:
 return start(_that);case _MarketProductDetailRefreshEvent() when refresh != null:
-return refresh(_that);case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh(_that);case _MarketProductDetailProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _MarketProductDetailChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that);case _MarketProductDetailSelectDeliveryEvent() when selectDelivery != null:
 return selectDelivery(_that);case _MarketProductDetailBuyNowEvent() when buyNow != null:
@@ -82,12 +83,13 @@ return buyNow(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketProductDetailStartEvent value)  start,required TResult Function( _MarketProductDetailRefreshEvent value)  refresh,required TResult Function( _MarketProductDetailToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketProductDetailChangeCartQuantityEvent value)  changeCartQuantity,required TResult Function( _MarketProductDetailSelectDeliveryEvent value)  selectDelivery,required TResult Function( _MarketProductDetailBuyNowEvent value)  buyNow,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _MarketProductDetailStartEvent value)  start,required TResult Function( _MarketProductDetailRefreshEvent value)  refresh,required TResult Function( _MarketProductDetailProductChangedEvent value)  productChanged,required TResult Function( _MarketProductDetailToggleFavoriteEvent value)  toggleFavorite,required TResult Function( _MarketProductDetailChangeCartQuantityEvent value)  changeCartQuantity,required TResult Function( _MarketProductDetailSelectDeliveryEvent value)  selectDelivery,required TResult Function( _MarketProductDetailBuyNowEvent value)  buyNow,}){
 final _that = this;
 switch (_that) {
 case _MarketProductDetailStartEvent():
 return start(_that);case _MarketProductDetailRefreshEvent():
-return refresh(_that);case _MarketProductDetailToggleFavoriteEvent():
+return refresh(_that);case _MarketProductDetailProductChangedEvent():
+return productChanged(_that);case _MarketProductDetailToggleFavoriteEvent():
 return toggleFavorite(_that);case _MarketProductDetailChangeCartQuantityEvent():
 return changeCartQuantity(_that);case _MarketProductDetailSelectDeliveryEvent():
 return selectDelivery(_that);case _MarketProductDetailBuyNowEvent():
@@ -108,12 +110,13 @@ return buyNow(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketProductDetailStartEvent value)?  start,TResult? Function( _MarketProductDetailRefreshEvent value)?  refresh,TResult? Function( _MarketProductDetailToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketProductDetailChangeCartQuantityEvent value)?  changeCartQuantity,TResult? Function( _MarketProductDetailSelectDeliveryEvent value)?  selectDelivery,TResult? Function( _MarketProductDetailBuyNowEvent value)?  buyNow,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _MarketProductDetailStartEvent value)?  start,TResult? Function( _MarketProductDetailRefreshEvent value)?  refresh,TResult? Function( _MarketProductDetailProductChangedEvent value)?  productChanged,TResult? Function( _MarketProductDetailToggleFavoriteEvent value)?  toggleFavorite,TResult? Function( _MarketProductDetailChangeCartQuantityEvent value)?  changeCartQuantity,TResult? Function( _MarketProductDetailSelectDeliveryEvent value)?  selectDelivery,TResult? Function( _MarketProductDetailBuyNowEvent value)?  buyNow,}){
 final _that = this;
 switch (_that) {
 case _MarketProductDetailStartEvent() when start != null:
 return start(_that);case _MarketProductDetailRefreshEvent() when refresh != null:
-return refresh(_that);case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh(_that);case _MarketProductDetailProductChangedEvent() when productChanged != null:
+return productChanged(_that);case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite(_that);case _MarketProductDetailChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that);case _MarketProductDetailSelectDeliveryEvent() when selectDelivery != null:
 return selectDelivery(_that);case _MarketProductDetailBuyNowEvent() when buyNow != null:
@@ -134,11 +137,12 @@ return buyNow(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int productId)?  start,TResult Function()?  refresh,TResult Function()?  toggleFavorite,TResult Function( int quantity)?  changeCartQuantity,TResult Function( int deliveryId)?  selectDelivery,TResult Function()?  buyNow,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( int productId)?  start,TResult Function()?  refresh,TResult Function( ItemChange change)?  productChanged,TResult Function()?  toggleFavorite,TResult Function( int quantity)?  changeCartQuantity,TResult Function( int deliveryId)?  selectDelivery,TResult Function()?  buyNow,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarketProductDetailStartEvent() when start != null:
 return start(_that.productId);case _MarketProductDetailRefreshEvent() when refresh != null:
-return refresh();case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh();case _MarketProductDetailProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite();case _MarketProductDetailChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that.quantity);case _MarketProductDetailSelectDeliveryEvent() when selectDelivery != null:
 return selectDelivery(_that.deliveryId);case _MarketProductDetailBuyNowEvent() when buyNow != null:
@@ -160,11 +164,12 @@ return buyNow();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int productId)  start,required TResult Function()  refresh,required TResult Function()  toggleFavorite,required TResult Function( int quantity)  changeCartQuantity,required TResult Function( int deliveryId)  selectDelivery,required TResult Function()  buyNow,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( int productId)  start,required TResult Function()  refresh,required TResult Function( ItemChange change)  productChanged,required TResult Function()  toggleFavorite,required TResult Function( int quantity)  changeCartQuantity,required TResult Function( int deliveryId)  selectDelivery,required TResult Function()  buyNow,}) {final _that = this;
 switch (_that) {
 case _MarketProductDetailStartEvent():
 return start(_that.productId);case _MarketProductDetailRefreshEvent():
-return refresh();case _MarketProductDetailToggleFavoriteEvent():
+return refresh();case _MarketProductDetailProductChangedEvent():
+return productChanged(_that.change);case _MarketProductDetailToggleFavoriteEvent():
 return toggleFavorite();case _MarketProductDetailChangeCartQuantityEvent():
 return changeCartQuantity(_that.quantity);case _MarketProductDetailSelectDeliveryEvent():
 return selectDelivery(_that.deliveryId);case _MarketProductDetailBuyNowEvent():
@@ -185,11 +190,12 @@ return buyNow();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int productId)?  start,TResult? Function()?  refresh,TResult? Function()?  toggleFavorite,TResult? Function( int quantity)?  changeCartQuantity,TResult? Function( int deliveryId)?  selectDelivery,TResult? Function()?  buyNow,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( int productId)?  start,TResult? Function()?  refresh,TResult? Function( ItemChange change)?  productChanged,TResult? Function()?  toggleFavorite,TResult? Function( int quantity)?  changeCartQuantity,TResult? Function( int deliveryId)?  selectDelivery,TResult? Function()?  buyNow,}) {final _that = this;
 switch (_that) {
 case _MarketProductDetailStartEvent() when start != null:
 return start(_that.productId);case _MarketProductDetailRefreshEvent() when refresh != null:
-return refresh();case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
+return refresh();case _MarketProductDetailProductChangedEvent() when productChanged != null:
+return productChanged(_that.change);case _MarketProductDetailToggleFavoriteEvent() when toggleFavorite != null:
 return toggleFavorite();case _MarketProductDetailChangeCartQuantityEvent() when changeCartQuantity != null:
 return changeCartQuantity(_that.quantity);case _MarketProductDetailSelectDeliveryEvent() when selectDelivery != null:
 return selectDelivery(_that.deliveryId);case _MarketProductDetailBuyNowEvent() when buyNow != null:
@@ -298,6 +304,72 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _MarketProductDetailProductChangedEvent implements MarketProductDetailEvent {
+   _MarketProductDetailProductChangedEvent({required this.change});
+  
+
+ final  ItemChange change;
+
+/// Create a copy of MarketProductDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$MarketProductDetailProductChangedEventCopyWith<_MarketProductDetailProductChangedEvent> get copyWith => __$MarketProductDetailProductChangedEventCopyWithImpl<_MarketProductDetailProductChangedEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MarketProductDetailProductChangedEvent&&(identical(other.change, change) || other.change == change));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,change);
+
+@override
+String toString() {
+  return 'MarketProductDetailEvent.productChanged(change: $change)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$MarketProductDetailProductChangedEventCopyWith<$Res> implements $MarketProductDetailEventCopyWith<$Res> {
+  factory _$MarketProductDetailProductChangedEventCopyWith(_MarketProductDetailProductChangedEvent value, $Res Function(_MarketProductDetailProductChangedEvent) _then) = __$MarketProductDetailProductChangedEventCopyWithImpl;
+@useResult
+$Res call({
+ ItemChange change
+});
+
+
+
+
+}
+/// @nodoc
+class __$MarketProductDetailProductChangedEventCopyWithImpl<$Res>
+    implements _$MarketProductDetailProductChangedEventCopyWith<$Res> {
+  __$MarketProductDetailProductChangedEventCopyWithImpl(this._self, this._then);
+
+  final _MarketProductDetailProductChangedEvent _self;
+  final $Res Function(_MarketProductDetailProductChangedEvent) _then;
+
+/// Create a copy of MarketProductDetailEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? change = null,}) {
+  return _then(_MarketProductDetailProductChangedEvent(
+change: null == change ? _self.change : change // ignore: cast_nullable_to_non_nullable
+as ItemChange,
+  ));
+}
+
+
+}
 
 /// @nodoc
 

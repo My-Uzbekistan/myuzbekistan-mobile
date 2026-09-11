@@ -15,13 +15,32 @@ part 'contents_by_category_bloc.freezed.dart';
 class ContentByCategoryBloc
     extends Bloc<ContentByCategoryEvent, ContentByCategoryState> {
   final Repository _repository;
-  final AppStatusChangeListeners _changeStatusListener;
+  final AppRefreshListener _refresh;
+  StreamSubscription<ItemChange>? _itemSubscription;
+  StreamSubscription<AppRefreshTopic>? _refreshSubscription;
   Timer? _timer;
   late int categoryId;
   ContentByCategoryType type = ContentByCategoryType.contents;
 
-  ContentByCategoryBloc(this._repository, this._changeStatusListener)
-      : super(ContentByCategoryState.dataState()) {
+  ContentByCategoryBloc(this._repository, this._refresh)
+    : super(ContentByCategoryState.dataState()) {
+    _itemSubscription = _refresh
+        .observeItems(RefreshEntity.content)
+        .listen(
+          (change) => add(
+            ContentByCategoryEvent.updateItemFavoriteWithPopResult(
+              isFavorite: change.isFavorite ?? false,
+              contentId: int.parse(change.id),
+            ),
+          ),
+        );
+    _refreshSubscription = _refresh
+        .observe({AppRefreshTopic.contentFavorites})
+        .listen((_) {
+          if (type == ContentByCategoryType.favorites) {
+            add(ContentByCategoryEvent.loadFavorites());
+          }
+        });
     on<_InitialEvent>(_onInitialEvent);
     on<_InitialFavoriteEvent>(_onInitFavoriteEvent);
     on<_LoadFavoritesEvent>(_loadFavorites);
@@ -58,7 +77,14 @@ class ContentByCategoryBloc
               contentId: event.contentId, setFavorite: event.isFavorite);
           add(ContentByCategoryEvent.updateItemFavoriteWithPopResult(
               isFavorite: event.isFavorite, contentId: event.contentId));
-          _changeStatusListener.refreshFavorite();
+          _refresh.notifyItem(
+            ItemChange(
+              entity: RefreshEntity.content,
+              id: event.contentId.toString(),
+              isFavorite: event.isFavorite,
+            ),
+          );
+          _refresh.notify(AppRefreshTopic.contentFavorites);
         } catch (e) {}
       });
     }
@@ -205,6 +231,8 @@ class ContentByCategoryBloc
   @override
   Future<void> close() {
     _timer?.cancel();
+    _itemSubscription?.cancel();
+    _refreshSubscription?.cancel();
     return super.close();
   }
 }

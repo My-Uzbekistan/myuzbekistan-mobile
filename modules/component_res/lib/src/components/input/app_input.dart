@@ -15,6 +15,7 @@ class AppInputField extends HookWidget {
   final int maxLength;
   final FocusNode? focusNode;
   final bool autoFocus;
+  final List<String> autofillHints;
 
   const AppInputField({
     super.key,
@@ -29,6 +30,7 @@ class AppInputField extends HookWidget {
     this.maxLength = TextField.noMaxLength,
     this.focusNode,
     this.autoFocus = false,
+    this.autofillHints = const [AutofillHints.oneTimeCode],
   });
 
   @override
@@ -94,7 +96,7 @@ class AppInputField extends HookWidget {
                         focusNode: _focusNode,
                         maxLength: maxLength,
                         maxLines: 1,
-                        autofillHints: [AutofillHints.oneTimeCode],
+                        autofillHints: autofillHints,
                         textInputAction: TextInputAction.done,
                         style: CustomTypography.bodyLg.copyWith(
                           color: context.appColors.textIconColor.primary,

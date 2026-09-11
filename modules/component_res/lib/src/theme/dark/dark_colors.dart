@@ -32,6 +32,7 @@ class DarkColors extends _BaseColors {
   FillColors get fill => FillColors(
         quaternary: const Color(0xff9090a2).withValues(alpha: 0.15), // ~18%
         tertiary: const Color(0xff9090a2).withValues(alpha: 0.27),
+        opaque: const Color(0xff27272b),
 
 
         secondary: const Color(0xff787880).withAlpha(0x52), // unchanged
@@ -75,6 +76,7 @@ class DarkColors extends _BaseColors {
         shimmerBase: const Color(0xff9090a2).withValues(alpha: 0.12),
         shimmerHighlight: Colors.white.withValues(alpha: 0.2),
         heroSurface: const Color(0xff0e0e10),
+        iconNeutral: const Color(0xff6C6C71),
       );
 
   @override
@@ -84,6 +86,8 @@ class DarkColors extends _BaseColors {
         premiumDark: const Color(0xffcb9030),
         premiumPlan: const Color(0xff07c277),
         premiumPlanDark: const Color(0xff006f42),
+        premiumSurface: const Color(0xff664c00),
+        premiumGlow: const Color(0xffffca2d),
         gift: const Color(0xff00b93f),
         giftLime: const Color(0xffadee5c),
         giftSurface: const Color(0xff143327),

@@ -12,11 +12,10 @@ part 'premium_cancel_bloc.freezed.dart';
 @injectable
 class PremiumCancelBloc extends Bloc<PremiumCancelEvent, PremiumCancelState> {
   final PremiumRepository _repository;
-  final AppStatusChangeListeners _appStatusChangeListeners;
+  final AppRefreshListener _refresh;
 
-  PremiumCancelBloc(this._repository, this._appStatusChangeListeners)
+  PremiumCancelBloc(this._repository, this._refresh)
     : super(PremiumCancelState()) {
-
     on<_Cancel>(_cancel);
   }
 
@@ -24,7 +23,7 @@ class PremiumCancelBloc extends Bloc<PremiumCancelEvent, PremiumCancelState> {
     emit(state.copyWith(isCancelling: true));
     try {
       await _repository.cancelSubscription();
-      _appStatusChangeListeners.refresh();
+      _refresh.notify(AppRefreshTopic.premium);
       emit(state.copyWith(isCancelling: false, isCancelled: true));
     } catch (e) {
       logger.e("Premium cancel error $e");

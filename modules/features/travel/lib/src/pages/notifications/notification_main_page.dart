@@ -9,6 +9,11 @@ import 'package:travel/src/pages/notifications/widgets/notifications_loading_con
 
 import 'bloc/notification_bloc.dart';
 
+bool _hasUnseen(NotificationsState state) => state.maybeMap(
+  successState: (st) => st.notifications.any((e) => !e.isSeen),
+  orElse: () => false,
+);
+
 class NotificationMainPage extends StatelessWidget {
   const NotificationMainPage({super.key});
 
@@ -27,6 +32,21 @@ class NotificationMainPage extends StatelessWidget {
       appBar: GradientAppBar(
         title: context.localization.notifications,
         centerTitle: true,
+        actions: [
+          BlocBuilder<NotificationBloc, NotificationsState>(
+            buildWhen: (previous, current) =>
+                _hasUnseen(previous) != _hasUnseen(current),
+            builder: (context, state) {
+              if (!_hasUnseen(state)) return const SizedBox.shrink();
+
+              return RoundedButton.check(
+                onPressed: () {
+                  bloc.add(NotificationEvent.allNotificationsSeen());
+                },
+              );
+            },
+          ),
+        ],
       ),
       body: BlocConsumer<NotificationBloc, NotificationsState>(
         listenWhen: (previous, current) {

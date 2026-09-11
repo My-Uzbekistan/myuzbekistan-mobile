@@ -65,21 +65,11 @@ class NotificationDetail extends StatelessWidget {
                 ).copyWith(bottom: 16),
                 child: AppActionButton(
                   actionText: context.coreLocalization.action_more,
-                  onPressed: () => openActionLink(context, actionLink),
+                  onPressed: () => AppLinkRouter.open(actionLink),
                 ),
               ),
             ),
     );
-  }
-
-  void openActionLink(BuildContext context, String actionLink) {
-    final uri = Uri.parse(actionLink);
-    if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty ||
-        uri.host.isEmpty) {
-      context.push(uri.toString());
-    } else {
-      context.more.openUrl(actionLink);
-    }
   }
 
   Widget _imageHeader(BuildContext context) {

@@ -126,6 +126,16 @@ class SecurityStorageImpl implements SecurityStorage {
   }
 
   @override
+  Future<void> changeIqAirWidgetState(bool value) async {
+    await _box.put("iqAirWidgetState", value);
+  }
+
+  @override
+  bool isShowIqAirWidget() {
+    return _box.get("iqAirWidgetState") ?? true;
+  }
+
+  @override
   Future<void> setPrayerLocationId(int locationId) async {
     await _box.put("prayerLocationId", locationId);
   }

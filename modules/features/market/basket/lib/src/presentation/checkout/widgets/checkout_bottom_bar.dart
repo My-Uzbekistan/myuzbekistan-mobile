@@ -9,11 +9,13 @@ class CheckoutBottomBar extends StatelessWidget {
     required this.total,
     required this.isLoading,
     this.onOrder,
+    this.onBlocked,
   });
 
   final int total;
   final bool isLoading;
   final VoidCallback? onOrder;
+  final VoidCallback? onBlocked;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CheckoutBottomBar extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: context.appColors.static.black.withValues(alpha: 0.1),
+            color: context.appColors.service.shadow,
             blurRadius: 34,
             offset: const Offset(6, 0),
           ),
@@ -66,10 +68,14 @@ class CheckoutBottomBar extends StatelessWidget {
               ],
             ),
             Expanded(
-              child: AppActionButton(
-                actionText: context.localization.basket_checkout_order,
-                isLoading: isLoading,
-                onPressed: onOrder,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onOrder == null && !isLoading ? onBlocked : null,
+                child: AppActionButton(
+                  actionText: context.localization.basket_checkout_order,
+                  isLoading: isLoading,
+                  onPressed: onOrder,
+                ),
               ),
             ),
           ],

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/di/injection.dart';
 import 'package:travel/src/pages/gift/bloc/gift_bloc.dart';
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 import 'package:travel/src/pages/onboarding/bloc/onboarding_bloc.dart';
@@ -157,20 +158,15 @@ class HomeScreen extends HookWidget {
                       onGiftTap: Toggle.giftToggle
                           ? () => context.travel.pushGiftPage()
                           : null,
-                      onSearchTap: () => context.travel
-                          .pushContentByCategoryPage(
-                            context.localization.search,
-                            0,
-                          ),
+                      onSearchTap: () => context.travel.pushGlobalSearch(),
                       onFavoriteTap: () => context.travel.pushFavoritesPage(),
                       onQrTap: () => context.finance.pushQrCoderReaderPage(),
                       quickActions: data.services
-                          .mapIndexed(
-                            (index, service) => HomeQuickAction(
+                          .map(
+                            (service) => HomeQuickAction(
                               iconPath: service.icon ?? '',
                               label: service.name ?? '',
-                              onTap: () =>
-                                  _openQuickAction(context, index, service.url),
+                              onTap: () => AppLinkRouter.open(service.url),
                             ),
                           )
                           .toList(),
@@ -186,12 +182,8 @@ class HomeScreen extends HookWidget {
                             imageUrls: data.banners
                                 .map((b) => b.imageUrl)
                                 .toList(),
-                            onItemTap: (index) {
-                              final link = data.banners[index].url;
-                              if (link != null && link.isNotEmpty) {
-                                context.more.openUrl(link);
-                              }
-                            },
+                            onItemTap: (index) =>
+                                _openBanner(context, data.banners[index]),
                           ),
                         ),
                       )
@@ -200,7 +192,9 @@ class HomeScreen extends HookWidget {
                         padding: EdgeInsets.only(top: 12),
                         sliver: SliverToBoxAdapter(child: HomeBannerShimmer()),
                       ),
-                    ServicesWidget(services: data.catalogServices),
+                    if (data.catalogServices.isNotEmpty ||
+                        data.loadingServices)
+                      ServicesWidget(services: data.catalogServices),
                     CurrencyCalculator(),
                     if (data.cities.isNotEmpty)
                       CitiesWidget(
@@ -282,15 +276,20 @@ class HomeScreen extends HookWidget {
 String _categoryName(HomeBlocDataState data, int id) =>
     data.categories.where((c) => c.id == id).firstOrNull?.name ?? "";
 
-void _openQuickAction(BuildContext context, int index, String? url) {
-  if (index == 0) {
-    context.travel.pushMuseumHome();
+void _openBanner(BuildContext context, BannerItem banner) {
+  if (banner.authRequired &&
+      getIt<SecurityStorage>().getAccessToken() == null) {
+    context.more.pushAuthPage();
     return;
   }
-  if (url == null || url.isEmpty) return;
-  if (url.startsWith("/")) {
-    context.push(url);
+
+  final link = banner.url.orEmpty().trim();
+  if (link.isEmpty) return;
+
+  if (banner.actionType == BannerActionType.inner) {
+    AppLinkRouter.open(link);
     return;
   }
-  context.more.openUrl(url);
+
+  context.more.openUrl(link);
 }

@@ -82,6 +82,12 @@ class FeatureBasketLocalizationsUz extends FeatureBasketLocalizations {
   String get basket_checkout_phone => 'Qabul qiluvchi telefoni';
 
   @override
+  String get basket_checkout_phone_add => 'Telefon raqamini qo‘shish';
+
+  @override
+  String get basket_checkout_phone_label => 'Telefon raqami';
+
+  @override
   String get basket_checkout_products => 'Mahsulotlar';
 
   @override
@@ -122,4 +128,62 @@ class FeatureBasketLocalizationsUz extends FeatureBasketLocalizations {
 
   @override
   String get basket_action_edit => 'O\'zgartirish';
+
+  @override
+  String get basket_checkout_store_address => 'Do\'kon manzili';
+
+  @override
+  String get basket_checkout_delivery_address => 'Yetkazib berish manzili';
+
+  @override
+  String get basket_checkout_my_addresses => 'Mening manzillarim';
+
+  @override
+  String get basket_checkout_address_new => 'Yangi manzil';
+
+  @override
+  String get basket_checkout_pickup_closest => 'Eng yaqin';
+
+  @override
+  String basket_checkout_pickup_distance(Object distance) {
+    return '$distance km';
+  }
+
+  @override
+  String get basket_checkout_pickup_empty => 'Hozircha mavjud do\'kon yo\'q';
+
+  @override
+  String get basket_checkout_delivery_empty =>
+      'Yetkazib berish usuli mavjud emas';
+
+  @override
+  String get basket_checkout_delivery_unavailable =>
+      'Bu hududga yetkazib berish usuli mavjud emas. Keyinroq urinib ko\'ring';
+
+  @override
+  String get basket_checkout_delivery_no_region =>
+      'Manzil xaritada belgilanmagan — yetkazib berish hududi aniqlanmadi. Manzilni tahrirlab, xaritadan nuqta tanlang';
+
+  @override
+  String get basket_checkout_delivery_select =>
+      'Yetkazib berish usulini tanlang';
+
+  @override
+  String get basket_map_title => 'Yetkazib berish manzilini tanlang';
+
+  @override
+  String get basket_map_add => 'Qo\'shish';
+
+  @override
+  String get basket_map_save => 'Saqlash';
+
+  @override
+  String get basket_map_address_empty => 'Nuqta aniqlanmadi';
+
+  @override
+  String get basket_map_delete_title => 'Lokatsiya o\'chirilsinmi?';
+
+  @override
+  String get basket_map_delete_message =>
+      'Ushbu lokatsiyani o\'chirmoqchimisiz?';
 }

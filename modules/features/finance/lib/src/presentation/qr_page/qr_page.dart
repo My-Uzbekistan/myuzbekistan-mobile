@@ -2,6 +2,7 @@ import 'package:component_res/component_res.dart';
 import 'package:finance/src/presentation/qr_page/widgets/qr_scanner_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 class QrReaderPage extends HookWidget {
@@ -72,16 +73,11 @@ class QrReaderPage extends HookWidget {
   }
 
   bool handleQr(BuildContext context, {required String path}) {
-    try {
-      final uri = Uri.parse(path);
-      if ((uri.host == "myuz.uz" || uri.host == "myuzb.uz") &&
-          uri.pathSegments.isNotEmpty) {
-        HapticFeedback.selectionClick();
-        context.pushReplacement(uri.path);
-        return true;
-      }
-    } catch (e) {}
+    final location = AppLinkRouter.locationOf(Uri.tryParse(path));
+    if (location == null) return true;
 
+    HapticFeedback.selectionClick();
+    context.pushReplacement(location);
     return true;
   }
 }

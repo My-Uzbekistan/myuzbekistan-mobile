@@ -210,7 +210,10 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get biometric_auth => 'Вход со сканером';
 
   @override
-  String get prayer_time_widget => 'Виджет времени намаза';
+  String get prayer_time_widget => 'Виджет намаза';
+
+  @override
+  String get iq_air_widget => 'Виджет IQAir';
 
   @override
   String get about_app => 'О приложении';
@@ -412,4 +415,22 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get noActiveSessions => 'Других активных сеансов нет';
+
+  @override
+  String premiumActiveUntil(String date) {
+    return 'Активен до $date';
+  }
+
+  @override
+  String get premiumBuySubscription => 'Приобретите подписку';
+
+  @override
+  String get webViewExitTitle => 'Вы действительно хотите выйти?';
+
+  @override
+  String get webViewExitMessage =>
+      'Страница закроется, введённые данные не сохранятся.';
+
+  @override
+  String get yes => 'Да';
 }
