@@ -5,6 +5,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
+import 'package:travel/src/pages/gift/bloc/gift_bloc.dart';
 import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 part 'home_hero_header/collapsing_card.dart';
@@ -104,8 +105,8 @@ class HomeHeader extends StatelessWidget {
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       scrolledUnderElevation: 0,
-      toolbarHeight: _kCollapsed,
-      expandedHeight: _kExpanded,
+      toolbarHeight: 72,
+      expandedHeight: 295,
       stretchTriggerOffset: 80,
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
@@ -127,8 +128,8 @@ class HomeHeader extends StatelessWidget {
               ),
               Positioned(
                 top: metrics.searchTop,
-                left: _kHPad,
-                right: _kHPad,
+                left: 16,
+                right: 16,
                 child: searchRow,
               ),
             ],

@@ -6,8 +6,6 @@ class CardViewBackground extends StatelessWidget {
 
   const CardViewBackground({super.key, this.imageUrl});
 
-  static const _imageWidthFactor = 0.5831;
-
   @override
   Widget build(BuildContext context) {
     final black = context.appColors.static.black;
@@ -17,7 +15,7 @@ class CardViewBackground extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerRight,
             child: FractionallySizedBox(
-              widthFactor: _imageWidthFactor,
+              widthFactor: 0.5831,
               heightFactor: 1,
               child: AppNetworkImage(
                 imageUrl ?? "",

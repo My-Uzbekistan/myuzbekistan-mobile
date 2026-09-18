@@ -2,8 +2,6 @@ import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
 class BasketItemImage extends StatelessWidget {
-  static const double size = 80;
-
   const BasketItemImage({super.key, required this.photo});
 
   final String photo;
@@ -11,8 +9,8 @@ class BasketItemImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: size,
-      height: size,
+      width: 80,
+      height: 80,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.31),

@@ -72,15 +72,22 @@ class _InfoRow extends StatelessWidget {
           ),
         ),
 
-        if (onGiftTap != null) ...[
-          const SizedBox(width: 8),
-          GlassFade(
-            child: _HeaderIconButton(
-              iconPath: Assets.svg.iconGift.path,
-              onTap: onGiftTap,
-            ),
+        if (onGiftTap != null)
+          BlocSelector<GiftBloc, GiftBlocState, bool>(
+            selector: (state) => state.giftEnabled,
+            builder: (context, giftEnabled) {
+              if (!giftEnabled) return const SizedBox.shrink();
+              return Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: GlassFade(
+                  child: _HeaderIconButton(
+                    iconPath: Assets.svg.iconGift.path,
+                    onTap: onGiftTap,
+                  ),
+                ),
+              );
+            },
           ),
-        ],
 
         const SizedBox(width: 8),
         GlassFade(child: _NotificationBell(onTap: onNotificationTap)),

@@ -30,7 +30,7 @@ export 'models/premium_access_model.dart';
 export 'models/premium_access_reason.dart';
 export 'models/onboarding_item.dart';
 export 'models/banner_item.dart';
-export 'models/banner_action_type.dart';
+export 'models/app_action_type.dart';
 
 export 'models/gift_history.dart';
 export 'models/service_action.dart';

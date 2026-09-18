@@ -9,13 +9,6 @@ import 'package:shared/shared.dart';
 import 'currency_rate_item.dart';
 import 'currency_rates_scroll_indicator.dart';
 
-const _horizontalPadding = 16.0;
-const _columnGap = 12.0;
-const _peekWidth = 19.0;
-const _rowsPerColumn = 2;
-const _rowHeight = 44.0;
-const _fadeWidth = 60.0;
-
 class CurrencyRatesWidget extends HookWidget {
   final List<Currency> currencies;
   final VoidCallback onShowAll;
@@ -28,7 +21,7 @@ class CurrencyRatesWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final columns = currencies.chunked(_rowsPerColumn).toList();
+    final columns = currencies.chunked(2).toList();
     final controller = useScrollController();
     final progress = useState(0.0);
 
@@ -53,7 +46,7 @@ class CurrencyRatesWidget extends HookWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: FinanceSectionHeader(
               title: context.localization.exchange_rates,
               subtitle: lastUpdatedAt == null
@@ -66,11 +59,10 @@ class CurrencyRatesWidget extends HookWidget {
           ),
           LayoutBuilder(
             builder: (context, constraints) {
-              final trackWidth = constraints.maxWidth - _horizontalPadding * 2;
-              final columnWidth = (trackWidth - _columnGap - _peekWidth) / 2;
+              final trackWidth = constraints.maxWidth - 32;
+              final columnWidth = (trackWidth - 31) / 2;
               final contentWidth =
-                  columns.length * columnWidth +
-                  (columns.length - 1) * _columnGap;
+                  columns.length * columnWidth + (columns.length - 1) * 12;
               final visibleFraction = contentWidth <= 0
                   ? 1.0
                   : (trackWidth / contentWidth).clamp(0.0, 1.0);
@@ -80,17 +72,15 @@ class CurrencyRatesWidget extends HookWidget {
                   Stack(
                     children: [
                       SizedBox(
-                        height: _rowHeight * _rowsPerColumn,
+                        height: 88,
                         child: ListView.separated(
                           controller: controller,
                           scrollDirection: Axis.horizontal,
                           physics: const BouncingScrollPhysics(),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: _horizontalPadding,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           itemCount: columns.length,
                           separatorBuilder: (context, index) =>
-                              const SizedBox(width: _columnGap),
+                              const SizedBox(width: 12),
                           itemBuilder: (context, index) {
                             return SizedBox(
                               width: columnWidth,
@@ -111,7 +101,7 @@ class CurrencyRatesWidget extends HookWidget {
                           bottom: 0,
                           child: IgnorePointer(
                             child: Container(
-                              width: _fadeWidth,
+                              width: 60,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   colors: [
@@ -127,9 +117,7 @@ class CurrencyRatesWidget extends HookWidget {
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: _horizontalPadding,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: CurrencyRatesScrollIndicator(
                       visibleFraction: visibleFraction,
                       progress: progress.value,

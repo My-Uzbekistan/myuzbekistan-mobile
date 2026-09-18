@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 class HistoryCell extends StatelessWidget {
-  static const double height = 72;
-
   final HistoryItemUiModel item;
   final VoidCallback? onTap;
 
@@ -20,7 +18,7 @@ class HistoryCell extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Container(
-        height: height,
+        height: 72,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: context.appColors.fill.quaternary,

@@ -6,10 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'nearest_place_card.dart';
 
-const _cardGap = 12.0;
-const _cardHeight = 114.0;
-const _horizontalPadding = 16.0;
-
 class NearestPlacesWidget extends StatelessWidget {
   final List<Merchant> merchants;
   final ValueChanged<Merchant> onMerchantTap;
@@ -31,21 +27,20 @@ class NearestPlacesWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: FinanceSectionHeader(
               title: context.localization.nearest_places,
               onActionTap: onShowAll,
             ),
           ),
           SizedBox(
-            height: _cardHeight,
+            height: 114,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               itemCount: merchants.length,
-              separatorBuilder: (context, index) =>
-                  const SizedBox(width: _cardGap),
+              separatorBuilder: (context, index) => const SizedBox(width: 12),
               itemBuilder: (context, index) {
                 final merchant = merchants[index];
                 return NearestPlaceCard(

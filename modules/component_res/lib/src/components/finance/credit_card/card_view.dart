@@ -21,9 +21,6 @@ class CardView extends StatelessWidget {
     this.onTap,
   });
 
-  static const height = 192.0;
-  static const radius = 24.0;
-
   @override
   Widget build(BuildContext context) {
     final white = context.appColors.static.white;
@@ -33,10 +30,10 @@ class CardView extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(24),
         child: Container(
           width: double.infinity,
-          height: height,
+          height: 192,
           color: context.appColors.static.black,
           child: Stack(
             children: [

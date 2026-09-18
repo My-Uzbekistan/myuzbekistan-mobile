@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'app_action_type.dart';
+
 class CatalogItemModel {
   final int? id;
   final String? icon;
@@ -7,7 +9,7 @@ class CatalogItemModel {
   final String title;
   final CatalogStatus status;
   final String? action;
-  final CatalogActionType actionType;
+  final AppActionType actionType;
   final bool authRequired;
   final bool? isPremiumOnly;
   final int? freeUsageLimit;
@@ -35,13 +37,4 @@ enum CatalogStatus {
   final int id;
 
   const CatalogStatus(this.id);
-}
-
-enum CatalogActionType {
-  redirect(0),
-  inner(1);
-
-  final int id;
-
-  const CatalogActionType(this.id);
 }

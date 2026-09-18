@@ -61,45 +61,9 @@ Future<bool> _hasAccess(BuildContext context, CatalogItemModel item) async {
 }
 
 void _launch(BuildContext context, CatalogItemModel item) {
-  final action = item.action.orEmpty();
-  if (action.isEmpty) return;
-
-  final securityStorage = getIt<SecurityStorage>();
-  var uri = Uri.parse(action.trim());
-
-  if (item.actionType == CatalogActionType.inner) {
-    if (AppLinkRouter.locationOf(uri) != null) {
-      uri = uri.replace(
-        queryParameters: {
-          ...uri.queryParameters,
-          "title": item.title,
-          "authRequired": "${item.authRequired}",
-        },
-      );
-      AppLinkRouter.open(uri.toString());
-    } else {
-      if (item.authRequired) {
-        uri = uri.replace(
-          queryParameters: {
-            ...uri.queryParameters,
-            "theme": context.brightness.name,
-          },
-        );
-      }
-      context.more.pushWebViewPage(
-        actionUrl: uri.toString(),
-        authRequired: item.authRequired,
-      );
-    }
-  } else {
-    if (item.authRequired) {
-      uri = uri.replace(
-        queryParameters: {
-          ...uri.queryParameters,
-          "token": securityStorage.getAccessToken(),
-        },
-      );
-    }
-    context.more.openUrl(uri.toString());
-  }
+  context.openAction(
+    item.action,
+    actionType: item.actionType,
+    authRequired: item.authRequired,
+  );
 }

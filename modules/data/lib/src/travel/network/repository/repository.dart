@@ -486,6 +486,11 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<bool> giftEnabled() {
+    return _restService.giftStatus().call((data) => data.enabled);
+  }
+
+  @override
   Future<ClaimStatus?> giftActive() {
     return _restService.giftActive().call((data) => data?.toDomain());
   }

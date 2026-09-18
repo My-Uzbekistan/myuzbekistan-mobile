@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:more/src/core/extension.dart';
+import 'package:more/src/di/injection.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
@@ -21,6 +23,14 @@ class WebViewPage extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useRef<InAppWebViewController?>(null);
     final progress = useState(0.0);
+    final requestUrl = useMemoized(
+      () => _appSessionUrl(context, actionUrl),
+      [actionUrl],
+    );
+    final routeAnimation = ModalRoute.of(context)?.animation;
+    final isTransitionDone = useState(
+      routeAnimation == null || routeAnimation.isCompleted,
+    );
 
     Future<void> goBack() async {
       if ((await controller.value?.canGoBack()) ?? false) {
@@ -45,10 +55,18 @@ class WebViewPage extends HookWidget {
     }
 
     useEffect(() {
-      return () {
-        InAppWebViewController.clearAllCache();
-        controller.value?.dispose();
-      };
+      if (routeAnimation == null || routeAnimation.isCompleted) return null;
+
+      void onStatusChanged(AnimationStatus status) {
+        if (status == AnimationStatus.completed) isTransitionDone.value = true;
+      }
+
+      routeAnimation.addStatusListener(onStatusChanged);
+      return () => routeAnimation.removeStatusListener(onStatusChanged);
+    }, const []);
+
+    useEffect(() {
+      return () => controller.value?.dispose();
     }, const []);
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -82,70 +100,71 @@ class WebViewPage extends HookWidget {
                     color: context.appColors.background.underlayer,
                     child: Stack(
                       children: [
-                        Positioned.fill(
-                          child: InAppWebView(
-                            initialUrlRequest: URLRequest(
-                              url: WebUri.uri(Uri.parse(actionUrl.orEmpty())),
-                            ),
-                            initialSettings: _settings,
-                            onWebViewCreated: (created) {
-                              controller.value = created;
-                              created.addJavaScriptHandler(
-                                handlerName: "MyUzbekistanHandler",
-                                callback: (data) =>
-                                    _openMerchant(context, data),
-                              );
-                            },
-                            onProgressChanged: (webViewController, value) {
-                              progress.value = value / 100.0;
-                            },
-                            onLoadStop: (webViewController, url) {
-                              progress.value = 1.0;
-                            },
-                            onPermissionRequest: _onPermissionRequest,
-                            onGeolocationPermissionsShowPrompt:
-                                _onGeolocationPermissionsShowPrompt,
-                            onDownloadStartRequest: (
-                              webViewController,
-                              request,
-                            ) {
-                              LauncherUtils.urlLauncher(
-                                request.url.toString(),
-                                mode: LaunchMode.externalApplication,
-                              );
-                            },
-                            onCreateWindow: (webViewController, action) async {
-                              final url = action.request.url;
-                              if (url != null) {
-                                await webViewController.loadUrl(
-                                  urlRequest: URLRequest(url: url),
+                        if (isTransitionDone.value)
+                          Positioned.fill(
+                            child: InAppWebView(
+                              initialUrlRequest: URLRequest(
+                                url: WebUri.uri(requestUrl),
+                              ),
+                              initialSettings: _settings,
+                              onWebViewCreated: (created) {
+                                controller.value = created;
+                                created.addJavaScriptHandler(
+                                  handlerName: "MyUzbekistanHandler",
+                                  callback: (data) =>
+                                      _openMerchant(context, data),
                                 );
-                              }
-                              return false;
-                            },
-                            shouldOverrideUrlLoading: (
-                              webViewController,
-                              action,
-                            ) async {
-                              final url = action.request.url;
-                              if (url == null) {
+                              },
+                              onProgressChanged: (webViewController, value) {
+                                progress.value = value / 100.0;
+                              },
+                              onLoadStop: (webViewController, url) {
+                                progress.value = 1.0;
+                              },
+                              onPermissionRequest: _onPermissionRequest,
+                              onGeolocationPermissionsShowPrompt:
+                                  _onGeolocationPermissionsShowPrompt,
+                              onDownloadStartRequest: (
+                                webViewController,
+                                request,
+                              ) {
+                                LauncherUtils.urlLauncher(
+                                  request.url.toString(),
+                                  mode: LaunchMode.externalApplication,
+                                );
+                              },
+                              onCreateWindow: (webViewController, action) async {
+                                final url = action.request.url;
+                                if (url != null) {
+                                  await webViewController.loadUrl(
+                                    urlRequest: URLRequest(url: url),
+                                  );
+                                }
+                                return false;
+                              },
+                              shouldOverrideUrlLoading: (
+                                webViewController,
+                                action,
+                              ) async {
+                                final url = action.request.url;
+                                if (url == null) {
+                                  return NavigationActionPolicy.CANCEL;
+                                }
+                                if (url.scheme == "http" ||
+                                    url.scheme == "https" ||
+                                    url.scheme == "about" ||
+                                    url.scheme == "data" ||
+                                    url.scheme == "blob") {
+                                  return NavigationActionPolicy.ALLOW;
+                                }
+                                await LauncherUtils.urlLauncher(
+                                  url.toString(),
+                                  mode: LaunchMode.externalApplication,
+                                );
                                 return NavigationActionPolicy.CANCEL;
-                              }
-                              if (url.scheme == "http" ||
-                                  url.scheme == "https" ||
-                                  url.scheme == "about" ||
-                                  url.scheme == "data" ||
-                                  url.scheme == "blob") {
-                                return NavigationActionPolicy.ALLOW;
-                              }
-                              await LauncherUtils.urlLauncher(
-                                url.toString(),
-                                mode: LaunchMode.externalApplication,
-                              );
-                              return NavigationActionPolicy.CANCEL;
-                            },
+                              },
+                            ),
                           ),
-                        ),
                         if (progress.value < 0.1)
                           Positioned.fill(
                             child: ColoredBox(
@@ -162,6 +181,21 @@ class WebViewPage extends HookWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Uri _appSessionUrl(BuildContext context, String? url) {
+    final uri = Uri.tryParse(url?.trim() ?? "");
+    if (uri == null) return Uri.parse("about:blank");
+    if (!uri.isScheme("http") && !uri.isScheme("https")) return uri;
+
+    final accessToken = getIt<SecurityStorage>().getAccessToken();
+    return uri.replace(
+      queryParameters: {
+        ...uri.queryParameters,
+        "theme": Theme.of(context).brightness.name,
+        if (accessToken != null && accessToken.isNotEmpty) "token": accessToken,
+      },
     );
   }
 

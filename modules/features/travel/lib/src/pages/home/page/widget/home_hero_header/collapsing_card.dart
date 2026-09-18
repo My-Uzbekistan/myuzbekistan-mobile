@@ -21,7 +21,7 @@ class _CollapsingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = metrics.t;
     final shadow = context.appColors.service.shadow;
-    const radius = BorderRadius.vertical(bottom: Radius.circular(_kRadius));
+    const radius = BorderRadius.vertical(bottom: Radius.circular(28));
 
     return Positioned(
       top: 0,
@@ -54,17 +54,17 @@ class _CollapsingCard extends StatelessWidget {
                 zoom: metrics.zoom,
               ),
               _FadingSlot(
-                top: _kInfoTop + metrics.topInset,
+                top: 12 + metrics.topInset,
                 metrics: metrics,
                 child: infoRow,
               ),
               _FadingSlot(
-                top: _kMetricsTop + metrics.topInset,
+                top: 64 + metrics.topInset,
                 metrics: metrics,
                 child: metricsRow,
               ),
               _FadingSlot(
-                top: _kQuickTop + metrics.topInset,
+                top: 154 + metrics.topInset,
                 metrics: metrics,
                 child: quickRow,
               ),
@@ -163,12 +163,12 @@ class _FadingSlot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final relTop = top - metrics.topInset;
-    final stretch = metrics.overscroll * (relTop / _kExpanded);
+    final stretch = metrics.overscroll * (relTop / 295);
 
     return Positioned(
       top: top,
-      left: _kHPad,
-      right: _kHPad,
+      left: 16,
+      right: 16,
       child: IgnorePointer(
         ignoring: metrics.contentOpacity < 0.05,
         child: GlassFadeScope(

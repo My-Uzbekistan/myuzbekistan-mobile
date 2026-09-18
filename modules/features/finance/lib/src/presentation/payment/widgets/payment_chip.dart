@@ -7,15 +7,13 @@ class PaymentChip extends StatelessWidget {
 
   const PaymentChip({super.key, required this.text, this.onTap});
 
-  static const height = 30.0;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
       child: Container(
-        height: height,
+        height: 30,
         padding: const EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           color: context.appColors.fill.tertiary,

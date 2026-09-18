@@ -19,6 +19,7 @@ class MuseumListPage extends HookWidget {
   Widget build(BuildContext context) {
     final bloc = context.read<MuseumListBloc>();
     final scrollController = useScrollController();
+    final topInset = MediaQuery.paddingOf(context).top;
 
     useEffect(() {
       void onScroll() {
@@ -34,46 +35,60 @@ class MuseumListPage extends HookWidget {
 
     return Scaffold(
       backgroundColor: context.appColors.background.underlayer,
-      body: SafeArea(
-        bottom: false,
-        child: BlocConsumer<MuseumListBloc, MuseumListState>(
-          bloc: bloc,
-          listenWhen:
-              (previous, current) =>
-                  current.errorMessage != null &&
-                  previous.errorMessage != current.errorMessage,
-          listener: (context, state) => Toast.showToast(state.errorMessage!),
-          builder:
-              (context, state) => Column(
-                children: [
-                  _header(context, bloc, state),
-                  _sortChips(context, bloc, state),
-                  Expanded(
-                    child: RefreshIndicator.adaptive(
-                      onRefresh: () async {
-                        bloc.add(
-                          MuseumListEvent.start(
-                            search: state.search,
-                            cityId: state.cityId,
-                            cityName: state.cityName,
-                          ),
-                        );
-                        await bloc.stream.firstWhere(
-                          (state) => !state.isFirstLoading,
-                        );
-                      },
-                      child: CustomScrollView(
-                        controller: scrollController,
-                        physics: const BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics(),
-                        ),
-                        slivers: _slivers(context, bloc, state),
-                      ),
-                    ),
+      body: BlocConsumer<MuseumListBloc, MuseumListState>(
+        bloc: bloc,
+        listenWhen:
+            (previous, current) =>
+                current.errorMessage != null &&
+                previous.errorMessage != current.errorMessage,
+        listener: (context, state) => Toast.showToast(state.errorMessage!),
+        builder:
+            (context, state) => RefreshIndicator.adaptive(
+              displacement: topInset + 110,
+              triggerMode: RefreshIndicatorTriggerMode.anywhere,
+              onRefresh: () async {
+                bloc.add(
+                  MuseumListEvent.start(
+                    search: state.search,
+                    cityId: state.cityId,
+                    cityName: state.cityName,
                   ),
+                );
+                await bloc.stream.firstWhere((state) => !state.isFirstLoading);
+              },
+              child: CustomScrollView(
+                controller: scrollController,
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                slivers: [
+                  SliverStack(
+                    children: [
+                      SliverPersistentHeader(
+                        pinned: true,
+                        delegate: BlurHeaderDelegate(
+                          topInset + 110,
+                          gradientColor:
+                              context.appColors.background.underlayer,
+                        ),
+                      ),
+                      SliverPinnedHeader(
+                        child: Padding(
+                          padding: EdgeInsets.only(top: topInset),
+                          child: Column(
+                            children: [
+                              _header(context, bloc, state),
+                              _sortChips(context, bloc, state),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  ..._slivers(context, bloc, state),
                 ],
               ),
-        ),
+            ),
       ),
     );
   }

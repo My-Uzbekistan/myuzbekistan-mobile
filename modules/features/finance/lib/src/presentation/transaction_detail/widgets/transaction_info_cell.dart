@@ -2,8 +2,6 @@ import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
 class TransactionInfoCell extends StatelessWidget {
-  static const double height = 56;
-
   final String label;
   final String value;
 
@@ -16,7 +14,7 @@ class TransactionInfoCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height,
+      height: 56,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(

@@ -208,32 +208,40 @@ Qo'shimcha qoidalar:
 
 ### O'lchov Konstantalari — NOMLANMAYDI
 
-Har bir padding/gap/o'lcham uchun `static const` yozilmaydi — raqam to'g'ridan-to'g'ri joyiga yoziladi.
+Har bir padding/gap/o'lcham uchun nom berilmaydi — raqam to'g'ridan-to'g'ri joyiga yoziladi. Bu **klass ichidagi `static const`** ga ham, **fayl boshidagi global `const`** ga ham tegishli. Qiymat hisob-kitobda ishlatilsa ham, bir faylning bir necha klassida takrorlansa ham — baribir nomlanmaydi, raqam yoziladi.
 
 **Noto'g'ri:**
 ```dart
-class MarketDetailDeliveryTile extends StatelessWidget {
+const _horizontalPadding = 16.0;
+const _columnGap = 12.0;
+const _rowHeight = 44.0;
+
+class CurrencyRatesWidget extends StatelessWidget {
   static const double _iconSize = 24;
-  static const double _contentGap = 12;
-  static const double _textGap = 4;
-  static const double _dividerPadding = 12;
   static const String _separator = " · ";
   ...
-        spacing: _contentGap,
+        spacing: _columnGap,
+        padding: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
 ```
 
 **To'g'ri:**
 ```dart
         spacing: 12,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         ...
         SizedBox.square(dimension: 24, child: ...),
         ...
     ].join(" · ");
 ```
 
-`const` faqat shu hollarda:
-- qiymat **hisob-kitobda** ishlatilsa (masalan `market_order_wizard.dart` ichidagi `_iconDiameter` — konnektor geometriyasi shundan hisoblanadi)
-- bir faylning bir necha klassi o'rtasida bo'lishilsa — fayl darajasidagi `const`
+Hisob-kitobda ham raqam yoziladi:
+```dart
+final trackWidth = constraints.maxWidth - 32;
+final clamped = belowHeight.clamp(64.0, 116.0);
+final progress = ((116 - clamped) / 52).clamp(0.0, 1.0);
+```
+
+Bu qoida **o'lchovlarga** tegishli. O'lcham bo'lmagan qiymatlar — BE kategoriya `id`, sahifa hajmi (`pageSize`), debounce/polling oralig'i, sana formati, `baseUrl`, merchant `id` — nomlangan `const` bo'lib qolaveradi.
 
 ### Model / Enum Qoidasi
 

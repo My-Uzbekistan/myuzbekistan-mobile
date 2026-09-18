@@ -7,16 +7,13 @@ class PaymentAvatar extends StatelessWidget {
 
   const PaymentAvatar({super.key, this.imageUrl});
 
-  static const size = 56.0;
-  static const radius = 16.0;
-
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(radius),
+      borderRadius: BorderRadius.circular(16),
       child: SizedBox(
-        width: size,
-        height: size,
+        width: 56,
+        height: 56,
         child: AppNetworkImage(
           imageUrl.orEmpty(),
           cacheMaxAge: const Duration(days: 6),

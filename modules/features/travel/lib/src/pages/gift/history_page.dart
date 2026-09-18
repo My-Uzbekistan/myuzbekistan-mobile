@@ -106,7 +106,7 @@ class _ClaimCell extends StatelessWidget {
                 const GiftBoxImage(
                   size: 56,
                   radius: 16,
-                  zoom: kGiftBoxCropZoom,
+                  zoom: 1.3226,
                 ),
                 Expanded(
                   child: Column(

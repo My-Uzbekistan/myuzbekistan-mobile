@@ -34,5 +34,3 @@ class GiftBoxImage extends StatelessWidget {
     );
   }
 }
-
-const double kGiftBoxCropZoom = 1.3226;

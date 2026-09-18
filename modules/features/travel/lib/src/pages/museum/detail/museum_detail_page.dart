@@ -93,6 +93,10 @@ class MuseumDetailPage extends HookWidget {
                             elevation: 0,
                             shadowColor: Colors.transparent,
                             backgroundColor: Colors.transparent,
+                            systemOverlayStyle: context.systemUiOverlyStyle
+                                .copyWith(
+                                  statusBarBrightness: Brightness.dark,
+                                ),
                             flexibleSpace: FlexibleSpaceBar(
                               collapseMode: CollapseMode.parallax,
                               stretchModes: const [StretchMode.zoomBackground],
@@ -119,12 +123,12 @@ class MuseumDetailPage extends HookWidget {
                               children: [
                                 ClipRRect(
                                   borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(24),
+                                    top: Radius.circular(20),
                                   ),
                                   child: Container(
-                                    height: 24,
+                                    height: 20,
                                     color:
-                                        context.appColors.background.underlayer,
+                                        context.appColors.background.elevation1,
                                   ),
                                 ),
                               ],
@@ -227,7 +231,10 @@ class MuseumDetailPage extends HookWidget {
 
     return Column(
       children: [
-        MuseumDetailSection(child: MuseumDetailSummary(detail: detail)),
+        MuseumDetailSection(
+          squareTop: true,
+          child: MuseumDetailSummary(detail: detail),
+        ),
         if (detail.description.isNotEmpty)
           MuseumDetailSection(
             title: context.localization.museum_detail_about,

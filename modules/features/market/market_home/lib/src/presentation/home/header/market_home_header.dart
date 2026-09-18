@@ -4,11 +4,6 @@ import 'package:market_home/src/core/extension.dart';
 import 'package:market_home/src/presentation/widgets/market_circle_button.dart';
 import 'package:market_home/src/presentation/widgets/market_search_hero.dart';
 
-const double _expandedHeight = 116;
-const double _collapsedHeight = 64;
-const double _searchHeight = 48;
-const double _horizontalPadding = 16;
-
 class MarketHomeHeader extends StatelessWidget {
   const MarketHomeHeader({
     super.key,
@@ -35,8 +30,8 @@ class MarketHomeHeader extends StatelessWidget {
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       scrolledUnderElevation: 0,
-      toolbarHeight: _collapsedHeight,
-      expandedHeight: _expandedHeight,
+      toolbarHeight: 64,
+      expandedHeight: 116,
       stretchTriggerOffset: 80,
       flexibleSpace: LayoutBuilder(
         builder: (context, constraints) {
@@ -52,8 +47,8 @@ class MarketHomeHeader extends StatelessWidget {
               _card(context, metrics),
               Positioned(
                 top: metrics.searchTop,
-                left: _horizontalPadding,
-                right: _horizontalPadding,
+                left: 16,
+                right: 16,
                 child: _searchRow(context),
               ),
             ],
@@ -79,8 +74,8 @@ class MarketHomeHeader extends StatelessWidget {
             _surface(context, metrics),
             Positioned(
               top: metrics.topInset,
-              left: _horizontalPadding,
-              right: _horizontalPadding,
+              left: 16,
+              right: 16,
               child: IgnorePointer(
                 ignoring: metrics.contentOpacity < 0.05,
                 child: Opacity(
@@ -206,7 +201,7 @@ class MarketHomeHeader extends StatelessWidget {
         MarketSearchHero(
           tag: MarketSearchHero.leadingTag,
           child: MarketCircleButton(
-            size: _searchHeight,
+            size: 48,
             onTap: onCatalogTap,
             icon: Assets.svg.tabIconCatalog.path.toSvgImage(
               width: 24,
@@ -223,7 +218,7 @@ class MarketHomeHeader extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               onTap: onSearchTap,
               child: SizedBox(
-                height: _searchHeight,
+                height: 48,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
@@ -248,7 +243,7 @@ class MarketHomeHeader extends StatelessWidget {
               ).shadow(
                 context,
                 backgroundColor: colors.background.elevation2,
-                borderRadius: BorderRadius.circular(_searchHeight / 2),
+                borderRadius: BorderRadius.circular(24),
               ),
             ),
           ),
@@ -263,17 +258,15 @@ class _HeaderMetrics {
     required double belowHeight,
     required double topInset,
   }) {
-    final clamped = belowHeight.clamp(_collapsedHeight, _expandedHeight);
-    final progress =
-        ((_expandedHeight - clamped) / (_expandedHeight - _collapsedHeight))
-            .clamp(0.0, 1.0);
+    final clamped = belowHeight.clamp(64.0, 116.0);
+    final progress = ((116 - clamped) / 52).clamp(0.0, 1.0);
 
     return _HeaderMetrics._(
       topInset: topInset,
       collapseProgress: progress,
       contentOpacity: (1 - progress * 2.2).clamp(0.0, 1.0),
       gradientOpacity: 1 - Curves.easeIn.transform(progress),
-      searchTop: topInset + belowHeight - _searchHeight - 16,
+      searchTop: topInset + belowHeight - 48 - 16,
       cardBottom: topInset + belowHeight,
     );
   }

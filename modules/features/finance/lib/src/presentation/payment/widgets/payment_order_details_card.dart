@@ -10,9 +10,6 @@ class PaymentOrderDetailsCard extends HookWidget {
 
   const PaymentOrderDetailsCard({super.key, required this.details});
 
-  static const _chevronSize = 20.0;
-  static const _expandDuration = Duration(milliseconds: 200);
-
   @override
   Widget build(BuildContext context) {
     final isExpanded = useState(true);
@@ -41,10 +38,10 @@ class PaymentOrderDetailsCard extends HookWidget {
                   ).labelLg(color: context.appColors.textIconColor.primary),
                 ),
                 AnimatedRotation(
-                  duration: _expandDuration,
+                  duration: const Duration(milliseconds: 200),
                   turns: isExpanded.value ? 0.5 : 0,
                   child: SizedBox.square(
-                    dimension: _chevronSize,
+                    dimension: 20,
                     child: Assets.svg.iconChevronDown.path.toSvgImage(
                       fit: BoxFit.contain,
                       tintColor: context.appColors.textIconColor.primary,
@@ -55,7 +52,7 @@ class PaymentOrderDetailsCard extends HookWidget {
             ),
           ),
           AnimatedSize(
-            duration: _expandDuration,
+            duration: const Duration(milliseconds: 200),
             alignment: Alignment.topCenter,
             child: isExpanded.value
                 ? Padding(

@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import '../../models/app_action_type.dart';
 import '../../models/catalog_model.dart';
 
 class SearchService {
@@ -8,7 +9,7 @@ class SearchService {
   final String? icon;
   final Color? color;
   final bool authRequired;
-  final CatalogActionType actionType;
+  final AppActionType actionType;
   final bool isPremiumOnly;
   final int? freeUsageLimit;
   final String? deeplink;
@@ -19,7 +20,7 @@ class SearchService {
     this.icon,
     this.color,
     this.authRequired = false,
-    this.actionType = CatalogActionType.inner,
+    this.actionType = AppActionType.inner,
     this.isPremiumOnly = false,
     this.freeUsageLimit,
     this.deeplink,

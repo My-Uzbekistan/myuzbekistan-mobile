@@ -16,8 +16,6 @@ import 'package:shared/shared.dart';
 class AddCardsPage extends HookWidget {
   const AddCardsPage({super.key});
 
-  static const _cardHorizontalPadding = 32.0;
-
   @override
   Widget build(BuildContext context) {
     final bloc = useMemoized(() => context.read<AddCardBloc>());
@@ -75,9 +73,7 @@ class AddCardsPage extends HookWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: _cardHorizontalPadding,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 32),
                     child: CardView(
                       cardNumber: state.pan.maskedPan,
                       expiry: state.cardExpire,

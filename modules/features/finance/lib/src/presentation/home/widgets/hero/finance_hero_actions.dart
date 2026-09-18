@@ -8,11 +8,6 @@ import 'package:shared/shared.dart';
 
 import 'finance_hero_action_tile.dart';
 
-const _tileRadius = 20.0;
-const _tileBlur = 2.0;
-const _tileSpacing = 8.0;
-const _tilePadding = EdgeInsets.symmetric(horizontal: 16, vertical: 14);
-
 class FinanceHeroActions extends StatelessWidget {
   const FinanceHeroActions({super.key});
 
@@ -24,11 +19,11 @@ class FinanceHeroActions extends StatelessWidget {
         bottom: 16,
       ),
       child: AdaptiveGlassRow(
-        borderRadius: _tileRadius,
-        blur: _tileBlur,
-        spacing: _tileSpacing,
+        borderRadius: 20,
+        blur: 2,
+        spacing: 8,
         tint: context.appColors.service.glass,
-        padding: _tilePadding,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         items: [
           AdaptiveGlassRowItem(
             onTap: _withHaptic(() => context.finance.pushQrCoderReaderPage()),

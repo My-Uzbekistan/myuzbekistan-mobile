@@ -13,8 +13,6 @@ import 'package:travel/src/premium/widgets/premium_sky_background.dart';
 
 class PremiumOnboardingPage extends HookWidget {
   static const _merchantId = "50";
-  static const _contentTopSpacing = 72.0;
-  static const _contentBottomSpacing = 24.0;
 
   const PremiumOnboardingPage({super.key});
 
@@ -72,15 +70,15 @@ class PremiumOnboardingPage extends HookWidget {
                       thickness: 3,
                       radius: const Radius.circular(999),
                       padding: EdgeInsets.only(
-                        top: topInset + _contentTopSpacing,
-                        bottom: _contentBottomSpacing,
+                        top: topInset + 72,
+                        bottom: 24,
                         right: 4,
                       ),
                       child: SingleChildScrollView(
                         controller: scrollController,
                         padding: EdgeInsets.only(
-                          top: topInset + _contentTopSpacing,
-                          bottom: _contentBottomSpacing,
+                          top: topInset + 72,
+                          bottom: 24,
                         ),
                         child: Column(
                           spacing: 24,

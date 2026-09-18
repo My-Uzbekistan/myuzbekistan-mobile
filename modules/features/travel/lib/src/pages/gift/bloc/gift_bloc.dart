@@ -31,6 +31,16 @@ class GiftBloc extends Bloc<GiftBlocEvent, GiftBlocState> {
         activeStatusCode: null,
       ),
     );
+
+    bool giftEnabled;
+    try {
+      giftEnabled = await _repository.giftEnabled();
+    } catch (_) {
+      giftEnabled = true;
+    }
+    emit(state.copyWith(giftEnabled: giftEnabled));
+    if (!giftEnabled) return;
+
     try {
       final result = await _repository.giftActive();
       emit(

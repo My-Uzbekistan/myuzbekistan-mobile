@@ -1,5 +1,7 @@
 import 'package:component_res/component_res.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/widgets.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart' hide Toast;
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
@@ -93,5 +95,5 @@ Future<void> _openAiGuide(BuildContext context) async {
     );
     return;
   }
-  context.push(url);
+  context.openAction(url, actionType: AppActionType.inner);
 }

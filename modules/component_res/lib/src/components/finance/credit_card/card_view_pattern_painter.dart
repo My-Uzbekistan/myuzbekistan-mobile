@@ -9,21 +9,14 @@ class CardViewPatternPainter extends CustomPainter {
     required this.glowColor,
   });
 
-  static const _glowCenter = Offset(13, -7);
-  static const _glowRadius = 32.0;
-  static const _glowBlurSigma = 24.0;
-  static const _circleRadius = 110.5;
-  static const _firstCircleCenter = Offset(7, -54);
-  static const _secondCircleCenter = Offset(-5, -44);
-
   @override
   void paint(Canvas canvas, Size size) {
     canvas.drawCircle(
-      _glowCenter,
-      _glowRadius,
+      const Offset(13, -7),
+      32,
       Paint()
         ..color = glowColor
-        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, _glowBlurSigma),
+        ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 24),
     );
 
     final strokePaint =
@@ -32,8 +25,8 @@ class CardViewPatternPainter extends CustomPainter {
           ..strokeWidth = 1
           ..color = strokeColor;
 
-    canvas.drawCircle(_firstCircleCenter, _circleRadius, strokePaint);
-    canvas.drawCircle(_secondCircleCenter, _circleRadius, strokePaint);
+    canvas.drawCircle(const Offset(7, -54), 110.5, strokePaint);
+    canvas.drawCircle(const Offset(-5, -44), 110.5, strokePaint);
   }
 
   @override

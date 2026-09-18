@@ -20,11 +20,11 @@ class ServicesSheet extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: GradientAppBar(
         automaticallyImplyLeading: false,
-        toolbarHeight: 72,
+        toolbarHeight: 48,
         centerTitle: true,
         gradientColor: context.appColors.background.elevation1,
         widget: const SizedBox(
-          height: 72,
+          height: 48,
           child: Align(alignment: Alignment.topCenter, child: SheetGrabber()),
         ),
         actions: [
@@ -49,12 +49,7 @@ class ServicesSheet extends StatelessWidget {
               ),
               slivers: [
                 SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(
-                    16,
-                    80,
-                    16,
-                    32,
-                  ),
+                  padding: const EdgeInsets.fromLTRB(16, 52, 16, 32),
                   sliver: SliverToBoxAdapter(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +79,7 @@ class ServicesSheet extends StatelessWidget {
     final widgets = buildServiceFeatureRows(context, services);
 
     if (services.length > 6) {
-      widgets.add(const SizedBox(height: 12));
+      widgets.add(const SizedBox(height: 16));
       widgets.add(
         ServiceSmallGrid(
           items: [

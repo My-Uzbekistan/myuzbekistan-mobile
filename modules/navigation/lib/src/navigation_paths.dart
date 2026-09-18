@@ -7,6 +7,7 @@ import '../navigation.dart';
 
 
 
+part 'action_opener.dart';
 part 'context_extension.dart';
 part 'link_router.dart';
 part 'root_nav_path.dart';

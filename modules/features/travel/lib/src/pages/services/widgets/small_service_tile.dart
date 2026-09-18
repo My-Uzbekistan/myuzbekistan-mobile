@@ -37,31 +37,29 @@ class SmallServiceTile extends HookWidget {
             mainAxisSize: MainAxisSize.min,
             spacing: 8,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: SizedBox.square(
-                  dimension: 56,
-                  child: ColoredBox(
-                    color: item.color,
-                    child: Stack(
-                      clipBehavior: Clip.none,
-                      children: [
-                        Positioned(
-                          left: -2,
-                          top: 8,
-                          child: ServiceIcon(item: item, size: 60),
-                        ),
-                        if (isChecking.value)
-                          Positioned.fill(
-                            child: ColoredBox(
-                              color: context.appColors.service.scrim,
-                              child: const Center(
-                                child: LoadingIndicator(size: 20),
-                              ),
+              SizedBox.square(
+                dimension: 56,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned.fill(child: ColoredBox(color: item.color)),
+                      Positioned(
+                        left: -2,
+                        top: -2,
+                        child: ServiceIcon(item: item, size: 60),
+                      ),
+                      if (isChecking.value)
+                        Positioned.fill(
+                          child: ColoredBox(
+                            color: context.appColors.service.scrim,
+                            child: const Center(
+                              child: LoadingIndicator(size: 20),
                             ),
                           ),
-                      ],
-                    ),
+                        ),
+                    ],
                   ),
                 ),
               ),

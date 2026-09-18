@@ -29,7 +29,7 @@ class ServiceSmallGrid extends StatelessWidget {
           ],
         ),
       );
-      if (i + columns < items.length) rows.add(const SizedBox(height: 12));
+      if (i + columns < items.length) rows.add(const SizedBox(height: 16));
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

@@ -5,11 +5,6 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:shared/shared.dart' hide Toast;
 
-const double _iconDiameter = 44;
-const double _connectorThickness = 2;
-const double _stepGap = 6;
-const Duration _accentDuration = Duration(milliseconds: 460);
-
 class MarketOrderWizard extends HookWidget {
   const MarketOrderWizard({super.key, required this.steps});
 
@@ -37,10 +32,9 @@ class MarketOrderWizard extends HookWidget {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final cellWidth =
-              (constraints.maxWidth - _stepGap * (steps.length - 1)) /
-              steps.length;
-          final stepSpan = cellWidth + _stepGap;
-          final connectorWidth = stepSpan - _iconDiameter - 5;
+              (constraints.maxWidth - 6 * (steps.length - 1)) / steps.length;
+          final stepSpan = cellWidth + 6;
+          final connectorWidth = stepSpan - 49;
 
           return TweenAnimationBuilder<double>(
             tween: Tween(begin: 0, end: _passedConnectorCount),
@@ -52,18 +46,14 @@ class MarketOrderWizard extends HookWidget {
                 if (connectorWidth > 0)
                   for (var index = 0; index < steps.length - 1; index++)
                     Positioned(
-                      left:
-                          index * stepSpan +
-                          cellWidth / 2 +
-                          _iconDiameter / 2 +
-                          2.5,
-                      top: _iconDiameter / 2 - _connectorThickness / 2,
+                      left: index * stepSpan + cellWidth / 2 + 24.5,
+                      top: 21,
                       width: connectorWidth,
                       child: _Connector(fill: progress - index),
                     ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: _stepGap,
+                  spacing: 6,
                   children: [
                     for (var index = 0; index < steps.length; index++)
                       Expanded(
@@ -114,18 +104,18 @@ class _Connector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: _connectorThickness,
+      height: 2,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: context.appColors.fill.tertiary,
-        borderRadius: BorderRadius.circular(_connectorThickness / 2),
+        borderRadius: BorderRadius.circular(1),
       ),
       child: FractionallySizedBox(
         widthFactor: fill.clamp(0, 1),
         heightFactor: 1,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(_connectorThickness / 2),
+            borderRadius: BorderRadius.circular(1),
             gradient: LinearGradient(
               colors: [
                 context.appColors.brandSeaBlue.withValues(alpha: 0.45),
@@ -168,8 +158,8 @@ class _Step extends StatelessWidget {
             children: [
               if (isCurrent) const _PulseRing(),
               Container(
-                width: _iconDiameter,
-                height: _iconDiameter,
+                width: 44,
+                height: 44,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: context.appColors.fill.quaternary,
@@ -180,7 +170,7 @@ class _Step extends StatelessWidget {
                   children: [
                     TweenAnimationBuilder<double>(
                       tween: Tween(begin: 0, end: isCurrent ? 1 : 0),
-                      duration: _accentDuration,
+                      duration: const Duration(milliseconds: 460),
                       curve: Curves.easeOutBack,
                       builder: (context, scale, child) =>
                           Transform.scale(scale: scale, child: child),
@@ -195,9 +185,8 @@ class _Step extends StatelessWidget {
                     ),
                     TweenAnimationBuilder<Color?>(
                       tween: ColorTween(begin: accent, end: accent),
-                      duration: _accentDuration,
-                      builder: (context, color, _) =>
-                          _glyph(color ?? accent),
+                      duration: const Duration(milliseconds: 460),
+                      builder: (context, color, _) => _glyph(color ?? accent),
                     ),
                   ],
                 ),
@@ -206,7 +195,7 @@ class _Step extends StatelessWidget {
           ),
           TweenAnimationBuilder<Color?>(
             tween: ColorTween(begin: accent, end: accent),
-            duration: _accentDuration,
+            duration: const Duration(milliseconds: 460),
             builder: (context, color, _) => Text(
               step.title,
               maxLines: 2,
@@ -273,8 +262,8 @@ class _PulseRing extends HookWidget {
         return Transform.scale(
           scale: 1 + 0.36 * wave,
           child: Container(
-            width: _iconDiameter,
-            height: _iconDiameter,
+            width: 44,
+            height: 44,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(

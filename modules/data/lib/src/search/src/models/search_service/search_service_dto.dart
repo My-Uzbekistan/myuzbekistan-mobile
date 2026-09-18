@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
+import '../../../../utils/convertors/app_action_type_convertor.dart';
 import '../../../../utils/convertors/view_type_convertor.dart';
 
 part 'search_service_dto.g.dart';
@@ -15,7 +16,8 @@ class SearchServiceDto {
   @HexColorConverter()
   final Color? color;
   final bool? authRequired;
-  final int? actionType;
+  @AppActionTypeConvertor()
+  final AppActionType actionType;
   final bool? isPremiumOnly;
   final int? freeUsageLimit;
   final String? deeplink;
@@ -26,7 +28,7 @@ class SearchServiceDto {
     this.icon,
     this.color,
     this.authRequired,
-    this.actionType,
+    required this.actionType,
     this.isPremiumOnly,
     this.freeUsageLimit,
     this.deeplink,
@@ -41,10 +43,7 @@ class SearchServiceDto {
     icon: icon,
     color: color,
     authRequired: authRequired ?? false,
-    actionType: CatalogActionType.values.firstWhere(
-      (e) => e.id == actionType,
-      orElse: () => CatalogActionType.inner,
-    ),
+    actionType: actionType,
     isPremiumOnly: isPremiumOnly ?? false,
     freeUsageLimit: freeUsageLimit,
     deeplink: deeplink,

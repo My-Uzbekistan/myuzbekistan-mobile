@@ -17,6 +17,30 @@ class ReviewItem extends StatelessWidget {
     this.onTap,
   });
 
+  Widget _avatar(BuildContext context) {
+    return ClipOval(
+      child: SizedBox.square(
+        dimension: 40,
+        child: AppNetworkImage(
+          item.avatar.orEmpty(),
+          width: 40,
+          height: 40,
+          fit: BoxFit.cover,
+          placeholder: ColoredBox(
+            color: context.appColors.textIconColor.primary,
+            child: Center(
+              child: Text(
+                item.userName.isNotEmpty
+                    ? item.userName.characters.first.toUpperCase()
+                    : "?",
+              ).labelMd(color: context.appColors.textIconColor.oposite),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,15 +62,7 @@ class ReviewItem extends StatelessWidget {
             Row(
               spacing: 12,
               children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: context.appColors.textIconColor.primary,
-                  child: Text(
-                    (item.userName.isNotEmpty
-                        ? item.userName.characters.first.toUpperCase()
-                        : "?"),
-                  ).labelMd(color: context.appColors.textIconColor.oposite),
-                ),
+                _avatar(context),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

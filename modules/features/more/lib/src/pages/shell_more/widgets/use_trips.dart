@@ -1,7 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:more/src/core/extension.dart';
 import 'package:navigation/navigation.dart';
 import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
@@ -31,19 +30,7 @@ class UseTripsWidget extends StatelessWidget {
             ),
             ...useFull.map((use) => SettingsCell(
                   text: use.title ?? "",
-                  onTap: () {
-                    final actionUrl = use.actionUrl ?? "";
-                    if (actionUrl.isNotEmpty) {
-                      if (actionUrl.startsWith("http://") ||
-                          actionUrl.startsWith("https://")) {
-                        //TODO WEbVIewPage
-                        context.more.pushWebViewPage(actionUrl: actionUrl);
-                      } else {
-                        context.push(actionUrl);
-                      }
-                    }
-
-                  },
+                  onTap: () => AppLinkRouter.open(use.actionUrl),
                 )),
           ],
         ),

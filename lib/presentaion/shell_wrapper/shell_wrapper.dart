@@ -89,5 +89,5 @@ class ShellPageWrapper extends HookWidget {
 void _openNotificationDeeplink(RemoteMessage message) {
   final deeplink = message.data["deeplink"];
   if (deeplink is! String) return;
-  AppLinkRouter.open(deeplink);
+  AppLinkRouter.openPlatformLink(deeplink);
 }

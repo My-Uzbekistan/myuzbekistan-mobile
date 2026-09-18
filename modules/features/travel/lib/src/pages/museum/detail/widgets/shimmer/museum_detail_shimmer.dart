@@ -1,5 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
+import 'package:travel/src/pages/museum/detail/widgets/museum_detail_section.dart';
 
 class MuseumDetailShimmer extends StatelessWidget {
   const MuseumDetailShimmer({super.key});
@@ -7,11 +8,11 @@ class MuseumDetailShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromDefault(
-      child: Column(
+      child: const Column(
         children: [
-          _card(
-            context,
-            child: const Column(
+          MuseumDetailSection(
+            squareTop: true,
+            child: Column(
               spacing: 12,
               children: [
                 ShimmerDefaultContainer(height: 36, radius: 8),
@@ -20,9 +21,8 @@ class MuseumDetailShimmer extends StatelessWidget {
               ],
             ),
           ),
-          _card(
-            context,
-            child: const Column(
+          MuseumDetailSection(
+            child: Column(
               spacing: 12,
               children: [
                 ShimmerDefaultContainer(height: 28, width: 160, radius: 8),
@@ -32,18 +32,6 @@ class MuseumDetailShimmer extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _card(BuildContext context, {required Widget child}) {
-    return Container(
-      margin: const EdgeInsets.only(left: 4, right: 4, bottom: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: context.appColors.background.elevation1,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      child: child,
     );
   }
 }

@@ -7,8 +7,6 @@ import 'package:shared/shared.dart';
 import 'nearest_place_distance_badge.dart';
 import 'nearest_place_logo.dart';
 
-const nearestPlaceCardWidth = 160.0;
-
 class NearestPlaceCard extends StatelessWidget {
   final Merchant merchant;
   final VoidCallback? onTap;
@@ -25,7 +23,7 @@ class NearestPlaceCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: nearestPlaceCardWidth,
+        width: 160,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

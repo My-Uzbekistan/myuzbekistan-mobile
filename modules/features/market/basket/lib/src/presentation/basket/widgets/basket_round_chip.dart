@@ -2,8 +2,6 @@ import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
 
 class BasketRoundChip extends StatelessWidget {
-  static const double iconSize = 16;
-
   const BasketRoundChip({
     super.key,
     required this.icon,
@@ -28,7 +26,7 @@ class BasketRoundChip extends StatelessWidget {
           color: context.appColors.fill.tertiary,
           shape: BoxShape.circle,
         ),
-        child: SizedBox.square(dimension: iconSize, child: icon),
+        child: SizedBox.square(dimension: 16, child: icon),
       ),
     );
   }

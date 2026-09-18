@@ -14,11 +14,6 @@ class CardImageSelectorItem extends StatelessWidget {
     required this.onTap,
   });
 
-  static const size = 56.0;
-  static const _imageSize = 40.0;
-  static const _selectionSize = 52.0;
-  static const _selectionWidth = 4.0;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -28,14 +23,14 @@ class CardImageSelectorItem extends StatelessWidget {
         onTap();
       },
       child: SizedBox(
-        width: size,
-        height: size,
+        width: 56,
+        height: 56,
         child: Stack(
           alignment: Alignment.center,
           children: [
             Container(
-              width: _imageSize,
-              height: _imageSize,
+              width: 40,
+              height: 40,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: context.appColors.fill.quaternary,
@@ -49,13 +44,13 @@ class CardImageSelectorItem extends StatelessWidget {
             ),
             if (isSelected)
               Container(
-                width: _selectionSize,
-                height: _selectionSize,
+                width: 52,
+                height: 52,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: context.appColors.brand,
-                    width: _selectionWidth,
+                    width: 4,
                     strokeAlign: BorderSide.strokeAlignInside,
                   ),
                 ),

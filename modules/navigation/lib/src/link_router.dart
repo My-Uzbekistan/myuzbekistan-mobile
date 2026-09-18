@@ -14,7 +14,11 @@ abstract class AppLinkRouter {
     _attach();
   }
 
-  static void open(String? link) {
+  static void open(String? link) => _open(link, fromPlatform: false);
+
+  static void openPlatformLink(String? link) => _open(link, fromPlatform: true);
+
+  static void _open(String? link, {required bool fromPlatform}) {
     final trimmed = link?.trim();
     if (trimmed == null || trimmed.isEmpty) return;
 
@@ -23,10 +27,10 @@ abstract class AppLinkRouter {
       appRootNavigatorKey.currentContext?.more.openUrl(trimmed);
       return;
     }
-    if (_isRepeat(location)) return;
+    if (fromPlatform && _isRepeat(location)) return;
 
     _pending = location;
-    _flush();
+    _flush(immediate: !fromPlatform);
   }
 
   static String? locationOf(Uri? uri) {
@@ -73,7 +77,7 @@ abstract class AppLinkRouter {
     _flush();
   }
 
-  static void _flush() {
+  static void _flush({bool immediate = false}) {
     final location = _pending;
     if (location == null) return;
 
@@ -84,6 +88,10 @@ abstract class AppLinkRouter {
     if (!_isReady(router)) return;
 
     _pending = null;
+    if (immediate) {
+      _navigate(location);
+      return;
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) => _navigate(location));
   }
 
@@ -126,7 +134,7 @@ class _PlatformLinkObserver extends WidgetsBindingObserver {
       return Future.value(false);
     }
 
-    AppLinkRouter.open(uri.toString());
+    AppLinkRouter.openPlatformLink(uri.toString());
     return Future.value(true);
   }
 }

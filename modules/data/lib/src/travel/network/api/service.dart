@@ -16,6 +16,7 @@ import '../../models/catalog/catalog_dto.dart';
 import '../../models/categories/categories_dto.dart';
 import '../../models/cities/cities_dto.dart';
 import '../../models/city_detail/city_detail_dto.dart';
+import '../../models/claim/bonus_status_dto.dart';
 import '../../models/claim/claim_dto.dart';
 import '../../models/currency/currency_dto.dart';
 import '../../models/content/content_dto.dart';
@@ -228,6 +229,9 @@ abstract class RestService {
 
   @PUT("prayer-times/reminders")
   Future<dynamic> updatePrayerReminders(@Body() Map<String, dynamic> body);
+
+  @GET("bonus/status")
+  Future<BonusStatusDto> giftStatus();
 
   @GET("bonus/active")
   Future<ClaimStatusDto?> giftActive();

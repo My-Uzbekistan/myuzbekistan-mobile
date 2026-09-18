@@ -166,8 +166,6 @@ class PremiumSection extends StatelessWidget {
 }
 
 class _PremiumGlowPainter extends CustomPainter {
-  static const double _designWidth = 371;
-
   final Color glow;
   final Color highlight;
 
@@ -176,7 +174,7 @@ class _PremiumGlowPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     canvas.save();
-    canvas.scale(size.width / _designWidth, 1);
+    canvas.scale(size.width / 371, 1);
     _blurred(canvas, _backGlow(), const Offset(-128.11, -3.22), 30, glow);
     _blurred(canvas, _frontGlow(), const Offset(-116.11, 36.78), 20, glow);
     _blurred(canvas, _crest(), const Offset(-127.11, 41.78), 20, highlight);

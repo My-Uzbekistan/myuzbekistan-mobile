@@ -53,7 +53,7 @@ class ClaimResultDialog extends HookWidget {
               height: 132,
               child: ImageFiltered(
                 imageFilter: ImageFilter.blur(sigmaX: 56, sigmaY: 56),
-                child: const GiftBoxImage(size: 132, zoom: kGiftBoxCropZoom),
+                child: const GiftBoxImage(size: 132, zoom: 1.3226),
               ),
             ),
             Positioned(
@@ -94,7 +94,7 @@ class ClaimResultDialog extends HookWidget {
                       ),
                       const GiftBoxAnimation(
                         size: 132,
-                        zoom: kGiftBoxCropZoom,
+                        zoom: 1.3226,
                       ),
                     ],
                   ),

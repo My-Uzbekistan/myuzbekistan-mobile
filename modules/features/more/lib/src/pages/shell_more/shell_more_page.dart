@@ -234,18 +234,8 @@ class ShellMorePage extends HookWidget {
                                     (e) => ProfileSettingsCell(
                                       icon: AppNetworkImage(e.photo ?? ""),
                                       title: e.title.toString(),
-                                      onTap: () {
-                                        final actionUrl = e.actionUrl ?? "";
-                                        if (actionUrl.isEmpty) return;
-                                        if (actionUrl.startsWith("http://") ||
-                                            actionUrl.startsWith("https://")) {
-                                          context.more.pushWebViewPage(
-                                            actionUrl: actionUrl,
-                                          );
-                                        } else {
-                                          context.push(actionUrl);
-                                        }
-                                      },
+                                      onTap: () =>
+                                          AppLinkRouter.open(e.actionUrl),
                                     ),
                                   ),
                                 ],

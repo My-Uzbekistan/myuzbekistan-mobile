@@ -29,12 +29,11 @@ class FeatureServiceTile extends HookWidget {
         child: ColoredBox(
           color: item.color,
           child: Stack(
-            clipBehavior: Clip.none,
             children: [
               Positioned(
-                right: -28,
-                bottom: -23,
-                child: ServiceIcon(item: item, size: 120),
+                right: 0,
+                top: -18.5,
+                child: ServiceIcon(item: item, size: 114),
               ),
               Padding(
                 padding: const EdgeInsets.all(12),
@@ -42,7 +41,7 @@ class FeatureServiceTile extends HookWidget {
                   item.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                ).labelMd(color: context.appColors.textIconColor.primary),
+                ).h3(color: context.appColors.textIconColor.primary),
               ),
               if (badge != null)
                 Positioned(

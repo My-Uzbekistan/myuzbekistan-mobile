@@ -12,7 +12,7 @@ List<Widget> buildServiceFeatureRows(
   final rows = <Widget>[];
   var built = 0;
   for (var i = 0; i < items.length && built < maxRows; i += 3, built++) {
-    if (rows.isNotEmpty) rows.add(const SizedBox(height: 12));
+    if (rows.isNotEmpty) rows.add(const SizedBox(height: 16));
     final s1 = i + 1 < items.length ? items[i + 1] : null;
     final s2 = i + 2 < items.length ? items[i + 2] : null;
     rows.add(

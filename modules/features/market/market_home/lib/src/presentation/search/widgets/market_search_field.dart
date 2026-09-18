@@ -3,9 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:market_home/src/core/extension.dart';
 
 class MarketSearchField extends StatelessWidget {
-  static const double height = 48;
-  static const double radius = 24;
-
   const MarketSearchField({
     super.key,
     required this.controller,
@@ -26,11 +23,11 @@ class MarketSearchField extends StatelessWidget {
     final colors = context.appColors;
 
     return Container(
-      height: height,
+      height: 48,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         border: Border.all(color: colors.brandSeaBlue, width: 2),
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Row(
         spacing: 8,
@@ -85,7 +82,7 @@ class MarketSearchField extends StatelessWidget {
     ).shadow(
       context,
       backgroundColor: colors.background.elevation2,
-      borderRadius: BorderRadius.circular(radius),
+      borderRadius: BorderRadius.circular(24),
     );
   }
 }

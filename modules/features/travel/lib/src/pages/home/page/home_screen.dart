@@ -166,7 +166,7 @@ class HomeScreen extends HookWidget {
                             (service) => HomeQuickAction(
                               iconPath: service.icon ?? '',
                               label: service.name ?? '',
-                              onTap: () => AppLinkRouter.open(service.url),
+                              onTap: () => context.openLink(service.url),
                             ),
                           )
                           .toList(),
@@ -283,13 +283,9 @@ void _openBanner(BuildContext context, BannerItem banner) {
     return;
   }
 
-  final link = banner.url.orEmpty().trim();
-  if (link.isEmpty) return;
-
-  if (banner.actionType == BannerActionType.inner) {
-    AppLinkRouter.open(link);
-    return;
-  }
-
-  context.more.openUrl(link);
+  context.openAction(
+    banner.url,
+    actionType: banner.actionType,
+    authRequired: banner.authRequired,
+  );
 }

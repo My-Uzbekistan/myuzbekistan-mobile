@@ -14,24 +14,20 @@ class CardImageSelector extends StatelessWidget {
     this.selectedImage,
   });
 
-  static const _horizontalPadding = 16.0;
-
   @override
   Widget build(BuildContext context) {
     if (images.isEmpty) return const SizedBox.shrink();
 
     return SizedBox(
-      height: CardImageSelectorItem.size,
+      height: 56,
       child: LayoutBuilder(
         builder:
             (context, constraints) => SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(
-                horizontal: _horizontalPadding,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minWidth: constraints.maxWidth - _horizontalPadding * 2,
+                  minWidth: constraints.maxWidth - 32,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

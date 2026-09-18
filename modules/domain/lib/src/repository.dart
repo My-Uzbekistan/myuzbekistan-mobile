@@ -158,6 +158,7 @@ abstract interface class Repository {
 
   Future<dynamic> onboardingTrackClick({required int id});
 
+  Future<bool> giftEnabled();
   Future<ClaimStatus?> giftActive();
   Future<List<ClaimHistory>> giftHistory({int page, int pageSize});
   Future<ClaimHistory> giftActivate();

@@ -68,23 +68,11 @@ mixin FeatureMoreRouter {
       path: AppNavPath.more.webViewPage.path,
       name: AppNavPath.more.webViewPage.name,
       pageBuilder: (context, state) {
-        final securityStorage = getIt<SecurityStorage>();
-        final url = parseString(state.uri.queryParameters["actionUrl"]);
-        final authRequired =
-            parseBool(state.uri.queryParameters["authRequired"]) ?? false;
-        var uri = Uri.parse(url ?? "");
-        if (authRequired) {
-          uri = uri.replace(
-            queryParameters: {
-              ...uri.queryParameters,
-              "token": securityStorage.getAccessToken(),
-            },
-          );
-        }
         return buildSlideTransitionPage(
           child: WebViewPage(
-            actionUrl: uri.toString(),
-            authRequired: authRequired,
+            actionUrl: parseString(state.uri.queryParameters["actionUrl"]),
+            authRequired:
+                parseBool(state.uri.queryParameters["authRequired"]) ?? false,
           ),
           context: context,
           state: state,
