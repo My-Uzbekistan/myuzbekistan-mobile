@@ -78,7 +78,6 @@ class GlobalSearchQueryCard extends StatelessWidget {
           if (popular.isNotEmpty)
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              clipBehavior: Clip.none,
               child: Row(
                 spacing: 8,
                 children: [

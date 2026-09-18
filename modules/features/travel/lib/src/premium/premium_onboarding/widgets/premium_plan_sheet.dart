@@ -37,7 +37,7 @@ class PremiumPlanSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 24),
+            padding: const EdgeInsets.only(top: 12),
             child: _planGrid(context),
           ),
           Padding(
@@ -63,8 +63,7 @@ class PremiumPlanSheet extends StatelessWidget {
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      clipBehavior: Clip.none,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 12),
       child: IntrinsicHeight(
         child: Row(
           spacing: 8,

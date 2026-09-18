@@ -1,1 +1,0 @@
-enum BannerActionType { redirect, inner }

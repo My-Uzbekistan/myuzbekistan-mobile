@@ -162,7 +162,6 @@ class MuseumSearchPage extends HookWidget {
           if (state.cities.isNotEmpty)
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              clipBehavior: Clip.none,
               child: Row(
                 spacing: 8,
                 children: [
