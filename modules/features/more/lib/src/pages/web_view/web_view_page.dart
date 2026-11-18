@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
@@ -23,6 +24,7 @@ class WebViewPage extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useRef<InAppWebViewController?>(null);
     final progress = useState(0.0);
+    final loadFailed = useState(false);
     final requestUrl = useMemoized(
       () => _appSessionUrl(context, actionUrl),
       [actionUrl],
@@ -38,6 +40,19 @@ class WebViewPage extends HookWidget {
         return;
       }
       if (context.mounted && context.canPop()) context.pop();
+    }
+
+    Future<void> reload() async {
+      final webView = controller.value;
+      if (webView == null) return;
+      final currentUrl = await webView.getUrl();
+      loadFailed.value = false;
+      progress.value = 0;
+      if (currentUrl == null || currentUrl.toString() == "about:blank") {
+        await webView.loadUrl(urlRequest: URLRequest(url: WebUri.uri(requestUrl)));
+        return;
+      }
+      await webView.reload();
     }
 
     void confirmClose() {
@@ -87,7 +102,7 @@ class WebViewPage extends HookWidget {
                 child: _navbar(
                   context,
                   onBack: goBack,
-                  onReload: () => controller.value?.reload(),
+                  onReload: reload,
                   onClose: confirmClose,
                 ),
               ),
@@ -118,8 +133,17 @@ class WebViewPage extends HookWidget {
                               onProgressChanged: (webViewController, value) {
                                 progress.value = value / 100.0;
                               },
+                              onLoadStart: (webViewController, url) {
+                                loadFailed.value = false;
+                              },
                               onLoadStop: (webViewController, url) {
                                 progress.value = 1.0;
+                              },
+                              onReceivedError: (webViewController, request, error) {
+                                if ((request.isForMainFrame ?? true) &&
+                                    _connectionErrors.contains(error.type)) {
+                                  loadFailed.value = true;
+                                }
                               },
                               onPermissionRequest: _onPermissionRequest,
                               onGeolocationPermissionsShowPrompt:
@@ -165,7 +189,21 @@ class WebViewPage extends HookWidget {
                               },
                             ),
                           ),
-                        if (progress.value < 0.1)
+                        if (loadFailed.value)
+                          Positioned.fill(
+                            child: ColoredBox(
+                              color: context.appColors.background.underlayer,
+                              child: Center(
+                                child: AppEmptyView(
+                                  title: context.coreLocalization.no_internet_title,
+                                  message: context.coreLocalization.no_internet,
+                                  actionText: context.coreLocalization.action_retry,
+                                  onAction: reload,
+                                ),
+                              ),
+                            ),
+                          )
+                        else if (progress.value < 0.1)
                           Positioned.fill(
                             child: ColoredBox(
                               color: context.appColors.background.underlayer,
@@ -297,7 +335,7 @@ class WebViewPage extends HookWidget {
     }
     if (resource == PermissionResourceType.PROTECTED_MEDIA_ID ||
         resource == PermissionResourceType.FILE_READ_WRITE) {
-      return [Permission.photos, Permission.storage];
+      return Platform.isIOS ? [Permission.photos] : const [];
     }
     if (resource == PermissionResourceType.NOTIFICATIONS) {
       return [Permission.notification];
@@ -308,6 +346,18 @@ class WebViewPage extends HookWidget {
     }
     return const [];
   }
+
+  static final _connectionErrors = {
+    WebResourceErrorType.NOT_CONNECTED_TO_INTERNET,
+    WebResourceErrorType.NETWORK_CONNECTION_LOST,
+    WebResourceErrorType.HOST_LOOKUP,
+    WebResourceErrorType.CANNOT_CONNECT_TO_HOST,
+    WebResourceErrorType.TIMEOUT,
+    WebResourceErrorType.SERVER_UNREACHABLE,
+    WebResourceErrorType.DATA_NOT_ALLOWED,
+    WebResourceErrorType.INTERNATIONAL_ROAMING_OFF,
+    WebResourceErrorType.CONNECTION_ABORTED,
+  };
 
   static final _settings = InAppWebViewSettings(
     javaScriptEnabled: true,

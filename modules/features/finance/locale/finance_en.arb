@@ -58,5 +58,13 @@
   "payment_status_cancelled": "Cancelled",
   "payment_status_refunded": "Refund",
   "action_retry": "Retry",
-  "back_to_home": "Back to home"
+  "back_to_home": "Back to home",
+  "history_empty_title": "No history yet",
+  "history_empty_message": "Your payments will appear here",
+  "history_failed_title": "Couldn't load history",
+  "cards_empty_title": "No cards yet",
+  "cards_empty_message": "Cards you add will appear here",
+  "camera_permission_denied": "Camera access denied. Allow camera access in settings to scan QR codes",
+  "camera_unavailable": "Couldn't start the camera",
+  "card_expiry_invalid": "Invalid date"
 }

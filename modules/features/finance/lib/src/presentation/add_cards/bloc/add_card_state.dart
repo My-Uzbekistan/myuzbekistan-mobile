@@ -38,12 +38,12 @@ abstract class AddCardParams with _$AddCardParams {
   bool hasDataSuccess() {
     if (this is AddCardExternalParams) {
       final param = this as AddCardExternalParams;
-      return param.expiry.length >= 5 &&
+      return param.expiry.isValidCardExpiry &&
           param.cvv.length >= 3 &&
           param.cardHolderName.trim().isNotEmpty;
     } else if (this is AddCardOwnParams) {
       final param = this as AddCardOwnParams;
-      return param.expiry.length >= 5;
+      return param.expiry.isValidCardExpiry;
     }
     return false;
   }

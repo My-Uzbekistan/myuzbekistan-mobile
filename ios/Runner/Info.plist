@@ -79,14 +79,37 @@
 	<string>This app needs camera access to scan QR codes</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Face ID is used to securely log in to your account.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>MyUzbekistan uses your location, even when the app is closed, to let you know about museums, restaurants and sights as you walk past them. You can turn this off anytime in the More tab.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location to suggest nearby services</string>
+	<string>MyUzbekistan uses your location to show places, distances and weather around you.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Galereyadan fayl tanlash uchun ruxsat kerak</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Yuklab olingan fayllarni galereyaga saqlash uchun ruxsat kerak</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Ovozli xabar va qo'ng'iroqlar uchun mikrofonga ruxsat kerak</string>
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UISceneConfigurations</key>
+		<dict>
+			<key>UIWindowSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneClassName</key>
+					<string>UIWindowScene</string>
+					<key>UISceneConfigurationName</key>
+					<string>flutter</string>
+					<key>UISceneDelegateClassName</key>
+					<string>FlutterSceneDelegate</string>
+					<key>UISceneStoryboardFile</key>
+					<string>Main</string>
+				</dict>
+			</array>
+		</dict>
+	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

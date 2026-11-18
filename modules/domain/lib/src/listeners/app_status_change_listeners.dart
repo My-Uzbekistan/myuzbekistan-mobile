@@ -9,6 +9,7 @@ class GlobalHandler {
 
   Function? refreshListener;
   Function? unauthorizedListener;
+  bool isBackgroundIsolate = false;
 
   void setRefreshListener(Function listener) {
     refreshListener = refreshListener ?? listener;

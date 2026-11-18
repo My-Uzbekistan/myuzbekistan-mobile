@@ -21,6 +21,7 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
     HistoryLoadNextEvent event,
     Emitter<HistoryState> emit,
   ) async {
+    emit(const HistoryState.loading());
     try {
       final result = await _repository.paymentHistory();
 

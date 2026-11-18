@@ -13,7 +13,6 @@
   "currency_uzs": "{value} uzs",
   "nPhotos": "{n} photos",
   "getStarted": "Get Started",
-
   "getStartedDescription": "Get full access to opportunities, as well as keep your favorite things",
   "continueWithGoogle": "Continue with Google",
   "continueWithApple": "Continue with Apple",
@@ -39,16 +38,14 @@
   "police": "Police",
   "medical": "Medical",
   "gasEmergency": "Gas Emergency",
-  "emergencyContacts": "Emergency Contacts",
+  "emergencyContacts": "Emergency numbers",
   "usefulTips": "Useful tips",
   "logout": "Logout",
   "logout_confirm_title": "Exit the app",
   "logoutConfirmation": "You are about to exit the app",
   "exit": "Exit",
-
   "delete_account_confirm_title": "Delete account?",
   "deleteAccountConfirmation": "Your account and all data, such as saved places and bank cards, will be deleted.",
-
   "deleteAccount": "Delete account",
   "cancel": "Cancel",
   "warning": "Warning",
@@ -89,7 +86,6 @@
   "auth_phone_invalid_format": "Invalid number format",
   "action_continue": "Continue",
   "accept_terms": "By clicking the button, you agree to the terms",
-
   "terms": "Terms of the User Agreement",
   "auth_page_action_phone": "Continue with phone",
   "premium": "Premium",
@@ -132,5 +128,18 @@
   "premiumBuySubscription": "Get a subscription",
   "webViewExitTitle": "Do you really want to leave?",
   "webViewExitMessage": "The page will close and the entered data will not be saved.",
-  "yes": "Yes"
+  "yes": "Yes",
+  "nearbyPlaces": "Nearby places notifications",
+  "nearbyPlacesDisclosureTitle": "Discover places around you",
+  "nearbyPlacesDisclosureBody": "Get a heads-up when you walk past a museum, restaurant or sight worth seeing. To do this, MyUzbekistan uses your location even when the app is closed or not in use.",
+  "nearbyPlacesDisclosureDistance": "Your location is used only to find places near you",
+  "nearbyPlacesDisclosureLimit": "No more than 2 notifications a day, never at night",
+  "nearbyPlacesDisclosureTurnOff": "Turn it off anytime in the More tab",
+  "nearbyPlacesDisclosureHint": "To work when the app is closed, this feature needs “Always” location access.",
+  "nearbyPlacesDisclosureContinue": "Continue",
+  "nearbyPlacesDisclosureLater": "Not now",
+  "nearbyPlacesPermissionDenied": "To use this feature, open MyUzbekistan → Location in your phone settings and choose “Always”.",
+  "nearbyPlacesTrackingTitle": "Nearby places",
+  "nearbyPlacesTrackingText": "We'll let you know about interesting places nearby",
+  "pin_invalid": "Invalid PIN"
 }

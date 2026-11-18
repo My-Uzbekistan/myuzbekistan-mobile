@@ -87,16 +87,13 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   Future<void> _checkPermissionEvent(_CheckPermissionEvent event,
       Emitter<HomeBlocState> emit,) async {
-
-  try{
-    final locationManager = LocationManager();
-    await locationManager.getCurrentLocation();
-  }catch(_){
-
-
-  }
-
     add(HomeBlocEvent.loadDataEvent());
+    try {
+      final position = await LocationManager().getCurrentLocation();
+      if (position != null) {
+        add(HomeBlocEvent.loadAirQuality());
+      }
+    } catch (_) {}
   }
 
   Future<void> _loadDataEvent(_LoadDataEvent event,

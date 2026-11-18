@@ -20,4 +20,7 @@ abstract class DevicesApiService {
 
   @DELETE("devices/sessions/others")
   Future<dynamic> terminateOtherSessions();
+
+  @POST("devices/location")
+  Future<dynamic> sendLocation(@Body() Map<String, dynamic> body);
 }

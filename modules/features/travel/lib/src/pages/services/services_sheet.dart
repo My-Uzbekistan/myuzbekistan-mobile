@@ -79,7 +79,7 @@ class ServicesSheet extends StatelessWidget {
     final widgets = buildServiceFeatureRows(context, services);
 
     if (services.length > 6) {
-      widgets.add(const SizedBox(height: 16));
+      widgets.add(const SizedBox(height: 12));
       widgets.add(
         ServiceSmallGrid(
           items: [

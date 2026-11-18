@@ -135,7 +135,9 @@ class ContentByCategoryBloc
           contents: List.of(currentState.contents)..addAll(result.contents),
           hasMore: result.contents.length == currentState.pageSize,
         ));
-      } catch (e) {}
+      } catch (e) {
+        emit(currentState.copyWith(isLoading: false, hasMore: false));
+      }
     }
   }
 

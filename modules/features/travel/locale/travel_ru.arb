@@ -272,5 +272,7 @@
   "global_search_clear_title": "Очистить поиск",
   "global_search_clear_message": "Вы точно хотите очистить историю поисков?",
   "global_search_empty_title": "Ничего не найдено",
-  "global_search_empty_message": "По этому запросу ничего не найдено, попробуйте другие слова"
+  "global_search_empty_message": "По этому запросу ничего не найдено, попробуйте другие слова",
+  "favorites_empty_title": "Нет сохранённых",
+  "favorites_empty_message": "Нажмите на сердечко, чтобы сохранить место"
 }

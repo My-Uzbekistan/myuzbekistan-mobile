@@ -22,10 +22,27 @@ class AuthPhoneBloc extends Bloc<AuthPhoneEvent, AuthPhoneState> {
     );
   }
 
-  void _sendEvent(AuthPhoneEvent event, Emitter<AuthPhoneState> emit) {
+  Future<void> _sendEvent(
+    AuthPhoneEvent event,
+    Emitter<AuthPhoneState> emit,
+  ) async {
+    if (state.isLoading) return;
+    emit(state.copyWith(isLoading: true, errorMessage: null, isOffline: false));
     try {
-      _repository.sendCode(phoneNumber: state.phoneNumber);
-      emit(state.copyWith(codeSend: true));
-    } catch (_) {}
+      await _repository.sendCode(phoneNumber: state.phoneNumber);
+      emit(state.copyWith(isLoading: false, codeSend: true));
+    } catch (e) {
+      final serverMessage =
+          e is DioException && e.error is AppException
+              ? (e.error as AppException).message
+              : null;
+      emit(
+        state.copyWith(
+          isLoading: false,
+          isOffline: e.isConnectionError,
+          errorMessage: e.isConnectionError ? null : serverMessage,
+        ),
+      );
+    }
   }
 }

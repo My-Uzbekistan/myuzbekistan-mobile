@@ -152,7 +152,7 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
   String get gasEmergency => 'Газовая аварийная служба';
 
   @override
-  String get emergencyContacts => 'Экстренные контакты';
+  String get emergencyContacts => 'Номера экстренных служб';
 
   @override
   String get usefulTips => 'Полезные советы';
@@ -433,4 +433,50 @@ class FeatureMoreLocalizationsRu extends FeatureMoreLocalizations {
 
   @override
   String get yes => 'Да';
+
+  @override
+  String get nearbyPlaces => 'Уведомления о местах рядом';
+
+  @override
+  String get nearbyPlacesDisclosureTitle => 'Интересные места рядом';
+
+  @override
+  String get nearbyPlacesDisclosureBody =>
+      'Подскажем, когда вы проходите рядом с музеем, рестораном или достопримечательностью. Для этого MyUzbekistan использует ваше местоположение, даже когда приложение закрыто или не используется.';
+
+  @override
+  String get nearbyPlacesDisclosureDistance =>
+      'Местоположение используется только для поиска мест рядом с вами';
+
+  @override
+  String get nearbyPlacesDisclosureLimit =>
+      'Не больше 2 уведомлений в день, ночью не беспокоим';
+
+  @override
+  String get nearbyPlacesDisclosureTurnOff =>
+      'Отключить можно в любой момент в разделе «Еще»';
+
+  @override
+  String get nearbyPlacesDisclosureHint =>
+      'Чтобы функция работала, когда приложение закрыто, нужен доступ к геопозиции «Всегда».';
+
+  @override
+  String get nearbyPlacesDisclosureContinue => 'Продолжить';
+
+  @override
+  String get nearbyPlacesDisclosureLater => 'Не сейчас';
+
+  @override
+  String get nearbyPlacesPermissionDenied =>
+      'Чтобы функция работала, в настройках телефона откройте MyUzbekistan → Геопозиция и выберите «Всегда».';
+
+  @override
+  String get nearbyPlacesTrackingTitle => 'Интересные места рядом';
+
+  @override
+  String get nearbyPlacesTrackingText =>
+      'Подскажем об интересных местах рядом с вами';
+
+  @override
+  String get pin_invalid => 'Неверный PIN-код';
 }

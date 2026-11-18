@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:more/src/core/extension.dart';
 import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart';
 import 'package:navigation/navigation.dart';
-import 'package:shared/shared.dart';
+import 'package:shared/shared.dart' hide Toast;
 
 class AuthPhonePage extends StatefulWidget {
   const AuthPhonePage({super.key});
@@ -38,7 +38,18 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GradientAppBar(),
-      body: BlocConsumer<AuthPhoneBloc, AuthPhoneState>(
+      body: BlocListener<AuthPhoneBloc, AuthPhoneState>(
+        listenWhen: (previous, current) =>
+            previous.isLoading && !current.isLoading && !current.codeSend,
+        listener: (context, state) {
+          Toast.showToast(
+            state.isOffline
+                ? context.coreLocalization.no_internet
+                : state.errorMessage ??
+                    context.coreLocalization.unexpected_error,
+          );
+        },
+        child: BlocConsumer<AuthPhoneBloc, AuthPhoneState>(
         listenWhen:
             (previous, current) =>
                 previous.codeSend != current.codeSend &&
@@ -126,6 +137,7 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
           );
         },
       ),
+      ),
     );
   }
 
@@ -138,7 +150,6 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        recognizer: TapGestureRecognizer()..onTap = () {},
         style: CustomTypography.bodySm.copyWith(
           color: context.appColors.textIconColor.primary,
         ),
@@ -149,10 +160,11 @@ class _AuthPhonePageState extends State<AuthPhonePage> {
             style: CustomTypography.bodySm.copyWith(
               color: context.appColors.brand,
             ),
-            // recognizer: TapGestureRecognizer()
-            //   ..onTap = () {
-            //     // agreement ochish
-            //   },
+            recognizer: TapGestureRecognizer()
+              ..onTap = () => context.more.pushWebViewPage(
+                actionUrl:
+                    "https://salomuzbekistan.uz/gallery/Privacy%20Policy-MyUzbekistan%20UZB-ENG-RUS.pdf",
+              ),
           ),
           if (parts.length > 1) TextSpan(text: parts.last),
         ],

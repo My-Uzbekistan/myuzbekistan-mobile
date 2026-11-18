@@ -31,12 +31,11 @@
   "distanceKm": "km",
   "action_all": "Barchasi",
   "rates_last_update": "Oxirgi yangilanish {date}",
-
   "currency_calculator": "Valyuta kalkulyatori",
   "all_places": "Barcha joylar",
   "exchange_rates": "Valyuta kurslari",
-  "uzs":"Oʻzbek soʻmi",
-  "card_added_success_message":"Karta muvaffaqiyatli qo‘shildi.",
+  "uzs": "Oʻzbek soʻmi",
+  "card_added_success_message": "Karta muvaffaqiyatli qo‘shildi.",
   "card_remove_notice": "Kartangiz ilovadan o‘chiriladi",
   "finance_title": "Moliya",
   "all_exchange_rates": "Barcha valyuta kurslari",
@@ -59,7 +58,13 @@
   "payment_status_cancelled": "Bekor qilindi",
   "payment_status_refunded": "Qaytarildi",
   "action_retry": "Qayta urinish",
-  "back_to_home": "Bosh sahifaga qaytish"
-
-
+  "back_to_home": "Bosh sahifaga qaytish",
+  "history_empty_title": "Tarix mavjud emas",
+  "history_empty_message": "To‘lovlaringiz shu yerda ko‘rinadi",
+  "history_failed_title": "Tarix yuklanmadi",
+  "cards_empty_title": "Kartalar mavjud emas",
+  "cards_empty_message": "Karta qo‘shsangiz, shu yerda ko‘rinadi",
+  "camera_permission_denied": "Kameraga ruxsat berilmagan. QR kodni skanerlash uchun sozlamalarda kameraga ruxsat bering",
+  "camera_unavailable": "Kamerani ishga tushirib bo‘lmadi",
+  "card_expiry_invalid": "Muddat noto‘g‘ri"
 }

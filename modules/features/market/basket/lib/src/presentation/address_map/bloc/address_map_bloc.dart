@@ -11,6 +11,10 @@ part 'address_map_bloc.freezed.dart';
 @injectable
 class AddressMapBloc extends Bloc<AddressMapEvent, AddressMapState> {
   static const LatLng _tashkent = LatLng(41.311151, 69.279737);
+  static final LatLngBounds uzbekistanBounds = LatLngBounds(
+    southwest: const LatLng(37.18, 55.99),
+    northeast: const LatLng(45.59, 73.15),
+  );
 
   final MarketRepository _repository;
   final AppRefreshListener _refresh;
@@ -72,6 +76,7 @@ class AddressMapBloc extends Bloc<AddressMapEvent, AddressMapState> {
     if (position == null) return;
 
     final target = LatLng(position.latitude, position.longitude);
+    if (!uzbekistanBounds.contains(target)) return;
     emit(
       state.copyWith(
         target: target,
@@ -114,6 +119,10 @@ class AddressMapBloc extends Bloc<AddressMapEvent, AddressMapState> {
   ) async {
     final target = state.target;
     if (target == null || target == state.geocodedTarget) return;
+    if (!uzbekistanBounds.contains(target)) {
+      emit(state.copyWith(isPanning: false, address: null, geocodedTarget: target));
+      return;
+    }
 
     emit(
       state.copyWith(
@@ -140,10 +149,9 @@ class AddressMapBloc extends Bloc<AddressMapEvent, AddressMapState> {
   ) async {
     final position = await _locationManager.getCurrentLocation();
     if (position == null) return;
-    await _animateTo(
-      LatLng(position.latitude, position.longitude),
-      state.zoom,
-    );
+    final target = LatLng(position.latitude, position.longitude);
+    if (!uzbekistanBounds.contains(target)) return;
+    await _animateTo(target, state.zoom);
   }
 
   Future<void> _zoomIn(

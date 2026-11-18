@@ -6,7 +6,9 @@
   "action_close": "Yopish",
   "action_done": "Tayyor",
   "action_edit": "Tahrirlash",
-  "action_more": "Batafsil"
-
-
+  "action_more": "Batafsil",
+  "no_internet": "Internet aloqasi yo‘q. Ulanishni tekshirib, qayta urinib ko‘ring",
+  "no_internet_title": "Internet yo‘q",
+  "action_retry": "Qayta urinish",
+  "action_open_settings": "Sozlamalarga o‘tish"
 }

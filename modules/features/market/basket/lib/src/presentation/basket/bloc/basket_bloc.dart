@@ -12,6 +12,8 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   final MarketRepository _repository;
   final AppRefreshListener _refresh;
   StreamSubscription<AppRefreshTopic>? _refreshSubscription;
+  final Map<int, int> _confirmedQuantity = {};
+  int _quantityVersion = 0;
 
   BasketBloc(this._repository, this._refresh) : super(BasketState()) {
     on<_BasketLoadDataEvent>(_loadData);
@@ -38,8 +40,13 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     Emitter<BasketState> emit,
   ) async {
     emit(state.copyWith(isLoading: true, errorMessage: null));
+    final version = _quantityVersion;
     try {
       final cart = await _repository.cart();
+      if (version != _quantityVersion) {
+        emit(state.copyWith(isLoading: false));
+        return;
+      }
       emit(
         state.copyWith(
           sellers: cart.sellers,
@@ -60,43 +67,61 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     Emitter<BasketState> emit,
   ) async {
     final item = event.item;
+    final productId = item.productId;
     final quantity = event.quantity;
     if (quantity <= 0) {
+      _quantityVersion++;
+      _confirmedQuantity.remove(productId);
       await _delete(
         emit,
         _withoutItem(state.sellers, item),
-        () => _repository.removeCartItem(productId: item.productId),
+        () => _repository.removeCartItem(productId: productId),
       );
       return;
     }
     if (quantity > item.available) return;
 
-    final previous = state.sellers;
+    _confirmedQuantity.putIfAbsent(productId, () => item.quantity);
+    final version = ++_quantityVersion;
     emit(
-      _recalculated(_replaceItem(previous, item.copyWith(quantity: quantity))),
+      _recalculated(
+        _replaceItem(state.sellers, item.copyWith(quantity: quantity)),
+      ),
     );
     _refresh.notifyItem(
       ItemChange(
         entity: RefreshEntity.marketProduct,
-        id: item.productId.toString(),
+        id: productId.toString(),
         cartQuantity: quantity,
       ),
     );
+
+    await Future.delayed(const Duration(milliseconds: 400));
+    if (version != _quantityVersion) return;
+
     try {
       await _repository.changeCartQuantity(
-        productId: item.productId,
+        productId: productId,
         quantity: quantity,
       );
+      _confirmedQuantity.remove(productId);
+      if (version != _quantityVersion) return;
       _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
+      final confirmed = _confirmedQuantity.remove(productId) ?? item.quantity;
       _refresh.notifyItem(
         ItemChange(
           entity: RefreshEntity.marketProduct,
-          id: item.productId.toString(),
-          cartQuantity: item.quantity,
+          id: productId.toString(),
+          cartQuantity: confirmed,
         ),
       );
-      emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
+      if (version != _quantityVersion) return;
+      emit(
+        _recalculated(
+          _replaceItem(state.sellers, item.copyWith(quantity: confirmed)),
+        ).copyWith(errorMessage: _errorMessage(e)),
+      );
     }
   }
 

@@ -151,7 +151,7 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
   String get gasEmergency => 'Gas Emergency';
 
   @override
-  String get emergencyContacts => 'Emergency Contacts';
+  String get emergencyContacts => 'Emergency numbers';
 
   @override
   String get usefulTips => 'Useful tips';
@@ -432,4 +432,50 @@ class FeatureMoreLocalizationsEn extends FeatureMoreLocalizations {
 
   @override
   String get yes => 'Yes';
+
+  @override
+  String get nearbyPlaces => 'Nearby places notifications';
+
+  @override
+  String get nearbyPlacesDisclosureTitle => 'Discover places around you';
+
+  @override
+  String get nearbyPlacesDisclosureBody =>
+      'Get a heads-up when you walk past a museum, restaurant or sight worth seeing. To do this, MyUzbekistan uses your location even when the app is closed or not in use.';
+
+  @override
+  String get nearbyPlacesDisclosureDistance =>
+      'Your location is used only to find places near you';
+
+  @override
+  String get nearbyPlacesDisclosureLimit =>
+      'No more than 2 notifications a day, never at night';
+
+  @override
+  String get nearbyPlacesDisclosureTurnOff =>
+      'Turn it off anytime in the More tab';
+
+  @override
+  String get nearbyPlacesDisclosureHint =>
+      'To work when the app is closed, this feature needs “Always” location access.';
+
+  @override
+  String get nearbyPlacesDisclosureContinue => 'Continue';
+
+  @override
+  String get nearbyPlacesDisclosureLater => 'Not now';
+
+  @override
+  String get nearbyPlacesPermissionDenied =>
+      'To use this feature, open MyUzbekistan → Location in your phone settings and choose “Always”.';
+
+  @override
+  String get nearbyPlacesTrackingTitle => 'Nearby places';
+
+  @override
+  String get nearbyPlacesTrackingText =>
+      'We\'ll let you know about interesting places nearby';
+
+  @override
+  String get pin_invalid => 'Invalid PIN';
 }

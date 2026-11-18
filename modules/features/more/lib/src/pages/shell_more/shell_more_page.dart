@@ -10,6 +10,7 @@ import 'package:shared/shared.dart' hide Toast;
 import '../../di/injection.dart';
 import '../profile_page/bloc/profile_bloc.dart';
 import 'bloc/more_bloc.dart';
+import 'widgets/nearby_places_switch.dart';
 import 'widgets/profile/premium_section.dart';
 import 'widgets/profile/profile_header.dart';
 import 'widgets/profile/profile_settings_cell.dart';
@@ -167,6 +168,12 @@ class ShellMorePage extends HookWidget {
                                       },
                                     ),
                                   ),
+                                  if (userState != null)
+                                    ProfileSettingsCell(
+                                      icon: Assets.svg.pinLocationLine.svg(),
+                                      title: context.localization.nearbyPlaces,
+                                      trailing: const NearbyPlacesSwitch(),
+                                    ),
                                   ProfileSettingsCell(
                                     icon: Assets.svg.more.globe.svg(),
                                     title: context.localization.language,
@@ -254,7 +261,7 @@ class ShellMorePage extends HookWidget {
                                   ),
                                   ProfileSettingsCell(
                                     icon: Assets.svg.more.paperPlane.svg(),
-                                    title: context.localization.contactUs,
+                                    title: context.localization.emergencyContacts,
                                     onTap:
                                         () =>
                                             context.more

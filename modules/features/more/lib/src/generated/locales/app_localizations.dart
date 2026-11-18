@@ -328,7 +328,7 @@ abstract class FeatureMoreLocalizations {
   /// No description provided for @emergencyContacts.
   ///
   /// In ru, this message translates to:
-  /// **'Экстренные контакты'**
+  /// **'Номера экстренных служб'**
   String get emergencyContacts;
 
   /// No description provided for @usefulTips.
@@ -870,6 +870,84 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Да'**
   String get yes;
+
+  /// No description provided for @nearbyPlaces.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления о местах рядом'**
+  String get nearbyPlaces;
+
+  /// No description provided for @nearbyPlacesDisclosureTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Интересные места рядом'**
+  String get nearbyPlacesDisclosureTitle;
+
+  /// No description provided for @nearbyPlacesDisclosureBody.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подскажем, когда вы проходите рядом с музеем, рестораном или достопримечательностью. Для этого MyUzbekistan использует ваше местоположение, даже когда приложение закрыто или не используется.'**
+  String get nearbyPlacesDisclosureBody;
+
+  /// No description provided for @nearbyPlacesDisclosureDistance.
+  ///
+  /// In ru, this message translates to:
+  /// **'Местоположение используется только для поиска мест рядом с вами'**
+  String get nearbyPlacesDisclosureDistance;
+
+  /// No description provided for @nearbyPlacesDisclosureLimit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не больше 2 уведомлений в день, ночью не беспокоим'**
+  String get nearbyPlacesDisclosureLimit;
+
+  /// No description provided for @nearbyPlacesDisclosureTurnOff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отключить можно в любой момент в разделе «Еще»'**
+  String get nearbyPlacesDisclosureTurnOff;
+
+  /// No description provided for @nearbyPlacesDisclosureHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы функция работала, когда приложение закрыто, нужен доступ к геопозиции «Всегда».'**
+  String get nearbyPlacesDisclosureHint;
+
+  /// No description provided for @nearbyPlacesDisclosureContinue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продолжить'**
+  String get nearbyPlacesDisclosureContinue;
+
+  /// No description provided for @nearbyPlacesDisclosureLater.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не сейчас'**
+  String get nearbyPlacesDisclosureLater;
+
+  /// No description provided for @nearbyPlacesPermissionDenied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы функция работала, в настройках телефона откройте MyUzbekistan → Геопозиция и выберите «Всегда».'**
+  String get nearbyPlacesPermissionDenied;
+
+  /// No description provided for @nearbyPlacesTrackingTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Интересные места рядом'**
+  String get nearbyPlacesTrackingTitle;
+
+  /// No description provided for @nearbyPlacesTrackingText.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подскажем об интересных местах рядом с вами'**
+  String get nearbyPlacesTrackingText;
+
+  /// No description provided for @pin_invalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный PIN-код'**
+  String get pin_invalid;
 }
 
 class _FeatureMoreLocalizationsDelegate

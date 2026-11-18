@@ -944,4 +944,10 @@ class FeatureTravelLocalizationsEn extends FeatureTravelLocalizations {
   @override
   String get global_search_empty_message =>
       'Nothing was found for this query, try other words';
+
+  @override
+  String get favorites_empty_title => 'No saved places';
+
+  @override
+  String get favorites_empty_message => 'Tap the heart to save a place';
 }

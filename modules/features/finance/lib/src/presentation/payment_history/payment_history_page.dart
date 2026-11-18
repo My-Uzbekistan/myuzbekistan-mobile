@@ -30,6 +30,15 @@ class PaymentHistoryPage extends StatelessWidget {
                   .where((group) => group.items.isNotEmpty)
                   .toList();
 
+              if (items.isEmpty) {
+                return Center(
+                  child: AppEmptyView(
+                    title: context.localization.history_empty_title,
+                    message: context.localization.history_empty_message,
+                  ),
+                );
+              }
+
               return ListView.separated(
                 padding: padding,
                 itemCount: items.length,
@@ -42,7 +51,15 @@ class PaymentHistoryPage extends StatelessWidget {
                 ),
               );
             },
-            errorState: () => const SizedBox(),
+            errorState: () => Center(
+              child: AppEmptyView(
+                title: context.localization.history_failed_title,
+                actionText: context.localization.action_retry,
+                onAction: () => context.read<HistoryBloc>().add(
+                  const HistoryEvent.loadNext(),
+                ),
+              ),
+            ),
           );
         },
       ),

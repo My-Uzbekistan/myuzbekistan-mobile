@@ -246,20 +246,56 @@ class TokenRefreshInterceptor extends Interceptor {
     _refreshCompleter = Completer<void>();
 
     try {
-      final response = await _dio.post(
-        "/auth/refresh",
-        data: {"refreshToken": securityStorage.getRefreshToken()},
-      );
-      final tokenDto = TokenDto.fromJson(response.data);
-      await securityStorage.setToken(token: tokenDto.toDomain());
+      await _requestNewToken();
       _refreshCompleter?.complete();
     } catch (e) {
-      await securityStorage.clearData();
+      final rejected = _isRefreshTokenRejected(e);
+      if (rejected && await _recoverTokenSavedByOtherIsolate()) {
+        _refreshCompleter?.complete();
+        return;
+      }
+      if (rejected && !GlobalHandler().isBackgroundIsolate) {
+        await securityStorage.clearData();
+        GlobalHandler().unauthorizedListener?.call();
+      }
       _refreshCompleter?.completeError(e);
-      GlobalHandler().unauthorizedListener?.call();
       rethrow;
     } finally {
       _isRefreshing = false;
     }
+  }
+
+  Future<void> _requestNewToken() async {
+    final response = await _dio.post(
+      "/auth/refresh",
+      data: {"refreshToken": securityStorage.getRefreshToken()},
+    );
+    final tokenDto = TokenDto.fromJson(response.data);
+    await securityStorage.setToken(token: tokenDto.toDomain());
+  }
+
+  Future<bool> _recoverTokenSavedByOtherIsolate() async {
+    final usedRefreshToken = securityStorage.getRefreshToken();
+    await securityStorage.reload();
+    final storedRefreshToken = securityStorage.getRefreshToken();
+    if (storedRefreshToken == null || storedRefreshToken == usedRefreshToken) {
+      return false;
+    }
+    final expiresAt = securityStorage.getTokenExpire();
+    if (expiresAt != null && expiresAt.difference(DateTime.now()).inMinutes > 5) {
+      return true;
+    }
+    try {
+      await _requestNewToken();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool _isRefreshTokenRejected(Object error) {
+    if (error is! DioException) return false;
+    final statusCode = error.response?.statusCode;
+    return statusCode == 400 || statusCode == 401 || statusCode == 403;
   }
 }

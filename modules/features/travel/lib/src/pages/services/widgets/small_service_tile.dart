@@ -46,9 +46,14 @@ class SmallServiceTile extends HookWidget {
                     children: [
                       Positioned.fill(child: ColoredBox(color: item.color)),
                       Positioned(
-                        left: -2,
-                        top: -2,
-                        child: ServiceIcon(item: item, size: 60),
+                        left: -6,
+                        top: -6,
+                        child: ServiceIcon(
+                          item: item,
+                          size: 68,
+                          fittedSize: 56,
+                          nudgeY: 6,
+                        ),
                       ),
                       if (isChecking.value)
                         Positioned.fill(

@@ -73,12 +73,17 @@ class _FeatureTravelNavPath {
       _NavPathImpl(name: 'feature_travel_investments_type', path: 'type');
 
 
-  ///notifications?notificationId=123
-  AppNavPath get notifications =>
-      _NavPathImpl(name: 'notifications', path: '/notifications');
+  AppNavPath get notifications => _NavPathImpl(
+    name: 'notifications',
+    path: '/notifications',
+    authRequired: true,
+  );
 
-  AppNavPath get notificationsDetail =>
-      _NavPathImpl(name: 'notificationsDetail', path: 'notificationDetail');
+  AppNavPath get notificationsDetail => _NavPathImpl(
+    name: 'notificationsDetail',
+    path: 'notificationDetail',
+    authRequired: true,
+  );
 
   AppNavPath get imagePreview =>
       _NavPathImpl(name: 'image_preview', path: '/image_preview');

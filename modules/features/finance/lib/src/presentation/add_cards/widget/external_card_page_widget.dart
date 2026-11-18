@@ -38,6 +38,12 @@ class ExternalCardPageWidget extends HookWidget {
       };
     }, const []);
 
+    useListenable(expireController);
+    final expiry = expireController.text;
+    final expiryError = expiry.length == 5 && !expiry.isValidCardExpiry
+        ? context.localization.card_expiry_invalid
+        : null;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       spacing: 16,
@@ -60,6 +66,7 @@ class ExternalCardPageWidget extends HookWidget {
               child: AppInputField(
                 controller: expireController,
                 label: context.localization.card_expiry_label,
+                errorText: expiryError,
                 hintText: context.localization.card_expiry_hint,
                 keyboardType: TextInputType.number,
                 formatters: [

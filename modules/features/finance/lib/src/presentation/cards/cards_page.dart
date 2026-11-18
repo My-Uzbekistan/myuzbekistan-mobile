@@ -52,7 +52,7 @@ class CardsPage extends HookWidget {
           appBar: GradientAppBar(
             title: context.localization.my_cards_title,
             actions: [
-              if (state is CardsDataState)
+              if (state is CardsDataState && cards.isNotEmpty)
                 isEdit.value
                     ? RoundedButton(
                       assetsSvgIcon: Assets.svg.iconCheck.path,
@@ -70,7 +70,14 @@ class CardsPage extends HookWidget {
                     ),
             ],
           ),
-          body: ListView.separated(
+          body: state is CardsDataState && cards.isEmpty
+              ? Center(
+                child: AppEmptyView(
+                  title: context.localization.cards_empty_title,
+                  message: context.localization.cards_empty_message,
+                ),
+              )
+              : ListView.separated(
             padding: EdgeInsets.all(16).copyWith(top: topPadding),
             separatorBuilder: (context, index) {
               return SizedBox(height: 12);

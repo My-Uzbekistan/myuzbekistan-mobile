@@ -15,7 +15,6 @@ import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
 import 'package:uzbekistan_travel/core/app_scroll_behavior.dart';
 import 'package:uzbekistan_travel/core/navigation/router.dart';
-import 'package:uzbekistan_travel/upgrader/mock_upgrader.dart';
 import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
 import 'di/injection.dart';
 import 'firebase_options.dart';
@@ -28,8 +27,22 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
 
+@pragma('vm:entry-point')
+Future<void> nearbyPlacesBackgroundMain() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  GlobalHandler().isBackgroundIsolate = true;
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await Hive.initFlutter();
+  await DeviceInfoManager().init();
+  await configureInjection();
+  await getIt<NearbyPlacesService>().initBackground();
+}
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  configureAndroidPhotoPicker();
   AppLinkRouter.init();
   await LiquidGlassWidgets.initialize();
   await Firebase.initializeApp(
@@ -42,6 +55,7 @@ Future<void> main() async {
   getIt<SecurityStorage>().clearPinVerified();
   NotificationService().subscribeToTopic();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  getIt<NearbyPlacesService>().init();
   // Edge-to-edge'ni GLOBAL yoqamiz: tizim nav paneli transparent bo'lib,
   // kontent/gradient uning ortiga chizilishi uchun. Splash o'zi ham buni
   // yoqadi, lekin bu yerda global yoqilgani boshqa ekranlarga ham kafolat beradi.

@@ -6,4 +6,11 @@ abstract class DevicesRepository {
   Future<dynamic> terminateSession({required int sessionId});
 
   Future<dynamic> terminateOtherSessions();
+
+  Future<dynamic> sendLocation({
+    required String firebaseToken,
+    required double latitude,
+    required double longitude,
+    double? accuracy,
+  });
 }

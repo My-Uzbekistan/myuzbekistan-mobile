@@ -13,7 +13,7 @@ class ServicesShimmer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           for (var i = 0; i < rows; i++) ...[
-            if (i > 0) const SizedBox(height: 16),
+            if (i > 0) const SizedBox(height: 12),
             _row(context),
           ],
         ],
@@ -35,9 +35,9 @@ class ServicesShimmer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 8),
+          const SizedBox(width: 7),
           const Expanded(child: _SmallTileShimmer()),
-          const SizedBox(width: 8),
+          const SizedBox(width: 7),
           const Expanded(child: _SmallTileShimmer()),
         ],
       ),

@@ -462,6 +462,54 @@ abstract class FeatureFinanceLocalizations {
   /// In ru, this message translates to:
   /// **'Вернуться на главную'**
   String get back_to_home;
+
+  /// No description provided for @history_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'История пуста'**
+  String get history_empty_title;
+
+  /// No description provided for @history_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Здесь появятся ваши платежи'**
+  String get history_empty_message;
+
+  /// No description provided for @history_failed_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось загрузить историю'**
+  String get history_failed_title;
+
+  /// No description provided for @cards_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет карт'**
+  String get cards_empty_title;
+
+  /// No description provided for @cards_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавленные карты появятся здесь'**
+  String get cards_empty_message;
+
+  /// No description provided for @camera_permission_denied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет доступа к камере. Разрешите доступ к камере в настройках, чтобы сканировать QR-код'**
+  String get camera_permission_denied;
+
+  /// No description provided for @camera_unavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось запустить камеру'**
+  String get camera_unavailable;
+
+  /// No description provided for @card_expiry_invalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный срок'**
+  String get card_expiry_invalid;
 }
 
 class _FeatureFinanceLocalizationsDelegate

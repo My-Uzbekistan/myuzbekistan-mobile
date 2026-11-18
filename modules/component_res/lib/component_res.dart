@@ -25,6 +25,7 @@ export 'src/components/cart/cart_glyph.dart';
 export 'src/components/cart/cart_glyph_icon.dart';
 export 'src/components/cart/cart_button.dart';
 export 'src/components/product_card/product_card.dart';
+export 'src/components/empty_view/app_empty_view.dart';
 export 'src/components/product_card/product_card_image.dart';
 export 'src/components/loading_indicator.dart';
 export 'package:flutter_svg/svg.dart';

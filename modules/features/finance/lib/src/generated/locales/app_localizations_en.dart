@@ -198,4 +198,29 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
 
   @override
   String get back_to_home => 'Back to home';
+
+  @override
+  String get history_empty_title => 'No history yet';
+
+  @override
+  String get history_empty_message => 'Your payments will appear here';
+
+  @override
+  String get history_failed_title => 'Couldn\'t load history';
+
+  @override
+  String get cards_empty_title => 'No cards yet';
+
+  @override
+  String get cards_empty_message => 'Cards you add will appear here';
+
+  @override
+  String get camera_permission_denied =>
+      'Camera access denied. Allow camera access in settings to scan QR codes';
+
+  @override
+  String get camera_unavailable => 'Couldn\'t start the camera';
+
+  @override
+  String get card_expiry_invalid => 'Invalid date';
 }

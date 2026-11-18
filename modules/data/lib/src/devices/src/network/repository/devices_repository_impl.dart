@@ -25,4 +25,19 @@ class DevicesRepositoryImpl extends DevicesRepository {
   Future<dynamic> terminateOtherSessions() {
     return service.terminateOtherSessions().call();
   }
+
+  @override
+  Future<dynamic> sendLocation({
+    required String firebaseToken,
+    required double latitude,
+    required double longitude,
+    double? accuracy,
+  }) {
+    return service.sendLocation({
+      "token": firebaseToken,
+      "lat": latitude,
+      "lon": longitude,
+      if (accuracy != null) "accuracy": accuracy,
+    }).call();
+  }
 }

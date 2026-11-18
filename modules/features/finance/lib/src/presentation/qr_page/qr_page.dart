@@ -1,4 +1,5 @@
 import 'package:component_res/component_res.dart';
+import 'package:finance/src/core/extension.dart';
 import 'package:finance/src/presentation/qr_page/widgets/qr_scanner_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,10 +18,18 @@ class QrReaderPage extends HookWidget {
       ),
     );
 
-    // Controller dispose qilish
     useEffect(() {
       return controller.dispose;
     }, [controller]);
+
+    useOnAppLifecycleStateChange((previous, current) {
+      final denied =
+          controller.value.error?.errorCode ==
+          MobileScannerErrorCode.permissionDenied;
+      if (current == AppLifecycleState.resumed && denied) {
+        controller.start();
+      }
+    });
 
     final scanWindow = Rect.fromCenter(
       center: MediaQuery.sizeOf(context).center(Offset.zero),
@@ -32,12 +41,10 @@ class QrReaderPage extends HookWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // if (image != null)
-          //   Image.memory(image!)
-          // else
           MobileScanner(
             controller: controller,
             scanWindow: scanWindow,
+            errorBuilder: (context, error) => _errorView(context, error),
             onDetect: (detect) {
               if (!isHandling.value) {
                 if (detect.barcodes.firstOrNull?.displayValue != null) {
@@ -68,6 +75,40 @@ class QrReaderPage extends HookWidget {
             iconTheme: IconThemeData(color: context.appColors.static.white),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _errorView(BuildContext context, MobileScannerException error) {
+    final denied = error.errorCode == MobileScannerErrorCode.permissionDenied;
+    return ColoredBox(
+      color: context.appColors.service.heroSurface,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 16,
+            children: [
+              Icon(
+                Icons.no_photography_outlined,
+                size: 48,
+                color: context.appColors.service.onMedia,
+              ),
+              Text(
+                denied
+                    ? context.localization.camera_permission_denied
+                    : context.localization.camera_unavailable,
+                textAlign: TextAlign.center,
+              ).bodyLg(color: context.appColors.service.onMedia),
+              if (denied)
+                AppActionButton(
+                  actionText: context.coreLocalization.action_open_settings,
+                  onPressed: openAppSettings,
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

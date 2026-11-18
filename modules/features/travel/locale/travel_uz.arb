@@ -272,5 +272,7 @@
   "global_search_clear_title": "Qidiruvni tozalash",
   "global_search_clear_message": "Qidiruv tarixini tozalashni xohlaysizmi?",
   "global_search_empty_title": "Hech narsa topilmadi",
-  "global_search_empty_message": "Bu so'rov bo'yicha hech narsa topilmadi, boshqa so'zlar bilan urinib ko'ring"
+  "global_search_empty_message": "Bu so'rov bo'yicha hech narsa topilmadi, boshqa so'zlar bilan urinib ko'ring",
+  "favorites_empty_title": "Saqlanganlar mavjud emas",
+  "favorites_empty_message": "Yoqqan joyni saqlash uchun yurakchani bosing"
 }

@@ -1728,6 +1728,18 @@ abstract class FeatureTravelLocalizations {
   /// In ru, this message translates to:
   /// **'По этому запросу ничего не найдено, попробуйте другие слова'**
   String get global_search_empty_message;
+
+  /// No description provided for @favorites_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет сохранённых'**
+  String get favorites_empty_title;
+
+  /// No description provided for @favorites_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нажмите на сердечко, чтобы сохранить место'**
+  String get favorites_empty_message;
 }
 
 class _FeatureTravelLocalizationsDelegate

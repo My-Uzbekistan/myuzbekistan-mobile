@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:shared/shared.dart';
 import 'package:uzbekistan_travel/di/injection.dart';
 
@@ -18,6 +20,13 @@ class NotificationService {
   factory NotificationService() => _instance;
 
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
+  final FlutterLocalNotificationsPlugin _localNotifications =
+      FlutterLocalNotificationsPlugin();
+  final _androidChannel = const AndroidNotificationChannel(
+    'high_importance_channel',
+    'MyUzbekistan',
+    importance: Importance.high,
+  );
   final topics = [
     "myuzb_topic_1",
     "myuzb_topic_2",
@@ -79,12 +88,61 @@ class NotificationService {
       onOpened(message);
     }
 
-    FirebaseMessaging.onMessage.listen(logRemoteMessage);
+    _prepareForegroundDisplay(open);
+    FirebaseMessaging.onMessage.listen((message) {
+      logRemoteMessage(message);
+      _showForeground(message);
+    });
     FirebaseMessaging.instance.getInitialMessage().then((message) {
       if (message != null) open(message);
     });
     FirebaseMessaging.onMessageOpenedApp.listen(open);
   }
+  Future<void> _prepareForegroundDisplay(
+    void Function(RemoteMessage) open,
+  ) async {
+    await _messaging.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    if (!Platform.isAndroid) return;
+    await _localNotifications.initialize(
+      settings: const InitializationSettings(
+        android: AndroidInitializationSettings('@mipmap/ic_launcher'),
+      ),
+      onDidReceiveNotificationResponse: (response) {
+        final payload = response.payload;
+        if (payload == null) return;
+        open(RemoteMessage(data: Map<String, dynamic>.from(jsonDecode(payload))));
+      },
+    );
+    await _localNotifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >()
+        ?.createNotificationChannel(_androidChannel);
+  }
+
+  void _showForeground(RemoteMessage message) {
+    final notification = message.notification;
+    if (!Platform.isAndroid || notification == null) return;
+    _localNotifications.show(
+      id: message.messageId.hashCode,
+      title: notification.title,
+      body: notification.body,
+      notificationDetails: NotificationDetails(
+        android: AndroidNotificationDetails(
+          _androidChannel.id,
+          _androidChannel.name,
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+      ),
+      payload: jsonEncode(message.data),
+    );
+  }
+
   Future<void> init() async {
     requestPermission();
 

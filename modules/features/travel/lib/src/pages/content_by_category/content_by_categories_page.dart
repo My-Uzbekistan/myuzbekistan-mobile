@@ -35,12 +35,22 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
       ),
       body: Column(
         children: [
-         Padding(padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),child:  SearchInputField(
-           hintText: context.localization.search,
-           onChanged: (text) {
-             bloc?.add(ContentByCategoryEvent.setQuery(text));
-           },
-         ),),
+          BlocBuilder<ContentByCategoryBloc, ContentByCategoryState>(
+            buildWhen: (previous, current) =>
+                _isFavoritesEmpty(previous) != _isFavoritesEmpty(current),
+            builder: (context, state) {
+              if (_isFavoritesEmpty(state)) return const SizedBox.shrink();
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: SearchInputField(
+                  hintText: context.localization.search,
+                  onChanged: (text) {
+                    bloc?.add(ContentByCategoryEvent.setQuery(text));
+                  },
+                ),
+              );
+            },
+          ),
           Expanded(
             child: BlocConsumer<ContentByCategoryBloc, ContentByCategoryState>(
               listener: (context, state) {
@@ -54,6 +64,23 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
                 return true;
               },
               builder: (context, state) {
+                if (state is ContentByCategoryDataState &&
+                    state.contents.isEmpty &&
+                    !state.isLoading) {
+                  final isFavorites =
+                      state.type == ContentByCategoryType.favorites &&
+                      state.query.isNullOrEmpty;
+                  return Center(
+                    child: AppEmptyView(
+                      title: isFavorites
+                          ? context.localization.favorites_empty_title
+                          : context.localization.nothing_found,
+                      message: isFavorites
+                          ? context.localization.favorites_empty_message
+                          : context.localization.nothing_found_message,
+                    ),
+                  );
+                }
                 if (state is ContentByCategoryDataState) {
                   return NotificationListener<ScrollNotification>(
                     onNotification: (notification) {
@@ -221,6 +248,13 @@ class _ContentByCategoryPageState extends State<ContentByCategoryPage> {
       ),
     );
   }
+
+  bool _isFavoritesEmpty(ContentByCategoryState state) =>
+      state is ContentByCategoryDataState &&
+      state.type == ContentByCategoryType.favorites &&
+      state.contents.isEmpty &&
+      !state.isLoading &&
+      state.query.isNullOrEmpty;
 }
 
 // class SearchCell extends StatelessWidget {

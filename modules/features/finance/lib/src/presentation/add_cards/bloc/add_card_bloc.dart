@@ -3,6 +3,7 @@ import 'package:domain/domain.dart';
 import 'package:shared/shared.dart';
 
 import '../../../service/FinanceSharedService.dart';
+import '../../../utils/expire_formatter.dart';
 
 part 'add_card_event.dart';
 

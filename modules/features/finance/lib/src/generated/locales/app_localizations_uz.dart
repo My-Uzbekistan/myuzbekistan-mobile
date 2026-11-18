@@ -198,4 +198,29 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
 
   @override
   String get back_to_home => 'Bosh sahifaga qaytish';
+
+  @override
+  String get history_empty_title => 'Tarix mavjud emas';
+
+  @override
+  String get history_empty_message => 'To‘lovlaringiz shu yerda ko‘rinadi';
+
+  @override
+  String get history_failed_title => 'Tarix yuklanmadi';
+
+  @override
+  String get cards_empty_title => 'Kartalar mavjud emas';
+
+  @override
+  String get cards_empty_message => 'Karta qo‘shsangiz, shu yerda ko‘rinadi';
+
+  @override
+  String get camera_permission_denied =>
+      'Kameraga ruxsat berilmagan. QR kodni skanerlash uchun sozlamalarda kameraga ruxsat bering';
+
+  @override
+  String get camera_unavailable => 'Kamerani ishga tushirib bo‘lmadi';
+
+  @override
+  String get card_expiry_invalid => 'Muddat noto‘g‘ri';
 }

@@ -958,4 +958,11 @@ class FeatureTravelLocalizationsRu extends FeatureTravelLocalizations {
   @override
   String get global_search_empty_message =>
       'По этому запросу ничего не найдено, попробуйте другие слова';
+
+  @override
+  String get favorites_empty_title => 'Нет сохранённых';
+
+  @override
+  String get favorites_empty_message =>
+      'Нажмите на сердечко, чтобы сохранить место';
 }

@@ -108,15 +108,7 @@ class CheckPinCodeBloc extends Bloc<CheckPinCodeEvent, CheckPinCodeState> {
       _securityStorage.setPin(event.pinCode);
       emitter(CheckPinCodeState.successState());
     } catch (e) {
-      if (e is DioException && e.error is AppException) {
-        emitter(
-          CheckPinCodeState.errorState(
-            message: (e.error as AppException).message,
-          ),
-        );
-      } else {
-        emitter(CheckPinCodeState.errorState(message: null));
-      }
+      emitter(CheckPinCodeState.errorState(isOffline: e.isConnectionError));
     }
   }
 }

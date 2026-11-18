@@ -933,4 +933,11 @@ class FeatureTravelLocalizationsUz extends FeatureTravelLocalizations {
   @override
   String get global_search_empty_message =>
       'Bu so\'rov bo\'yicha hech narsa topilmadi, boshqa so\'zlar bilan urinib ko\'ring';
+
+  @override
+  String get favorites_empty_title => 'Saqlanganlar mavjud emas';
+
+  @override
+  String get favorites_empty_message =>
+      'Yoqqan joyni saqlash uchun yurakchani bosing';
 }

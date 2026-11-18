@@ -316,7 +316,7 @@ String toString() {
 /// @nodoc
 mixin _$AuthPhoneState {
 
- String get phoneNumber; dynamic get isLoading; String get error; dynamic get codeSend;
+ String get phoneNumber; dynamic get isLoading; String get error; dynamic get codeSend; String? get errorMessage; bool get isOffline;
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -327,16 +327,16 @@ $AuthPhoneStateCopyWith<AuthPhoneState> get copyWith => _$AuthPhoneStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isOffline, isOffline) || other.isOffline == isOffline));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend));
+int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend),errorMessage,isOffline);
 
 @override
 String toString() {
-  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend)';
+  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend, errorMessage: $errorMessage, isOffline: $isOffline)';
 }
 
 
@@ -347,7 +347,7 @@ abstract mixin class $AuthPhoneStateCopyWith<$Res>  {
   factory $AuthPhoneStateCopyWith(AuthPhoneState value, $Res Function(AuthPhoneState) _then) = _$AuthPhoneStateCopyWithImpl;
 @useResult
 $Res call({
- String phoneNumber, dynamic isLoading, String error, dynamic codeSend
+ String phoneNumber, dynamic isLoading, String error, dynamic codeSend, String? errorMessage, bool isOffline
 });
 
 
@@ -364,13 +364,15 @@ class _$AuthPhoneStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,Object? errorMessage = freezed,Object? isOffline = null,}) {
   return _then(_self.copyWith(
 phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as dynamic,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,codeSend: freezed == codeSend ? _self.codeSend : codeSend // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as dynamic,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isOffline: null == isOffline ? _self.isOffline : isOffline // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 
@@ -455,10 +457,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend,  String? errorMessage,  bool isOffline)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AuthPhoneState() when $default != null:
-return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);case _:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend,_that.errorMessage,_that.isOffline);case _:
   return orElse();
 
 }
@@ -476,10 +478,10 @@ return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend,  String? errorMessage,  bool isOffline)  $default,) {final _that = this;
 switch (_that) {
 case _AuthPhoneState():
-return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);case _:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend,_that.errorMessage,_that.isOffline);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -496,10 +498,10 @@ return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend,  String? errorMessage,  bool isOffline)?  $default,) {final _that = this;
 switch (_that) {
 case _AuthPhoneState() when $default != null:
-return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);case _:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend,_that.errorMessage,_that.isOffline);case _:
   return null;
 
 }
@@ -511,13 +513,15 @@ return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend);ca
 
 
 class _AuthPhoneState extends AuthPhoneState {
-  const _AuthPhoneState({this.phoneNumber = "", this.isLoading = false, this.error = "", this.codeSend = false}): super._();
+  const _AuthPhoneState({this.phoneNumber = "", this.isLoading = false, this.error = "", this.codeSend = false, this.errorMessage, this.isOffline = false}): super._();
   
 
 @override@JsonKey() final  String phoneNumber;
 @override@JsonKey() final  dynamic isLoading;
 @override@JsonKey() final  String error;
 @override@JsonKey() final  dynamic codeSend;
+@override final  String? errorMessage;
+@override@JsonKey() final  bool isOffline;
 
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
@@ -529,16 +533,16 @@ _$AuthPhoneStateCopyWith<_AuthPhoneState> get copyWith => __$AuthPhoneStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isOffline, isOffline) || other.isOffline == isOffline));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend));
+int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend),errorMessage,isOffline);
 
 @override
 String toString() {
-  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend)';
+  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend, errorMessage: $errorMessage, isOffline: $isOffline)';
 }
 
 
@@ -549,7 +553,7 @@ abstract mixin class _$AuthPhoneStateCopyWith<$Res> implements $AuthPhoneStateCo
   factory _$AuthPhoneStateCopyWith(_AuthPhoneState value, $Res Function(_AuthPhoneState) _then) = __$AuthPhoneStateCopyWithImpl;
 @override @useResult
 $Res call({
- String phoneNumber, dynamic isLoading, String error, dynamic codeSend
+ String phoneNumber, dynamic isLoading, String error, dynamic codeSend, String? errorMessage, bool isOffline
 });
 
 
@@ -566,13 +570,15 @@ class __$AuthPhoneStateCopyWithImpl<$Res>
 
 /// Create a copy of AuthPhoneState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,Object? errorMessage = freezed,Object? isOffline = null,}) {
   return _then(_AuthPhoneState(
 phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
 as String,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
 as dynamic,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String,codeSend: freezed == codeSend ? _self.codeSend : codeSend // ignore: cast_nullable_to_non_nullable
-as dynamic,
+as dynamic,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isOffline: null == isOffline ? _self.isOffline : isOffline // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

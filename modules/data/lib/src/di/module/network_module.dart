@@ -11,13 +11,16 @@ import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../interseptors/AppInterceptor.dart';
+import '../../interseptors/offline_cache_interceptor.dart';
 
 @module
 abstract class NetworkModule {
   @lazySingleton
   Alice getAlice() {
     return Alice(
-        showNotification: true, showInspectorOnShake: true, darkTheme: true);
+        showNotification: AppConstants.httpInspectorEnabled,
+        showInspectorOnShake: AppConstants.httpInspectorEnabled,
+        darkTheme: true);
   }
 
   @Named('baseUrl')
@@ -61,6 +64,7 @@ abstract class NetworkModule {
     if (kDebugMode) {
       dio.interceptors.add(PrettyDioLogger(requestBody: true));
     }
+    dio.interceptors.add(OfflineCacheInterceptor());
     dio.interceptors.add(ErrorInterceptor());
     return dio;
   }

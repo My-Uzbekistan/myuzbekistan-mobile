@@ -615,13 +615,13 @@ return reset(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String pinCode,  bool canBiometric)?  entryState,TResult Function()?  successState,TResult Function()?  loadingState,TResult Function( String? message)?  errorState,TResult Function()?  reset,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String pinCode,  bool canBiometric)?  entryState,TResult Function()?  successState,TResult Function()?  loadingState,TResult Function( String? message,  bool isOffline)?  errorState,TResult Function()?  reset,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case CheckPinEntryState() when entryState != null:
 return entryState(_that.pinCode,_that.canBiometric);case CheckPinSuccessState() when successState != null:
 return successState();case CheckPinLoadingState() when loadingState != null:
 return loadingState();case CheckPinErrorState() when errorState != null:
-return errorState(_that.message);case CheckPinResetState() when reset != null:
+return errorState(_that.message,_that.isOffline);case CheckPinResetState() when reset != null:
 return reset();case _:
   return orElse();
 
@@ -640,13 +640,13 @@ return reset();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String pinCode,  bool canBiometric)  entryState,required TResult Function()  successState,required TResult Function()  loadingState,required TResult Function( String? message)  errorState,required TResult Function()  reset,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String pinCode,  bool canBiometric)  entryState,required TResult Function()  successState,required TResult Function()  loadingState,required TResult Function( String? message,  bool isOffline)  errorState,required TResult Function()  reset,}) {final _that = this;
 switch (_that) {
 case CheckPinEntryState():
 return entryState(_that.pinCode,_that.canBiometric);case CheckPinSuccessState():
 return successState();case CheckPinLoadingState():
 return loadingState();case CheckPinErrorState():
-return errorState(_that.message);case CheckPinResetState():
+return errorState(_that.message,_that.isOffline);case CheckPinResetState():
 return reset();case _:
   throw StateError('Unexpected subclass');
 
@@ -664,13 +664,13 @@ return reset();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String pinCode,  bool canBiometric)?  entryState,TResult? Function()?  successState,TResult? Function()?  loadingState,TResult? Function( String? message)?  errorState,TResult? Function()?  reset,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String pinCode,  bool canBiometric)?  entryState,TResult? Function()?  successState,TResult? Function()?  loadingState,TResult? Function( String? message,  bool isOffline)?  errorState,TResult? Function()?  reset,}) {final _that = this;
 switch (_that) {
 case CheckPinEntryState() when entryState != null:
 return entryState(_that.pinCode,_that.canBiometric);case CheckPinSuccessState() when successState != null:
 return successState();case CheckPinLoadingState() when loadingState != null:
 return loadingState();case CheckPinErrorState() when errorState != null:
-return errorState(_that.message);case CheckPinResetState() when reset != null:
+return errorState(_that.message,_that.isOffline);case CheckPinResetState() when reset != null:
 return reset();case _:
   return null;
 
@@ -815,10 +815,11 @@ String toString() {
 
 
 class CheckPinErrorState implements CheckPinCodeState {
-   CheckPinErrorState({this.message});
+   CheckPinErrorState({this.message, this.isOffline = false});
   
 
  final  String? message;
+@JsonKey() final  bool isOffline;
 
 /// Create a copy of CheckPinCodeState
 /// with the given fields replaced by the non-null parameter values.
@@ -830,16 +831,16 @@ $CheckPinErrorStateCopyWith<CheckPinErrorState> get copyWith => _$CheckPinErrorS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CheckPinErrorState&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CheckPinErrorState&&(identical(other.message, message) || other.message == message)&&(identical(other.isOffline, isOffline) || other.isOffline == isOffline));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,message);
+int get hashCode => Object.hash(runtimeType,message,isOffline);
 
 @override
 String toString() {
-  return 'CheckPinCodeState.errorState(message: $message)';
+  return 'CheckPinCodeState.errorState(message: $message, isOffline: $isOffline)';
 }
 
 
@@ -850,7 +851,7 @@ abstract mixin class $CheckPinErrorStateCopyWith<$Res> implements $CheckPinCodeS
   factory $CheckPinErrorStateCopyWith(CheckPinErrorState value, $Res Function(CheckPinErrorState) _then) = _$CheckPinErrorStateCopyWithImpl;
 @useResult
 $Res call({
- String? message
+ String? message, bool isOffline
 });
 
 
@@ -867,10 +868,11 @@ class _$CheckPinErrorStateCopyWithImpl<$Res>
 
 /// Create a copy of CheckPinCodeState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? isOffline = null,}) {
   return _then(CheckPinErrorState(
 message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,isOffline: null == isOffline ? _self.isOffline : isOffline // ignore: cast_nullable_to_non_nullable
+as bool,
   ));
 }
 

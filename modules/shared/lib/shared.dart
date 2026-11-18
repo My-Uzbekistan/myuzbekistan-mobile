@@ -16,6 +16,8 @@ export 'package:equatable/equatable.dart';
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:hive/hive.dart';
 export 'src/utils/LocationManager.dart';
+export 'package:geolocator/geolocator.dart'
+    show Geolocator, Position, LocationPermission, LocationAccuracy;
 export 'src/utils/device_info_manager.dart';
 export 'package:flutter_hooks/flutter_hooks.dart';
 export  'package:dartx/dartx.dart';
@@ -25,9 +27,11 @@ export 'package:flutter_alice/alice.dart';
 export 'package:dio/dio.dart';
 export 'package:pinput/pinput.dart';
 export 'src/extensions/string_extension.dart';
+export 'src/extensions/error_extension.dart';
 export 'package:keyboard_actions/keyboard_actions.dart';
 export 'package:mobile_scanner/mobile_scanner.dart';
 export 'src/permissions/camera_and_gallery/camera_storage.dart';
+export 'src/permissions/camera_and_gallery/photo_picker_config.dart';
 export 'package:image_picker/image_picker.dart' show ImageSource, XFile;
 
 export 'package:intl/intl.dart' show DateFormat, Intl, NumberFormat;

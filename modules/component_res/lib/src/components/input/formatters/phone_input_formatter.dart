@@ -1,67 +1,44 @@
-import 'package:component_res/component_res.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class PhoneInputFormatter extends TextInputFormatter {
+  static final _nonDigit = RegExp(r'\D');
+
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue,
-      TextEditingValue newValue,
-      ) {
-    if (newValue.selection.baseOffset == 0) {
-      return newValue;
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var digits = newValue.text.replaceAll(_nonDigit, '');
+    final cursor = newValue.selection.baseOffset.clamp(0, newValue.text.length);
+    var digitsBeforeCursor =
+        newValue.text.substring(0, cursor).replaceAll(_nonDigit, '').length;
+
+    final oldDigits = oldValue.text.replaceAll(_nonDigit, '');
+    final removedOnlySpace =
+        newValue.text.length == oldValue.text.length - 1 &&
+        digits == oldDigits &&
+        digitsBeforeCursor > 0;
+    if (removedOnlySpace) {
+      digits =
+          digits.substring(0, digitsBeforeCursor - 1) +
+          digits.substring(digitsBeforeCursor);
+      digitsBeforeCursor--;
     }
 
-    var currentNumber = newValue.text.withOutSpace().take(9);
-    var beforeNumber = oldValue.text.withOutSpace().take(9);
-    var resultNumber = newValue.text.withOutSpace().take(9);
+    if (digits.length > 9) digits = digits.substring(0, 9);
+    if (digitsBeforeCursor > digits.length) digitsBeforeCursor = digits.length;
 
-    var selectionIndex = newValue.selection.base.offset;
-    var endSelection = false;
-
-    if (beforeNumber == currentNumber && currentNumber.isNotEmpty) {
-      var index = 0;
-      for (int i = 0; i < currentNumber.length; i++) {
-        if (beforeNumber[i] != currentNumber[i]) {
-          index = i;
-          break;
-        }
-      }
-
-      if (index != 0) {
-        resultNumber = currentNumber
-            .substring(0, index - 1)
-            .plus(currentNumber.substring(index));
-        selectionIndex = index - 1;
-      }
-    } else if (beforeNumber.length < currentNumber.length) {
-      if (selectionIndex == currentNumber.length) {
-        endSelection = true;
-      } else if ([3, 7, 10].contains(selectionIndex)) {
-        selectionIndex++;
-      }
+    final buffer = StringBuffer();
+    var selection = 0;
+    for (var i = 0; i < digits.length; i++) {
+      if (i == 2 || i == 5 || i == 7) buffer.write(' ');
+      buffer.write(digits[i]);
+      if (i + 1 == digitsBeforeCursor) selection = buffer.length;
     }
 
-    var text = "";
-    int i = 0;
-    resultNumber = resultNumber.withOutSpace();
-    for (var element in resultNumber.characters) {
-      if ([2, 6, 9].contains(i)) {
-        text = text.plus(" ");
-        i++;
-      }
-      text = text.plus(element);
-      i++;
-    }
-
-    resultNumber = text;
-    if (endSelection || selectionIndex > resultNumber.length) {
-      selectionIndex = resultNumber.length;
-    }
-
-    return newValue.copyWith(
-      text: resultNumber,
-      selection: TextSelection.collapsed(offset: selectionIndex),
+    return TextEditingValue(
+      text: buffer.toString(),
+      selection: TextSelection.collapsed(offset: selection),
     );
   }
 }

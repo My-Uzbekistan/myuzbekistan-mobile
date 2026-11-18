@@ -28,6 +28,10 @@ abstract class SecurityStorage {
 
   bool isShowIqAirWidget();
 
+  Future<void> changeNearbyPlacesState(bool value);
+
+  bool isNearbyPlacesEnabled();
+
   Future<void> setPrayerLocationId(int locationId);
 
   int? getPrayerLocationId();
@@ -59,4 +63,6 @@ abstract class SecurityStorage {
   Future<void> setHasPin(bool hasPin);
 
   Future<void> clearData();
+
+  Future<void> reload();
 }

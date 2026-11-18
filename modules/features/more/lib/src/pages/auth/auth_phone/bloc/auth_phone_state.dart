@@ -8,6 +8,8 @@ abstract class AuthPhoneState with _$AuthPhoneState {
     @Default(false) isLoading,
     @Default("")  String error,
     @Default(false) codeSend,
+    String? errorMessage,
+    @Default(false) bool isOffline,
   }) = _AuthPhoneState;
 
   bool get isPhoneNumberValid => phoneNumber.length == 9;

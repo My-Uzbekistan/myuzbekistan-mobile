@@ -6,10 +6,15 @@ import 'package:shared/shared.dart';
 
 @Injectable(as: SecurityStorage)
 class SecurityStorageImpl implements SecurityStorage {
-  final Box _box;
+  SecurityStorageImpl({@Named(StorageConstants.securityBox) required Box box});
 
-  SecurityStorageImpl({@Named(StorageConstants.securityBox) required Box box})
-    : _box = box;
+  Box get _box => Hive.box(StorageConstants.securityBox);
+
+  @override
+  Future<void> reload() async {
+    await _box.close();
+    await Hive.openBox(StorageConstants.securityBox);
+  }
 
   @override
   UserModel? getUserModel() {
@@ -71,6 +76,7 @@ class SecurityStorageImpl implements SecurityStorage {
       "pin",
       "faceId",
       "profilePictureUrl",
+      "nearbyPlacesState",
     ]);
   }
 
@@ -133,6 +139,16 @@ class SecurityStorageImpl implements SecurityStorage {
   @override
   bool isShowIqAirWidget() {
     return _box.get("iqAirWidgetState") ?? true;
+  }
+
+  @override
+  Future<void> changeNearbyPlacesState(bool value) async {
+    await _box.put("nearbyPlacesState", value);
+  }
+
+  @override
+  bool isNearbyPlacesEnabled() {
+    return _box.get("nearbyPlacesState") ?? false;
   }
 
   @override

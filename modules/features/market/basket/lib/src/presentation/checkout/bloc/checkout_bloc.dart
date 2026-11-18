@@ -12,6 +12,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   final MarketRepository _repository;
   final AppRefreshListener _refresh;
   StreamSubscription<AppRefreshTopic>? _refreshSubscription;
+  final Map<int, int> _confirmedQuantity = {};
+  int _quantityVersion = 0;
 
   CheckoutBloc(this._repository, this._refresh) : super(CheckoutState()) {
     on<_CheckoutLoadDataEvent>(_loadData);
@@ -47,11 +49,13 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
   }
 
   Future<void> _fetch(Emitter<CheckoutState> emit) async {
+    final version = _quantityVersion;
     try {
       final results = await Future.wait([
         _repository.checkout(),
         _repository.deliveryMethods(),
       ]);
+      if (version != _quantityVersion) return;
       final checkout = results.first as Checkout;
       final methods = results.last as List<DeliveryMethod>;
       emit(
@@ -82,43 +86,67 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
     Emitter<CheckoutState> emit,
   ) async {
     final item = event.item;
+    final productId = item.productId;
     final quantity = event.quantity;
     if (quantity <= 0) {
+      _quantityVersion++;
+      _confirmedQuantity.remove(productId);
       await _remove(emit, item);
       return;
     }
     if (quantity > item.available) return;
 
-    final previous = state.items;
-    emit(
-      _recalculated(
-        previous
-            .map(
-              (it) =>
-                  it.productId == item.productId
-                      ? it.copyWith(quantity: quantity)
-                      : it,
-            )
-            .toList(),
-      ),
-    );
+    _confirmedQuantity.putIfAbsent(productId, () => item.quantity);
+    final version = ++_quantityVersion;
+    emit(_recalculated(_withQuantity(state.items, productId, quantity)));
+
+    await Future.delayed(const Duration(milliseconds: 400));
+    if (version != _quantityVersion) return;
+
     try {
       await _repository.changeCartQuantity(
-        productId: item.productId,
+        productId: productId,
         quantity: quantity,
       );
-      await _applyCheckout(emit);
+      _confirmedQuantity.remove(productId);
       _refresh.notifyItem(
         ItemChange(
           entity: RefreshEntity.marketProduct,
-          id: item.productId.toString(),
+          id: productId.toString(),
           cartQuantity: quantity,
+        ),
+      );
+      if (version != _quantityVersion) return;
+      final checkout = await _repository.checkout();
+      if (version != _quantityVersion) return;
+      emit(
+        state.copyWith(
+          items: checkout.items,
+          price: checkout.price,
+          priceDetails: checkout.priceDetails,
+          freeCancellationUntil: checkout.freeCancellationUntil,
         ),
       );
       _refresh.notify(AppRefreshTopic.marketCart);
     } catch (e) {
-      emit(_recalculated(previous).copyWith(errorMessage: _errorMessage(e)));
+      final confirmed = _confirmedQuantity.remove(productId) ?? item.quantity;
+      if (version != _quantityVersion) return;
+      emit(
+        _recalculated(
+          _withQuantity(state.items, productId, confirmed),
+        ).copyWith(errorMessage: _errorMessage(e)),
+      );
     }
+  }
+
+  List<CartItem> _withQuantity(
+    List<CartItem> items,
+    int productId,
+    int quantity,
+  ) {
+    return items
+        .map((it) => it.productId == productId ? it.copyWith(quantity: quantity) : it)
+        .toList();
   }
 
   Future<void> _removeItem(

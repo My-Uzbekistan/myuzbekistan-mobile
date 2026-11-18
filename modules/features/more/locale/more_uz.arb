@@ -38,7 +38,7 @@
   "police": "Politsiya",
   "medical": "Tez yordam",
   "gasEmergency": "Gaz xizmati",
-  "emergencyContacts": "Favqulodda kontaktlar",
+  "emergencyContacts": "Favqulodda vaziyat raqamlari",
   "usefulTips": "Foydali maslahatlar",
   "logout": "Ilovadan chiqish",
   "logout_confirm_title": "Ilovadan chiqish?",
@@ -128,5 +128,18 @@
   "premiumBuySubscription": "Obunani xarid qiling",
   "webViewExitTitle": "Rostdan ham chiqib ketmoqchimisiz?",
   "webViewExitMessage": "Sahifa yopiladi, kiritilgan ma'lumotlar saqlanmaydi.",
-  "yes": "Ha"
+  "yes": "Ha",
+  "nearbyPlaces": "Yaqin atrofdagi joylar haqida xabar",
+  "nearbyPlacesDisclosureTitle": "Yaqin atrofdagi qiziqarli joylar",
+  "nearbyPlacesDisclosureBody": "Shahar bo'ylab sayr qilganingizda yoningizdagi muzey, restoran va diqqatga sazovor joylar haqida xabar beramiz. Buning uchun ilova yopiq bo'lganda ham joylashuvingizdan foydalanamiz.",
+  "nearbyPlacesDisclosureDistance": "Joylashuv faqat yaqin atrofdagi joylarni topish uchun ishlatiladi",
+  "nearbyPlacesDisclosureLimit": "Kuniga 2 tadan ortiq xabar yubormaymiz, tunda bezovta qilmaymiz",
+  "nearbyPlacesDisclosureTurnOff": "«Ko‘proq» bo'limida istalgan vaqtda o'chirib qo'yishingiz mumkin",
+  "nearbyPlacesDisclosureHint": "Ilova yopiq bo'lganda ham ishlashi uchun joylashuvga «Har doim» ruxsati kerak bo'ladi.",
+  "nearbyPlacesDisclosureContinue": "Davom etish",
+  "nearbyPlacesDisclosureLater": "Hozir emas",
+  "nearbyPlacesPermissionDenied": "Funksiya ishlashi uchun telefon sozlamalarida MyUzbekistan → Joylashuv bo'limida «Har doim» ni tanlang.",
+  "nearbyPlacesTrackingTitle": "Yaqin atrofdagi joylar",
+  "nearbyPlacesTrackingText": "Yoningizdagi qiziqarli joylar haqida xabar beramiz",
+  "pin_invalid": "Noto‘g‘ri PIN-kod"
 }

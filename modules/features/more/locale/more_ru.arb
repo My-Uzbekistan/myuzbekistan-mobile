@@ -39,7 +39,7 @@
   "police": "Полиция",
   "medical": "Скорая помощь",
   "gasEmergency": "Газовая аварийная служба",
-  "emergencyContacts": "Экстренные контакты",
+  "emergencyContacts": "Номера экстренных служб",
   "usefulTips": "Полезные советы",
   "logout": "Выйти из приложения",
   "logout_confirm_title": "Выйти из приложения?",
@@ -136,5 +136,18 @@
   },
   "webViewExitTitle": "Вы действительно хотите выйти?",
   "webViewExitMessage": "Страница закроется, введённые данные не сохранятся.",
-  "yes": "Да"
+  "yes": "Да",
+  "nearbyPlaces": "Уведомления о местах рядом",
+  "nearbyPlacesDisclosureTitle": "Интересные места рядом",
+  "nearbyPlacesDisclosureBody": "Подскажем, когда вы проходите рядом с музеем, рестораном или достопримечательностью. Для этого MyUzbekistan использует ваше местоположение, даже когда приложение закрыто или не используется.",
+  "nearbyPlacesDisclosureDistance": "Местоположение используется только для поиска мест рядом с вами",
+  "nearbyPlacesDisclosureLimit": "Не больше 2 уведомлений в день, ночью не беспокоим",
+  "nearbyPlacesDisclosureTurnOff": "Отключить можно в любой момент в разделе «Еще»",
+  "nearbyPlacesDisclosureHint": "Чтобы функция работала, когда приложение закрыто, нужен доступ к геопозиции «Всегда».",
+  "nearbyPlacesDisclosureContinue": "Продолжить",
+  "nearbyPlacesDisclosureLater": "Не сейчас",
+  "nearbyPlacesPermissionDenied": "Чтобы функция работала, в настройках телефона откройте MyUzbekistan → Геопозиция и выберите «Всегда».",
+  "nearbyPlacesTrackingTitle": "Интересные места рядом",
+  "nearbyPlacesTrackingText": "Подскажем об интересных местах рядом с вами",
+  "pin_invalid": "Неверный PIN-код"
 }

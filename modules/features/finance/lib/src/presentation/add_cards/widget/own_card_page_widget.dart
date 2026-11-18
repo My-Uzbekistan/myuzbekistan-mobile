@@ -24,9 +24,16 @@ class OwnCardPageWidget extends HookWidget {
       return () => expireController.removeListener(listener);
     }, const []);
 
+    useListenable(expireController);
+    final expiry = expireController.text;
+    final expiryError = expiry.length == 5 && !expiry.isValidCardExpiry
+        ? context.localization.card_expiry_invalid
+        : null;
+
     return AppInputField(
       controller: expireController,
       label: context.localization.card_expiry_full_label,
+      errorText: expiryError,
       hintText: context.localization.card_expiry_hint,
       keyboardType: TextInputType.number,
       formatters: [

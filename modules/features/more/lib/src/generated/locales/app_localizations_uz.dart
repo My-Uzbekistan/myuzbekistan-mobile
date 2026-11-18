@@ -152,7 +152,7 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get gasEmergency => 'Gaz xizmati';
 
   @override
-  String get emergencyContacts => 'Favqulodda kontaktlar';
+  String get emergencyContacts => 'Favqulodda vaziyat raqamlari';
 
   @override
   String get usefulTips => 'Foydali maslahatlar';
@@ -436,4 +436,50 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get yes => 'Ha';
+
+  @override
+  String get nearbyPlaces => 'Yaqin atrofdagi joylar haqida xabar';
+
+  @override
+  String get nearbyPlacesDisclosureTitle => 'Yaqin atrofdagi qiziqarli joylar';
+
+  @override
+  String get nearbyPlacesDisclosureBody =>
+      'Shahar bo\'ylab sayr qilganingizda yoningizdagi muzey, restoran va diqqatga sazovor joylar haqida xabar beramiz. Buning uchun ilova yopiq bo\'lganda ham joylashuvingizdan foydalanamiz.';
+
+  @override
+  String get nearbyPlacesDisclosureDistance =>
+      'Joylashuv faqat yaqin atrofdagi joylarni topish uchun ishlatiladi';
+
+  @override
+  String get nearbyPlacesDisclosureLimit =>
+      'Kuniga 2 tadan ortiq xabar yubormaymiz, tunda bezovta qilmaymiz';
+
+  @override
+  String get nearbyPlacesDisclosureTurnOff =>
+      '«Ko‘proq» bo\'limida istalgan vaqtda o\'chirib qo\'yishingiz mumkin';
+
+  @override
+  String get nearbyPlacesDisclosureHint =>
+      'Ilova yopiq bo\'lganda ham ishlashi uchun joylashuvga «Har doim» ruxsati kerak bo\'ladi.';
+
+  @override
+  String get nearbyPlacesDisclosureContinue => 'Davom etish';
+
+  @override
+  String get nearbyPlacesDisclosureLater => 'Hozir emas';
+
+  @override
+  String get nearbyPlacesPermissionDenied =>
+      'Funksiya ishlashi uchun telefon sozlamalarida MyUzbekistan → Joylashuv bo\'limida «Har doim» ni tanlang.';
+
+  @override
+  String get nearbyPlacesTrackingTitle => 'Yaqin atrofdagi joylar';
+
+  @override
+  String get nearbyPlacesTrackingText =>
+      'Yoningizdagi qiziqarli joylar haqida xabar beramiz';
+
+  @override
+  String get pin_invalid => 'Noto‘g‘ri PIN-kod';
 }

@@ -148,6 +148,30 @@ abstract class CoreAppLocalizations {
   /// In en, this message translates to:
   /// **'Read more'**
   String get action_more;
+
+  /// No description provided for @no_internet.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet connection. Check your connection and try again'**
+  String get no_internet;
+
+  /// No description provided for @no_internet_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No internet'**
+  String get no_internet_title;
+
+  /// No description provided for @action_retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get action_retry;
+
+  /// No description provided for @action_open_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get action_open_settings;
 }
 
 class _CoreAppLocalizationsDelegate

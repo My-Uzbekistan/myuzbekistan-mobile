@@ -8,6 +8,8 @@ import 'dart:async' as _i687;
 
 import 'package:domain/domain.dart' as _i494;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:more/src/core/nearby_places/nearby_places_service.dart'
+    as _i102;
 import 'package:more/src/core/settings_bloc/app_settings_bloc.dart' as _i830;
 import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart'
     as _i396;
@@ -25,6 +27,12 @@ class MorePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
+    gh.lazySingleton<_i102.NearbyPlacesService>(() => _i102.NearbyPlacesService(
+          gh<_i494.DevicesRepository>(),
+          gh<_i494.Repository>(),
+          gh<_i494.SecurityStorage>(),
+          gh<_i494.AppPreference>(),
+        ));
     gh.factory<_i201.BiometricUtils>(() => _i201.BiometricUtilsProvider());
     gh.factory<_i507.MoreBloc>(() => _i507.MoreBloc(
           gh<_i494.SecurityStorage>(),

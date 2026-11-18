@@ -198,4 +198,29 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
 
   @override
   String get back_to_home => 'Вернуться на главную';
+
+  @override
+  String get history_empty_title => 'История пуста';
+
+  @override
+  String get history_empty_message => 'Здесь появятся ваши платежи';
+
+  @override
+  String get history_failed_title => 'Не удалось загрузить историю';
+
+  @override
+  String get cards_empty_title => 'Нет карт';
+
+  @override
+  String get cards_empty_message => 'Добавленные карты появятся здесь';
+
+  @override
+  String get camera_permission_denied =>
+      'Нет доступа к камере. Разрешите доступ к камере в настройках, чтобы сканировать QR-код';
+
+  @override
+  String get camera_unavailable => 'Не удалось запустить камеру';
+
+  @override
+  String get card_expiry_invalid => 'Неверный срок';
 }

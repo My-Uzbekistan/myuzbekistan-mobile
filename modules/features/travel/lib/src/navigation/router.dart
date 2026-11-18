@@ -322,9 +322,9 @@ mixin FeatureTravelRouter {
                   (context) =>
                       getIt<NotificationBloc>()..add(
                         NotificationEvent.loadNotifications(
-                          initialNotId:
-                              state.uri.queryParameters["notificationId"]
-                                  ?.toIntOrNull(),
+                          initialNotId: parseInt(
+                            state.uri.queryParameters["notificationId"],
+                          ),
                         ),
                       ),
               child: NotificationMainPage(),

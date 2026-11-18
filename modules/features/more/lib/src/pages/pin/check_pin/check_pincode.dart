@@ -44,7 +44,7 @@ class CheckPinCodePage extends HookWidget {
           loadingState: () {
             mPinController.loading();
           },
-          errorState: (message) {
+          errorState: (message, isOffline) {
             mPinController.notifyWrongInput();
           },
           reset: () {
@@ -53,7 +53,11 @@ class CheckPinCodePage extends HookWidget {
         );
       },
       builder: (context, state) {
-        final errorMessage = state.whenOrNull(errorState: (message) => message);
+        final errorMessage = state.whenOrNull(
+          errorState: (message, isOffline) => isOffline
+              ? context.coreLocalization.no_internet
+              : localization.pin_invalid,
+        );
         final showBiometricKey =
             pinCodeBloc.canBiometric && enteredPin.value.isEmpty;
 

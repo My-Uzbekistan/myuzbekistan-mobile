@@ -1,5 +1,6 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
+import 'package:more/more.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/travel.dart';
@@ -59,6 +60,11 @@ class ShellPageWrapper extends HookWidget {
           onOpened: _openNotificationDeeplink,
         );
       });
+      return null;
+    }, const []);
+
+    useEffect(() {
+      askNearbyPlacesOnLaunch(context);
       return null;
     }, const []);
 

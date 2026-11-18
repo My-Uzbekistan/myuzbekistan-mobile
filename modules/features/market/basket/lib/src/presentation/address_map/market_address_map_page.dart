@@ -115,6 +115,8 @@ class MarketAddressMapPage extends HookWidget {
       zoomControlsEnabled: false,
       compassEnabled: false,
       mapToolbarEnabled: false,
+      cameraTargetBounds: CameraTargetBounds(AddressMapBloc.uzbekistanBounds),
+      minMaxZoomPreference: const MinMaxZoomPreference(5, 21),
       onMapCreated: (controller) =>
           bloc.add(AddressMapEvent.mapCreated(controller)),
       onCameraMove: (position) =>
