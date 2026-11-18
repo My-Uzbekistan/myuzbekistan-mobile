@@ -37,10 +37,7 @@ class FilesGroup extends StatelessWidget {
                   imageUrl: attachment.icon,
                   onTap: () {
 
-                   context.more.pushPdfViewPage(
-                     title: attachment.name,
-                     pdfUrl: attachment.file
-                   );
+                   context.more.pushPdfViewPage(pdfUrl: attachment.file);
                   },
                 );
               },

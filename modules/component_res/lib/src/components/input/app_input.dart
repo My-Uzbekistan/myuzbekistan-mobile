@@ -15,6 +15,7 @@ class AppInputField extends HookWidget {
   final int maxLength;
   final FocusNode? focusNode;
   final bool autoFocus;
+  final List<String> autofillHints;
 
   const AppInputField({
     super.key,
@@ -29,6 +30,7 @@ class AppInputField extends HookWidget {
     this.maxLength = TextField.noMaxLength,
     this.focusNode,
     this.autoFocus = false,
+    this.autofillHints = const [AutofillHints.oneTimeCode],
   });
 
   @override
@@ -42,7 +44,9 @@ class AppInputField extends HookWidget {
 
     final containerColor = errorText != null
         ? context.appColors.nonOpaque.red
-        : context.appColors.fill.quaternary;
+        : isFocused.value
+            ? context.appColors.fill.tertiary
+            : context.appColors.fill.quaternary;
 
     final supportTextColor = errorText != null
         ? context.appColors.colors.red
@@ -92,7 +96,7 @@ class AppInputField extends HookWidget {
                         focusNode: _focusNode,
                         maxLength: maxLength,
                         maxLines: 1,
-                        autofillHints: [AutofillHints.oneTimeCode],
+                        autofillHints: autofillHints,
                         textInputAction: TextInputAction.done,
                         style: CustomTypography.bodyLg.copyWith(
                           color: context.appColors.textIconColor.primary,
@@ -131,7 +135,7 @@ class AppInputField extends HookWidget {
                             color: context.appColors.textIconColor.primary,
                           ),
                           hintStyle: CustomTypography.bodyLg.copyWith(
-                            color: context.appColors.textIconColor.tertiary,
+                            color: context.appColors.textIconColor.secondary,
                           ),
                           contentPadding: EdgeInsets.symmetric(vertical: 0),
                         ),
@@ -159,7 +163,7 @@ class AppInputField extends HookWidget {
                         width: 20,
                         child: Padding(
                           padding: EdgeInsets.all(4),
-                          child: Assets.svgIconClose.toSvgImage(
+                          child: Assets.svg.iconClose.path.toSvgImage(
                               fit: BoxFit.contain,
                               colorFilter: ColorFilter.mode(
                                   context.appColors.textIconColor.secondary,

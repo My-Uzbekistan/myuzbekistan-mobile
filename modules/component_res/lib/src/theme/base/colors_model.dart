@@ -1,7 +1,8 @@
 part of '../app_color_theme.dart';
 
 abstract class _BaseColors {
-  Color get brandPrimary;
+  Color get brandSeaBlue;
+  Color get brandFlamingo;
 
   BackgroundColors get background;
 
@@ -18,6 +19,8 @@ abstract class _BaseColors {
   NonOpaque get nonOpaque;
 
   ServiceColors get service;
+
+  AccentColors get accent;
 
   RippleColor get ripple;
 }
@@ -65,12 +68,14 @@ class FillColors {
   final Color secondary;
   final Color tertiary;
   final Color quaternary;
+  final Color opaque;
 
   FillColors({
     required this.primary,
     required this.secondary,
     required this.tertiary,
     required this.quaternary,
+    required this.opaque,
   });
 }
 
@@ -94,13 +99,17 @@ class OtherColors {
   final Color blue;
   final Color yellow;
   final Color orange;
+  final Color lime;
+  final Color purple;
 
   OtherColors({
     required this.red,
     required this.green,
     required this.blue,
     required this.yellow,
-    required this.orange
+    required this.orange,
+    required this.lime,
+    required this.purple,
   });
 }
 
@@ -124,9 +133,55 @@ class NonOpaque {
 
 class ServiceColors {
   final Color overlay;
+  final Color scrim;
+  final Color glass;
+  final Color onMedia;
+  final Color shadow;
+  final Color shimmerBase;
+  final Color shimmerHighlight;
+  final Color heroSurface;
+  final Color iconNeutral;
 
   ServiceColors({
     required this.overlay,
+    required this.scrim,
+    required this.glass,
+    required this.onMedia,
+    required this.shadow,
+    required this.shimmerBase,
+    required this.shimmerHighlight,
+    required this.heroSurface,
+    required this.iconNeutral,
+  });
+}
+
+class AccentColors {
+  final Color premium;
+  final Color premiumLight;
+  final Color premiumDark;
+  final Color premiumPlan;
+  final Color premiumPlanDark;
+  final Color premiumSurface;
+  final Color premiumGlow;
+  final Color gift;
+  final Color giftLime;
+  final Color giftSurface;
+  final Color aqiModerateLabel;
+  final Color aqiHazardous;
+
+  AccentColors({
+    required this.premium,
+    required this.premiumLight,
+    required this.premiumDark,
+    required this.premiumPlan,
+    required this.premiumPlanDark,
+    required this.premiumSurface,
+    required this.premiumGlow,
+    required this.gift,
+    required this.giftLime,
+    required this.giftSurface,
+    required this.aqiModerateLabel,
+    required this.aqiHazardous,
   });
 }
 

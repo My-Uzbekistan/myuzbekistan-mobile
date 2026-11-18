@@ -22,14 +22,12 @@ abstract class AddCardState with _$AddCardState {
   bool get isExternal => params is AddCardExternalParams;
 
   String? get cardExpire {
-    if (params is AddCardExternalParams) {
-      final param = params as AddCardExternalParams;
-      return param.expiry;
-    } else if (params is AddCardOwnParams) {
-      final param = params as AddCardOwnParams;
-      return param.expiry;
-    }
-    return null;
+    final expiry = switch (params) {
+      AddCardExternalParams(:final expiry) => expiry,
+      AddCardOwnParams(:final expiry) => expiry,
+      _ => null,
+    };
+    return expiry?.isNotEmpty == true ? expiry : null;
   }
 }
 
@@ -40,12 +38,12 @@ abstract class AddCardParams with _$AddCardParams {
   bool hasDataSuccess() {
     if (this is AddCardExternalParams) {
       final param = this as AddCardExternalParams;
-      return param.expiry.length >= 5 &&
+      return param.expiry.isValidCardExpiry &&
           param.cvv.length >= 3 &&
-          param.cardHolderName.length >= 4;
+          param.cardHolderName.trim().isNotEmpty;
     } else if (this is AddCardOwnParams) {
       final param = this as AddCardOwnParams;
-      return param.expiry.length >= 5 && param.phone.length >= 9;
+      return param.expiry.isValidCardExpiry;
     }
     return false;
   }
@@ -56,10 +54,8 @@ abstract class AddCardParams with _$AddCardParams {
     @Default("") String cardHolderName,
   }) = AddCardExternalParams;
 
-  const factory AddCardParams.ownParams({
-    @Default("") String expiry,
-    @Default("") String phone,
-  }) = AddCardOwnParams;
+  const factory AddCardParams.ownParams({@Default("") String expiry}) =
+      AddCardOwnParams;
 }
 
 @freezed

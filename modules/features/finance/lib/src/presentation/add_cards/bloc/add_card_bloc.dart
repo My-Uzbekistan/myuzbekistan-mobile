@@ -1,11 +1,9 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
-import 'package:finance/src/presentation/widgets/add_card/add_card_widget.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:shared/shared.dart';
 
 import '../../../service/FinanceSharedService.dart';
+import '../../../utils/expire_formatter.dart';
 
 part 'add_card_event.dart';
 
@@ -52,7 +50,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
         params: AddCardParams.externalParams(
           expiry: event.expire,
           cvv: event.cvv,
-          cardHolderName: event.holderName,
+          cardHolderName: event.cardHolderName,
         ),
       ),
     );
@@ -62,10 +60,7 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
     emitter(
       state.copyWith(
         cardBrand: state.cardBrand ?? event.cardBrand,
-        params: AddCardParams.ownParams(
-          expiry: event.expire,
-          phone: event.phoneNumber,
-        ),
+        params: AddCardParams.ownParams(expiry: event.expire),
       ),
     );
   }
@@ -116,14 +111,13 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
             AddCardEvent.setExternalParams(
               expire: "",
               cvv: "",
-              holderName: "",
+              cardHolderName: "",
               cardBrand: result.cardBrand,
             ),
           )
           : add(
             AddCardEvent.setOwnParams(
               expire: "",
-              phoneNumber: "",
               cardBrand: result.cardBrand,
             ),
           );
@@ -143,22 +137,18 @@ class AddCardBloc extends Bloc<AddCardEvent, AddCardState> {
     try {
       final expParts = state.params!.expiry.split("/");
       final formattedExpiry = "${expParts.last}${expParts.first}";
-      String phoneNumber = "";
-      String cardHolderName = "";
       String cvv = "";
-      if (state.params case AddCardOwnParams params) {
-        phoneNumber = params.phone;
-      } else if (state.params case AddCardExternalParams params) {
-        cardHolderName = params.cardHolderName;
+      String cardHolderName = "";
+      if (state.params case AddCardExternalParams params) {
         cvv = params.cvv;
+        cardHolderName = params.cardHolderName.trim();
       }
 
       final result = await _financeRepository.bindCard(
         pan: state.pan,
         expiry: formattedExpiry,
-        phoneNumber: phoneNumber,
-        cardHolderName: cardHolderName,
         cvv: cvv,
+        cardHolderName: cardHolderName,
         image: state.selectedImage,
       );
       if (state.isExternal == true) {

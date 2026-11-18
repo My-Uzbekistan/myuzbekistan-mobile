@@ -35,7 +35,7 @@ class CurrencyCell extends StatelessWidget {
             SizedBox(
               height: 24,
               width: 24,
-              child: ExtendedImage.network(currency.flag, fit: BoxFit.cover),
+              child: AppNetworkImage(currency.flag, fit: BoxFit.cover),
             ),
             Expanded(
               child: Column(

@@ -33,7 +33,11 @@ class ReviewAnalytics extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ReviewStars(stars: averageRating.round()), // yaxshiroq
+                    ReviewStars(
+                      stars: averageRating.round(),
+                      filled: true,
+                      selectedColor: context.appColors.colors.yellow,
+                    ),
                     Text(context.localization.reviewsCount(totalReviews)).bodySm(color: context.appColors.textIconColor.secondary),
                   ],
                 ),

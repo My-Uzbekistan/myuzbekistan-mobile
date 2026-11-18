@@ -12,7 +12,7 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get language => 'Ilova tili';
 
   @override
-  String get theme => 'Dizayn mavzusi';
+  String get theme => 'Ilova mavzusi';
 
   @override
   String lanItem(String lang) {
@@ -35,6 +35,12 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
     });
     return '$_temp0';
   }
+
+  @override
+  String get selectLanguageTitle => 'Interfeys tilini tanlang';
+
+  @override
+  String get welcomeTitle => 'Xush kelibsiz';
 
   @override
   String themeModes(String theme) {
@@ -146,7 +152,7 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get gasEmergency => 'Gaz xizmati';
 
   @override
-  String get emergencyContacts => 'Favqulodda kontaktlar';
+  String get emergencyContacts => 'Favqulodda vaziyat raqamlari';
 
   @override
   String get usefulTips => 'Foydali maslahatlar';
@@ -204,7 +210,10 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get biometric_auth => 'Biometrik kirish';
 
   @override
-  String get prayer_time_widget => 'Namoz vaqti vidjeti';
+  String get prayer_time_widget => 'Namoz vidjeti';
+
+  @override
+  String get iq_air_widget => 'IQAir vidjeti';
 
   @override
   String get about_app => 'Ilova haqida';
@@ -222,7 +231,7 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
   String get licenses => 'Litsenziyalar';
 
   @override
-  String get pin_code_create_title => 'Kirish ko\'zidini yaratish';
+  String get pin_code_create_title => 'Kirish ko\'didini yaratish';
 
   @override
   String get pin_code_repeat => 'Kodni takrorlang';
@@ -270,4 +279,207 @@ class FeatureMoreLocalizationsUz extends FeatureMoreLocalizations {
 
   @override
   String get authPrompt => 'Ilovaga kirish uchun autentifikatsiyadan o‘ting';
+
+  @override
+  String get auth_phone_page_title => 'Raqamingizni kiriting';
+
+  @override
+  String get auth_phone_page_hint => 'Telefon raqami';
+
+  @override
+  String get auth_phone_sms_hint => 'Sizga SMS-kod yuboramiz';
+
+  @override
+  String get auth_phone_invalid_format => 'Raqam formati noto‘g‘ri';
+
+  @override
+  String get action_continue => 'Davom etish';
+
+  @override
+  String get accept_terms =>
+      'Tugmani bosish orqali siz terms  rozilik bildirasiz';
+
+  @override
+  String get terms => 'Foydalanuvchi kelishuvi shartlariga';
+
+  @override
+  String get auth_page_action_phone => 'Telefon raqami orqali kirish';
+
+  @override
+  String get premium => 'Premium';
+
+  @override
+  String get premiumActiveSubtitle => 'Premium obuna faol';
+
+  @override
+  String get changePhotoTitle => 'Profil rasmi';
+
+  @override
+  String get takePhotoFromCamera => 'Kamera orqali suratga olish';
+
+  @override
+  String get chooseFromGallery => 'Galereyadan tanlash';
+
+  @override
+  String get photoUpdated => 'Profil rasmi yangilandi';
+
+  @override
+  String get photoUploadError =>
+      'Rasmni yuklab bo\'lmadi. Qayta urinib ko\'ring';
+
+  @override
+  String get premiumRequiredForPhoto =>
+      'Bu funksiya faqat Premium foydalanuvchilar uchun';
+
+  @override
+  String get upgrade => 'Yaxshilash';
+
+  @override
+  String get edit => 'Tahrirlash';
+
+  @override
+  String get security => 'Xavfsizlik';
+
+  @override
+  String get contactUs => 'Biz bilan bog\'lanish';
+
+  @override
+  String get save => 'Saqlash';
+
+  @override
+  String get firstName => 'Ism';
+
+  @override
+  String get lastName => 'Familiya';
+
+  @override
+  String get phoneNumber => 'Telefon raqami';
+
+  @override
+  String get registrationMethod => 'Ro\'yxatdan o\'tish usuli:';
+
+  @override
+  String get viaGoogle => 'Google orqali';
+
+  @override
+  String get scannerLogin => 'Skaner orqali kirish';
+
+  @override
+  String get scannerLoginPrompt =>
+      'Skaner orqali kirishni yoqish uchun tasdiqlang';
+
+  @override
+  String get biometricNotAvailable =>
+      'Qurilmangizda skaner orqali kirish mavjud emas';
+
+  @override
+  String get devices => 'Qurilmalar';
+
+  @override
+  String get thisDevice => 'Bu qurilma';
+
+  @override
+  String get activeSessions => 'Faol seanslar';
+
+  @override
+  String get terminateOtherSessions => 'Barcha boshqa seanslarni tugatish';
+
+  @override
+  String get terminateConfirmTitle => 'Buni tugatmoqchimisiz?';
+
+  @override
+  String get terminateOtherSessionsMessage =>
+      'Bu amal barcha boshqa qurilmalarning ishini tugatadi';
+
+  @override
+  String get terminateSessionMessage =>
+      'Bu qurilma ilovadan chiqarib yuboriladi';
+
+  @override
+  String get terminate => 'Tugatish';
+
+  @override
+  String get deviceOnline => 'online';
+
+  @override
+  String get unknownDevice => 'Noma\'lum qurilma';
+
+  @override
+  String get deviceOffline => 'Tarmoqda emas';
+
+  @override
+  String get deviceIpAddress => 'IP-manzil';
+
+  @override
+  String get deviceLocation => 'Joylashuv';
+
+  @override
+  String get signOutFromDevice => 'Qurilmadan chiqish';
+
+  @override
+  String get noActiveSessions => 'Boshqa faol seans yo\'q';
+
+  @override
+  String premiumActiveUntil(String date) {
+    return '$date gacha faol';
+  }
+
+  @override
+  String get premiumBuySubscription => 'Obunani xarid qiling';
+
+  @override
+  String get webViewExitTitle => 'Rostdan ham chiqib ketmoqchimisiz?';
+
+  @override
+  String get webViewExitMessage =>
+      'Sahifa yopiladi, kiritilgan ma\'lumotlar saqlanmaydi.';
+
+  @override
+  String get yes => 'Ha';
+
+  @override
+  String get nearbyPlaces => 'Yaqin atrofdagi joylar haqida xabar';
+
+  @override
+  String get nearbyPlacesDisclosureTitle => 'Yaqin atrofdagi qiziqarli joylar';
+
+  @override
+  String get nearbyPlacesDisclosureBody =>
+      'Shahar bo\'ylab sayr qilganingizda yoningizdagi muzey, restoran va diqqatga sazovor joylar haqida xabar beramiz. Buning uchun ilova yopiq bo\'lganda ham joylashuvingizdan foydalanamiz.';
+
+  @override
+  String get nearbyPlacesDisclosureDistance =>
+      'Joylashuv faqat yaqin atrofdagi joylarni topish uchun ishlatiladi';
+
+  @override
+  String get nearbyPlacesDisclosureLimit =>
+      'Kuniga 2 tadan ortiq xabar yubormaymiz, tunda bezovta qilmaymiz';
+
+  @override
+  String get nearbyPlacesDisclosureTurnOff =>
+      '«Ko‘proq» bo\'limida istalgan vaqtda o\'chirib qo\'yishingiz mumkin';
+
+  @override
+  String get nearbyPlacesDisclosureHint =>
+      'Ilova yopiq bo\'lganda ham ishlashi uchun joylashuvga «Har doim» ruxsati kerak bo\'ladi.';
+
+  @override
+  String get nearbyPlacesDisclosureContinue => 'Davom etish';
+
+  @override
+  String get nearbyPlacesDisclosureLater => 'Hozir emas';
+
+  @override
+  String get nearbyPlacesPermissionDenied =>
+      'Funksiya ishlashi uchun telefon sozlamalarida MyUzbekistan → Joylashuv bo\'limida «Har doim» ni tanlang.';
+
+  @override
+  String get nearbyPlacesTrackingTitle => 'Yaqin atrofdagi joylar';
+
+  @override
+  String get nearbyPlacesTrackingText =>
+      'Yoningizdagi qiziqarli joylar haqida xabar beramiz';
+
+  @override
+  String get pin_invalid => 'Noto‘g‘ri PIN-kod';
 }

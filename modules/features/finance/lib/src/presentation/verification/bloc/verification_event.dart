@@ -7,6 +7,8 @@ abstract class VerificationEvent with _$VerificationEvent {
 
   const factory VerificationEvent.setCardCardId(String cardId) =
       _VerificationSetCardIdEvent;
+  const factory VerificationEvent.setPhoneEvent(String phone) =
+      _VerificationSetPhoneEvent;
 
   const factory VerificationEvent.resendEvent() = _VerificationResendEvent;
 

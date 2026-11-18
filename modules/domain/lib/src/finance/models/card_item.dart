@@ -20,16 +20,18 @@ class CardItem {
     required this.icon,
     required this.ps,
     this.expiry,
-    this.image
+    this.image,
   });
 
-  String? get cardExpiry => expiry
-      ?.replaceAllMapped(RegExp(r'.{2}'), (match) {
-    if (match.end == expiry?.length) {
-      return match.group(0)!;
+  static const _expiryLength = 4;
+
+  String? get cardExpiry {
+    final value = expiry;
+    if (value == null || value.length != _expiryLength) {
+      return value;
     }
-    return "${match.group(0)}/";
-  });
+    return "${value.substring(2)}/${value.substring(0, 2)}";
+  }
   String? get maskedNumber =>
       cardNumber
           ?.replaceAll('*', '•')
@@ -41,6 +43,11 @@ class CardItem {
   //     .replaceAll('*', '•')
   //     // .replaceAllMapped(RegExp(r'.{4}'), (match) => '${match.group(0)} ')
   //     .trim();
+
+  String? get shortMaskedNumber {
+    final lastDigits = cardNumber?.takeLast(4);
+    return lastDigits.isNullOrEmpty ? null : "****$lastDigits";
+  }
 
   String get cardTitle => maskedNumber.orEmpty();
   // "${ps.orEmpty().capitalize()} ${maskedNumber.orEmpty()}";

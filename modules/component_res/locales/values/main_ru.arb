@@ -6,8 +6,9 @@
   "action_close": "Закрыть",
   "action_done": "Готово",
   "action_edit": "Изменить",
-  "action_more": "Подробнее"
-
-
-
+  "action_more": "Подробнее",
+  "no_internet": "Нет подключения к интернету. Проверьте соединение и попробуйте ещё раз",
+  "no_internet_title": "Нет интернета",
+  "action_retry": "Повторить",
+  "action_open_settings": "Перейти в настройки"
 }

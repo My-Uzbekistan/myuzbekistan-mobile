@@ -17,16 +17,46 @@ class FeatureFinanceNavExtension {
     );
   }
 
+  Future<T?> pushAuthVerification<T>({required String phone, Object? extra}) {
+    return _context.pushType<T>(
+      AppNavPath.more.authVerification,
+      queryParameters: {"phone": phone.toString()},
+      extra: extra,
+    );
+  }
+
   void pushMerchantPage({
     required String id,
     String? amount,
+    String? orderId,
     Completer<bool>? extra,
   }) {
     _context.pushType(
       AppNavPath.finance.financePayment,
       pathParameters: {"id": id},
-      queryParameters: amount != null ? {"amount": amount} : {},
+      queryParameters: {
+        if (amount != null) "amount": amount,
+        if (orderId != null) "orderId": orderId,
+      },
       extra: extra,
+    );
+  }
+
+  Future<T?> pushMarketOrderPayment<T>({
+    required String merchantId,
+    required MarketCheckoutPayment payment,
+  }) {
+    return _context.pushType<T>(
+      AppNavPath.finance.financePayment,
+      pathParameters: {"id": merchantId},
+      extra: payment,
+    );
+  }
+
+  void pushPaymentTransactionDetail({required String paymentId}) {
+    _context.pushType(
+      AppNavPath.finance.paymentTransactionDetailPage,
+      pathParameters: {"paymentId": paymentId},
     );
   }
 

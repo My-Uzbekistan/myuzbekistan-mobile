@@ -1,149 +1,99 @@
 import 'package:component_res/component_res.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:go_router/go_router.dart';
+import 'package:more/more.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
-import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
+import 'package:travel/travel.dart';
+import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/app_bottom_nav_bar.dart';
+import 'package:uzbekistan_travel/presentaion/shell_wrapper/widgets/nav_tab_data.dart';
+import 'package:uzbekistan_travel/upgrader/upgrader_global.dart';
 
-class ShellPageWrapper extends StatefulWidget {
+bool _listeningNotifications = false;
+
+class ShellPageWrapper extends HookWidget {
+  const ShellPageWrapper({
+    super.key,
+    required this.navigationShell,
+    required this.tabsBuilder,
+    this.navBarKind = NavBarKind.auto,
+    this.showNavBarFade = true,
+    this.extendBody = true,
+  });
+
   final StatefulNavigationShell navigationShell;
+  final NavTabsBuilder tabsBuilder;
+  final NavBarKind navBarKind;
+  final bool showNavBarFade;
+  final bool extendBody;
 
-  const ShellPageWrapper({super.key, required this.navigationShell});
-
-  @override
-  State<ShellPageWrapper> createState() => _ShellPageWrapperState();
-}
-
-class _ShellPageWrapperState extends State<ShellPageWrapper> {
   void _goBranch(int index) {
-    widget.navigationShell.goBranch(
+    navigationShell.goBranch(
       index,
-      initialLocation: index == widget.navigationShell.currentIndex,
+      initialLocation: index == navigationShell.currentIndex,
     );
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    WidgetsFlutterBinding.ensureInitialized().addPostFrameCallback((t) {
-      NotificationService().listenNotification(
-          logRemoteMessage: (remoteMessage) {
-        openNotification(remoteMessage);
-      });
-    });
-    super.initState();
-  }
-
-  void openNotification(RemoteMessage message) {
-    try {
-      final String? deeplink = message.data["deeplink"];
-      if (deeplink != null && deeplink.isNotEmpty) {
-        final uri = Uri.parse(deeplink);
-        if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty) {
-          appRootNavigatorKey.currentContext?.push(uri.toString());
-        }
-      }
-    } catch (_) {}
+  void _onTabSelected(List<NavTabData> tabs, int index) {
+    final tab = tabs[index];
+    final onTap = tab.onTap;
+    if (onTap != null) {
+      onTap();
+      return;
+    }
+    final branchIndex = tab.branchIndex;
+    if (branchIndex != null) _goBranch(branchIndex);
   }
 
   @override
   Widget build(BuildContext context) {
-    // useAutomaticKeepAlive(wantKeepAlive: true);
-    return Scaffold(
-        resizeToAvoidBottomInset: true,
-        extendBody: true,
-        body: widget.navigationShell,
-        bottomNavigationBar: CustomNavigationBar(
-          centerDotted: true,
-          currentIndex: widget.navigationShell.currentIndex,
-          onTap: (index) => _goBranch(index),
-          onTapCenterDotted: () {
-            context.finance.pushQrCoderReaderPage();
-          },
-          items: [
-            CustomTabItem(
-              label: context.localizations!.nav_home,
-              icon: Assets.svgTabIconHome.toSvgImage(height: 24, width: 24),
-            ),
-            CustomTabItem(
-              label: context.localizations!.nav_payment,
-              icon: Assets.svgTabIconFinance.toSvgImage(height: 24, width: 24),
-            ),
-            CustomTabItem(
-              label: context.localizations!.nav_services,
-              icon: Assets.svgTabIconCatalog.toSvgImage(height: 24, width: 24),
-            ),
-            CustomTabItem(
-              label: context.localizations!.nav_more,
-              icon: Assets.svgTabIconMore.toSvgImage(height: 24, width: 24),
-            )
-          ],
-        ));
-  }
+    final aiGuideCubit = context.read<AiGuideCubit>();
+    useEffect(() {
+      aiGuideCubit.loadAiGuideLink();
+      return null;
+    }, [Localizations.localeOf(context)]);
 
-  List<BottomNavigationBarItem> bottomNavigationBarItems({
-    required BuildContext context,
-    required Color selectedTabColor,
-    required Color unselectedIconColor,
-  }) {
-    final selectedTabColorFilter =
-        ColorFilter.mode(selectedTabColor, BlendMode.srcIn);
-    final unselectedTabColorFilter =
-        ColorFilter.mode(unselectedIconColor, BlendMode.srcIn);
-    return [
-      BottomNavigationBarItem(
-        icon: Assets.svgTabIconHome.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconHome.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: selectedTabColorFilter),
-        label: context.localizations?.nav_home,
+    useEffect(() {
+      if (_listeningNotifications) return null;
+      _listeningNotifications = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        NotificationService().listenNotification(
+          onOpened: _openNotificationDeeplink,
+        );
+      });
+      return null;
+    }, const []);
+
+    useEffect(() {
+      askNearbyPlacesOnLaunch(context);
+      return null;
+    }, const []);
+
+    return MyUpgradeAlert(
+      child: Scaffold(
+        backgroundColor: context.appColors.background.underlayer,
+        extendBody: extendBody,
+        body: navigationShell,
+        bottomNavigationBar: Builder(
+          builder: (context) {
+            final tabs = tabsBuilder(context);
+            return AppBottomNavBar(
+              tabs: tabs,
+              selectedIndex: tabs.indexWhere(
+                (tab) => tab.branchIndex == navigationShell.currentIndex,
+              ),
+              onTabSelected: (index) => _onTabSelected(tabs, index),
+              kind: navBarKind,
+              showFade: showNavBarFade,
+            );
+          },
+        ),
       ),
-      BottomNavigationBarItem(
-        icon: Assets.svgTabIconFinance.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconFinance.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: selectedTabColorFilter),
-        label: context.localizations?.nav_payment,
-      ),
-      BottomNavigationBarItem(
-        icon: Assets.svgTabIconCatalog.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconCatalog.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: selectedTabColorFilter),
-        label: context.localizations?.nav_services,
-      ),
-      BottomNavigationBarItem(
-        icon: Assets.svgTabIconMore.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: unselectedTabColorFilter),
-        activeIcon: Assets.svgTabIconMore.toSvgImage(
-            height: 24,
-            width: 24,
-            fit: BoxFit.contain,
-            colorFilter: selectedTabColorFilter),
-        label: context.localizations?.nav_more,
-      ),
-    ];
+    );
   }
+}
+
+void _openNotificationDeeplink(RemoteMessage message) {
+  final deeplink = message.data["deeplink"];
+  if (deeplink is! String) return;
+  AppLinkRouter.openPlatformLink(deeplink);
 }

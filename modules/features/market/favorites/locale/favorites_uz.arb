@@ -1,0 +1,9 @@
+{
+  "favorites_title": "Saralangan",
+  "favorites_empty": "Saralanganlar bo'sh",
+  "favorites_empty_message": "Yoqqan mahsulotlarni yurakcha bilan belgilang — ular shu yerda to'planadi",
+  "favorites_currency_som": "so'm",
+  "favorites_page_failed_to_load": "Sahifa yuklanmadi",
+  "favorites_something_went_wrong": "Nimadir xato ketdi. Iltimos, qayta urinib ko'ring.",
+  "favorites_refresh": "Yangilash"
+}

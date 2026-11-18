@@ -1,0 +1,588 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'auth_phone_bloc.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+// dart format off
+T _$identity<T>(T value) => value;
+/// @nodoc
+mixin _$AuthPhoneEvent {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthPhoneEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthPhoneEvent()';
+}
+
+
+}
+
+/// @nodoc
+class $AuthPhoneEventCopyWith<$Res>  {
+$AuthPhoneEventCopyWith(AuthPhoneEvent _, $Res Function(AuthPhoneEvent) __);
+}
+
+
+/// Adds pattern-matching-related methods to [AuthPhoneEvent].
+extension AuthPhoneEventPatterns on AuthPhoneEvent {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _AuthPhoneSetEvent value)?  setPhone,TResult Function( _AuthPhoneSendEvent value)?  sendEvent,TResult Function( _AuthPushedConfirmEvent value)?  pushedConfirm,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AuthPhoneSetEvent() when setPhone != null:
+return setPhone(_that);case _AuthPhoneSendEvent() when sendEvent != null:
+return sendEvent(_that);case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _AuthPhoneSetEvent value)  setPhone,required TResult Function( _AuthPhoneSendEvent value)  sendEvent,required TResult Function( _AuthPushedConfirmEvent value)  pushedConfirm,}){
+final _that = this;
+switch (_that) {
+case _AuthPhoneSetEvent():
+return setPhone(_that);case _AuthPhoneSendEvent():
+return sendEvent(_that);case _AuthPushedConfirmEvent():
+return pushedConfirm(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _AuthPhoneSetEvent value)?  setPhone,TResult? Function( _AuthPhoneSendEvent value)?  sendEvent,TResult? Function( _AuthPushedConfirmEvent value)?  pushedConfirm,}){
+final _that = this;
+switch (_that) {
+case _AuthPhoneSetEvent() when setPhone != null:
+return setPhone(_that);case _AuthPhoneSendEvent() when sendEvent != null:
+return sendEvent(_that);case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String phoneNumber)?  setPhone,TResult Function()?  sendEvent,TResult Function()?  pushedConfirm,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AuthPhoneSetEvent() when setPhone != null:
+return setPhone(_that.phoneNumber);case _AuthPhoneSendEvent() when sendEvent != null:
+return sendEvent();case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm();case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String phoneNumber)  setPhone,required TResult Function()  sendEvent,required TResult Function()  pushedConfirm,}) {final _that = this;
+switch (_that) {
+case _AuthPhoneSetEvent():
+return setPhone(_that.phoneNumber);case _AuthPhoneSendEvent():
+return sendEvent();case _AuthPushedConfirmEvent():
+return pushedConfirm();case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String phoneNumber)?  setPhone,TResult? Function()?  sendEvent,TResult? Function()?  pushedConfirm,}) {final _that = this;
+switch (_that) {
+case _AuthPhoneSetEvent() when setPhone != null:
+return setPhone(_that.phoneNumber);case _AuthPhoneSendEvent() when sendEvent != null:
+return sendEvent();case _AuthPushedConfirmEvent() when pushedConfirm != null:
+return pushedConfirm();case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _AuthPhoneSetEvent implements AuthPhoneEvent {
+  const _AuthPhoneSetEvent({this.phoneNumber = ""});
+  
+
+@JsonKey() final  String phoneNumber;
+
+/// Create a copy of AuthPhoneEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AuthPhoneSetEventCopyWith<_AuthPhoneSetEvent> get copyWith => __$AuthPhoneSetEventCopyWithImpl<_AuthPhoneSetEvent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPhoneSetEvent&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,phoneNumber);
+
+@override
+String toString() {
+  return 'AuthPhoneEvent.setPhone(phoneNumber: $phoneNumber)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AuthPhoneSetEventCopyWith<$Res> implements $AuthPhoneEventCopyWith<$Res> {
+  factory _$AuthPhoneSetEventCopyWith(_AuthPhoneSetEvent value, $Res Function(_AuthPhoneSetEvent) _then) = __$AuthPhoneSetEventCopyWithImpl;
+@useResult
+$Res call({
+ String phoneNumber
+});
+
+
+
+
+}
+/// @nodoc
+class __$AuthPhoneSetEventCopyWithImpl<$Res>
+    implements _$AuthPhoneSetEventCopyWith<$Res> {
+  __$AuthPhoneSetEventCopyWithImpl(this._self, this._then);
+
+  final _AuthPhoneSetEvent _self;
+  final $Res Function(_AuthPhoneSetEvent) _then;
+
+/// Create a copy of AuthPhoneEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,}) {
+  return _then(_AuthPhoneSetEvent(
+phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _AuthPhoneSendEvent implements AuthPhoneEvent {
+  const _AuthPhoneSendEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPhoneSendEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthPhoneEvent.sendEvent()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _AuthPushedConfirmEvent implements AuthPhoneEvent {
+  const _AuthPushedConfirmEvent();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPushedConfirmEvent);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthPhoneEvent.pushedConfirm()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+mixin _$AuthPhoneState {
+
+ String get phoneNumber; dynamic get isLoading; String get error; dynamic get codeSend; String? get errorMessage; bool get isOffline;
+/// Create a copy of AuthPhoneState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$AuthPhoneStateCopyWith<AuthPhoneState> get copyWith => _$AuthPhoneStateCopyWithImpl<AuthPhoneState>(this as AuthPhoneState, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isOffline, isOffline) || other.isOffline == isOffline));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend),errorMessage,isOffline);
+
+@override
+String toString() {
+  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend, errorMessage: $errorMessage, isOffline: $isOffline)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $AuthPhoneStateCopyWith<$Res>  {
+  factory $AuthPhoneStateCopyWith(AuthPhoneState value, $Res Function(AuthPhoneState) _then) = _$AuthPhoneStateCopyWithImpl;
+@useResult
+$Res call({
+ String phoneNumber, dynamic isLoading, String error, dynamic codeSend, String? errorMessage, bool isOffline
+});
+
+
+
+
+}
+/// @nodoc
+class _$AuthPhoneStateCopyWithImpl<$Res>
+    implements $AuthPhoneStateCopyWith<$Res> {
+  _$AuthPhoneStateCopyWithImpl(this._self, this._then);
+
+  final AuthPhoneState _self;
+  final $Res Function(AuthPhoneState) _then;
+
+/// Create a copy of AuthPhoneState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,Object? errorMessage = freezed,Object? isOffline = null,}) {
+  return _then(_self.copyWith(
+phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as dynamic,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,codeSend: freezed == codeSend ? _self.codeSend : codeSend // ignore: cast_nullable_to_non_nullable
+as dynamic,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isOffline: null == isOffline ? _self.isOffline : isOffline // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [AuthPhoneState].
+extension AuthPhoneStatePatterns on AuthPhoneState {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _AuthPhoneState value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _AuthPhoneState() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _AuthPhoneState value)  $default,){
+final _that = this;
+switch (_that) {
+case _AuthPhoneState():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _AuthPhoneState value)?  $default,){
+final _that = this;
+switch (_that) {
+case _AuthPhoneState() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend,  String? errorMessage,  bool isOffline)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _AuthPhoneState() when $default != null:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend,_that.errorMessage,_that.isOffline);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend,  String? errorMessage,  bool isOffline)  $default,) {final _that = this;
+switch (_that) {
+case _AuthPhoneState():
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend,_that.errorMessage,_that.isOffline);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String phoneNumber,  dynamic isLoading,  String error,  dynamic codeSend,  String? errorMessage,  bool isOffline)?  $default,) {final _that = this;
+switch (_that) {
+case _AuthPhoneState() when $default != null:
+return $default(_that.phoneNumber,_that.isLoading,_that.error,_that.codeSend,_that.errorMessage,_that.isOffline);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class _AuthPhoneState extends AuthPhoneState {
+  const _AuthPhoneState({this.phoneNumber = "", this.isLoading = false, this.error = "", this.codeSend = false, this.errorMessage, this.isOffline = false}): super._();
+  
+
+@override@JsonKey() final  String phoneNumber;
+@override@JsonKey() final  dynamic isLoading;
+@override@JsonKey() final  String error;
+@override@JsonKey() final  dynamic codeSend;
+@override final  String? errorMessage;
+@override@JsonKey() final  bool isOffline;
+
+/// Create a copy of AuthPhoneState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$AuthPhoneStateCopyWith<_AuthPhoneState> get copyWith => __$AuthPhoneStateCopyWithImpl<_AuthPhoneState>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AuthPhoneState&&(identical(other.phoneNumber, phoneNumber) || other.phoneNumber == phoneNumber)&&const DeepCollectionEquality().equals(other.isLoading, isLoading)&&(identical(other.error, error) || other.error == error)&&const DeepCollectionEquality().equals(other.codeSend, codeSend)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isOffline, isOffline) || other.isOffline == isOffline));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,phoneNumber,const DeepCollectionEquality().hash(isLoading),error,const DeepCollectionEquality().hash(codeSend),errorMessage,isOffline);
+
+@override
+String toString() {
+  return 'AuthPhoneState(phoneNumber: $phoneNumber, isLoading: $isLoading, error: $error, codeSend: $codeSend, errorMessage: $errorMessage, isOffline: $isOffline)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$AuthPhoneStateCopyWith<$Res> implements $AuthPhoneStateCopyWith<$Res> {
+  factory _$AuthPhoneStateCopyWith(_AuthPhoneState value, $Res Function(_AuthPhoneState) _then) = __$AuthPhoneStateCopyWithImpl;
+@override @useResult
+$Res call({
+ String phoneNumber, dynamic isLoading, String error, dynamic codeSend, String? errorMessage, bool isOffline
+});
+
+
+
+
+}
+/// @nodoc
+class __$AuthPhoneStateCopyWithImpl<$Res>
+    implements _$AuthPhoneStateCopyWith<$Res> {
+  __$AuthPhoneStateCopyWithImpl(this._self, this._then);
+
+  final _AuthPhoneState _self;
+  final $Res Function(_AuthPhoneState) _then;
+
+/// Create a copy of AuthPhoneState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? phoneNumber = null,Object? isLoading = freezed,Object? error = null,Object? codeSend = freezed,Object? errorMessage = freezed,Object? isOffline = null,}) {
+  return _then(_AuthPhoneState(
+phoneNumber: null == phoneNumber ? _self.phoneNumber : phoneNumber // ignore: cast_nullable_to_non_nullable
+as String,isLoading: freezed == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as dynamic,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,codeSend: freezed == codeSend ? _self.codeSend : codeSend // ignore: cast_nullable_to_non_nullable
+as dynamic,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isOffline: null == isOffline ? _self.isOffline : isOffline // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+// dart format on

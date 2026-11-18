@@ -6,5 +6,9 @@
   "action_close": "Close",
   "action_done": "Done",
   "action_edit": "Edit",
-  "action_more": "Read more"
+  "action_more": "Read more",
+  "no_internet": "No internet connection. Check your connection and try again",
+  "no_internet_title": "No internet",
+  "action_retry": "Retry",
+  "action_open_settings": "Open settings"
 }

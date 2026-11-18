@@ -31,7 +31,7 @@ class SelectRegionPage extends HookWidget {
             onPressed: () {
               context.pop();
             },
-            icon: Assets.svgRoundedCloseIcon.toSvgImage(
+            icon: Assets.svg.roundedCloseIcon.path.toSvgImage(
               colorFilter: ColorFilter.mode(
                 context.appColors.textIconColor.tertiary,
                 BlendMode.srcIn,
@@ -51,10 +51,8 @@ class SelectRegionPage extends HookWidget {
             return SettingsCell(
               text: region.name ?? "",
               onTap: () {
-                if (selectedId.value != region.id) {
                   selectedId.value = region.id;
-                  context.pop(region.id);
-                }
+                  context.pop(region);
               },
               trailing: AppCheck(isChecked: selectedId.value == region.id),
             );

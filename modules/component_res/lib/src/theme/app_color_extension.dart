@@ -1,7 +1,9 @@
 part of 'app_color_theme.dart';
 
-class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
+class AppColorsExtension extends ThemeExtension<AppColorsExtension> {
   final Color brand;
+  final Color brandFlamingo;
+  final Color brandSeaBlue;
   final LabelColor textIconColor;
   final BackgroundColors background;
   final FillColors fill;
@@ -10,10 +12,12 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
   final OtherColors colors;
   final NonOpaque nonOpaque;
   final ServiceColors service;
+  final AccentColors accent;
   final RippleColor rippleColor;
 
-  _AppColorsExtension({
+  AppColorsExtension({
     required this.brand,
+    required this.brandFlamingo,
     required this.textIconColor,
     required this.background,
     required this.fill,
@@ -22,33 +26,172 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
     required this.colors,
     required this.nonOpaque,
     required this.service,
+    required this.accent,
     required this.rippleColor,
+    required this.brandSeaBlue,
   });
 
   @override
-  ThemeExtension<_AppColorsExtension> lerp(
-      covariant ThemeExtension<_AppColorsExtension>? other, double t) {
-    if (other is! _AppColorsExtension) {
+  ThemeExtension<AppColorsExtension> lerp(
+      covariant ThemeExtension<AppColorsExtension>? other, double t) {
+    if (other is! AppColorsExtension) {
       return this;
     }
-    return _AppColorsExtension(
-      brand: other.brand,
-      textIconColor: other.textIconColor,
-      background: other.background,
-      fill: other.fill,
-      stroke: other.stroke,
-      static: other.static,
-      colors: other.colors,
-      nonOpaque: other.nonOpaque,
-      service: other.service,
-      rippleColor: other.rippleColor,
+    return AppColorsExtension(
+      brand: Color.lerp(brand, other.brand, t) ?? other.brand,
+      brandFlamingo: Color.lerp(brandFlamingo, other.brandFlamingo, t) ??
+          other.brandFlamingo,
+      textIconColor: _lerpLabelColor(textIconColor, other.textIconColor, t),
+      background: _lerpBackgroundColors(background, other.background, t),
+      fill: _lerpFillColors(fill, other.fill, t),
+      stroke: _lerpStrokeColors(stroke, other.stroke, t),
+      static: _lerpStaticColors(static, other.static, t),
+      colors: _lerpOtherColors(colors, other.colors, t),
+      nonOpaque: _lerpNonOpaque(nonOpaque, other.nonOpaque, t),
+      service: _lerpServiceColors(service, other.service, t),
+      accent: _lerpAccentColors(accent, other.accent, t),
+      rippleColor: _lerpRippleColor(rippleColor, other.rippleColor, t),
+      brandSeaBlue: Color.lerp(brandSeaBlue, other.brandSeaBlue, t) ?? other.brandSeaBlue,
+    );
+  }
+
+  static LabelColor _lerpLabelColor(LabelColor a, LabelColor b, double t) {
+    return LabelColor(
+      primary: Color.lerp(a.primary, b.primary, t) ?? b.primary,
+      secondary: Color.lerp(a.secondary, b.secondary, t) ?? b.secondary,
+      tertiary: Color.lerp(a.tertiary, b.tertiary, t) ?? b.tertiary,
+      disable: Color.lerp(a.disable, b.disable, t) ?? b.disable,
+      oposite: Color.lerp(a.oposite, b.oposite, t) ?? b.oposite,
+    );
+  }
+
+  static BackgroundColors _lerpBackgroundColors(
+    BackgroundColors a,
+    BackgroundColors b,
+    double t,
+  ) {
+    return BackgroundColors(
+      base: Color.lerp(a.base, b.base, t) ?? b.base,
+      underlayer: Color.lerp(a.underlayer, b.underlayer, t) ?? b.underlayer,
+      elevation1: Color.lerp(a.elevation1, b.elevation1, t) ?? b.elevation1,
+      elevation1Alt:
+          Color.lerp(a.elevation1Alt, b.elevation1Alt, t) ?? b.elevation1Alt,
+      elevation2: Color.lerp(a.elevation2, b.elevation2, t) ?? b.elevation2,
+      elevation2Alt:
+          Color.lerp(a.elevation2Alt, b.elevation2Alt, t) ?? b.elevation2Alt,
+      elevation3: Color.lerp(a.elevation3, b.elevation3, t) ?? b.elevation3,
+    );
+  }
+
+  static FillColors _lerpFillColors(FillColors a, FillColors b, double t) {
+    return FillColors(
+      primary: Color.lerp(a.primary, b.primary, t) ?? b.primary,
+      secondary: Color.lerp(a.secondary, b.secondary, t) ?? b.secondary,
+      tertiary: Color.lerp(a.tertiary, b.tertiary, t) ?? b.tertiary,
+      quaternary: Color.lerp(a.quaternary, b.quaternary, t) ?? b.quaternary,
+      opaque: Color.lerp(a.opaque, b.opaque, t) ?? b.opaque,
+    );
+  }
+
+  static StrokeColors _lerpStrokeColors(
+    StrokeColors a,
+    StrokeColors b,
+    double t,
+  ) {
+    return StrokeColors(
+      nonOpaque: Color.lerp(a.nonOpaque, b.nonOpaque, t) ?? b.nonOpaque,
+      opaque: Color.lerp(a.opaque, b.opaque, t) ?? b.opaque,
+    );
+  }
+
+  static StaticColors _lerpStaticColors(
+      StaticColors a, StaticColors b, double t) {
+    return StaticColors(
+      black: Color.lerp(a.black, b.black, t) ?? b.black,
+      white: Color.lerp(a.white, b.white, t) ?? b.white,
+    );
+  }
+
+  static OtherColors _lerpOtherColors(OtherColors a, OtherColors b, double t) {
+    return OtherColors(
+      red: Color.lerp(a.red, b.red, t) ?? b.red,
+      green: Color.lerp(a.green, b.green, t) ?? b.green,
+      blue: Color.lerp(a.blue, b.blue, t) ?? b.blue,
+      yellow: Color.lerp(a.yellow, b.yellow, t) ?? b.yellow,
+      orange: Color.lerp(a.orange, b.orange, t) ?? b.orange,
+      lime: Color.lerp(a.lime, b.lime, t) ?? b.lime,
+      purple: Color.lerp(a.purple, b.purple, t) ?? b.purple,
+    );
+  }
+
+  static NonOpaque _lerpNonOpaque(NonOpaque a, NonOpaque b, double t) {
+    return NonOpaque(
+      red: Color.lerp(a.red, b.red, t) ?? b.red,
+      green: Color.lerp(a.green, b.green, t) ?? b.green,
+      blue: Color.lerp(a.blue, b.blue, t) ?? b.blue,
+      yellow: Color.lerp(a.yellow, b.yellow, t) ?? b.yellow,
+      brand: Color.lerp(a.brand, b.brand, t) ?? b.brand,
+    );
+  }
+
+  static ServiceColors _lerpServiceColors(
+      ServiceColors a, ServiceColors b, double t) {
+    return ServiceColors(
+      overlay: Color.lerp(a.overlay, b.overlay, t) ?? b.overlay,
+      scrim: Color.lerp(a.scrim, b.scrim, t) ?? b.scrim,
+      glass: Color.lerp(a.glass, b.glass, t) ?? b.glass,
+      onMedia: Color.lerp(a.onMedia, b.onMedia, t) ?? b.onMedia,
+      shadow: Color.lerp(a.shadow, b.shadow, t) ?? b.shadow,
+      shimmerBase:
+          Color.lerp(a.shimmerBase, b.shimmerBase, t) ?? b.shimmerBase,
+      shimmerHighlight: Color.lerp(a.shimmerHighlight, b.shimmerHighlight, t) ??
+          b.shimmerHighlight,
+      heroSurface:
+          Color.lerp(a.heroSurface, b.heroSurface, t) ?? b.heroSurface,
+      iconNeutral:
+          Color.lerp(a.iconNeutral, b.iconNeutral, t) ?? b.iconNeutral,
+    );
+  }
+
+  static AccentColors _lerpAccentColors(
+      AccentColors a, AccentColors b, double t) {
+    return AccentColors(
+      premium: Color.lerp(a.premium, b.premium, t) ?? b.premium,
+      premiumLight:
+          Color.lerp(a.premiumLight, b.premiumLight, t) ?? b.premiumLight,
+      premiumDark:
+          Color.lerp(a.premiumDark, b.premiumDark, t) ?? b.premiumDark,
+      premiumPlan:
+          Color.lerp(a.premiumPlan, b.premiumPlan, t) ?? b.premiumPlan,
+      premiumPlanDark: Color.lerp(a.premiumPlanDark, b.premiumPlanDark, t) ??
+          b.premiumPlanDark,
+      premiumSurface:
+          Color.lerp(a.premiumSurface, b.premiumSurface, t) ?? b.premiumSurface,
+      premiumGlow: Color.lerp(a.premiumGlow, b.premiumGlow, t) ?? b.premiumGlow,
+      gift: Color.lerp(a.gift, b.gift, t) ?? b.gift,
+      giftLime: Color.lerp(a.giftLime, b.giftLime, t) ?? b.giftLime,
+      giftSurface:
+          Color.lerp(a.giftSurface, b.giftSurface, t) ?? b.giftSurface,
+      aqiModerateLabel:
+          Color.lerp(a.aqiModerateLabel, b.aqiModerateLabel, t) ??
+              b.aqiModerateLabel,
+      aqiHazardous:
+          Color.lerp(a.aqiHazardous, b.aqiHazardous, t) ?? b.aqiHazardous,
+    );
+  }
+
+  static RippleColor _lerpRippleColor(RippleColor a, RippleColor b, double t) {
+    return RippleColor(
+      ripple: Color.lerp(a.ripple, b.ripple, t) ?? b.ripple,
     );
   }
 
   @override
-  ThemeExtension<_AppColorsExtension> copyWith(
+  ThemeExtension<AppColorsExtension> copyWith(
       {LabelColor? textIconColor,
       Color? brand,
+      Color? brandSeaBlue,
+      Color? brandFlamingo,
       BackgroundColors? background,
       FillColors? fill,
       StrokeColors? stroke,
@@ -56,9 +199,11 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
       OtherColors? colors,
       NonOpaque? nonOpaque,
       ServiceColors? service,
+      AccentColors? accent,
       RippleColor? ripple}) {
-    return _AppColorsExtension(
+    return AppColorsExtension(
       brand: brand ?? this.brand,
+      brandFlamingo: brandFlamingo ?? this.brandFlamingo,
       textIconColor: textIconColor ?? this.textIconColor,
       background: background ?? this.background,
       fill: fill ?? this.fill,
@@ -67,18 +212,19 @@ class _AppColorsExtension extends ThemeExtension<_AppColorsExtension> {
       colors: colors ?? this.colors,
       nonOpaque: nonOpaque ?? this.nonOpaque,
       service: service ?? this.service,
-      rippleColor: ripple ?? rippleColor,
+      accent: accent ?? this.accent,
+      rippleColor: ripple ?? rippleColor, brandSeaBlue:  brandSeaBlue ?? this.brandSeaBlue,
     );
   }
 }
 
 extension CustomThemeData on ThemeData {
-  _AppColorsExtension get appColors =>
-      extensions[_AppColorsExtension] as _AppColorsExtension;
+  AppColorsExtension get appColors =>
+      extensions[AppColorsExtension] as AppColorsExtension;
 }
 
 extension ContextEx on BuildContext {
-  _AppColorsExtension get appColors => Theme.of(this).appColors;
+  AppColorsExtension get appColors => Theme.of(this).appColors;
 
   SystemUiOverlayStyle get systemUiOverlyStyle => systemOverlyStyle();
 
@@ -95,7 +241,7 @@ extension ContextEx on BuildContext {
           brightness == Brightness.light ? Brightness.dark : Brightness.light,
       systemNavigationBarIconBrightness:
           brightness == Brightness.light ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: appColors.background.base,
+      systemNavigationBarColor: Colors.transparent,
     );
   }
 }

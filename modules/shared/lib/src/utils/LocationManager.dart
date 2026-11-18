@@ -1,11 +1,6 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class LocationManager {
-  // Singleton (agar global foydalanilsa)
   static final LocationManager _instance = LocationManager._internal();
 
   factory LocationManager() => _instance;
@@ -14,13 +9,6 @@ class LocationManager {
 
   Position? _currentLocation;
 
-  /// Location permission so‘rash
-  Future<bool> _requestPermissions() async {
-    final status = await Permission.location.request();
-    return status.isGranted;
-  }
-
-  /// Location xizmatlari yoqilganligini tekshirish
   Future<bool> _isLocationServiceEnabled() async {
     return await Geolocator.isLocationServiceEnabled();
   }
@@ -29,9 +17,7 @@ class LocationManager {
     return _currentLocation;
   }
 
-  /// Permission va servislar tekshirilib, hozirgi joylashuvni olish
   Future<Position?> getCurrentLocation() async {
-    // Permissionlar
     final serviceEnabled = await _isLocationServiceEnabled();
     if (!serviceEnabled) {
       return null;
@@ -46,16 +32,57 @@ class LocationManager {
     if (lastKnown != null) {
       final duration = DateTime.now().difference(lastKnown.timestamp);
       if (duration.inMinutes < 30) {
-        _currentLocation=lastKnown;
+        _currentLocation = lastKnown;
       }
     }
 
-    if(getCurrentPosition()==null) {
-      _currentLocation = await Geolocator.getCurrentPosition(
-          locationSettings: LocationSettings(accuracy: LocationAccuracy.high));
+    if (getCurrentPosition() == null) {
+      try {
+        _currentLocation = await Geolocator.getCurrentPosition(
+            locationSettings: LocationSettings(
+                accuracy: LocationAccuracy.high,
+                timeLimit: const Duration(seconds: 10)));
+      } catch (_) {
+        return null;
+      }
     }
 
     return Future.value(_currentLocation);
+  }
+
+  Future<Position?> getPositionSilently() async {
+    if (!await _isLocationServiceEnabled()) return null;
+    if (!await hasLocationPermission()) return null;
+
+    final lastKnown = await Geolocator.getLastKnownPosition();
+    if (lastKnown != null &&
+        DateTime.now().difference(lastKnown.timestamp).inMinutes < 10) {
+      _currentLocation = lastKnown;
+      return lastKnown;
+    }
+
+    try {
+      final position = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.low,
+          timeLimit: Duration(seconds: 5),
+        ),
+      );
+      _currentLocation = position;
+      return position;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  Future<bool> hasLocationPermission() async {
+    final permission = await Geolocator.checkPermission();
+    return permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse;
+  }
+
+  Future<bool> hasAlwaysPermission() async {
+    return await Geolocator.checkPermission() == LocationPermission.always;
   }
 
   Stream<Position> getPositionStream({
@@ -70,41 +97,12 @@ class LocationManager {
     );
   }
 
-  /// Ichki permission boshqaruvi
   Future<bool> _handlePermission() async {
     LocationPermission permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
     }
-
-    // if (context != null) {
-    //   if (permission == LocationPermission.deniedForever) {
-    //     await showDialog(
-    //       context: context,
-    //       builder: (context) => AlertDialog(
-    //         title: Text('Location permission needed'),
-    //         content: Text(
-    //           'This feature requires location access. Please enable it from the Settings app.',
-    //         ),
-    //         actions: [
-    //           TextButton(
-    //             onPressed: () => Navigator.pop(context),
-    //             child: Text('Cancel'),
-    //           ),
-    //           TextButton(
-    //             onPressed: () async {
-    //               Navigator.pop(context);
-    //               await openAppSettings(); // faqat foydalanuvchi istasa ochiladi
-    //             },
-    //             child: Text('Open Settings'),
-    //           ),
-    //         ],
-    //       ),
-    //     );
-    //     return false;
-    //   }
-    // }
-
-    return permission==LocationPermission.always || permission==LocationPermission.whileInUse;
+    return permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse;
   }
 }

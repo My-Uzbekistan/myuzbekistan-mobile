@@ -31,4 +31,17 @@ class CoreAppLocalizationsRu extends CoreAppLocalizations {
 
   @override
   String get action_more => 'Подробнее';
+
+  @override
+  String get no_internet =>
+      'Нет подключения к интернету. Проверьте соединение и попробуйте ещё раз';
+
+  @override
+  String get no_internet_title => 'Нет интернета';
+
+  @override
+  String get action_retry => 'Повторить';
+
+  @override
+  String get action_open_settings => 'Перейти в настройки';
 }

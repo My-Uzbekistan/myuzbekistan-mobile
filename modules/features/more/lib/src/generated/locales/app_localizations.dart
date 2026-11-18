@@ -112,7 +112,7 @@ abstract class FeatureMoreLocalizations {
   /// No description provided for @theme.
   ///
   /// In ru, this message translates to:
-  /// **'Тема'**
+  /// **'Тема приложения'**
   String get theme;
 
   /// No description provided for @lanItem.
@@ -126,6 +126,18 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'{lang, select, en{English} ru{Русский} uz{O\'zbekcha} other{} }'**
   String langItemDefault(String lang);
+
+  /// No description provided for @selectLanguageTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выберите язык интерфейса'**
+  String get selectLanguageTitle;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добро пожаловать'**
+  String get welcomeTitle;
 
   /// No description provided for @themeModes.
   ///
@@ -316,7 +328,7 @@ abstract class FeatureMoreLocalizations {
   /// No description provided for @emergencyContacts.
   ///
   /// In ru, this message translates to:
-  /// **'Экстренные контакты'**
+  /// **'Номера экстренных служб'**
   String get emergencyContacts;
 
   /// No description provided for @usefulTips.
@@ -430,8 +442,14 @@ abstract class FeatureMoreLocalizations {
   /// No description provided for @prayer_time_widget.
   ///
   /// In ru, this message translates to:
-  /// **'Виджет времени намаза'**
+  /// **'Виджет намаза'**
   String get prayer_time_widget;
+
+  /// No description provided for @iq_air_widget.
+  ///
+  /// In ru, this message translates to:
+  /// **'Виджет IQAir'**
+  String get iq_air_widget;
 
   /// No description provided for @about_app.
   ///
@@ -558,6 +576,378 @@ abstract class FeatureMoreLocalizations {
   /// In ru, this message translates to:
   /// **'Пройдите аутентификацию для доступа к приложению'**
   String get authPrompt;
+
+  /// No description provided for @auth_phone_page_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите ваш номер'**
+  String get auth_phone_page_title;
+
+  /// No description provided for @auth_phone_page_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Номер телефона'**
+  String get auth_phone_page_hint;
+
+  /// No description provided for @auth_phone_sms_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Мы вышлем вам SMS-код'**
+  String get auth_phone_sms_hint;
+
+  /// No description provided for @auth_phone_invalid_format.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный формат номера'**
+  String get auth_phone_invalid_format;
+
+  /// No description provided for @action_continue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продолжить'**
+  String get action_continue;
+
+  /// No description provided for @accept_terms.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нажимая на кнопку, вы принимаете terms'**
+  String get accept_terms;
+
+  /// No description provided for @terms.
+  ///
+  /// In ru, this message translates to:
+  /// **'условия пользовательского соглашения'**
+  String get terms;
+
+  /// No description provided for @auth_page_action_phone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Войти по номеру телефона'**
+  String get auth_page_action_phone;
+
+  /// No description provided for @premium.
+  ///
+  /// In ru, this message translates to:
+  /// **'Premium'**
+  String get premium;
+
+  /// No description provided for @premiumActiveSubtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Premium подписка активна'**
+  String get premiumActiveSubtitle;
+
+  /// No description provided for @changePhotoTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото профиля'**
+  String get changePhotoTitle;
+
+  /// No description provided for @takePhotoFromCamera.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сделать фото'**
+  String get takePhotoFromCamera;
+
+  /// No description provided for @chooseFromGallery.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выбрать из галереи'**
+  String get chooseFromGallery;
+
+  /// No description provided for @photoUpdated.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фото профиля обновлено'**
+  String get photoUpdated;
+
+  /// No description provided for @photoUploadError.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось загрузить фото. Повторите попытку'**
+  String get photoUploadError;
+
+  /// No description provided for @premiumRequiredForPhoto.
+  ///
+  /// In ru, this message translates to:
+  /// **'Эта функция доступна только для Premium'**
+  String get premiumRequiredForPhoto;
+
+  /// No description provided for @upgrade.
+  ///
+  /// In ru, this message translates to:
+  /// **'Улучшить'**
+  String get upgrade;
+
+  /// No description provided for @edit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Редактировать'**
+  String get edit;
+
+  /// No description provided for @security.
+  ///
+  /// In ru, this message translates to:
+  /// **'Безопасность'**
+  String get security;
+
+  /// No description provided for @contactUs.
+  ///
+  /// In ru, this message translates to:
+  /// **'Связаться с нами'**
+  String get contactUs;
+
+  /// No description provided for @save.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохранить'**
+  String get save;
+
+  /// No description provided for @firstName.
+  ///
+  /// In ru, this message translates to:
+  /// **'Имя'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In ru, this message translates to:
+  /// **'Фамилия'**
+  String get lastName;
+
+  /// No description provided for @phoneNumber.
+  ///
+  /// In ru, this message translates to:
+  /// **'Номер телефона'**
+  String get phoneNumber;
+
+  /// No description provided for @registrationMethod.
+  ///
+  /// In ru, this message translates to:
+  /// **'Способ регистрации:'**
+  String get registrationMethod;
+
+  /// No description provided for @viaGoogle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Через Google'**
+  String get viaGoogle;
+
+  /// No description provided for @scannerLogin.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вход со сканером'**
+  String get scannerLogin;
+
+  /// No description provided for @scannerLoginPrompt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подтвердите, чтобы включить вход со сканером'**
+  String get scannerLoginPrompt;
+
+  /// No description provided for @biometricNotAvailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вход со сканером недоступен на вашем устройстве'**
+  String get biometricNotAvailable;
+
+  /// No description provided for @devices.
+  ///
+  /// In ru, this message translates to:
+  /// **'Устройства'**
+  String get devices;
+
+  /// No description provided for @thisDevice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это устройство'**
+  String get thisDevice;
+
+  /// No description provided for @activeSessions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Активные сеансы'**
+  String get activeSessions;
+
+  /// No description provided for @terminateOtherSessions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завершить все остальные сеансы'**
+  String get terminateOtherSessions;
+
+  /// No description provided for @terminateConfirmTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы уверены, что хотите это завершить?'**
+  String get terminateConfirmTitle;
+
+  /// No description provided for @terminateOtherSessionsMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это действие завершит работу всех остальных устройств'**
+  String get terminateOtherSessionsMessage;
+
+  /// No description provided for @terminateSessionMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Это устройство выйдет из приложения'**
+  String get terminateSessionMessage;
+
+  /// No description provided for @terminate.
+  ///
+  /// In ru, this message translates to:
+  /// **'Завершить'**
+  String get terminate;
+
+  /// No description provided for @deviceOnline.
+  ///
+  /// In ru, this message translates to:
+  /// **'online'**
+  String get deviceOnline;
+
+  /// No description provided for @unknownDevice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неизвестное устройство'**
+  String get unknownDevice;
+
+  /// No description provided for @deviceOffline.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не в сети'**
+  String get deviceOffline;
+
+  /// No description provided for @deviceIpAddress.
+  ///
+  /// In ru, this message translates to:
+  /// **'IP-адрес'**
+  String get deviceIpAddress;
+
+  /// No description provided for @deviceLocation.
+  ///
+  /// In ru, this message translates to:
+  /// **'Геопозиция'**
+  String get deviceLocation;
+
+  /// No description provided for @signOutFromDevice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Выйти из устройства'**
+  String get signOutFromDevice;
+
+  /// No description provided for @noActiveSessions.
+  ///
+  /// In ru, this message translates to:
+  /// **'Других активных сеансов нет'**
+  String get noActiveSessions;
+
+  /// No description provided for @premiumActiveUntil.
+  ///
+  /// In ru, this message translates to:
+  /// **'Активен до {date}'**
+  String premiumActiveUntil(String date);
+
+  /// No description provided for @premiumBuySubscription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Приобретите подписку'**
+  String get premiumBuySubscription;
+
+  /// No description provided for @webViewExitTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вы действительно хотите выйти?'**
+  String get webViewExitTitle;
+
+  /// No description provided for @webViewExitMessage.
+  ///
+  /// In ru, this message translates to:
+  /// **'Страница закроется, введённые данные не сохранятся.'**
+  String get webViewExitMessage;
+
+  /// No description provided for @yes.
+  ///
+  /// In ru, this message translates to:
+  /// **'Да'**
+  String get yes;
+
+  /// No description provided for @nearbyPlaces.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уведомления о местах рядом'**
+  String get nearbyPlaces;
+
+  /// No description provided for @nearbyPlacesDisclosureTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Интересные места рядом'**
+  String get nearbyPlacesDisclosureTitle;
+
+  /// No description provided for @nearbyPlacesDisclosureBody.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подскажем, когда вы проходите рядом с музеем, рестораном или достопримечательностью. Для этого MyUzbekistan использует ваше местоположение, даже когда приложение закрыто или не используется.'**
+  String get nearbyPlacesDisclosureBody;
+
+  /// No description provided for @nearbyPlacesDisclosureDistance.
+  ///
+  /// In ru, this message translates to:
+  /// **'Местоположение используется только для поиска мест рядом с вами'**
+  String get nearbyPlacesDisclosureDistance;
+
+  /// No description provided for @nearbyPlacesDisclosureLimit.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не больше 2 уведомлений в день, ночью не беспокоим'**
+  String get nearbyPlacesDisclosureLimit;
+
+  /// No description provided for @nearbyPlacesDisclosureTurnOff.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отключить можно в любой момент в разделе «Еще»'**
+  String get nearbyPlacesDisclosureTurnOff;
+
+  /// No description provided for @nearbyPlacesDisclosureHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы функция работала, когда приложение закрыто, нужен доступ к геопозиции «Всегда».'**
+  String get nearbyPlacesDisclosureHint;
+
+  /// No description provided for @nearbyPlacesDisclosureContinue.
+  ///
+  /// In ru, this message translates to:
+  /// **'Продолжить'**
+  String get nearbyPlacesDisclosureContinue;
+
+  /// No description provided for @nearbyPlacesDisclosureLater.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не сейчас'**
+  String get nearbyPlacesDisclosureLater;
+
+  /// No description provided for @nearbyPlacesPermissionDenied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Чтобы функция работала, в настройках телефона откройте MyUzbekistan → Геопозиция и выберите «Всегда».'**
+  String get nearbyPlacesPermissionDenied;
+
+  /// No description provided for @nearbyPlacesTrackingTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Интересные места рядом'**
+  String get nearbyPlacesTrackingTitle;
+
+  /// No description provided for @nearbyPlacesTrackingText.
+  ///
+  /// In ru, this message translates to:
+  /// **'Подскажем об интересных местах рядом с вами'**
+  String get nearbyPlacesTrackingText;
+
+  /// No description provided for @pin_invalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный PIN-код'**
+  String get pin_invalid;
 }
 
 class _FeatureMoreLocalizationsDelegate

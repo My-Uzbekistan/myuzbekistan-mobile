@@ -7,14 +7,14 @@ import 'package:flutter/services.dart';
 class RoundedButton extends StatelessWidget {
   static RoundedButton closeButton({VoidCallback? onPressed}) {
     return RoundedButton(
-      assetsSvgIcon: Assets.svgIconClose,
+      assetsSvgIcon: Assets.svg.iconClose.path,
       onPressed: onPressed,
     );
   }
 
   static RoundedButton arrowLeft({VoidCallback? onPressed}) {
     return RoundedButton(
-      assetsSvgIcon: Assets.svgIconArrowRight,
+      assetsSvgIcon: Assets.svg.iconArrowRight.path,
       onPressed: onPressed,
       angle: pi,
     );
@@ -22,14 +22,14 @@ class RoundedButton extends StatelessWidget {
 
   static RoundedButton edit({VoidCallback? onPressed}) {
     return RoundedButton(
-      assetsSvgIcon: Assets.svgIconEditPen,
+      assetsSvgIcon: Assets.svg.iconEditPen.path,
       onPressed: onPressed,
     );
   }
 
   static RoundedButton check({VoidCallback? onPressed}) {
     return RoundedButton(
-      assetsSvgIcon: Assets.svgIconCheck,
+      assetsSvgIcon: Assets.svg.iconCheck.path,
       onPressed: onPressed,
     );
   }

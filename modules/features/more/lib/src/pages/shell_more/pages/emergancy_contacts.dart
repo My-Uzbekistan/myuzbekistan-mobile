@@ -21,28 +21,28 @@ class EmergencyContactsPage extends StatelessWidget {
       EmergencyItem(
         title: context.localization.generalEmergency,
         contact: "112",
-        assets: Assets.svgStaroflifeFill,
+        assets: Assets.svg.staroflifeFill.path,
       ),
       EmergencyItem(
           title: context.localization.touristPolice,
           contact: "+998 71 233 17 17",
-          assets: Assets.svgStarFill),
+          assets: Assets.svg.starFill.path),
       EmergencyItem(
           title: context.localization.fire,
           contact: "101",
-          assets: Assets.svgFlameFill),
+          assets: Assets.svg.flameFill.path),
       EmergencyItem(
           title: context.localization.police,
           contact: "102",
-          assets: Assets.svgShieldFill),
+          assets: Assets.svg.shieldFill.path),
       EmergencyItem(
           title: context.localization.medical,
           contact: "103",
-          assets: Assets.svgCrossCaseFill),
+          assets: Assets.svg.crossCaseFill.path),
       EmergencyItem(
           title: context.localization.gasEmergency,
           contact: "104",
-          assets: Assets.svgBoltFill)
+          assets: Assets.svg.boltFill.path)
     ];
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +74,7 @@ class _Item extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(20),
       onTap: () {
-        LauncherUtils.urlLauncher("tel://${item.contact.replaceAll(" ", "")}");
+        LauncherUtils.urlLauncher("tel:${item.contact}");
       },
       child: Ink(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 18),
@@ -89,7 +89,8 @@ class _Item extends StatelessWidget {
               radius: 20,
               backgroundColor: context.appColors.colors.red,
               child: item.assets.toSvgImage(
-                  colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn)),
+                  colorFilter: ColorFilter.mode(
+                      context.appColors.static.white, BlendMode.srcIn)),
             ),
             Expanded(
                 child: Column(

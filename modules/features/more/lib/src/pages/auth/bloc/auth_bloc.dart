@@ -27,6 +27,7 @@ class AuthBlock extends Bloc<AuthEvent, AuthState> {
     on<_AuthGoogleEvent>(_googleAuth);
     on<_AuthAppleEvent>(_appleAuth);
     on<_AuthLogOutEvent>(_logOutEvent);
+    on<_SetFirebaseTokenEvent>((event, emit) => _setFirebaseToken());
   }
 
   Future<void> _googleAuth(

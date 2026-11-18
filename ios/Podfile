@@ -36,6 +36,10 @@ target 'Runner' do
     inherit! :search_paths
   end
 end
+# target 'ImageNotification' do
+#   use_frameworks!
+# #   pod 'SDWebImage'
+# end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|

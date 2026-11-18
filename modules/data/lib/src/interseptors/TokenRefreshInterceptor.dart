@@ -3,12 +3,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:domain/domain.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared/shared.dart';
 
 import '../constants.dart';
-import '../travel/models/token_dto.dart';
+import '../travel/models/token/token_dto.dart';
+import 'device_headers_interceptor.dart';
 
 // class TokenRefreshInterceptor extends Interceptor {
 //   SecurityStorage securityStorage;
@@ -169,7 +169,8 @@ class TokenRefreshInterceptor extends Interceptor {
   bool _isRefreshing = false;
   Completer<void>? _refreshCompleter;
 
-  final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseUrlAPi))
+  final Dio _dio = Dio(BaseOptions(baseUrl: AppConstants.baseApiUrl))
+    ..interceptors.add(DeviceHeadersInterceptor())
     ..interceptors.add(PrettyDioLogger(requestBody: true));
 
   @override
@@ -245,20 +246,56 @@ class TokenRefreshInterceptor extends Interceptor {
     _refreshCompleter = Completer<void>();
 
     try {
-      final response = await _dio.post(
-        "/auth/refresh",
-        data: {"RefreshToken": securityStorage.getRefreshToken()},
-      );
-      final tokenDto = TokenDto.fromJson(response.data);
-      await securityStorage.setToken(token: tokenDto.toDomain());
+      await _requestNewToken();
       _refreshCompleter?.complete();
     } catch (e) {
-      await securityStorage.clearData();
+      final rejected = _isRefreshTokenRejected(e);
+      if (rejected && await _recoverTokenSavedByOtherIsolate()) {
+        _refreshCompleter?.complete();
+        return;
+      }
+      if (rejected && !GlobalHandler().isBackgroundIsolate) {
+        await securityStorage.clearData();
+        GlobalHandler().unauthorizedListener?.call();
+      }
       _refreshCompleter?.completeError(e);
-      GlobalHandler().unauthorizedListener?.call();
       rethrow;
     } finally {
       _isRefreshing = false;
     }
+  }
+
+  Future<void> _requestNewToken() async {
+    final response = await _dio.post(
+      "/auth/refresh",
+      data: {"refreshToken": securityStorage.getRefreshToken()},
+    );
+    final tokenDto = TokenDto.fromJson(response.data);
+    await securityStorage.setToken(token: tokenDto.toDomain());
+  }
+
+  Future<bool> _recoverTokenSavedByOtherIsolate() async {
+    final usedRefreshToken = securityStorage.getRefreshToken();
+    await securityStorage.reload();
+    final storedRefreshToken = securityStorage.getRefreshToken();
+    if (storedRefreshToken == null || storedRefreshToken == usedRefreshToken) {
+      return false;
+    }
+    final expiresAt = securityStorage.getTokenExpire();
+    if (expiresAt != null && expiresAt.difference(DateTime.now()).inMinutes > 5) {
+      return true;
+    }
+    try {
+      await _requestNewToken();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool _isRefreshTokenRejected(Object error) {
+    if (error is! DioException) return false;
+    final statusCode = error.response?.statusCode;
+    return statusCode == 400 || statusCode == 401 || statusCode == 403;
   }
 }

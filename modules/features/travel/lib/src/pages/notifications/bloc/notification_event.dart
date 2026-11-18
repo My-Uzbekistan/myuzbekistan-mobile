@@ -8,4 +8,6 @@ abstract class NotificationEvent with _$NotificationEvent {
   factory NotificationEvent.notificationSeen({
     required int notId,
   }) = _NotificationSeenEvent;
+
+  factory NotificationEvent.allNotificationsSeen() = _AllNotificationsSeenEvent;
 }

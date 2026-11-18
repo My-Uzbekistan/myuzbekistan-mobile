@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 
@@ -17,6 +16,30 @@ class ReviewItem extends StatelessWidget {
     this.isShort = true,
     this.onTap,
   });
+
+  Widget _avatar(BuildContext context) {
+    return ClipOval(
+      child: SizedBox.square(
+        dimension: 40,
+        child: AppNetworkImage(
+          item.avatar.orEmpty(),
+          width: 40,
+          height: 40,
+          fit: BoxFit.cover,
+          placeholder: ColoredBox(
+            color: context.appColors.textIconColor.primary,
+            child: Center(
+              child: Text(
+                item.userName.isNotEmpty
+                    ? item.userName.characters.first.toUpperCase()
+                    : "?",
+              ).labelMd(color: context.appColors.textIconColor.oposite),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +62,7 @@ class ReviewItem extends StatelessWidget {
             Row(
               spacing: 12,
               children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundColor: context.appColors.textIconColor.primary,
-                  child: Text(
-                    (item.userName.isNotEmpty
-                        ? item.userName.characters.first.toUpperCase()
-                        : "?"),
-                  ).labelMd(color: context.appColors.textIconColor.oposite),
-                ),
+                _avatar(context),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,9 +75,21 @@ class ReviewItem extends StatelessWidget {
                       ).labelMd(),
                       Row(
                         mainAxisSize: MainAxisSize.min,
-                        spacing: 4,
+                        spacing: 6,
                         children: [
-                          ReviewStars(stars: item.rating),
+                          ReviewStars(
+                            stars: item.rating,
+                            filled: true,
+                            selectedColor: context.appColors.colors.yellow,
+                          ),
+                          Container(
+                            width: 3,
+                            height: 3,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: context.appColors.textIconColor.secondary,
+                            ),
+                          ),
                           Flexible(
                             child: Text(
                               item.createdAt?.toFormatMMMY() ?? "".orEmpty(),
@@ -102,7 +129,7 @@ class ReviewItem extends StatelessWidget {
                     ).bodyMd(),
                     if (moreThan3 && isShort)
                       Text(
-                        context.localization.readMore,
+                        context.localization.expand,
                         style: CustomTypography.bodyMd.copyWith(
                           color: context.appColors.brand,
                           decoration: TextDecoration.underline,
@@ -141,33 +168,44 @@ class ReviewStars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    final row = Row(
       spacing: spacing,
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,
       children: List.generate(
         5,
-        (e) => GestureDetector(
-          onTap:
-              onItemTab != null
-                  ? () {
-                    onItemTab!(e + 1);
-                  }
-                  : null,
-          behavior: HitTestBehavior.translucent,
-          child: SizedBox(
-            height: size,
-            width: size,
+        (e) => SizedBox(
+          height: size,
+          width: size,
+          child: AnimatedScale(
+            scale: onItemTab != null && e + 1 == stars ? 1.15 : 1,
+            duration: const Duration(milliseconds: 180),
+            curve: Curves.easeOutBack,
             child: star(context, e + 1),
           ),
         ),
       ),
     );
+    if (onItemTab == null) return row;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTapDown: (details) => _select(details.localPosition.dx),
+      onHorizontalDragStart: (details) => _select(details.localPosition.dx),
+      onHorizontalDragUpdate: (details) => _select(details.localPosition.dx),
+      child: row,
+    );
+  }
+
+  void _select(double dx) {
+    final value = ((dx / (size + spacing)).floor() + 1).clamp(1, 5);
+    if (value == stars) return;
+    HapticFeedback.selectionClick();
+    onItemTab!(value);
   }
 
   Widget star(BuildContext context, int e) {
     if (filled) {
-      return Assets.svgStarFill.toSvgImage(
+      return Assets.svg.starFill.path.toSvgImage(
         fit: BoxFit.fill,
         tintColor:
             e <= stars
@@ -176,11 +214,11 @@ class ReviewStars extends StatelessWidget {
       );
     }
     return e <= stars
-        ? Assets.svgStarFill.toSvgImage(
+        ? Assets.svg.starFill.path.toSvgImage(
           fit: BoxFit.fill,
           tintColor: context.appColors.textIconColor.primary,
         )
-        : Assets.svgStarOutline.toSvgImage(
+        : Assets.svg.starOutline.path.toSvgImage(
           fit: BoxFit.fill,
           tintColor: context.appColors.textIconColor.primary,
         );

@@ -5,31 +5,49 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 import 'package:travel/src/core/extension.dart';
 import 'package:travel/src/pages/notifications/widgets/notification_item.dart';
+import 'package:travel/src/pages/notifications/widgets/notifications_loading_content.dart';
 
 import 'bloc/notification_bloc.dart';
 
-class NotificationMainPage extends StatefulWidget {
+bool _hasUnseen(NotificationsState state) => state.maybeMap(
+  successState: (st) => st.notifications.any((e) => !e.isSeen),
+  orElse: () => false,
+);
+
+class NotificationMainPage extends StatelessWidget {
   const NotificationMainPage({super.key});
 
   @override
-  State<NotificationMainPage> createState() => _NotificationMainPageState();
-}
-
-class _NotificationMainPageState extends State<NotificationMainPage> {
-  NotificationBloc? _bloc;
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    _bloc = context.read();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final bloc = context.read<NotificationBloc>();
+
+    void openNotificationDetail(NotificationItem item) {
+      context.travel.pushNotificationsDetail(item: item);
+      bloc.add(NotificationEvent.notificationSeen(notId: item.id));
+    }
+
     return Scaffold(
+      backgroundColor: context.appColors.background.underlayer,
       extendBodyBehindAppBar: true,
-      appBar: GradientAppBar(title: context.localization.notifications),
+      appBar: GradientAppBar(
+        title: context.localization.notifications,
+        centerTitle: true,
+        actions: [
+          BlocBuilder<NotificationBloc, NotificationsState>(
+            buildWhen: (previous, current) =>
+                _hasUnseen(previous) != _hasUnseen(current),
+            builder: (context, state) {
+              if (!_hasUnseen(state)) return const SizedBox.shrink();
+
+              return RoundedButton.check(
+                onPressed: () {
+                  bloc.add(NotificationEvent.allNotificationsSeen());
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: BlocConsumer<NotificationBloc, NotificationsState>(
         listenWhen: (previous, current) {
           if (current is SuccessState) {
@@ -42,7 +60,7 @@ class _NotificationMainPageState extends State<NotificationMainPage> {
             return true;
           }
 
-          return false; // faqat SuccessState dan boshqa holatlarda listener ishlamasin
+          return false;
         },
         listener: (context, state) {
           state.maybeMap(
@@ -58,68 +76,33 @@ class _NotificationMainPageState extends State<NotificationMainPage> {
         },
         builder: (context, state) {
           if (state is LoadingState) {
-            return _LoadingContent();
+            return const NotificationsLoadingContent();
           }
-          final List<NotificationItem> items =
-              state is SuccessState ? state.notifications : [];
+          final List<NotificationItem> items = state is SuccessState
+              ? state.notifications
+              : [];
 
-          return SizedBox(
-            height: double.maxFinite,
-            child: ListView.separated(
-              padding: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 24,
-              ).copyWith(top: MediaQuery.of(context).padding.top + 24),
-              separatorBuilder: (context, index) {
-                return SizedBox(height: 16);
-              },
-              itemBuilder: (context, index) {
-                final item = items[index];
-                return NotificationItemWidget(
-                  onTap: () {
-                    openNotificationDetail(
-                     item
-                    );
-
-                    // _bloc?.add(NotificationEvent.notificationSeen(notId: 123));
-                  },
-                );
-              },
-              itemCount: items.length,
+          return ListView.separated(
+            padding: EdgeInsets.only(
+              top: MediaQuery.of(context).padding.top + 16,
+              bottom: MediaQuery.of(context).padding.bottom + 16,
             ),
+            separatorBuilder: (context, index) => const SizedBox(height: 16),
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return NotificationItemWidget(
+                title: item.title,
+                image: item.image,
+                date: item.publishDate(),
+                isSeen: item.isSeen,
+                onTap: () {
+                  openNotificationDetail(item);
+                },
+              );
+            },
+            itemCount: items.length,
           );
         },
-      ),
-    );
-  }
-
-  void openNotificationDetail(NotificationItem item) {
-    context.travel.pushNotificationsDetail(item: item);
-  }
-}
-
-class _LoadingContent extends StatelessWidget {
-  const _LoadingContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromDefault(
-      child: ListView.separated(
-        physics: NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 24,
-        ).copyWith(top: MediaQuery.of(context).padding.top + 24),
-        separatorBuilder: (context, index) {
-          return SizedBox(height: 16);
-        },
-        itemBuilder: (context, index) {
-          return AspectRatio(
-            aspectRatio: 343 / 288,
-            child: ShimmerDefaultContainer(height: double.maxFinite),
-          );
-        },
-        itemCount: 4,
       ),
     );
   }

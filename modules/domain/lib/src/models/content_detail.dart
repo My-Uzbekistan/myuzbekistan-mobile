@@ -1,12 +1,13 @@
+import 'package:domain/src/models/info_slug.dart';
+import 'package:domain/src/models/info_state.dart';
+import 'package:domain/src/models/info_type.dart';
 import 'package:domain/src/models/view_type.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
-
-// part 'content_detail.freezed.dart';
 
 class ContentDetail extends Equatable {
   final int id;
   final String? title;
+  final String? shortDescription;
   final String? description;
   final String? region;
   final double? distance;
@@ -15,8 +16,10 @@ class ContentDetail extends Equatable {
   final int? categoryId;
   final String? categoryName;
   final String? workingHours;
+  final List<WorkingScheduleDay>? workingSchedule;
   final List<double>? location;
   final List<Facility>? facilities;
+  final List<FacilityGroup>? facilityGroups;
   final List<String>? languages;
   final List<Attachments>? attachments;
   final List<String>? photos;
@@ -26,6 +29,9 @@ class ContentDetail extends Equatable {
   final int? averageCheck;
   final double? price;
   final double? priceInDollar;
+  final String? priceUnit;
+  final DateTime? eventDate;
+  final String? eventType;
   final String? address;
   final bool isFavorite;
   final ViewType viewType;
@@ -34,12 +40,15 @@ class ContentDetail extends Equatable {
   const ContentDetail({
     required this.id,
     this.title,
+    this.shortDescription,
     this.description,
     this.categoryId,
     this.categoryName,
     this.workingHours,
+    this.workingSchedule,
     this.location,
     this.facilities,
+    this.facilityGroups,
     this.languages,
     this.attachments,
     this.photos,
@@ -49,6 +58,9 @@ class ContentDetail extends Equatable {
     this.averageCheck,
     this.price,
     this.priceInDollar,
+    this.priceUnit,
+    this.eventDate,
+    this.eventType,
     this.address,
     required this.viewType,
     this.distance,
@@ -62,9 +74,17 @@ class ContentDetail extends Equatable {
 
   bool get facilitiesAvailable => facilities?.isNotEmpty == true;
 
+  bool get facilityGroupsAvailable => facilityGroups?.isNotEmpty == true;
+
+  bool get workingScheduleAvailable => workingSchedule?.isNotEmpty == true;
+
   bool get workingHoursAvailable => workingHours?.isNotEmpty == true;
 
   bool get contactAvailable => contacts?.isNotEmpty == true;
+
+  bool get infoAvailable => info?.items.isNotEmpty == true;
+
+  bool get shortDescriptionAvailable => shortDescription?.isNotEmpty == true;
 
   String get priceText => price?.amountFormatted() ?? "";
 
@@ -77,12 +97,15 @@ class ContentDetail extends Equatable {
   ContentDetail copyWith({
     int? id,
     String? title,
+    String? shortDescription,
     String? description,
     int? categoryId,
     String? categoryName,
     String? workingHours,
+    List<WorkingScheduleDay>? workingSchedule,
     List<double>? location,
     List<Facility>? facilities,
+    List<FacilityGroup>? facilityGroups,
     List<String>? languages,
     List<String>? files,
     List<Attachments>? attachments,
@@ -93,7 +116,13 @@ class ContentDetail extends Equatable {
     int? averageCheck,
     double? price,
     double? priceInDollar,
+    String? priceUnit,
+    DateTime? eventDate,
+    String? eventType,
     String? address,
+    String? region,
+    double? distance,
+    int? reviewCount,
     bool? isFavorite,
     ViewType? viewType,
     DetailInfo? info,
@@ -101,12 +130,15 @@ class ContentDetail extends Equatable {
     return ContentDetail(
       id: id ?? this.id,
       title: title ?? this.title,
+      shortDescription: shortDescription ?? this.shortDescription,
       description: description ?? this.description,
       categoryId: categoryId ?? this.categoryId,
       categoryName: categoryName ?? this.categoryName,
       workingHours: workingHours ?? this.workingHours,
+      workingSchedule: workingSchedule ?? this.workingSchedule,
       location: location ?? this.location,
       facilities: facilities ?? this.facilities,
+      facilityGroups: facilityGroups ?? this.facilityGroups,
       languages: languages ?? this.languages,
       photos: photos ?? this.photos,
       photo: photo ?? _photo,
@@ -115,7 +147,13 @@ class ContentDetail extends Equatable {
       averageCheck: averageCheck ?? this.averageCheck,
       price: price ?? this.price,
       priceInDollar: priceInDollar ?? this.priceInDollar,
+      priceUnit: priceUnit ?? this.priceUnit,
+      eventDate: eventDate ?? this.eventDate,
+      eventType: eventType ?? this.eventType,
       address: address ?? this.address,
+      region: region ?? this.region,
+      distance: distance ?? this.distance,
+      reviewCount: reviewCount ?? this.reviewCount,
       isFavorite: isFavorite ?? this.isFavorite,
       viewType: viewType ?? this.viewType,
       attachments: attachments ?? this.attachments,
@@ -124,17 +162,18 @@ class ContentDetail extends Equatable {
   }
 
   @override
-  // TODO: implement props
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         id,
         title,
+        shortDescription,
         description,
         categoryId,
         categoryName,
         workingHours,
+        workingSchedule,
         location,
         facilities,
+        facilityGroups,
         languages,
         attachments,
         photos,
@@ -144,7 +183,13 @@ class ContentDetail extends Equatable {
         averageCheck,
         price,
         priceInDollar,
+        priceUnit,
+        eventDate,
+        eventType,
         address,
+        region,
+        distance,
+        reviewCount,
         isFavorite,
         viewType,
         info,
@@ -160,16 +205,16 @@ class Contacts {
   const Contacts({this.icon, this.name, this.contact, this.action});
 
   String? get actionUrl {
-    if(action==null) return null;
+    if (action == null) return null;
 
     String normalizedUrl = action!;
     if (normalizedUrl.startsWith('www.')) {
       normalizedUrl = 'https://$normalizedUrl';
     }
 
-
     return normalizedUrl;
   }
+
   String? get contactName {
     if (contact == null) return null;
 
@@ -212,37 +257,46 @@ class Attachments {
 }
 
 class DetailInfo {
-  final InfoItem? left;
-  final InfoItem? right;
-  const DetailInfo({this.left, this.right});
+  final List<InfoItem> items;
+
+  const DetailInfo({this.items = const []});
 }
 
-
-class InfoItem{
+class InfoItem {
+  final InfoSlug? slug;
   final String key;
   final String? value;
-  final String? type;
-  const InfoItem({required this.key, this.value, this.type});
+  final InfoType type;
+  final InfoState? state;
+
+  const InfoItem({
+    this.slug,
+    required this.key,
+    this.value,
+    this.type = InfoType.text,
+    this.state,
+  });
 }
-// @freezed
-// abstract class InfoItem with _$InfoItem {
-//   const factory InfoItem.text({
-//     required String key,
-//     String? value}) =
-//       InfoItemText;
-//   const factory InfoItem.dollarRating({
-//     int? value,
-//   }) = InfoItemDollarRating;
-//   const factory InfoItem.distance({
-//     double? distance,
-//   }) = InfoItemDistance;
-//   const factory InfoItem.approximateCost({
-//     int? cost,
-//   }) = InfoItemApproximateCost;
-//   const factory InfoItem.workTime({
-//     String? start,
-//     String? end,
-//   }) = InfoItemWorkTime;
-// }
 
+class WorkingScheduleDay {
+  final int day;
+  final String name;
+  final bool isClosed;
+  final String? from;
+  final String? to;
 
+  const WorkingScheduleDay({
+    required this.day,
+    required this.name,
+    this.isClosed = false,
+    this.from,
+    this.to,
+  });
+}
+
+class FacilityGroup {
+  final String name;
+  final List<Facility> facilities;
+
+  const FacilityGroup({required this.name, this.facilities = const []});
+}

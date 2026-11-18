@@ -39,16 +39,28 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get payment_history_title => 'History';
 
   @override
-  String get payment_qr_title => 'QR Pay';
+  String get payment_qr_title => 'QR-payment';
 
   @override
   String get card_number_label => 'Card number';
 
   @override
+  String get card_number_hint => 'Enter card number';
+
+  @override
   String get card_expiry_label => 'Expiry date';
 
   @override
+  String get card_expiry_full_label => 'Card expiry date';
+
+  @override
   String get card_expiry_hint => 'MM/YY';
+
+  @override
+  String get cvv_label => 'CVV / CVC';
+
+  @override
+  String get cvv_hint => '000';
 
   @override
   String get card_holder_label => 'Name on card';
@@ -86,6 +98,20 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
   String get nearest_places => 'Nearest places';
 
   @override
+  String get distanceM => 'm';
+
+  @override
+  String get distanceKm => 'km';
+
+  @override
+  String get action_all => 'All';
+
+  @override
+  String rates_last_update(Object date) {
+    return 'Last update $date';
+  }
+
+  @override
   String get currency_calculator => 'Currency calculator';
 
   @override
@@ -114,4 +140,87 @@ class FeatureFinanceLocalizationsEn extends FeatureFinanceLocalizations {
 
   @override
   String get fiscalReceipt => 'Fiscal receipt';
+
+  @override
+  String verification_page_code_send_phone(Object phone) {
+    return 'Verification code sent to $phone';
+  }
+
+  @override
+  String get payment_title => 'Payment';
+
+  @override
+  String get enter_amount => 'Enter amount';
+
+  @override
+  String get action_change => 'Change';
+
+  @override
+  String get payment_order_details => 'Order details';
+
+  @override
+  String get payment_summary_title => 'Payment details';
+
+  @override
+  String get payment_summary_order => 'Order';
+
+  @override
+  String get payment_summary_delivery => 'Delivery';
+
+  @override
+  String get payment_summary_total => 'Total:';
+
+  @override
+  String get payment_free_cancellation_title => 'Free cancellation';
+
+  @override
+  String payment_free_cancellation_subtitle(Object date) {
+    return 'Cancel before $date for a full refund';
+  }
+
+  @override
+  String get payment_details_title => 'Details';
+
+  @override
+  String get payment_status_success => 'Successfully paid';
+
+  @override
+  String get payment_status_pending => 'Pending';
+
+  @override
+  String get payment_status_cancelled => 'Cancelled';
+
+  @override
+  String get payment_status_refunded => 'Refund';
+
+  @override
+  String get action_retry => 'Retry';
+
+  @override
+  String get back_to_home => 'Back to home';
+
+  @override
+  String get history_empty_title => 'No history yet';
+
+  @override
+  String get history_empty_message => 'Your payments will appear here';
+
+  @override
+  String get history_failed_title => 'Couldn\'t load history';
+
+  @override
+  String get cards_empty_title => 'No cards yet';
+
+  @override
+  String get cards_empty_message => 'Cards you add will appear here';
+
+  @override
+  String get camera_permission_denied =>
+      'Camera access denied. Allow camera access in settings to scan QR codes';
+
+  @override
+  String get camera_unavailable => 'Couldn\'t start the camera';
+
+  @override
+  String get card_expiry_invalid => 'Invalid date';
 }

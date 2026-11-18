@@ -1,16 +1,16 @@
-import 'package:data/src/finance/src/models/card_colors.dart';
-import 'package:data/src/finance/src/models/card_id_dto.dart';
-import 'package:data/src/finance/src/models/card_type.dart';
-import 'package:data/src/finance/src/models/payment_top_up_response_dto.dart';
-import 'package:data/src/models/items_response.dart';
+import 'package:data/src/finance/src/models/card_colors/card_colors.dart';
+import 'package:data/src/finance/src/models/card_id/card_id_dto.dart';
+import 'package:data/src/finance/src/models/card_type/card_type.dart';
+import 'package:data/src/finance/src/models/payment_top_up_response/payment_top_up_response_dto.dart';
+import 'package:data/src/models/items/items_response.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/error_logger.dart';
 import 'package:retrofit/http.dart';
 import 'package:shared/shared.dart';
 
-import '../../models/card_item.dart';
-import '../../models/merchant_dto.dart';
-import '../../models/payment_check/transaction_item_dto.dart';
+import '../../models/card_item/card_item.dart';
+import '../../models/merchant/merchant_dto.dart';
+import '../../models/transaction_item/transaction_item_dto.dart';
 
 part 'finance_api_service.g.dart';
 

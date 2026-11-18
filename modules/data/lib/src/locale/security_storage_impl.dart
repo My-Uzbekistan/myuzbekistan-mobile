@@ -6,21 +6,30 @@ import 'package:shared/shared.dart';
 
 @Injectable(as: SecurityStorage)
 class SecurityStorageImpl implements SecurityStorage {
-  final Box _box;
+  SecurityStorageImpl({@Named(StorageConstants.securityBox) required Box box});
 
-  SecurityStorageImpl({@Named(StorageConstants.securityBox) required Box box})
-    : _box = box;
+  Box get _box => Hive.box(StorageConstants.securityBox);
+
+  @override
+  Future<void> reload() async {
+    await _box.close();
+    await Hive.openBox(StorageConstants.securityBox);
+  }
 
   @override
   UserModel? getUserModel() {
     final dynamic token = getAccessToken();
     if (token == null) return null;
     final jwt = JwtDecoder.decode(token);
-    debugPrint("jwt UserModel $jwt");
+    debugPrint("isUtcClient ${jwt["isUztelecom"]}");
     final user = UserModel(
       name: jwt["userName"],
       email: jwt["name"],
+      // Avatar hech qayerga saqlanmaydi — live user-info dan ProfileBloc
+      // tomonidan to'ldiriladi. Bu yerda faqat JWT dagi rasm (odatda bo'sh).
       photoUrl: jwt["photoUrl"],
+      phoneNumber: _box.get("phone"),
+      isUtcClient: jwt["isUztelecom"]=="true"
     );
     return user;
   }
@@ -37,7 +46,7 @@ class SecurityStorageImpl implements SecurityStorage {
 
   @override
   bool hasTokenExpire() {
-    return false;
+    return _box.get("expiresIn") != null;
   }
 
   @override
@@ -63,27 +72,43 @@ class SecurityStorageImpl implements SecurityStorage {
       "expiresIn",
       "hasPin",
       "isPinVerified",
+      "isUtcClient",
       "pin",
+      "faceId",
+      "profilePictureUrl",
+      "nearbyPlacesState",
     ]);
   }
 
   @override
   Future<void> setToken({required Token token}) async {
-    await _box.put("accessToken", token.accessToken);
-    await _box.put("refreshToken", token.refreshToken);
-    await _box.put("expiresIn", token.expires);
-    await _box.put("hasPin", token.hasPin);
+    await _box.putAll({
+      "accessToken": token.accessToken,
+      "refreshToken": token.refreshToken,
+      "expiresIn": token.expires,
+      "hasPin": token.hasPin,
+      "phone": token.phone,
+    });
+
   }
 
   @override
   DateTime? getTokenExpire() {
-    final secund = _box.get("expiresIn");
-    if (secund == null) return null;
-    final microsecondsSinceEpoch = secund * 1000;
+    final dynamic secondsRaw = _box.get("expiresIn");
+    if (secondsRaw == null) return null;
+
+    final int? seconds = secondsRaw is int
+        ? secondsRaw
+        : secondsRaw is num
+            ? secondsRaw.toInt()
+            : int.tryParse(secondsRaw.toString());
+    if (seconds == null) return null;
+
+    final int millisecondsSinceEpoch = seconds * 1000;
     return DateTime.fromMillisecondsSinceEpoch(
-      microsecondsSinceEpoch,
-      isUtc: false,
-    );
+      millisecondsSinceEpoch,
+      isUtc: true,
+    ).toLocal();
   }
 
   @override
@@ -107,6 +132,46 @@ class SecurityStorageImpl implements SecurityStorage {
   }
 
   @override
+  Future<void> changeIqAirWidgetState(bool value) async {
+    await _box.put("iqAirWidgetState", value);
+  }
+
+  @override
+  bool isShowIqAirWidget() {
+    return _box.get("iqAirWidgetState") ?? true;
+  }
+
+  @override
+  Future<void> changeNearbyPlacesState(bool value) async {
+    await _box.put("nearbyPlacesState", value);
+  }
+
+  @override
+  bool isNearbyPlacesEnabled() {
+    return _box.get("nearbyPlacesState") ?? false;
+  }
+
+  @override
+  Future<void> setPrayerLocationId(int locationId) async {
+    await _box.put("prayerLocationId", locationId);
+  }
+
+  @override
+  int? getPrayerLocationId() {
+    return _box.get("prayerLocationId");
+  }
+
+  @override
+  Future<void> changeNotificationsState(bool value) async {
+    await _box.put("notificationsEnabledState", value);
+  }
+
+  @override
+  bool isNotificationsEnabled() {
+    return _box.get("notificationsEnabledState") ?? true;
+  }
+
+  @override
   bool hasPin() {
     return _box.get("hasPin", defaultValue: false) ?? false;
   }
@@ -114,6 +179,16 @@ class SecurityStorageImpl implements SecurityStorage {
   @override
   Future<void> setHasPin(bool hasPin) async {
     await _box.put("hasPin", hasPin);
+  }
+
+  @override
+  bool isFaceIdEnabled() {
+    return _box.get("faceId", defaultValue: false) ?? false;
+  }
+
+  @override
+  Future<void> setFaceIdEnabled(bool enabled) async {
+    await _box.put("faceId", enabled);
   }
 
   @override
@@ -128,7 +203,7 @@ class SecurityStorageImpl implements SecurityStorage {
 
   @override
   Future<void> deletePin() async {
-    await _box.deleteAll(["pin", "isPinVerified", "hasPin"]);
+    await _box.deleteAll(["pin", "isPinVerified", "hasPin", "faceId"]);
   }
 
   @override

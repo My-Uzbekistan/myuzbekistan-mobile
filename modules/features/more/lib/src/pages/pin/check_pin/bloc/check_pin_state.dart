@@ -11,7 +11,10 @@ abstract class CheckPinCodeState with _$CheckPinCodeState {
 
   factory CheckPinCodeState.loadingState() = CheckPinLoadingState;
 
-  factory CheckPinCodeState.errorState({String? message}) = CheckPinErrorState;
+  factory CheckPinCodeState.errorState({
+    String? message,
+    @Default(false) bool isOffline,
+  }) = CheckPinErrorState;
 
   factory CheckPinCodeState.reset() = CheckPinResetState;
 }
@@ -28,7 +31,7 @@ extension CheckPinCodeStateX on CheckPinCodeState {
       },
       successState: () => this,
       loadingState: () => this,
-      errorState: (message) => this,
+      errorState: (message, isOffline) => this,
       reset: () => this,
     );
   }

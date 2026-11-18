@@ -4,9 +4,7 @@ extension StringExtensions on String {
     return substring(0, n);
   }
 
-  String withOutSpace() {
-    return replaceAll(RegExp(r'\s+'), '');
-  }
+  String withOutSpace() => replaceAll(RegExp("\\s"), '');
 
   String plus(String text) => "$this$text";
 }

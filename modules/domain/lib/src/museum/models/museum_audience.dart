@@ -1,0 +1,1 @@
+enum MuseumAudience { citizen, foreigner }

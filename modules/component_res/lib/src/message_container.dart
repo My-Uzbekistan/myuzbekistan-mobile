@@ -5,7 +5,7 @@ import 'package:uzbekistan_travel/core/extensions/context_extension.dart';
 mixin class MessageContainer {
   static Widget comingSoonWidget(BuildContext context) {
     return _MessageContainerWidget(
-      icon: Assets.pngGears.toImage(),
+      icon: Assets.png.gears.image(),
       title: "",
       caption: "",
     );
@@ -14,7 +14,7 @@ mixin class MessageContainer {
   static Widget notFoundWidget(BuildContext context,
       {required String title, required String caption}) {
     return _MessageContainerWidget(
-      icon: Assets.svgIconSearch.toSvgImage(
+      icon: Assets.svg.iconSearch.path.toSvgImage(
           colorFilter:
               ColorFilter.mode(context.appColors.brand, BlendMode.srcIn)),
       title: title,

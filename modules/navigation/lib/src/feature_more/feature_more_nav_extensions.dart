@@ -18,6 +18,18 @@ class FeatureMoreNavExtension {
     _context.pushType(AppNavPath.more.changeTheme);
   }
 
+  void pushEditProfilePage() {
+    _context.pushType(AppNavPath.more.editProfile);
+  }
+
+  void pushSecurityPage() {
+    _context.pushType(AppNavPath.more.securityPage);
+  }
+
+  Future<T?> pushDevicesPage<T>() {
+    return _context.pushType<T>(AppNavPath.more.devicesPage);
+  }
+
   void pushAuthPage() {
     _context.pushType(
       AppNavPath.more.authPage,
@@ -29,39 +41,60 @@ class FeatureMoreNavExtension {
     _context.pushType(AppNavPath.more.emergencyContacts);
   }
 
-  void pushCreatePinCodePage() {
-    _context.pushType(
+  Future<T?> pushCreatePinCodePage<T>() {
+    return _context.pushType<T>(
       AppNavPath.more.pinCodePage,
       queryParameters: {"changePin": "false"},
     );
   }
 
-  void pushChangePinCodePage() {
-    _context.pushType(
+  Future<T?> pushChangePinCodePage<T>() {
+    return _context.pushType<T>(
       AppNavPath.more.pinCodePage,
       queryParameters: {"changePin": "true"},
     );
   }
 
   void pushWebViewPage({
-    String? title,
     required String actionUrl,
     bool? authRequired = false,
   }) {
     _context.pushType(
       AppNavPath.more.webViewPage,
       queryParameters: {
-        "title": title??"",
         "actionUrl": actionUrl,
         "authRequired": authRequired.toString(),
       },
     );
   }
 
-  void pushPdfViewPage({String? title, String? pdfUrl}) {
+  Future<void> openUrl(
+    String url, {
+    bool authRequired = false,
+  }) async {
+    final trimmed = url.trim();
+    if (trimmed.isEmpty) return;
+
+    final uri = Uri.tryParse(trimmed);
+    final isWebPage = uri != null && (uri.scheme == "http" || uri.scheme == "https");
+    if (!isWebPage) {
+      await LauncherUtils.urlLauncher(
+        trimmed,
+        mode: LaunchMode.externalApplication,
+      );
+      return;
+    }
+
+    pushWebViewPage(
+      actionUrl: trimmed,
+      authRequired: authRequired,
+    );
+  }
+
+  void pushPdfViewPage({String? pdfUrl}) {
     _context.pushType(
       AppNavPath.more.pdfPreViewPage,
-      queryParameters: {"title": title, "pdfUrl": pdfUrl},
+      queryParameters: {"pdfUrl": pdfUrl},
     );
   }
 }

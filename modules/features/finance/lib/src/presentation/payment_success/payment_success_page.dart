@@ -50,26 +50,13 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
                         borderRadius: BorderRadius.circular(24),
                         child: Container(
                           color: context.appColors.fill.quaternary,
-                          child: ExtendedImage.network(
+                          child: AppNetworkImage(
                             widget.params.merchant.icon ?? "",
                             width: 80,
                             height: 80,
                             fit: BoxFit.fill,
                             colorBlendMode: BlendMode.hardLight,
                             color: context.appColors.fill.quaternary,
-
-                            loadStateChanged: (state) {
-                              switch (state.extendedImageLoadState) {
-                                case LoadState.completed:
-                                  return AnimatedOpacity(
-                                    opacity: 1.0,
-                                    duration: Duration(milliseconds: 300),
-                                    child: state.completedWidget,
-                                  );
-                                default:
-                                  return SizedBox();
-                              }
-                            },
                           ),
                         ),
                       ),
@@ -83,7 +70,7 @@ class _PaymentSuccessPageState extends State<PaymentSuccessPage> {
                           backgroundColor: context.appColors.colors.green,
                           child: Padding(
                             padding: const EdgeInsets.all(4.0),
-                            child: Assets.svgIconCheck.toSvgImage(
+                            child: Assets.svg.iconCheck.path.toSvgImage(
                               fit: BoxFit.fill,
                               colorFilter: ColorFilter.mode(
                                 context.appColors.static.white,

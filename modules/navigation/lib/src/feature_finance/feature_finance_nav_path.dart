@@ -6,8 +6,11 @@ class _FeatureFinanceNavPath {
   AppNavPath get financeHome =>
       _NavPathImpl(name: 'feature_finance_home', path: '/finance');
 
-  AppNavPath get financeCards =>
-      _NavPathImpl(name: 'feature_finance_cards', path: '/finance/cards/:type');
+  AppNavPath get financeCards => _NavPathImpl(
+    name: 'feature_finance_cards',
+    path: '/finance/cards/:type',
+    authRequired: true,
+  );
 
   AppNavPath get financeAddCard =>
       _NavPathImpl(name: 'feature_finance_add_card', path: '/finance/add_card');
@@ -15,6 +18,7 @@ class _FeatureFinanceNavPath {
   AppNavPath get financePayment => _NavPathImpl(
     name: 'feature_finance_payment',
     path: '/pay/:id',
+    authRequired: true,
   );
 
   AppNavPath get verification =>
@@ -31,6 +35,7 @@ class _FeatureFinanceNavPath {
   AppNavPath get paymentHistoryPage => _NavPathImpl(
     name: 'feature_finance_payment_history',
     path: '/finance/payment_history',
+    authRequired: true,
   );
 
   AppNavPath get paymentTransactionDetailPage => _NavPathImpl(
@@ -50,4 +55,19 @@ class _FeatureFinanceNavPath {
     name: 'feature_finance_currencies_modal_page',
     path: '/feature/finance/currenciesModal',
   );
+
+  List<AppNavPath> get values => [
+    financeHome,
+    financeCards,
+    financeAddCard,
+    financePayment,
+    verification,
+    paymentSuccessPage,
+    qrReaderPage,
+    paymentHistoryPage,
+    paymentTransactionDetailPage,
+    financeMerchants,
+    currenciesPage,
+    currenciesModalPage,
+  ];
 }

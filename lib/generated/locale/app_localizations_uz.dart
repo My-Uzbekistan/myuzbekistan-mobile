@@ -24,6 +24,24 @@ class AppLocalizationsUz extends AppLocalizations {
   String get nav_more => 'Ko‘proq';
 
   @override
+  String get nav_back => 'Ortga';
+
+  @override
+  String get nav_ai_guide => 'GidAI';
+
+  @override
+  String get nav_market => 'Market';
+
+  @override
+  String get nav_favorites => 'Saralangan';
+
+  @override
+  String get nav_basket => 'Savat';
+
+  @override
+  String get nav_profile => 'Profil';
+
+  @override
   String get catalogMyEsim => 'My eSIM';
 
   @override
@@ -55,4 +73,27 @@ class AppLocalizationsUz extends AppLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Tez orada';
+
+  @override
+  String get new_version_available => 'Yangi versiya mavjud';
+
+  @override
+  String get new_features_and_security =>
+      'Yangi funksiyalar mavjud va xavfsizlik kuchaytirildi. Ilovani yangilashni tavsiya qilamiz.';
+
+  @override
+  String get update_app_now => 'Ilovani yangilash';
+
+  @override
+  String get update_app_later => 'Keyin yangilash';
+
+  @override
+  String get page_not_found_title => 'Sahifa topilmadi';
+
+  @override
+  String get page_not_found_message =>
+      'Bu havola eskirgan yoki sahifa ko‘chirilgan bo‘lishi mumkin.';
+
+  @override
+  String get page_not_found_go_home => 'Bosh sahifaga';
 }

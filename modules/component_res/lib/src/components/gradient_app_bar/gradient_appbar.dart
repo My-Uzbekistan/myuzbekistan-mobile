@@ -8,25 +8,36 @@ import '../button/rounded_button.dart';
 
 
 class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
+  static const double navbarHeight = 48;
+
   final String? title;
+  final Widget? widget;
   final Widget? leading;
   final List<Widget>? actions;
   final bool? centerTitle;
   final bool automaticallyImplyLeading;
+  final double? toolbarHeight;
+  final Color? gradientColor;
 
   const GradientAppBar(
       {super.key,
       this.title,
+        this.widget,
       this.leading,
       this.actions,
       this.centerTitle,
+      this.toolbarHeight,
+      this.gradientColor,
       this.automaticallyImplyLeading = true});
+
+  double get _height => toolbarHeight ?? kToolbarHeight;
 
   @override
   Widget build(BuildContext context) {
+    final actionsTopPadding = toolbarHeight == null ? 10.0 : 0.0;
     final leadingWidget = Container(
-      padding: const EdgeInsets.only(top: 10),
-      alignment: Alignment.topRight,
+      padding: EdgeInsets.only(top: actionsTopPadding),
+      alignment: Alignment.centerRight,
       child: leading ??
           (automaticallyImplyLeading
               ? RoundedButton.arrowLeft(
@@ -49,13 +60,15 @@ class GradientAppBar extends StatelessWidget implements PreferredSizeWidget {
       forceMaterialTransparency: true,
       shadowColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
-      title: title != null ? Text(title!) : null,
-      flexibleSpace: const AppGradientMask(),
-      actionsPadding: const EdgeInsets.only(right: 16, top: 10),
+
+      title: title != null ? Text(title!) : widget,
+      flexibleSpace: AppGradientMask(gradientColor: gradientColor),
+      toolbarHeight: toolbarHeight,
+      actionsPadding: EdgeInsets.only(right: 16, top: actionsTopPadding),
       actions: actions,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => Size.fromHeight(_height);
 }

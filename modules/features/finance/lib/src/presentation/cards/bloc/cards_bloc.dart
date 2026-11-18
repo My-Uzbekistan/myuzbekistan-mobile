@@ -66,7 +66,13 @@ class CardsBloc extends Bloc<CardsEvent, CardsState> {
 
   void _setCards(_SetCardsEvent event, Emitter<CardsState> emitter) {
     if (state is CardsDataState) {
-      emitter((state as CardsDataState).copyWith(cards: event.cards));
+      final current = state as CardsDataState;
+      emitter(
+        current.copyWith(
+          cards: event.cards,
+          isEdit: event.cards.isNotEmpty && current.isEdit,
+        ),
+      );
     } else {
       emitter(CardsState.dataState(event.cards));
     }

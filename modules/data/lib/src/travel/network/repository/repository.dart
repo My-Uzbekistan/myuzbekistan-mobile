@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:data/src/travel/models/review/review_dto.dart';
 import 'package:data/src/utils/generic/generics.dart';
 import 'package:domain/domain.dart';
+import 'package:domain/src/models/onboarding_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
 
-import '../../../models/items_response.dart';
-import '../../models/places/content_dto_model.dart';
+import '../../../models/items/items_response.dart';
+import '../../models/content_dto_model/content_dto_model.dart';
 import '../api/service.dart';
 
 @Injectable(as: Repository)
@@ -72,11 +73,108 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<List<ServiceAction>> getServices() {
+    return _restService.getServices().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future<CitiesResult> loadCities() {
+    return _restService.loadCities().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<CityDetail> loadCityDetail({
+    required int cityId,
+    double? lat,
+    double? lon,
+  }) {
+    return _restService
+        .loadCityDetail(cityId: cityId, lat: lat, lon: lon)
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<List<BannerItem>> loadBanners() {
+    return _restService.loadBanners().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future<String?> loadHomeBackground() {
+    return _restService.loadHomeBackground().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<String?> loadAiGuideLink() {
+    return _restService.loadAiGuideLink().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<AirQuality> loadAirQuality({
+    required double lat,
+    required double lon,
+  }) {
+    return _restService
+        .loadAirQuality(lat: lat, lon: lon)
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<AirQuality> loadAirQualityByRegion({required int regionId}) {
+    return _restService
+        .loadAirQualityByRegion(regionId: regionId)
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<PrayerTimes> loadPrayerTimes({int? locationId, DateTime? date}) {
+    return _restService
+        .loadPrayerTimes(
+          locationId: locationId,
+          date: date == null ? null : DateFormat("yyyy-MM-dd").format(date),
+        )
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<List<PrayerLocation>> loadPrayerLocations() {
+    return _restService.loadPrayerLocations().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future<PrayerReminders> loadPrayerReminders() async {
+    final firebaseToken = await FirebaseMessaging.instance.getToken();
+    return _restService
+        .loadPrayerReminders(firebaseToken: firebaseToken.orEmpty())
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<dynamic> updatePrayerReminders({
+    required int locationId,
+    required List<PrayerKey> prayers,
+  }) async {
+    final firebaseToken = await FirebaseMessaging.instance.getToken();
+    return _restService.updatePrayerReminders({
+      "locationId": locationId,
+      "prayers": prayers.map((e) => e.name).toList(),
+      "firebaseToken": firebaseToken.orEmpty(),
+    }).call();
+  }
+
+  @override
   Future<List<MainPageContent>> loadContentsByCategory({
     required int categoryId,
     required int page,
     required int pageSize,
+    int? regionId,
     String? search,
+    Map<String, String>? sort,
   }) {
     return _restService
         .loadContentsByCategory(
@@ -84,6 +182,8 @@ class RepositoryImp implements Repository {
           page: page,
           pageSize: pageSize,
           search: search,
+          regionId: regionId,
+          sort: sort,
         )
         .call((data) => data.map((e) => e.toDomain()).toList());
   }
@@ -154,8 +254,47 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future logout() {
+    return _restService.logout().call();
+  }
+
+  @override
   Future deleteAccount() {
     return _restService.deleteAccount().call();
+  }
+
+  @override
+  Future<String?> uploadProfilePicture({required File file}) async {
+    final multipartFile = await MultipartFile.fromFile(
+      file.path,
+      filename: file.path.split('/').last,
+    );
+    return _restService.uploadProfilePicture(multipartFile).call((data) {
+      if (data is Map) return data["profilePictureUrl"] as String?;
+      return null;
+    });
+  }
+
+  @override
+  Future<UserProfile> deleteProfilePicture() {
+    return _restService.deleteProfilePicture().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<UserInfoModel> getUserInfo() {
+    return _restService.getUserInfo().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<UserProfile> getProfile() {
+    return _restService.getProfile().call((data) => data.toDomain());
+  }
+
+  @override
+  Future<UserProfile> saveProfile({String? firstName, String? lastName}) {
+    return _restService
+        .saveProfile({"firstName": firstName, "lastName": lastName})
+        .call((data) => data.toDomain());
   }
 
   // {
@@ -186,6 +325,17 @@ class RepositoryImp implements Repository {
       "osVersion": osVersion,
       "model": model,
       "appVersion": info.version,
+    }).call();
+  }
+
+  @override
+  Future<dynamic> updateNotificationSettings({
+    required bool pushEnabled,
+  }) async {
+    final firebaseToken = await FirebaseMessaging.instance.getToken();
+    return _restService.updateNotificationSettings({
+      "pushEnabled": pushEnabled,
+      "token": firebaseToken.orEmpty(),
     }).call();
   }
 
@@ -236,6 +386,16 @@ class RepositoryImp implements Repository {
   }
 
   @override
+  Future<dynamic> seenAllNotifications() {
+    return _restService.seenAllNotifications().call();
+  }
+
+  @override
+  Future<int> getNotificationUnreadCount() {
+    return _restService.getNotificationUnreadCount();
+  }
+
+  @override
   Future addReview({
     required int contentId,
     required String comment,
@@ -277,44 +437,74 @@ class RepositoryImp implements Repository {
   }
 
   @override
-  Future<List<CatalogItemModel>> getCatalog() async {
+  Future<List<CatalogItemModel>> getCatalogV3({
+    int page = 1,
+    int pageSize = 50,
+    String? search,
+    int? catalogStatus,
+  }) {
+    return _restService
+        .getCatalogV3(
+          page: page,
+          pageSize: pageSize,
+          search: search,
+          catalogStatus: catalogStatus,
+        )
+        .call((data) => data.map((e) => e.toDomain()).toList());
+  }
 
-    return _restService.getCatalog().call((data)=>data.map((e) => e.toDomain()).toList());
-    await Future.delayed(Duration(seconds: 2));
-    return Future.value([
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        color: Color(0xff04A5FE),
-        title: "My eSIM",
-        status: CatalogStatus.newService,
-        actionType: CatalogActionType.inner,
-        authRequired: true,
-        action: "https://esimapp.myuz.uz",
-      ),
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        color: Color(0xff37A8C7),
-        title: "Travel Cam AI",
-        status: CatalogStatus.active,
-        actionType: CatalogActionType.inner,
-        action: "https://travel-cam-ai.vercel.app?lang=uz",
-      ),
+  @override
+  Future<List<OnboardingItem>> getActiveOnboardings() {
+    return _restService.getActiveOnboardings().call(
+      (data) => data.map((e) => e.toDomain()).toList(),
+    );
+  }
 
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        color: Color(0xff14CB7D),
-        title: "Travel Quiz",
-        status: CatalogStatus.active,
-        actionType: CatalogActionType.inner,
-        action: "https://myuzb.uz/notifications?notificationId=1234",
-      ),
-      CatalogItemModel(
-        icon: "https://picsum.photos/200/300",
-        title: "Авиабилеты",
-        status: CatalogStatus.upcoming,
-        actionType: CatalogActionType.inner,
-      ),
-    ]);
+  @override
+  Future onboardingTrackClick({required int id}) {
+    return _restService.onboardingTrackClick(id).call();
+  }
+
+  @override
+  Future onboardingTrackView({required int id}) {
+    return _restService.onboardingTrackView(id).call();
+  }
+
+  @override
+  Future sendCode({required String phoneNumber}) {
+    return _restService.authPhoneSendCode({"phone": phoneNumber}).call();
+  }
+
+  @override
+  Future<Token> authConfirmCode({
+    required String phoneNumber,
+    required String code,
+  }) {
+    return _restService
+        .authPhoneConfirm({"phone": phoneNumber, "code": code})
+        .call((data) => data.toDomain());
+  }
+
+  @override
+  Future<bool> giftEnabled() {
+    return _restService.giftStatus().call((data) => data.enabled);
+  }
+
+  @override
+  Future<ClaimStatus?> giftActive() {
+    return _restService.giftActive().call((data) => data?.toDomain());
+  }
+
+  @override
+  Future<List<ClaimHistory>> giftHistory({int page = 1, int pageSize = 100}) {
+    return _restService.giftHistory(page: page, pageSize: pageSize).call(
+      (data) => data.items.map((e) => e.toDomain()).toList(),
+    );
+  }
+
+  @override
+  Future<ClaimHistory> giftActivate() {
+    return _restService.giftActivate().call((data) => data.toDomain());
   }
 }
 

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:component_res/component_res.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppGradientMask extends StatelessWidget {
@@ -12,6 +13,7 @@ class AppGradientMask extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
+      borderRadius: _sheetCornerRadius(context),
       child: BackdropFilter(
         filter: ImageFilter.blur(
           sigmaX: 1.2,
@@ -36,12 +38,24 @@ class AppGradientMask extends StatelessWidget {
       ),
     );
   }
+
+  BorderRadius _sheetCornerRadius(BuildContext context) {
+    final route = ModalRoute.of(context);
+    if (route is CupertinoSheetRoute) {
+      return const BorderRadius.vertical(top: Radius.circular(12));
+    }
+    if (route is ModalBottomSheetRoute) {
+      return const BorderRadius.vertical(top: Radius.circular(24));
+    }
+    return BorderRadius.zero;
+  }
 }
 
 class BlurHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double height;
+  final Color? gradientColor;
 
-  BlurHeaderDelegate(this.height);
+  BlurHeaderDelegate(this.height, {this.gradientColor});
 
   @override
   double get minExtent => height;
@@ -55,9 +69,10 @@ class BlurHeaderDelegate extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return AppGradientMask();
+    return AppGradientMask(gradientColor: gradientColor);
   }
 
   @override
-  bool shouldRebuild(covariant BlurHeaderDelegate oldDelegate) => false;
+  bool shouldRebuild(covariant BlurHeaderDelegate oldDelegate) =>
+      oldDelegate.gradientColor != gradientColor;
 }

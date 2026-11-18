@@ -53,14 +53,16 @@ class PriceCategoryWithContainer extends StatelessWidget {
               child: Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.64),
+                    color: context.appColors.service.scrim
+                        .withValues(alpha: 0.64),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   alignment: Alignment.center,
                   child: PriceCategory(
-                    activeTextColor: Colors.white,
+                    activeTextColor: context.appColors.service.onMedia,
                     priceCategory: priceCategory,
-                    inactiveTextColor: Colors.white.withValues(alpha: 0.56),
+                    inactiveTextColor: context.appColors.service.onMedia
+                        .withValues(alpha: 0.56),
                   )),
             ),
           ),
@@ -90,14 +92,17 @@ class PriceContainer extends StatelessWidget {
               child: Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.64),
+                    color: context.appColors.service.scrim
+                        .withValues(alpha: 0.64),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   alignment: Alignment.center,
                   child: Text(
                     priceText,
                     style:
-                        CustomTypography.labelSm.copyWith(color: Colors.white),
+                        CustomTypography.labelSm.copyWith(
+                      color: context.appColors.service.onMedia,
+                    ),
                   )),
             ),
           ),

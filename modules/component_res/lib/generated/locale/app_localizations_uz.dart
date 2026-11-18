@@ -31,4 +31,17 @@ class CoreAppLocalizationsUz extends CoreAppLocalizations {
 
   @override
   String get action_more => 'Batafsil';
+
+  @override
+  String get no_internet =>
+      'Internet aloqasi yo‘q. Ulanishni tekshirib, qayta urinib ko‘ring';
+
+  @override
+  String get no_internet_title => 'Internet yo‘q';
+
+  @override
+  String get action_retry => 'Qayta urinish';
+
+  @override
+  String get action_open_settings => 'Sozlamalarga o‘tish';
 }

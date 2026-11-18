@@ -17,11 +17,13 @@ mixin AppImageCard {
       int? star,
       double ratingAverage = 0,
       int averageCheck = 0,
+      bool blur = false,
       String? priceText}) {
     return _AppItemCardImage(
       imageUrl: imageUrl,
       ratingAverage: ratingAverage,
       averageCheck: averageCheck,
+      blur: blur,
       priceText: priceText,
     );
   }
@@ -47,6 +49,7 @@ class _AppItemCardImage extends StatefulWidget {
   final int averageCheck;
   final String? priceText;
   final Widget? topRightWidget;
+  final bool blur;
 
   const _AppItemCardImage(
       {super.key,
@@ -55,6 +58,7 @@ class _AppItemCardImage extends StatefulWidget {
       this.ratingAverage = 0,
       this.averageCheck = 0,
       this.topRightWidget,
+      this.blur = false,
 
       this.priceText});
 
@@ -77,6 +81,15 @@ class _AppItemCardImageState extends State<_AppItemCardImage>
       height = 100;
     }
 
+    final image = AppNetworkImage(
+      widget.imageUrl ?? "",
+      fit: BoxFit.cover,
+      height: double.maxFinite,
+      width: double.maxFinite,
+      cacheMaxAge: const Duration(days: 1),
+      placeholder: Assets.png.defaultContentImage.image(fit: BoxFit.fill),
+    );
+
     return SizedBox(
       height: height,
       width: width,
@@ -84,7 +97,31 @@ class _AppItemCardImageState extends State<_AppItemCardImage>
         borderRadius: BorderRadius.circular(20),
         child: Stack(
           children: [
-            _ImageContent(imageUrl: widget.imageUrl ?? ""),
+            widget.blur
+                ? Positioned.fill(
+                    child: SoftEdgeBlur(
+                      edges: [
+                        EdgeBlur(
+                          type: EdgeType.bottomEdge,
+                          size: 70,
+                          sigma: 6,
+                          tileMode: TileMode.mirror,
+                          controlPoints: [
+                            ControlPoint(
+                              position: 0.7,
+                              type: ControlPointType.visible,
+                            ),
+                            ControlPoint(
+                              position: 1,
+                              type: ControlPointType.transparent,
+                            ),
+                          ],
+                        ),
+                      ],
+                      child: image,
+                    ),
+                  )
+                : image,
             Positioned.fill(
                 child: Container(
               color: context.appColors.static.black.withValues(
@@ -113,49 +150,6 @@ class _AppItemCardImageState extends State<_AppItemCardImage>
         ),
       ),
     );
-  }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
-}
-
-class _ImageContent extends StatefulWidget {
-  final String imageUrl;
-
-  const _ImageContent({super.key, required this.imageUrl});
-
-  @override
-  State<_ImageContent> createState() => _ImageContentState();
-}
-
-class _ImageContentState extends State<_ImageContent> {
-  @override
-  Widget build(BuildContext context) {
-    return  ExtendedImage.network(
-          widget.imageUrl,
-          key: ValueKey(widget.imageUrl),
-          fit: BoxFit.cover,
-          height: double.maxFinite,
-          width: double.maxFinite,
-          cache: true,
-          cacheMaxAge: const Duration(days: 1),
-          loadStateChanged: (ExtendedImageState state) {
-            switch (state.extendedImageLoadState) {
-              case LoadState.completed:
-                return AnimatedOpacity(
-                  opacity: 1.0,
-                  duration: Duration(milliseconds: 200),
-                  child: state.completedWidget,
-                ); // ✅ Default image o'zi ko'rsatiladi
-              default:
-                return Assets.pngDefaultContentImage.toImage(fit: BoxFit.fill);
-            }
-          },
-
-
-      );
-
   }
 
   @override

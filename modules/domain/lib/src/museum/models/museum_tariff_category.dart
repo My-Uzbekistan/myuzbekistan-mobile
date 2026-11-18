@@ -1,0 +1,1 @@
+enum MuseumTariffCategory { adult, child }

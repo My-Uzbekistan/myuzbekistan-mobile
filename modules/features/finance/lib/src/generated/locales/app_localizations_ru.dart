@@ -39,16 +39,28 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
   String get payment_history_title => 'История';
 
   @override
-  String get payment_qr_title => 'QR Платёж';
+  String get payment_qr_title => 'QR-оплата';
 
   @override
   String get card_number_label => 'Номер карты';
 
   @override
+  String get card_number_hint => 'Введите номер карты';
+
+  @override
   String get card_expiry_label => 'Срок действия';
 
   @override
+  String get card_expiry_full_label => 'Срок действия карты';
+
+  @override
   String get card_expiry_hint => 'ММ/ГГ';
+
+  @override
+  String get cvv_label => 'CVV / CVC';
+
+  @override
+  String get cvv_hint => '000';
 
   @override
   String get card_holder_label => 'Имя на карте';
@@ -86,6 +98,20 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
   String get nearest_places => 'Ближайшие места';
 
   @override
+  String get distanceM => 'м';
+
+  @override
+  String get distanceKm => 'км';
+
+  @override
+  String get action_all => 'Все';
+
+  @override
+  String rates_last_update(Object date) {
+    return 'Последнее обновление $date';
+  }
+
+  @override
   String get currency_calculator => 'Калькулятор валют';
 
   @override
@@ -114,4 +140,87 @@ class FeatureFinanceLocalizationsRu extends FeatureFinanceLocalizations {
 
   @override
   String get fiscalReceipt => 'Фискальный чек';
+
+  @override
+  String verification_page_code_send_phone(Object phone) {
+    return 'Код подтверждения отправлен на $phone';
+  }
+
+  @override
+  String get payment_title => 'Оплата';
+
+  @override
+  String get enter_amount => 'Введите сумму';
+
+  @override
+  String get action_change => 'Изменить';
+
+  @override
+  String get payment_order_details => 'Детали заказа';
+
+  @override
+  String get payment_summary_title => 'Детали оплаты';
+
+  @override
+  String get payment_summary_order => 'Заказ';
+
+  @override
+  String get payment_summary_delivery => 'Доставка';
+
+  @override
+  String get payment_summary_total => 'Итого:';
+
+  @override
+  String get payment_free_cancellation_title => 'Бесплатная отмена';
+
+  @override
+  String payment_free_cancellation_subtitle(Object date) {
+    return 'Отмените до $date для полного возврата средств';
+  }
+
+  @override
+  String get payment_details_title => 'Детали';
+
+  @override
+  String get payment_status_success => 'Успешно оплачено';
+
+  @override
+  String get payment_status_pending => 'В ожидании';
+
+  @override
+  String get payment_status_cancelled => 'Отменено';
+
+  @override
+  String get payment_status_refunded => 'Возврат';
+
+  @override
+  String get action_retry => 'Повторить';
+
+  @override
+  String get back_to_home => 'Вернуться на главную';
+
+  @override
+  String get history_empty_title => 'История пуста';
+
+  @override
+  String get history_empty_message => 'Здесь появятся ваши платежи';
+
+  @override
+  String get history_failed_title => 'Не удалось загрузить историю';
+
+  @override
+  String get cards_empty_title => 'Нет карт';
+
+  @override
+  String get cards_empty_message => 'Добавленные карты появятся здесь';
+
+  @override
+  String get camera_permission_denied =>
+      'Нет доступа к камере. Разрешите доступ к камере в настройках, чтобы сканировать QR-код';
+
+  @override
+  String get camera_unavailable => 'Не удалось запустить камеру';
+
+  @override
+  String get card_expiry_invalid => 'Неверный срок';
 }

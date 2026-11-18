@@ -34,19 +34,64 @@ class _FeatureMoreNavPath {
 
   AppNavPath get changeTheme =>
       _NavPathImpl(name: "feature_more_change_theme", path: "/changeTheme");
+
   AppNavPath get aboutApp =>
       _NavPathImpl(name: "feature_more_about_app", path: "/aboutApp");
-  AppNavPath get aboutUsInfoPage =>
-      _NavPathImpl(name: "feature_more_about_us_info_page", path: "/aboutUsInfoPage");
+
+  AppNavPath get editProfile =>
+      _NavPathImpl(name: "feature_more_edit_profile", path: "/editProfile");
+
+  AppNavPath get securityPage =>
+      _NavPathImpl(name: "feature_more_security_page", path: "/securityPage");
+
+  AppNavPath get devicesPage =>
+      _NavPathImpl(name: "feature_more_devices_page", path: "/devicesPage");
+
+  AppNavPath get aboutUsInfoPage => _NavPathImpl(
+    name: "feature_more_about_us_info_page",
+    path: "/aboutUsInfoPage",
+  );
 
   AppNavPath get authPage =>
       _NavPathImpl(name: "feature_more_auth_page", path: "/authPage");
 
+  AppNavPath get authPhonePage => _NavPathImpl(
+    name: "feature_more_auth_phone_page",
+    path: "/authPhonePage",
+  );
+
+  AppNavPath get authVerification => _NavPathImpl(
+    name: 'feature_more_auth_verification',
+    path: '/authVerification',
+  );
+
   AppNavPath get pinCodePage =>
       _NavPathImpl(name: "feature_more_pin_code_page", path: "/pinCodePage");
+
   AppNavPath get checkPin =>
       _NavPathImpl(name: "feature_more_check_pin", path: "/checkPin");
+
   AppNavPath get forceUpdate =>
       _NavPathImpl(name: "feature_more_force_update", path: "/forceUpdate");
 
+  List<AppNavPath> get values => [
+    moreHome,
+    selectLangPage,
+    emergencyContacts,
+    webViewPage,
+    pdfPreViewPage,
+    changeLang,
+    changeTheme,
+    aboutApp,
+    editProfile,
+    securityPage,
+    devicesPage,
+    aboutUsInfoPage,
+    authPage,
+    authPhonePage,
+    authVerification,
+    pinCodePage,
+    checkPin,
+    forceUpdate,
+  ];
 }

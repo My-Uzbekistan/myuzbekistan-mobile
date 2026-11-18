@@ -1,7 +1,8 @@
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:more/src/di/injection.dart';
-import 'package:more/src/pages/force_update/force_update_page.dart';
+import 'package:more/src/pages/auth/auth_phone/auth_phone_page.dart';
+import 'package:more/src/pages/auth/auth_phone/bloc/auth_phone_bloc.dart';
 import 'package:more/src/pages/pin/check_pin/bloc/check_pin_bloc.dart';
 import 'package:more/src/pages/pin/pin_code_bloc/pincode_bloc.dart';
 import 'package:more/src/pages/pin/pincode_page.dart';
@@ -12,13 +13,18 @@ import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
 import '../pages/about_app/about_app.dart';
+import '../pages/edit_profile/bloc/edit_profile_bloc.dart';
+import '../pages/edit_profile/edit_profile_page.dart';
+import '../pages/devices/bloc/devices_bloc.dart';
+import '../pages/devices/devices_page.dart';
+import '../pages/security/security_page.dart';
 import '../pages/auth/auth_page.dart';
 import '../pages/auth/bloc/auth_bloc.dart';
 import '../pages/pin/check_pin/check_pincode.dart';
 import '../pages/profile_page/pages/change_locale.dart';
 import '../pages/profile_page/pages/change_theme_page.dart';
 import '../pages/shell_more/pages/emergancy_contacts.dart';
-import '../pages/shell_more/pages/web_view_page.dart';
+import '../pages/web_view/web_view_page.dart';
 import '../pages/shell_more/shell_more_page.dart';
 
 mixin FeatureMoreRouter {
@@ -48,19 +54,6 @@ mixin FeatureMoreRouter {
       // builder: (context, state) => SelectLangPage(),
     ),
     GoRoute(
-      path: AppNavPath.more.forceUpdate.path,
-      name: AppNavPath.more.forceUpdate.name,
-      pageBuilder:
-          (context, state) => buildSlideTransitionPage(
-            child: ForceUpdatePage(
-              appStoreLink: state.uri.queryParameters["appStoreLink"]!,
-            ),
-            context: context,
-            state: state,
-            slideAlign: SlideAlign.vertical
-          ),
-    ),
-    GoRoute(
       path: AppNavPath.more.emergencyContacts.path,
       name: AppNavPath.more.emergencyContacts.name,
       pageBuilder: (context, state) {
@@ -74,25 +67,16 @@ mixin FeatureMoreRouter {
     GoRoute(
       path: AppNavPath.more.webViewPage.path,
       name: AppNavPath.more.webViewPage.name,
-      redirect: (context, state) {
-        if (state.uri.queryParameters["authRequired"] == "true") {
-          final securityStorage = getIt<SecurityStorage>();
-
-          if (securityStorage.getAccessToken() == null) {
-            return "${AppNavPath.more.authPage.path}?slideAlign=vertical";
-          }
-        }
-
-        return null;
-      },
       pageBuilder: (context, state) {
         return buildSlideTransitionPage(
           child: WebViewPage(
-            title: state.uri.queryParameters["title"],
-            actionUrl: state.uri.queryParameters["actionUrl"],
+            actionUrl: parseString(state.uri.queryParameters["actionUrl"]),
+            authRequired:
+                parseBool(state.uri.queryParameters["authRequired"]) ?? false,
           ),
           context: context,
           state: state,
+          slideAlign: SlideAlign.vertical,
         );
       },
     ),
@@ -103,31 +87,67 @@ mixin FeatureMoreRouter {
       pageBuilder: (context, state) {
         return buildSlideTransitionPage(
           child: WebViewPage(
-            title: state.uri.queryParameters["title"],
-            actionUrl: state.uri.queryParameters["actionUrl"],
+            actionUrl: parseString(state.uri.queryParameters["pdfUrl"]),
           ),
           context: context,
           state: state,
+          slideAlign: SlideAlign.vertical,
         );
       },
     ),
 
     GoRoute(
-      path: AppNavPath.more.authPage.path,
-      name: AppNavPath.more.authPage.name,
+      path: AppNavPath.more.authPhonePage.path,
+      name: AppNavPath.more.authPhonePage.name,
       pageBuilder:
           (context, state) => buildSlideTransitionPage(
-            child: BlocProvider(
-              create: (context) => getIt<AuthBlock>(),
-              child: AuthPage(),
-            ),
-            context: context,
-            state: state,
-            slideAlign:
-                state.uri.queryParameters["slideAlign"] == "vertical"
-                    ? SlideAlign.vertical
-                    : SlideAlign.horizontal,
-          ),
+        child: BlocProvider(
+          create: (context) => getIt<AuthPhoneBloc>(),
+          child: AuthPhonePage(),
+        ),
+        context: context,
+        state: state,
+      ),
+    ),
+    GoRoute(
+      path: AppNavPath.more.authPage.path,
+      name: AppNavPath.more.authPage.name,
+      pageBuilder: (context, state) {
+        final slideAlign = state.uri.queryParameters["slideAlign"];
+        final child = BlocProvider(
+          create: (context) => getIt<AuthBlock>(),
+          child: AuthPage(),
+        );
+
+        // Til tanlash / birinchi ochilish oqimida (slideAlign yo'q) — butun
+        // sahifani surmasdan fade qilamiz. Fon rasmi ikkala ekranda bir xil
+        // bo'lgani uchun fade ko'rinmaydi, faqat kontent silliq almashadi.
+        if (slideAlign == null) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            transitionDuration: const Duration(milliseconds: 400),
+            reverseTransitionDuration: const Duration(milliseconds: 300),
+            child: child,
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                alwaysIncludeSemantics: false,
+                child: child,
+              );
+            },
+          );
+        }
+
+        return buildSlideTransitionPage(
+          child: child,
+          context: context,
+          state: state,
+          slideAlign:
+              slideAlign == "vertical"
+                  ? SlideAlign.vertical
+                  : SlideAlign.horizontal,
+        );
+      },
     ),
     GoRoute(
       path: AppNavPath.more.pinCodePage.path,
@@ -169,16 +189,24 @@ mixin FeatureMoreRouter {
       path: AppNavPath.more.changeLang.path,
       name: AppNavPath.more.changeLang.name,
       pageBuilder:
-          (context, state) =>
-              ModalPage(child: ChangeLocalePage(), showDragHandle: true),
+          (context, state) => ModalPage(
+            child: ChangeLocalePage(),
+            showDragHandle: false,
+            useSafeArea: false,
+            backgroundColor: Color(0x00000000),
+          ),
     ),
 
     GoRoute(
       path: AppNavPath.more.changeTheme.path,
       name: AppNavPath.more.changeTheme.name,
       pageBuilder:
-          (context, state) =>
-              ModalPage(child: ChangeThemePage(), showDragHandle: true),
+          (context, state) => ModalPage(
+            child: ChangeThemePage(),
+            showDragHandle: false,
+            useSafeArea: false,
+            backgroundColor: Color(0x00000000),
+          ),
     ),
     GoRoute(
       path: AppNavPath.more.aboutApp.path,
@@ -186,6 +214,45 @@ mixin FeatureMoreRouter {
       pageBuilder:
           (context, state) => buildSlideTransitionPage(
             child: AboutApp(),
+            context: context,
+            state: state,
+          ),
+    ),
+    GoRoute(
+      path: AppNavPath.more.editProfile.path,
+      name: AppNavPath.more.editProfile.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: BlocProvider(
+              create:
+                  (ctx) =>
+                      getIt<EditProfileBloc>()..add(EditProfileEvent.fetch()),
+              child: const EditProfilePage(),
+            ),
+            context: context,
+            state: state,
+          ),
+    ),
+    GoRoute(
+      path: AppNavPath.more.securityPage.path,
+      name: AppNavPath.more.securityPage.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: const SecurityPage(),
+            context: context,
+            state: state,
+          ),
+    ),
+    GoRoute(
+      path: AppNavPath.more.devicesPage.path,
+      name: AppNavPath.more.devicesPage.name,
+      pageBuilder:
+          (context, state) => buildSlideTransitionPage(
+            child: BlocProvider(
+              create:
+                  (ctx) => getIt<DevicesBloc>()..add(DevicesEvent.fetch()),
+              child: const DevicesPage(),
+            ),
             context: context,
             state: state,
           ),

@@ -21,22 +21,13 @@ class AppBadge extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (iconUrl != null)
-            ExtendedImage.network(iconUrl ?? "",
+            AppNetworkImage(
+              iconUrl ?? "",
               height: 20,
               width: 20,
               color: context.appColors.textIconColor.primary,
               colorBlendMode: BlendMode.srcIn,
-
-              loadStateChanged: (state){
-
-              switch(state.extendedImageLoadState){
-
-                case LoadState.completed : return null;
-                default : return SizedBox();
-              }
-              },
-
-            ) ,
+            ),
           Flexible(
             child: Text(
               title,

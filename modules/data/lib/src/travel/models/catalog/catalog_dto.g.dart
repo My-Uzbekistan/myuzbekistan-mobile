@@ -7,7 +7,8 @@ part of 'catalog_dto.dart';
 // **************************************************************************
 
 CatalogDto _$CatalogDtoFromJson(Map<String, dynamic> json) => CatalogDto(
-  icon: json['icon'] as String,
+  id: (json['id'] as num?)?.toInt(),
+  icon: json['icon'] as String?,
   color: _$JsonConverterFromJson<String, Color>(
     json['color'],
     const HexColorConverter().fromJson,
@@ -15,12 +16,15 @@ CatalogDto _$CatalogDtoFromJson(Map<String, dynamic> json) => CatalogDto(
   title: json['title'] as String,
   status: (json['status'] as num?)?.toInt(),
   action: json['action'] as String?,
-  actionType: (json['actionType'] as num?)?.toInt(),
+  actionType: const AppActionTypeConvertor().fromJson(json['actionType']),
   authRequired: json['authRequired'] as bool?,
+  isPremiumOnly: json['isPremiumOnly'] as bool?,
+  freeUsageLimit: (json['freeUsageLimit'] as num?)?.toInt(),
 );
 
 Map<String, dynamic> _$CatalogDtoToJson(CatalogDto instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'icon': instance.icon,
       'color': _$JsonConverterToJson<String, Color>(
         instance.color,
@@ -29,8 +33,10 @@ Map<String, dynamic> _$CatalogDtoToJson(CatalogDto instance) =>
       'title': instance.title,
       'status': instance.status,
       'action': instance.action,
-      'actionType': instance.actionType,
+      'actionType': const AppActionTypeConvertor().toJson(instance.actionType),
       'authRequired': instance.authRequired,
+      'isPremiumOnly': instance.isPremiumOnly,
+      'freeUsageLimit': instance.freeUsageLimit,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

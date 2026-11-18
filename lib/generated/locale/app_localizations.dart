@@ -130,6 +130,42 @@ abstract class AppLocalizations {
   /// **'More'**
   String get nav_more;
 
+  /// No description provided for @nav_back.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get nav_back;
+
+  /// No description provided for @nav_ai_guide.
+  ///
+  /// In en, this message translates to:
+  /// **'GidAI'**
+  String get nav_ai_guide;
+
+  /// No description provided for @nav_market.
+  ///
+  /// In en, this message translates to:
+  /// **'Market'**
+  String get nav_market;
+
+  /// No description provided for @nav_favorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get nav_favorites;
+
+  /// No description provided for @nav_basket.
+  ///
+  /// In en, this message translates to:
+  /// **'Basket'**
+  String get nav_basket;
+
+  /// No description provided for @nav_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get nav_profile;
+
   /// No description provided for @catalogMyEsim.
   ///
   /// In en, this message translates to:
@@ -195,6 +231,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Soon'**
   String get catalogItemStatusSoon;
+
+  /// No description provided for @new_version_available.
+  ///
+  /// In en, this message translates to:
+  /// **'A new version is available'**
+  String get new_version_available;
+
+  /// No description provided for @new_features_and_security.
+  ///
+  /// In en, this message translates to:
+  /// **'New features are available and security has been improved. We recommend updating the app.'**
+  String get new_features_and_security;
+
+  /// No description provided for @update_app_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Update App'**
+  String get update_app_now;
+
+  /// No description provided for @update_app_later.
+  ///
+  /// In en, this message translates to:
+  /// **'Update Later'**
+  String get update_app_later;
+
+  /// No description provided for @page_not_found_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Page not found'**
+  String get page_not_found_title;
+
+  /// No description provided for @page_not_found_message.
+  ///
+  /// In en, this message translates to:
+  /// **'This link may be outdated or the page has been moved.'**
+  String get page_not_found_message;
+
+  /// No description provided for @page_not_found_go_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to home'**
+  String get page_not_found_go_home;
 }
 
 class _AppLocalizationsDelegate

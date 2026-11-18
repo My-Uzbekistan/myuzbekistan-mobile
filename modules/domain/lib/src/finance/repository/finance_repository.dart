@@ -7,7 +7,6 @@ abstract class FinanceRepository {
   Future<CardId> bindCard({
     required String pan,
     required String expiry,
-    String phoneNumber = "",
     String cardHolderName = "",
     String cvv = "",
     String? image,
@@ -35,6 +34,7 @@ abstract class FinanceRepository {
     required String merchantId,
     required double amount,
     required String cardId,
+    String? orderId,
   });
 
   Future<void> confirmPay({required String paymentId});

@@ -24,6 +24,22 @@ abstract class SecurityStorage {
 
   bool isShowPrayerTimes();
 
+  Future<void> changeIqAirWidgetState(bool value);
+
+  bool isShowIqAirWidget();
+
+  Future<void> changeNearbyPlacesState(bool value);
+
+  bool isNearbyPlacesEnabled();
+
+  Future<void> setPrayerLocationId(int locationId);
+
+  int? getPrayerLocationId();
+
+  Future<void> changeNotificationsState(bool value);
+
+  bool isNotificationsEnabled();
+
   String? getRefreshToken();
 
   DateTime? getTokenExpire();
@@ -31,6 +47,10 @@ abstract class SecurityStorage {
   bool hasTokenExpire();
 
   bool hasPin();
+
+  bool isFaceIdEnabled();
+
+  Future<void> setFaceIdEnabled(bool enabled);
 
   bool isPinVerified();
 
@@ -43,4 +63,6 @@ abstract class SecurityStorage {
   Future<void> setHasPin(bool hasPin);
 
   Future<void> clearData();
+
+  Future<void> reload();
 }

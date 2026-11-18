@@ -1,5 +1,8 @@
 import 'package:domain/domain.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/src/di/injection.dart';
+import 'package:travel/src/pages/notifications/notification_count_bloc/notification_count_cubit.dart';
 
 part 'notification_event.dart';
 
@@ -15,6 +18,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
     : super(NotificationsState.loadingState()) {
     on<_LoadNotifications>(_loadNotifications);
     on<_NotificationSeenEvent>(_notificationSeen);
+    on<_AllNotificationsSeenEvent>(_allNotificationsSeen);
   }
 
   Future<void> _loadNotifications(
@@ -27,16 +31,17 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
       final initialNotification = result.firstOrNullWhere(
         (e) => e.id == event.initialNotId,
       );
+
       emit(
         NotificationsState.successState(
-          notifications: result,
+          notifications: result.uniqueById((e)=>e.id),
           initialNotification: initialNotification,
         ),
       );
       if (initialNotification?.isSeen == false) {
         add(NotificationEvent.notificationSeen(notId: initialNotification!.id));
       }
-    } catch (e) {}
+    } catch (_) {}
   }
 
   Future<void> _notificationSeen(
@@ -63,7 +68,37 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationsState> {
           orElse: () => state,
         ),
       );
-      _repository.seenNotification(id: event.notId);
+      await _repository.seenNotification(id: event.notId);
+      getIt<NotificationCountCubit>().loadNotificationCount();
     } catch (e) {}
+  }
+
+  Future<void> _allNotificationsSeen(
+    _AllNotificationsSeenEvent event,
+    Emitter<NotificationsState> emit,
+  ) async {
+    try {
+      emit(
+        state.maybeMap(
+          successState: (st) => st.copyWith(
+            notifications: st.notifications
+                .map((n) => n.copyWith(isSeen: true))
+                .toList(),
+            initialNotification: null,
+          ),
+          orElse: () => state,
+        ),
+      );
+      await _repository.seenAllNotifications();
+      getIt<NotificationCountCubit>().loadNotificationCount();
+    } catch (e) {}
+  }
+}
+
+
+extension UniqueById<T> on List<T> {
+  List<T> uniqueById(int Function(T) getId) {
+    var seen = <int>{};
+    return where((element) => seen.add(getId(element))).toList();
   }
 }

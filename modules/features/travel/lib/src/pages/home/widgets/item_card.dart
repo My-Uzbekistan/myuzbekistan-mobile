@@ -31,9 +31,11 @@ class _ItemCardState extends State<ItemCard>
               imageUrl: widget.content.mainPhoto,
               ratingAverage: widget.content.ratingAverage ?? 0,
               averageCheck: widget.content.averageCheck ?? 0,
+              blur: true,
             )
             : AppImageCard.large(
               imageUrl: widget.content.mainPhoto,
+              blur: true,
               priceText:
                   (widget.content.priceInDollar ?? 0).floor() > 0
                       ? "~\$${widget.content.priceInDollar?.floor()}"
@@ -77,7 +79,7 @@ class _ItemCardState extends State<ItemCard>
                                     context.appColors.textIconColor.secondary,
                               ),
                             ),
-                            if (widget.content.distanceKm != null)
+                            if (widget.distanceText != null)
                               Text(
                                 " • ${widget.distanceText}",
                                 maxLines: 1,
@@ -93,7 +95,7 @@ class _ItemCardState extends State<ItemCard>
                         Row(
                           spacing: 4,
                           children: [
-                            Assets.svgStarFill.toSvgImage(
+                            Assets.svg.starFill.path.toSvgImage(
                               width: 16,
                               height: 16,
                               colorFilter: ColorFilter.mode(

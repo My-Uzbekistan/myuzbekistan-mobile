@@ -61,6 +61,7 @@ class ActionAlertdialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: context.appColors.background.elevation2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       title: null,
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

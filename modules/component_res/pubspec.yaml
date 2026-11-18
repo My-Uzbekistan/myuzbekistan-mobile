@@ -36,6 +36,7 @@ dependencies:
   google_maps_flutter: #^2.11.0
   smooth_page_indicator: ^1.2.1
   sliver_tools:
+  flutter_staggered_grid_view:
 
   flutter_localizations:
     sdk: flutter
@@ -62,9 +63,11 @@ flutter:
      - assets/png/
      - assets/catalog/
      - assets/svg/
+     - assets/svg/market/
      - assets/svg/more/
      - assets/svg/prayers/
      - assets/logo/
+     - assets/map_style/
      - assets/flags/
      - assets/splash/
   #   - images/a_dot_ham.jpeg
@@ -116,3 +119,13 @@ flutter:
     androidX: true
     androidPackage: com.example.component_res
     iosBundleIdentifier: com.example.componentRes
+flutter_assets_generator:
+  output_dir: generated/
+  output_filename: assets
+  class_name: Assets
+  auto_detection: true
+  package_parameter_enabled: true
+  style: robust
+
+
+  path_ignore: [ ]

@@ -7,7 +7,7 @@ import 'package:finance/src/di/injection.dart';
 import 'package:finance/src/presentation/add_cards/add_cards_page.dart';
 import 'package:finance/src/presentation/cards/bloc/cards_bloc.dart';
 import 'package:finance/src/presentation/cards/cards_page.dart';
-import 'package:finance/src/presentation/home/FinanceHomePage.dart';
+import 'package:finance/src/presentation/home/finance_home_page.dart';
 import 'package:finance/src/presentation/home/bloc/finance_bloc.dart';
 import 'package:finance/src/presentation/merchants/bloc/merchants_bloc.dart';
 import 'package:finance/src/presentation/merchants/merchants_page.dart';
@@ -74,35 +74,63 @@ mixin FeatureFinanceRouter {
     GoRoute(
       path: AppNavPath.finance.financePayment.path,
       name: AppNavPath.finance.financePayment.name,
-      pageBuilder:
-          (context, state) => buildSlideTransitionPage(
-            child: BlocProvider(
-              create: (context) => getIt<PaymentBloc>(),
-              child: PaymentPage(
-                id: state.pathParameters['id'].toString(),
-                amount: state.uri.queryParameters["amount"],
-                completer: state.extra as Completer<bool>?,
-              ),
+      pageBuilder: (context, state) {
+        final extra = state.extra;
+
+        return buildSlideTransitionPage(
+          child: BlocProvider(
+            create: (context) => getIt<PaymentBloc>(),
+            child: PaymentPage(
+              id: state.pathParameters['id'].toString(),
+              amount: parseString(state.uri.queryParameters["amount"]),
+              orderId: parseString(state.uri.queryParameters["orderId"]),
+              orderPayment: extra is MarketCheckoutPayment ? extra : null,
+              completer: extra is Completer<bool> ? extra : null,
             ),
-            context: context,
-            state: state,
           ),
+          context: context,
+          state: state,
+        );
+      },
     ),
     GoRoute(
       path: AppNavPath.finance.verification.path,
       name: AppNavPath.finance.verification.name,
       pageBuilder:
-          (context, state) => ModalSheetPage(
-            child: BlocProvider(
-              create:
-                  (context) => getIt<VerificationBloc>(
-                    instanceName: VerificationType.addCardVerification,
-                  ),
-              child: OtpVerificationPage(
-                cardId: state.pathParameters["cardId"].toString(),
+          (context, state){
+
+         return   ModalSheetPage(
+              child: BlocProvider(
+                create:
+                    (context) => getIt<VerificationBloc>(
+                  instanceName: VerificationType.addCardVerification,
+                )..add(VerificationEvent.setCardCardId(state.pathParameters["cardId"].toString())),
+                child: OtpVerificationPage(
+                  verificationType: VerificationType.addCardVerification,
+                ),
               ),
+            );
+          },
+    ),
+
+    GoRoute(
+      path: AppNavPath.more.authVerification.path,
+      name: AppNavPath.more.authVerification.name,
+      pageBuilder:
+          (context, state){
+
+        return   ModalSheetPage(
+          child: BlocProvider(
+            create:
+                (context) => getIt<VerificationBloc>(
+              instanceName: VerificationType.authVerification,
+            )..add(VerificationEvent.setPhoneEvent(state.uri.queryParameters["phone"].toString())),
+            child: OtpVerificationPage(
+              verificationType: VerificationType.authVerification,
             ),
           ),
+        );
+      },
     ),
     GoRoute(
       path: AppNavPath.finance.paymentTransactionDetailPage.path,

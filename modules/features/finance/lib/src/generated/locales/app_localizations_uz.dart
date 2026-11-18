@@ -39,16 +39,28 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get payment_history_title => 'Tarix';
 
   @override
-  String get payment_qr_title => 'QR To\'lov';
+  String get payment_qr_title => 'QR-to\'lov';
 
   @override
   String get card_number_label => 'Karta raqami';
 
   @override
+  String get card_number_hint => 'Karta raqamini kiriting';
+
+  @override
   String get card_expiry_label => 'Amal qilish muddati';
 
   @override
+  String get card_expiry_full_label => 'Kartaning amal qilish muddati';
+
+  @override
   String get card_expiry_hint => 'OO/YY';
+
+  @override
+  String get cvv_label => 'CVV / CVC';
+
+  @override
+  String get cvv_hint => '000';
 
   @override
   String get card_holder_label => 'Karta egasi nomi';
@@ -86,6 +98,20 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
   String get nearest_places => 'Eng yaqin joylar';
 
   @override
+  String get distanceM => 'm';
+
+  @override
+  String get distanceKm => 'km';
+
+  @override
+  String get action_all => 'Barchasi';
+
+  @override
+  String rates_last_update(Object date) {
+    return 'Oxirgi yangilanish $date';
+  }
+
+  @override
   String get currency_calculator => 'Valyuta kalkulyatori';
 
   @override
@@ -114,4 +140,87 @@ class FeatureFinanceLocalizationsUz extends FeatureFinanceLocalizations {
 
   @override
   String get fiscalReceipt => 'Soliq cheki';
+
+  @override
+  String verification_page_code_send_phone(Object phone) {
+    return 'Tasdiqlash kodi $phone  raqamga yuborildi';
+  }
+
+  @override
+  String get payment_title => 'To\'lov';
+
+  @override
+  String get enter_amount => 'Summani kiriting';
+
+  @override
+  String get action_change => 'O\'zgartirish';
+
+  @override
+  String get payment_order_details => 'Buyurtma tafsilotlari';
+
+  @override
+  String get payment_summary_title => 'To\'lov tafsilotlari';
+
+  @override
+  String get payment_summary_order => 'Buyurtma';
+
+  @override
+  String get payment_summary_delivery => 'Yetkazib berish';
+
+  @override
+  String get payment_summary_total => 'Jami:';
+
+  @override
+  String get payment_free_cancellation_title => 'Bepul bekor qilish';
+
+  @override
+  String payment_free_cancellation_subtitle(Object date) {
+    return 'Pulni to\'liq qaytarish uchun $date gacha bekor qiling';
+  }
+
+  @override
+  String get payment_details_title => 'Tafsilotlar';
+
+  @override
+  String get payment_status_success => 'Muvaffaqiyatli to\'landi';
+
+  @override
+  String get payment_status_pending => 'Kutilmoqda';
+
+  @override
+  String get payment_status_cancelled => 'Bekor qilindi';
+
+  @override
+  String get payment_status_refunded => 'Qaytarildi';
+
+  @override
+  String get action_retry => 'Qayta urinish';
+
+  @override
+  String get back_to_home => 'Bosh sahifaga qaytish';
+
+  @override
+  String get history_empty_title => 'Tarix mavjud emas';
+
+  @override
+  String get history_empty_message => 'To‘lovlaringiz shu yerda ko‘rinadi';
+
+  @override
+  String get history_failed_title => 'Tarix yuklanmadi';
+
+  @override
+  String get cards_empty_title => 'Kartalar mavjud emas';
+
+  @override
+  String get cards_empty_message => 'Karta qo‘shsangiz, shu yerda ko‘rinadi';
+
+  @override
+  String get camera_permission_denied =>
+      'Kameraga ruxsat berilmagan. QR kodni skanerlash uchun sozlamalarda kameraga ruxsat bering';
+
+  @override
+  String get camera_unavailable => 'Kamerani ishga tushirib bo‘lmadi';
+
+  @override
+  String get card_expiry_invalid => 'Muddat noto‘g‘ri';
 }

@@ -52,9 +52,14 @@ class CheckPinCodeBloc extends Bloc<CheckPinCodeEvent, CheckPinCodeState> {
 
   Future<void> init() async {
     if (_securityStorage.getPin() != null) {
-      canBiometric = await _biometricUtils.checkCanAuthenticate();
+      canBiometric = await _canUseBiometric();
       emit(CheckPinCodeState.entryState("", canBiometric: canBiometric));
     }
+  }
+
+  Future<bool> _canUseBiometric() async {
+    if (!_securityStorage.isFaceIdEnabled()) return false;
+    return _biometricUtils.checkCanAuthenticate();
   }
 
   Future<void> _biometricAuth(
@@ -62,8 +67,8 @@ class CheckPinCodeBloc extends Bloc<CheckPinCodeEvent, CheckPinCodeState> {
     Emitter<CheckPinCodeState> emit,
   ) async {
     try {
-      if(_securityStorage.getPin()!=null) {
-        canBiometric = await _biometricUtils.checkCanAuthenticate();
+      if (_securityStorage.getPin() != null) {
+        canBiometric = await _canUseBiometric();
         if (canBiometric) {
           final authenticate = await _biometricUtils
               .authenticateWithCustomDialogMessages(event.localizedReason);
@@ -103,15 +108,7 @@ class CheckPinCodeBloc extends Bloc<CheckPinCodeEvent, CheckPinCodeState> {
       _securityStorage.setPin(event.pinCode);
       emitter(CheckPinCodeState.successState());
     } catch (e) {
-      if (e is DioException && e.error is AppException) {
-        emitter(
-          CheckPinCodeState.errorState(
-            message: (e.error as AppException).message,
-          ),
-        );
-      } else {
-        emitter(CheckPinCodeState.errorState(message: null));
-      }
+      emitter(CheckPinCodeState.errorState(isOffline: e.isConnectionError));
     }
   }
 }

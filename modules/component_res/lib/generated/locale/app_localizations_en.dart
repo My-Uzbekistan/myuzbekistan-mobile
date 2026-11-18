@@ -31,4 +31,17 @@ class CoreAppLocalizationsEn extends CoreAppLocalizations {
 
   @override
   String get action_more => 'Read more';
+
+  @override
+  String get no_internet =>
+      'No internet connection. Check your connection and try again';
+
+  @override
+  String get no_internet_title => 'No internet';
+
+  @override
+  String get action_retry => 'Retry';
+
+  @override
+  String get action_open_settings => 'Open settings';
 }

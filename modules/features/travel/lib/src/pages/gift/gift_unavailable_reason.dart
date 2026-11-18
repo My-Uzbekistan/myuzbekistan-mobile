@@ -1,0 +1,1 @@
+enum GiftUnavailableReason { notSubscriber, noPlan }

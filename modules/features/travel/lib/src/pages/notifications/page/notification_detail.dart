@@ -1,93 +1,93 @@
 import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
+import 'package:travel/src/pages/notifications/widgets/notification_image.dart';
 
-class NotificationDetail extends StatefulWidget {
+class NotificationDetail extends StatelessWidget {
   final NotificationItem item;
 
   const NotificationDetail({super.key, required this.item});
 
   @override
-  State<NotificationDetail> createState() => _NotificationDetailState();
-}
-
-class _NotificationDetailState extends State<NotificationDetail> {
-  @override
   Widget build(BuildContext context) {
-    debugPrint("itemData ${widget.item}");
+    final hasImage = item.image.orEmpty().isNotEmpty;
+    final actionLink = item.actionLink.orEmpty();
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: GradientAppBar(),
-
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16).copyWith(
-          top: kToolbarHeight + MediaQuery.of(context).padding.top + 24,
-        ),
-        child: Column(
-          spacing: 16,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AspectRatio(
-              aspectRatio: 334 / 220,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                clipBehavior: Clip.antiAlias,
-                child: ExtendedImage.network(
-                  widget.item.image.orEmpty(),
-                  fit: BoxFit.cover,
-                  loadStateChanged: (state) {
-                    switch (state.extendedImageLoadState) {
-                      case LoadState.completed:
-                        return null;
-                      default:
-                        return Container(
-                          color: context.appColors.fill.tertiary,
-                        );
-                    }
-                  },
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          if (hasImage)
+            _imageHeader(context)
+          else
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: MediaQuery.of(context).padding.top + kToolbarHeight,
+              ),
+            ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16).copyWith(
+                top: hasImage ? 20 : 16,
+                bottom: 16,
+              ),
+              child: Column(
+                spacing: 16,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    spacing: 8,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(item.title.orEmpty()).h2(),
+                      Text(item.publishDate()).bodySm(
+                        color: context.appColors.textIconColor.secondary,
+                      ),
+                    ],
+                  ),
+                  Text(item.content.orEmpty()).bodyLg(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: actionLink.isEmpty
+          ? null
+          : SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ).copyWith(bottom: 16),
+                child: AppActionButton(
+                  actionText: context.coreLocalization.action_more,
+                  onPressed: () => AppLinkRouter.open(actionLink),
                 ),
               ),
             ),
-            Column(
-              spacing: 8,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.item.title.orEmpty()).h3(),
-                Text(
-                  widget.item.publishAt.orEmpty(),
-                ).bodySm(color: context.appColors.textIconColor.secondary),
-              ],
-            ),
-            Text(widget.item.content.orEmpty()).bodyLg(),
-          ],
-        ),
-      ),
-      bottomNavigationBar:
-          widget.item.actionLink.orEmpty().isNotEmpty
-              ? SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ).copyWith(bottom: 16),
-                  child: AppActionButton(
-                    actionText: context.coreLocalization.action_more,
-                    onPressed: () {
-                      openActionLink(widget.item.actionLink.orEmpty());
-                    },
-                  ),
-                ),
-              )
-              : SizedBox.shrink(),
     );
   }
 
-  void openActionLink(String actionLink) {
-    final uri = Uri.parse(actionLink);
-    if (uri.host == "myuzb.uz" && uri.pathSegments.isNotEmpty) {
-      context.push(uri.toString());
-    } else {
-      LauncherUtils.urlLauncher(actionLink);
-    }
+  Widget _imageHeader(BuildContext context) {
+    return SliverAppBar(
+      primary: false,
+      automaticallyImplyLeading: false,
+      expandedHeight: MediaQuery.sizeOf(context).width / (375 / 360),
+      stretch: true,
+      stretchTriggerOffset: 0.9,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      backgroundColor: Colors.transparent,
+      shadowColor: Colors.transparent,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.parallax,
+        stretchModes: const [StretchMode.zoomBackground],
+        background: NotificationImage(url: item.image),
+      ),
+    );
   }
 }

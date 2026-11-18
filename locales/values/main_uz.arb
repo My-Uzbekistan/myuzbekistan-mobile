@@ -5,6 +5,12 @@
   "nav_services": "Xizmatlar",
 
   "nav_more": "Ko‘proq",
+  "nav_back": "Ortga",
+  "nav_ai_guide": "GidAI",
+  "nav_market": "Market",
+  "nav_favorites": "Saralangan",
+  "nav_basket": "Savat",
+  "nav_profile": "Profil",
 
   "catalogMyEsim": "My eSIM",
   "catalogTravelQuiz": "Travel Quiz",
@@ -16,6 +22,12 @@
   "catalogCottages": "Dachalar",
   "catalogInsurance": "Sug‘urta",
   "catalogItemStatusNew": "Yangi",
-  "catalogItemStatusSoon": "Tez orada"
-
+  "catalogItemStatusSoon": "Tez orada",
+  "new_version_available": "Yangi versiya mavjud",
+  "new_features_and_security": "Yangi funksiyalar mavjud va xavfsizlik kuchaytirildi. Ilovani yangilashni tavsiya qilamiz.",
+  "update_app_now": "Ilovani yangilash",
+  "update_app_later": "Keyin yangilash",
+  "page_not_found_title": "Sahifa topilmadi",
+  "page_not_found_message": "Bu havola eskirgan yoki sahifa ko‘chirilgan bo‘lishi mumkin.",
+  "page_not_found_go_home": "Bosh sahifaga"
 }

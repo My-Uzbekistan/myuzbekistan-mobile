@@ -1,0 +1,16 @@
+part of 'auth_phone_bloc.dart';
+
+@freezed
+abstract class AuthPhoneState with _$AuthPhoneState {
+  const AuthPhoneState._();
+  const factory AuthPhoneState({
+    @Default("") String phoneNumber,
+    @Default(false) isLoading,
+    @Default("")  String error,
+    @Default(false) codeSend,
+    String? errorMessage,
+    @Default(false) bool isOffline,
+  }) = _AuthPhoneState;
+
+  bool get isPhoneNumberValid => phoneNumber.length == 9;
+}

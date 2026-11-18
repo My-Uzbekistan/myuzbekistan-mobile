@@ -1,18 +1,35 @@
-import 'package:data/src/models/items_response.dart';
-import 'package:data/src/travel/models/notification/notification_item_dto.dart';
+import 'dart:io';
+
+import 'package:data/src/models/items/items_response.dart';
+import 'package:data/src/travel/models/notification_item/notification_item_dto.dart';
+import 'package:data/src/travel/models/onboarding/onboarding_dto.dart';
+import 'package:data/src/travel/models/user_info/user_info_dto.dart';
+import 'package:data/src/travel/models/user_profile/user_profile_dto.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:shared/shared.dart';
 
-import '../../models/about_dto.dart';
+import '../../models/about/about_dto.dart';
+import '../../models/ai_guide/ai_guide_dto.dart';
+import '../../models/air_quality/air_quality_dto.dart';
+import '../../models/banner/banner_dto.dart';
 import '../../models/catalog/catalog_dto.dart';
-import '../../models/categories_dto.dart';
-import '../../models/currency_dto.dart';
-import '../../models/detail/content_dto.dart';
-import '../../models/favorite_dto.dart';
-import '../../models/places/content_dto_model.dart';
-import '../../models/regions.dart';
+import '../../models/categories/categories_dto.dart';
+import '../../models/cities/cities_dto.dart';
+import '../../models/city_detail/city_detail_dto.dart';
+import '../../models/claim/bonus_status_dto.dart';
+import '../../models/claim/claim_dto.dart';
+import '../../models/currency/currency_dto.dart';
+import '../../models/content/content_dto.dart';
+import '../../models/favorite/favorite_dto.dart';
+import '../../models/home_background/home_background_dto.dart';
+import '../../models/content_dto_model/content_dto_model.dart';
+import '../../models/prayer_location/prayer_location_dto.dart';
+import '../../models/prayer_reminders/prayer_reminders_dto.dart';
+import '../../models/prayer_times/prayer_times_dto.dart';
+import '../../models/regions/regions.dart';
 import '../../models/review/review_dto.dart';
-import '../../models/token_dto.dart';
+import '../../models/service_action/service_action_dto.dart';
+import '../../models/token/token_dto.dart';
 
 part 'service.g.dart';
 
@@ -28,12 +45,44 @@ abstract class RestService {
   @GET("regions")
   Future<List<RegionsDto>> loadRegions();
 
+  @GET("services")
+  Future<List<ServiceActionDto>> getServices();
+
+  @GET("cities")
+  Future<CitiesResponseDto> loadCities();
+
+  @GET("cities/{cityId}")
+  Future<CityDetailDto> loadCityDetail({
+    @Path("cityId") required int cityId,
+    @Query("lat") double? lat,
+    @Query("lon") double? lon,
+  });
+
+  @GET("banners")
+  Future<List<BannerDto>> loadBanners();
+
+  @GET("home-background")
+  Future<HomeBackgroundDto> loadHomeBackground();
+
+  @GET("air-quality")
+  Future<AirQualityDto> loadAirQuality({
+    @Query("lat") required double lat,
+    @Query("lon") required double lon,
+  });
+
+  @GET("air-quality/region")
+  Future<AirQualityDto> loadAirQualityByRegion({
+    @Query("regionId") required int regionId,
+  });
+
   @GET("v2/categories/{categoryId}/contents")
   Future<List<MainPageContentDto>> loadContentsByCategory({
     @Path("categoryId") required int categoryId,
     @Query("page") required int page,
     @Query("pageSize") required int pageSize,
+    @Query("regionId") int? regionId,
     @Query("search") String? search,
+    @Queries() Map<String, String>? sort,
   });
 
   @GET("favorites")
@@ -67,8 +116,27 @@ abstract class RestService {
   @DELETE("favorites")
   Future<dynamic> deleteFavorite({@Query("contentId") required int contentId});
 
+  @POST("auth/logout")
+  Future<dynamic> logout();
+
   @DELETE("auth/delete")
   Future<dynamic> deleteAccount();
+
+  @POST('/auth/profile-picture')
+  @MultiPart()
+  Future<dynamic> uploadProfilePicture(@Part(name: 'file') MultipartFile file);
+
+  @DELETE("auth/profile-picture")
+  Future<UserProfileDto> deleteProfilePicture();
+
+  @GET("auth/user-info")
+  Future<UserInfoDto> getUserInfo();
+
+  @GET("auth/profile")
+  Future<UserProfileDto> getProfile();
+
+  @PUT("auth/profile")
+  Future<UserProfileDto> saveProfile(@Body() Map<String, dynamic> body);
 
   @GET("more/currency")
   Future<List<CurrencyDto>> getCurrency();
@@ -94,14 +162,23 @@ abstract class RestService {
   @POST("notifications/firebase-token")
   Future<dynamic> setFirebaseToken(@Body() Map<String, dynamic> body);
 
+  @PUT("notifications/settings")
+  Future<dynamic> updateNotificationSettings(@Body() Map<String, dynamic> body);
+
   @GET("notifications")
   Future<ItemsResponse<NotificationItemDto>> getNotifications();
+
+  @GET("notifications/unread-count")
+  Future<int> getNotificationUnreadCount();
 
   @GET("notifications/{id}")
   Future<NotificationItemDto> getNotificationById(@Path("id") int id);
 
-  @POST("notifications/{id}/seen")
+  @POST("notifications/mark-seen/{id}")
   Future<dynamic> seenNotification(@Path("id") int id);
+
+  @POST("notifications/mark-all-seen")
+  Future<dynamic> seenAllNotifications();
 
   @GET("reviews/content/{contentId}")
   Future<ItemsResponse<ReviewDto>> getReviews(@Path("contentId") int contentId);
@@ -112,6 +189,62 @@ abstract class RestService {
   @POST("reviews")
   Future<dynamic> addReview(@Body() Map<String, dynamic> body);
 
-  @GET("catalogs")
-  Future<List<CatalogDto>> getCatalog();
+  @GET("catalog-v3")
+  Future<List<CatalogDto>> getCatalogV3({
+    @Query("page") required int page,
+    @Query("pageSize") required int pageSize,
+    @Query("search") String? search,
+    @Query("catalogStatus") int? catalogStatus,
+  });
+
+  @GET("onboarding/active")
+  Future<List<OnboardingDto>> getActiveOnboardings();
+
+  @POST("onboarding/track-view/{id}")
+  Future<dynamic> onboardingTrackView(@Path("id") int id);
+
+  @POST("onboarding/track-click/{id}")
+  Future<dynamic> onboardingTrackClick(@Path("id") int id);
+
+  //AuthPhone
+  @POST("registration/send-code")
+  Future<dynamic> authPhoneSendCode(@Body() Map<String, dynamic> body);
+
+  @POST("registration/confirm")
+  Future<TokenDto> authPhoneConfirm(@Body() Map<String, dynamic> body);
+
+  @GET("prayer-times")
+  Future<PrayerTimesDto> loadPrayerTimes({
+    @Query("locationId") int? locationId,
+    @Query("date") String? date,
+  });
+
+  @GET("prayer-times/locations")
+  Future<List<PrayerLocationDto>> loadPrayerLocations();
+
+  @GET("prayer-times/reminders")
+  Future<PrayerRemindersDto> loadPrayerReminders({
+    @Query("firebaseToken") required String firebaseToken,
+  });
+
+  @PUT("prayer-times/reminders")
+  Future<dynamic> updatePrayerReminders(@Body() Map<String, dynamic> body);
+
+  @GET("bonus/status")
+  Future<BonusStatusDto> giftStatus();
+
+  @GET("bonus/active")
+  Future<ClaimStatusDto?> giftActive();
+
+  @GET("bonus/history")
+  Future<ItemsResponse<ClaimDto>> giftHistory({
+    @Query("page") required int page,
+    @Query("pageSize") required int pageSize,
+  });
+
+  @POST("bonus/claim")
+  Future<ClaimDto> giftActivate();
+
+  @GET("ai/guide")
+  Future<AiGuideDto> loadAiGuideLink();
 }

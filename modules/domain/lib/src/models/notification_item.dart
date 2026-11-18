@@ -20,6 +20,12 @@ class NotificationItem extends Equatable {
     this.isSeen = false,
   });
 
+  String publishDate() {
+    if (publishAt == null) return "";
+    final date = DateTime.tryParse(publishAt!);
+    return date == null ? "" : DateFormat("dd.MM.yyyy HH:mm").format(date);
+  }
+
   NotificationItem copyWith({
     int? id,
     String? title,
@@ -41,7 +47,6 @@ class NotificationItem extends Equatable {
   }
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
     id,
     title,

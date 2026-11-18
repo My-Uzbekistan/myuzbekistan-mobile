@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+
 import 'package:local_auth/local_auth.dart';
 import 'package:shared/shared.dart';
 
@@ -19,43 +20,33 @@ class BiometricUtilsProvider extends BiometricUtils {
     return auth.isDeviceSupported();
   }
 
-  Future<bool> get canAuthenticateWithBiometrics async =>
-      await auth.canCheckBiometrics;
-
-  Future<bool> get canAuthenticate async =>
-      await canAuthenticateWithBiometrics && await isSupportBiometric();
-
-  Future<List<BiometricType>> get availableBiometrics async =>
-      await auth.getAvailableBiometrics();
-
   @override
   Future<bool> checkCanAuthenticate() async {
-    final bool canAuth =
-        await canAuthenticate &&
-            await canAuthenticateWithBiometrics &&
-            (await availableBiometrics).isNotEmpty;
-    return Future.value(canAuth);
+    try {
+      if (Platform.isIOS) {
+        return (await auth.getAvailableBiometrics()).isNotEmpty;
+      }
+      return await auth.isDeviceSupported();
+    } catch (e) {
+      return false;
+    }
   }
 
   @override
   Future<bool> authenticateWithCustomDialogMessages(
-      String localizedReason,
-      ) async {
+    String localizedReason,
+  ) async {
     try {
-      final bool didAuthenticate = await auth.authenticate(
+      return await auth.authenticate(
         localizedReason: localizedReason,
-        options: const AuthenticationOptions(
+        options: AuthenticationOptions(
           sensitiveTransaction: false,
-          biometricOnly: true,
-          stickyAuth: true
-
+          biometricOnly: Platform.isIOS,
+          stickyAuth: true,
         ),
       );
-
-      return Future.value(didAuthenticate);
     } catch (e) {
+      return false;
     }
-
-    return Future.value(false);
   }
 }

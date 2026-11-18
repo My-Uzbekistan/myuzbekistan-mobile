@@ -32,20 +32,11 @@ class IconTextCell extends StatelessWidget {
                height: 20,
                width: 20,
                child:  Center(
-                 child: ExtendedImage.network(
+                 child: AppNetworkImage(
                    iconUrl ?? "",
                    color: context.appColors.textIconColor.primary,
                    colorBlendMode: BlendMode.srcIn,
                    fit: BoxFit.fill,
-
-                   loadStateChanged: (state) {
-                     switch (state.extendedImageLoadState) {
-                       case LoadState.completed:
-                         return null;
-                       default:
-                         return SizedBox();
-                     }
-                   },
                  ),
                ),
              ),
@@ -57,7 +48,7 @@ class IconTextCell extends StatelessWidget {
               ).bodyLg(),
             ),
             if (showArrow)
-              Assets.svgIconArrowRight.toSvgImage(
+              Assets.svg.iconArrowRight.path.toSvgImage(
                 fit: BoxFit.fill,
                 tintColor: context.appColors.textIconColor.secondary,
               ),

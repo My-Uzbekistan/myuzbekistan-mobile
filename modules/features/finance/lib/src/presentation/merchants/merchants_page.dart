@@ -2,58 +2,58 @@ import 'package:component_res/component_res.dart';
 import 'package:domain/domain.dart';
 import 'package:finance/src/core/extension.dart';
 import 'package:finance/src/presentation/merchants/bloc/merchants_bloc.dart';
-import 'package:finance/src/presentation/widgets/finance_category_header.dart';
+import 'package:finance/src/presentation/merchants/widgets/merchants_group_card.dart';
+import 'package:finance/src/presentation/merchants/widgets/merchants_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:shared/shared.dart';
 
-import '../widgets/finance_merchants_card.dart';
-
-class MerchantsPage extends StatefulWidget {
+class MerchantsPage extends StatelessWidget {
   final List<Merchant> merchants;
 
   const MerchantsPage({super.key, required this.merchants});
 
   @override
-  State<MerchantsPage> createState() => _MerchantsPageState();
-}
-
-class _MerchantsPageState extends State<MerchantsPage> {
-  @override
   Widget build(BuildContext context) {
+    final padding = EdgeInsets.only(
+      top: GradientAppBar.navbarHeight + MediaQuery.of(context).padding.top + 16,
+      bottom: MediaQuery.of(context).padding.bottom + 16,
+    );
+
     return Scaffold(
+      backgroundColor: context.appColors.background.underlayer,
       extendBodyBehindAppBar: true,
-      appBar: GradientAppBar(title: context.localization.all_places),
+      appBar: GradientAppBar(
+        title: context.localization.all_places,
+        centerTitle: true,
+        toolbarHeight: GradientAppBar.navbarHeight,
+      ),
       body: BlocBuilder<MerchantsBloc, MerchantsState>(
         builder: (context, state) {
           return state.when(
-            loading: () => SizedBox(),
+            loading: () => MerchantsLoading(padding: padding),
             dataState: (groups) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
+              final items = groups
+                  .where((group) => group.items.isNotEmpty)
+                  .toList();
 
-                  final groupItem = groups[index];
-                  return FinanceMerchantsWithCategory(
-                    onItemTap: (index) {
+              return ListView.separated(
+                padding: padding,
+                itemCount: items.length,
+                separatorBuilder: (context, index) => const SizedBox(height: 12),
+                itemBuilder: (context, index) {
+                  final group = items[index];
+
+                  return MerchantsGroupCard(
+                    title: group.name,
+                    merchants: group.items,
+                    onMerchantTap: (merchant) {
                       context.finance.pushMerchantPage(
-                        id: groupItem.items[index].id.toString(),
+                        id: merchant.id.toString(),
                       );
                     },
-                    title: groupItem.name,
-                    items:
-                        groupItem.items
-                            .map(
-                              (e) => MerchantWidgetModel(
-                                name: e.name.orEmpty(),
-                                // caption: e.type,
-                                // distance: e.distance?.toString(),
-                                imageUrl: e.logo,
-                              ),
-                            )
-                            .toList(),
                   );
                 },
-                itemCount: groups.length,
               );
             },
           );

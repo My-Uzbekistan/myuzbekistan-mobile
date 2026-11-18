@@ -1,0 +1,1 @@
+enum MarketOrderDeliveryType { courier, pickup }

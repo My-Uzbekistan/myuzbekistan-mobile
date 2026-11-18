@@ -55,6 +55,7 @@ class VerificationScreenWidget extends StatelessWidget {
             length: 6,
             onCompleted: onCompleted,
             onChanged: onChange,
+            autofillHints: const [AutofillHints.oneTimeCode],
             smsRetriever: smsRetriever,
             errorBuilder: (context, error) {
               return Text(error);

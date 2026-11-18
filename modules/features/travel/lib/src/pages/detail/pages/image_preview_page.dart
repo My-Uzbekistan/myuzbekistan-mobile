@@ -38,10 +38,9 @@ class ImagePreviewPage extends HookWidget {
                 final element = images[index];
                 return Padding(
                   padding: EdgeInsets.symmetric(vertical: 8),
-                  child: ExtendedImage.network(
+                  child: AppNetworkImage(
                     element,
                     mode: ExtendedImageMode.gesture,
-                    // 👈 Zoom va drag yoqiladi
                     initGestureConfigHandler:
                         (state) => GestureConfig(
                           minScale: 1.0,
@@ -103,7 +102,7 @@ class ImagePreviewPage extends HookWidget {
                             borderRadius: BorderRadius.circular(8),
                             child: Container(
                               color: context.appColors.fill.tertiary,
-                              child: ExtendedImage.network(
+                              child: AppNetworkImage(
                                 images[index],
                                 fit: BoxFit.cover,
                               ),

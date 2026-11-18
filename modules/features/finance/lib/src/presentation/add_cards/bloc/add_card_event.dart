@@ -5,13 +5,12 @@ abstract class AddCardEvent with _$AddCardEvent {
   factory AddCardEvent.setExternalParams({
     required String expire,
     required String cvv,
-    required String holderName,
-     String? cardBrand,
+    required String cardHolderName,
+    String? cardBrand,
   }) = _SetExtermalParamsEvent;
 
   factory AddCardEvent.setOwnParams({
     required String expire,
-    required String phoneNumber,
     String? cardBrand,
   }) = _SetOwnParamsEvent;
 

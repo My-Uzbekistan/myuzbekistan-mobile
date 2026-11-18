@@ -11,11 +11,10 @@ part 'detail_bloc.freezed.dart';
 @injectable
 class DetailBloc extends Bloc<DetailBlocEvent, DetailBlocState> {
   final Repository _repository;
-  final AppStatusChangeListeners _appLocaleChangeListener;
+  final AppRefreshListener _refresh;
 
-  DetailBloc(Repository rp, AppStatusChangeListeners appStatusChangeListeners)
+  DetailBloc(Repository rp, this._refresh)
     : _repository = rp,
-      _appLocaleChangeListener = appStatusChangeListeners,
       super(DetailBlocState.loadingState()) {
     on<_DetailBlocInitialEvent>((event, handler) async {
       try {
@@ -72,9 +71,14 @@ class DetailBloc extends Bloc<DetailBlocEvent, DetailBlocState> {
             contentId: dataState.contentDetail!.id,
             setFavorite: event.isSetFavorite,
           );
-          _appLocaleChangeListener.refreshFavorite(
-            require: !event.isSetFavorite,
+          _refresh.notifyItem(
+            ItemChange(
+              entity: RefreshEntity.content,
+              id: dataState.contentDetail!.id.toString(),
+              isFavorite: event.isSetFavorite,
+            ),
           );
+          _refresh.notify(AppRefreshTopic.contentFavorites);
         } catch (_) {}
       },
       unauthorized: () {

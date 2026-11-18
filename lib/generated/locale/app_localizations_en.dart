@@ -24,6 +24,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nav_more => 'More';
 
   @override
+  String get nav_back => 'Back';
+
+  @override
+  String get nav_ai_guide => 'GidAI';
+
+  @override
+  String get nav_market => 'Market';
+
+  @override
+  String get nav_favorites => 'Favorites';
+
+  @override
+  String get nav_basket => 'Basket';
+
+  @override
+  String get nav_profile => 'Profile';
+
+  @override
   String get catalogMyEsim => 'My eSIM';
 
   @override
@@ -55,4 +73,27 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Soon';
+
+  @override
+  String get new_version_available => 'A new version is available';
+
+  @override
+  String get new_features_and_security =>
+      'New features are available and security has been improved. We recommend updating the app.';
+
+  @override
+  String get update_app_now => 'Update App';
+
+  @override
+  String get update_app_later => 'Update Later';
+
+  @override
+  String get page_not_found_title => 'Page not found';
+
+  @override
+  String get page_not_found_message =>
+      'This link may be outdated or the page has been moved.';
+
+  @override
+  String get page_not_found_go_home => 'Go to home';
 }

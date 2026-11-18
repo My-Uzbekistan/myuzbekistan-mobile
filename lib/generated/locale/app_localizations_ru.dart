@@ -24,6 +24,24 @@ class AppLocalizationsRu extends AppLocalizations {
   String get nav_more => 'Еще';
 
   @override
+  String get nav_back => 'Назад';
+
+  @override
+  String get nav_ai_guide => 'GidAI';
+
+  @override
+  String get nav_market => 'Маркет';
+
+  @override
+  String get nav_favorites => 'Избранное';
+
+  @override
+  String get nav_basket => 'Корзина';
+
+  @override
+  String get nav_profile => 'Профиль';
+
+  @override
   String get catalogMyEsim => 'My eSIM';
 
   @override
@@ -55,4 +73,27 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get catalogItemStatusSoon => 'Скоро';
+
+  @override
+  String get new_version_available => 'Доступна новая версия';
+
+  @override
+  String get new_features_and_security =>
+      'Доступны новые функции и усилена безопасность. Рекомендуем обновить приложение';
+
+  @override
+  String get update_app_now => 'Обновить приложение';
+
+  @override
+  String get update_app_later => 'Обновить позже';
+
+  @override
+  String get page_not_found_title => 'Страница не найдена';
+
+  @override
+  String get page_not_found_message =>
+      'Возможно, ссылка устарела или страница была перемещена.';
+
+  @override
+  String get page_not_found_go_home => 'На главную';
 }

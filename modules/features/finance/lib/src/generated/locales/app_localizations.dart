@@ -160,7 +160,7 @@ abstract class FeatureFinanceLocalizations {
   /// No description provided for @payment_qr_title.
   ///
   /// In ru, this message translates to:
-  /// **'QR Платёж'**
+  /// **'QR-оплата'**
   String get payment_qr_title;
 
   /// No description provided for @card_number_label.
@@ -169,17 +169,41 @@ abstract class FeatureFinanceLocalizations {
   /// **'Номер карты'**
   String get card_number_label;
 
+  /// No description provided for @card_number_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите номер карты'**
+  String get card_number_hint;
+
   /// No description provided for @card_expiry_label.
   ///
   /// In ru, this message translates to:
   /// **'Срок действия'**
   String get card_expiry_label;
 
+  /// No description provided for @card_expiry_full_label.
+  ///
+  /// In ru, this message translates to:
+  /// **'Срок действия карты'**
+  String get card_expiry_full_label;
+
   /// No description provided for @card_expiry_hint.
   ///
   /// In ru, this message translates to:
   /// **'ММ/ГГ'**
   String get card_expiry_hint;
+
+  /// No description provided for @cvv_label.
+  ///
+  /// In ru, this message translates to:
+  /// **'CVV / CVC'**
+  String get cvv_label;
+
+  /// No description provided for @cvv_hint.
+  ///
+  /// In ru, this message translates to:
+  /// **'000'**
+  String get cvv_hint;
 
   /// No description provided for @card_holder_label.
   ///
@@ -247,6 +271,30 @@ abstract class FeatureFinanceLocalizations {
   /// **'Ближайшие места'**
   String get nearest_places;
 
+  /// No description provided for @distanceM.
+  ///
+  /// In ru, this message translates to:
+  /// **'м'**
+  String get distanceM;
+
+  /// No description provided for @distanceKm.
+  ///
+  /// In ru, this message translates to:
+  /// **'км'**
+  String get distanceKm;
+
+  /// No description provided for @action_all.
+  ///
+  /// In ru, this message translates to:
+  /// **'Все'**
+  String get action_all;
+
+  /// No description provided for @rates_last_update.
+  ///
+  /// In ru, this message translates to:
+  /// **'Последнее обновление {date}'**
+  String rates_last_update(Object date);
+
   /// No description provided for @currency_calculator.
   ///
   /// In ru, this message translates to:
@@ -306,6 +354,162 @@ abstract class FeatureFinanceLocalizations {
   /// In ru, this message translates to:
   /// **'Фискальный чек'**
   String get fiscalReceipt;
+
+  /// No description provided for @verification_page_code_send_phone.
+  ///
+  /// In ru, this message translates to:
+  /// **'Код подтверждения отправлен на {phone}'**
+  String verification_page_code_send_phone(Object phone);
+
+  /// No description provided for @payment_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата'**
+  String get payment_title;
+
+  /// No description provided for @enter_amount.
+  ///
+  /// In ru, this message translates to:
+  /// **'Введите сумму'**
+  String get enter_amount;
+
+  /// No description provided for @action_change.
+  ///
+  /// In ru, this message translates to:
+  /// **'Изменить'**
+  String get action_change;
+
+  /// No description provided for @payment_order_details.
+  ///
+  /// In ru, this message translates to:
+  /// **'Детали заказа'**
+  String get payment_order_details;
+
+  /// No description provided for @payment_summary_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Детали оплаты'**
+  String get payment_summary_title;
+
+  /// No description provided for @payment_summary_order.
+  ///
+  /// In ru, this message translates to:
+  /// **'Заказ'**
+  String get payment_summary_order;
+
+  /// No description provided for @payment_summary_delivery.
+  ///
+  /// In ru, this message translates to:
+  /// **'Доставка'**
+  String get payment_summary_delivery;
+
+  /// No description provided for @payment_summary_total.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итого:'**
+  String get payment_summary_total;
+
+  /// No description provided for @payment_free_cancellation_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Бесплатная отмена'**
+  String get payment_free_cancellation_title;
+
+  /// No description provided for @payment_free_cancellation_subtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отмените до {date} для полного возврата средств'**
+  String payment_free_cancellation_subtitle(Object date);
+
+  /// No description provided for @payment_details_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Детали'**
+  String get payment_details_title;
+
+  /// No description provided for @payment_status_success.
+  ///
+  /// In ru, this message translates to:
+  /// **'Успешно оплачено'**
+  String get payment_status_success;
+
+  /// No description provided for @payment_status_pending.
+  ///
+  /// In ru, this message translates to:
+  /// **'В ожидании'**
+  String get payment_status_pending;
+
+  /// No description provided for @payment_status_cancelled.
+  ///
+  /// In ru, this message translates to:
+  /// **'Отменено'**
+  String get payment_status_cancelled;
+
+  /// No description provided for @payment_status_refunded.
+  ///
+  /// In ru, this message translates to:
+  /// **'Возврат'**
+  String get payment_status_refunded;
+
+  /// No description provided for @action_retry.
+  ///
+  /// In ru, this message translates to:
+  /// **'Повторить'**
+  String get action_retry;
+
+  /// No description provided for @back_to_home.
+  ///
+  /// In ru, this message translates to:
+  /// **'Вернуться на главную'**
+  String get back_to_home;
+
+  /// No description provided for @history_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'История пуста'**
+  String get history_empty_title;
+
+  /// No description provided for @history_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Здесь появятся ваши платежи'**
+  String get history_empty_message;
+
+  /// No description provided for @history_failed_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось загрузить историю'**
+  String get history_failed_title;
+
+  /// No description provided for @cards_empty_title.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет карт'**
+  String get cards_empty_title;
+
+  /// No description provided for @cards_empty_message.
+  ///
+  /// In ru, this message translates to:
+  /// **'Добавленные карты появятся здесь'**
+  String get cards_empty_message;
+
+  /// No description provided for @camera_permission_denied.
+  ///
+  /// In ru, this message translates to:
+  /// **'Нет доступа к камере. Разрешите доступ к камере в настройках, чтобы сканировать QR-код'**
+  String get camera_permission_denied;
+
+  /// No description provided for @camera_unavailable.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось запустить камеру'**
+  String get camera_unavailable;
+
+  /// No description provided for @card_expiry_invalid.
+  ///
+  /// In ru, this message translates to:
+  /// **'Неверный срок'**
+  String get card_expiry_invalid;
 }
 
 class _FeatureFinanceLocalizationsDelegate

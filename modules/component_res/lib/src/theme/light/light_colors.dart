@@ -3,7 +3,10 @@ part of '../app_color_theme.dart';
 class LightColors extends _BaseColors {
   @override
   // Color get brandPrimary => const Color(0xff177f9B); // old
-  Color get brandPrimary => const Color(0xff00B26B); // unchanged
+  Color get brandSeaBlue => const Color(0xff00B26B); // unchanged
+
+  @override
+  Color get brandFlamingo => const Color(0xffFFD7F0);
 
   @override
   LabelColor get label =>
@@ -33,6 +36,7 @@ class LightColors extends _BaseColors {
       FillColors(
         quaternary: const Color(0xff143661).withValues(alpha: 0.04), // ~4%
         tertiary: const Color(0xff143661).withValues(alpha: 0.06), // ~6%
+        opaque: const Color(0xfff1f3f6),
 
 
         secondary: const Color(0xff001024).withAlpha(0x1F), // ~12%
@@ -54,6 +58,8 @@ class LightColors extends _BaseColors {
         blue: const Color(0xff007aff),
         yellow: const Color(0xffffca2d),
         orange: const Color(0xfffb5d40),// updated
+        lime:  const Color(0xffC2ED72),
+        purple: const Color(0xffaf52de),
       );
 
   @override
@@ -71,6 +77,31 @@ class LightColors extends _BaseColors {
   ServiceColors get service =>
       ServiceColors(
         overlay: Colors.black.withValues(alpha: 0.6), // updated
+        scrim: const Color(0xff14191a),
+        glass: Colors.white.withValues(alpha: 0.08),
+        onMedia: Colors.white,
+        shadow: const Color(0xff001024).withValues(alpha: 0.1),
+        shimmerBase: const Color(0xff143661).withValues(alpha: 0.06),
+        shimmerHighlight: Colors.white.withValues(alpha: 0.6),
+        heroSurface: const Color(0xff0e0e10),
+        iconNeutral: const Color(0xffbbc0c4),
+      );
+
+  @override
+  AccentColors get accent =>
+      AccentColors(
+        premium: const Color(0xfff7ce5f),
+        premiumLight: const Color(0xfffeea7b),
+        premiumDark: const Color(0xffcb9030),
+        premiumPlan: const Color(0xff07c277),
+        premiumPlanDark: const Color(0xff006f42),
+        premiumSurface: const Color(0xff664c00),
+        premiumGlow: const Color(0xffffca2d),
+        gift: const Color(0xff00b93f),
+        giftLime: const Color(0xffadee5c),
+        giftSurface: const Color(0xff143327),
+        aqiModerateLabel: const Color(0xff4d3d0e),
+        aqiHazardous: const Color(0xff453442),
       );
 
   @override

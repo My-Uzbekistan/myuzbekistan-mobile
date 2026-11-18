@@ -15,7 +15,7 @@ extension WidgetsSh on Widget {
           borderRadius: borderRadius ?? BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-                color: Color(0xff001024).withValues(alpha: 0.1),
+                color: context.appColors.service.shadow,
                 blurRadius: 34,
                 offset: Offset(0, 6),
                 blurStyle: BlurStyle.normal)

@@ -25,6 +25,7 @@ android {
 
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -74,11 +75,13 @@ android {
 //            storePassword keystoreProperties['storePassword']
 //        }
         create("release") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storePassword = keystoreProperties.getProperty("storePassword")
-            storeFile = project.file(keystoreProperties.getProperty("storeFile"))
-
+            val storeFilePath = keystoreProperties.getProperty("storeFile")
+            if (storeFilePath != null) {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storePassword = keystoreProperties.getProperty("storePassword")
+                storeFile = project.file(storeFilePath)
+            }
         }
     }
 
@@ -122,4 +125,6 @@ flutter {
 
 dependencies {
     implementation ("com.android.support:multidex:1.0.3")
+    implementation ("com.google.android.gms:play-services-location:21.2.0")
+    coreLibraryDesugaring ("com.android.tools:desugar_jdk_libs:2.1.4")
 }
